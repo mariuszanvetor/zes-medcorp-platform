@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { TrackedButtonLink } from "@/components/analytics/TrackedButtonLink";
 import { ProposalBuilder } from "@/components/ai/ProposalBuilder";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Container } from "@/components/ui/Container";
@@ -51,6 +52,33 @@ export default function ProposalBuilderPage() {
                 medical: servicii recomandate, faze, buget orientativ, timeline
                 și riscuri.
               </p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <TrackedButtonLink
+                  href="/proposal-builder#proposal"
+                  size="lg"
+                  tracking={{
+                    ctaLabel: "Generați propunerea preliminară",
+                    destination: "/proposal-builder#proposal",
+                    sourcePage: "/proposal-builder",
+                    sourceTool: "proposal-builder",
+                  }}
+                >
+                  Generați propunerea preliminară
+                </TrackedButtonLink>
+                <TrackedButtonLink
+                  href="/contact"
+                  size="lg"
+                  tracking={{
+                    ctaLabel: "Discutați propunerea",
+                    destination: "/contact",
+                    sourcePage: "/proposal-builder",
+                    sourceTool: "proposal-builder",
+                  }}
+                  variant="secondary"
+                >
+                  Discutați propunerea
+                </TrackedButtonLink>
+              </div>
             </div>
             <div className="rounded-[1.5rem] border border-blue-100 bg-white p-8 shadow-[0_24px_80px_rgba(0,87,184,0.10)]">
               <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#0057b8]">
@@ -71,7 +99,9 @@ export default function ProposalBuilderPage() {
 
       <Section className="bg-slate-950" tone="graphite">
         <Container>
-          <ProposalBuilder />
+          <div id="proposal">
+            <ProposalBuilder />
+          </div>
         </Container>
       </Section>
     </>

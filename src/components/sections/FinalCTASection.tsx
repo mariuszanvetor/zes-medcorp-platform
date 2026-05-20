@@ -23,25 +23,25 @@ export function FinalCTASection() {
               href="/ai-project-advisor"
               size="lg"
               tracking={{
-                ctaLabel: "Incepe analiza initiala",
+                ctaLabel: "Planificare preliminara",
                 destination: "/ai-project-advisor",
                 sourcePage: "/",
               }}
             >
-              Începe analiza inițială
+              Planificare preliminară
             </TrackedButtonLink>
             <TrackedButtonLink
               className="rounded-full border-blue-200 px-7 text-[#0057b8]"
               href="/contact"
               size="lg"
               tracking={{
-                ctaLabel: "Contacteaza echipa",
+                ctaLabel: "Solicitati evaluare tehnica",
                 destination: "/contact",
                 sourcePage: "/",
               }}
               variant="secondary"
             >
-              Contactează echipa
+              Solicitați evaluare tehnică
             </TrackedButtonLink>
           </div>
           <div className="mx-auto mt-10 grid max-w-3xl gap-3 text-left sm:grid-cols-3">

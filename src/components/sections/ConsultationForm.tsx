@@ -19,7 +19,7 @@ const timelines = ["Exploratoriu", "1-3 luni", "3-6 luni", "Urgent"];
 export function ConsultationForm() {
   return (
     <LeadCaptureForm
-      description="Completează câteva detalii despre proiect, echipamente sau problema de service. Echipa ZES poate continua apoi cu o discuție tehnică aplicată."
+      description="Completați câteva detalii despre proiect, echipamente sau problema de service. Echipa ZES poate continua apoi cu întrebări tehnice și o direcție de analiză preliminară."
       extraFields={[
         {
           id: "inquiryType",
@@ -35,16 +35,16 @@ export function ConsultationForm() {
           type: "select",
         },
       ]}
-      eyebrow="Solicitare tehnică"
+      eyebrow="Consultanță tehnică"
       inquiryType="Contact consultation"
       sourcePage="/contact"
       sourceTool="contact"
-      submitLabel="Pregătește solicitarea tehnică"
+      submitLabel="Solicitați evaluare tehnică"
       summary={{
-        nextStep: "Un consultant ZES poate continua discuția după clarificarea contextului.",
+        nextStep: "Un consultant ZES poate continua discuția după clarificarea contextului tehnic.",
         urgency: "Selectată în formular",
       }}
-      title="Trimite contextul proiectului către echipa ZES."
+      title="Trimiteți contextul proiectului către echipa ZES."
       tone="light"
     />
   );

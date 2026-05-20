@@ -29,28 +29,28 @@ export function HeroSection() {
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <TrackedButtonLink
                 className="rounded-full px-7"
-                href="/services"
+                href="/contact"
                 size="lg"
                 tracking={{
-                  ctaLabel: "Exploreaza serviciile",
-                  destination: "/services",
+                  ctaLabel: "Solicitati evaluare tehnica",
+                  destination: "/contact",
                   sourcePage: "/",
                 }}
               >
-                Explorează serviciile
+                Solicitați evaluare tehnică
               </TrackedButtonLink>
               <TrackedButtonLink
                 className="rounded-full border-blue-200 px-7 text-[#0057b8]"
                 href="/ai-project-advisor"
                 size="lg"
                 tracking={{
-                  ctaLabel: "Consultant AI",
+                  ctaLabel: "Planificare proiect",
                   destination: "/ai-project-advisor",
                   sourcePage: "/",
                 }}
                 variant="secondary"
               >
-                Consultant AI
+                Planificare proiect
               </TrackedButtonLink>
             </div>
           </div>

@@ -47,12 +47,12 @@ export type LinkableContent = {
 };
 
 const directToolRoutes: ArticleTool[] = [
-  { label: "Consultant AI", href: "/ai-project-advisor" },
-  { label: "Calculator proiect medical", href: "/calculator-proiect-medical" },
-  { label: "Radiology Room Planner", href: "/radiology-room-planner" },
-  { label: "Diagnostic service", href: "/service-diagnostic" },
-  { label: "Proposal Builder", href: "/proposal-builder" },
-  { label: "Contact ZES", href: "/contact" },
+  { label: "Analiză preliminară", href: "/ai-project-advisor" },
+  { label: "Estimare proiect medical", href: "/calculator-proiect-medical" },
+  { label: "Planificare radiologie", href: "/radiology-room-planner" },
+  { label: "Evaluare service", href: "/service-diagnostic" },
+  { label: "Propunere preliminară", href: "/proposal-builder" },
+  { label: "Discutați cu ZES", href: "/contact" },
 ];
 
 export function buildInternalLinkPlan(
@@ -74,7 +74,7 @@ export function buildInternalLinkPlan(
   const relatedGuides = getGuideRecommendations(blueprint).slice(0, 3);
   const primaryCta =
     choosePrimaryCta(blueprint, calculators, tools, relatedServices) ??
-    toolToRecommendation({ label: "Contact ZES", href: "/contact" }, "contact", 70);
+    toolToRecommendation({ label: "Discutați cu ZES", href: "/contact" }, "contact", 70);
 
   return {
     primaryCta,
@@ -216,18 +216,18 @@ export function getPrimaryConversionTarget(
   intent: SearchIntent,
 ): ArticleTool {
   if (intent === "problem-solving" || pillar === "service-aparatura") {
-    return { label: "Diagnostic service", href: "/service-diagnostic" };
+    return { label: "Evaluare service", href: "/service-diagnostic" };
   }
 
   if (pillar === "rf-shielding-rmn" || pillar === "radiologie-cncan") {
-    return { label: "Radiology Room Planner", href: "/radiology-room-planner" };
+    return { label: "Planificare radiologie", href: "/radiology-room-planner" };
   }
 
   if (intent === "commercial-investigation") {
-    return { label: "Proposal Builder", href: "/proposal-builder" };
+    return { label: "Propunere preliminară", href: "/proposal-builder" };
   }
 
-  return { label: "Consultant AI", href: "/ai-project-advisor" };
+  return { label: "Analiză preliminară", href: "/ai-project-advisor" };
 }
 
 export function createLinkableContentIndex(): LinkableContent[] {

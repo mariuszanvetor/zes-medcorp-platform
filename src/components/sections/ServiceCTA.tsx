@@ -16,25 +16,36 @@ export function ServiceCTA({ service }: ServiceCTAProps) {
   const diagnosticService =
     service.slug === "aparatura-medicala" ||
     service.slug === "service-aparatura-medicala";
-  const primaryAction = plannerService
-    ? {
-        label: "Radiology Room Planner",
-        href: "/radiology-room-planner",
-      }
-    : diagnosticService
+  const primaryAction =
+    service.slug === "rf-shielding"
       ? {
-          label: "Diagnostic service",
-          href: "/service-diagnostic",
+          label: "Planificare RMN / RF",
+          href: "/radiology-room-planner",
         }
-      : {
-          label: "Consultant AI",
-          href: "/ai-project-advisor",
-        };
+      : service.slug === "protectie-radiologica"
+        ? {
+            label: "Planificare CT / RX",
+            href: "/radiology-room-planner",
+          }
+        : plannerService
+          ? {
+              label: "Planificare radiologie",
+              href: "/radiology-room-planner",
+            }
+          : diagnosticService
+            ? {
+                label: "Evaluare service",
+                href: "/service-diagnostic",
+              }
+            : {
+                label: "Analiză proiect",
+                href: "/ai-project-advisor",
+              };
   const description = plannerService
-    ? `Începe cu Radiology Room Planner pentru a structura cerințele de ${service.shortTitle.toLowerCase()}, apoi solicită o verificare tehnică aplicată camerei.`
+    ? `Structurați cerințele de ${service.shortTitle.toLowerCase()} și validați camera înainte de execuție, echipament sau documentație.`
     : diagnosticService
-      ? `Începe cu Diagnostic service pentru a tria riscurile și pașii de intervenție pentru ${service.shortTitle.toLowerCase()}, apoi solicită evaluarea ZES.`
-      : `Începe cu Consultant AI pentru a structura cerințele de ${service.shortTitle.toLowerCase()}, apoi solicită o analiză tehnică aplicată proiectului tău.`;
+      ? `Triați riscurile și pașii de intervenție pentru ${service.shortTitle.toLowerCase()}, apoi solicitați o evaluare aplicată.`
+      : `Structurați cerințele de ${service.shortTitle.toLowerCase()} și solicitați o analiză tehnică aplicată proiectului.`;
 
   return (
     <Section
@@ -46,21 +57,21 @@ export function ServiceCTA({ service }: ServiceCTAProps) {
           align="center"
           className="border-blue-100 bg-white"
           description={description}
-          eyebrow="Lead tehnic"
+          eyebrow="Consultanță tehnică"
           primaryAction={primaryAction}
           secondaryAction={{
-            label: "Contact ZES",
+            label: "Discutați proiectul",
             href: "/contact",
           }}
-          title="Solicită o analiză tehnică înainte să blochezi bugetul sau execuția."
-          tone="light"
-        >
-          <div className="grid w-full max-w-3xl gap-3 text-left sm:grid-cols-3">
-            {[
-              "Evaluare riscuri tehnice",
-              "Coordonare infrastructură + aparatură",
-              "Pași următori clari",
-            ].map((item) => (
+      title="Clarificați cerințele tehnice înainte de buget final, achiziții sau execuție."
+      tone="light"
+    >
+      <div className="grid w-full max-w-3xl gap-3 text-left sm:grid-cols-3">
+        {[
+          "Riscuri tehnice prioritizate",
+          "Ipoteze și documente necesare",
+          "Pas următor realist",
+        ].map((item) => (
               <div
                 className="rounded-2xl border border-blue-100 bg-[#f7fbff] p-4 text-sm font-semibold leading-6 text-slate-700"
                 key={item}

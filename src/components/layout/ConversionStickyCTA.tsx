@@ -5,9 +5,9 @@ import Link from "next/link";
 import { trackCTA } from "@/lib/analytics";
 
 const actions = [
-  { label: "Analiză inițială", href: "/ai-project-advisor" },
-  { label: "Verifică bugetul", href: "/calculator-proiect-medical" },
-  { label: "Discută cu ZES", href: "/contact" },
+  { label: "Analiză preliminară", href: "/ai-project-advisor" },
+  { label: "Estimare orientativă", href: "/calculator-proiect-medical" },
+  { label: "Discutați proiectul", href: "/contact" },
 ];
 
 export function ConversionStickyCTA() {
@@ -19,7 +19,7 @@ export function ConversionStickyCTA() {
             Ai un proiect medical, o cameră de radiologie sau o problemă de service?
           </p>
           <p className="truncate text-xs text-slate-500">
-            Alege un pas simplu, fără ofertă finală sau obligații.
+            Alegeți un pas clar: evaluare, estimare sau discuție tehnică.
           </p>
         </div>
         <div className="grid w-full grid-cols-3 gap-1 md:w-auto">

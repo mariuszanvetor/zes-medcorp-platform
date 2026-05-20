@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/Button";
+import { TrackedButtonLink } from "@/components/analytics/TrackedButtonLink";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
@@ -17,11 +17,21 @@ export function ServiceHero({ service }: ServiceHeroProps) {
   const diagnosticService =
     service.slug === "aparatura-medicala" ||
     service.slug === "service-aparatura-medicala";
-  const primaryCta = plannerService
-    ? { href: "/radiology-room-planner", label: "Radiology Room Planner" }
+  const primaryCta =
+    service.slug === "rf-shielding"
+      ? { href: "/radiology-room-planner", label: "Planificare RMN / RF" }
+      : service.slug === "protectie-radiologica"
+        ? { href: "/radiology-room-planner", label: "Planificare CT / RX" }
+        : plannerService
+          ? { href: "/radiology-room-planner", label: "Planificare radiologie" }
+          : diagnosticService
+            ? { href: "/service-diagnostic", label: "Evaluare service" }
+            : { href: "/ai-project-advisor", label: "Analiză proiect" };
+  const validationNote = plannerService
+    ? "Clarificăm tipul camerei, echipamentul, ecranarea corectă, autorizările și riscurile înainte de execuție."
     : diagnosticService
-      ? { href: "/service-diagnostic", label: "Diagnostic service" }
-      : { href: "/ai-project-advisor", label: "Consultant AI" };
+      ? "Pornim de la impact operațional, stare echipament, contract service și pașii reali de intervenție."
+      : "Pornim de la scop, spațiu, aparatură, autorizări și constrângeri tehnice, nu de la o ofertă generică.";
 
   return (
     <Section
@@ -39,18 +49,37 @@ export function ServiceHero({ service }: ServiceHeroProps) {
             {service.heroDescription}
           </p>
           <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-            <Button className="rounded-full px-7" href={primaryCta.href} size="lg">
+            <TrackedButtonLink
+              className="rounded-full px-7"
+              href={primaryCta.href}
+              size="lg"
+              tracking={{
+                ctaLabel: primaryCta.label,
+                destination: primaryCta.href,
+                inquiryType: service.shortTitle,
+                sourcePage: service.href,
+              }}
+            >
               {primaryCta.label}
-            </Button>
-            <Button
+            </TrackedButtonLink>
+            <TrackedButtonLink
               className="rounded-full border-blue-200 px-7 text-[#0057b8]"
               href="/contact"
               size="lg"
+              tracking={{
+                ctaLabel: "Solicitați evaluare tehnică",
+                destination: "/contact",
+                inquiryType: service.shortTitle,
+                sourcePage: service.href,
+              }}
               variant="secondary"
             >
-              Solicită analiză tehnică
-            </Button>
+              Solicitați evaluare tehnică
+            </TrackedButtonLink>
           </div>
+          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-500">
+            {validationNote}
+          </p>
         </div>
 
         <div className="mx-auto mt-16 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-4">

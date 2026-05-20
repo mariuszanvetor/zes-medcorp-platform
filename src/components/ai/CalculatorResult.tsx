@@ -116,8 +116,8 @@ export function CalculatorResult({ result }: CalculatorResultProps) {
           Recomandare de continuare
         </p>
         <p className="mt-3 text-xl font-semibold leading-8 text-slate-950">
-          Solicită analiză tehnică ZES pentru validarea cerințelor, a riscurilor
-          de autorizare și a etapelor reale de proiect.
+          Solicitați evaluare tehnică ZES pentru validarea cerințelor, a
+          riscurilor de autorizare și a etapelor reale de proiect.
         </p>
         <p className="mt-4 text-sm font-semibold text-slate-500">
           Estimare orientativă, nu ofertă tehnică sau comercială finală.
@@ -132,7 +132,7 @@ export function CalculatorResult({ result }: CalculatorResultProps) {
         summary={{
           budgetRange: result.budget.totalRange,
           complexity: result.complexity,
-          nextStep: "Solicită analiză tehnică ZES pentru validarea cerințelor.",
+          nextStep: "Solicitați evaluare tehnică ZES pentru validarea cerințelor.",
           riskLevel: result.risks[0]?.level,
         }}
       />

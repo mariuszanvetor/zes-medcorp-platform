@@ -15,7 +15,7 @@ const navigationLinks: MobileNavLink[] = [
 ];
 
 const ctaHref = "/ai-project-advisor";
-const ctaLabel = "Consultant AI";
+const ctaLabel = "Analiză preliminară";
 
 export function Header() {
   return (

@@ -4,31 +4,31 @@ import { Section } from "@/components/ui/Section";
 
 const tools = [
   {
-    title: "AI Project Advisor",
+    title: "Analiză preliminară proiect",
     description:
       "Clarifică tipul de proiect, riscurile inițiale și serviciile ZES care merită discutate.",
     href: "/ai-project-advisor",
   },
   {
-    title: "Medical Project Calculator",
+    title: "Estimare orientativă proiect",
     description:
       "Oferă o orientare de complexitate, buget și date lipsă, fără să promită prețuri finale.",
     href: "/calculator-proiect-medical",
   },
   {
-    title: "Radiology Room Planner",
+    title: "Planificare cameră radiologie",
     description:
       "Separă cerințele RMN/RF de protecția radiologică necesară pentru CT și RX.",
     href: "/radiology-room-planner",
   },
   {
-    title: "Service Diagnostic Assistant",
+    title: "Evaluare service aparatură",
     description:
       "Ajută la trierea unei probleme de aparatură și la pregătirea datelor pentru service.",
     href: "/service-diagnostic",
   },
   {
-    title: "Proposal Builder",
+    title: "Propunere preliminară",
     description:
       "Structurează o propunere preliminară pentru discuția tehnică: faze, buget, riscuri și întrebări deschise.",
     href: "/proposal-builder",
@@ -74,7 +74,7 @@ export function AIToolsPreviewSection() {
                     {tool.description}
                   </p>
                   <span className="mt-5 inline-flex text-sm font-bold text-white transition group-hover:translate-x-1">
-                    Deschide →
+                    Deschide instrumentul →
                   </span>
                 </TrackedLink>
               ))}

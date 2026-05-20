@@ -24,7 +24,7 @@ export function LeadMagnetBlock({
       <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
         <div>
           <span className="inline-flex rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
-            Lead resource · Disponibil în curând
+            Resursă tehnică · În pregătire
           </span>
           <h2 className="mt-5 text-3xl font-semibold leading-tight text-slate-950">
             {title}
@@ -33,9 +33,9 @@ export function LeadMagnetBlock({
             {description}
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-            <Button href={primaryHref}>Solicită resursa</Button>
+            <Button href={primaryHref}>Solicitați consultanță</Button>
             <Button href={secondaryHref} variant="secondary">
-              Analizează proiectul
+              Analiză preliminară
             </Button>
           </div>
         </div>

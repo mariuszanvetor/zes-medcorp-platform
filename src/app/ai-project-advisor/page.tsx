@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { TrackedButtonLink } from "@/components/analytics/TrackedButtonLink";
 import { ProjectAdvisorForm } from "@/components/ai/ProjectAdvisorForm";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Container } from "@/components/ui/Container";
@@ -50,6 +51,33 @@ export default function AIProjectAdvisorPage() {
                 asistată pentru infrastructură, radiologie, imagistică, IVD,
                 aparatură, ecranare, service și pașii următori.
               </p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <TrackedButtonLink
+                  href="/ai-project-advisor#advisor"
+                  size="lg"
+                  tracking={{
+                    ctaLabel: "Începe analiza preliminară",
+                    destination: "/ai-project-advisor#advisor",
+                    sourcePage: "/ai-project-advisor",
+                    sourceTool: "ai-project-advisor",
+                  }}
+                >
+                  Începe analiza preliminară
+                </TrackedButtonLink>
+                <TrackedButtonLink
+                  href="/contact"
+                  size="lg"
+                  tracking={{
+                    ctaLabel: "Discutați proiectul",
+                    destination: "/contact",
+                    sourcePage: "/ai-project-advisor",
+                    sourceTool: "ai-project-advisor",
+                  }}
+                  variant="secondary"
+                >
+                  Discutați proiectul
+                </TrackedButtonLink>
+              </div>
             </div>
             <div className="rounded-[1.5rem] border border-blue-100 bg-white p-8 shadow-[0_24px_80px_rgba(0,87,184,0.10)]">
               <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#0057b8]">
@@ -66,6 +94,7 @@ export default function AIProjectAdvisorPage() {
 
       <Section
         className="bg-slate-950"
+        id="advisor"
         tone="graphite"
       >
         <Container>

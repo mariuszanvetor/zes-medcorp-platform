@@ -44,6 +44,12 @@ Production build:
 npm run build
 ```
 
+Content quality and internal-link checks:
+
+```bash
+npm run content:check
+```
+
 Run the production server locally:
 
 ```bash
@@ -77,6 +83,10 @@ npm run start
 - [Post-launch checklist](./docs/post-launch-checklist.md)
 - [Brand asset replacement plan](./docs/brand-assets.md)
 - [Lead integration plan](./docs/lead-integration-plan.md)
+- [Publishing workflow](./docs/publishing-workflow.md)
+- [Topic queue](./docs/topic-queue.md)
+- [Article review checklist](./docs/article-review-checklist.md)
+- [Internal linking checklist](./docs/internal-linking-checklist.md)
 
 ## Environment Variables
 

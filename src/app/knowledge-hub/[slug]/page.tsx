@@ -182,7 +182,7 @@ export default async function KnowledgeHubArticlePage({
                     className="rounded-full border border-blue-100 bg-[#f7fbff] px-4 py-3 text-center text-sm font-bold text-[#0057b8] transition hover:border-blue-200 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                     href="/contact"
                   >
-                    Solicită consultanță
+                    Discutați proiectul
                   </Link>
                 </div>
               </Card>
@@ -334,7 +334,7 @@ export default async function KnowledgeHubArticlePage({
             align="center"
             className="border-blue-100 bg-[linear-gradient(135deg,#ffffff,#eef6ff)]"
             description={article.cta.description}
-            eyebrow="Analiză tehnică"
+            eyebrow="Consultanță tehnică"
             primaryAction={{
               label: article.cta.label,
               href: article.cta.href,

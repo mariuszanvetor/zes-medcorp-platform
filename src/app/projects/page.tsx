@@ -42,7 +42,7 @@ const projectScenarios = [
     role:
       "ZES poate asigura analiză tehnică, coordonare de infrastructură, integrare aparatură și pași de planificare turnkey.",
     services: ["Construcții medicale", "Amenajări medicale", "Aparatură medicală"],
-    cta: { label: "Analizează proiectul", href: "/ai-project-advisor" },
+    cta: { label: "Analiză preliminară", href: "/ai-project-advisor" },
   },
   {
     type: "Cameră RMN cu RF shielding",
@@ -62,7 +62,7 @@ const projectScenarios = [
     role:
       "ZES poate susține analiza tehnică a camerei, separarea cerințelor CT/RX de RF shielding și coordonarea cu autorizările.",
     services: ["Radiologie", "Protecție radiologică", "Amenajări medicale"],
-    cta: { label: "Vezi plannerul", href: "/radiology-room-planner" },
+    cta: { label: "Planificați camera", href: "/radiology-room-planner" },
   },
   {
     type: "Integrare aparatură imagistică",
@@ -72,7 +72,7 @@ const projectScenarios = [
     role:
       "ZES poate conecta achiziția, integrarea și service-ul aparaturii cu infrastructura pregătită pentru operare.",
     services: ["Aparatură medicală", "Imagistică medicală", "Service specializat"],
-    cta: { label: "Verifică complexitatea", href: "/calculator-proiect-medical" },
+    cta: { label: "Estimare orientativă", href: "/calculator-proiect-medical" },
   },
   {
     type: "Laborator / IVD",
@@ -82,7 +82,7 @@ const projectScenarios = [
     role:
       "ZES poate susține alegerea și integrarea echipamentelor de laborator într-un spațiu pregătit pentru continuitate operațională.",
     services: ["IVD / laborator", "Aparatură medicală", "Service specializat"],
-    cta: { label: "Discută cu ZES", href: "/contact" },
+    cta: { label: "Discutați cu ZES", href: "/contact" },
   },
   {
     type: "Service și mentenanță aparatură",
@@ -92,7 +92,7 @@ const projectScenarios = [
     role:
       "ZES poate sprijini evaluarea service, diagnosticarea inițială, mentenanța preventivă și recomandări pentru continuitate operațională.",
     services: ["Service aparatură medicală", "Aparatură medicală", "IVD / laborator"],
-    cta: { label: "Diagnostic service", href: "/service-diagnostic" },
+    cta: { label: "Evaluare service", href: "/service-diagnostic" },
   },
 ];
 
@@ -113,7 +113,7 @@ export default function ProjectsPage() {
       >
         <Container>
           <div className="mx-auto max-w-5xl text-center">
-            <Eyebrow tone="graphite">Technical capabilities</Eyebrow>
+            <Eyebrow tone="graphite">Capabilități tehnice</Eyebrow>
             <h1 className="mt-7 text-5xl font-semibold leading-[1.03] text-balance text-slate-950 sm:text-6xl">
               Proiecte și capabilități tehnice
             </h1>
@@ -150,7 +150,7 @@ export default function ProjectsPage() {
               </h2>
             </div>
             <Button href="/contact" variant="secondary">
-              Solicită consultanță
+              Solicitați consultanță
             </Button>
           </div>
 
@@ -221,9 +221,9 @@ export default function ProjectsPage() {
                 ZES pentru a transforma capabilitatea într-un brief tehnic aplicat.
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <Button href="/ai-project-advisor">Consultant AI</Button>
+                <Button href="/ai-project-advisor">Analiză preliminară</Button>
                 <Button href="/contact" variant="secondary">
-                  Contact ZES
+                  Discutați cu ZES
                 </Button>
               </div>
             </Card>

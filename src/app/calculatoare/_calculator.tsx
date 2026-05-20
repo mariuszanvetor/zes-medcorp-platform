@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { TrackedButtonLink } from "@/components/analytics/TrackedButtonLink";
 import { ProgrammaticCalculator } from "@/components/ai/ProgrammaticCalculator";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { FAQSchema } from "@/components/seo/FAQSchema";
-import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
@@ -76,12 +76,33 @@ export function renderProgrammaticCalculatorPage(slug: CalculatorSlug) {
                 {calculator.purpose}
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <Button href="#calculator" size="lg">
-                  Începe estimarea
-                </Button>
-                <Button href={calculator.secondaryCta.href} size="lg" variant="secondary">
+                <TrackedButtonLink
+                  href={`/calculatoare/${calculator.slug}#calculator`}
+                  size="lg"
+                  tracking={{
+                    calculatorSlug: calculator.slug,
+                    ctaLabel: "Calculați estimarea orientativă",
+                    destination: `/calculatoare/${calculator.slug}#calculator`,
+                    sourcePage: `/calculatoare/${calculator.slug}`,
+                    sourceTool: "programmatic-calculator",
+                  }}
+                >
+                  Calculați estimarea orientativă
+                </TrackedButtonLink>
+                <TrackedButtonLink
+                  href={calculator.secondaryCta.href}
+                  size="lg"
+                  tracking={{
+                    calculatorSlug: calculator.slug,
+                    ctaLabel: calculator.secondaryCta.label,
+                    destination: calculator.secondaryCta.href,
+                    sourcePage: `/calculatoare/${calculator.slug}`,
+                    sourceTool: "programmatic-calculator",
+                  }}
+                  variant="secondary"
+                >
                   {calculator.secondaryCta.label}
-                </Button>
+                </TrackedButtonLink>
               </div>
             </div>
 

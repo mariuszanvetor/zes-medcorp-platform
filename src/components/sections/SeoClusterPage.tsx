@@ -16,7 +16,7 @@ export type SeoClusterPageProps = {
 
 export function SeoClusterPage({ cluster }: SeoClusterPageProps) {
   const primaryTool = cluster.relatedTools[0] ?? {
-    label: "Consultant AI",
+    label: "Analiză preliminară",
     href: "/ai-project-advisor",
   };
 
@@ -55,7 +55,7 @@ export function SeoClusterPage({ cluster }: SeoClusterPageProps) {
                   {primaryTool.label}
                 </Button>
                 <Button href="/contact" size="lg" variant="secondary">
-                  Discută cu ZES
+                  Discutați proiectul
                 </Button>
               </div>
             </div>
@@ -120,7 +120,8 @@ export function SeoClusterPage({ cluster }: SeoClusterPageProps) {
                   Tool recomandat
                 </p>
                 <p className="mt-4 text-base leading-7 text-slate-600">
-                  Transformă ghidul într-o primă structură de proiect.
+                  Transformă ghidul într-o primă structură de proiect pentru
+                  discuția tehnică.
                 </p>
                 <Link
                   className="mt-5 inline-flex w-full justify-center rounded-full bg-[#0057b8] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#00498f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
@@ -221,7 +222,7 @@ export function SeoClusterPage({ cluster }: SeoClusterPageProps) {
               href: cluster.cta.href,
             }}
             secondaryAction={{
-              label: "Contact ZES",
+              label: "Discutați proiectul",
               href: "/contact",
             }}
             title={cluster.cta.title}

@@ -87,3 +87,27 @@ canvas {
     padding-bottom: 5rem;
   }
 }
+
+@media print {
+  html,
+  body {
+    background: #ffffff !important;
+    padding: 0 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .proposal-print {
+    break-inside: avoid;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .proposal-print section,
+  .proposal-print footer {
+    break-inside: avoid;
+  }
+}

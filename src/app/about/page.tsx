@@ -275,21 +275,21 @@ export default function AboutPage() {
         <Container>
           <div className="rounded-[2rem] border border-blue-100 bg-[linear-gradient(135deg,#ffffff,#eef6ff)] p-8 text-center shadow-[0_28px_90px_rgba(0,87,184,0.10)] sm:p-12">
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#0057b8]">
-              Next step
+              Următorul pas
             </p>
             <h2 className="mx-auto mt-5 max-w-3xl text-4xl font-semibold leading-tight text-slate-950">
               Transformă ideea medicală într-un prim brief tehnic.
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-slate-600">
-              Începe cu Consultantul AI sau discută direct cu ZES despre
+              Începe cu o analiză preliminară sau discută direct cu ZES despre
               infrastructură, aparatură, shielding, IVD, imagistică și service.
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <Button href="/ai-project-advisor" size="lg">
-                Consultant AI
+                Analiză preliminară
               </Button>
               <Button href="/contact" size="lg" variant="secondary">
-                Contact ZES
+                Discutați cu ZES
               </Button>
             </div>
           </div>

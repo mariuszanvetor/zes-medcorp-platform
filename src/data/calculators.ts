@@ -140,8 +140,8 @@ export const programmaticCalculators: ProgrammaticCalculatorDefinition[] = [
           "Nu. Este o estimare orientativă care trebuie validată prin analiză tehnică, planuri, specificații de echipament și verificare de amplasament.",
       },
     ],
-    primaryCta: { label: "Deschide Radiology Room Planner", href: "/radiology-room-planner" },
-    secondaryCta: { label: "Generează propunere ZES", href: "/proposal-builder" },
+    primaryCta: { label: "Planificați camera RMN", href: "/radiology-room-planner" },
+    secondaryCta: { label: "Structurați propunerea", href: "/proposal-builder" },
     relatedLinks: [
       { label: "RF shielding pentru RMN", href: "/services/rf-shielding" },
       { label: "Ghid cost cameră RMN", href: "/ghiduri/cost-camera-rmn" },
@@ -213,8 +213,8 @@ export const programmaticCalculators: ProgrammaticCalculatorDefinition[] = [
           "Nu ca ofertă comercială finală. Include o orientare de complexitate și componente de buget care trebuie validate cu specificațiile echipamentului.",
       },
     ],
-    primaryCta: { label: "Deschide Radiology Room Planner", href: "/radiology-room-planner" },
-    secondaryCta: { label: "Generează propunere ZES", href: "/proposal-builder" },
+    primaryCta: { label: "Planificați camera CT", href: "/radiology-room-planner" },
+    secondaryCta: { label: "Structurați propunerea", href: "/proposal-builder" },
     relatedLinks: [
       { label: "Protecție radiologică", href: "/services/protectie-radiologica" },
       { label: "Ghid cost cameră CT", href: "/ghiduri/cost-camera-ct" },
@@ -287,8 +287,8 @@ export const programmaticCalculators: ProgrammaticCalculatorDefinition[] = [
           "Nu. Este o estimare orientativă pentru structurarea discuției tehnice și comerciale cu ZES.",
       },
     ],
-    primaryCta: { label: "Generează propunere ZES", href: "/proposal-builder" },
-    secondaryCta: { label: "Contact ZES", href: "/contact" },
+    primaryCta: { label: "Structurați propunerea", href: "/proposal-builder" },
+    secondaryCta: { label: "Discutați cu ZES", href: "/contact" },
     relatedLinks: [
       { label: "IVD / laborator", href: "/services/ivd-laborator" },
       { label: "Ghid echipamente IVD", href: "/ghiduri/echipamente-ivd-laborator" },
@@ -360,8 +360,8 @@ export const programmaticCalculators: ProgrammaticCalculatorDefinition[] = [
           "Nu. Ecografia are de regulă cerințe mai simple de cameră, dar tot are nevoie de integrare clinică, service și mentenanță.",
       },
     ],
-    primaryCta: { label: "Generează propunere ZES", href: "/proposal-builder" },
-    secondaryCta: { label: "Contact ZES", href: "/contact" },
+    primaryCta: { label: "Structurați propunerea", href: "/proposal-builder" },
+    secondaryCta: { label: "Discutați cu ZES", href: "/contact" },
     relatedLinks: [
       { label: "Imagistică medicală", href: "/services/imagistica-medicala" },
       { label: "Ghid aparatură imagistică", href: "/ghiduri/aparatura-imagistica-medicala" },
@@ -440,12 +440,12 @@ export const programmaticCalculators: ProgrammaticCalculatorDefinition[] = [
           "Da. Nu elimină riscurile, dar ajută la planificarea verificărilor și la reducerea intervențiilor reactive.",
       },
     ],
-    primaryCta: { label: "Deschide Diagnostic service", href: "/service-diagnostic" },
-    secondaryCta: { label: "Contact ZES", href: "/contact" },
+    primaryCta: { label: "Evaluați problema service", href: "/service-diagnostic" },
+    secondaryCta: { label: "Discutați cu ZES", href: "/contact" },
     relatedLinks: [
       { label: "Service aparatură medicală", href: "/services/service-aparatura-medicala" },
       { label: "Ghid service aparatură", href: "/ghiduri/service-aparatura-medicala" },
-      { label: "Diagnostic service", href: "/service-diagnostic" },
+      { label: "Evaluare service aparatură", href: "/service-diagnostic" },
     ],
   },
 ];
@@ -937,7 +937,7 @@ function calculateService(values: Record<string, string>): ProgrammaticCalculato
       "Evaluare tehnică ZES",
     ],
     nextSteps: [
-      "Deschide Diagnostic service pentru o triere mai detaliată.",
+      "Deschide evaluarea service pentru o triere mai detaliată.",
       "Pregătește modelul, seria, codurile de eroare și istoricul service.",
       urgency === "Critic" ? "Solicită evaluare rapidă ZES." : "Planifică o verificare preventivă sau corectivă.",
     ],

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { TrackedButtonLink } from "@/components/analytics/TrackedButtonLink";
 import { RadiologyRoomPlanner } from "@/components/ai/RadiologyRoomPlanner";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Container } from "@/components/ui/Container";
@@ -48,6 +49,33 @@ export default function RadiologyRoomPlannerPage() {
                 Planifică infrastructura tehnică pentru camere CT, RMN sau RX:
                 ecranare, autorizări, integrare aparatură și riscuri de execuție.
               </p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <TrackedButtonLink
+                  href="/radiology-room-planner#planner"
+                  size="lg"
+                  tracking={{
+                    ctaLabel: "Planificați camera",
+                    destination: "/radiology-room-planner#planner",
+                    sourcePage: "/radiology-room-planner",
+                    sourceTool: "radiology-room-planner",
+                  }}
+                >
+                  Planificați camera
+                </TrackedButtonLink>
+                <TrackedButtonLink
+                  href="/proposal-builder"
+                  size="lg"
+                  tracking={{
+                    ctaLabel: "Structurați propunerea",
+                    destination: "/proposal-builder",
+                    sourcePage: "/radiology-room-planner",
+                    sourceTool: "radiology-room-planner",
+                  }}
+                  variant="secondary"
+                >
+                  Structurați propunerea
+                </TrackedButtonLink>
+              </div>
             </div>
             <div className="rounded-[1.5rem] border border-blue-100 bg-white p-8 shadow-[0_24px_80px_rgba(0,87,184,0.10)]">
               <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#0057b8]">
@@ -65,6 +93,7 @@ export default function RadiologyRoomPlannerPage() {
 
       <Section
         className="bg-slate-950"
+        id="planner"
         tone="graphite"
       >
         <Container>

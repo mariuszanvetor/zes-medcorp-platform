@@ -63,8 +63,8 @@ export function LeadCaptureForm({
   title,
   description,
   submitLabel,
-  successTitle = "Solicitarea a fost pregătită.",
-  successDescription = "Datele au fost verificate și pot fi folosite pentru continuarea discuției tehnice cu ZES.",
+  successTitle = "Solicitarea a fost pregătită pentru evaluare.",
+  successDescription = "Un consultant ZES poate continua discuția cu întrebări tehnice, validarea ipotezelor și pașii următori.",
   tone = "dark",
   extraFields = [],
   summary,
@@ -209,6 +209,24 @@ export function LeadCaptureForm({
           >
             {description}
           </p>
+          <div
+            className={cn(
+              "mt-5 rounded-2xl border p-4 text-xs leading-6",
+              isDark
+                ? "border-white/10 bg-white/[0.05] text-slate-300"
+                : "border-blue-100 bg-[#f7fbff] text-slate-600",
+            )}
+          >
+            <p className={cn("font-bold", isDark ? "text-cyan-100" : "text-[#0057b8]")}>
+              Ce se întâmplă după trimitere
+            </p>
+            <p className="mt-2">
+              Contextul este folosit pentru triere tehnică și pregătirea unei
+              discuții aplicate. Estimările rămân preliminare până la verificarea
+              planurilor, echipamentelor și documentației. Nu include date
+              medicale despre pacienți.
+            </p>
+          </div>
           <LeadSummaryPanel summary={summary} tone={tone} />
           {status === "success" && (
             <div
@@ -231,6 +249,15 @@ export function LeadCaptureForm({
         </div>
 
         <form className="grid gap-4" noValidate onSubmit={handleSubmit}>
+          <p
+            className={cn(
+              "text-xs leading-6",
+              isDark ? "text-slate-400" : "text-slate-500",
+            )}
+          >
+            Câmpurile marcate cu * sunt necesare pentru contact și clarificarea
+            solicitării. Câmpurile opționale ajută la o triere mai bună.
+          </p>
           <div className="grid gap-4 sm:grid-cols-2">
             {fields.map((field) => (
               <LeadInput
@@ -252,9 +279,8 @@ export function LeadCaptureForm({
           <Button
             fullWidth
             isLoading={isLoading}
-            onClick={() => void submitLead()}
             size="lg"
-            type="button"
+            type="submit"
           >
             {isLoading ? "Pregătim solicitarea..." : submitLabel}
           </Button>
@@ -313,7 +339,7 @@ function LeadInput({
         )}
       >
         {field.label}
-        {field.required ? " *" : ""}
+        {field.required ? " *" : " (opțional)"}
       </span>
       {field.type === "select" ? (
         <select
@@ -377,7 +403,7 @@ function LeadTextarea({
         className={cn(inputClassName(tone, Boolean(error)), "min-h-32 py-3 leading-7")}
         id="lead-message"
         onChange={(event) => onChange(event.target.value)}
-        placeholder="Adaugă locație, termen, echipamente, stadiu autorizări sau constrângeri tehnice."
+        placeholder="Adaugă locație, termen, echipamente, stadiu autorizări sau constrângeri tehnice. Nu include date medicale despre pacienți."
         value={value}
       />
       {error && <FieldError>{error}</FieldError>}
@@ -399,10 +425,10 @@ function LeadSummaryPanel({
   const items = [
     ["Tip proiect", summary.projectType],
     ["Complexitate", summary.complexity],
-    ["Buget", summary.budgetRange],
-    ["Risc", summary.riskLevel],
+    ["Buget orientativ", summary.budgetRange],
+    ["Risc estimat", summary.riskLevel],
     ["Urgență", summary.urgency],
-    ["Next step", summary.nextStep],
+    ["Pas recomandat", summary.nextStep],
   ].filter(([, value]) => value);
 
   if (!items.length) {
@@ -424,7 +450,7 @@ function LeadSummaryPanel({
           isDark ? "text-cyan-100" : "text-[#0057b8]",
         )}
       >
-        Rezumat înainte de trimitere
+        Rezumat pentru discuția tehnică
       </p>
       <dl className="mt-4 grid gap-3">
         {items.map(([label, value]) => (

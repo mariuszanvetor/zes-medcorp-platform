@@ -18,11 +18,11 @@ const serviceLinks = [
 ];
 
 const aiToolLinks = [
-  { label: "Consultant AI", href: "/ai-project-advisor" },
-  { label: "Calculator proiect medical", href: "/calculator-proiect-medical" },
-  { label: "Calculator cameră RMN", href: "/calculatoare/cost-camera-rmn" },
-  { label: "Radiology Room Planner", href: "/radiology-room-planner" },
-  { label: "Proposal Builder", href: "/proposal-builder" },
+  { label: "Analiză preliminară", href: "/ai-project-advisor" },
+  { label: "Estimare proiect medical", href: "/calculator-proiect-medical" },
+  { label: "Estimare cameră RMN", href: "/calculatoare/cost-camera-rmn" },
+  { label: "Planificare radiologie", href: "/radiology-room-planner" },
+  { label: "Propunere preliminară", href: "/proposal-builder" },
 ];
 
 const knowledgeLinks = [
@@ -65,7 +65,7 @@ export function Footer() {
             </p>
             <div className="mt-6">
               <Button href="/contact" size="sm" variant="outline">
-                Contact
+                Discutați proiectul
               </Button>
             </div>
           </div>

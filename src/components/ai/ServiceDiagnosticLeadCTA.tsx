@@ -18,20 +18,20 @@ export function ServiceDiagnosticLeadCTA({
 }: ServiceDiagnosticLeadCTAProps) {
   return (
     <LeadCaptureForm
-      description="Trimite simptomele, impactul operațional și datele de contact pentru o evaluare service. Rezultatul nu înlocuiește verificarea tehnică pe echipament."
+      description="Trimiteți simptomele și impactul operațional pentru o triere service. Rezultatul nu înlocuiește verificarea tehnică pe echipament sau documentația de service."
       extraFields={[
         { id: "projectType", label: "Tip echipament", placeholder: "CT, RMN, RX, IVD..." },
       ]}
-      eyebrow="Solicită intervenție / evaluare service ZES"
+      eyebrow="Evaluare service"
       generatedComplexity={generatedComplexity}
       generatedRiskLevel={generatedRiskLevel}
       generatedSummary={generatedSummary}
       inquiryType="Service Diagnostic"
       sourcePage="/service-diagnostic"
       sourceTool="service-diagnostic"
-      submitLabel="Solicită evaluare service"
+      submitLabel="Solicitați evaluare service"
       summary={summary}
-      title="Trimite cazul către echipa tehnică pentru o evaluare aplicată."
+      title="Trimiteți cazul către echipa tehnică pentru o evaluare aplicată."
       tone="light"
     />
   );

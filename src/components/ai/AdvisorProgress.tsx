@@ -7,7 +7,7 @@ export type AdvisorProgressProps = {
   leadCaptured: boolean;
 };
 
-const steps = ["Date proiect", "Analiză simulată", "Contact ZES"];
+const steps = ["Date proiect", "Analiză preliminară", "Evaluare ZES"];
 
 export function AdvisorProgress({
   hasResult,

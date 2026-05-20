@@ -36,6 +36,11 @@ export function BudgetEstimatePanel({ budget }: { budget: BudgetEstimate }) {
           <p className="mt-2 text-sm font-semibold text-slate-500">
             {budget.disclaimer}
           </p>
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-600">
+            Intervalul ajută la trierea proiectului și la pregătirea discuției
+            tehnice. Bugetul final depinde de planuri, echipamente, amplasament
+            și documentația disponibilă.
+          </p>
         </div>
         <Badge variant={budget.band === "Enterprise" ? "dark" : "blue"}>
           {budgetBandLabel[budget.band]}
@@ -131,7 +136,7 @@ export function ConfidencePanel({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
-            Assumptions & confidence
+            Ipoteze și încredere
           </p>
           <h3 className="mt-3 text-2xl font-semibold text-slate-950">
             Încredere estimare: {confidence.level} ({confidence.score}%)

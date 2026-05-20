@@ -142,45 +142,46 @@ export function trackCTA(payload: AnalyticsPayload = {}) {
 
   trackEvent("cta_click", normalizedPayload);
 
-  const contextualEvent = getContextualCTAEvent(normalizedPayload);
-  if (contextualEvent && contextualEvent !== "cta_click") {
+  for (const contextualEvent of getContextualCTAEvents(normalizedPayload)) {
     trackEvent(contextualEvent, normalizedPayload);
   }
 }
 
-function getContextualCTAEvent(
+function getContextualCTAEvents(
   payload: AnalyticsPayload,
-): AnalyticsEventName | null {
+): AnalyticsEventName[] {
   const sourcePage = payload.sourcePage ?? "";
   const destination = payload.destination ?? "";
+  const events = new Set<AnalyticsEventName>();
+
+  if (sourcePage.includes("/knowledge-hub/")) {
+    events.add("article_cta_click");
+  }
+
+  if (sourcePage.includes("/ghiduri/")) {
+    events.add("guide_cta_click");
+  }
+
+  if (sourcePage.includes("/calculatoare/") || destination.includes("/calculatoare/")) {
+    events.add("calculator_cta_click");
+  }
 
   if (destination === "/contact" || destination.includes("/contact")) {
-    return "consultation_click";
+    events.add("consultation_click");
   }
 
   if (
     destination.includes("/ai-project-advisor") ||
     destination.includes("/calculator-proiect-medical") ||
+    destination.includes("/calculatoare/") ||
     destination.includes("/radiology-room-planner") ||
     destination.includes("/service-diagnostic") ||
     destination.includes("/proposal-builder")
   ) {
-    return "ai_tool_click";
+    events.add("ai_tool_click");
   }
 
-  if (sourcePage.includes("/knowledge-hub/")) {
-    return "article_cta_click";
-  }
-
-  if (sourcePage.includes("/ghiduri/")) {
-    return "guide_cta_click";
-  }
-
-  if (sourcePage.includes("/calculatoare/")) {
-    return "calculator_cta_click";
-  }
-
-  return null;
+  return [...events];
 }
 
 function getCurrentPath() {

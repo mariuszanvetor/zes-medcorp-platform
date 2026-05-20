@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { TrackedButtonLink } from "@/components/analytics/TrackedButtonLink";
 import { ServiceDiagnosticAssistant } from "@/components/ai/ServiceDiagnosticAssistant";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Container } from "@/components/ui/Container";
@@ -48,6 +49,33 @@ export default function ServiceDiagnosticPage() {
                 Descrie problema echipamentului medical, iar ZES îți oferă o primă
                 orientare privind urgența, riscurile și pașii recomandați.
               </p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <TrackedButtonLink
+                  href="/service-diagnostic#diagnostic"
+                  size="lg"
+                  tracking={{
+                    ctaLabel: "Evaluați problema service",
+                    destination: "/service-diagnostic#diagnostic",
+                    sourcePage: "/service-diagnostic",
+                    sourceTool: "service-diagnostic",
+                  }}
+                >
+                  Evaluați problema service
+                </TrackedButtonLink>
+                <TrackedButtonLink
+                  href="/contact"
+                  size="lg"
+                  tracking={{
+                    ctaLabel: "Solicitați intervenție",
+                    destination: "/contact",
+                    sourcePage: "/service-diagnostic",
+                    sourceTool: "service-diagnostic",
+                  }}
+                  variant="secondary"
+                >
+                  Solicitați intervenție
+                </TrackedButtonLink>
+              </div>
             </div>
             <div className="rounded-[1.5rem] border border-blue-100 bg-white p-8 shadow-[0_24px_80px_rgba(0,87,184,0.10)]">
               <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#0057b8]">
@@ -63,7 +91,7 @@ export default function ServiceDiagnosticPage() {
         </Container>
       </Section>
 
-      <Section className="bg-[#f7fafc]" tone="transparent">
+      <Section className="bg-[#f7fafc]" id="diagnostic" tone="transparent">
         <Container>
           <ServiceDiagnosticAssistant />
         </Container>

@@ -200,8 +200,8 @@ export const topicTaxonomy: Record<TopicPillar, TopicTaxonomyItem> = {
       "/services/aparatura-medicala",
     ],
     defaultTools: [
-      { label: "Consultant AI", href: "/ai-project-advisor" },
-      { label: "Proposal Builder", href: "/proposal-builder" },
+      { label: "Analiză preliminară", href: "/ai-project-advisor" },
+      { label: "Propunere preliminară", href: "/proposal-builder" },
     ],
     defaultCalculators: [
       { label: "Calculator proiect medical", href: "/calculator-proiect-medical" },
@@ -218,8 +218,8 @@ export const topicTaxonomy: Record<TopicPillar, TopicTaxonomyItem> = {
       "/services/imagistica-medicala",
     ],
     defaultTools: [
-      { label: "Radiology Room Planner", href: "/radiology-room-planner" },
-      { label: "Proposal Builder", href: "/proposal-builder" },
+      { label: "Planificare radiologie", href: "/radiology-room-planner" },
+      { label: "Propunere preliminară", href: "/proposal-builder" },
     ],
     defaultCalculators: [
       { label: "Calculator cost camera CT", href: "/calculatoare/cost-camera-ct" },
@@ -236,8 +236,8 @@ export const topicTaxonomy: Record<TopicPillar, TopicTaxonomyItem> = {
       "/services/imagistica-medicala",
     ],
     defaultTools: [
-      { label: "Radiology Room Planner", href: "/radiology-room-planner" },
-      { label: "Proposal Builder", href: "/proposal-builder" },
+      { label: "Planificare radiologie", href: "/radiology-room-planner" },
+      { label: "Propunere preliminară", href: "/proposal-builder" },
     ],
     defaultCalculators: [
       { label: "Calculator cost camera RMN", href: "/calculatoare/cost-camera-rmn" },
@@ -254,7 +254,7 @@ export const topicTaxonomy: Record<TopicPillar, TopicTaxonomyItem> = {
       "/services/imagistica-medicala",
     ],
     defaultTools: [
-      { label: "Radiology Room Planner", href: "/radiology-room-planner" },
+      { label: "Planificare radiologie", href: "/radiology-room-planner" },
     ],
     defaultCalculators: [
       { label: "Calculator cost camera CT", href: "/calculatoare/cost-camera-ct" },
@@ -271,8 +271,8 @@ export const topicTaxonomy: Record<TopicPillar, TopicTaxonomyItem> = {
       "/services/service-aparatura-medicala",
     ],
     defaultTools: [
-      { label: "Proposal Builder", href: "/proposal-builder" },
-      { label: "Radiology Room Planner", href: "/radiology-room-planner" },
+      { label: "Propunere preliminară", href: "/proposal-builder" },
+      { label: "Planificare radiologie", href: "/radiology-room-planner" },
     ],
     defaultCalculators: [
       {
@@ -291,7 +291,7 @@ export const topicTaxonomy: Record<TopicPillar, TopicTaxonomyItem> = {
       "/services/aparatura-medicala",
       "/services/service-aparatura-medicala",
     ],
-    defaultTools: [{ label: "Proposal Builder", href: "/proposal-builder" }],
+    defaultTools: [{ label: "Propunere preliminară", href: "/proposal-builder" }],
     defaultCalculators: [
       { label: "Calculator cost laborator IVD", href: "/calculatoare/cost-laborator-ivd" },
     ],
@@ -306,7 +306,7 @@ export const topicTaxonomy: Record<TopicPillar, TopicTaxonomyItem> = {
       "/services/aparatura-medicala",
       "/services/imagistica-medicala",
     ],
-    defaultTools: [{ label: "Diagnostic service", href: "/service-diagnostic" }],
+    defaultTools: [{ label: "Evaluare service", href: "/service-diagnostic" }],
     defaultCalculators: [
       { label: "Estimator service aparatura", href: "/calculatoare/service-aparatura" },
     ],
@@ -322,8 +322,8 @@ export const topicTaxonomy: Record<TopicPillar, TopicTaxonomyItem> = {
       "/services/aparatura-medicala",
     ],
     defaultTools: [
-      { label: "Consultant AI", href: "/ai-project-advisor" },
-      { label: "Proposal Builder", href: "/proposal-builder" },
+      { label: "Analiză preliminară", href: "/ai-project-advisor" },
+      { label: "Propunere preliminară", href: "/proposal-builder" },
     ],
     defaultCalculators: [
       { label: "Calculator proiect medical", href: "/calculator-proiect-medical" },
@@ -339,7 +339,7 @@ export const topicTaxonomy: Record<TopicPillar, TopicTaxonomyItem> = {
       "/services/radiologie",
       "/services/protectie-radiologica",
     ],
-    defaultTools: [{ label: "Consultant AI", href: "/ai-project-advisor" }],
+    defaultTools: [{ label: "Analiză preliminară", href: "/ai-project-advisor" }],
     defaultCalculators: [
       { label: "Calculator proiect medical", href: "/calculator-proiect-medical" },
     ],
@@ -354,7 +354,7 @@ export const topicTaxonomy: Record<TopicPillar, TopicTaxonomyItem> = {
       "/services/imagistica-medicala",
       "/services/ivd-laborator",
     ],
-    defaultTools: [{ label: "Proposal Builder", href: "/proposal-builder" }],
+    defaultTools: [{ label: "Propunere preliminară", href: "/proposal-builder" }],
     defaultCalculators: [
       {
         label: "Calculator echipamente imagistica",
@@ -373,8 +373,8 @@ export const topicTaxonomy: Record<TopicPillar, TopicTaxonomyItem> = {
       "/services/aparatura-medicala",
     ],
     defaultTools: [
-      { label: "Proposal Builder", href: "/proposal-builder" },
-      { label: "Diagnostic service", href: "/service-diagnostic" },
+      { label: "Propunere preliminară", href: "/proposal-builder" },
+      { label: "Evaluare service", href: "/service-diagnostic" },
     ],
     defaultCalculators: [
       { label: "Estimator service aparatura", href: "/calculatoare/service-aparatura" },
@@ -387,8 +387,8 @@ export const topicTaxonomy: Record<TopicPillar, TopicTaxonomyItem> = {
     leadIntent: "Users who need a next step, risk estimate or budget orientation.",
     defaultServices: ["/services", "/contact"],
     defaultTools: [
-      { label: "Consultant AI", href: "/ai-project-advisor" },
-      { label: "Proposal Builder", href: "/proposal-builder" },
+      { label: "Analiză preliminară", href: "/ai-project-advisor" },
+      { label: "Propunere preliminară", href: "/proposal-builder" },
     ],
     defaultCalculators: [
       { label: "Calculator proiect medical", href: "/calculator-proiect-medical" },

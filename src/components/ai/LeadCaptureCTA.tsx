@@ -26,8 +26,8 @@ export function LeadCaptureCTA({
 
   return (
     <LeadCaptureForm
-      description="Trimite rezultatul și contextul proiectului pentru o discuție tehnică ZES. Estimarea rămâne orientativă până la validarea planurilor, spațiului și echipamentelor."
-      eyebrow="Primește analiza tehnică personalizată de la ZES"
+      description="Trimite rezultatul și contextul proiectului pentru o evaluare tehnică preliminară. ZES poate valida ipotezele doar după analizarea spațiului, planurilor și echipamentelor."
+      eyebrow="Evaluare tehnică preliminară"
       generatedBudgetRange={generatedBudgetRange}
       generatedComplexity={generatedComplexity}
       generatedRiskLevel={generatedRiskLevel}
@@ -36,9 +36,9 @@ export function LeadCaptureCTA({
       onSubmitted={handleSubmitted}
       sourcePage="/ai-project-advisor"
       sourceTool="ai-project-advisor"
-      submitLabel="Trimite contextul către ZES"
+      submitLabel="Solicitați evaluare tehnică"
       summary={summary}
-      title="Trimite rezultatul către echipa ZES pentru o discuție tehnică."
+      title="Transformați rezultatul într-o discuție tehnică aplicată."
       tone="dark"
     />
   );

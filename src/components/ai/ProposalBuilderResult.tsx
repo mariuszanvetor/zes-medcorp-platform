@@ -8,7 +8,9 @@ import {
   TimelineEstimatePanel,
 } from "@/components/ai/IntelligencePanels";
 import { ProposalBuilderLeadCTA } from "@/components/ai/ProposalBuilderLeadCTA";
+import { ProposalDocumentPreview } from "@/components/proposal/ProposalDocumentPreview";
 import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import type {
   AdvancedComplexityLevel,
@@ -18,6 +20,7 @@ import type {
   TimelineEstimate,
 } from "@/lib/ai-estimation";
 import { BUDGET_DISCLAIMER } from "@/lib/ai-estimation";
+import { createProposalDocument } from "@/lib/proposal-document";
 
 export type ProposalAnalysis = {
   title: string;
@@ -50,6 +53,8 @@ const complexityVariant: Record<AdvancedComplexityLevel, "cyan" | "blue" | "dark
 };
 
 export function ProposalBuilderResult({ result }: ProposalBuilderResultProps) {
+  const proposalDocument = createProposalDocument(result);
+
   return (
     <div className="grid gap-6">
       <Card className="border-cyan-300/20" variant="glass">
@@ -108,15 +113,38 @@ export function ProposalBuilderResult({ result }: ProposalBuilderResultProps) {
 
       <Card className="border-blue-100 bg-[#f7fbff]" padding="lg">
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
-          Recomandare comercială
+          Recomandare de continuare
         </p>
         <p className="mt-4 text-2xl font-semibold leading-9 text-slate-950">
           {result.nextStep}
         </p>
         <p className="mt-5 text-sm font-semibold text-slate-500">
-          Propunere orientativă. Validarea finală se face după verificarea
-          documentației, echipamentelor și amplasamentului.
+          Propunere preliminară. Validarea finală se face după verificarea
+          documentației, echipamentelor, amplasamentului și constrângerilor
+          operaționale.
         </p>
+      </Card>
+
+      <Card className="border-cyan-300/20" padding="lg" variant="glass">
+        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold text-cyan-100">
+              Previzualizare propunere
+            </p>
+            <h3 className="mt-2 text-2xl font-semibold text-white">
+              Structură pregătită pentru viitorul export PDF
+            </h3>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300">
+              Acesta este un document de lucru, construit din rezultatul
+              Proposal Builder. Exportul PDF va putea fi conectat ulterior fără
+              schimbarea logicii de estimare.
+            </p>
+          </div>
+          <Button disabled type="button" variant="secondary">
+            Export PDF — disponibil în curând
+          </Button>
+        </div>
+        <ProposalDocumentPreview document={proposalDocument} />
       </Card>
 
       <ProposalBuilderLeadCTA

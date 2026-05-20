@@ -39,27 +39,27 @@ const consultationAreas = [
 
 const aiLinks = [
   {
-    title: "Consultant AI",
+    title: "Analiză preliminară proiect",
     description: "Structurează proiectul, riscurile și serviciile relevante.",
     href: "/ai-project-advisor",
   },
   {
-    title: "Calculator proiect medical",
+    title: "Estimare proiect medical",
     description: "Verifică nivelul de complexitate înainte de bugetare.",
     href: "/calculator-proiect-medical",
   },
   {
-    title: "Radiology Room Planner",
+    title: "Planificare cameră radiologie",
     description: "Separă cerințele CT/RX de cerințele RMN/RF.",
     href: "/radiology-room-planner",
   },
   {
-    title: "Diagnostic service",
+    title: "Evaluare service aparatură",
     description: "Triează problemele de aparatură și pașii de intervenție.",
     href: "/service-diagnostic",
   },
   {
-    title: "Proposal Builder",
+    title: "Propunere preliminară",
     description: "Generează o propunere preliminară pentru discuția cu ZES.",
     href: "/proposal-builder",
   },
@@ -83,9 +83,9 @@ export default function ContactPage() {
         <Container>
           <div className="grid gap-12 lg:grid-cols-[0.94fr_1.06fr] lg:items-end">
             <div>
-              <Eyebrow tone="graphite">Technical consultation</Eyebrow>
+              <Eyebrow tone="graphite">Consultanță tehnică</Eyebrow>
               <h1 className="mt-7 max-w-4xl text-5xl font-semibold leading-[1.04] text-balance text-slate-950 sm:text-6xl">
-                Discută cu ZES despre proiectul medical.
+                Discutați cu ZES despre proiectul medical.
               </h1>
               <p className="mt-7 max-w-3xl text-xl leading-9 text-slate-600">
                 Consultanță tehnică pentru infrastructură medicală, radiologie,
@@ -94,10 +94,10 @@ export default function ContactPage() {
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <Button href="/ai-project-advisor" size="lg">
-                  Începe cu Consultantul AI
+                  Analiză preliminară
                 </Button>
                 <Button href="/services" size="lg" variant="secondary">
-                  Explorează serviciile
+                  Servicii ZES
                 </Button>
               </div>
             </div>
@@ -189,7 +189,7 @@ export default function ContactPage() {
                   className="mt-7 inline-flex text-sm font-bold text-[#0057b8] transition hover:text-blue-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                   href={link.href}
                 >
-                  Deschide
+                  Deschide instrumentul
                 </Link>
               </Card>
             ))}

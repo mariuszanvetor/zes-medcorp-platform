@@ -24,8 +24,8 @@ export function CalculatorLeadCTA({
 }: CalculatorLeadCTAProps) {
   return (
     <LeadCaptureForm
-      description="Calculatorul oferă orientări de complexitate și buget, nu prețuri finale. ZES poate valida ipotezele pe baza spațiului, echipamentelor și documentației reale."
-      eyebrow="Solicită analiză tehnică ZES"
+      description="Calculatorul oferă o orientare de complexitate și buget, nu prețuri finale. ZES poate verifica ipotezele pe baza spațiului, echipamentelor și documentației reale."
+      eyebrow="Validare estimare"
       generatedBudgetRange={generatedBudgetRange}
       generatedComplexity={generatedComplexity}
       generatedRiskLevel={generatedRiskLevel}
@@ -33,9 +33,9 @@ export function CalculatorLeadCTA({
       inquiryType={inquiryType}
       sourcePage={sourcePage}
       sourceTool="calculator"
-      submitLabel="Trimite estimarea către ZES"
+      submitLabel="Solicitați validarea estimării"
       summary={summary}
-      title="Transformă estimarea într-o discuție tehnică aplicată."
+      title="Transformați estimarea într-o discuție tehnică aplicată."
       tone="dark"
     />
   );

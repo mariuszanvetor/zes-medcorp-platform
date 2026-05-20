@@ -106,9 +106,9 @@ export function ProjectAdvisorResult({
         title="Pași recomandați"
       />
       <InsightListPanel
-        eyebrow="Technical checklist"
+        eyebrow="Checklist tehnic"
         items={result.checklist}
-        title="Date de pregătit pentru analiza ZES"
+        title="Date de pregătit pentru evaluarea ZES"
       />
 
       <Card variant="surface">

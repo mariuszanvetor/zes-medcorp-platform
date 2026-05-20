@@ -57,10 +57,10 @@ export default function ServicesPage() {
             </p>
             <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
               <Button className="rounded-full px-7" href="/ai-project-advisor" size="lg">
-                Începe analiza inițială
+                Analiză preliminară
               </Button>
               <Button className="rounded-full border-blue-200 px-7 text-[#0057b8]" href="/contact" size="lg" variant="secondary">
-                Solicită analiză tehnică
+                Solicitați evaluare tehnică
               </Button>
             </div>
           </div>
@@ -90,7 +90,7 @@ export default function ServicesPage() {
                     className="mt-6 inline-flex text-sm font-semibold text-blue-700 transition hover:text-blue-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
                     href={service.href}
                   >
-                    Vezi serviciul
+                    Explorați serviciul
                   </Link>
                 </Card>
               ))}
