@@ -1217,6 +1217,516 @@ const baseArticles: Article[] = [
     publishedAt: "2026-05-20",
     updatedAt: "2026-05-20",
   },
+  {
+    slug: "modernizare-radiologie-clinica",
+    title: "Modernizare radiologie clinică: infrastructură, echipamente și riscuri tehnice",
+    description:
+      "Ghid pentru modernizarea unei radiologii existente: CT, RX, RMN, protecție radiologică, RF shielding, echipamente, fluxuri, autorizări și continuitate operațională.",
+    category: "Radiologie",
+    tags: [
+      "modernizare radiologie",
+      "camera CT",
+      "camera RMN",
+      "protecție radiologică",
+      "RF shielding",
+      "integrare imagistică",
+    ],
+    readingTime: "15 min",
+    targetKeyword: "modernizare radiologie clinica",
+    relatedServices: [
+      "/services/radiologie",
+      "/services/imagistica-medicala",
+      "/services/protectie-radiologica",
+      "/services/rf-shielding",
+      "/services/aparatura-medicala",
+      "/services/service-aparatura-medicala",
+      "/services/amenajari-medicale",
+    ],
+    relatedTools: [
+      { label: "Radiology Room Planner", href: "/radiology-room-planner" },
+      { label: "Proposal Builder", href: "/proposal-builder" },
+      { label: "Calculator cameră CT", href: "/calculatoare/cost-camera-ct" },
+      { label: "Calculator cameră RMN", href: "/calculatoare/cost-camera-rmn" },
+      { label: "Contact ZES", href: "/contact" },
+    ],
+    intro:
+      "Modernizarea unei radiologii clinice este mai delicată decât amenajarea unei camere noi, pentru că proiectul pornește de la constrângeri existente: pereți, instalații, echipamente aflate în operare, fluxuri de pacienți, autorizări, spații vecine și presiune comercială pentru a reduce perioada de întrerupere. O modernizare bună nu înseamnă doar înlocuirea aparatului sau refacerea finisajelor, ci verificarea întregului sistem tehnic care susține imagistica.",
+    sections: [
+      {
+        id: "ce-inseamna-modernizare",
+        title: "Ce înseamnă modernizarea unei radiologii",
+        body: [
+          "O radiologie modernizată trebuie să răspundă la trei întrebări: ce echipamente vor funcționa, ce condiții tehnice cer acestea și cum rămâne clinica operațională în timpul lucrărilor. În practică, modernizarea poate include schimbarea unui CT sau RX, introducerea unui RMN, extinderea zonei de imagistică, înlocuirea infrastructurii electrice, refacerea protecției radiologice sau pregătirea unei camere pentru un alt tip de echipament.",
+          "Riscul apare când modernizarea este tratată ca lucrare de finisaj. Radiologia este un spațiu tehnic: greutate echipament, trasee, răcire, date, poziție operator, acces service, autorizări și protecție trebuie analizate împreună. Un perete existent nu este automat potrivit, o ușă existentă nu este automat compatibilă, iar o cameră care a găzduit un echipament vechi nu este automat pregătită pentru unul nou.",
+        ],
+        bullets: [
+          "inventarierea echipamentelor existente și viitoare",
+          "verificarea camerei, a instalațiilor și a zonelor adiacente",
+          "planificarea lucrărilor fără blocarea inutilă a activității",
+          "corelarea autorizărilor cu soluția tehnică reală",
+        ],
+      },
+      {
+        id: "ct-rx-versus-rmn",
+        title: "CT/RX și RMN au cerințe diferite",
+        body: [
+          "În modernizare, separarea dintre CT/RX și RMN este esențială. Pentru CT și RX, tema principală este protecția radiologică: ecranare cu plumb sau soluții echivalente, uși de protecție, geam plombat, zone controlate, poziționare și documentație relevantă pentru CNCAN.",
+          "Pentru RMN, tema principală este RF shielding-ul: cușcă Faraday, uși RF, filtre, waveguides, penetrări controlate, interferențe electromagnetice, HVAC, vibrații și integrarea magnetului. Ecranarea cu plumb nu rezolvă performanța RF a unei camere RMN, iar RF shielding-ul nu rezolvă protecția radiologică pentru CT sau RX.",
+        ],
+        callout: {
+          title: "Separare tehnică obligatorie",
+          body: "Modernizarea CT/RX se analizează prin protecție radiologică și CNCAN. Modernizarea RMN se analizează prin RF shielding, integritate electromagnetică, HVAC și cerințe de integrare a magnetului.",
+        },
+      },
+      {
+        id: "auditul-spatiului",
+        title: "Auditul spațiului înainte de buget",
+        body: [
+          "Înainte de ofertare, spațiul trebuie citit tehnic: dimensiuni reale, înălțimi, structură, acces, trasee de alimentare, poziții pentru echipamente auxiliare, ventilație, răcire, trasee de date și destinația încăperilor vecine. Pentru radiologie, vecinătățile pot schimba soluția de protecție, iar pentru RMN pot apărea probleme legate de interferențe, vibrații sau accesul magnetului.",
+          "Auditul ar trebui să includă și documentația existentă. Planurile vechi pot să nu mai corespundă execuției, iar schimbările făcute în timp pot introduce neconcordanțe. Dacă modernizarea pornește de la informații inexacte, bugetul preliminar devine fragil și calendarul se poate modifica în execuție.",
+        ],
+        bullets: [
+          "planuri actualizate și măsurători la fața locului",
+          "verificarea încăperilor adiacente și a fluxurilor",
+          "starea instalațiilor electrice, HVAC și date",
+          "documentația echipamentelor existente și viitoare",
+          "impactul lucrărilor asupra activității clinice",
+        ],
+      },
+      {
+        id: "echipament-si-integrare",
+        title: "Echipamentul nou schimbă infrastructura",
+        body: [
+          "Înlocuirea unui echipament imagistic cu unul mai performant poate schimba cerințele camerei. Alimentarea electrică, răcirea, masa echipamentului, traseele de cabluri, spațiul de service și conectivitatea trebuie validate înainte de comandă. Nu este suficient ca noul aparat să încapă în cameră; trebuie să poată fi instalat, operat și întreținut corect.",
+          "Integrarea include și legătura cu sistemele digitale ale clinicii, fluxul pacientului, zona operatorului și accesul pentru service. Dacă radiologia rămâne parțial operațională în timpul modernizării, fazarea lucrărilor devine la fel de importantă ca soluția tehnică.",
+        ],
+      },
+      {
+        id: "autorizari-si-documentatie",
+        title: "Autorizări, DSP, CNCAN și schimbări de funcțiune",
+        body: [
+          "Modernizarea poate declanșa nevoi de actualizare documentară. Pentru CT, RX sau alte echipamente cu radiații ionizante, protecția radiologică și pașii CNCAN trebuie reevaluați în raport cu noua configurație. Pentru RMN, cerințele țin de performanța camerei și de integrarea tehnică, nu de aceeași logică radiologică.",
+          "DSP și CNCAN nu sunt același lucru și nu acoperă aceleași riscuri. DSP privește cadrul de funcționare medicală, fluxurile și condițiile spațiului medical, în timp ce CNCAN devine relevant pentru utilizarea surselor de radiații ionizante. O modernizare coerentă ține cont de ambele acolo unde proiectul o cere.",
+        ],
+      },
+      {
+        id: "continuitate-operationala",
+        title: "Continuitatea operațională trebuie planificată",
+        body: [
+          "Într-o clinică activă, costul real al modernizării include și întreruperea activității. Dacă radiologia este o sursă importantă de programări și venituri, calendarul trebuie construit astfel încât perioadele de downtime să fie previzibile, comunicate și cât mai scurte fără a compromite calitatea execuției.",
+          "Un plan bun include faze clare: pregătire documentară, comandă echipament, lucrări preliminare, oprire controlată, intervenții critice, instalare, testare și reluare operațională. În lipsa acestei fazări, proiectul poate intra într-o zonă de improvizație care consumă timp și buget.",
+        ],
+        bullets: [
+          "stabilirea ferestrelor de oprire",
+          "prioritizarea lucrărilor critice înainte de livrarea echipamentului",
+          "coordonarea furnizorilor de echipamente, ecranare și instalații",
+          "pregătirea echipei clinice pentru schimbarea fluxurilor",
+        ],
+      },
+      {
+        id: "buget-si-pasi",
+        title: "Cum se construiește bugetul orientativ",
+        body: [
+          "Bugetul unei modernizări de radiologie trebuie separat pe categorii: analiză tehnică, proiectare, protecție radiologică sau RF shielding, amenajări, instalații, echipament, integrare, testare și service. Această separare previne confuzia dintre costurile de cameră, costurile de aparat și costurile de autorizare.",
+          "Estimatorul online poate ajuta la orientare, dar nu trebuie tratat ca ofertă finală. Pentru modernizări, informațiile lipsă sunt deseori decisive: planuri reale, starea instalațiilor, modelul echipamentului, documentația existentă, restricțiile clădirii și nivelul de downtime acceptabil.",
+        ],
+        callout: {
+          title: "Estimare responsabilă",
+          body: "Orice discuție de cost pentru modernizarea radiologiei trebuie tratată ca estimare orientativă, nu ofertă tehnică sau comercială finală.",
+        },
+      },
+      {
+        id: "cum-poate-ajuta-zes",
+        title: "Cum poate ajuta ZES într-o modernizare",
+        body: [
+          "ZES poate analiza modernizarea ca proiect integrat: radiologie, imagistică, protecție radiologică, RF shielding pentru RMN, echipamente, integrare și service. Obiectivul este reducerea riscurilor înainte de execuție și clarificarea pașilor tehnici înainte de achiziții sau opriri operaționale.",
+          "Radiology Room Planner este util pentru trierea inițială a cerințelor, iar Proposal Builder poate organiza informațiile într-o propunere tehnică preliminară. Pentru discuții aplicate pe spațiu, contactul direct rămâne pasul firesc.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Modernizarea unei camere CT implică RF shielding?",
+        answer:
+          "În mod obișnuit, nu. Camera CT se tratează prin protecție radiologică, ecranare cu plumb sau soluții echivalente, zone controlate și pași CNCAN.",
+      },
+      {
+        question: "Modernizarea unei camere RMN implică plumb?",
+        answer:
+          "În mod obișnuit, nu. Pentru RMN contează RF shielding-ul, cușca Faraday, controlul interferențelor, HVAC-ul, vibrațiile și integrarea magnetului.",
+      },
+      {
+        question: "Poate funcționa clinica în timpul modernizării radiologiei?",
+        answer:
+          "Uneori da, dar depinde de lucrări, acces, siguranță, echipamente și fluxuri. Continuitatea trebuie planificată prin faze și ferestre de oprire.",
+      },
+      {
+        question: "Ce informații sunt necesare pentru o analiză inițială?",
+        answer:
+          "Planuri actualizate, echipamentul existent și cel dorit, stadiul autorizărilor, detalii despre instalații, vecinătăți și calendarul dorit.",
+      },
+      {
+        question: "Modernizarea cere o ofertă separată de echipament?",
+        answer:
+          "Da, de regulă echipamentul, infrastructura, ecranarea, integrarea și service-ul trebuie bugetate distinct, apoi corelate într-un plan comun.",
+      },
+    ],
+    relatedArticles: [
+      "cost-camera-rmn-romania",
+      "cost-camera-ct-romania",
+      "autorizare-cncan-pas-cu-pas",
+      "diferenta-dintre-rf-shielding-si-ecranarea-cu-plumb",
+    ],
+    cta: {
+      title: "Modernizezi o radiologie existentă?",
+      description:
+        "Clarifică diferențele dintre CT/RX și RMN, riscurile de ecranare, integrarea echipamentului și calendarul de oprire.",
+      label: "Planifică modernizarea",
+      href: "/radiology-room-planner",
+    },
+    publishedAt: "2026-05-20",
+    updatedAt: "2026-05-20",
+  },
+  {
+    slug: "service-ct-rmn-mentenanta-uptime",
+    title: "Service CT și RMN: mentenanță, uptime și riscuri operaționale",
+    description:
+      "Ghid pentru service CT și RMN: mentenanță preventivă, diagnostic, piese de schimb, uptime, continuitate operațională și triere tehnică.",
+    category: "Service",
+    tags: [
+      "service CT",
+      "service RMN",
+      "mentenanță imagistică",
+      "uptime medical",
+      "diagnostic aparatură",
+      "piese de schimb",
+    ],
+    readingTime: "14 min",
+    targetKeyword: "service CT RMN mentenanta uptime",
+    relatedServices: [
+      "/services/service-aparatura-medicala",
+      "/services/imagistica-medicala",
+      "/services/aparatura-medicala",
+      "/services/radiologie",
+      "/services/rf-shielding",
+    ],
+    relatedTools: [
+      { label: "Service Diagnostic", href: "/service-diagnostic" },
+      { label: "Calculator service aparatură", href: "/calculatoare/service-aparatura" },
+      { label: "Proposal Builder", href: "/proposal-builder" },
+      { label: "Contact service ZES", href: "/contact" },
+    ],
+    intro:
+      "Service-ul pentru CT și RMN nu este doar o reacție la o eroare apărută pe ecran. Pentru o clinică sau un departament de imagistică, service-ul este o componentă de continuitate operațională: reduce opririle neplanificate, protejează programările, susține calitatea investigațiilor și ajută echipa medicală să lucreze predictibil. Când aparatul este critic pentru fluxul clinicii, mentenanța devine o decizie de business, nu doar o intervenție tehnică.",
+    sections: [
+      {
+        id: "de-ce-uptime-ul-conteaza",
+        title: "De ce uptime-ul contează în imagistică",
+        body: [
+          "Un CT sau un RMN oprit poate afecta rapid programările, veniturile, încrederea pacienților și colaborarea cu medicii trimițători. În multe clinici, imagistica este un nod operațional: dacă aparatul nu funcționează, întregul flux se decalează.",
+          "Uptime-ul nu înseamnă promisiunea că nu vor apărea niciodată probleme. Înseamnă pregătirea unui sistem care reduce frecvența incidentelor, scurtează timpul de diagnostic, clarifică responsabilitățile și prioritizează intervențiile în funcție de impact. O strategie de service bună începe înainte de prima defecțiune majoră.",
+        ],
+        bullets: [
+          "programări mai predictibile",
+          "risc mai mic de opriri prelungite",
+          "triage mai rapid când apare o eroare",
+          "planificarea pieselor și a mentenanței preventive",
+        ],
+      },
+      {
+        id: "mentenanta-preventiva",
+        title: "Mentenanța preventivă nu este o formalitate",
+        body: [
+          "Mentenanța preventivă urmărește condițiile de funcționare înainte ca ele să producă o oprire. Pentru CT, aceasta poate include verificări ale componentelor, răcirii, alimentării, calității imaginii și parametrilor de funcționare. Pentru RMN, se adaugă atenție la condițiile de mediu, răcire, integritate RF, sisteme auxiliare și comportamentul camerei.",
+          "Un plan preventiv nu elimină toate riscurile, dar schimbă modul în care clinica le gestionează. Problemele pot fi observate mai devreme, intervențiile se pot programa în ferestre mai puțin aglomerate, iar bugetul de service devine mai predictibil.",
+        ],
+        callout: {
+          title: "Principiu de continuitate",
+          body: "Service-ul bun nu începe în ziua în care aparatul se oprește. Începe cu mentenanță preventivă, monitorizarea condițiilor de operare și documentarea incidentelor.",
+        },
+      },
+      {
+        id: "diagnostic-corect",
+        title: "Diagnostic tehnic: simptomul nu este mereu cauza",
+        body: [
+          "O eroare de sistem, artefactele de imagine, supraîncălzirea sau funcționarea intermitentă pot avea cauze diferite: componentă electronică, alimentare electrică, răcire, software, cablare, mediu de cameră, integrare sau utilizare. De aceea, trierea inițială este importantă.",
+          "Pentru RMN, unele probleme pot părea legate de echipament, dar să fie influențate de RF shielding, interferențe, HVAC sau modificări în cameră. Pentru CT, calitatea imaginii, erorile sau opririle pot necesita verificarea echipamentului, dar și a condițiilor de alimentare, răcire și utilizare.",
+        ],
+        bullets: [
+          "eroare afișată și momentul apariției",
+          "impact operațional: oprit, funcționare parțială sau degradare",
+          "istoricul incidentelor și al mentenanței",
+          "condițiile de mediu și modificările recente în cameră",
+        ],
+      },
+      {
+        id: "piese-de-schimb",
+        title: "Piese de schimb și planificare logistică",
+        body: [
+          "O intervenție rapidă depinde nu doar de diagnostic, ci și de disponibilitatea pieselor, compatibilitatea lor, istoricul echipamentului și procedurile furnizorului. În echipamente imagistice complexe, o piesă critică indisponibilă poate transforma o problemă tehnică într-o întrerupere operațională serioasă.",
+          "Planificarea pieselor nu înseamnă stocarea haotică a componentelor. Înseamnă identificarea elementelor cu risc, înțelegerea timpilor de livrare, stabilirea priorităților și documentarea modelului echipamentului. Pentru aparatele esențiale, această discuție ar trebui să facă parte din planul de service.",
+        ],
+      },
+      {
+        id: "ct-versus-rmn-service",
+        title: "Diferențe între service CT și service RMN",
+        body: [
+          "CT-ul și RMN-ul pot avea nevoi comune, precum mentenanță preventivă, diagnostic electronic, verificări de calitate a imaginii și managementul pieselor. Totuși, cerințele de cameră sunt diferite. CT-ul se leagă de protecția radiologică, flux, răcire și echipament cu radiații ionizante. RMN-ul se leagă de RF shielding, câmp magnetic, HVAC, vibrații și integrarea magnetului.",
+          "Această diferență contează în service. O modificare în camera RMN poate afecta performanța RF sau condițiile de mediu. O schimbare într-o cameră CT poate avea impact asupra protecției radiologice sau a operării. Service-ul responsabil privește aparatul și infrastructura împreună.",
+        ],
+      },
+      {
+        id: "contract-service",
+        title: "Contract de service sau intervenții la cerere",
+        body: [
+          "Intervențiile la cerere pot părea flexibile, dar pentru echipamente critice pot crea incertitudine: cine răspunde, în ce timp, cu ce documentație, ce piese sunt disponibile și cum se prioritizează cazul. Un contract sau o structură clară de suport poate reduce aceste incertitudini.",
+          "Nu orice clinică are nevoie de aceeași formulă. Un centru cu volum mare și echipament esențial are alt profil de risc decât un cabinet cu utilizare ocazională. Decizia trebuie legată de impactul opririi, vechimea echipamentului, disponibilitatea pieselor, istoricul incidentelor și calendarul de lucru.",
+        ],
+      },
+      {
+        id: "ce-sa-pregatesti",
+        title: "Ce informații ajută la o triere rapidă",
+        body: [
+          "Când apare o problemă, calitatea informațiilor transmise scurtează timpul de triere. Un mesaj vag de tipul „nu merge” ajută puțin. Mai util este un sumar: tip echipament, eroare afișată, momentul apariției, dacă aparatul este complet oprit, ce investigații sunt afectate și ce s-a schimbat recent în cameră.",
+          "Service Diagnostic poate ajuta la structurarea acestui prim sumar fără să pretindă un diagnostic final. Rezultatul poate orienta urgența, riscurile operaționale și pașii următori înainte de o discuție tehnică aplicată.",
+        ],
+        bullets: [
+          "tipul și modelul echipamentului, dacă este disponibil",
+          "simptomul, codul de eroare și frecvența apariției",
+          "impactul asupra programărilor",
+          "istoricul de mentenanță și intervenții recente",
+          "condiții de mediu sau lucrări recente în cameră",
+        ],
+      },
+      {
+        id: "cum-abordeaza-zes",
+        title: "Cum abordează ZES service-ul imagistic",
+        body: [
+          "ZES tratează service-ul ca parte dintr-un sistem mai larg: echipament, infrastructură, integrare, cameră, utilizare și continuitate operațională. Pentru CT și RMN, această abordare este importantă deoarece unele probleme apar la granița dintre aparat și mediul tehnic.",
+          "Pentru o primă triere, folosește Service Diagnostic sau calculatorul de service aparatură. Pentru un plan mai amplu, Proposal Builder poate include mentenanța, riscurile, bugetul orientativ și pașii de continuitate într-o propunere preliminară.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Cât de des trebuie făcută mentenanța pentru CT sau RMN?",
+        answer:
+          "Frecvența depinde de echipament, utilizare, recomandările producătorului și istoricul incidentelor. Trebuie stabilită într-un plan tehnic, nu printr-o regulă generică.",
+      },
+      {
+        question: "Artefactele de imagine înseamnă automat defect al aparatului?",
+        answer:
+          "Nu întotdeauna. Pot exista cauze legate de echipament, software, calibrare, mediu, RF shielding la RMN sau condiții de operare.",
+      },
+      {
+        question: "Ce este mai important: intervenția rapidă sau mentenanța preventivă?",
+        answer:
+          "Ambele sunt importante. Intervenția rapidă reduce impactul incidentului, iar mentenanța preventivă reduce probabilitatea și severitatea unor incidente.",
+      },
+      {
+        question: "Un contract de service garantează uptime total?",
+        answer:
+          "Nu. Un contract poate îmbunătăți predictibilitatea și timpii de reacție, dar nu poate garanta lipsa oricărei opriri sau disponibilitatea instantanee a tuturor pieselor.",
+      },
+      {
+        question: "Ce trebuie trimis înainte de o solicitare service?",
+        answer:
+          "Tipul echipamentului, simptomul, codul de eroare, impactul operațional, istoricul incidentelor și orice schimbare recentă în cameră sau infrastructură.",
+      },
+    ],
+    relatedArticles: [
+      "mentenanta-aparaturii-medicale-ce-trebuie-urmarit",
+      "imagistica-medicala-ct-rmn-rx-si-integrare-tehnica",
+      "modernizare-radiologie-clinica",
+      "cost-camera-rmn-romania",
+    ],
+    cta: {
+      title: "Ai o problemă cu un CT sau RMN?",
+      description:
+        "Structurează rapid simptomele, impactul operațional și pașii recomandați înainte de intervenția tehnică.",
+      label: "Deschide Service Diagnostic",
+      href: "/service-diagnostic",
+    },
+    publishedAt: "2026-05-20",
+    updatedAt: "2026-05-20",
+  },
+  {
+    slug: "echipamente-ivd-laborator-alegere-integrare-service",
+    title: "Echipamente IVD pentru laborator: alegere, integrare și service",
+    description:
+      "Ghid pentru alegerea echipamentelor IVD și de laborator: workflow, capacitate, integrare, calibrare, validare, service și continuitate operațională.",
+    category: "IVD / laborator",
+    tags: [
+      "echipamente IVD",
+      "laborator medical",
+      "integrare laborator",
+      "service IVD",
+      "calibrare",
+      "validare laborator",
+    ],
+    readingTime: "14 min",
+    targetKeyword: "echipamente IVD laborator alegere integrare service",
+    relatedServices: [
+      "/services/ivd-laborator",
+      "/services/aparatura-medicala",
+      "/services/service-aparatura-medicala",
+      "/services/amenajari-medicale",
+      "/services/constructii-medicale",
+    ],
+    relatedTools: [
+      { label: "Calculator cost laborator IVD", href: "/calculatoare/cost-laborator-ivd" },
+      { label: "Proposal Builder", href: "/proposal-builder" },
+      { label: "Consultant AI", href: "/ai-project-advisor" },
+      { label: "Contact ZES", href: "/contact" },
+      { label: "Ghid echipamente IVD", href: "/ghiduri/echipamente-ivd-laborator" },
+    ],
+    intro:
+      "Alegerea echipamentelor IVD pentru un laborator medical nu ar trebui să pornească doar de la lista de analize sau de la prețul unui analizor. Un laborator funcțional este un sistem de workflow: prelevare, recepție probe, pregătire, analiză, control calitate, raportare, mentenanță, consumabile, calibrare, validare și service. Dacă aceste elemente nu sunt gândite împreună, echipamentul poate fi bun pe hârtie, dar dificil de operat în realitate.",
+    sections: [
+      {
+        id: "workflow-inainte-de-echipament",
+        title: "Workflow-ul vine înaintea echipamentului",
+        body: [
+          "Primul pas în alegerea echipamentelor IVD este definirea fluxului laboratorului. Ce probe intră, în ce volum, cu ce frecvență, ce timp de răspuns se dorește, ce personal operează echipamentele, cum se gestionează consumabilele și cum se raportează rezultatele? Răspunsurile schimbă complet selecția.",
+          "Un laborator mic cu volum predictibil poate avea nevoie de o configurație compactă și ușor de întreținut. Un laborator cu volum ridicat sau cu portofoliu divers are nevoie de redundanță, automatizare, integrare digitală, spații de lucru clare și un plan de service mai robust.",
+        ],
+        bullets: [
+          "tipuri de probe și trasee interne",
+          "volum zilnic și vârfuri de lucru",
+          "timp de răspuns dorit",
+          "personal disponibil și nivel de automatizare",
+          "integrare cu sistemele de raportare",
+        ],
+      },
+      {
+        id: "selectia-echipamentelor",
+        title: "Criterii de selecție pentru echipamente IVD",
+        body: [
+          "Selecția trebuie să echilibreze capacitatea, fiabilitatea, disponibilitatea consumabilelor, cerințele de service, spațiul necesar, conectivitatea și costul total de operare. Prețul de achiziție este doar o parte din decizie. Contează cât de ușor se operează echipamentul, cât de predictibil este suportul și cât de bine se potrivește fluxului laboratorului.",
+          "Este util să separi decizia pe categorii: analizor principal, echipamente auxiliare, consumabile, reactivi, software, mentenanță, calibrare și service. Când toate sunt puse într-un singur total, riscul este să fie subestimate costurile operaționale.",
+        ],
+        bullets: [
+          "capacitate și tipuri de teste",
+          "necesar de spațiu, alimentare și mediu",
+          "consumabile și disponibilitate",
+          "interfațare și raportare",
+          "service, mentenanță și timp de reacție",
+        ],
+      },
+      {
+        id: "integrarea-in-laborator",
+        title: "Integrarea echipamentelor în spațiul de laborator",
+        body: [
+          "Integrarea nu înseamnă doar conectarea la priză. Echipamentele IVD pot cere mese, alimentări dedicate, apă, evacuare, ventilație, temperatură controlată, spațiu pentru consumabile, trasee pentru probe și zone de lucru separate. Într-un laborator aglomerat, o poziționare greșită poate încetini fluxul și crește riscul de erori.",
+          "Integrarea digitală este la fel de importantă. Rezultatele trebuie să circule coerent între echipament, sistemele interne și raportare. Chiar dacă nu se implementează totul din prima zi, laboratorul trebuie gândit astfel încât să poată evolua fără reamenajări majore.",
+        ],
+      },
+      {
+        id: "calibrare-validare",
+        title: "Calibrare, validare și control calitate",
+        body: [
+          "În laborator, performanța echipamentului trebuie susținută prin proceduri, calibrare, validare și control calitate. Acestea nu sunt detalii administrative; ele influențează încrederea în rezultate, ritmul de lucru și modul în care echipa reacționează la abateri.",
+          "Când un echipament nou intră în laborator, perioada de instalare trebuie să includă verificări, instruire, configurare și documentare. Dacă validarea este grăbită sau neclară, apar probleme în operare: rezultate întârziate, repetări, neînțelegeri între echipe sau utilizare sub capacitate.",
+        ],
+        callout: {
+          title: "Laboratorul este un sistem",
+          body: "Un analizor performant nu compensează un workflow slab, lipsa consumabilelor, integrarea digitală incompletă sau un plan de service insuficient.",
+        },
+      },
+      {
+        id: "service-si-continuitate",
+        title: "Service IVD și continuitate operațională",
+        body: [
+          "Service-ul pentru IVD trebuie gândit în raport cu impactul asupra probelor și timpului de răspuns. O oprire a unui analizor critic poate bloca fluxul, poate crea întârzieri și poate pune presiune pe personal. De aceea, planul de service trebuie să includă mentenanță preventivă, triere rapidă, documentare și, unde este justificat, soluții de backup.",
+          "Pentru laboratoare cu volum mare, disponibilitatea consumabilelor și a pieselor devine parte din continuitate. Nu este suficient să ai echipamentul instalat; trebuie să existe un lanț operațional care susține funcționarea zilnică.",
+        ],
+        bullets: [
+          "mentenanță preventivă și verificări periodice",
+          "proceduri pentru erori și opriri",
+          "plan pentru consumabile și piese critice",
+          "instruire personal și documentare internă",
+          "opțiuni de backup pentru teste critice",
+        ],
+      },
+      {
+        id: "buget-total-operare",
+        title: "Bugetul real: achiziție plus operare",
+        body: [
+          "Bugetul pentru echipamente IVD nu trebuie privit doar ca achiziție. Costul total include consumabile, reactivi, mentenanță, service, calibrare, eventuale interfețe software, amenajarea spațiului și instruirea personalului. Uneori, un echipament cu preț inițial mai mic poate avea costuri operaționale mai mari sau suport mai dificil.",
+          "Un calculator de laborator IVD poate ajuta la o primă orientare, dar estimarea rămâne preliminară. Pentru o decizie comercială reală trebuie analizate volumul, meniul de teste, condițiile spațiului, suportul dorit și planul de creștere al laboratorului.",
+        ],
+        callout: {
+          title: "Estimare orientativă",
+          body: "Discuțiile despre buget pentru IVD trebuie tratate ca orientare preliminară, nu ca ofertă tehnică sau comercială finală.",
+        },
+      },
+      {
+        id: "greseli-frecvente",
+        title: "Greșeli frecvente în alegerea echipamentelor IVD",
+        body: [
+          "O greșeală frecventă este alegerea echipamentului înainte de definirea fluxului. Alta este ignorarea service-ului și a consumabilelor până după achiziție. În laborator, aceste decizii apar rapid în costuri, întârzieri și utilizare sub nivelul așteptat.",
+          "Mai există și riscul de a proiecta spațiul ca pe un simplu cabinet tehnic. Laboratorul are zone, trasee, depozitare, condiții de mediu și proceduri. Dacă ele sunt aglomerate sau neclare, echipamentele performante nu livrează eficiența așteptată.",
+        ],
+        bullets: [
+          "alegere pe preț inițial, fără cost total de operare",
+          "subestimarea consumabilelor și a mentenanței",
+          "lipsa spațiului pentru probe, reactivi și deșeuri",
+          "integrare digitală amânată prea mult",
+          "fără plan de service și continuitate",
+        ],
+      },
+      {
+        id: "cum-ajuta-zes",
+        title: "Cum poate ajuta ZES în proiecte IVD",
+        body: [
+          "ZES poate aborda laboratorul prin infrastructură, echipamente, integrare și service. Scopul este ca alegerea aparaturii să fie conectată la flux, spațiu, capacitate, buget orientativ și continuitate operațională.",
+          "Pentru o primă structurare, poți folosi calculatorul de cost laborator IVD sau Proposal Builder. Pentru proiecte cu achiziții, integrare și service, o discuție tehnică ajută la clarificarea cerințelor înainte de ofertare.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Cum aleg echipamentele IVD pentru un laborator nou?",
+        answer:
+          "Începe cu fluxul de probe, volumul estimat, meniul de teste, personalul, spațiul, integrarea digitală și planul de service. Abia apoi compară echipamentele.",
+      },
+      {
+        question: "Prețul de achiziție este cel mai important criteriu?",
+        answer:
+          "Nu. Contează costul total de operare: consumabile, mentenanță, calibrare, service, integrare, instruire și eventuale adaptări ale spațiului.",
+      },
+      {
+        question: "Ce înseamnă integrarea echipamentelor IVD?",
+        answer:
+          "Înseamnă amplasare, condiții tehnice, utilități, workflow, conectivitate, raportare, instruire și pregătirea pentru service.",
+      },
+      {
+        question: "De ce sunt importante calibrarea și validarea?",
+        answer:
+          "Pentru că susțin performanța, încrederea în rezultate și operarea controlată. Ele trebuie incluse în planul de instalare și operare.",
+      },
+      {
+        question: "Laboratorul are nevoie de plan de service?",
+        answer:
+          "Da. Un plan de service reduce riscul de opriri prelungite, clarifică reacția la incidente și ajută la menținerea continuității operaționale.",
+      },
+    ],
+    relatedArticles: [
+      "ghid-pentru-echipamente-ivd-si-laborator",
+      "cum-alegi-aparatura-medicala-pentru-o-clinica",
+      "mentenanta-aparaturii-medicale-ce-trebuie-urmarit",
+      "cum-se-construieste-o-clinica-medicala-in-romania",
+    ],
+    cta: {
+      title: "Planifici un laborator IVD?",
+      description:
+        "Structurează fluxul, echipamentele, integrarea, calibrarea și service-ul înainte de achiziție.",
+      label: "Calculează orientativ laboratorul IVD",
+      href: "/calculatoare/cost-laborator-ivd",
+    },
+    publishedAt: "2026-05-20",
+    updatedAt: "2026-05-20",
+  },
 ];
 
 const authorityArticleUpgrades: Record<string, Partial<Article>> = {
