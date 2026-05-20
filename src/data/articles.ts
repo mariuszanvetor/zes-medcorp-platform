@@ -1727,6 +1727,1286 @@ const baseArticles: Article[] = [
     publishedAt: "2026-05-20",
     updatedAt: "2026-05-20",
   },
+  {
+    slug: "diferenta-rmn-ct-infrastructura",
+    title: "Ce diferență este între RMN și CT din punct de vedere al infrastructurii",
+    description:
+      "Explicație practică despre diferențele de infrastructură dintre RMN și CT: RF shielding, protecție radiologică, HVAC, autorizări, integrare și riscuri de proiectare.",
+    category: "Imagistică",
+    tags: [
+      "RMN vs CT",
+      "infrastructură imagistică",
+      "RF shielding",
+      "protecție radiologică",
+      "camera RMN",
+      "camera CT",
+    ],
+    readingTime: "11 min",
+    targetKeyword: "diferenta RMN CT infrastructura",
+    relatedServices: [
+      "/services/imagistica-medicala",
+      "/services/radiologie",
+      "/services/rf-shielding",
+      "/services/protectie-radiologica",
+      "/services/aparatura-medicala",
+    ],
+    relatedTools: [
+      { label: "Radiology Room Planner", href: "/radiology-room-planner" },
+      { label: "Calculator cameră RMN", href: "/calculatoare/cost-camera-rmn" },
+      { label: "Calculator cameră CT", href: "/calculatoare/cost-camera-ct" },
+      { label: "Proposal Builder", href: "/proposal-builder" },
+    ],
+    intro:
+      "RMN și CT sunt ambele echipamente de imagistică medicală, dar din punct de vedere al infrastructurii sunt proiecte diferite. Confuzia dintre ele duce la bugete greșite, camere proiectate incomplet și riscuri în autorizare sau operare. RMN-ul cere control electromagnetic și RF shielding. CT-ul cere protecție radiologică, zone controlate și coordonare cu cerințele aplicabile echipamentelor cu radiații ionizante.",
+    sections: [
+      {
+        id: "principiul-de-baza",
+        title: "Principiul de bază: RMN nu este CT",
+        body: [
+          "RMN-ul funcționează cu câmp magnetic și radiofrecvență, nu cu radiații ionizante. De aceea, camera RMN trebuie gândită în jurul performanței electromagnetice: cușcă Faraday, ușă RF, filtre, penetrări controlate, HVAC, vibrații, acces pentru magnet și condiții de mediu stabile.",
+          "CT-ul folosește radiații ionizante. Pentru camera CT, infrastructura se concentrează pe protecție radiologică, ecranare cu plumb sau soluții echivalente, uși și geamuri protejate, poziționare, zone controlate, documentație și pași CNCAN unde este cazul.",
+        ],
+        callout: {
+          title: "Distincție esențială",
+          body: "RF shielding-ul este specific camerei RMN. Protecția radiologică și CNCAN sunt relevante pentru CT/RX și alte echipamente cu radiații ionizante.",
+        },
+      },
+      {
+        id: "camera-rmn",
+        title: "Ce cere infrastructura pentru RMN",
+        body: [
+          "O cameră RMN trebuie să protejeze echipamentul și calitatea imaginii de interferențe radiofrecvență. Asta înseamnă o anvelopă RF coerentă, fără întreruperi necontrolate. Orice trecere pentru cabluri, ventilație, gaze, conducte sau accesorii trebuie tratată prin soluții compatibile cu ecranarea.",
+          "Pe lângă RF shielding, RMN-ul cere atenție la HVAC, răcire, umiditate, vibrații, acces pentru instalare și spațiu de service. Camera tehnică, traseele de cabluri și cerințele producătorului echipamentului trebuie analizate înainte de execuție, nu după livrarea aparatului.",
+        ],
+        bullets: [
+          "cușcă Faraday, ușă RF, filtre și waveguides",
+          "controlul penetrărilor prin ecranare",
+          "HVAC, răcire, vibrații și condiții de mediu",
+          "acces pentru instalare și mentenanță",
+        ],
+      },
+      {
+        id: "camera-ct",
+        title: "Ce cere infrastructura pentru CT",
+        body: [
+          "Camera CT este proiectată în jurul siguranței radiologice și al fluxului de operare. Contează poziția gantry-ului, direcțiile de expunere, zona operatorului, pereții și încăperile adiacente, accesul pacientului, ușa camerei și geamul de vizualizare.",
+          "Protecția radiologică poate include materiale cu plumb sau soluții echivalente validate tehnic. Layout-ul nu trebuie schimbat după stabilirea soluției fără reevaluare, deoarece mutarea echipamentului, ușii sau zonei operatorului poate afecta protecția.",
+        ],
+        bullets: [
+          "ecranare cu plumb sau soluții echivalente",
+          "uși și geamuri cu protecție radiologică",
+          "zone controlate și vecinătăți analizate",
+          "coordonare cu documentația CNCAN unde este cazul",
+        ],
+      },
+      {
+        id: "buget-si-calendar",
+        title: "De ce bugetul și calendarul sunt diferite",
+        body: [
+          "Un buget RMN poate fi influențat puternic de RF shielding, HVAC, accesul magnetului și condițiile camerei. Un buget CT poate fi influențat de protecția radiologică, calculul de ecranare, autorizare și poziționarea față de spațiile vecine.",
+          "În ambele cazuri, echipamentul schimbă infrastructura. Modelul ales dictează alimentarea, răcirea, spațiul de service, traseele și cerințele de instalare. De aceea, comparația simplă RMN vs CT prin suprafață sau finisaje nu este relevantă.",
+        ],
+      },
+      {
+        id: "cum-verifici-proiectul",
+        title: "Cum verifici ce tip de infrastructură ai nevoie",
+        body: [
+          "Primul pas este clarificarea echipamentului: RMN, CT, RX sau combinație. Apoi trebuie analizate spațiul, clădirea, vecinătățile, documentația, instalațiile și stadiul proiectului. Pentru proiecte mixte, separarea cerințelor este obligatorie: nu există o singură soluție de ecranare pentru toate tipurile de imagistică.",
+          "Radiology Room Planner poate ajuta la trierea inițială, iar Proposal Builder poate structura fazele, riscurile și bugetul orientativ. Pentru decizia finală este nevoie de validare tehnică pe planuri și specificații de echipament.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "RMN-ul are nevoie de protecție cu plumb?",
+        answer:
+          "În mod obișnuit, nu. RMN-ul are nevoie de RF shielding pentru control electromagnetic, nu de plumb pentru radiații ionizante.",
+      },
+      {
+        question: "CT-ul are nevoie de cușcă Faraday?",
+        answer:
+          "Nu în logica unei camere RMN. Pentru CT contează protecția radiologică, ecranarea cu plumb sau soluții echivalente și zonele controlate.",
+      },
+      {
+        question: "CNCAN se aplică la RMN?",
+        answer:
+          "CNCAN este relevant pentru echipamente cu radiații ionizante, precum CT/RX. Nu trebuie confundat cu RF shielding-ul pentru RMN.",
+      },
+      {
+        question: "Care cameră este mai complexă, RMN sau CT?",
+        answer:
+          "Depinde de spațiu și echipament. RMN-ul are complexitate RF, HVAC și integrare magnetică. CT-ul are complexitate radiologică, CNCAN și protecție cu plumb.",
+      },
+      {
+        question: "Pot planifica o cameră fără modelul exact de echipament?",
+        answer:
+          "Se poate face o orientare, dar proiectarea serioasă cere specificații de echipament pentru alimentare, răcire, spațiu, greutate și service.",
+      },
+    ],
+    relatedArticles: [
+      "diferenta-dintre-rf-shielding-si-ecranarea-cu-plumb",
+      "cost-camera-rmn-romania",
+      "cost-camera-ct-romania",
+      "modernizare-radiologie-clinica",
+    ],
+    cta: {
+      title: "Ai un proiect RMN sau CT?",
+      description:
+        "Clarifică diferențele de infrastructură înainte de buget, autorizări sau achiziția echipamentului.",
+      label: "Planifică în Radiology Room Planner",
+      href: "/radiology-room-planner",
+    },
+    publishedAt: "2026-05-20",
+    updatedAt: "2026-05-20",
+  },
+  {
+    slug: "camera-faraday-rmn",
+    title: "Ce este camera Faraday pentru RMN și când este necesară",
+    description:
+      "Ghid despre camera Faraday pentru RMN: rolul RF shielding-ului, uși RF, filtre, waveguides, penetrări, testare și riscuri de proiectare.",
+    category: "RF shielding",
+    tags: [
+      "camera Faraday RMN",
+      "cușcă Faraday",
+      "RF shielding",
+      "camera RMN",
+      "uși RF",
+      "filtre RF",
+    ],
+    readingTime: "10 min",
+    targetKeyword: "camera Faraday RMN",
+    relatedServices: [
+      "/services/rf-shielding",
+      "/services/radiologie",
+      "/services/imagistica-medicala",
+      "/services/aparatura-medicala",
+    ],
+    relatedTools: [
+      { label: "Calculator cameră RMN", href: "/calculatoare/cost-camera-rmn" },
+      { label: "Radiology Room Planner", href: "/radiology-room-planner" },
+      { label: "Proposal Builder", href: "/proposal-builder" },
+      { label: "Contact ZES", href: "/contact" },
+    ],
+    intro:
+      "Camera Faraday pentru RMN este anvelopa tehnică prin care camera este protejată de interferențe radiofrecvență. În limbaj de proiect, vorbim despre RF shielding: pereți, tavan, pardoseală, ușă RF, filtre, waveguides și toate detaliile care mențin integritatea electromagnetică a camerei. Nu este o soluție decorativă și nu este același lucru cu ecranarea cu plumb pentru CT sau RX.",
+    sections: [
+      {
+        id: "rolul-camerei-faraday",
+        title: "Rolul camerei Faraday în RMN",
+        body: [
+          "RMN-ul este sensibil la interferențe radiofrecvență. Aceste interferențe pot afecta calitatea imaginii, stabilitatea investigației și performanța camerei. Camera Faraday are rolul de a crea o barieră controlată între mediul exterior și zona de examinare.",
+          "Performanța nu depinde doar de materialele folosite, ci de continuitatea întregului sistem. O îmbinare slabă, o ușă nepotrivită sau o trecere necontrolată prin ecranare poate compromite rezultatul. De aceea, RF shielding-ul trebuie proiectat și executat ca sistem, nu ca listă de materiale.",
+        ],
+      },
+      {
+        id: "componente",
+        title: "Componentele principale",
+        body: [
+          "O cameră Faraday include suprafețe conductoare pe pereți, tavan și pardoseală, ușă RF, elemente pentru ventilație, filtre pentru cabluri și soluții speciale pentru fiecare penetrare. Fiecare componentă trebuie să contribuie la aceeași performanță de atenuare.",
+          "Waveguides și filtrele permit trecerea aerului, cablurilor sau altor trasee fără a deschide camera către interferențe. Aceste detalii sunt frecvent subestimate în faze timpurii, dar pot deveni costisitoare dacă sunt adăugate după execuție.",
+        ],
+        bullets: [
+          "anvelopă RF continuă",
+          "ușă RF și feronerie compatibilă",
+          "filtre pentru cabluri și alimentări",
+          "waveguides pentru ventilație și treceri controlate",
+          "testare de performanță după execuție",
+        ],
+      },
+      {
+        id: "cand-este-necesara",
+        title: "Când este necesară",
+        body: [
+          "Camera Faraday este necesară pentru camere RMN în care echipamentul cere controlul interferențelor RF. Practic, este o componentă standard în planificarea unei camere RMN moderne, dar soluția exactă depinde de echipament, spațiu, clădire și cerințele producătorului.",
+          "Nu trebuie confundată cu protecția radiologică. Dacă proiectul este CT sau RX, discuția se mută către plumb, zone controlate și CNCAN. Dacă proiectul este RMN, discuția se mută către RF, câmp magnetic, HVAC, vibrații și acces pentru magnet.",
+        ],
+        callout: {
+          title: "Nu este ecranare radiologică",
+          body: "Camera Faraday pentru RMN controlează interferențele radiofrecvență. Nu înlocuiește protecția radiologică pentru CT/RX și nu este o cerință CNCAN în sine.",
+        },
+      },
+      {
+        id: "greseli-frecvente",
+        title: "Greșeli frecvente în proiectarea camerei Faraday",
+        body: [
+          "Prima greșeală este proiectarea camerei RMN fără lista completă de penetrări. HVAC-ul, cablurile, monitorizarea, accesoriile și traseele tehnice trebuie definite devreme. A doua greșeală este tratarea ușii RF ca produs separat, deși ea este parte critică din anvelopă.",
+          "O altă problemă apare când mobilierul, finisajele sau echipamentele auxiliare sunt decise după instalarea RF shielding-ului. Orice modificare care trece prin anvelopa camerei trebuie coordonată tehnic.",
+        ],
+        bullets: [
+          "trasee tehnice adăugate târziu",
+          "ușă RF aleasă fără coordonare cu anvelopa",
+          "lipsă spațiu pentru service și echipamente auxiliare",
+          "testare amânată până după recepție",
+        ],
+      },
+      {
+        id: "planificare",
+        title: "Cum se planifică responsabil",
+        body: [
+          "Planificarea începe cu specificațiile RMN-ului, planurile camerei și analiza clădirii. Trebuie clarificate dimensiunile, accesul pentru magnet, poziția camerei tehnice, traseele, HVAC-ul, vibrațiile și condițiile de service. Abia apoi soluția RF poate fi bugetată realist.",
+          "Pentru o primă orientare, calculatorul de cameră RMN și Radiology Room Planner pot evidenția riscurile. Pentru decizia finală, ZES poate valida cerințele tehnice și poate coordona RF shielding-ul cu infrastructura și integrarea echipamentului.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Camera Faraday este același lucru cu RF shielding?",
+        answer:
+          "În context RMN, termenii sunt folosiți apropiat. Camera Faraday descrie anvelopa de ecranare RF care reduce interferențele radiofrecvență.",
+      },
+      {
+        question: "Se folosește plumb într-o cameră Faraday pentru RMN?",
+        answer:
+          "Plumbul este asociat cu protecția radiologică pentru CT/RX. Pentru RMN contează ecranarea RF, nu protecția la radiații ionizante.",
+      },
+      {
+        question: "Ce poate compromite RF shielding-ul?",
+        answer:
+          "Penetrările necontrolate, îmbinările slabe, ușile nepotrivite, filtrele lipsă și modificările târzii prin anvelopă pot reduce performanța.",
+      },
+      {
+        question: "Când se testează camera Faraday?",
+        answer:
+          "Testarea trebuie planificată după execuția ecranării și înainte de acceptarea finală, conform cerințelor proiectului și echipamentului.",
+      },
+      {
+        question: "Cine trebuie implicat în planificare?",
+        answer:
+          "Beneficiarul, furnizorul RMN, echipa de proiectare, integratorul RF shielding și specialiștii în infrastructură medicală.",
+      },
+    ],
+    relatedArticles: [
+      "diferenta-rmn-ct-infrastructura",
+      "cost-camera-rmn-romania",
+      "greseli-critice-in-proiectarea-camerelor-rmn",
+      "diferenta-dintre-rf-shielding-si-ecranarea-cu-plumb",
+    ],
+    cta: {
+      title: "Verifică cerințele RF pentru camera RMN",
+      description:
+        "Clarifică anvelopa RF, penetrările, HVAC-ul, accesul și integrarea echipamentului înainte de execuție.",
+      label: "Calculează camera RMN",
+      href: "/calculatoare/cost-camera-rmn",
+    },
+    publishedAt: "2026-05-20",
+    updatedAt: "2026-05-20",
+  },
+  {
+    slug: "protectie-radiologica-camera-rx",
+    title: "Ce presupune protecția radiologică pentru o cameră RX",
+    description:
+      "Ghid practic despre protecția radiologică pentru camera RX: ecranare cu plumb, uși, geamuri, zone controlate, CNCAN și greșeli de proiectare.",
+    category: "Protecție radiologică",
+    tags: [
+      "protecție radiologică RX",
+      "camera RX",
+      "ecranare cu plumb",
+      "CNCAN",
+      "radiologie",
+      "zone controlate",
+    ],
+    readingTime: "10 min",
+    targetKeyword: "protectie radiologica camera RX",
+    relatedServices: [
+      "/services/protectie-radiologica",
+      "/services/radiologie",
+      "/services/imagistica-medicala",
+      "/services/amenajari-medicale",
+    ],
+    relatedTools: [
+      { label: "Radiology Room Planner", href: "/radiology-room-planner" },
+      { label: "Proposal Builder", href: "/proposal-builder" },
+      { label: "Consultant AI", href: "/ai-project-advisor" },
+      { label: "Ghid autorizare CNCAN", href: "/ghiduri/autorizare-cncan" },
+    ],
+    intro:
+      "Protecția radiologică pentru o cameră RX înseamnă controlul expunerii la radiații ionizante pentru pacienți, personal și spațiile din jur. Nu este o simplă finisare a camerei și nu trebuie confundată cu RF shielding-ul pentru RMN. O cameră RX bine planificată pornește de la echipament, layout, vecinătăți, zone controlate și documentație tehnică.",
+    sections: [
+      {
+        id: "ce-inseamna-protectie-radiologica",
+        title: "Ce înseamnă protecție radiologică",
+        body: [
+          "Protecția radiologică este ansamblul de măsuri prin care radiațiile ionizante sunt controlate în camera RX și în spațiile adiacente. Poate include pereți protejați, uși cu plumb, geam de protecție, poziționarea echipamentului, reguli de acces și documentație.",
+          "Soluția depinde de echipament, utilizare, vecinătăți și fluxul camerei. O cameră RX lângă o zonă circulată are alte riscuri decât una amplasată într-o zonă tehnică. De aceea, nu există o soluție universală valabilă pentru toate camerele.",
+        ],
+      },
+      {
+        id: "elemente-tehnice",
+        title: "Elementele tehnice ale unei camere RX",
+        body: [
+          "În proiectare se analizează pereții, ușa, geamul operatorului, tavanul, pardoseala, poziția echipamentului și direcțiile de expunere. Protecția poate folosi plumb sau soluții echivalente, dar alegerea trebuie validată tehnic pentru situația reală.",
+          "Camera operatorului și traseul pacientului sunt importante. Operatorul trebuie să aibă vizibilitate și control, iar accesul trebuie gândit astfel încât camera să funcționeze predictibil și sigur.",
+        ],
+        bullets: [
+          "pereți și uși cu protecție radiologică",
+          "geam de protecție pentru zona operatorului",
+          "poziționarea echipamentului și a fasciculului",
+          "zone adiacente și nivel de ocupare",
+          "documentație pentru pașii CNCAN unde este cazul",
+        ],
+      },
+      {
+        id: "cncan-si-rx",
+        title: "CNCAN și camera RX",
+        body: [
+          "Pentru camere RX, CNCAN poate fi relevant deoarece echipamentul implică radiații ionizante. Pașii exacți trebuie validați pentru fiecare proiect, dar planificarea camerei ar trebui să țină cont din timp de documentație și protecție radiologică.",
+          "Este riscant să se execute camera și abia apoi să se caute completarea documentației. Modificările cerute după execuție pot afecta uși, pereți, geamuri, poziția echipamentului sau zonele din jur.",
+        ],
+        callout: {
+          title: "Atenție la confuzii",
+          body: "CNCAN privește radiațiile ionizante și protecția radiologică. Nu este același lucru cu RF shielding-ul folosit la camere RMN.",
+        },
+      },
+      {
+        id: "greseli-de-evitat",
+        title: "Greșeli de evitat",
+        body: [
+          "Una dintre cele mai frecvente greșeli este alegerea camerei RX după criterii de spațiu liber, nu după criterii tehnice. Vecinătățile, fluxul și poziția echipamentului pot conta mai mult decât suprafața aparent disponibilă.",
+          "O altă greșeală este modificarea layout-ului după stabilirea protecției. Schimbarea ușii, mutarea echipamentului sau schimbarea destinației unei camere vecine pot necesita reevaluare.",
+        ],
+        bullets: [
+          "protecție radiologică bugetată prea târziu",
+          "echipament ales fără verificarea camerei",
+          "zone controlate neclare",
+          "geam sau ușă nepotrivite pentru cerințele camerei",
+        ],
+      },
+      {
+        id: "pasii-recomandati",
+        title: "Pașii recomandați înainte de execuție",
+        body: [
+          "Pregătește planurile, echipamentul dorit, destinația încăperilor vecine și stadiul documentației. Apoi verifică protecția radiologică, fluxurile, zona operatorului și modul în care camera se integrează în clinică.",
+          "Radiology Room Planner și Proposal Builder pot ajuta la structurarea riscurilor. Pentru ofertare finală este nevoie de verificare tehnică și documentație aplicată proiectului.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Camera RX are nevoie de plumb?",
+        answer:
+          "De multe ori, protecția radiologică implică plumb sau soluții echivalente, dar soluția exactă depinde de echipament, cameră și vecinătăți.",
+      },
+      {
+        question: "RF shielding-ul este relevant pentru RX?",
+        answer:
+          "Nu în logica unei camere RMN. RX-ul implică protecție radiologică, nu cușcă Faraday pentru control RF.",
+      },
+      {
+        question: "Când trebuie analizată protecția radiologică?",
+        answer:
+          "Înainte de execuție și înainte de blocarea layout-ului. Protecția influențează pereții, ușile, geamul, poziționarea și documentația.",
+      },
+      {
+        question: "Camera RX intră în zona CNCAN?",
+        answer:
+          "Echipamentele RX folosesc radiații ionizante, deci cerințele relevante trebuie verificate pentru proiect. Nu se recomandă presupuneri generale.",
+      },
+      {
+        question: "Ce informații sunt necesare la început?",
+        answer:
+          "Planuri, echipament vizat, utilizare estimată, vecinătăți, fluxuri, stadiu documentație și orice cerințe tehnice ale furnizorului.",
+      },
+    ],
+    relatedArticles: [
+      "autorizare-cncan-pas-cu-pas",
+      "diferenta-rmn-ct-infrastructura",
+      "cost-camera-ct-romania",
+      "diferenta-dintre-rf-shielding-si-ecranarea-cu-plumb",
+    ],
+    cta: {
+      title: "Pregătești o cameră RX?",
+      description:
+        "Verifică protecția radiologică, zonele controlate și documentația înainte de execuție.",
+      label: "Planifică în Radiology Room Planner",
+      href: "/radiology-room-planner",
+    },
+    publishedAt: "2026-05-20",
+    updatedAt: "2026-05-20",
+  },
+  {
+    slug: "verificari-inainte-instalare-ct",
+    title: "Ce verificări sunt necesare înainte de instalarea unui CT",
+    description:
+      "Checklist tehnic pentru instalarea unui CT: spațiu, protecție radiologică, CNCAN, alimentare, HVAC, acces, integrare și service.",
+    category: "Radiologie",
+    tags: [
+      "instalare CT",
+      "verificări CT",
+      "camera CT",
+      "CNCAN",
+      "protecție radiologică",
+      "integrare CT",
+    ],
+    readingTime: "11 min",
+    targetKeyword: "verificari inainte instalare CT",
+    relatedServices: [
+      "/services/radiologie",
+      "/services/protectie-radiologica",
+      "/services/imagistica-medicala",
+      "/services/aparatura-medicala",
+      "/services/service-aparatura-medicala",
+    ],
+    relatedTools: [
+      { label: "Calculator cameră CT", href: "/calculatoare/cost-camera-ct" },
+      { label: "Radiology Room Planner", href: "/radiology-room-planner" },
+      { label: "Proposal Builder", href: "/proposal-builder" },
+      { label: "Service Diagnostic", href: "/service-diagnostic" },
+    ],
+    intro:
+      "Instalarea unui CT nu începe în ziua livrării echipamentului. Înainte ca aparatul să ajungă în clinică, spațiul trebuie verificat tehnic: protecție radiologică, acces, alimentare, HVAC, structură, trasee de cabluri, documentație și integrare. O verificare făcută târziu poate transforma instalarea într-o succesiune de remedieri costisitoare.",
+    sections: [
+      {
+        id: "spatiu-si-layout",
+        title: "Spațiul și layout-ul camerei",
+        body: [
+          "Camera CT trebuie verificată în raport cu dimensiunile echipamentului, zona operatorului, accesul pacientului, spațiul de service și vecinătățile. Nu este suficient ca aparatul să încapă fizic. Trebuie să existe spațiu pentru operare, mentenanță și intervenții ulterioare.",
+          "Layout-ul influențează protecția radiologică și fluxul. Mutarea unei uși sau schimbarea poziției gantry-ului poate cere reevaluare. De aceea, planul final trebuie blocat înainte de execuția protecției.",
+        ],
+      },
+      {
+        id: "protectie-radiologica",
+        title: "Protecție radiologică și zone controlate",
+        body: [
+          "CT-ul implică radiații ionizante, deci camera trebuie analizată prin protecție radiologică. Pereții, ușile, geamurile, planșeele și zonele adiacente pot necesita soluții specifice, în funcție de echipament și utilizare.",
+          "Această verificare nu are legătură cu RF shielding-ul pentru RMN. Pentru CT contează radiația, ecranarea cu plumb sau soluții echivalente, zonele controlate și documentația asociată.",
+        ],
+        callout: {
+          title: "CT nu cere cușcă Faraday",
+          body: "Înainte de instalarea CT-ului, verificarea critică este protecția radiologică, nu RF shielding-ul specific RMN-ului.",
+        },
+      },
+      {
+        id: "instalatii",
+        title: "Alimentare, HVAC și infrastructură tehnică",
+        body: [
+          "Specificațiile echipamentului dictează alimentarea electrică, răcirea, condițiile de mediu, traseele de date și cerințele pentru camera tehnică. Aceste date trebuie verificate cu furnizorul echipamentului înainte de instalare.",
+          "HVAC-ul subdimensionat, traseele de cabluri improvizate sau lipsa spațiului pentru service pot afecta funcționarea și mentenanța. Într-un CT, infrastructura slab pregătită nu se vede întotdeauna la început, dar poate crea incidente operaționale.",
+        ],
+        bullets: [
+          "alimentare electrică și protecții dedicate",
+          "răcire, ventilație și condiții de mediu",
+          "trasee de date și conectivitate",
+          "spațiu pentru service și acces la componente",
+        ],
+      },
+      {
+        id: "documentatie-cncan",
+        title: "Documentație și pași CNCAN",
+        body: [
+          "Pentru CT, documentația relevantă trebuie pregătită înainte de punerea în operare. Pașii exacți depind de proiect și trebuie validați cu specialiști, dar planificarea protecției radiologice și a camerei nu poate fi lăsată pentru final.",
+          "Dacă documentația, layout-ul și execuția nu sunt coerente, apar întârzieri. Camera trebuie să corespundă planului pe baza căruia a fost gândită protecția.",
+        ],
+      },
+      {
+        id: "integrare-si-service",
+        title: "Integrare, testare și service",
+        body: [
+          "Instalarea CT-ului include integrarea în fluxul clinicii: conectivitate, raportare, acces operator, programări, mentenanță și suport tehnic. După montaj, testarea și recepția trebuie să confirme că echipamentul și camera funcționează împreună.",
+          "Pentru proiecte aflate în bugetare, calculatorul de cameră CT poate oferi o primă orientare. Pentru o propunere tehnică structurată, Proposal Builder ajută la organizarea fazelor, riscurilor și informațiilor lipsă.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Ce verificare este critică înainte de instalarea CT-ului?",
+        answer:
+          "Protecția radiologică, layout-ul, alimentarea, HVAC-ul, accesul și documentația trebuie verificate înainte de livrarea echipamentului.",
+      },
+      {
+        question: "Poate fi instalat CT-ul într-o cameră existentă?",
+        answer:
+          "Da, uneori, dar camera trebuie evaluată tehnic. Spațiul, vecinătățile, protecția și instalațiile pot necesita adaptări.",
+      },
+      {
+        question: "Când trebuie discutat CNCAN?",
+        answer:
+          "Din faza de planificare, nu după execuție. CT-ul implică radiații ionizante și trebuie tratat responsabil.",
+      },
+      {
+        question: "Este suficientă verificarea furnizorului de echipament?",
+        answer:
+          "Furnizorul echipamentului este esențial, dar camera trebuie coordonată și cu infrastructura, protecția radiologică și operarea clinicii.",
+      },
+      {
+        question: "Cum reduc riscul de întârziere la instalare?",
+        answer:
+          "Blochează layout-ul, validează protecția radiologică, verifică instalațiile și pregătește documentația înainte de livrare.",
+      },
+    ],
+    relatedArticles: [
+      "cost-camera-ct-romania",
+      "autorizare-cncan-pas-cu-pas",
+      "protectie-radiologica-camera-rx",
+      "modernizare-radiologie-clinica",
+    ],
+    cta: {
+      title: "Pregătești instalarea unui CT?",
+      description:
+        "Verifică spațiul, protecția radiologică, instalațiile și pașii de integrare înainte de livrare.",
+      label: "Calculează camera CT",
+      href: "/calculatoare/cost-camera-ct",
+    },
+    publishedAt: "2026-05-20",
+    updatedAt: "2026-05-20",
+  },
+  {
+    slug: "pregatire-instalare-rmn",
+    title: "Ce trebuie pregătit înainte de instalarea unui RMN",
+    description:
+      "Checklist tehnic pentru instalarea RMN: acces magnet, RF shielding, cușcă Faraday, HVAC, vibrații, camera tehnică, service și integrare.",
+    category: "RF shielding",
+    tags: [
+      "instalare RMN",
+      "pregătire cameră RMN",
+      "RF shielding",
+      "cușcă Faraday",
+      "HVAC RMN",
+      "integrare RMN",
+    ],
+    readingTime: "11 min",
+    targetKeyword: "pregatire instalare RMN",
+    relatedServices: [
+      "/services/rf-shielding",
+      "/services/radiologie",
+      "/services/imagistica-medicala",
+      "/services/aparatura-medicala",
+      "/services/service-aparatura-medicala",
+    ],
+    relatedTools: [
+      { label: "Calculator cameră RMN", href: "/calculatoare/cost-camera-rmn" },
+      { label: "Radiology Room Planner", href: "/radiology-room-planner" },
+      { label: "Proposal Builder", href: "/proposal-builder" },
+      { label: "Contact ZES", href: "/contact" },
+    ],
+    intro:
+      "Instalarea unui RMN cere o pregătire diferită de instalarea unui CT sau RX. Înainte de livrarea magnetului, trebuie clarificate accesul, RF shielding-ul, camera Faraday, HVAC-ul, vibrațiile, camera tehnică, traseele și condițiile de service. O cameră RMN pregătită superficial poate funcționa sub așteptări sau poate necesita corecții dificile după instalare.",
+    sections: [
+      {
+        id: "acces-magnet",
+        title: "Accesul pentru magnet și echipamente auxiliare",
+        body: [
+          "Primul risc practic este accesul fizic. Magnetul poate avea dimensiuni, greutate și cerințe de manipulare care depășesc accesul obișnuit al unei clădiri. Traseul de la exterior până în cameră trebuie verificat: uși, holuri, înălțimi, planșee, lifturi, zone de întoarcere și eventuale lucrări temporare.",
+          "Accesul nu se verifică doar pentru instalare. Trebuie gândit și pentru service, înlocuiri și intervenții viitoare. Dacă totul este construit fără această perspectivă, orice problemă majoră poate deveni o intervenție complicată.",
+        ],
+      },
+      {
+        id: "rf-shielding",
+        title: "RF shielding și camera Faraday",
+        body: [
+          "Pentru RMN, RF shielding-ul este una dintre cerințele centrale. Camera trebuie protejată împotriva interferențelor radiofrecvență printr-o anvelopă coerentă: pereți, tavan, pardoseală, ușă RF, filtre și penetrări controlate.",
+          "Această ecranare nu este protecție cu plumb și nu are aceeași logică precum camera CT/RX. Nu urmărește radiații ionizante, ci integritate electromagnetică și calitatea imaginii RMN.",
+        ],
+        callout: {
+          title: "RMN înseamnă RF, nu plumb",
+          body: "Pentru instalarea RMN, verifică RF shielding-ul, ușa RF, filtrele, waveguides și toate trecerile prin anvelopă. Plumbul aparține protecției radiologice pentru CT/RX.",
+        },
+      },
+      {
+        id: "hva-vibratii",
+        title: "HVAC, vibrații și condiții de mediu",
+        body: [
+          "RMN-ul are nevoie de condiții stabile de mediu. Temperatura, umiditatea, răcirea, schimburile de aer și poziționarea echipamentelor auxiliare trebuie corelate cu cerințele producătorului. HVAC-ul nu este doar confort pentru pacient, ci parte din performanța camerei.",
+          "Vibrațiile pot afecta funcționarea și calitatea investigațiilor. Trebuie analizate sursele din clădire, echipamentele mecanice, traficul intern și structura. Aceste verificări sunt mai ușor de făcut înainte de execuție decât după instalare.",
+        ],
+      },
+      {
+        id: "camera-tehnica",
+        title: "Camera tehnică și traseele",
+        body: [
+          "Camera RMN nu este doar spațiul de examinare. Camera tehnică, traseele de cabluri, alimentarea, răcirea și accesul pentru service trebuie planificate împreună. Poziționarea greșită a echipamentelor auxiliare poate complica mentenanța și poate crește costurile.",
+          "Toate penetrările prin camera Faraday trebuie definite devreme. Adăugarea târzie a unui cablu, unei conducte sau unui traseu de ventilație poate compromite ecranarea dacă nu este tratată corect.",
+        ],
+        bullets: [
+          "camera tehnică dimensionată corect",
+          "trasee RF-compatible",
+          "acces pentru service",
+          "corelare cu furnizorul echipamentului",
+        ],
+      },
+      {
+        id: "validare-finala",
+        title: "Validarea înainte de instalare",
+        body: [
+          "Înainte de instalarea RMN, proiectul trebuie verificat cu planurile camerei, specificațiile echipamentului și soluția de RF shielding. Nu este suficient ca lucrările să fie terminate vizual. Camera trebuie să fie pregătită tehnic.",
+          "Calculatorul de cameră RMN poate oferi o orientare de complexitate, iar Radiology Room Planner poate identifica riscurile. Pentru proiecte reale, ZES poate ajuta la coordonarea RF shielding-ului, infrastructurii, echipamentului și service-ului.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Ce trebuie verificat prima dată pentru instalarea RMN?",
+        answer:
+          "Accesul magnetului, dimensiunile camerei, RF shielding-ul, HVAC-ul, vibrațiile, camera tehnică și cerințele furnizorului.",
+      },
+      {
+        question: "RMN-ul are nevoie de CNCAN?",
+        answer:
+          "RMN-ul nu folosește radiații ionizante ca CT/RX. Cerințele sale principale sunt RF shielding, câmp magnetic, infrastructură și integrare.",
+      },
+      {
+        question: "Ce este cel mai riscant de adăugat târziu?",
+        answer:
+          "Penetrările prin anvelopa RF, traseele HVAC, cablurile, ușile și modificările care afectează cușca Faraday.",
+      },
+      {
+        question: "Poate fi instalat RMN într-o clădire existentă?",
+        answer:
+          "Da, dar clădirea trebuie evaluată pentru acces, structură, vibrații, HVAC, RF shielding și spații tehnice.",
+      },
+      {
+        question: "Când trebuie implicat integratorul RF?",
+        answer:
+          "Înainte de execuția camerei, ideal încă din faza de proiectare și coordonare cu furnizorul RMN.",
+      },
+    ],
+    relatedArticles: [
+      "camera-faraday-rmn",
+      "cost-camera-rmn-romania",
+      "greseli-critice-in-proiectarea-camerelor-rmn",
+      "diferenta-rmn-ct-infrastructura",
+    ],
+    cta: {
+      title: "Pregătești instalarea unui RMN?",
+      description:
+        "Clarifică accesul, RF shielding-ul, HVAC-ul, vibrațiile și integrarea înainte de livrare.",
+      label: "Planifică instalarea RMN",
+      href: "/radiology-room-planner",
+    },
+    publishedAt: "2026-05-20",
+    updatedAt: "2026-05-20",
+  },
+  {
+    slug: "alegere-aparatura-medicala-clinica",
+    title: "Cum alegi aparatura medicală pentru o clinică nouă",
+    description:
+      "Ghid practic pentru alegerea aparaturii medicale într-o clinică nouă: fluxuri, buget, integrare, service, imagistică, IVD și continuitate operațională.",
+    category: "Aparatură medicală",
+    tags: [
+      "aparatură medicală clinică",
+      "clinică nouă",
+      "echipamente medicale",
+      "integrare aparatură",
+      "imagistică medicală",
+      "service aparatură",
+    ],
+    readingTime: "11 min",
+    targetKeyword: "alegere aparatura medicala clinica",
+    relatedServices: [
+      "/services/aparatura-medicala",
+      "/services/imagistica-medicala",
+      "/services/ivd-laborator",
+      "/services/service-aparatura-medicala",
+      "/services/constructii-medicale",
+      "/services/amenajari-medicale",
+    ],
+    relatedTools: [
+      { label: "Calculator proiect medical", href: "/calculator-proiect-medical" },
+      { label: "Calculator echipamente imagistică", href: "/calculatoare/cost-echipamente-imagistica" },
+      { label: "Proposal Builder", href: "/proposal-builder" },
+      { label: "Consultant AI", href: "/ai-project-advisor" },
+    ],
+    intro:
+      "Alegerea aparaturii medicale pentru o clinică nouă ar trebui să pornească de la serviciile medicale, fluxurile de lucru și modelul operațional, nu doar de la o listă de produse. Un echipament bun într-un spațiu nepregătit poate deveni greu de utilizat, greu de întreținut sau subfolosit. Planificarea corectă leagă aparatura de infrastructură, personal, buget, service și creșterea viitoare a clinicii.",
+    sections: [
+      {
+        id: "porneste-de-la-servicii",
+        title: "Pornește de la serviciile clinicii",
+        body: [
+          "Primul pas este clarificarea serviciilor medicale care vor fi oferite. Consultațiile, tratamentele, imagistica, recoltarea, laboratorul, recuperarea sau procedurile au cerințe diferite. Aparatura trebuie aleasă în funcție de flux, volum, specialități și nivelul de complexitate dorit.",
+          "O clinică nouă are avantajul planificării de la zero. Dacă echipamentele sunt decise devreme, spațiul, instalațiile, mobilierul, datele și service-ul pot fi pregătite coerent. Dacă sunt decise târziu, proiectul poate necesita modificări costisitoare.",
+        ],
+        bullets: [
+          "specialități medicale și servicii oferite",
+          "volum estimat de pacienți",
+          "fluxuri de personal, pacient și materiale",
+          "nevoi de imagistică, IVD sau tratament",
+        ],
+      },
+      {
+        id: "buget-total",
+        title: "Nu compara doar prețul de achiziție",
+        body: [
+          "Costul real al aparaturii include achiziția, livrarea, instalarea, consumabilele, mentenanța, service-ul, instruirea, integrarea digitală și eventualele lucrări de infrastructură. Un echipament ieftin la achiziție poate deveni scump dacă are consumabile greu disponibile sau suport tehnic dificil.",
+          "Pentru clinicile noi, este utilă împărțirea pe categorii: aparatură de bază, imagistică, IVD/laborator, echipamente auxiliare, mobilier medical, service și buget de rezervă. Această structură oferă o imagine mai realistă decât o listă lungă de produse.",
+        ],
+      },
+      {
+        id: "integrare-infrastructura",
+        title: "Aparatura schimbă infrastructura",
+        body: [
+          "Unele echipamente cer alimentări dedicate, rețea de date, apă, evacuare, ventilație, spațiu de service, condiții de temperatură sau protecții speciale. Imagistica poate schimba complet proiectul: RMN cere RF shielding, CT/RX cere protecție radiologică și documentație specifică.",
+          "De aceea, alegerea aparaturii nu trebuie separată de proiectarea clinicii. O decizie luată târziu poate afecta pereți, trasee, camere tehnice, acces, HVAC și calendarul de deschidere.",
+        ],
+        callout: {
+          title: "Aparatura nu este mobilier",
+          body: "Echipamentele medicale trebuie integrate în spațiu, instalații, service și fluxuri. Nu se tratează ca obiecte adăugate după amenajare.",
+        },
+      },
+      {
+        id: "service-si-continuitate",
+        title: "Service-ul trebuie gândit înainte de cumpărare",
+        body: [
+          "Înainte de achiziție, întreabă ce se întâmplă dacă echipamentul se oprește: cine intervine, în cât timp, ce piese sunt disponibile, cum se face mentenanța și ce impact are oprirea asupra clinicii. Pentru aparatura critică, planul de service este parte din decizia de achiziție.",
+          "Continuitatea operațională contează mai ales pentru imagistică, laborator și echipamente cu volum mare de utilizare. Dacă o oprire blochează programările, costul riscului trebuie luat în calcul de la început.",
+        ],
+      },
+      {
+        id: "cum-structurezi-decizia",
+        title: "Cum structurezi decizia de echipare",
+        body: [
+          "O abordare practică începe cu lista de servicii, apoi definește echipamentele obligatorii, echipamentele care pot fi fazate, cerințele de infrastructură și planul de service. Nu toate achizițiile trebuie făcute în prima zi, dar spațiul trebuie pregătit pentru dezvoltare.",
+          "Calculatorul de proiect medical și Proposal Builder pot ajuta la structurarea bugetului orientativ, a fazelor și a riscurilor. Pentru decizie finală, ZES poate valida conexiunea dintre aparatură, infrastructură și service.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Când trebuie aleasă aparatura pentru o clinică nouă?",
+        answer:
+          "Cât mai devreme în proiect, deoarece aparatura influențează spațiul, instalațiile, fluxurile, service-ul și bugetul.",
+      },
+      {
+        question: "Este mai bine să cumpăr totul din prima?",
+        answer:
+          "Nu întotdeauna. Unele achiziții pot fi fazate, dar infrastructura trebuie pregătită pentru direcția de dezvoltare a clinicii.",
+      },
+      {
+        question: "Ce echipamente schimbă cel mai mult proiectul?",
+        answer:
+          "Imagistica, IVD/laboratorul și echipamentele cu cerințe speciale de alimentare, HVAC, protecție sau service pot schimba semnificativ proiectul.",
+      },
+      {
+        question: "Cum compar două oferte de aparatură?",
+        answer:
+          "Compară nu doar prețul, ci costul total de operare, consumabilele, service-ul, integrarea, disponibilitatea pieselor și impactul asupra spațiului.",
+      },
+      {
+        question: "Poate ZES ajuta la alegerea aparaturii?",
+        answer:
+          "ZES poate ajuta prin consultanță tehnică, integrare, planificare infrastructură, imagistică, IVD și service specializat.",
+      },
+    ],
+    relatedArticles: [
+      "cum-alegi-aparatura-medicala-pentru-o-clinica",
+      "echipamente-ivd-laborator-alegere-integrare-service",
+      "imagistica-medicala-ct-rmn-rx-si-integrare-tehnica",
+      "cum-se-construieste-o-clinica-medicala-in-romania",
+    ],
+    cta: {
+      title: "Echipezi o clinică nouă?",
+      description:
+        "Structurează aparatura, infrastructura, bugetul și service-ul înainte de achiziții.",
+      label: "Generează o propunere preliminară",
+      href: "/proposal-builder",
+    },
+    publishedAt: "2026-05-20",
+    updatedAt: "2026-05-20",
+  },
+  {
+    slug: "echipamente-necesare-laborator-ivd",
+    title: "Ce echipamente sunt necesare într-un laborator IVD",
+    description:
+      "Ghid pentru echiparea unui laborator IVD: analizatoare, workflow, probe, consumabile, integrare, calibrare, validare și service.",
+    category: "IVD / laborator",
+    tags: [
+      "echipamente laborator IVD",
+      "laborator medical",
+      "analizoare IVD",
+      "workflow laborator",
+      "calibrare",
+      "service laborator",
+    ],
+    readingTime: "10 min",
+    targetKeyword: "echipamente necesare laborator IVD",
+    relatedServices: [
+      "/services/ivd-laborator",
+      "/services/aparatura-medicala",
+      "/services/service-aparatura-medicala",
+      "/services/amenajari-medicale",
+    ],
+    relatedTools: [
+      { label: "Calculator laborator IVD", href: "/calculatoare/cost-laborator-ivd" },
+      { label: "Proposal Builder", href: "/proposal-builder" },
+      { label: "Consultant AI", href: "/ai-project-advisor" },
+      { label: "Ghid IVD / laborator", href: "/ghiduri/echipamente-ivd-laborator" },
+    ],
+    intro:
+      "Un laborator IVD nu se definește doar prin lista de analizoare. Echipamentele necesare depind de tipul probelor, volumul estimat, meniul de teste, timpul de răspuns, spațiul disponibil, integrarea digitală, consumabile și service. O listă corectă începe cu workflow-ul laboratorului și se transformă apoi în aparatură, infrastructură și plan de operare.",
+    sections: [
+      {
+        id: "workflow-laborator",
+        title: "Începe cu workflow-ul probelor",
+        body: [
+          "Înainte de alegerea echipamentelor, definește traseul probelor: recepție, identificare, pregătire, analiză, validare, raportare și arhivare. Fiecare etapă poate cere echipamente, spații, consumabile și proceduri diferite.",
+          "Un laborator cu volum mic poate funcționa cu o configurație compactă, dar un laborator cu volum ridicat are nevoie de capacitate, redundanță și integrare digitală. Alegerea fără această analiză poate duce la echipamente subdimensionate sau inutil de complexe.",
+        ],
+      },
+      {
+        id: "categorii-echipamente",
+        title: "Categorii de echipamente IVD",
+        body: [
+          "Lista depinde de profilul laboratorului, dar poate include analizoare pentru biochimie, hematologie, imunologie, coagulare, urină, microbiologie sau alte zone specializate. Pe lângă acestea apar centrifuge, sisteme de pregătire probe, frigidere, congelatoare, echipamente auxiliare și sisteme de raportare.",
+          "Nu toate laboratoarele au nevoie de toate categoriile. Decizia trebuie legată de meniul de teste, volumul estimat, specializarea clinicii și nivelul de externalizare acceptat.",
+        ],
+        bullets: [
+          "analizoare principale și echipamente auxiliare",
+          "sisteme pentru pregătirea și păstrarea probelor",
+          "consumabile, reactivi și control calitate",
+          "software, conectivitate și raportare",
+          "plan de service și mentenanță",
+        ],
+      },
+      {
+        id: "spatiu-si-utilitati",
+        title: "Spațiul și utilitățile laboratorului",
+        body: [
+          "Echipamentele IVD pot cere alimentare electrică, apă, evacuare, temperatură controlată, ventilație, mese tehnice, spațiu pentru consumabile și zone de lucru separate. Dacă spațiul nu este pregătit, echipamentele pot funcționa cu dificultăți sau pot aglomera fluxul.",
+          "Amenajarea trebuie să țină cont de mișcarea probelor, a personalului, a consumabilelor și a deșeurilor. Un laborator eficient nu este doar dotat, ci organizat.",
+        ],
+      },
+      {
+        id: "calibrare-validare-service",
+        title: "Calibrare, validare și service",
+        body: [
+          "Instalarea echipamentelor trebuie urmată de configurare, calibrare, validare și instruire. Aceste etape susțin încrederea în rezultate și reduc riscul de operare inconsistentă.",
+          "Service-ul trebuie planificat din faza de achiziție. Pentru echipamente critice, timpul de reacție, disponibilitatea consumabilelor și pieselor, istoricul de mentenanță și suportul tehnic pot fi la fel de importante ca performanța declarată.",
+        ],
+        callout: {
+          title: "IVD înseamnă workflow",
+          body: "Un laborator IVD bun se proiectează în jurul probelor, rezultatelor, controlului calității și continuității operaționale, nu doar în jurul analizatoarelor.",
+        },
+      },
+      {
+        id: "cum-bugetezi",
+        title: "Cum bugetezi un laborator IVD",
+        body: [
+          "Bugetarea trebuie să includă aparatura, mobilierul tehnic, utilitățile, consumabilele inițiale, calibrarea, validarea, integrarea digitală, service-ul și eventualele adaptări de spațiu. Fără aceste categorii, estimarea poate părea mică la început și insuficientă în implementare.",
+          "Calculatorul de laborator IVD poate ajuta la o primă orientare, iar Proposal Builder poate organiza fazele și riscurile într-un sumar tehnic preliminar. Estimările rămân orientative până la validarea proiectului.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Există o listă standard de echipamente IVD?",
+        answer:
+          "Nu una universală. Lista depinde de meniul de teste, volumul probelor, spațiu, personal, integrare și nivelul de externalizare.",
+      },
+      {
+        question: "Ce echipamente sunt de obicei critice?",
+        answer:
+          "Analizoarele principale, echipamentele de pregătire probe, stocarea controlată, consumabilele și sistemele de raportare pot deveni critice.",
+      },
+      {
+        question: "Când se face validarea echipamentelor?",
+        answer:
+          "După instalare și configurare, conform procedurilor aplicabile laboratorului și cerințelor echipamentului.",
+      },
+      {
+        question: "Service-ul trebuie inclus în buget?",
+        answer:
+          "Da. Mentenanța, suportul, piesele și consumabilele influențează costul total de operare al laboratorului.",
+      },
+      {
+        question: "Poate fi laboratorul extins ulterior?",
+        answer:
+          "Da, dacă spațiul, utilitățile și fluxurile sunt gândite de la început cu posibilitate de creștere.",
+      },
+    ],
+    relatedArticles: [
+      "echipamente-ivd-laborator-alegere-integrare-service",
+      "ghid-pentru-echipamente-ivd-si-laborator",
+      "alegere-aparatura-medicala-clinica",
+      "mentenanta-preventiva-aparatura-medicala",
+    ],
+    cta: {
+      title: "Configurezi un laborator IVD?",
+      description:
+        "Clarifică workflow-ul, echipamentele, utilitățile, validarea și service-ul înainte de achiziții.",
+      label: "Calculează laboratorul IVD",
+      href: "/calculatoare/cost-laborator-ivd",
+    },
+    publishedAt: "2026-05-20",
+    updatedAt: "2026-05-20",
+  },
+  {
+    slug: "mentenanta-preventiva-aparatura-medicala",
+    title: "Când este recomandată mentenanța preventivă pentru aparatura medicală",
+    description:
+      "Ghid despre mentenanța preventivă a aparaturii medicale: uptime, verificări periodice, diagnostic, risc operațional, service și continuitate.",
+    category: "Service",
+    tags: [
+      "mentenanță preventivă",
+      "service aparatură medicală",
+      "uptime",
+      "diagnostic service",
+      "continuitate operațională",
+      "echipamente medicale",
+    ],
+    readingTime: "10 min",
+    targetKeyword: "mentenanta preventiva aparatura medicala",
+    relatedServices: [
+      "/services/service-aparatura-medicala",
+      "/services/aparatura-medicala",
+      "/services/imagistica-medicala",
+      "/services/ivd-laborator",
+    ],
+    relatedTools: [
+      { label: "Service Diagnostic", href: "/service-diagnostic" },
+      { label: "Calculator service aparatură", href: "/calculatoare/service-aparatura" },
+      { label: "Proposal Builder", href: "/proposal-builder" },
+      { label: "Contact ZES", href: "/contact" },
+    ],
+    intro:
+      "Mentenanța preventivă este recomandată atunci când oprirea echipamentului ar afecta activitatea medicală, programările, rezultatele sau siguranța operațională. Nu este doar o bifă tehnică. Este o metodă prin care clinica reduce riscul de opriri neplanificate, menține condiții de funcționare mai stabile și pregătește intervențiile înainte ca problema să devină urgentă.",
+    sections: [
+      {
+        id: "ce-este-mentenanta-preventiva",
+        title: "Ce este mentenanța preventivă",
+        body: [
+          "Mentenanța preventivă înseamnă verificări periodice, curățare tehnică unde este cazul, calibrare, testare, actualizări, inspecții și documentare. Conținutul exact depinde de tipul echipamentului, recomandările producătorului, utilizare și istoricul de service.",
+          "Scopul nu este să promită că aparatura nu se va defecta niciodată. Scopul este să reducă probabilitatea unor incidente, să identifice semnele timpurii și să creeze o reacție mai rapidă atunci când apare o problemă.",
+        ],
+      },
+      {
+        id: "cand-devine-importanta",
+        title: "Când devine importantă",
+        body: [
+          "Mentenanța preventivă devine critică pentru echipamente cu utilizare frecventă, aparatură care susține fluxuri de venit, echipamente imagistice, IVD/laborator, monitorizare pacient și orice sistem a cărui oprire afectează programări sau rezultate.",
+          "Cu cât impactul opririi este mai mare, cu atât service-ul preventiv trebuie tratat mai serios. Pentru un echipament rar folosit, planul poate fi simplu. Pentru un CT, RMN sau analizor IVD central, planul trebuie să fie mai structurat.",
+        ],
+        bullets: [
+          "echipamente cu volum mare de utilizare",
+          "aparatură critică pentru programări",
+          "sisteme cu piese greu disponibile",
+          "echipamente cu istoric de erori intermitente",
+          "laboratoare sau imagistică unde downtime-ul este costisitor",
+        ],
+      },
+      {
+        id: "ce-se-verifica",
+        title: "Ce se verifică în practică",
+        body: [
+          "Verificările pot include condițiile de mediu, alimentarea, răcirea, componentele critice, calibrarea, calitatea imaginii sau a rezultatelor, erorile memorate, consumabilele, filtrele și starea accesoriilor. Pentru fiecare categorie de aparatură, lista trebuie adaptată.",
+          "În imagistică, service-ul poate urmări calitatea imaginii, răcirea, electronica, condițiile camerei și sistemele auxiliare. În IVD, verificările pot include calibrare, validare, consumabile, fluxul probelor și conectivitatea.",
+        ],
+      },
+      {
+        id: "preventiv-versus-corectiv",
+        title: "Preventiv nu înlocuiește corectivul",
+        body: [
+          "Mentenanța preventivă reduce riscul, dar nu elimină nevoia de intervenții corective. Diferența este că o clinică pregătită are documentație, istoric, contacte de service și priorități clare când apare incidentul.",
+          "Fără mentenanță, multe probleme ajung să fie observate doar când echipamentul se oprește complet. Cu mentenanță, unele simptome pot fi investigate înainte de oprire: zgomote, încălzire, erori intermitente, degradarea imaginii sau valori instabile.",
+        ],
+        callout: {
+          title: "Uptime realist",
+          body: "Nicio mentenanță nu garantează funcționare permanentă, dar un plan bun reduce improvizația și scurtează traseul de la simptom la decizie.",
+        },
+      },
+      {
+        id: "cum-incepi",
+        title: "Cum începi un plan preventiv",
+        body: [
+          "Începe cu inventarul echipamentelor, nivelul lor de criticitate, istoricul de erori, recomandările producătorului și impactul opririi. Apoi stabilește frecvențe, responsabilități, documentare, priorități și procedura de escaladare.",
+          "Service Diagnostic poate ajuta la trierea unei probleme curente, iar calculatorul de service poate orienta nivelul de risc. Pentru un plan complet, ZES poate analiza echipamentele și poate propune o structură de service adaptată activității.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Mentenanța preventivă este obligatorie pentru toate echipamentele?",
+        answer:
+          "Depinde de echipament, utilizare și cerințe aplicabile. Din perspectivă operațională, este recomandată mai ales pentru aparatura critică.",
+      },
+      {
+        question: "Cât de des trebuie făcută?",
+        answer:
+          "Frecvența trebuie stabilită pe baza recomandărilor producătorului, utilizării, istoricului de service și impactului operațional.",
+      },
+      {
+        question: "Ce echipamente au prioritate?",
+        answer:
+          "Echipamentele care blochează programări, rezultate sau fluxuri medicale: imagistică, IVD, monitorizare critică și aparatură cu utilizare intensă.",
+      },
+      {
+        question: "Mentenanța preventivă reduce costurile?",
+        answer:
+          "Poate reduce opririle neplanificate și intervențiile de urgență, dar nu trebuie prezentată ca garanție de economii. Beneficiul principal este predictibilitatea.",
+      },
+      {
+        question: "Ce trebuie documentat?",
+        answer:
+          "Verificările, erorile, piesele schimbate, recomandările, condițiile de mediu și orice simptom repetitiv.",
+      },
+    ],
+    relatedArticles: [
+      "service-ct-rmn-mentenanta-uptime",
+      "mentenanta-aparaturii-medicale-ce-trebuie-urmarit",
+      "echipamente-ivd-laborator-alegere-integrare-service",
+      "alegere-aparatura-medicala-clinica",
+    ],
+    cta: {
+      title: "Vrei să reduci riscul de opriri?",
+      description:
+        "Evaluează echipamentele, criticitatea și pașii de mentenanță preventivă într-un format structurat.",
+      label: "Deschide Service Diagnostic",
+      href: "/service-diagnostic",
+    },
+    publishedAt: "2026-05-20",
+    updatedAt: "2026-05-20",
+  },
+  {
+    slug: "greseli-amenajare-camera-radiologie",
+    title: "Ce greșeli apar frecvent în amenajarea unei camere de radiologie",
+    description:
+      "Lista greșelilor frecvente în amenajarea camerelor de radiologie: CT, RX, RMN, ecranare, autorizări, echipamente, HVAC, service și layout.",
+    category: "Radiologie",
+    tags: [
+      "greșeli cameră radiologie",
+      "amenajare radiologie",
+      "camera CT",
+      "camera RMN",
+      "camera RX",
+      "ecranare",
+    ],
+    readingTime: "11 min",
+    targetKeyword: "greseli amenajare camera radiologie",
+    relatedServices: [
+      "/services/radiologie",
+      "/services/amenajari-medicale",
+      "/services/protectie-radiologica",
+      "/services/rf-shielding",
+      "/services/imagistica-medicala",
+    ],
+    relatedTools: [
+      { label: "Radiology Room Planner", href: "/radiology-room-planner" },
+      { label: "Calculator cameră CT", href: "/calculatoare/cost-camera-ct" },
+      { label: "Calculator cameră RMN", href: "/calculatoare/cost-camera-rmn" },
+      { label: "Proposal Builder", href: "/proposal-builder" },
+    ],
+    intro:
+      "Cele mai costisitoare greșeli în amenajarea unei camere de radiologie apar rar din lipsa finisajelor. Apar din decizii tehnice luate prea târziu: echipament ales după layout, ecranare tratată generic, HVAC subdimensionat, documentație incompletă, spații de service ignorate sau confuzie între CT/RX și RMN. O cameră de radiologie trebuie proiectată în jurul echipamentului și al riscurilor sale reale.",
+    sections: [
+      {
+        id: "confuzia-tipului-de-camera",
+        title: "Greșeala 1: confuzia între CT/RX și RMN",
+        body: [
+          "CT și RX folosesc radiații ionizante și cer protecție radiologică, ecranare cu plumb sau soluții echivalente, zone controlate și pași CNCAN unde este cazul. RMN-ul cere RF shielding, cușcă Faraday, control electromagnetic, HVAC, vibrații și acces pentru magnet.",
+          "Când aceste cerințe sunt amestecate, bugetul devine neclar și soluțiile pot fi greșite. Plumbul nu rezolvă RF shielding-ul unui RMN, iar cușca Faraday nu rezolvă protecția radiologică a unui CT.",
+        ],
+        callout: {
+          title: "Regula de aur",
+          body: "Nu proiecta o cameră de radiologie generică. Proiectează camera pentru echipamentul concret: CT, RX sau RMN.",
+        },
+      },
+      {
+        id: "echipament-ales-tarziu",
+        title: "Greșeala 2: echipamentul este ales prea târziu",
+        body: [
+          "Echipamentul dictează dimensiuni, greutate, alimentare, răcire, spațiu de service, trasee, acces și uneori autorizări. Dacă modelul este ales după execuție, camera poate să nu fie pregătită pentru instalare.",
+          "Chiar și echipamentele din aceeași categorie pot avea cerințe diferite. De aceea, proiectarea trebuie să pornească de la specificații sau măcar de la un scenariu tehnic realist.",
+        ],
+      },
+      {
+        id: "layout-instabil",
+        title: "Greșeala 3: layout-ul se schimbă după ecranare",
+        body: [
+          "Mutarea unei uși, schimbarea poziției operatorului, modificarea camerei tehnice sau adăugarea unui traseu poate afecta protecția. În CT/RX, modificările pot cere reevaluarea protecției radiologice. În RMN, penetrările pot afecta anvelopa RF.",
+          "Layout-ul trebuie stabilizat înainte de execuția elementelor critice. Dacă schimbările sunt inevitabile, ele trebuie evaluate tehnic, nu tratate ca simple ajustări de șantier.",
+        ],
+      },
+      {
+        id: "hva-si-service",
+        title: "Greșeala 4: HVAC-ul și service-ul sunt ignorate",
+        body: [
+          "Radiologia are nevoie de condiții stabile de operare. HVAC-ul, răcirea, alimentarea, datele și spațiul pentru service influențează direct funcționarea echipamentului. O cameră frumoasă, dar greu de întreținut, va crea probleme operaționale.",
+          "Service-ul trebuie gândit din faza de proiectare: acces la componente, trasee clare, camera tehnică, spațiu pentru intervenții și documentație. O intervenție dificilă devine timp pierdut pentru clinică.",
+        ],
+      },
+      {
+        id: "documentatie-si-buget",
+        title: "Greșeala 5: documentația și bugetul sunt incomplete",
+        body: [
+          "O estimare care include doar amenajări și finisaje este insuficientă. Camera poate cere proiectare, ecranare, instalații, autorizări, integrare, testare și service. Dacă aceste categorii lipsesc, bugetul pare mic la început și devine tensionat în execuție.",
+          "Radiology Room Planner poate ajuta la trierea riscurilor, iar Proposal Builder poate organiza fazele și informațiile lipsă. Scopul este evitarea surprizelor, nu promisiunea unui cost fix fără verificare.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Care este cea mai frecventă greșeală?",
+        answer:
+          "Proiectarea camerei fără specificațiile echipamentului și fără separarea cerințelor CT/RX de cerințele RMN.",
+      },
+      {
+        question: "Pot folosi aceeași cameră pentru CT și RMN?",
+        answer:
+          "Nu fără analiză majoră. CT și RMN au cerințe tehnice diferite, iar soluțiile de ecranare nu sunt interschimbabile.",
+      },
+      {
+        question: "Când trebuie stabilită ecranarea?",
+        answer:
+          "După clarificarea echipamentului, layout-ului și vecinătăților, dar înainte de execuția camerei.",
+      },
+      {
+        question: "De ce contează spațiul de service?",
+        answer:
+          "Pentru că intervențiile ulterioare trebuie făcute rapid și fără demontări inutile. Lipsa accesului crește downtime-ul.",
+      },
+      {
+        question: "Cum reduc riscul de greșeli?",
+        answer:
+          "Prin analiză tehnică timpurie, coordonare cu furnizorul echipamentului, verificarea ecranării, instalațiilor și documentației.",
+      },
+    ],
+    relatedArticles: [
+      "modernizare-radiologie-clinica",
+      "diferenta-rmn-ct-infrastructura",
+      "verificari-inainte-instalare-ct",
+      "pregatire-instalare-rmn",
+    ],
+    cta: {
+      title: "Vrei să verifici camera de radiologie?",
+      description:
+        "Identifică riscurile de layout, ecranare, instalații, autorizări și integrare înainte de execuție.",
+      label: "Verifică în Radiology Room Planner",
+      href: "/radiology-room-planner",
+    },
+    publishedAt: "2026-05-20",
+    updatedAt: "2026-05-20",
+  },
+  {
+    slug: "buget-modernizare-clinica-medicala",
+    title: "Cum estimezi bugetul pentru modernizarea unei clinici medicale",
+    description:
+      "Ghid pentru bugetarea modernizării unei clinici: spațiu, instalații, aparatură, imagistică, IVD, service, fazare și riscuri tehnice.",
+    category: "Infrastructură medicală",
+    tags: [
+      "buget modernizare clinică",
+      "modernizare clinică medicală",
+      "amenajări medicale",
+      "aparatură medicală",
+      "imagistică",
+      "IVD",
+    ],
+    readingTime: "11 min",
+    targetKeyword: "buget modernizare clinica medicala",
+    relatedServices: [
+      "/services/constructii-medicale",
+      "/services/amenajari-medicale",
+      "/services/aparatura-medicala",
+      "/services/imagistica-medicala",
+      "/services/ivd-laborator",
+      "/services/service-aparatura-medicala",
+    ],
+    relatedTools: [
+      { label: "Calculator proiect medical", href: "/calculator-proiect-medical" },
+      { label: "Proposal Builder", href: "/proposal-builder" },
+      { label: "Consultant AI", href: "/ai-project-advisor" },
+      { label: "Contact ZES", href: "/contact" },
+      { label: "Ghid cost clinică", href: "/ghiduri/cost-clinica-medicala" },
+    ],
+    intro:
+      "Bugetul pentru modernizarea unei clinici medicale trebuie construit pe faze și riscuri, nu doar pe suprafață. O modernizare poate însemna schimbări de flux, instalații, aparatură, imagistică, laborator, finisaje, autorizări, service și perioade de întrerupere. Dacă bugetul pornește doar de la lucrări de amenajare, costurile tehnice apar târziu și devin greu de controlat.",
+    sections: [
+      {
+        id: "defineste-scopul",
+        title: "Definește scopul modernizării",
+        body: [
+          "Primul pas este să clarifici ce modernizezi: recepție, cabinete, sală de tratament, imagistică, laborator, fluxuri, aparatură sau întreaga clinică. Fiecare direcție are costuri diferite și riscuri diferite.",
+          "Modernizarea pentru confort vizual este diferită de modernizarea pentru introducerea unui CT, RMN sau laborator IVD. În al doilea caz, infrastructura tehnică poate domina bugetul.",
+        ],
+      },
+      {
+        id: "categorii-buget",
+        title: "Separă bugetul pe categorii",
+        body: [
+          "Un buget util trebuie împărțit în categorii: analiză tehnică, proiectare, lucrări de amenajare, instalații, aparatură, imagistică, IVD, integrare, service, documentație și rezervă pentru riscuri. Această separare arată ce este esențial și ce poate fi fazat.",
+          "Dacă toate costurile sunt puse într-o singură sumă, beneficiarul pierde controlul asupra deciziilor. Nu mai este clar ce ține de finisaje, ce ține de aparatură și ce ține de cerințe tehnice obligatorii.",
+        ],
+        bullets: [
+          "amenajări și instalații",
+          "aparatură medicală și integrare",
+          "imagistică și ecranare unde este cazul",
+          "IVD/laborator și consumabile inițiale",
+          "service, mentenanță și continuitate",
+        ],
+      },
+      {
+        id: "radiologie-ivd-aparatura",
+        title: "Radiologia, IVD-ul și aparatura schimbă bugetul",
+        body: [
+          "Dacă modernizarea include imagistică, trebuie separate clar cerințele. RMN-ul aduce RF shielding, HVAC, vibrații și acces pentru magnet. CT/RX aduc protecție radiologică, plumb, zone controlate și pași CNCAN. Aceste costuri nu sunt echivalente și nu trebuie amestecate.",
+          "Dacă modernizarea include laborator IVD, bugetul trebuie să includă echipamente, workflow, utilități, calibrare, validare, consumabile și service. Aparatura medicală poate cere adaptări ale spațiului, nu doar achiziție.",
+        ],
+        callout: {
+          title: "Buget tehnic, nu doar amenajare",
+          body: "Clinica medicală modernizată trebuie bugetată ca sistem: spațiu, aparatură, instalații, autorizări, service și operare.",
+        },
+      },
+      {
+        id: "downtime-si-fazare",
+        title: "Include downtime-ul și fazarea lucrărilor",
+        body: [
+          "O clinică activă nu poate fi modernizată ca un spațiu gol. Trebuie planificate zonele care rămân operaționale, ferestrele de oprire, protecția pacienților, accesul personalului și comunicarea internă.",
+          "Fazarea poate reduce riscul, dar poate crește complexitatea. Uneori este mai eficientă o oprire scurtă și bine coordonată decât lucrări lungi care perturbă permanent fluxul clinicii.",
+        ],
+      },
+      {
+        id: "estimare-si-validare",
+        title: "Cum treci de la estimare la decizie",
+        body: [
+          "Un calculator poate oferi o estimare orientativă, dar modernizarea reală cere planuri, vizită tehnică, inventar de aparatură, stadiu de autorizări și scenariu de operare. Estimarea trebuie actualizată pe măsură ce informațiile devin clare.",
+          "Calculatorul de proiect medical și Proposal Builder pot structura fazele și riscurile. Pentru proiecte cu radiologie, laborator sau echipamente critice, o analiză tehnică ZES poate valida bugetul înainte de ofertare.",
+        ],
+        callout: {
+          title: "Fără promisiuni de preț fix",
+          body: "Orice buget preliminar pentru modernizare este orientativ și trebuie validat tehnic înainte de ofertă finală.",
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: "Pot estima modernizarea doar pe metru pătrat?",
+        answer:
+          "Nu responsabil. Suprafața ajută, dar aparatura, instalațiile, radiologia, IVD-ul, autorizările și downtime-ul pot schimba major bugetul.",
+      },
+      {
+        question: "Ce costuri sunt uitate frecvent?",
+        answer:
+          "Integrarea echipamentelor, service-ul, documentația, protecția radiologică, RF shielding-ul, consumabilele inițiale și fazarea lucrărilor.",
+      },
+      {
+        question: "Modernizarea poate fi făcută în etape?",
+        answer:
+          "Da, dar fazarea trebuie proiectată. Altfel, fiecare etapă poate perturba activitatea și poate crea costuri suplimentare.",
+      },
+      {
+        question: "Cum includ imagistica în buget?",
+        answer:
+          "Separă RMN-ul de CT/RX. RMN înseamnă RF shielding și integrare specifică, CT/RX înseamnă protecție radiologică și CNCAN unde este cazul.",
+      },
+      {
+        question: "Care este primul pas recomandat?",
+        answer:
+          "O analiză tehnică a spațiului, aparaturii dorite, fluxurilor și documentației existente.",
+      },
+    ],
+    relatedArticles: [
+      "cum-se-construieste-o-clinica-medicala-in-romania",
+      "modernizare-radiologie-clinica",
+      "alegere-aparatura-medicala-clinica",
+      "echipamente-necesare-laborator-ivd",
+    ],
+    cta: {
+      title: "Modernizezi o clinică medicală?",
+      description:
+        "Transformă ideea într-un buget orientativ pe faze, riscuri și servicii tehnice relevante.",
+      label: "Calculează proiectul medical",
+      href: "/calculator-proiect-medical",
+    },
+    publishedAt: "2026-05-20",
+    updatedAt: "2026-05-20",
+  },
 ];
 
 const authorityArticleUpgrades: Record<string, Partial<Article>> = {
