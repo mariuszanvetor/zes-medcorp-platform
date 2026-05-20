@@ -1,0 +1,56 @@
+import type { LeadPayload } from "@/lib/lead-types";
+import type { LeadPriority, LeadScoreResult } from "@/lib/lead-scoring";
+
+export type EmailProvider = "resend" | "sendgrid" | "smtp" | "gmail-workspace" | "mock";
+
+export type LeadNotificationEmail = {
+  provider: EmailProvider;
+  to: string[];
+  subject: string;
+  summary: string;
+  priority: LeadPriority;
+  contactDetails: {
+    name: string;
+    email: string;
+    phone: string;
+    company?: string;
+  };
+  projectDetails: {
+    sourceTool: string;
+    sourcePage: string;
+    inquiryType: string;
+    projectType?: string;
+    urgency?: string;
+    message?: string;
+  };
+  estimatedBudget?: string;
+  recommendedServices: string[];
+  nextStep: string;
+  adminReviewLink: string;
+  scoring: LeadScoreResult;
+  createdAt: string;
+};
+
+export type LeadConfirmationEmail = {
+  provider: EmailProvider;
+  to: string;
+  subject: string;
+  summary: string;
+  nextStep: string;
+  createdAt: string;
+  sourcePage: string;
+};
+
+export type EmailSendResult = {
+  ok: boolean;
+  mode: "mock";
+  provider: EmailProvider;
+  message: string;
+};
+
+export type EmailBuildContext = {
+  lead: LeadPayload;
+  scoring: LeadScoreResult;
+  leadId: string;
+  recommendedServices?: string[];
+};
