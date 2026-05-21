@@ -30,6 +30,12 @@ export const metadata: Metadata = createWebsiteMetadata({
 
 const internalLinks = [
   {
+    title: "Planificare proiect medical",
+    description:
+      "Alege scenariul potrivit si continua catre servicii, ghiduri si instrumente relevante.",
+    href: "/planificare",
+  },
+  {
     title: "Servicii ZES",
     description:
       "Explorează pilonii tehnici: construcții, radiologie, RF shielding, protecție radiologică, aparatură, IVD și service.",

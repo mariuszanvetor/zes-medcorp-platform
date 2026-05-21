@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { articles } from "@/data/articles";
 import { programmaticCalculators } from "@/data/calculators";
+import { planningJourneys } from "@/data/planning-journeys";
 import { seoClusters } from "@/data/seo-clusters";
 import { services } from "@/data/services";
 import { siteConfig } from "@/lib/seo";
@@ -20,6 +21,7 @@ const staticRoutes: Array<{
   { path: "/radiology-room-planner", changeFrequency: "monthly", priority: 0.8 },
   { path: "/service-diagnostic", changeFrequency: "monthly", priority: 0.78 },
   { path: "/proposal-builder", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/planificare", changeFrequency: "monthly", priority: 0.84 },
   { path: "/knowledge-hub", changeFrequency: "weekly", priority: 0.86 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.82 },
 ];
@@ -69,6 +71,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
         : 0.78,
   }));
 
+  const planningRoutes = planningJourneys.map((journey) => ({
+    url: new URL(`/planificare/${journey.slug}`, siteConfig.url).toString(),
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority:
+      journey.slug === "nu-stiu-de-unde-sa-incep" ||
+      journey.slug === "deschid-clinica-medicala"
+        ? 0.82
+        : 0.78,
+  }));
+
   return [
     ...staticRoutes.map((route) => ({
       url: new URL(route.path, siteConfig.url).toString(),
@@ -77,6 +90,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: route.priority,
     })),
     ...serviceRoutes,
+    ...planningRoutes,
     ...calculatorRoutes,
     ...clusterRoutes,
     ...articleRoutes,

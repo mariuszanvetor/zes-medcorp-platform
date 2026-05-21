@@ -1,3 +1,14 @@
+import type {
+  AuthorityCluster,
+  CommercialIntent,
+  FunnelStage,
+  Modality,
+  PlanningPhase,
+  ProjectComplexity,
+  SearchIntent,
+  TopicPillar,
+} from "@/lib/content-engine";
+
 export const articleCategories = [
   "Infrastructură medicală",
   "Radiologie",
@@ -57,6 +68,17 @@ export type Article = {
   cta: ArticleCTA;
   publishedAt: string;
   updatedAt: string;
+  semantic?: {
+    pillars?: TopicPillar[];
+    intent?: SearchIntent;
+    funnelStage?: FunnelStage;
+    planningPhases?: PlanningPhase[];
+    modalities?: Modality[];
+    equipmentTypes?: Modality[];
+    projectComplexity?: ProjectComplexity;
+    commercialIntent?: CommercialIntent;
+    authorityClusters?: AuthorityCluster[];
+  };
 };
 
 const defaultCta: ArticleCTA = {

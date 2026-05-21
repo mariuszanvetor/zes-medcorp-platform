@@ -1,6 +1,8 @@
 import { Container } from "@/components/ui/Container";
 import { CTA } from "@/components/ui/CTA";
 import { Section } from "@/components/ui/Section";
+import { PlanningJourneyBlock } from "@/components/sections/PlanningJourneyBlock";
+import { getPlanningJourneyRecommendations } from "@/data/planning-journeys";
 import type { Service } from "@/data/services";
 
 export type ServiceCTAProps = {
@@ -8,6 +10,10 @@ export type ServiceCTAProps = {
 };
 
 export function ServiceCTA({ service }: ServiceCTAProps) {
+  const journeyRecommendations = getPlanningJourneyRecommendations({
+    serviceHref: service.href,
+    limit: 2,
+  });
   const plannerService =
     service.slug === "radiologie" ||
     service.slug === "rf-shielding" ||
@@ -81,6 +87,14 @@ export function ServiceCTA({ service }: ServiceCTAProps) {
             ))}
           </div>
         </CTA>
+        <PlanningJourneyBlock
+          className="mt-10"
+          compact
+          description="Daca serviciul face parte dintr-un proiect mai larg, alege scenariul potrivit inainte de decizii finale."
+          journeys={journeyRecommendations}
+          sourcePage={service.href}
+          title="Nu esti sigur de ordinea pasilor?"
+        />
       </Container>
     </Section>
   );

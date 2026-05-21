@@ -1,12 +1,13 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import type { ReactNode } from "react";
 
 import { ArticleSchema } from "@/components/seo/ArticleSchema";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { FAQSchema } from "@/components/seo/FAQSchema";
 import { LeadMagnetBlock } from "@/components/sections/LeadMagnetBlock";
+import { PlanningJourneyBlock } from "@/components/sections/PlanningJourneyBlock";
+import { RelatedContentBlocks } from "@/components/sections/RelatedContentBlocks";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
@@ -17,7 +18,8 @@ import {
   getArticleBySlug,
   type Article,
 } from "@/data/articles";
-import { services, type Service } from "@/data/services";
+import { getPlanningJourneyRecommendations } from "@/data/planning-journeys";
+import { getArticleDiscoverySections } from "@/lib/internal-linking";
 import { createArticleMetadata } from "@/lib/seo";
 
 type ArticlePageProps = {
@@ -25,22 +27,6 @@ type ArticlePageProps = {
     slug: string;
   }>;
 };
-
-function isService(service: Service | undefined): service is Service {
-  return Boolean(service);
-}
-
-function getRelatedServices(article: Article) {
-  return article.relatedServices
-    .map((href) => services.find((service) => service.href === href))
-    .filter(isService);
-}
-
-function getRelatedArticles(article: Article) {
-  return article.relatedArticles
-    .map((slug) => getArticleBySlug(slug))
-    .filter((item): item is Article => Boolean(item));
-}
 
 export function generateStaticParams() {
   return articles.map((article) => ({
@@ -79,8 +65,11 @@ export default async function KnowledgeHubArticlePage({
     notFound();
   }
 
-  const relatedServices = getRelatedServices(article);
-  const relatedArticles = getRelatedArticles(article);
+  const discoverySections = getArticleDiscoverySections(article);
+  const journeyRecommendations = getPlanningJourneyRecommendations({
+    articleSlug: article.slug,
+    limit: 2,
+  });
   const leadMagnet = getLeadMagnet(article);
 
   return (
@@ -249,6 +238,16 @@ export default async function KnowledgeHubArticlePage({
                 />
               </div>
 
+              <div className="mt-16">
+                <PlanningJourneyBlock
+                  compact
+                  description="Daca articolul descrie situatia ta, continua cu un traseu de planificare inainte de oferta finala."
+                  journeys={journeyRecommendations}
+                  sourcePage={`/knowledge-hub/${article.slug}`}
+                  title="Alege pasul urmator pentru acest context."
+                />
+              </div>
+
               <section className="mt-16" id="intrebari-frecvente">
                 <h2 className="text-3xl font-semibold leading-tight text-slate-950">
                   Întrebări frecvente
@@ -278,53 +277,7 @@ export default async function KnowledgeHubArticlePage({
 
       <Section className="bg-[#f7fafc]" spacing="lg" tone="transparent">
         <Container>
-          <div className="grid gap-6 lg:grid-cols-3">
-            <RelatedPanel title="Servicii relevante">
-              {relatedServices.map((service) => (
-                <Link
-                  className="rounded-2xl border border-blue-100 bg-white p-5 transition hover:border-blue-200 hover:shadow-[0_18px_50px_rgba(0,87,184,0.08)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                  href={service.href}
-                  key={service.slug}
-                >
-                  <span className="text-base font-semibold text-slate-950">
-                    {service.shortTitle}
-                  </span>
-                  <span className="mt-2 block text-sm leading-6 text-slate-600">
-                    {service.seoDescription}
-                  </span>
-                </Link>
-              ))}
-            </RelatedPanel>
-
-            <RelatedPanel title="Instrumente relevante">
-              {article.relatedTools.map((tool) => (
-                <Link
-                  className="rounded-2xl border border-blue-100 bg-white p-5 text-base font-semibold text-[#0057b8] transition hover:border-blue-200 hover:text-blue-950 hover:shadow-[0_18px_50px_rgba(0,87,184,0.08)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                  href={tool.href}
-                  key={tool.href}
-                >
-                  {tool.label}
-                </Link>
-              ))}
-            </RelatedPanel>
-
-            <RelatedPanel title="Articole conexe">
-              {relatedArticles.map((relatedArticle) => (
-                <Link
-                  className="rounded-2xl border border-blue-100 bg-white p-5 transition hover:border-blue-200 hover:shadow-[0_18px_50px_rgba(0,87,184,0.08)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                  href={`/knowledge-hub/${relatedArticle.slug}`}
-                  key={relatedArticle.slug}
-                >
-                  <span className="text-base font-semibold text-slate-950">
-                    {relatedArticle.title}
-                  </span>
-                  <span className="mt-2 block text-sm leading-6 text-slate-600">
-                    {relatedArticle.readingTime} · {relatedArticle.category}
-                  </span>
-                </Link>
-              ))}
-            </RelatedPanel>
-          </div>
+          <RelatedContentBlocks sections={discoverySections} />
         </Container>
       </Section>
 
@@ -349,23 +302,6 @@ export default async function KnowledgeHubArticlePage({
         </Container>
       </Section>
     </>
-  );
-}
-
-function RelatedPanel({
-  title,
-  children,
-}: {
-  title: string;
-  children: ReactNode;
-}) {
-  return (
-    <div>
-      <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
-        {title}
-      </h2>
-      <div className="mt-5 grid gap-3">{children}</div>
-    </div>
   );
 }
 

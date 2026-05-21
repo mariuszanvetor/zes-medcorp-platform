@@ -23,6 +23,48 @@ export type SearchIntent =
 
 export type FunnelStage = "awareness" | "mid" | "high-intent" | "post-lead";
 
+export type PlanningPhase =
+  | "concept"
+  | "feasibility"
+  | "authorization"
+  | "design"
+  | "procurement"
+  | "installation"
+  | "commissioning"
+  | "operation"
+  | "maintenance"
+  | "modernization";
+
+export type Modality =
+  | "rmn"
+  | "ct"
+  | "rx"
+  | "ecografie"
+  | "ivd"
+  | "laborator"
+  | "clinica"
+  | "service";
+
+export type ProjectComplexity =
+  | "basic"
+  | "moderate"
+  | "advanced"
+  | "high-complexity";
+
+export type CommercialIntent = "low" | "medium" | "high" | "urgent";
+
+export type AuthorityCluster =
+  | "clinic-planning"
+  | "radiology-planning"
+  | "rmn-rf"
+  | "ct-radiation"
+  | "cncan-dsp"
+  | "equipment-imaging"
+  | "ivd-lab"
+  | "service-uptime"
+  | "modernization"
+  | "budgeting";
+
 export type TopicPillar =
   | "constructii-medicale"
   | "radiologie-cncan"
@@ -70,6 +112,12 @@ export type ArticleBlueprint = {
   pillar: TopicPillar;
   intent: SearchIntent;
   funnelStage: FunnelStage;
+  planningPhases?: PlanningPhase[];
+  modalities?: Modality[];
+  projectComplexity?: ProjectComplexity;
+  commercialIntent?: CommercialIntent;
+  equipmentTypes?: Modality[];
+  authorityCluster?: AuthorityCluster;
   keywordCluster: KeywordCluster;
   audience: string[];
   thesis: string;
@@ -571,6 +619,19 @@ export function toKnowledgeHubArticle(draft: ArticleDraft): Article {
     cta: draft.cta,
     publishedAt: draft.blueprint.publishedAt ?? new Date().toISOString().slice(0, 10),
     updatedAt: draft.blueprint.updatedAt ?? new Date().toISOString().slice(0, 10),
+    semantic: {
+      pillars: [draft.blueprint.pillar],
+      intent: draft.blueprint.intent,
+      funnelStage: draft.blueprint.funnelStage,
+      planningPhases: draft.blueprint.planningPhases,
+      modalities: draft.blueprint.modalities,
+      equipmentTypes: draft.blueprint.equipmentTypes,
+      projectComplexity: draft.blueprint.projectComplexity,
+      commercialIntent: draft.blueprint.commercialIntent,
+      authorityClusters: draft.blueprint.authorityCluster
+        ? [draft.blueprint.authorityCluster]
+        : undefined,
+    },
   };
 }
 

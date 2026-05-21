@@ -5,9 +5,13 @@ import { AIToolsPreviewSection } from "@/components/sections/AIToolsPreviewSecti
 import { EquipmentServiceSection } from "@/components/sections/EquipmentServiceSection";
 import { FinalCTASection } from "@/components/sections/FinalCTASection";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { PlanningJourneyBlock } from "@/components/sections/PlanningJourneyBlock";
 import { RadiologyShieldingSection } from "@/components/sections/RadiologyShieldingSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
+import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { planningJourneys } from "@/data/planning-journeys";
 import { homepageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = homepageMetadata;
@@ -17,6 +21,21 @@ export default function Home() {
     <>
       <BreadcrumbSchema items={[{ name: "Acasă", href: "/" }]} />
       <HeroSection />
+      <Section
+        className="border-y border-blue-100 bg-white"
+        spacing="lg"
+        tone="transparent"
+      >
+        <Container>
+          <PlanningJourneyBlock
+            compact
+            description="Nu trebuie sa alegi direct un serviciu. Porneste de la scenariul tau si vezi ce trebuie verificat mai intai."
+            journeys={planningJourneys.slice(0, 4)}
+            sourcePage="/"
+            title="Nu stii de unde sa incepi? Alege un traseu de planificare."
+          />
+        </Container>
+      </Section>
       <AIIntroSection />
       <ServicesSection />
       <AIToolsPreviewSection />

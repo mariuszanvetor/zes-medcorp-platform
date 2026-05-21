@@ -12,6 +12,8 @@ import {
   type Article,
   type ArticleCategory,
 } from "@/data/articles";
+import type { AuthorityCluster } from "@/lib/content-engine";
+import { getArticleSemanticProfile } from "@/lib/internal-linking";
 
 const allCategory = "Toate";
 type FilterCategory = ArticleCategory | typeof allCategory;
@@ -19,18 +21,51 @@ const filterCategories: readonly FilterCategory[] = [
   allCategory,
   ...articleCategories,
 ];
+const allCluster = "Toate traseele";
+type FilterCluster = AuthorityCluster | typeof allCluster;
+const clusterLabels: Record<AuthorityCluster, string> = {
+  "clinic-planning": "Clinici",
+  "radiology-planning": "Radiologie",
+  "rmn-rf": "RMN / RF",
+  "ct-radiation": "CT / RX",
+  "cncan-dsp": "DSP / CNCAN",
+  "equipment-imaging": "Aparatura",
+  "ivd-lab": "IVD",
+  "service-uptime": "Service",
+  modernization: "Modernizare",
+  budgeting: "Costuri",
+};
+const clusterFilters: readonly FilterCluster[] = [
+  allCluster,
+  "clinic-planning",
+  "radiology-planning",
+  "rmn-rf",
+  "ct-radiation",
+  "cncan-dsp",
+  "equipment-imaging",
+  "ivd-lab",
+  "service-uptime",
+  "modernization",
+  "budgeting",
+];
 
 export function KnowledgeHubArticles() {
   const [activeCategory, setActiveCategory] =
     useState<FilterCategory>(allCategory);
+  const [activeCluster, setActiveCluster] =
+    useState<FilterCluster>(allCluster);
 
   const filteredArticles = useMemo(() => {
-    if (activeCategory === allCategory) {
-      return articles;
-    }
+    return articles.filter((article) => {
+      const matchesCategory =
+        activeCategory === allCategory || article.category === activeCategory;
+      const matchesCluster =
+        activeCluster === allCluster ||
+        getArticleSemanticProfile(article).authorityClusters.includes(activeCluster);
 
-    return articles.filter((article) => article.category === activeCategory);
-  }, [activeCategory]);
+      return matchesCategory && matchesCluster;
+    });
+  }, [activeCategory, activeCluster]);
 
   return (
     <div className="grid gap-12" id="ghiduri-tehnice">
@@ -74,6 +109,59 @@ export function KnowledgeHubArticles() {
             </button>
           );
         })}
+      </div>
+
+      <div className="rounded-3xl border border-blue-100 bg-white p-5 shadow-[0_18px_60px_rgba(0,87,184,0.05)]">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
+              Trasee semantice
+            </p>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Filtreaza dupa etapa, echipament si intentie. Rezultat curent:{" "}
+              <strong className="text-slate-950">{filteredArticles.length}</strong>{" "}
+              articole.
+            </p>
+          </div>
+          <button
+            className="text-left text-sm font-bold text-[#0057b8] transition hover:text-blue-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 lg:text-right"
+            onClick={() => {
+              setActiveCategory(allCategory);
+              setActiveCluster(allCluster);
+            }}
+            type="button"
+          >
+            Reseteaza filtrele
+          </button>
+        </div>
+        <div
+          aria-label="Trasee semantice Knowledge Hub"
+          className="mt-5 flex flex-wrap gap-2"
+          role="list"
+        >
+          {clusterFilters.map((cluster) => {
+            const isActive = activeCluster === cluster;
+            const label =
+              cluster === allCluster ? allCluster : clusterLabels[cluster];
+
+            return (
+              <button
+                aria-pressed={isActive}
+                className={cn(
+                  "rounded-full border px-4 py-2 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600",
+                  isActive
+                    ? "border-[#0057b8] bg-[#0057b8] text-white shadow-[0_14px_30px_rgba(0,87,184,0.18)]"
+                    : "border-slate-200 bg-[#f8fbff] text-slate-700 hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]",
+                )}
+                key={cluster}
+                onClick={() => setActiveCluster(cluster)}
+                type="button"
+              >
+                {label}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3" id="articole">

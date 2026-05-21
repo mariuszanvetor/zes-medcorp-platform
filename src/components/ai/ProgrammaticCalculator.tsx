@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import { CalculatorLeadCTA } from "@/components/ai/CalculatorLeadCTA";
 import { TrackedButtonLink } from "@/components/analytics/TrackedButtonLink";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 import {
   BudgetEstimatePanel,
   ConfidencePanel,
@@ -319,6 +320,18 @@ function RelatedCalculatorLinks({
         Continuă analiza
       </h3>
       <div className="mt-6 grid gap-3">
+        <TrackedLink
+          className="rounded-2xl border border-blue-100 bg-[#f7fbff] p-4 text-sm font-bold leading-6 text-slate-950 transition hover:border-blue-200 hover:text-[#0057b8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+          href="/planificare"
+          tracking={{
+            calculatorSlug: calculator.slug,
+            ctaLabel: "Alege un traseu de planificare",
+            destination: "/planificare",
+            sourcePage: `/calculatoare/${calculator.slug}`,
+          }}
+        >
+          Alege un traseu de planificare
+        </TrackedLink>
         {calculator.relatedLinks.map((link) => (
           <Link
             className="rounded-2xl border border-blue-100 bg-[#f7fbff] p-4 text-sm font-bold leading-6 text-slate-950 transition hover:border-blue-200 hover:text-[#0057b8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"

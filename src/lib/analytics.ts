@@ -34,6 +34,7 @@ export type AnalyticsPayload = {
   articleSlug?: string;
   guideSlug?: string;
   calculatorSlug?: string;
+  journeySlug?: string;
   status?: string;
 };
 

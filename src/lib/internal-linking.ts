@@ -7,8 +7,14 @@ import { seoClusters, type SeoCluster } from "@/data/seo-clusters";
 import { services, type Service } from "@/data/services";
 import {
   topicTaxonomy,
+  type AuthorityCluster,
   type ArticleBlueprint,
   type ArticleRelationshipMap,
+  type CommercialIntent,
+  type FunnelStage,
+  type Modality,
+  type PlanningPhase,
+  type ProjectComplexity,
   type SearchIntent,
   type TopicPillar,
 } from "@/lib/content-engine";
@@ -44,6 +50,25 @@ export type LinkableContent = {
   label: string;
   text: string;
   pillarHints: TopicPillar[];
+};
+
+export type ArticleSemanticProfile = {
+  slug: string;
+  pillars: TopicPillar[];
+  intent: SearchIntent;
+  funnelStage: FunnelStage;
+  planningPhases: PlanningPhase[];
+  modalities: Modality[];
+  equipmentTypes: Modality[];
+  projectComplexity: ProjectComplexity;
+  commercialIntent: CommercialIntent;
+  authorityClusters: AuthorityCluster[];
+};
+
+export type RelatedContentSection = {
+  title: string;
+  description: string;
+  links: InternalLinkRecommendation[];
 };
 
 const directToolRoutes: ArticleTool[] = [
@@ -266,6 +291,267 @@ export function createLinkableContentIndex(): LinkableContent[] {
   ];
 }
 
+export function getArticleSemanticProfile(article: Article): ArticleSemanticProfile {
+  const text = buildArticleText(article);
+  const normalized = normalizeText(text);
+  const pillars = inferPillarsFromText(text);
+  const planningPhases = inferPlanningPhases(normalized);
+  const modalities = inferModalities(normalized);
+  const authorityClusters = inferAuthorityClusters(normalized, pillars, modalities);
+  const semantic = article.semantic;
+
+  return {
+    slug: article.slug,
+    pillars: semantic?.pillars ?? pillars,
+    intent: semantic?.intent ?? inferSearchIntent(normalized),
+    funnelStage: semantic?.funnelStage ?? inferFunnelStage(normalized),
+    planningPhases: semantic?.planningPhases ?? planningPhases,
+    modalities: semantic?.modalities ?? modalities,
+    equipmentTypes: semantic?.equipmentTypes ?? modalities.filter((modality) =>
+      ["rmn", "ct", "rx", "ecografie", "ivd", "laborator"].includes(modality),
+    ),
+    projectComplexity:
+      semantic?.projectComplexity ??
+      inferProjectComplexity(pillars, modalities, normalized),
+    commercialIntent: semantic?.commercialIntent ?? inferCommercialIntent(normalized),
+    authorityClusters: semantic?.authorityClusters ?? authorityClusters,
+  };
+}
+
+export function scoreSemanticRelevance(
+  source: ArticleSemanticProfile,
+  candidate: ArticleSemanticProfile,
+) {
+  if (source.slug === candidate.slug) {
+    return 0;
+  }
+
+  let score = 0;
+
+  score += overlap(source.authorityClusters, candidate.authorityClusters) * 18;
+  score += overlap(source.modalities, candidate.modalities) * 16;
+  score += overlap(source.pillars, candidate.pillars) * 14;
+  score += overlap(source.planningPhases, candidate.planningPhases) * 8;
+
+  if (source.intent === candidate.intent) {
+    score += 8;
+  }
+
+  if (source.funnelStage === candidate.funnelStage) {
+    score += 6;
+  }
+
+  if (source.commercialIntent === "high" && candidate.commercialIntent !== "low") {
+    score += 4;
+  }
+
+  if (source.projectComplexity === candidate.projectComplexity) {
+    score += 3;
+  }
+
+  return score;
+}
+
+export function getSemanticArticleRecommendations(
+  article: Article,
+  limit = 6,
+): InternalLinkRecommendation[] {
+  const sourceProfile = getArticleSemanticProfile(article);
+  const manualSlugs = new Set(article.relatedArticles);
+
+  return articles
+    .filter((candidate) => candidate.slug !== article.slug)
+    .map((candidate) => {
+      const profile = getArticleSemanticProfile(candidate);
+      const manualBoost = manualSlugs.has(candidate.slug) ? 24 : 0;
+      const score = scoreSemanticRelevance(sourceProfile, profile) + manualBoost;
+
+      return { candidate, score };
+    })
+    .filter((item) => item.score >= 18)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map(({ candidate, score }) => ({
+      label: candidate.title,
+      href: `/knowledge-hub/${candidate.slug}`,
+      role: "article",
+      reason: createSemanticReason(sourceProfile, getArticleSemanticProfile(candidate)),
+      priority: Math.min(96, 58 + score),
+    }));
+}
+
+export function getSemanticServiceRecommendations(
+  article: Article,
+  limit = 4,
+): InternalLinkRecommendation[] {
+  const sourceProfile = getArticleSemanticProfile(article);
+  const manual = article.relatedServices.map((href, index) => ({
+    href,
+    score: 48 - index * 4,
+  }));
+  const inferred = services.map((service) => {
+    const text = [
+      service.title,
+      service.shortTitle,
+      service.seoDescription,
+      service.schemaServiceType,
+      ...service.keywords,
+    ].join(" ");
+    const servicePillars = inferPillarsFromText(text);
+    const score =
+      overlap(sourceProfile.pillars, servicePillars) * 22 +
+      scoreTextMatch(buildArticleText(article), [
+        service.title,
+        service.shortTitle,
+        service.seoDescription,
+        ...service.keywords,
+      ]);
+
+    return { href: service.href, score };
+  });
+
+  return mergeScoredHrefs([...manual, ...inferred])
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map((item, index) =>
+      serviceToRecommendation(
+        item.href,
+        index === 0 ? "primary-service" : "supporting-service",
+      ),
+    );
+}
+
+export function getSemanticCalculatorRecommendations(
+  article: Article,
+  limit = 3,
+): InternalLinkRecommendation[] {
+  const sourceProfile = getArticleSemanticProfile(article);
+
+  return programmaticCalculators
+    .map((calculator) => {
+      const text = [
+        calculator.title,
+        calculator.description,
+        calculator.targetKeyword,
+        ...calculator.keywords,
+      ].join(" ");
+      const profile = profileFromText(`calculator-${calculator.slug}`, text);
+      const score =
+        scoreSemanticRelevance(sourceProfile, profile) +
+        scoreTextMatch(buildArticleText(article), [
+          calculator.title,
+          calculator.description,
+          calculator.targetKeyword,
+          ...calculator.keywords,
+        ]);
+
+      return { calculator, score };
+    })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map(({ calculator, score }) =>
+      calculatorToRecommendation(calculator, Math.min(94, 72 + score)),
+    );
+}
+
+export function getSemanticGuideRecommendations(
+  article: Article,
+  limit = 4,
+): InternalLinkRecommendation[] {
+  const sourceProfile = getArticleSemanticProfile(article);
+
+  return seoClusters
+    .map((cluster) => {
+      const text = [
+        cluster.title,
+        cluster.description,
+        cluster.targetKeyword,
+        ...cluster.secondaryKeywords,
+        cluster.category,
+      ].join(" ");
+      const profile = profileFromText(`guide-${cluster.slug}`, text);
+      const score =
+        scoreSemanticRelevance(sourceProfile, profile) +
+        scoreTextMatch(buildArticleText(article), [
+          cluster.title,
+          cluster.description,
+          cluster.targetKeyword,
+          ...cluster.secondaryKeywords,
+        ]);
+
+      return { cluster, score };
+    })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map(({ cluster, score }) =>
+      clusterToRecommendation(cluster, Math.min(88, 62 + score)),
+    );
+}
+
+export function getSemanticToolRecommendations(
+  article: Article,
+  limit = 4,
+): InternalLinkRecommendation[] {
+  const sourceProfile = getArticleSemanticProfile(article);
+  const preferredTools = toolsForProfile(sourceProfile);
+  const manualTools = article.relatedTools.map((tool, index) =>
+    toolToRecommendation(tool, inferToolRole(tool.href), 86 - index),
+  );
+  const inferredTools = preferredTools.map((tool, index) =>
+    toolToRecommendation(tool, inferToolRole(tool.href), 82 - index),
+  );
+
+  return uniqueRecommendations([...manualTools, ...inferredTools]).slice(0, limit);
+}
+
+export function getArticleDiscoverySections(article: Article): RelatedContentSection[] {
+  const calculators = getSemanticCalculatorRecommendations(article, 3);
+  const tools = getSemanticToolRecommendations(article, 3);
+  const services = getSemanticServiceRecommendations(article, 4);
+  const guides = getSemanticGuideRecommendations(article, 3);
+  const articlesForCluster = getSemanticArticleRecommendations(article, 5);
+  const nextSteps = uniqueRecommendations([...calculators, ...tools]).slice(0, 4);
+  const used = new Set<string>();
+  const freshLinks = (links: InternalLinkRecommendation[]) =>
+    links.filter((link) => {
+      if (used.has(link.href)) {
+        return false;
+      }
+
+      used.add(link.href);
+      return true;
+    });
+
+  return [
+    {
+      title: "Planificare recomandata",
+      description:
+        "Instrumente utile pentru a transforma lectura intr-o verificare tehnica preliminara.",
+      links: freshLinks(nextSteps),
+    },
+    {
+      title: "Servicii pentru acest context",
+      description:
+        "Pilonii ZES care se leaga natural de subiect, fara a amesteca cerinte tehnice diferite.",
+      links: freshLinks(services),
+    },
+    {
+      title: "Ghiduri si calculatoare conexe",
+      description:
+        "Resurse orientate pe cost, autorizare, infrastructura sau echipamente, in functie de intentie.",
+      links: freshLinks(uniqueRecommendations([...guides, ...calculators]).slice(0, 4)),
+    },
+    {
+      title: "Articole din acelasi cluster",
+      description:
+        "Lecturi apropiate ca etapa de proiect, echipament, risc sau intentie de cautare.",
+      links: freshLinks(articlesForCluster),
+    },
+  ].filter((section) => section.links.length > 0);
+}
+
 function choosePrimaryCta(
   blueprint: ArticleBlueprint,
   calculators: InternalLinkRecommendation[],
@@ -304,6 +590,294 @@ function inferRelatedArticles(blueprint: ArticleBlueprint) {
     .filter((item) => item.score > 0 && item.article.slug !== blueprint.slug)
     .sort((a, b) => b.score - a.score)
     .map((item) => item.article);
+}
+
+function buildArticleText(article: Article) {
+  return [
+    article.slug,
+    article.title,
+    article.description,
+    article.category,
+    article.targetKeyword,
+    ...article.tags,
+    article.intro,
+    ...article.sections.flatMap((section) => [
+      section.title,
+      ...toTextArray(section.body),
+      ...(section.bullets ?? []),
+      section.callout?.title ?? "",
+      section.callout?.body ?? "",
+    ]),
+    ...article.faqs.flatMap((faq) => [faq.question, faq.answer]),
+  ].join(" ");
+}
+
+function profileFromText(slug: string, text: string): ArticleSemanticProfile {
+  const normalized = normalizeText(text);
+  const pillars = inferPillarsFromText(text);
+  const modalities = inferModalities(normalized);
+
+  return {
+    slug,
+    pillars,
+    intent: inferSearchIntent(normalized),
+    funnelStage: inferFunnelStage(normalized),
+    planningPhases: inferPlanningPhases(normalized),
+    modalities,
+    equipmentTypes: modalities.filter((modality) =>
+      ["rmn", "ct", "rx", "ecografie", "ivd", "laborator"].includes(modality),
+    ),
+    projectComplexity: inferProjectComplexity(pillars, modalities, normalized),
+    commercialIntent: inferCommercialIntent(normalized),
+    authorityClusters: inferAuthorityClusters(normalized, pillars, modalities),
+  };
+}
+
+function inferSearchIntent(text: string): SearchIntent {
+  if (/cncan|dsp|autoriz/.test(text)) {
+    return "regulatory";
+  }
+
+  if (/service|mentenanta|downtime|defect|eroare|interventie/.test(text)) {
+    return "problem-solving";
+  }
+
+  if (/cost|buget|achizitie|contract|oferta|pret/.test(text)) {
+    return "commercial-investigation";
+  }
+
+  if (/checklist|pregat|planific|proiectare|instalare|integrare/.test(text)) {
+    return "technical-planning";
+  }
+
+  return "educational-authority";
+}
+
+function inferFunnelStage(text: string): FunnelStage {
+  if (/service|mentenanta|contact|interventie|oferta|proposal|contract/.test(text)) {
+    return "post-lead";
+  }
+
+  if (/cost|buget|achizitie|calculator|pret|cat dureaza/.test(text)) {
+    return "high-intent";
+  }
+
+  if (/checklist|pregat|planific|proiectare|modernizare|autoriz/.test(text)) {
+    return "mid";
+  }
+
+  return "awareness";
+}
+
+function inferPlanningPhases(text: string): PlanningPhase[] {
+  const phases: PlanningPhase[] = [];
+
+  addIf(phases, "concept", /idee|concept|flux|strategie|planificare/.test(text));
+  addIf(phases, "feasibility", /cost|buget|estim|fezabil|investitie|durata/.test(text));
+  addIf(phases, "authorization", /dsp|cncan|autoriz|documentatie|conform/.test(text));
+  addIf(phases, "design", /proiectare|layout|camera|spatiu|infrastructura/.test(text));
+  addIf(phases, "procurement", /achizitie|alegere|aparatura|echipament|furnizor/.test(text));
+  addIf(phases, "installation", /instalare|montaj|integrare|livrare/.test(text));
+  addIf(phases, "commissioning", /testare|commissioning|validare|calibrare|qc/.test(text));
+  addIf(phases, "operation", /operare|operational|uptime|flux pacient|flux probe/.test(text));
+  addIf(phases, "maintenance", /service|mentenanta|preventiv|corectiv|downtime/.test(text));
+  addIf(phases, "modernization", /modernizare|retrofit|existent|inlocuire/.test(text));
+
+  return phases.length ? phases : ["concept"];
+}
+
+function inferModalities(text: string): Modality[] {
+  const modalities: Modality[] = [];
+
+  addIf(modalities, "rmn", /\brmn\b|\bmri\b|faraday|rf shielding|cusca faraday/.test(text));
+  addIf(modalities, "ct", /\bct\b|computer tomograf/.test(text));
+  addIf(modalities, "rx", /\brx\b|x-ray|radiografie|fluoroscopie/.test(text));
+  addIf(modalities, "ecografie", /ecograf|ultrasound|ecografie/.test(text));
+  addIf(modalities, "ivd", /\bivd\b|diagnostic in vitro/.test(text));
+  addIf(modalities, "laborator", /laborator|probe|analiz/.test(text));
+  addIf(modalities, "clinica", /clinica|cabinet|spital|sectie/.test(text));
+  addIf(modalities, "service", /service|mentenanta|downtime|interventie/.test(text));
+
+  return modalities.length ? modalities : ["clinica"];
+}
+
+function inferAuthorityClusters(
+  text: string,
+  pillars: TopicPillar[],
+  modalities: Modality[],
+): AuthorityCluster[] {
+  const clusters: AuthorityCluster[] = [];
+
+  addIf(
+    clusters,
+    "clinic-planning",
+    pillars.includes("constructii-medicale") ||
+      pillars.includes("proiectare-medicala") ||
+      modalities.includes("clinica"),
+  );
+  addIf(clusters, "radiology-planning", /radiolog|imagistic|camera/.test(text));
+  addIf(clusters, "rmn-rf", modalities.includes("rmn") || pillars.includes("rf-shielding-rmn"));
+  addIf(
+    clusters,
+    "ct-radiation",
+    modalities.includes("ct") ||
+      modalities.includes("rx") ||
+      pillars.includes("protectie-radiologica"),
+  );
+  addIf(clusters, "cncan-dsp", /cncan|dsp|autoriz|conform/.test(text));
+  addIf(
+    clusters,
+    "equipment-imaging",
+    pillars.includes("imagistica-medicala") ||
+      pillars.includes("achizitie-echipamente") ||
+      /aparatura|echipament|ecograf/.test(text),
+  );
+  addIf(
+    clusters,
+    "ivd-lab",
+    pillars.includes("ivd-laborator") ||
+      modalities.includes("ivd") ||
+      modalities.includes("laborator"),
+  );
+  addIf(
+    clusters,
+    "service-uptime",
+    pillars.includes("service-aparatura") ||
+      modalities.includes("service") ||
+      /uptime|mentenanta|downtime/.test(text),
+  );
+  addIf(clusters, "modernization", /modernizare|retrofit|existent|inlocuire/.test(text));
+  addIf(clusters, "budgeting", /cost|buget|estim|investitie|pret/.test(text));
+
+  return clusters.length ? clusters : ["clinic-planning"];
+}
+
+function inferProjectComplexity(
+  pillars: TopicPillar[],
+  modalities: Modality[],
+  text: string,
+): ProjectComplexity {
+  const hasSpecialModality =
+    modalities.includes("rmn") || modalities.includes("ct") || modalities.includes("rx");
+  const hasMultipleDomains = pillars.length >= 3 || modalities.length >= 3;
+
+  if (
+    hasMultipleDomains ||
+    /turnkey|spital|sectie|complex|imediat|critic|cncan.*ct|rmn.*rf/.test(text)
+  ) {
+    return "high-complexity";
+  }
+
+  if (hasSpecialModality || /ivd|laborator|modernizare|autoriz/.test(text)) {
+    return "advanced";
+  }
+
+  if (/cabinet|ecograf|preventiv|concept/.test(text)) {
+    return "basic";
+  }
+
+  return "moderate";
+}
+
+function inferCommercialIntent(text: string): CommercialIntent {
+  if (/imediat|critic|urgent|oprit complet|downtime/.test(text)) {
+    return "urgent";
+  }
+
+  if (/cost|buget|oferta|achizitie|proposal|contract|calculator/.test(text)) {
+    return "high";
+  }
+
+  if (/checklist|planific|pregat|autoriz|modernizare|instalare/.test(text)) {
+    return "medium";
+  }
+
+  return "low";
+}
+
+function createSemanticReason(
+  source: ArticleSemanticProfile,
+  candidate: ArticleSemanticProfile,
+) {
+  const modalityMatch = source.modalities.filter((modality) =>
+    candidate.modalities.includes(modality),
+  );
+  const clusterMatch = source.authorityClusters.filter((cluster) =>
+    candidate.authorityClusters.includes(cluster),
+  );
+
+  if (modalityMatch.length) {
+    return `Related by modality: ${modalityMatch.join(", ")}.`;
+  }
+
+  if (clusterMatch.length) {
+    return `Related authority cluster: ${clusterMatch[0]}.`;
+  }
+
+  return "Related by search intent and planning stage.";
+}
+
+function toolsForProfile(profile: ArticleSemanticProfile): ArticleTool[] {
+  const tools: ArticleTool[] = [];
+
+  if (
+    profile.modalities.some((modality) => ["rmn", "ct", "rx"].includes(modality)) ||
+    profile.authorityClusters.some((cluster) =>
+      ["rmn-rf", "ct-radiation", "radiology-planning"].includes(cluster),
+    )
+  ) {
+    tools.push({ label: "Radiology Room Planner", href: "/radiology-room-planner" });
+  }
+
+  if (
+    profile.authorityClusters.includes("service-uptime") ||
+    profile.commercialIntent === "urgent"
+  ) {
+    tools.push({ label: "Diagnostic service", href: "/service-diagnostic" });
+  }
+
+  if (
+    profile.commercialIntent === "high" ||
+    profile.projectComplexity === "high-complexity"
+  ) {
+    tools.push({ label: "Proposal Builder", href: "/proposal-builder" });
+  }
+
+  if (
+    profile.authorityClusters.includes("clinic-planning") ||
+    profile.authorityClusters.includes("budgeting") ||
+    profile.funnelStage === "mid"
+  ) {
+    tools.push({ label: "Consultant AI", href: "/ai-project-advisor" });
+  }
+
+  return tools.length
+    ? uniqueTools(tools)
+    : [{ label: "Consultanta tehnica", href: "/contact" }];
+}
+
+function inferToolRole(
+  href: string,
+): Extract<LinkRole, "calculator" | "tool" | "contact"> {
+  if (href === "/contact") {
+    return "contact";
+  }
+
+  if (href.startsWith("/calculatoare") || href === "/calculator-proiect-medical") {
+    return "calculator";
+  }
+
+  return "tool";
+}
+
+function mergeScoredHrefs(items: Array<{ href: string; score: number }>) {
+  const scored = new Map<string, number>();
+
+  for (const item of items) {
+    scored.set(item.href, Math.max(scored.get(item.href) ?? 0, item.score));
+  }
+
+  return Array.from(scored, ([href, score]) => ({ href, score }));
 }
 
 function serviceToRecommendation(
@@ -408,20 +982,36 @@ function scoreTextMatch(query: string, candidates: string[]) {
 
 function tokenize(text: string) {
   return new Set(
-    text
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
+    normalizeText(text)
       .split(/[^a-z0-9]+/)
       .filter((token) => token.length > 2),
   );
 }
 
-function inferPillarsFromText(text: string): TopicPillar[] {
-  const normalized = text
+function normalizeText(text: string) {
+  return text
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase();
+}
+
+function toTextArray(value: string | string[]) {
+  return Array.isArray(value) ? value : [value];
+}
+
+function addIf<T>(items: T[], item: T, condition: boolean) {
+  if (condition && !items.includes(item)) {
+    items.push(item);
+  }
+}
+
+function overlap<T>(first: T[], second: T[]) {
+  const secondSet = new Set(second);
+  return first.filter((item) => secondSet.has(item)).length;
+}
+
+function inferPillarsFromText(text: string): TopicPillar[] {
+  const normalized = normalizeText(text);
   const pillars: TopicPillar[] = [];
 
   if (/construct|amenajar|clinica|dsp/.test(normalized)) {

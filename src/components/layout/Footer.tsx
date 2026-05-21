@@ -26,6 +26,7 @@ const aiToolLinks = [
 ];
 
 const knowledgeLinks = [
+  { label: "Planificare proiect", href: "/planificare" },
   { label: "Knowledge Hub", href: "/knowledge-hub" },
   { label: "Ghiduri tehnice", href: "/knowledge-hub#ghiduri-tehnice" },
   { label: "Autorizări", href: "/knowledge-hub#autorizari" },

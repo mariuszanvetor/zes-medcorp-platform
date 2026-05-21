@@ -124,6 +124,8 @@ function getQuotedValues(source) {
 
 function checkArticleBlocks(blocks, articleSlugs, routes) {
   const seen = new Set();
+  const seenTitles = new Map();
+  const seenTargetKeywords = new Map();
   const requiredFields = [
     "slug",
     "title",
@@ -170,9 +172,25 @@ function checkArticleBlocks(blocks, articleSlugs, routes) {
     const ctaHref = block.match(/cta:\s*{[\s\S]*?href:\s*"([^"]+)"/)?.[1];
 
     if (!title || title.length < 20) warnings.push(`${slug}: title may be too short.`);
+    if (title) {
+      const normalizedTitle = title.toLowerCase();
+      const previousSlug = seenTitles.get(normalizedTitle);
+      if (previousSlug) {
+        errors.push(`${slug}: duplicate title also used by ${previousSlug}.`);
+      }
+      seenTitles.set(normalizedTitle, slug);
+    }
     if (!description || description.length < 90) warnings.push(`${slug}: description may be too short.`);
     if (description.length > 220) warnings.push(`${slug}: description may be too long for clean SERP snippets.`);
     if (!targetKeyword) errors.push(`${slug}: missing targetKeyword.`);
+    if (targetKeyword) {
+      const normalizedKeyword = targetKeyword.toLowerCase();
+      const previousSlug = seenTargetKeywords.get(normalizedKeyword);
+      if (previousSlug) {
+        errors.push(`${slug}: duplicate targetKeyword also used by ${previousSlug}.`);
+      }
+      seenTargetKeywords.set(normalizedKeyword, slug);
+    }
     if (sectionCount < 3) errors.push(`${slug}: expected at least 3 sections.`);
     if (questionCount < 3) errors.push(`${slug}: expected at least 3 FAQ questions.`);
     if (serviceLinks.length < 1) errors.push(`${slug}: expected at least one related service.`);
@@ -200,6 +218,16 @@ function checkArticleBlocks(blocks, articleSlugs, routes) {
 
     if (hypeCount > 8) {
       warnings.push(`${slug}: repeated marketing terms detected. Review for AI-spam tone.`);
+    }
+
+    if (toolLinks.length > 16) {
+      warnings.push(`${slug}: many internal links detected. Review for over-linking and anchor repetition.`);
+    }
+
+    const locationTerms = ["bucuresti", "cluj", "iasi", "timisoara", "brasov", "constanta"];
+    const locationMentions = locationTerms.filter((term) => lower.includes(term));
+    if (locationMentions.length > 3) {
+      warnings.push(`${slug}: multiple city terms detected. Review to avoid location-doorway patterns.`);
     }
 
     const mentionsRmnAndLead = lower.includes("rmn") && (lower.includes("plumb") || lower.includes("lead"));

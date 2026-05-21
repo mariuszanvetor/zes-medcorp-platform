@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { FAQSchema } from "@/components/seo/FAQSchema";
+import { PlanningJourneyBlock } from "@/components/sections/PlanningJourneyBlock";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -8,6 +9,7 @@ import { Container } from "@/components/ui/Container";
 import { CTA } from "@/components/ui/CTA";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
+import { getPlanningJourneyRecommendations } from "@/data/planning-journeys";
 import type { SeoCluster } from "@/data/seo-clusters";
 
 export type SeoClusterPageProps = {
@@ -19,6 +21,10 @@ export function SeoClusterPage({ cluster }: SeoClusterPageProps) {
     label: "Analiză preliminară",
     href: "/ai-project-advisor",
   };
+  const journeyRecommendations = getPlanningJourneyRecommendations({
+    guideHref: `/ghiduri/${cluster.slug}`,
+    limit: 2,
+  });
 
   return (
     <>
@@ -171,6 +177,16 @@ export function SeoClusterPage({ cluster }: SeoClusterPageProps) {
                     )}
                   </section>
                 ))}
+              </div>
+
+              <div className="mt-16">
+                <PlanningJourneyBlock
+                  compact
+                  description="Alege traseul de planificare apropiat de ghid si continua catre serviciile sau instrumentele potrivite."
+                  journeys={journeyRecommendations}
+                  sourcePage={`/ghiduri/${cluster.slug}`}
+                  title="Continua cu un scenariu de proiect."
+                />
               </div>
 
               <section className="mt-16" id="intrebari-frecvente">
