@@ -13,6 +13,8 @@ export const analyticsEventNames = [
   "intake_complete",
   "intake_lead_submit",
   "intake_next_step_click",
+  "proposal_pdf_export",
+  "proposal_print",
   "lead_form_view",
   "lead_form_submit_attempt",
   "lead_form_submit_success",

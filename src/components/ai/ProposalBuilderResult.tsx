@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import {
   BudgetEstimatePanel,
   ConfidencePanel,
@@ -21,8 +23,14 @@ import type {
   TimelineEstimate,
 } from "@/lib/ai-estimation";
 import { BUDGET_DISCLAIMER } from "@/lib/ai-estimation";
+import { trackEvent } from "@/lib/analytics";
 import type { AssembledProposal } from "@/lib/proposal-assembly";
 import { createProposalDocument } from "@/lib/proposal-document";
+import {
+  downloadProposalPdf,
+  getProposalPdfFilename,
+  openProposalPdfForPrint,
+} from "@/lib/proposal-pdf";
 
 export type ProposalAnalysis = {
   title: string;
@@ -57,6 +65,43 @@ const complexityVariant: Record<AdvancedComplexityLevel, "cyan" | "blue" | "dark
 
 export function ProposalBuilderResult({ result }: ProposalBuilderResultProps) {
   const proposalDocument = createProposalDocument(result);
+  const [exportStatus, setExportStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+
+  const trackingPayload = {
+    sourcePage: "/proposal-builder",
+    sourceTool: "proposal-builder",
+    projectType: result.proposalType,
+    estimatedBudgetRange: result.budget.totalRange,
+    complexity: result.complexity,
+    riskLevel: result.risks[0]?.level,
+  };
+
+  function handlePdfExport() {
+    setExportStatus("loading");
+
+    try {
+      downloadProposalPdf(proposalDocument);
+      trackEvent("proposal_pdf_export", trackingPayload);
+      setExportStatus("success");
+    } catch {
+      setExportStatus("error");
+    }
+  }
+
+  function handlePrintPreview() {
+    try {
+      const opened = openProposalPdfForPrint(proposalDocument);
+      trackEvent("proposal_print", {
+        ...trackingPayload,
+        status: opened ? "opened" : "blocked",
+      });
+      setExportStatus(opened ? "success" : "error");
+    } catch {
+      setExportStatus("error");
+    }
+  }
 
   return (
     <div className="grid gap-6">
@@ -162,18 +207,42 @@ export function ProposalBuilderResult({ result }: ProposalBuilderResultProps) {
               Previzualizare propunere
             </p>
             <h3 className="mt-2 text-2xl font-semibold text-white">
-              Structură pregătită pentru viitorul export PDF
+              Structură pregătită pentru export PDF
             </h3>
             <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300">
               Acesta este un document de lucru, construit din rezultatul
-              Proposal Builder. Exportul PDF va putea fi conectat ulterior fără
-              schimbarea logicii de estimare.
+              Proposal Builder. Exportul este determinist și rămâne preliminar
+              până la validarea tehnică ZES.
+            </p>
+            <p className="mt-2 text-xs font-semibold text-slate-400">
+              Fișier: {getProposalPdfFilename(proposalDocument)}
             </p>
           </div>
-          <Button disabled type="button" variant="secondary">
-            Export PDF — disponibil în curând
-          </Button>
+          <div className="no-print flex flex-col gap-3 sm:flex-row">
+            <Button
+              isLoading={exportStatus === "loading"}
+              onClick={handlePdfExport}
+              type="button"
+              variant="secondary"
+            >
+              Descarcă propunerea PDF
+            </Button>
+            <Button onClick={handlePrintPreview} type="button" variant="outline">
+              Deschide pentru print
+            </Button>
+          </div>
         </div>
+        {exportStatus === "success" && (
+          <p className="no-print mb-5 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800">
+            Exportul PDF a fost pregătit local în browser.
+          </p>
+        )}
+        {exportStatus === "error" && (
+          <p className="no-print mb-5 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-semibold text-rose-800">
+            Exportul nu a putut fi pornit. Pe mobil, deschideți pagina într-un
+            browser complet sau folosiți opțiunea de print a browserului.
+          </p>
+        )}
         <ProposalDocumentPreview document={proposalDocument} />
       </Card>
 

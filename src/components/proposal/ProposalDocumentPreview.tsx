@@ -48,6 +48,7 @@ export function ProposalDocumentPreview({
             </p>
             <dl className="mt-5 grid gap-3 text-xs leading-5">
               <PreviewMeta label="Pregătit de" value={document.preparedBy} />
+              <PreviewMeta label="Generat" value={document.generatedAt} />
               <PreviewMeta label="Status" value={document.generatedLabel} />
               <PreviewMeta
                 label="Încredere"

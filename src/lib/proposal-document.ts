@@ -62,6 +62,7 @@ export type ProposalDocument = {
   title: string;
   subtitle: string;
   preparedBy: string;
+  generatedAt: string;
   generatedLabel: string;
   summary: ProposalDocumentSummary;
   recommendedServices: string[];
@@ -105,6 +106,11 @@ export function createProposalDocument(
     title: source.title,
     subtitle: "Propunere tehnică preliminară",
     preparedBy: brand.brandName,
+    generatedAt: new Intl.DateTimeFormat("ro-RO", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    }).format(new Date()),
     generatedLabel: "Previzualizare generată în Proposal Builder",
     summary: {
       projectType: source.proposalType,
