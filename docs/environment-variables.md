@@ -43,6 +43,25 @@ Current state:
 - Email sending is mocked only.
 - No production email is sent.
 
+## Lead Storage
+
+| Variable | Required now | Required later | Purpose |
+| --- | --- | --- | --- |
+| `LEAD_STORAGE_PROVIDER` | No | Yes, when real storage is enabled | Current safe value is `mock`. Future options may include Postgres, Supabase, Neon, Airtable, Google Sheets, HubSpot, or webhook. |
+| `LEAD_DATABASE_URL` | No | Yes, for Postgres-style storage | Future server-side database connection string. Never commit a real value. |
+| `SUPABASE_URL` | No | Optional | Future Supabase project URL if Supabase is selected. |
+| `SUPABASE_SERVICE_ROLE_KEY` | No | Optional | Future server-side Supabase service key. Never expose as `NEXT_PUBLIC_*`. |
+| `GOOGLE_SHEETS_ID` | No | Optional | Future temporary Sheets workflow identifier. |
+| `AIRTABLE_API_KEY` | No | Optional | Future Airtable API key. Never commit a real value. |
+| `AIRTABLE_BASE_ID` | No | Optional | Future Airtable base identifier. |
+
+Current state:
+
+- Lead storage is mocked only.
+- `/api/leads` returns a mock `leadId` and `storageMode: "mock"`.
+- No persistent database, sheet, Airtable base, CRM record, or webhook is used.
+- Admin lead review still uses demo data only.
+
 ## Production Safety Rules
 
 - Do not commit `.env.local`.
@@ -50,3 +69,4 @@ Current state:
 - Rotate any secret that is accidentally committed.
 - Keep analytics payloads free of personal data.
 - Enable CRM/email only after legal, privacy, and operational review.
+- Enable real lead storage only after admin authentication, access control, and privacy review are complete.

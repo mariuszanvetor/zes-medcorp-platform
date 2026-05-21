@@ -9,6 +9,7 @@ import {
 } from "@/lib/integrations/email-adapter";
 import type { LeadPayload } from "@/lib/lead-types";
 import { scoreLead } from "@/lib/lead-scoring";
+import { saveLead } from "@/lib/lead-storage";
 
 export async function POST(request: NextRequest) {
   let payload: LeadPayload;
@@ -28,10 +29,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, errors }, { status: 422 });
   }
 
-  const leadId = `mock_${Date.now()}`;
   const scoring = scoreLead(payload);
   const recommendedServices = parseRecommendedServices(payload);
   const crmPayload = buildCrmPayload(payload, scoring);
+  const storageResult = await saveLead({
+    lead: payload,
+    scoring,
+  });
+  const leadId = storageResult.leadId ?? `mock_${Date.now()}`;
   const crmResult = await sendToCrm(crmPayload);
   const notificationEmail = buildLeadNotificationEmail({
     lead: payload,
@@ -47,6 +52,7 @@ export async function POST(request: NextRequest) {
     ok: true,
     leadId,
     mode: "mock",
+    storageMode: storageResult.storageMode,
     score: scoring.score,
     priority: scoring.priority,
     nextAction: scoring.nextAction,
@@ -66,9 +72,16 @@ export async function POST(request: NextRequest) {
         subject: confirmationEmail.subject,
         provider: confirmationEmail.provider,
       },
+      storage: {
+        mode: storageResult.storageMode,
+        result: {
+          ok: storageResult.ok,
+          message: storageResult.message,
+        },
+      },
     },
     message:
-      "Lead payload validated, scored and mapped to mock CRM/email payloads. No database, CRM or email integration is active yet.",
+      "Lead payload validated, scored, mapped to mock CRM/email payloads and accepted by mock lead storage. No database, CRM or email integration is active yet.",
   });
 }
 
