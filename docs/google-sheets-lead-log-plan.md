@@ -13,6 +13,8 @@ Current state:
 - The adapter has a no-dependency service-account JWT + `fetch` scaffold for future real append.
 - No service account is connected by default.
 - No row is appended unless `LEAD_INTEGRATION_MODE` requests Sheets and all required server env vars are configured.
+- Primary env names now match the production Vercel setup: `GOOGLE_SHEETS_SPREADSHEET_ID`, `GOOGLE_SHEETS_CLIENT_EMAIL`, `GOOGLE_SHEETS_PRIVATE_KEY`, `GOOGLE_SHEETS_TAB_NAME`.
+- Legacy aliases `GOOGLE_SHEETS_ID`, `GOOGLE_SERVICE_ACCOUNT_EMAIL` and `GOOGLE_PRIVATE_KEY` are still accepted by code for compatibility, but new deployments should use the primary names.
 
 ## Future Setup Steps
 
@@ -33,13 +35,17 @@ Current state:
 
 ```env
 LEAD_INTEGRATION_MODE=email-and-sheets
-GOOGLE_SHEETS_ID=
-GOOGLE_SERVICE_ACCOUNT_EMAIL=
-GOOGLE_PRIVATE_KEY=
+GOOGLE_SHEETS_SPREADSHEET_ID=
+GOOGLE_SHEETS_CLIENT_EMAIL=
+GOOGLE_SHEETS_PROJECT_ID=
+GOOGLE_SHEETS_PRIVATE_KEY=
 GOOGLE_SHEETS_TAB_NAME=Leads
+GOOGLE_SHEETS_REQUEST_TIMEOUT_MS=10000
 ```
 
-`GOOGLE_PRIVATE_KEY` must preserve newlines. In Vercel, paste the full private key with line breaks when supported, or use escaped `\n` sequences. The adapter normalizes escaped newlines server-side.
+`GOOGLE_SHEETS_PROJECT_ID` is useful for operational clarity when copying service-account JSON into Vercel, but the current adapter does not need it for the JWT append flow.
+
+`GOOGLE_SHEETS_PRIVATE_KEY` must preserve newlines. In Vercel, paste the full private key with line breaks when supported, or use escaped `\n` sequences. The adapter normalizes escaped newlines server-side.
 
 Do not commit real values. Store them only in the hosting provider environment settings.
 
@@ -47,24 +53,20 @@ Do not commit real values. Store them only in the hosting provider environment s
 
 Create the `Leads` tab with this header row:
 
-1. `timestamp`
-2. `leadId`
-3. `sourceTool`
-4. `sourcePage`
-5. `inquiryType`
-6. `projectType`
-7. `company`
-8. `name`
-9. `email`
-10. `phone`
-11. `urgency`
-12. `score`
-13. `priority`
-14. `estimatedBudgetRange`
-15. `complexity`
-16. `riskLevel`
-17. `recommendedNextStep`
-18. `message`
+1. `Date`
+2. `Lead ID`
+3. `Source`
+4. `Project Type`
+5. `Priority`
+6. `Score`
+7. `Name`
+8. `Email`
+9. `Phone`
+10. `Company`
+11. `Message`
+12. `Recommended Services`
+13. `Next Action`
+14. `Status`
 
 ## Fields To Store
 
@@ -73,13 +75,13 @@ Recommended initial fields:
 - lead ID
 - received timestamp
 - source tool
-- source page
-- inquiry type
 - project type
-- company
+- source page and inquiry type as source context
 - contact name
 - email
 - phone
+- company
+- message, if operationally useful and not patient-related
 - urgency
 - estimated budget range
 - complexity
@@ -88,6 +90,7 @@ Recommended initial fields:
 - priority
 - recommended next action
 - recommended services
+- status, defaulting to `Nou`
 
 ## Fields Not To Store
 
@@ -125,17 +128,17 @@ Lead forms should continue to discourage users from submitting patient data.
 4. Add test credentials in staging only.
 5. Switch staging to `LEAD_INTEGRATION_MODE=email-and-sheets`.
 6. Submit a non-real test lead.
-7. Confirm row append and email notification.
+7. Confirm row append, `sheetsMode: "real"` and email notification.
 8. Test provider failure behavior by removing one staging env var.
-9. Confirm form submission returns a controlled configuration response, not a stack trace.
+9. Confirm form submission returns a controlled `sheetsMode: "config-error"` response, not a stack trace.
 10. Confirm production remains mock until approved.
 
 ## Rollback Plan
 
 If Sheets logging fails:
 
-1. Set `LEAD_INTEGRATION_MODE=mock`.
-2. Keep form submissions available.
-3. Use email-only mode as a temporary fallback if email is stable.
+1. Set `LEAD_INTEGRATION_MODE=email-only`.
+2. Keep Resend internal notifications available.
+3. Use email-only mode as the temporary fallback while Sheets is fixed.
 4. Review provider errors in server logs without logging full lead payloads.
 5. Re-enable Sheets only after credentials and permissions are fixed.

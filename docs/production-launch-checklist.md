@@ -50,15 +50,21 @@ Use this checklist before switching the ZES MEDCORP platform from mock-safe mode
 ## Google Sheets Activation
 
 - Create the lead log Sheet.
-- Add tab `Leads`.
+- Add tab `Leads` with columns: `Date`, `Lead ID`, `Source`, `Project Type`, `Priority`, `Score`, `Name`, `Email`, `Phone`, `Company`, `Message`, `Recommended Services`, `Next Action`, `Status`.
 - Share the Sheet with the Google service account.
 - Add Vercel env vars:
-  - `GOOGLE_SHEETS_ID`
-  - `GOOGLE_SERVICE_ACCOUNT_EMAIL`
-  - `GOOGLE_PRIVATE_KEY`
+  - `GOOGLE_SHEETS_SPREADSHEET_ID`
+  - `GOOGLE_SHEETS_CLIENT_EMAIL`
+  - `GOOGLE_SHEETS_PRIVATE_KEY`
+  - `GOOGLE_SHEETS_PROJECT_ID` if copied from service-account JSON
   - `GOOGLE_SHEETS_TAB_NAME=Leads`
+  - `GOOGLE_SHEETS_REQUEST_TIMEOUT_MS=10000`
 - Set `LEAD_INTEGRATION_MODE=email-and-sheets` only after email has been validated.
-- Submit a test lead with demo data and confirm row creation.
+- Redeploy.
+- Submit one test lead with demo data.
+- Confirm email arrives, `sheetsMode` is `real`, a row appears once in the Sheet, and the frontend success message appears.
+- Confirm no PII is sent to analytics.
+- Roll back to `LEAD_INTEGRATION_MODE=email-only` if Sheets fails while keeping Resend email active.
 
 ## Legal And Trust
 
@@ -93,3 +99,4 @@ Use this checklist before switching the ZES MEDCORP platform from mock-safe mode
   - `LEAD_INTEGRATION_MODE=mock`
   - `LEAD_STORAGE_PROVIDER=mock`
 - Redeploy and verify mock API response.
+- For Sheets-only rollback after Resend is validated, prefer `LEAD_INTEGRATION_MODE=email-only` so email notifications continue while Sheets is fixed.

@@ -70,10 +70,12 @@ Current state:
 | `LEAD_DATABASE_URL` | No | Yes, for Postgres-style storage | Future server-side database connection string. Never commit a real value. |
 | `SUPABASE_URL` | No | Optional | Future Supabase project URL if Supabase is selected. |
 | `SUPABASE_SERVICE_ROLE_KEY` | No | Optional | Future server-side Supabase service key. Never expose as `NEXT_PUBLIC_*`. |
-| `GOOGLE_SHEETS_ID` | No | Optional | Future temporary Sheets workflow identifier. |
-| `GOOGLE_SERVICE_ACCOUNT_EMAIL` | No | Optional | Future service account email for Sheets logging. |
-| `GOOGLE_PRIVATE_KEY` | No | Optional | Future service account private key. Preserve newlines or use escaped `\n`. Never expose client-side or commit. |
-| `GOOGLE_SHEETS_TAB_NAME` | No | Optional | Future lead log tab name. Default planned value: `Leads`. |
+| `GOOGLE_SHEETS_SPREADSHEET_ID` | No | Yes, when Sheets logging is enabled | Google Sheet ID for the lead log. |
+| `GOOGLE_SHEETS_CLIENT_EMAIL` | No | Yes, when Sheets logging is enabled | Google service account email with access to the Sheet. |
+| `GOOGLE_SHEETS_PRIVATE_KEY` | No | Yes, when Sheets logging is enabled | Google service account private key. Preserve newlines or use escaped `\n`. Never expose client-side or commit. |
+| `GOOGLE_SHEETS_PROJECT_ID` | No | Optional | Service-account project ID for operational reference. Current adapter does not require it. |
+| `GOOGLE_SHEETS_TAB_NAME` | No | Optional | Lead log tab name. Default planned value: `Leads`. |
+| `GOOGLE_SHEETS_REQUEST_TIMEOUT_MS` | No | Optional | Google token/append timeout. Default is `10000`. |
 | `AIRTABLE_API_KEY` | No | Optional | Future Airtable API key. Never commit a real value. |
 | `AIRTABLE_BASE_ID` | No | Optional | Future Airtable base identifier. |
 
@@ -81,8 +83,12 @@ Current state:
 
 - Lead storage is mocked only.
 - `/api/leads` returns a mock `leadId` and `storageMode: "mock"`.
-- `/api/leads` also prepares a Google Sheets row shape and returns `sheetsMode: "mock"`.
-- The Sheets adapter can append later using server-side service account env vars, but missing config must not break builds or form submissions.
+- `/api/leads` also prepares a Google Sheets row shape and returns `sheetsMode: "mock"` unless `LEAD_INTEGRATION_MODE=sheets-only` or `email-and-sheets`.
+- With `LEAD_INTEGRATION_MODE=email-and-sheets`, the API sends the internal email notification and attempts a Sheets append.
+- Sheets success returns `sheetsMode: "real"`.
+- Missing Sheets config returns `sheetsMode: "config-error"` without exposing secrets or stack traces.
+- Provider append failures return `sheetsMode: "provider-error"`.
+- Legacy aliases `GOOGLE_SHEETS_ID`, `GOOGLE_SERVICE_ACCOUNT_EMAIL` and `GOOGLE_PRIVATE_KEY` are still accepted by code for compatibility, but new Vercel deployments should use the primary `GOOGLE_SHEETS_*` names above.
 - No persistent database, Google Sheet, Airtable base, CRM record, or webhook is used.
 - Admin lead review still uses demo data only.
 
