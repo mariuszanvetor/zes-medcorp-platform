@@ -62,6 +62,25 @@ Current state:
 - No persistent database, sheet, Airtable base, CRM record, or webhook is used.
 - Admin lead review still uses demo data only.
 
+## Admin Authentication
+
+| Variable | Required now | Required later | Purpose |
+| --- | --- | --- | --- |
+| `AUTH_PROVIDER` | No | Yes, when admin auth is enabled | Future selected provider: Auth.js, Clerk, Supabase Auth or custom. |
+| `AUTH_SECRET` | No | Yes, for custom/server auth | Future server-side auth secret. Never commit a real value. |
+| `ADMIN_EMAILS` | No | Yes, for allowlisted admin access | Comma-separated internal admin emails for future access control. |
+| `NEXTAUTH_URL` | No | If using Auth.js | Canonical app URL for Auth.js / NextAuth. |
+| `NEXTAUTH_SECRET` | No | If using Auth.js | Auth.js session secret. Never commit a real value. |
+| `CLERK_SECRET_KEY` | No | If using Clerk | Clerk server-side secret key. Never commit a real value. |
+| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | No | If using Clerk | Clerk browser publishable key. |
+
+Current state:
+
+- Admin auth is not enabled.
+- `/admin/leads` uses demo data only.
+- Admin routes remain noindex and absent from public navigation.
+- Do not connect real lead storage before admin authentication and authorization exist.
+
 ## Production Safety Rules
 
 - Do not commit `.env.local`.
