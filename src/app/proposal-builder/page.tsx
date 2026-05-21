@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { TrackedButtonLink } from "@/components/analytics/TrackedButtonLink";
 import { ProposalBuilder } from "@/components/ai/ProposalBuilder";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
+import { EnterpriseTrustBand } from "@/components/sections/EnterpriseTrustBand";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
@@ -96,6 +97,12 @@ export default function ProposalBuilderPage() {
           </div>
         </Container>
       </Section>
+
+      <EnterpriseTrustBand
+        description="Propunerea preliminară este utilă pentru pregătirea discuției comerciale și tehnice, dar deciziile finale depind de validarea documentației, echipamentelor și amplasamentului."
+        sourcePage="/proposal-builder"
+        title="Un draft de propunere trebuie să rămână verificabil."
+      />
 
       <Section className="bg-slate-950" tone="graphite">
         <Container>

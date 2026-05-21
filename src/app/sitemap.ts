@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { articles } from "@/data/articles";
 import { programmaticCalculators } from "@/data/calculators";
+import { legalPages } from "@/data/legal-pages";
 import { planningJourneys } from "@/data/planning-journeys";
 import { seoClusters } from "@/data/seo-clusters";
 import { services } from "@/data/services";
@@ -15,6 +16,7 @@ const staticRoutes: Array<{
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/services", changeFrequency: "monthly", priority: 0.9 },
   { path: "/about", changeFrequency: "monthly", priority: 0.74 },
+  { path: "/companie", changeFrequency: "monthly", priority: 0.76 },
   { path: "/projects", changeFrequency: "monthly", priority: 0.76 },
   { path: "/ai-project-advisor", changeFrequency: "monthly", priority: 0.85 },
   { path: "/calculator-proiect-medical", changeFrequency: "monthly", priority: 0.8 },
@@ -83,6 +85,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         : 0.78,
   }));
 
+  const legalRoutes = legalPages.map((page) => ({
+    url: new URL(`/${page.slug}`, siteConfig.url).toString(),
+    lastModified: new Date(page.updatedAt),
+    changeFrequency: "yearly" as const,
+    priority: 0.35,
+  }));
+
   return [
     ...staticRoutes.map((route) => ({
       url: new URL(route.path, siteConfig.url).toString(),
@@ -95,5 +104,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...calculatorRoutes,
     ...clusterRoutes,
     ...articleRoutes,
+    ...legalRoutes,
   ];
 }

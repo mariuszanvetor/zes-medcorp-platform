@@ -5,9 +5,9 @@ import Link from "next/link";
 import { trackCTA } from "@/lib/analytics";
 
 const actions = [
-  { label: "Analiză preliminară", href: "/ai-project-advisor" },
+  { label: "Solicită analiză", href: "/ai-project-advisor" },
   { label: "Estimare orientativă", href: "/calculator-proiect-medical" },
-  { label: "Discutați proiectul", href: "/contact" },
+  { label: "Discută cu echipa", href: "/contact" },
 ];
 
 export function ConversionStickyCTA() {

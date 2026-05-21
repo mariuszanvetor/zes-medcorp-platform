@@ -146,6 +146,39 @@ export default function ContactPage() {
         </Container>
       </Section>
 
+      <Section className="bg-white" spacing="md" tone="transparent">
+        <Container>
+          <div className="grid gap-5 lg:grid-cols-3">
+            {[
+              {
+                title: "Ce pregătiți înainte de discuție",
+                body: "Planuri, dimensiuni cameră, stadiu DSP/CNCAN, echipamente vizate, termen estimativ și constrângeri de amplasament.",
+              },
+              {
+                title: "Cum răspunde ZES",
+                body: "Prima etapă este trierea tehnică: clarificăm riscurile, informațiile lipsă și serviciile care merită evaluate mai departe.",
+              },
+              {
+                title: "Canale directe",
+                body: `${companyContact.email} · ${companyContact.phone}. Nu transmiteți date medicale despre pacienți prin formular.`,
+              },
+            ].map((item) => (
+              <Card
+                as="article"
+                className="border-blue-100 bg-[#f7fbff]"
+                key={item.title}
+                padding="lg"
+              >
+                <h2 className="text-xl font-semibold leading-tight text-slate-950">
+                  {item.title}
+                </h2>
+                <p className="mt-4 text-sm leading-7 text-slate-600">{item.body}</p>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
       <Section className="bg-white" spacing="lg" tone="transparent">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[0.42fr_0.58fr] lg:items-start">

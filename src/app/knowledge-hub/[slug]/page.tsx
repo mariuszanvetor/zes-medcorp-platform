@@ -181,6 +181,17 @@ export default async function KnowledgeHubArticlePage({
               <p className="text-xl font-semibold leading-9 text-slate-950 sm:text-2xl sm:leading-10">
                 {article.intro}
               </p>
+              <div className="mt-8 rounded-2xl border border-blue-100 bg-[#f7fbff] p-6">
+                <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
+                  Când este necesară validarea tehnică
+                </p>
+                <p className="mt-3 text-base leading-8 text-slate-700">
+                  Folosiți acest ghid pentru orientare și pregătirea întrebărilor.
+                  Pentru buget final, autorizări, ecranare, echipamente sau
+                  execuție, concluziile trebuie validate pe planuri, specificații
+                  de echipament și condiții reale de amplasament.
+                </p>
+              </div>
 
               <div className="mt-14 space-y-14">
                 {article.sections.map((section) => (

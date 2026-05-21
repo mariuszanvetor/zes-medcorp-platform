@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { AIIntroSection } from "@/components/sections/AIIntroSection";
 import { AIToolsPreviewSection } from "@/components/sections/AIToolsPreviewSection";
 import { EquipmentServiceSection } from "@/components/sections/EquipmentServiceSection";
+import { EnterpriseTrustBand } from "@/components/sections/EnterpriseTrustBand";
 import { FinalCTASection } from "@/components/sections/FinalCTASection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { PlanningJourneyBlock } from "@/components/sections/PlanningJourneyBlock";
@@ -21,6 +22,7 @@ export default function Home() {
     <>
       <BreadcrumbSchema items={[{ name: "Acasă", href: "/" }]} />
       <HeroSection />
+      <EnterpriseTrustBand sourcePage="/" />
       <Section
         className="border-y border-blue-100 bg-white"
         spacing="lg"

@@ -35,9 +35,18 @@ const knowledgeLinks = [
 ];
 
 const companyLinks = [
+  { label: "Companie", href: "/companie" },
   { label: "Despre ZES", href: "/about" },
   { label: "Proiecte", href: "/projects" },
   { label: "Contact", href: "/contact" },
+];
+
+const legalLinks = [
+  { label: "Confidențialitate", href: "/privacy-policy" },
+  { label: "Termeni", href: "/terms" },
+  { label: "Cookies", href: "/cookie-policy" },
+  { label: "GDPR", href: "/gdpr" },
+  { label: "Disclaimer", href: "/disclaimer" },
 ];
 
 const linkGroups = [
@@ -45,6 +54,7 @@ const linkGroups = [
   { title: "Instrumente", links: aiToolLinks },
   { title: "Knowledge Hub", links: knowledgeLinks },
   { title: "Companie", links: companyLinks },
+  { title: "Legal", links: legalLinks },
 ];
 
 export function Footer() {
@@ -82,12 +92,12 @@ export function Footer() {
             </div>
             <div className="mt-6">
               <Button href="/contact" size="sm" variant="outline">
-                Discutați proiectul
+                Solicitați evaluare tehnică
               </Button>
             </div>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
             {linkGroups.map((group) => (
               <nav aria-label={group.title} key={group.title}>
                 <h2 className="text-xs font-semibold uppercase leading-none text-cyan-100">
@@ -119,8 +129,11 @@ export function Footer() {
             <Link className="transition hover:text-slate-300" href="/contact">
               Contact
             </Link>
-            <Link className="transition hover:text-slate-300" href="/about">
-              Despre
+            <Link className="transition hover:text-slate-300" href="/privacy-policy">
+              Confidențialitate
+            </Link>
+            <Link className="transition hover:text-slate-300" href="/terms">
+              Termeni
             </Link>
           </div>
         </div>

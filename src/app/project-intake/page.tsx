@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { TrackedButtonLink } from "@/components/analytics/TrackedButtonLink";
 import { ProjectIntakeWizard } from "@/components/ai/ProjectIntakeWizard";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
+import { EnterpriseTrustBand } from "@/components/sections/EnterpriseTrustBand";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
@@ -101,6 +102,12 @@ export default function ProjectIntakePage() {
           </div>
         </Container>
       </Section>
+
+      <EnterpriseTrustBand
+        description="Intake-ul ajută la pregătirea unei discuții mai eficiente: ce există, ce lipsește, ce trebuie verificat și ce poate afecta bugetul sau termenul."
+        sourcePage="/project-intake"
+        title="Leadurile serioase încep cu date structurate."
+      />
 
       <Section className="bg-[#f7fafc]" id="intake" spacing="xl" tone="transparent">
         <Container>

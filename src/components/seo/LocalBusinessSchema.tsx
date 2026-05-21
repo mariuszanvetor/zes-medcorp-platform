@@ -41,6 +41,7 @@ export function LocalBusinessSchema({
     url,
     description,
     areaServed,
+    taxID: companyContact.cui,
   };
 
   if (telephone) {

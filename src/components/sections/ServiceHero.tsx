@@ -80,6 +80,20 @@ export function ServiceHero({ service }: ServiceHeroProps) {
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-500">
             {validationNote}
           </p>
+          <div className="mx-auto mt-8 grid max-w-4xl gap-3 text-left sm:grid-cols-3">
+            {[
+              "Analiză înainte de buget final",
+              "Fără garanții tehnice fără verificare",
+              "Pași clari pentru documente și implementare",
+            ].map((item) => (
+              <div
+                className="rounded-2xl border border-blue-100 bg-white/80 p-4 text-sm font-semibold leading-6 text-slate-700 shadow-[0_16px_45px_rgba(0,87,184,0.06)]"
+                key={item}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="mx-auto mt-16 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-4">

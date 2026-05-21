@@ -36,6 +36,7 @@ export function OrganizationSchema({
     description,
     email: companyContact.email,
     telephone: companyContact.phoneInternational,
+    taxID: companyContact.cui,
     address: {
       "@type": "PostalAddress",
       streetAddress: companyContact.address.streetAddress,
