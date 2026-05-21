@@ -98,7 +98,7 @@ export async function POST(request: NextRequest) {
     success: true,
     ok: true,
     leadId,
-    mode: "mock",
+    mode: integrationConfig.mode,
     storageMode: storageResult.storageMode,
     emailMode: "mock",
     sheetsMode: sheetsResult.sheetsMode,
@@ -169,6 +169,8 @@ export async function POST(request: NextRequest) {
         requested: sheetsResult.requested,
         tabName: sheetsConfig.tabName,
         rowPrepared: sheetsResult.rowPrepared,
+        appended: sheetsResult.appended,
+        status: sheetsResult.status,
         rowColumns: Object.keys(sheetsRow),
         missingEnv: sheetsConfig.missingEnv,
         result: {
@@ -178,7 +180,7 @@ export async function POST(request: NextRequest) {
       },
     },
     message:
-      "Lead payload validated, scored, mapped to mock CRM/storage/email/Sheets payloads and accepted by mock lead storage. No database, CRM, email or Google Sheets integration is active yet.",
+      "Lead payload validated, scored and mapped to configured lead integration payloads. Default behavior remains mock-safe unless real provider environment variables are configured.",
   });
 }
 

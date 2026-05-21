@@ -14,7 +14,7 @@ No lead is stored permanently.
 No database is connected.
 No CRM receives data.
 No email is sent.
-No Google Sheet is updated.
+No Google Sheet is updated unless a future deployment explicitly sets `LEAD_INTEGRATION_MODE` to a Sheets mode and provides valid server-side Google service account env vars.
 
 ## Current Mock Behavior
 

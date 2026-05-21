@@ -62,7 +62,7 @@ Current state:
 | `SUPABASE_SERVICE_ROLE_KEY` | No | Optional | Future server-side Supabase service key. Never expose as `NEXT_PUBLIC_*`. |
 | `GOOGLE_SHEETS_ID` | No | Optional | Future temporary Sheets workflow identifier. |
 | `GOOGLE_SERVICE_ACCOUNT_EMAIL` | No | Optional | Future service account email for Sheets logging. |
-| `GOOGLE_PRIVATE_KEY` | No | Optional | Future service account private key. Never expose client-side or commit. |
+| `GOOGLE_PRIVATE_KEY` | No | Optional | Future service account private key. Preserve newlines or use escaped `\n`. Never expose client-side or commit. |
 | `GOOGLE_SHEETS_TAB_NAME` | No | Optional | Future lead log tab name. Default planned value: `Leads`. |
 | `AIRTABLE_API_KEY` | No | Optional | Future Airtable API key. Never commit a real value. |
 | `AIRTABLE_BASE_ID` | No | Optional | Future Airtable base identifier. |
@@ -72,6 +72,7 @@ Current state:
 - Lead storage is mocked only.
 - `/api/leads` returns a mock `leadId` and `storageMode: "mock"`.
 - `/api/leads` also prepares a Google Sheets row shape and returns `sheetsMode: "mock"`.
+- The Sheets adapter can append later using server-side service account env vars, but missing config must not break builds or form submissions.
 - No persistent database, Google Sheet, Airtable base, CRM record, or webhook is used.
 - Admin lead review still uses demo data only.
 
