@@ -45,7 +45,7 @@ Do not add:
 - Real emails or phone numbers
 - Real commercial opportunities
 
-Use clear demo naming such as `Demo Healthcare Group` and `example.com` email addresses.
+Use clear demo naming such as `Demo Healthcare Group` and reserved `demo.invalid` email addresses.
 
 ## Future CRM Integration Path
 

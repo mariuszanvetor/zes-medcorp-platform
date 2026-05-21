@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
+import { companyContact } from "@/lib/brand";
 import { createWebsiteMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createWebsiteMetadata({
@@ -104,6 +105,21 @@ export default function ContactPage() {
                 <Button href="/services" size="lg" variant="secondary">
                   Servicii ZES
                 </Button>
+              </div>
+              <div className="mt-8 grid gap-3 rounded-3xl border border-blue-100 bg-white/80 p-5 text-sm leading-6 text-slate-600 shadow-[0_18px_55px_rgba(0,87,184,0.08)] sm:grid-cols-3">
+                <a
+                  className="font-semibold text-[#0057b8] transition hover:text-blue-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                  href={companyContact.emailHref}
+                >
+                  {companyContact.email}
+                </a>
+                <a
+                  className="font-semibold text-[#0057b8] transition hover:text-blue-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                  href={companyContact.phoneHref}
+                >
+                  {companyContact.phone}
+                </a>
+                <span>{companyContact.address.full}</span>
               </div>
             </div>
 

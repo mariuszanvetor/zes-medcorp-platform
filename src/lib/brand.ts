@@ -11,6 +11,27 @@ export const brand = {
   backgroundColor: "#FFFFFF",
 };
 
+export const companyContact = {
+  legalName: "SC ZES MEDCORP S.R.L.",
+  displayName: "ZES MEDCORP",
+  email: "office@zescorp.ro",
+  emailHref: "mailto:office@zescorp.ro",
+  phone: "0725 514 782",
+  phoneInternational: "+40725514782",
+  phoneHref: "tel:+40725514782",
+  cui: "52942540",
+  tradeRegister: "J2025089432009",
+  address: {
+    streetAddress: "Str. Năzuinței nr. 11B",
+    addressLocality: "Bragadiru",
+    addressRegion: "Ilfov",
+    addressCountry: "RO",
+    full: "Str. Năzuinței nr. 11B, Bragadiru, Ilfov",
+  },
+  positioning:
+    "Infrastructură de imagistică medicală, RF shielding, radioprotecție, modernizare medicală, planificare și suport de implementare.",
+};
+
 export const futureBrandAssets = {
   logoColor: "/brand/logo/logo-color.svg",
   logoWhite: "/brand/logo/logo-white.svg",

@@ -9,8 +9,12 @@ import type {
   TimelinePhase,
 } from "@/lib/ai-estimation";
 import { BUDGET_DISCLAIMER } from "@/lib/ai-estimation";
-import { brand } from "@/lib/brand";
+import { brand, companyContact } from "@/lib/brand";
 import type { AssembledProposal } from "@/lib/proposal-assembly";
+import {
+  createProposalSnapshot,
+  type ProposalSnapshot,
+} from "@/lib/proposal-versioning";
 
 export type ProposalDocumentStatus = "preview" | "ready-for-review";
 
@@ -59,10 +63,15 @@ export type ProposalDocumentSummary = {
 export type ProposalDocument = {
   status: ProposalDocumentStatus;
   brandName: string;
+  company: typeof companyContact;
+  proposalId: string;
+  versionLabel: string;
+  documentType: ProposalSnapshot["documentType"];
   title: string;
   subtitle: string;
   preparedBy: string;
   generatedAt: string;
+  generatedTimestamp: string;
   generatedLabel: string;
   summary: ProposalDocumentSummary;
   recommendedServices: string[];
@@ -75,6 +84,7 @@ export type ProposalDocument = {
   nextSteps: string[];
   nextStep: string;
   assembly: AssembledProposal;
+  snapshot: ProposalSnapshot;
   disclaimer: string;
 };
 
@@ -100,17 +110,28 @@ export type ProposalDocumentSource = {
 export function createProposalDocument(
   source: ProposalDocumentSource,
 ): ProposalDocument {
-  return {
+  const generatedDate = new Date();
+  const generatedTimestamp = generatedDate.toISOString();
+  const generatedAt = new Intl.DateTimeFormat("ro-RO", {
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    month: "long",
+    year: "numeric",
+  }).format(generatedDate);
+
+  const baseDocument = {
     status: "preview",
     brandName: brand.brandName,
+    company: companyContact,
+    proposalId: "",
+    versionLabel: "",
+    documentType: "Propunere tehnică preliminară" as const,
     title: source.title,
     subtitle: "Propunere tehnică preliminară",
     preparedBy: brand.brandName,
-    generatedAt: new Intl.DateTimeFormat("ro-RO", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    }).format(new Date()),
+    generatedAt,
+    generatedTimestamp,
     generatedLabel: "Previzualizare generată în Proposal Builder",
     summary: {
       projectType: source.proposalType,
@@ -145,7 +166,17 @@ export function createProposalDocument(
     nextSteps: source.nextSteps,
     nextStep: source.nextStep,
     assembly: source.assembly,
+    snapshot: undefined as unknown as ProposalSnapshot,
     disclaimer: source.budget.disclaimer || BUDGET_DISCLAIMER,
+  } satisfies ProposalDocument;
+  const snapshot = createProposalSnapshot(baseDocument);
+
+  return {
+    ...baseDocument,
+    proposalId: snapshot.proposalId,
+    versionLabel: snapshot.versionLabel,
+    documentType: snapshot.documentType,
+    snapshot,
   };
 }
 

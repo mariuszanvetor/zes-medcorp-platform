@@ -1,5 +1,5 @@
 import { JsonLd, type JsonLdObject } from "@/components/seo/JsonLd";
-import { brandAssets } from "@/lib/brand";
+import { brandAssets, companyContact } from "@/lib/brand";
 import { getCanonicalUrl, siteConfig } from "@/lib/seo";
 
 export type OrganizationContactPoint = {
@@ -20,7 +20,7 @@ export type OrganizationSchemaProps = {
 };
 
 export function OrganizationSchema({
-  name = siteConfig.name,
+  name = companyContact.legalName,
   url = siteConfig.url,
   description = siteConfig.defaultDescription,
   logo = getCanonicalUrl(brandAssets.logoColor),
@@ -31,8 +31,18 @@ export function OrganizationSchema({
     "@context": "https://schema.org",
     "@type": "Organization",
     name,
+    alternateName: siteConfig.name,
     url,
     description,
+    email: companyContact.email,
+    telephone: companyContact.phoneInternational,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: companyContact.address.streetAddress,
+      addressLocality: companyContact.address.addressLocality,
+      addressRegion: companyContact.address.addressRegion,
+      addressCountry: companyContact.address.addressCountry,
+    },
   };
 
   if (logo) {
@@ -43,8 +53,20 @@ export function OrganizationSchema({
     data.sameAs = sameAs;
   }
 
-  if (contactPoint?.length) {
-    data.contactPoint = contactPoint.map((point) => {
+  const effectiveContactPoint =
+    contactPoint ??
+    [
+      {
+        contactType: "technical consultation",
+        telephone: companyContact.phoneInternational,
+        email: companyContact.email,
+        areaServed: "RO",
+        availableLanguage: ["ro"],
+      },
+    ];
+
+  if (effectiveContactPoint.length) {
+    data.contactPoint = effectiveContactPoint.map((point) => {
       const contactData: JsonLdObject = {
         "@type": "ContactPoint",
         contactType: point.contactType,

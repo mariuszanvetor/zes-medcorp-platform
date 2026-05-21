@@ -39,7 +39,7 @@ LEAD_CONFIRMATION_EMAIL_ENABLED=false
 Use a verified sender for `EMAIL_FROM`, for example:
 
 ```env
-EMAIL_FROM=ZES MEDCORP <leaduri@zescorp.ro>
+EMAIL_FROM=ZES MEDCORP <office@zescorp.ro>
 ```
 
 Do not commit real values. Keep API keys only in the hosting provider environment settings.

@@ -41,6 +41,8 @@ export type AnalyticsPayload = {
   guideSlug?: string;
   calculatorSlug?: string;
   journeySlug?: string;
+  proposalId?: string;
+  versionLabel?: string;
   status?: string;
 };
 

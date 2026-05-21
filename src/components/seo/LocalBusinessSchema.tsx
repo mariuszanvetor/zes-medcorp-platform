@@ -1,4 +1,5 @@
 import { JsonLd, type JsonLdObject } from "@/components/seo/JsonLd";
+import { companyContact } from "@/lib/brand";
 import { siteConfig } from "@/lib/seo";
 
 export type PostalAddress = {
@@ -20,12 +21,17 @@ export type LocalBusinessSchemaProps = {
 };
 
 export function LocalBusinessSchema({
-  name = siteConfig.name,
+  name = companyContact.legalName,
   url = siteConfig.url,
   description = siteConfig.defaultDescription,
-  telephone,
-  email,
-  address,
+  telephone = companyContact.phoneInternational,
+  email = companyContact.email,
+  address = {
+    streetAddress: companyContact.address.streetAddress,
+    addressLocality: companyContact.address.addressLocality,
+    addressRegion: companyContact.address.addressRegion,
+    addressCountry: companyContact.address.addressCountry,
+  },
   areaServed = "România",
 }: LocalBusinessSchemaProps) {
   const data: JsonLdObject = {

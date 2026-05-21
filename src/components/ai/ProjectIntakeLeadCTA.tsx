@@ -11,7 +11,7 @@ export type ProjectIntakeLeadCTAProps = {
 export function ProjectIntakeLeadCTA({ result }: ProjectIntakeLeadCTAProps) {
   return (
     <LeadCaptureForm
-      description="Trimite contextul structurat catre ZES pentru o discutie tehnica mai clara. Formularul ramane conectat la endpoint-ul mock existent, fara CRM sau stocare reala in aceasta etapa."
+      description="Trimite contextul structurat către ZES pentru o discuție tehnică mai clară. Informațiile rămân orientative până la validarea planurilor, echipamentelor și documentației."
       eyebrow="Transmitere intake"
       extraFields={[
         {
@@ -46,9 +46,9 @@ export function ProjectIntakeLeadCTA({ result }: ProjectIntakeLeadCTAProps) {
       }}
       sourcePage="/project-intake"
       sourceTool="project-intake"
-      submitLabel="Trimite informatiile pentru analiza ZES"
-      successDescription="Informatiile au fost pregatite pentru triere tehnica. Urmatorul pas real este validarea lor cu planuri, echipamente si documentatie."
-      successTitle="Intake-ul a fost pregatit pentru analiza."
+      submitLabel="Trimite informațiile pentru analiza ZES"
+      successDescription="Informațiile au fost pregătite pentru triere tehnică. Următorul pas real este validarea lor cu planuri, echipamente și documentație."
+      successTitle="Intake-ul a fost pregătit pentru analiză."
       summary={{
         complexity: result.technicalComplexity,
         nextStep: result.nextStep,
@@ -56,7 +56,7 @@ export function ProjectIntakeLeadCTA({ result }: ProjectIntakeLeadCTAProps) {
         riskLevel: result.riskLevel,
         urgency: result.urgency,
       }}
-      title="Trimite informatiile pentru analiza tehnica ZES"
+      title="Trimite informațiile pentru analiza tehnică ZES"
       tone="light"
     />
   );

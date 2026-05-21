@@ -6,7 +6,7 @@ const payload = {
   inquiryType: "Test integrare lead",
   projectType: "Test tehnic",
   name: "Test User",
-  email: "test@example.com",
+  email: "test@demo.invalid",
   phone: "+40 700 000 000",
   company: "Test Company",
   urgency: "Exploratoriu",
@@ -48,4 +48,3 @@ console.log(
 if (!response.ok || !body.success) {
   process.exitCode = 1;
 }
-

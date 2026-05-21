@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import {
   BudgetEstimatePanel,
@@ -64,7 +64,7 @@ const complexityVariant: Record<AdvancedComplexityLevel, "cyan" | "blue" | "dark
 };
 
 export function ProposalBuilderResult({ result }: ProposalBuilderResultProps) {
-  const proposalDocument = createProposalDocument(result);
+  const proposalDocument = useMemo(() => createProposalDocument(result), [result]);
   const [exportStatus, setExportStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -75,6 +75,8 @@ export function ProposalBuilderResult({ result }: ProposalBuilderResultProps) {
     projectType: result.proposalType,
     estimatedBudgetRange: result.budget.totalRange,
     complexity: result.complexity,
+    proposalId: proposalDocument.proposalId,
+    versionLabel: proposalDocument.versionLabel,
     riskLevel: result.risks[0]?.level,
   };
 
@@ -216,6 +218,10 @@ export function ProposalBuilderResult({ result }: ProposalBuilderResultProps) {
             </p>
             <p className="mt-2 text-xs font-semibold text-slate-400">
               Fișier: {getProposalPdfFilename(proposalDocument)}
+            </p>
+            <p className="mt-2 text-xs leading-5 text-slate-400">
+              Document generat local, orientativ, fără salvare permanentă.
+              Versiunile salvate vor fi disponibile într-o etapă viitoare.
             </p>
           </div>
           <div className="no-print flex flex-col gap-3 sm:flex-row">

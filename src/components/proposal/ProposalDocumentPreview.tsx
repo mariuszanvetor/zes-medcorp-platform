@@ -48,6 +48,8 @@ export function ProposalDocumentPreview({
             </p>
             <dl className="mt-5 grid gap-3 text-xs leading-5">
               <PreviewMeta label="Pregătit de" value={document.preparedBy} />
+              <PreviewMeta label="ID propunere" value={document.proposalId} />
+              <PreviewMeta label="Versiune" value={document.versionLabel} />
               <PreviewMeta label="Generat" value={document.generatedAt} />
               <PreviewMeta label="Status" value={document.generatedLabel} />
               <PreviewMeta
@@ -228,6 +230,11 @@ export function ProposalDocumentPreview({
             Previzualizarea este o structură de lucru pentru discuția tehnică.
             Exportul PDF și trimiterea automată către CRM pot fi conectate
             ulterior, după validarea fluxului comercial.
+          </p>
+          <p className="mt-4 text-xs leading-6 text-slate-500">
+            {document.company.legalName} · {document.company.email} ·{" "}
+            {document.company.phone} · CUI {document.company.cui} · Reg. Com.{" "}
+            {document.company.tradeRegister} · {document.company.address.full}
           </p>
           <div className="no-print mt-5 flex flex-col gap-3 sm:flex-row">
             <Button href="/contact" variant="primary">

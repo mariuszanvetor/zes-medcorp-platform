@@ -8,6 +8,7 @@ import type {
 import type { LeadPayload } from "@/lib/lead-types";
 import { scoreLead, type LeadScoreResult } from "@/lib/lead-scoring";
 import type { RenderedEmailTemplate } from "@/lib/email-templates";
+import { companyContact } from "@/lib/brand";
 import { getLeadIntegrationConfig } from "@/lib/integration-config";
 import {
   renderHighPriorityAlertTemplate,
@@ -57,7 +58,7 @@ export function buildLeadNotificationEmail({
 }: EmailBuildContext): LeadNotificationEmail {
   return {
     provider: getEmailProvider(),
-    to: [process.env.LEAD_NOTIFICATION_EMAIL || "mock-internal@zescorp.ro"],
+    to: [process.env.LEAD_NOTIFICATION_EMAIL || companyContact.email],
     subject: `[${scoring.priority}] ${lead.inquiryType} - ${lead.company || lead.name}`,
     summary:
       lead.generatedSummary ||
@@ -237,7 +238,7 @@ export function getEmailAdapter(): EmailProviderAdapter {
       return this.sendEmail(
         messageFromTemplate({
           template,
-          to: [process.env.LEAD_NOTIFICATION_EMAIL || "mock-internal@zescorp.ro"],
+          to: [process.env.LEAD_NOTIFICATION_EMAIL || companyContact.email],
           requiresInternalRecipient: true,
           metadata: {
             kind: "internal_lead_notification",
@@ -268,7 +269,7 @@ export function getEmailAdapter(): EmailProviderAdapter {
       return this.sendEmail(
         messageFromTemplate({
           template,
-          to: [process.env.LEAD_NOTIFICATION_EMAIL || "mock-internal@zescorp.ro"],
+          to: [process.env.LEAD_NOTIFICATION_EMAIL || companyContact.email],
           requiresInternalRecipient: true,
           metadata: {
             kind: "high_priority_alert",
@@ -410,7 +411,9 @@ function messageFromTemplate({
 }): EmailMessage {
   return {
     to,
-    from: process.env.EMAIL_FROM || "ZES MEDCORP <no-reply@zescorp.ro>",
+    from:
+      process.env.EMAIL_FROM ||
+      `${companyContact.displayName} <${companyContact.email}>`,
     subject: template.subject,
     previewText: template.previewText,
     text: template.text,

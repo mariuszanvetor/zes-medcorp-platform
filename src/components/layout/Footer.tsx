@@ -3,6 +3,7 @@ import Link from "next/link";
 import { BrandLogo } from "@/components/layout/BrandLogo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { companyContact } from "@/lib/brand";
 
 const serviceLinks = [
   { label: "Radiologie", href: "/services/radiologie" },
@@ -62,9 +63,23 @@ export function Footer() {
               <BrandLogo compact inverse />
             </Link>
             <p className="mt-5 text-sm leading-7 text-slate-300">
-              Infrastructură medicală, aparatură, imagistică, IVD, ecranare și
-              service.
+              {companyContact.positioning}
             </p>
+            <div className="mt-6 grid gap-2 text-sm leading-6 text-slate-300">
+              <a
+                className="transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+                href={companyContact.emailHref}
+              >
+                {companyContact.email}
+              </a>
+              <a
+                className="transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+                href={companyContact.phoneHref}
+              >
+                {companyContact.phone}
+              </a>
+              <p className="text-slate-400">{companyContact.address.full}</p>
+            </div>
             <div className="mt-6">
               <Button href="/contact" size="sm" variant="outline">
                 Discutați proiectul
@@ -96,7 +111,10 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col gap-3 border-t border-white/10 py-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>&copy; {currentYear} ZES MEDCORP. All rights reserved.</p>
+          <p>
+            &copy; {currentYear} {companyContact.legalName}. CUI{" "}
+            {companyContact.cui} · Reg. Com. {companyContact.tradeRegister}
+          </p>
           <div className="flex gap-4">
             <Link className="transition hover:text-slate-300" href="/contact">
               Contact

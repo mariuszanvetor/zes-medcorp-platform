@@ -31,6 +31,16 @@ type PdfBlockOptions = {
   padding?: number;
 };
 
+type PdfMetadata = {
+  title: string;
+  author: string;
+  subject: string;
+  keywords: string[];
+  creator: string;
+  producer: string;
+  creationDate: string;
+};
+
 export function downloadProposalPdf(document: ProposalDocument) {
   const blob = createProposalPdfBlob(document);
   const url = URL.createObjectURL(blob);
@@ -98,7 +108,7 @@ class ProposalPdfWriter {
 
   render() {
     this.addFooters();
-    return createPdf(this.pages);
+    return createPdf(this.pages, this.metadata());
   }
 
   private build() {
@@ -112,7 +122,7 @@ class ProposalPdfWriter {
   }
 
   private cover() {
-    this.rect(margin, pageHeight - 132, contentWidth, 86, {
+    this.rect(margin, pageHeight - 156, contentWidth, 110, {
       fill: lightBlue,
       stroke: border,
     });
@@ -121,19 +131,30 @@ class ProposalPdfWriter {
       font: "F2",
       size: 18,
     });
-    this.text(this.document.subtitle, margin + 22, pageHeight - 101, {
+    this.text(this.document.company.legalName, margin + 22, pageHeight - 98, {
+      color: deepBlue,
+      font: "F2",
+      size: 9.5,
+    });
+    this.text(this.document.subtitle, margin + 22, pageHeight - 116, {
       color: deepBlue,
       font: "F2",
       size: 10,
     });
     this.text(
-      `Generat: ${this.document.generatedAt} | Status: ${this.document.generatedLabel}`,
+      `${this.document.company.email} | ${this.document.company.phone} | ${this.document.company.address.full}`,
       margin + 22,
-      pageHeight - 119,
+      pageHeight - 134,
+      { color: muted, size: 8 },
+    );
+    this.text(
+      `ID: ${this.document.proposalId} | ${this.document.versionLabel}`,
+      margin + 22,
+      pageHeight - 147,
       { color: muted, size: 8 },
     );
 
-    this.y = pageHeight - 168;
+    this.y = pageHeight - 188;
     this.paragraph(this.document.title, {
       color: "#0F172A",
       font: "F2",
@@ -149,6 +170,9 @@ class ProposalPdfWriter {
     this.y -= 12;
 
     this.keyValues([
+      ["ID propunere", this.document.proposalId],
+      ["Versiune", this.document.versionLabel],
+      ["Tip document", this.document.documentType],
       ["Tip proiect", this.document.summary.projectType],
       ["Complexitate", this.document.summary.complexity],
       ["Scor", `${this.document.summary.score}/100`],
@@ -281,6 +305,24 @@ class ProposalPdfWriter {
       "Propunere preliminara",
       `${this.document.disclaimer} Documentul nu reprezinta aprobare finala de proiectare, aviz legal, autorizare, oferta comerciala finala sau garantie de implementare. Cerintele finale depind de conditiile amplasamentului, specificatiile echipamentelor, documentatia disponibila si validarea tehnica ZES.`,
     );
+  }
+
+  private metadata(): PdfMetadata {
+    return {
+      title: this.document.title,
+      author: this.document.company.legalName,
+      subject: `${this.document.documentType} - ${this.document.summary.projectType}`,
+      keywords: [
+        "ZES MEDCORP",
+        this.document.proposalId,
+        this.document.versionLabel,
+        this.document.summary.projectType,
+        "propunere preliminara",
+      ],
+      creator: "ZES MEDCORP Proposal Builder",
+      producer: "ZES MEDCORP browser PDF generator",
+      creationDate: this.document.generatedTimestamp,
+    };
   }
 
   private section(title: string) {
@@ -469,19 +511,23 @@ class ProposalPdfWriter {
       );
       page.commands.push(
         `${rgb(muted)} rg BT /F1 8 Tf 1 0 0 1 ${margin} 22 Tm (${escapePdfString(
-          `ZES MEDCORP - propunere preliminara | Pagina ${index + 1} / ${total}`,
+          normalizePdfText(
+            `${this.document.company.legalName} | ${this.document.company.email} | ${this.document.company.phone}`,
+          ),
         )}) Tj ET`,
       );
       page.commands.push(
-        `${rgb(muted)} rg BT /F1 8 Tf 1 0 0 1 ${pageWidth - 154} 22 Tm (${escapePdfString(
-          this.document.generatedAt,
+        `${rgb(muted)} rg BT /F1 8 Tf 1 0 0 1 ${margin} 12 Tm (${escapePdfString(
+          normalizePdfText(
+            `${this.document.proposalId} | ${this.document.versionLabel} | Pagina ${index + 1} / ${total}`,
+          ),
         )}) Tj ET`,
       );
     });
   }
 }
 
-function createPdf(pages: PdfPage[]) {
+function createPdf(pages: PdfPage[], metadata?: PdfMetadata) {
   const pageObjectNumbers = pages.map((_, index) => 3 + index * 2);
   const fontRegularObjectNumber = 3 + pages.length * 2;
   const fontBoldObjectNumber = fontRegularObjectNumber + 1;
@@ -507,6 +553,11 @@ function createPdf(pages: PdfPage[]) {
     "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>",
     "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>",
   );
+  const infoObjectNumber = metadata ? objects.length + 1 : undefined;
+
+  if (metadata) {
+    objects.push(createInfoObject(metadata));
+  }
 
   const header = "%PDF-1.4\n";
   const offsets: number[] = [];
@@ -526,9 +577,25 @@ function createPdf(pages: PdfPage[]) {
     "0000000000 65535 f ",
     ...offsets.map((item) => `${String(item).padStart(10, "0")} 00000 n `),
   ].join("\n");
-  const trailer = `\ntrailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`;
+  const trailer = `\ntrailer\n<< /Size ${objects.length + 1} /Root 1 0 R${
+    infoObjectNumber ? ` /Info ${infoObjectNumber} 0 R` : ""
+  } >>\nstartxref\n${xrefOffset}\n%%EOF`;
 
   return `${header}${body}${xref}${trailer}`;
+}
+
+function createInfoObject(metadata: PdfMetadata) {
+  return [
+    "<<",
+    `/Title (${escapePdfString(normalizePdfText(metadata.title))})`,
+    `/Author (${escapePdfString(normalizePdfText(metadata.author))})`,
+    `/Subject (${escapePdfString(normalizePdfText(metadata.subject))})`,
+    `/Keywords (${escapePdfString(normalizePdfText(metadata.keywords.join(", ")))})`,
+    `/Creator (${escapePdfString(normalizePdfText(metadata.creator))})`,
+    `/Producer (${escapePdfString(normalizePdfText(metadata.producer))})`,
+    `/CreationDate (${toPdfDate(metadata.creationDate)})`,
+    ">>",
+  ].join("\n");
 }
 
 function estimateHeight(text: string, width: number, size: number) {
@@ -600,6 +667,23 @@ function escapePdfString(value: string) {
     .replace(/\\/g, "\\\\")
     .replace(/\(/g, "\\(")
     .replace(/\)/g, "\\)");
+}
+
+function toPdfDate(timestamp: string) {
+  const date = new Date(timestamp);
+
+  if (Number.isNaN(date.getTime())) {
+    return "D:00000000000000Z";
+  }
+
+  return `D:${date.getUTCFullYear()}${String(date.getUTCMonth() + 1).padStart(
+    2,
+    "0",
+  )}${String(date.getUTCDate()).padStart(2, "0")}${String(
+    date.getUTCHours(),
+  ).padStart(2, "0")}${String(date.getUTCMinutes()).padStart(2, "0")}${String(
+    date.getUTCSeconds(),
+  ).padStart(2, "0")}Z`;
 }
 
 function rgb(hex: string) {
