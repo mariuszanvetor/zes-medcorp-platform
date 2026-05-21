@@ -21,6 +21,7 @@ Notes:
 
 | Variable | Required now | Required later | Purpose |
 | --- | --- | --- | --- |
+| `LEAD_INTEGRATION_MODE` | No | Yes, when real routing is enabled | Current safe value is `mock`. Future options: `email-only`, `sheets-only`, `email-and-sheets`, `crm`. |
 | `CRM_PROVIDER` | No | Yes, when CRM sync is enabled | Future CRM provider name. |
 | `CRM_API_KEY` | No | Yes, when CRM sync is enabled | Future CRM API key. Never commit a real value. |
 | `CRM_WEBHOOK_URL` | No | Optional | Future webhook endpoint for CRM or automation routing. |
@@ -28,15 +29,23 @@ Notes:
 Current state:
 
 - CRM integration is mocked only.
-- `/api/leads` does not store leads or send data to an external CRM.
+- `/api/leads` prepares mode summaries but does not store leads, send email, append Sheets rows, or send data to an external CRM.
+- Recommended first real mode after staging validation is `LEAD_INTEGRATION_MODE=email-and-sheets`.
 
 ## Email Notifications
 
 | Variable | Required now | Required later | Purpose |
 | --- | --- | --- | --- |
 | `EMAIL_PROVIDER` | No | Yes, when email is enabled | Future email provider, such as Resend, SendGrid, SMTP, or Workspace mail. |
+| `EMAIL_FROM` | No | Yes, when email is enabled | Verified sender address for future transactional email. |
 | `EMAIL_API_KEY` | No | Yes, when email is enabled | Future email API key. Never commit a real value. |
 | `LEAD_NOTIFICATION_EMAIL` | No | Yes, when internal notifications are enabled | Internal destination for lead notifications. |
+| `RESEND_API_KEY` | No | Optional | Future Resend API key if Resend is selected. |
+| `SENDGRID_API_KEY` | No | Optional | Future SendGrid API key if SendGrid is selected. |
+| `SMTP_HOST` | No | Optional | Future SMTP host if SMTP/Gmail Workspace is selected. |
+| `SMTP_PORT` | No | Optional | Future SMTP port. |
+| `SMTP_USER` | No | Optional | Future SMTP username. |
+| `SMTP_PASS` | No | Optional | Future SMTP password. |
 
 Current state:
 
@@ -52,6 +61,9 @@ Current state:
 | `SUPABASE_URL` | No | Optional | Future Supabase project URL if Supabase is selected. |
 | `SUPABASE_SERVICE_ROLE_KEY` | No | Optional | Future server-side Supabase service key. Never expose as `NEXT_PUBLIC_*`. |
 | `GOOGLE_SHEETS_ID` | No | Optional | Future temporary Sheets workflow identifier. |
+| `GOOGLE_SERVICE_ACCOUNT_EMAIL` | No | Optional | Future service account email for Sheets logging. |
+| `GOOGLE_PRIVATE_KEY` | No | Optional | Future service account private key. Never expose client-side or commit. |
+| `GOOGLE_SHEETS_TAB_NAME` | No | Optional | Future lead log tab name. Default planned value: `Leads`. |
 | `AIRTABLE_API_KEY` | No | Optional | Future Airtable API key. Never commit a real value. |
 | `AIRTABLE_BASE_ID` | No | Optional | Future Airtable base identifier. |
 
@@ -59,7 +71,8 @@ Current state:
 
 - Lead storage is mocked only.
 - `/api/leads` returns a mock `leadId` and `storageMode: "mock"`.
-- No persistent database, sheet, Airtable base, CRM record, or webhook is used.
+- `/api/leads` also prepares a Google Sheets row shape and returns `sheetsMode: "mock"`.
+- No persistent database, Google Sheet, Airtable base, CRM record, or webhook is used.
 - Admin lead review still uses demo data only.
 
 ## Admin Authentication

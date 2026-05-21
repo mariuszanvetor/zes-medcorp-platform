@@ -13,6 +13,13 @@ Email notifications are prepared in mock mode only.
 
 This keeps the platform backend-ready without exposing secrets or sending production email prematurely.
 
+Email now sits behind the broader lead integration decision layer:
+
+- `LEAD_INTEGRATION_MODE=mock` keeps all lead routing mocked.
+- `LEAD_INTEGRATION_MODE=email-only` is the future email-only path.
+- `LEAD_INTEGRATION_MODE=email-and-sheets` is the recommended first real launch flow after staging validation.
+- Google Sheets logging remains a separate mock-prepared payload until credentials and provider code are approved.
+
 ## Email Types
 
 ### Internal Lead Notification
@@ -109,6 +116,7 @@ Future env vars:
 Current safe defaults:
 
 ```env
+LEAD_INTEGRATION_MODE=mock
 EMAIL_PROVIDER=mock
 EMAIL_FROM=
 LEAD_NOTIFICATION_EMAIL=
@@ -153,9 +161,11 @@ Never commit real secrets. Production secrets should live only in the hosting pr
 ## Launch Path
 
 1. Keep `EMAIL_PROVIDER=mock` for initial production launch if real email is not ready.
-2. Choose provider and add secrets in the deployment platform.
-3. Replace the mock provider branch in `src/lib/integrations/email-adapter.ts` with the real provider implementation.
-4. Test internal lead notification first.
-5. Add user confirmation email only after consent/privacy text is approved.
-6. Monitor failures and avoid blocking form submissions if email delivery fails.
-
+2. Keep `LEAD_INTEGRATION_MODE=mock` until integration sign-off.
+3. Choose provider and add secrets in the deployment platform.
+4. Replace the mock provider branch in `src/lib/integrations/email-adapter.ts` with the real provider implementation.
+5. Test internal lead notification first in staging.
+6. Add Google Sheets logging only after sheet permissions and service account access are reviewed.
+7. Move to `LEAD_INTEGRATION_MODE=email-and-sheets` for the first real launch flow.
+8. Add user confirmation email only after consent/privacy text is approved.
+9. Monitor failures and avoid blocking form submissions if email delivery fails.

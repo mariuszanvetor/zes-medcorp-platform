@@ -8,12 +8,13 @@ The platform now has:
 
 - `src/lib/lead-storage.ts` for provider-ready storage contracts
 - `src/lib/integrations/mock-lead-storage.ts` for safe mock responses
-- `/api/leads` wired to validate, score, prepare CRM/email payloads and call mock storage
+- `/api/leads` wired to validate, score, prepare CRM/email/Google Sheets payloads and call mock storage
 
 No lead is stored permanently.
 No database is connected.
 No CRM receives data.
 No email is sent.
+No Google Sheet is updated.
 
 ## Current Mock Behavior
 
@@ -40,28 +41,42 @@ Supported future provider names are documented in code:
 - `custom-webhook`
 - `mock`
 
-### Recommended First Real Implementation
+### Recommended First Real Integration
 
 Recommended first production path:
+
+1. Keep `LEAD_INTEGRATION_MODE=mock` until final launch review
+2. Enable internal email notifications in staging
+3. Add Google Sheets lead logging in staging
+4. Move to `LEAD_INTEGRATION_MODE=email-and-sheets` only after privacy and access review
+5. Add authenticated admin, database storage and CRM later
+
+This gives ZES a practical early lead flow without forcing a full database/admin system before operations are ready.
+
+### Recommended Future Database Implementation
+
+After the Email + Google Sheets MVP is stable:
 
 1. Add authentication and role-based admin access
 2. Use Postgres-compatible storage: Vercel Postgres or Neon
 3. Store validated lead payloads server-side
-4. Keep CRM/email adapters mock until storage is stable
+4. Keep CRM/email delivery resilient and non-blocking
 5. Add CRM sync as a separate queue/retry step
-
-This keeps the source of truth under platform control and avoids mixing early storage with CRM delivery failures.
 
 ## Environment Variables
 
 Current/future variables:
 
 ```bash
+LEAD_INTEGRATION_MODE=mock
 LEAD_STORAGE_PROVIDER=mock
 LEAD_DATABASE_URL=
 SUPABASE_URL=
 SUPABASE_SERVICE_ROLE_KEY=
 GOOGLE_SHEETS_ID=
+GOOGLE_SERVICE_ACCOUNT_EMAIL=
+GOOGLE_PRIVATE_KEY=
+GOOGLE_SHEETS_TAB_NAME=Leads
 AIRTABLE_API_KEY=
 AIRTABLE_BASE_ID=
 ```

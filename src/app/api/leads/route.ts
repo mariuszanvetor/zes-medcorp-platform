@@ -6,6 +6,7 @@ import {
   renderInternalLeadNotificationTemplate,
   renderLeadConfirmationTemplate,
 } from "@/lib/email-templates";
+import { getLeadIntegrationConfig } from "@/lib/integration-config";
 import { buildCrmPayload, sendToCrm } from "@/lib/integrations/crm-adapter";
 import {
   buildLeadConfirmationEmail,
@@ -15,6 +16,11 @@ import {
   sendLeadConfirmation,
   shouldPrepareHighPriorityAlert,
 } from "@/lib/integrations/email-adapter";
+import {
+  appendLeadToGoogleSheets,
+  buildGoogleSheetsLeadRow,
+  validateSheetsConfig,
+} from "@/lib/integrations/google-sheets-adapter";
 import type { LeadPayload } from "@/lib/lead-types";
 import { scoreLead } from "@/lib/lead-scoring";
 import { saveLead } from "@/lib/lead-storage";
@@ -39,6 +45,7 @@ export async function POST(request: NextRequest) {
 
   const scoring = scoreLead(payload);
   const recommendedServices = parseRecommendedServices(payload);
+  const integrationConfig = getLeadIntegrationConfig();
   const crmPayload = buildCrmPayload(payload, scoring);
   const emailContext = {
     lead: payload,
@@ -75,6 +82,17 @@ export async function POST(request: NextRequest) {
   const highPriorityTemplate = highPriorityPrepared
     ? renderHighPriorityAlertTemplate(emailContext)
     : null;
+  const sheetsRow = buildGoogleSheetsLeadRow({
+    lead: payload,
+    leadId,
+    recommendedServices,
+    scoring,
+  });
+  const sheetsConfig = validateSheetsConfig(integrationConfig.sheetsRequested);
+  const sheetsResult = await appendLeadToGoogleSheets(
+    sheetsRow,
+    integrationConfig.mode,
+  );
 
   return NextResponse.json({
     success: true,
@@ -83,6 +101,8 @@ export async function POST(request: NextRequest) {
     mode: "mock",
     storageMode: storageResult.storageMode,
     emailMode: "mock",
+    sheetsMode: sheetsResult.sheetsMode,
+    integrationMode: integrationConfig.mode,
     score: scoring.score,
     priority: scoring.priority,
     nextAction: scoring.nextAction,
@@ -144,9 +164,21 @@ export async function POST(request: NextRequest) {
           message: storageResult.message,
         },
       },
+      sheets: {
+        mode: sheetsResult.sheetsMode,
+        requested: sheetsResult.requested,
+        tabName: sheetsConfig.tabName,
+        rowPrepared: sheetsResult.rowPrepared,
+        rowColumns: Object.keys(sheetsRow),
+        missingEnv: sheetsConfig.missingEnv,
+        result: {
+          ok: sheetsResult.ok,
+          message: sheetsResult.message,
+        },
+      },
     },
     message:
-      "Lead payload validated, scored, mapped to mock CRM/storage/email payloads and accepted by mock lead storage. No database, CRM or email integration is active yet.",
+      "Lead payload validated, scored, mapped to mock CRM/storage/email/Sheets payloads and accepted by mock lead storage. No database, CRM, email or Google Sheets integration is active yet.",
   });
 }
 
