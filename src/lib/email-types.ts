@@ -43,7 +43,7 @@ export type LeadConfirmationEmail = {
 
 export type EmailSendResult = {
   ok: boolean;
-  mode: "mock";
+  mode: "mock" | "live" | "config-error" | "provider-error" | "unsupported";
   provider: EmailProvider;
   message: string;
 };

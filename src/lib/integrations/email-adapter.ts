@@ -15,6 +15,8 @@ import {
   templateFromLeadNotificationEmail,
 } from "@/lib/email-templates";
 
+const resendEmailEndpoint = "https://api.resend.com/emails";
+
 export type EmailMessage = {
   to: string[];
   from: string;
@@ -24,6 +26,14 @@ export type EmailMessage = {
   html: string;
   priorityLabel?: string;
   metadata?: Record<string, string | number | undefined>;
+};
+
+export type EmailConfigStatus = {
+  ok: boolean;
+  provider: EmailProviderName;
+  mode: EmailSendResult["mode"];
+  missingEnv: string[];
+  message: string;
 };
 
 export type EmailProvider = {
@@ -82,6 +92,7 @@ export async function sendLeadNotification(
     messageFromTemplate({
       template: templateFromLeadNotificationEmail(email),
       to: email.to,
+      requiresInternalRecipient: true,
       metadata: {
         kind: "internal_lead_notification",
         priority: email.priority,
@@ -98,12 +109,81 @@ export function buildLeadConfirmationEmail(
   return {
     provider: getEmailProvider(),
     to: lead.email,
-    subject: "ZES MEDCORP - solicitarea tehnica a fost pregatita",
+    subject: "ZES MEDCORP - solicitarea tehnica a fost primita",
     summary:
-      "Solicitarea a fost validata in modul mock si poate fi conectata ulterior la email real.",
+      "Solicitarea a fost primita si poate fi analizata tehnic de echipa ZES. Aceasta nu reprezinta o oferta tehnica sau comerciala finala.",
     nextStep: scoring.nextAction,
     createdAt: new Date().toISOString(),
     sourcePage: lead.sourcePage,
+  };
+}
+
+export function validateEmailConfig({
+  requiresInternalRecipient = false,
+}: {
+  requiresInternalRecipient?: boolean;
+} = {}): EmailConfigStatus {
+  const provider = getEmailProvider();
+
+  if (provider === "mock") {
+    return {
+      ok: true,
+      provider,
+      mode: "mock",
+      missingEnv: [],
+      message: "EMAIL_PROVIDER is mock or missing. No real email will be sent.",
+    };
+  }
+
+  if (provider === "resend") {
+    const missingEnv = [
+      !process.env.RESEND_API_KEY ? "RESEND_API_KEY" : "",
+      !process.env.EMAIL_FROM ? "EMAIL_FROM" : "",
+      requiresInternalRecipient && !process.env.LEAD_NOTIFICATION_EMAIL
+        ? "LEAD_NOTIFICATION_EMAIL"
+        : "",
+    ].filter(Boolean);
+
+    return {
+      ok: missingEnv.length === 0,
+      provider,
+      mode: missingEnv.length ? "config-error" : "live",
+      missingEnv,
+      message: missingEnv.length
+        ? "Resend email provider is selected, but required env vars are missing. No email was sent."
+        : "Resend email provider is configured.",
+    };
+  }
+
+  if (provider === "smtp") {
+    const missingEnv = [
+      !process.env.SMTP_HOST ? "SMTP_HOST" : "",
+      !process.env.SMTP_PORT ? "SMTP_PORT" : "",
+      !process.env.SMTP_USER ? "SMTP_USER" : "",
+      !process.env.SMTP_PASS ? "SMTP_PASS" : "",
+      !process.env.EMAIL_FROM ? "EMAIL_FROM" : "",
+      requiresInternalRecipient && !process.env.LEAD_NOTIFICATION_EMAIL
+        ? "LEAD_NOTIFICATION_EMAIL"
+        : "",
+    ].filter(Boolean);
+
+    return {
+      ok: false,
+      provider,
+      mode: "unsupported",
+      missingEnv,
+      message:
+        "SMTP provider is reserved for a later implementation. No SMTP email was sent.",
+    };
+  }
+
+  return {
+    ok: false,
+    provider,
+    mode: "unsupported",
+    missingEnv: [],
+    message:
+      "Selected email provider is not implemented yet. No email was sent.",
   };
 }
 
@@ -144,15 +224,7 @@ export function getEmailAdapter(): EmailProviderAdapter {
   return {
     provider,
     async sendEmail(message: EmailMessage) {
-      void message;
-
-      return {
-        ok: true,
-        mode: "mock",
-        provider,
-        message:
-          "Email template prepared in mock mode. No provider call was made and no email was sent.",
-      };
+      return sendPreparedEmail(message);
     },
     async sendInternalLeadNotification(context: EmailBuildContext) {
       const template = renderInternalLeadNotificationTemplate(context);
@@ -161,6 +233,7 @@ export function getEmailAdapter(): EmailProviderAdapter {
         messageFromTemplate({
           template,
           to: [process.env.LEAD_NOTIFICATION_EMAIL || "mock-internal@zescorp.ro"],
+          requiresInternalRecipient: true,
           metadata: {
             kind: "internal_lead_notification",
             priority: context.scoring.priority,
@@ -191,6 +264,7 @@ export function getEmailAdapter(): EmailProviderAdapter {
         messageFromTemplate({
           template,
           to: [process.env.LEAD_NOTIFICATION_EMAIL || "mock-internal@zescorp.ro"],
+          requiresInternalRecipient: true,
           metadata: {
             kind: "high_priority_alert",
             priority: context.scoring.priority,
@@ -203,13 +277,117 @@ export function getEmailAdapter(): EmailProviderAdapter {
   };
 }
 
+async function sendPreparedEmail(
+  message: EmailMessage,
+): Promise<EmailSendResult> {
+  const config = validateEmailConfig({
+    requiresInternalRecipient:
+      message.metadata?.requiresInternalRecipient === "true" ||
+      message.metadata?.kind === "internal_lead_notification" ||
+      message.metadata?.kind === "high_priority_alert",
+  });
+
+  if (config.provider === "mock") {
+    return {
+      ok: true,
+      mode: "mock",
+      provider: config.provider,
+      message:
+        "Email template prepared in mock mode. No provider call was made and no email was sent.",
+    };
+  }
+
+  if (!config.ok) {
+    return {
+      ok: false,
+      mode: config.mode,
+      provider: config.provider,
+      message: config.message,
+    };
+  }
+
+  if (config.provider === "resend") {
+    return sendViaResend(message);
+  }
+
+  return {
+    ok: false,
+    mode: "unsupported",
+    provider: config.provider,
+    message: config.message,
+  };
+}
+
+async function sendViaResend(
+  message: EmailMessage,
+): Promise<EmailSendResult> {
+  const apiKey = process.env.RESEND_API_KEY;
+
+  if (!apiKey) {
+    return {
+      ok: false,
+      mode: "config-error",
+      provider: "resend",
+      message: "RESEND_API_KEY is missing. No email was sent.",
+    };
+  }
+
+  try {
+    const response = await fetch(resendEmailEndpoint, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: message.from,
+        to: message.to,
+        subject: message.subject,
+        html: message.html,
+        text: message.text,
+        headers: {
+          "X-Entity-Ref-ID": `zes-${Date.now()}`,
+        },
+      }),
+    });
+
+    if (!response.ok) {
+      return {
+        ok: false,
+        mode: "provider-error",
+        provider: "resend",
+        message: `Resend API returned ${response.status}. Email was not confirmed as sent.`,
+      };
+    }
+
+    return {
+      ok: true,
+      mode: "live",
+      provider: "resend",
+      message: "Email sent through Resend.",
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      mode: "provider-error",
+      provider: "resend",
+      message:
+        error instanceof Error
+          ? `Resend email failed safely: ${error.message}`
+          : "Resend email failed safely.",
+    };
+  }
+}
+
 function messageFromTemplate({
   template,
   to,
+  requiresInternalRecipient = false,
   metadata,
 }: {
   template: RenderedEmailTemplate;
   to: string[];
+  requiresInternalRecipient?: boolean;
   metadata?: EmailMessage["metadata"];
 }): EmailMessage {
   return {
@@ -220,7 +398,10 @@ function messageFromTemplate({
     text: template.text,
     html: template.html,
     priorityLabel: template.priorityLabel,
-    metadata,
+    metadata: {
+      ...metadata,
+      requiresInternalRecipient: requiresInternalRecipient ? "true" : undefined,
+    },
   };
 }
 
@@ -233,7 +414,6 @@ function getEmailProvider(): EmailProviderName {
     provider === "smtp" ||
     provider === "gmail-workspace"
   ) {
-    // Future providers are intentionally not connected yet. The adapter remains mock-safe.
     return provider;
   }
 

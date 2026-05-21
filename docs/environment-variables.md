@@ -36,7 +36,7 @@ Current state:
 
 | Variable | Required now | Required later | Purpose |
 | --- | --- | --- | --- |
-| `EMAIL_PROVIDER` | No | Yes, when email is enabled | Future email provider, such as Resend, SendGrid, SMTP, or Workspace mail. |
+| `EMAIL_PROVIDER` | No | Yes, when email is enabled | Safe default is `mock`. `resend` enables the Resend scaffold when required env vars exist. `smtp` is reserved for later. |
 | `EMAIL_FROM` | No | Yes, when email is enabled | Verified sender address for future transactional email. |
 | `EMAIL_API_KEY` | No | Yes, when email is enabled | Future email API key. Never commit a real value. |
 | `LEAD_NOTIFICATION_EMAIL` | No | Yes, when internal notifications are enabled | Internal destination for lead notifications. |
@@ -49,8 +49,10 @@ Current state:
 
 Current state:
 
-- Email sending is mocked only.
-- No production email is sent.
+- Email sending is mocked unless `EMAIL_PROVIDER=resend` and required server-side env vars are configured.
+- Missing Resend configuration returns a controlled `config-error`; it does not crash the lead API.
+- SMTP is a placeholder and returns `unsupported` until implemented.
+- No production email is sent by default.
 
 ## Lead Storage
 

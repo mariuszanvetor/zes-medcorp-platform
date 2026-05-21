@@ -100,7 +100,11 @@ export async function POST(request: NextRequest) {
     leadId,
     mode: integrationConfig.mode,
     storageMode: storageResult.storageMode,
-    emailMode: "mock",
+    emailMode: getEmailMode([
+      notificationResult,
+      confirmationResult,
+      highPriorityResult,
+    ]),
     sheetsMode: sheetsResult.sheetsMode,
     integrationMode: integrationConfig.mode,
     score: scoring.score,
@@ -195,4 +199,21 @@ function parseRecommendedServices(payload: LeadPayload) {
     .split(",")
     .map((item) => item.trim())
     .filter(Boolean);
+}
+
+function getEmailMode(
+  results: Array<{
+    mode: string;
+  } | null>,
+) {
+  const modes = results
+    .filter((result): result is { mode: string } => Boolean(result))
+    .map((result) => result.mode);
+
+  if (modes.includes("live")) return "live";
+  if (modes.includes("provider-error")) return "provider-error";
+  if (modes.includes("config-error")) return "config-error";
+  if (modes.includes("unsupported")) return "unsupported";
+
+  return "mock";
 }

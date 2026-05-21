@@ -53,7 +53,7 @@ export function renderInternalLeadNotificationTemplate({
     `Urmatorul pas: ${scoring.nextAction}`,
     `Review intern: ${adminReviewLink}`,
     "",
-    "Nota: template pregatit in mod mock. Nu a fost trimis niciun email real.",
+    "Nota: analiza este preliminara si necesita validare tehnica ZES inainte de orice oferta finala.",
   ].join("\n");
 
   return {
@@ -76,7 +76,8 @@ export function renderInternalLeadNotificationTemplate({
         ["Urmatorul pas", scoring.nextAction],
       ],
       summary,
-      footer: "Mock email preview. No real email was sent.",
+      footer:
+        "Notificare interna pentru triere lead. Estimarile sunt preliminare si necesita validare tehnica.",
     }),
     priorityLabel: scoring.priority,
     leadSummary: summary,
@@ -89,7 +90,7 @@ export function renderLeadConfirmationTemplate({
   scoring,
 }: LeadEmailTemplateContext): RenderedEmailTemplate {
   const summary = createLeadSummary(lead);
-  const subject = "ZES MEDCORP - solicitarea tehnica a fost pregatita";
+  const subject = "ZES MEDCORP - solicitarea tehnica a fost primita";
   const text = [
     subject,
     "",
@@ -97,7 +98,7 @@ export function renderLeadConfirmationTemplate({
     `Rezumat: ${summary}`,
     `Urmatorul pas estimat: ${scoring.nextAction}`,
     "",
-    "Aceasta confirmare va fi activata doar dupa configurarea emailului real si a textului de confidentialitate.",
+    "Aceasta confirmare nu reprezinta o oferta tehnica sau comerciala finala.",
     "Nu include date medicale despre pacienti in comunicarile de proiect.",
   ].join("\n");
 
@@ -116,7 +117,7 @@ export function renderLeadConfirmationTemplate({
       ],
       summary,
       footer:
-        "Confirmare mock. Emailul catre utilizator nu este activ inca.",
+        "Confirmare preliminara. Echipa ZES poate valida ulterior informatiile tehnice.",
     }),
     priorityLabel: scoring.priority,
     leadSummary: summary,
@@ -144,7 +145,7 @@ export function renderHighPriorityAlertTemplate({
     `Actiune recomandata: ${scoring.nextAction}`,
     `Review intern: ${adminReviewLink}`,
     "",
-    "Mock alert only. No real high-priority email was sent.",
+    "Alerta interna pentru triere rapida. Nu reprezinta o confirmare comerciala finala.",
   ].join("\n");
 
   return {
@@ -162,7 +163,8 @@ export function renderHighPriorityAlertTemplate({
         ["Actiune", scoring.nextAction],
       ],
       summary,
-      footer: "Mock high-priority alert. No real email was sent.",
+      footer:
+        "Alerta interna pentru lead prioritar. Validarea tehnica ramane necesara.",
     }),
     priorityLabel: scoring.priority,
     leadSummary: summary,
@@ -195,7 +197,8 @@ export function templateFromLeadNotificationEmail(
         ["Next step", email.nextStep],
       ],
       summary: email.summary,
-      footer: "Mock email preview. No real email was sent.",
+      footer:
+        "Notificare interna pentru triere lead. Validarea tehnica ramane necesara.",
     }),
     priorityLabel: email.priority,
     leadSummary: email.summary,
@@ -219,7 +222,8 @@ export function templateFromLeadConfirmationEmail(
         ["Next step", email.nextStep],
       ],
       summary: email.summary,
-      footer: "Mock confirmation preview. No real email was sent.",
+      footer:
+        "Confirmare preliminara. Aceasta nu reprezinta o oferta finala.",
     }),
     priorityLabel: "Confirmation",
     leadSummary: email.summary,

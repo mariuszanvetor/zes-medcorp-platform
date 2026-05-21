@@ -20,6 +20,12 @@ Email now sits behind the broader lead integration decision layer:
 - `LEAD_INTEGRATION_MODE=email-and-sheets` is the recommended first real launch flow after staging validation.
 - Google Sheets logging remains a separate mock-prepared payload until credentials and provider code are approved.
 
+Provider behavior:
+
+- `EMAIL_PROVIDER=mock` or a missing value sends no real email.
+- `EMAIL_PROVIDER=resend` uses the Resend API only when `RESEND_API_KEY`, `EMAIL_FROM` and the needed recipient env vars exist.
+- `EMAIL_PROVIDER=smtp` is reserved as a future fallback and currently returns a controlled unsupported response.
+
 ## Email Types
 
 ### Internal Lead Notification
@@ -71,6 +77,8 @@ This remains mock-only until a provider is configured.
 
 Good fit for a Next.js app because it has a simple API, strong transactional email ergonomics and clean deployment on Vercel.
 
+The current scaffold can call Resend via `fetch`; no dependency is required.
+
 Future env vars:
 - `EMAIL_PROVIDER=resend`
 - `RESEND_API_KEY=`
@@ -90,6 +98,8 @@ Future env vars:
 ### SMTP
 
 Useful for traditional hosting or an existing business mailbox provider.
+
+SMTP remains a placeholder in code for now. A real SMTP implementation should be added only after choosing a transport approach and testing deliverability.
 
 Future env vars:
 - `EMAIL_PROVIDER=smtp`
@@ -162,10 +172,12 @@ Never commit real secrets. Production secrets should live only in the hosting pr
 
 1. Keep `EMAIL_PROVIDER=mock` for initial production launch if real email is not ready.
 2. Keep `LEAD_INTEGRATION_MODE=mock` until integration sign-off.
-3. Choose provider and add secrets in the deployment platform.
-4. Replace the mock provider branch in `src/lib/integrations/email-adapter.ts` with the real provider implementation.
+3. Verify the sending domain and add Resend secrets in the deployment platform.
+4. Set `EMAIL_PROVIDER=resend` in staging.
 5. Test internal lead notification first in staging.
 6. Add Google Sheets logging only after sheet permissions and service account access are reviewed.
 7. Move to `LEAD_INTEGRATION_MODE=email-and-sheets` for the first real launch flow.
 8. Add user confirmation email only after consent/privacy text is approved.
 9. Monitor failures and avoid blocking form submissions if email delivery fails.
+
+See `docs/resend-email-setup.md` for the step-by-step Resend activation plan.
