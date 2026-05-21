@@ -47,6 +47,11 @@ Final review before public launch or integration activation.
 ## Integration Readiness
 
 - Resend remains mock unless explicitly enabled.
+- Real Resend activation requires `LEAD_INTEGRATION_MODE=email-only`, `EMAIL_PROVIDER=resend`, `RESEND_API_KEY`, `EMAIL_FROM`, `LEAD_NOTIFICATION_EMAIL`, `RESEND_VERIFIED_DOMAIN` and `RESEND_DOMAIN_VERIFIED=true`.
+- User-facing confirmation emails remain off with `LEAD_CONFIRMATION_EMAIL_ENABLED=false`.
+- High-priority alert emails remain off with `HIGH_PRIORITY_ALERT_EMAIL_ENABLED=false` during first live testing to avoid duplicate internal notifications.
+- Live testing should use one Contact, one Proposal Builder and one Project Intake demo submission, then verify `emailMode=live`.
+- Duplicate submission cooldown should return `429` for rapid repeats.
 - Google Sheets remains mock unless explicitly enabled.
 - CRM remains placeholder only.
 - No database or auth is active.

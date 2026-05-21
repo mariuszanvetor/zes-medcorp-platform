@@ -41,7 +41,12 @@ Current state:
 | `EMAIL_API_KEY` | No | Yes, when email is enabled | Future email API key. Never commit a real value. |
 | `LEAD_NOTIFICATION_EMAIL` | No | Yes, when internal notifications are enabled | Internal destination for lead notifications. |
 | `LEAD_CONFIRMATION_EMAIL_ENABLED` | No | Optional | Keep `false` until user-facing confirmation wording and privacy text are approved. |
+| `HIGH_PRIORITY_ALERT_EMAIL_ENABLED` | No | Optional | Keep `false` during first Resend activation to avoid duplicate internal emails. |
+| `LEAD_SUBMISSION_COOLDOWN_SECONDS` | No | Optional | Lightweight in-memory duplicate submission cooldown. Default is `45`. |
 | `RESEND_API_KEY` | No | Optional | Future Resend API key if Resend is selected. |
+| `RESEND_VERIFIED_DOMAIN` | No | Yes, when Resend is enabled | Verified Resend sender domain, for example `zescorp.ro`. |
+| `RESEND_DOMAIN_VERIFIED` | No | Yes, when Resend is enabled | Set to `true` only after Resend confirms domain verification. |
+| `RESEND_REQUEST_TIMEOUT_MS` | No | Optional | Provider request timeout. Default is `8000`. |
 | `SENDGRID_API_KEY` | No | Optional | Future SendGrid API key if SendGrid is selected. |
 | `SMTP_HOST` | No | Optional | Future SMTP host if SMTP/Gmail Workspace is selected. |
 | `SMTP_PORT` | No | Optional | Future SMTP port. |
@@ -50,9 +55,10 @@ Current state:
 
 Current state:
 
-- Email sending is mocked unless `LEAD_INTEGRATION_MODE` requests email, `EMAIL_PROVIDER=resend`, and required server-side env vars are configured.
+- Email sending is mocked unless `LEAD_INTEGRATION_MODE` requests email, `EMAIL_PROVIDER=resend`, required server-side env vars are configured, and Resend domain verification is confirmed.
 - Missing Resend configuration returns a controlled `config-error`; it does not crash the lead API.
 - User-facing lead confirmation remains mock-disabled unless `LEAD_CONFIRMATION_EMAIL_ENABLED=true`.
+- High-priority alert emails remain disabled unless `HIGH_PRIORITY_ALERT_EMAIL_ENABLED=true`.
 - SMTP is a placeholder and returns `unsupported` until implemented.
 - No production email is sent by default.
 

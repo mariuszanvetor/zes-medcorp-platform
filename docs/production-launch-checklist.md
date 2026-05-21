@@ -25,16 +25,26 @@ Use this checklist before switching the ZES MEDCORP platform from mock-safe mode
 
 ## Resend Activation
 
-- Verify sending domain in Resend.
-- Add DNS records.
+- Verify sending domain in Resend and wait until the provider marks it verified.
+- Add DNS records exactly as Resend provides them.
 - Add server-side Vercel env vars:
+  - `LEAD_INTEGRATION_MODE=email-only`
   - `EMAIL_PROVIDER=resend`
   - `EMAIL_FROM=ZES MEDCORP <office@zescorp.ro>`
   - `LEAD_NOTIFICATION_EMAIL=office@zescorp.ro`
   - `RESEND_API_KEY`
+  - `RESEND_VERIFIED_DOMAIN=zescorp.ro`
+  - `RESEND_DOMAIN_VERIFIED=true`
+  - `RESEND_REQUEST_TIMEOUT_MS=8000`
+  - `LEAD_CONFIRMATION_EMAIL_ENABLED=false`
+  - `HIGH_PRIORITY_ALERT_EMAIL_ENABLED=false`
+  - `LEAD_SUBMISSION_COOLDOWN_SECONDS=45`
 - Redeploy.
-- Submit a test lead with demo data.
+- Submit controlled test leads from Contact, Proposal Builder and Project Intake using demo data only.
 - Confirm `emailMode` is `live`.
+- Confirm exactly one internal notification arrives per submission.
+- Confirm no customer confirmation emails are sent.
+- Submit one duplicate test quickly and confirm cooldown protection.
 - Roll back to `EMAIL_PROVIDER=mock` if delivery is not confirmed.
 
 ## Google Sheets Activation

@@ -18,6 +18,7 @@ import {
 } from "@/lib/email-templates";
 
 const resendEmailEndpoint = "https://api.resend.com/emails";
+const defaultResendTimeoutMs = 8000;
 
 export type EmailMessage = {
   to: string[];
@@ -149,15 +150,20 @@ export function validateEmailConfig({
         ? "LEAD_NOTIFICATION_EMAIL"
         : "",
     ].filter(Boolean);
+    const domainStatus = validateResendDomainConfig(process.env.EMAIL_FROM);
+    const allMissingEnv = [...missingEnv, ...domainStatus.missingEnv];
 
     return {
-      ok: missingEnv.length === 0,
+      ok: allMissingEnv.length === 0 && domainStatus.ok,
       provider,
-      mode: missingEnv.length ? "config-error" : "live",
-      missingEnv,
-      message: missingEnv.length
+      mode:
+        allMissingEnv.length || !domainStatus.ok ? "config-error" : "live",
+      missingEnv: allMissingEnv,
+      message: allMissingEnv.length
         ? "Resend email provider is selected, but required env vars are missing. No email was sent."
-        : "Resend email provider is configured.",
+        : domainStatus.ok
+          ? "Resend email provider is configured and domain verification is confirmed."
+          : domainStatus.message,
     };
   }
 
@@ -351,6 +357,9 @@ async function sendViaResend(
     };
   }
 
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), getResendTimeoutMs());
+
   try {
     const response = await fetch(resendEmailEndpoint, {
       method: "POST",
@@ -368,6 +377,7 @@ async function sendViaResend(
           "X-Entity-Ref-ID": `zes-${Date.now()}`,
         },
       }),
+      signal: controller.signal,
     });
 
     if (!response.ok) {
@@ -386,15 +396,20 @@ async function sendViaResend(
       message: "Email sent through Resend.",
     };
   } catch (error) {
+    const isAbort =
+      error instanceof Error &&
+      (error.name === "AbortError" || error.message.includes("aborted"));
+
     return {
       ok: false,
       mode: "provider-error",
       provider: "resend",
-      message:
-        error instanceof Error
-          ? `Resend email failed safely: ${error.message}`
-          : "Resend email failed safely.",
+      message: isAbort
+        ? "Resend request timed out safely. Email was not confirmed as sent."
+        : "Resend email failed safely. Provider details were not exposed.",
     };
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
@@ -439,6 +454,69 @@ function getEmailProvider(): EmailProviderName {
   }
 
   return "mock";
+}
+
+function validateResendDomainConfig(emailFrom: string | undefined) {
+  const verifiedDomain = process.env.RESEND_VERIFIED_DOMAIN?.trim().toLowerCase();
+  const verificationFlag = process.env.RESEND_DOMAIN_VERIFIED;
+  const senderDomain = extractEmailDomain(emailFrom);
+  const missingEnv = [
+    !verifiedDomain ? "RESEND_VERIFIED_DOMAIN" : "",
+    !verificationFlag ? "RESEND_DOMAIN_VERIFIED" : "",
+  ].filter(Boolean);
+
+  if (missingEnv.length) {
+    return {
+      ok: false,
+      missingEnv,
+      message:
+        "Resend domain verification env vars are missing. No email was sent.",
+    };
+  }
+
+  if (verificationFlag !== "true") {
+    return {
+      ok: false,
+      missingEnv: [],
+      message:
+        "Resend domain verification has not been confirmed. Set RESEND_DOMAIN_VERIFIED=true only after the provider marks the domain as verified.",
+    };
+  }
+
+  if (!senderDomain || senderDomain !== verifiedDomain) {
+    return {
+      ok: false,
+      missingEnv: [],
+      message:
+        "EMAIL_FROM must use the verified Resend domain. No email was sent.",
+    };
+  }
+
+  return {
+    ok: true,
+    missingEnv: [],
+    message: "Resend verified sender domain is configured.",
+  };
+}
+
+function extractEmailDomain(value: string | undefined) {
+  if (!value) return "";
+
+  const emailMatch = value.match(/<([^>]+)>/);
+  const email = (emailMatch?.[1] ?? value).trim().toLowerCase();
+  const parts = email.split("@");
+
+  return parts.length === 2 ? parts[1] : "";
+}
+
+function getResendTimeoutMs() {
+  const rawTimeout = Number(process.env.RESEND_REQUEST_TIMEOUT_MS);
+
+  if (!Number.isFinite(rawTimeout) || rawTimeout <= 0) {
+    return defaultResendTimeoutMs;
+  }
+
+  return Math.min(Math.max(Math.floor(rawTimeout), 3000), 15000);
 }
 
 function normalize(value: string | undefined) {

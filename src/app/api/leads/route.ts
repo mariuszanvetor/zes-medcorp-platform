@@ -22,6 +22,7 @@ import {
   validateSheetsConfig,
 } from "@/lib/integrations/google-sheets-adapter";
 import type { LeadPayload } from "@/lib/lead-types";
+import { checkLeadSubmissionCooldown } from "@/lib/lead-rate-limit";
 import { scoreLead } from "@/lib/lead-scoring";
 import { saveLead } from "@/lib/lead-storage";
 
@@ -41,6 +42,29 @@ export async function POST(request: NextRequest) {
 
   if (hasFormErrors(errors)) {
     return NextResponse.json({ ok: false, errors }, { status: 422 });
+  }
+
+  const cooldown = checkLeadSubmissionCooldown(payload);
+
+  if (!cooldown.allowed) {
+    const retryAfterSeconds = cooldown.retryAfterSeconds ?? 45;
+
+    return NextResponse.json(
+      {
+        success: false,
+        ok: false,
+        error: "Duplicate submission cooldown.",
+        retryAfterSeconds,
+        message:
+          "O solicitare similara a fost primita recent. Va rugam sa asteptati cateva secunde inainte de retrimitere.",
+      },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": String(retryAfterSeconds),
+        },
+      },
+    );
   }
 
   const scoring = scoreLead(payload);
@@ -76,7 +100,9 @@ export async function POST(request: NextRequest) {
     lead: payload,
     scoring,
   });
-  const highPriorityResult = highPriorityPrepared
+  const highPriorityEmailEnabled =
+    process.env.HIGH_PRIORITY_ALERT_EMAIL_ENABLED === "true";
+  const highPriorityResult = highPriorityPrepared && highPriorityEmailEnabled
     ? await sendHighPriorityAlert(emailContext)
     : null;
   const highPriorityTemplate = highPriorityPrepared
@@ -146,6 +172,7 @@ export async function POST(request: NextRequest) {
       },
       highPriorityAlert: {
         prepared: highPriorityPrepared,
+        emailEnabled: highPriorityEmailEnabled,
         template: highPriorityTemplate
           ? {
               subject: highPriorityTemplate.subject,
