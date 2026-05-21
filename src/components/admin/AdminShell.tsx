@@ -21,6 +21,11 @@ const adminNavItems = [
     status: "Demo",
   },
   {
+    label: "Lead Flow",
+    href: "/admin/lead-flow",
+    status: "Diagnostic",
+  },
+  {
     label: "Analytics",
     href: "#",
     status: "Future",
