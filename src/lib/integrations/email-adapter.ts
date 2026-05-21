@@ -8,6 +8,7 @@ import type {
 import type { LeadPayload } from "@/lib/lead-types";
 import { scoreLead, type LeadScoreResult } from "@/lib/lead-scoring";
 import type { RenderedEmailTemplate } from "@/lib/email-templates";
+import { getLeadIntegrationConfig } from "@/lib/integration-config";
 import {
   renderHighPriorityAlertTemplate,
   renderInternalLeadNotificationTemplate,
@@ -124,14 +125,18 @@ export function validateEmailConfig({
   requiresInternalRecipient?: boolean;
 } = {}): EmailConfigStatus {
   const provider = getEmailProvider();
+  const integrationConfig = getLeadIntegrationConfig();
 
-  if (provider === "mock") {
+  if (provider === "mock" || !integrationConfig.emailRequested) {
     return {
       ok: true,
-      provider,
+      provider: "mock",
       mode: "mock",
       missingEnv: [],
-      message: "EMAIL_PROVIDER is mock or missing. No real email will be sent.",
+      message:
+        provider === "mock"
+          ? "EMAIL_PROVIDER is mock or missing. No real email will be sent."
+          : "Email provider is configured, but LEAD_INTEGRATION_MODE does not request email. No real email will be sent.",
     };
   }
 
@@ -280,6 +285,19 @@ export function getEmailAdapter(): EmailProviderAdapter {
 async function sendPreparedEmail(
   message: EmailMessage,
 ): Promise<EmailSendResult> {
+  if (
+    message.metadata?.kind === "lead_confirmation" &&
+    process.env.LEAD_CONFIRMATION_EMAIL_ENABLED !== "true"
+  ) {
+    return {
+      ok: true,
+      mode: "mock",
+      provider: getEmailProvider(),
+      message:
+        "Lead confirmation email is disabled. No user-facing email was sent.",
+    };
+  }
+
   const config = validateEmailConfig({
     requiresInternalRecipient:
       message.metadata?.requiresInternalRecipient === "true" ||

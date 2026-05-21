@@ -32,7 +32,8 @@ Steps:
 4. Add environment variables only when needed:
    - `NEXT_PUBLIC_GTM_ID`
    - `NEXT_PUBLIC_GA_ID`
-   - CRM/email variables later, after real integration is approved.
+   - `LEAD_INTEGRATION_MODE=mock` for safe default lead routing.
+   - CRM/email/Sheets variables later, after real integration is approved.
 5. Deploy to a preview environment.
 6. Connect the production domain:
    - `zescorp.ro`
@@ -107,7 +108,8 @@ Keep `npm run build` as the final authority before shipping.
 - No real secrets are committed.
 - `.env.example` contains placeholders only.
 - `/admin/leads` is noindex and excluded from sitemap.
-- `/api/leads` remains mocked until CRM/email integration is approved.
+- `/api/leads` remains mock-safe while `LEAD_INTEGRATION_MODE=mock`.
+- Real email requires both an email integration mode and `EMAIL_PROVIDER=resend` with valid server-side env vars.
 - `robots.txt` allows indexing and points to the sitemap.
 - `sitemap.xml` includes all intended public indexed content routes.
 - Brand assets resolve.

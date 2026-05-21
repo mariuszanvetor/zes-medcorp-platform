@@ -29,23 +29,31 @@ Safe to leave empty initially:
 ```txt
 NEXT_PUBLIC_GTM_ID=
 NEXT_PUBLIC_GA_ID=
+LEAD_INTEGRATION_MODE=mock
 CRM_PROVIDER=
 CRM_API_KEY=
 CRM_WEBHOOK_URL=
-EMAIL_PROVIDER=
+EMAIL_PROVIDER=mock
 EMAIL_API_KEY=
 LEAD_NOTIFICATION_EMAIL=
+LEAD_CONFIRMATION_EMAIL_ENABLED=false
+RESEND_API_KEY=
+GOOGLE_SHEETS_ID=
+GOOGLE_SERVICE_ACCOUNT_EMAIL=
+GOOGLE_PRIVATE_KEY=
+GOOGLE_SHEETS_TAB_NAME=Leads
 ```
 
 Initial launch recommendation:
 
 - Leave analytics IDs empty until GA4/GTM properties are confirmed.
-- Leave CRM/email variables empty because integrations are mocked.
+- Keep `LEAD_INTEGRATION_MODE=mock` and `EMAIL_PROVIDER=mock` until real activation is approved.
+- Add Resend or Google Sheets secrets only in Vercel, never in committed files.
 - Do not add secrets until the CRM/email implementation is activated and reviewed.
 
 ## Runtime Notes
 
-- `/api/leads` currently validates, scores, and returns a mocked response.
+- `/api/leads` validates, scores, and remains mock-safe unless integration mode and provider env vars are explicitly configured.
 - No database is required for the current launch.
 - No email provider is required for the current launch.
 - No CRM provider is required for the current launch.

@@ -23,8 +23,9 @@ Email now sits behind the broader lead integration decision layer:
 Provider behavior:
 
 - `EMAIL_PROVIDER=mock` or a missing value sends no real email.
-- `EMAIL_PROVIDER=resend` uses the Resend API only when `RESEND_API_KEY`, `EMAIL_FROM` and the needed recipient env vars exist.
+- `EMAIL_PROVIDER=resend` uses the Resend API only when `LEAD_INTEGRATION_MODE` requests email and `RESEND_API_KEY`, `EMAIL_FROM` and the needed recipient env vars exist.
 - `EMAIL_PROVIDER=smtp` is reserved as a future fallback and currently returns a controlled unsupported response.
+- User-facing confirmation emails remain disabled unless `LEAD_CONFIRMATION_EMAIL_ENABLED=true`.
 
 ## Email Types
 
@@ -130,6 +131,7 @@ LEAD_INTEGRATION_MODE=mock
 EMAIL_PROVIDER=mock
 EMAIL_FROM=
 LEAD_NOTIFICATION_EMAIL=
+LEAD_CONFIRMATION_EMAIL_ENABLED=false
 ```
 
 Future provider-specific variables:
@@ -177,7 +179,7 @@ Never commit real secrets. Production secrets should live only in the hosting pr
 5. Test internal lead notification first in staging.
 6. Add Google Sheets logging only after sheet permissions and service account access are reviewed.
 7. Move to `LEAD_INTEGRATION_MODE=email-and-sheets` for the first real launch flow.
-8. Add user confirmation email only after consent/privacy text is approved.
+8. Add user confirmation email only after consent/privacy text is approved, then set `LEAD_CONFIRMATION_EMAIL_ENABLED=true`.
 9. Monitor failures and avoid blocking form submissions if email delivery fails.
 
 See `docs/resend-email-setup.md` for the step-by-step Resend activation plan.

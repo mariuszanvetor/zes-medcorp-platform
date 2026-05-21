@@ -36,10 +36,11 @@ Current state:
 
 | Variable | Required now | Required later | Purpose |
 | --- | --- | --- | --- |
-| `EMAIL_PROVIDER` | No | Yes, when email is enabled | Safe default is `mock`. `resend` enables the Resend scaffold when required env vars exist. `smtp` is reserved for later. |
+| `EMAIL_PROVIDER` | No | Yes, when email is enabled | Safe default is `mock`. `resend` enables the Resend scaffold only when `LEAD_INTEGRATION_MODE` requests email and required env vars exist. `smtp` is reserved for later. |
 | `EMAIL_FROM` | No | Yes, when email is enabled | Verified sender address for future transactional email. |
 | `EMAIL_API_KEY` | No | Yes, when email is enabled | Future email API key. Never commit a real value. |
 | `LEAD_NOTIFICATION_EMAIL` | No | Yes, when internal notifications are enabled | Internal destination for lead notifications. |
+| `LEAD_CONFIRMATION_EMAIL_ENABLED` | No | Optional | Keep `false` until user-facing confirmation wording and privacy text are approved. |
 | `RESEND_API_KEY` | No | Optional | Future Resend API key if Resend is selected. |
 | `SENDGRID_API_KEY` | No | Optional | Future SendGrid API key if SendGrid is selected. |
 | `SMTP_HOST` | No | Optional | Future SMTP host if SMTP/Gmail Workspace is selected. |
@@ -49,8 +50,9 @@ Current state:
 
 Current state:
 
-- Email sending is mocked unless `EMAIL_PROVIDER=resend` and required server-side env vars are configured.
+- Email sending is mocked unless `LEAD_INTEGRATION_MODE` requests email, `EMAIL_PROVIDER=resend`, and required server-side env vars are configured.
 - Missing Resend configuration returns a controlled `config-error`; it does not crash the lead API.
+- User-facing lead confirmation remains mock-disabled unless `LEAD_CONFIRMATION_EMAIL_ENABLED=true`.
 - SMTP is a placeholder and returns `unsupported` until implemented.
 - No production email is sent by default.
 
