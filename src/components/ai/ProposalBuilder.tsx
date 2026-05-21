@@ -17,6 +17,7 @@ import {
   risk as createRisk,
 } from "@/lib/ai-estimation";
 import { trackToolComplete, trackToolStart } from "@/lib/analytics";
+import { assembleProposal } from "@/lib/proposal-assembly";
 import { cn } from "@/lib/utils";
 
 const projectTypes = [
@@ -634,6 +635,28 @@ function generateProposal(form: ProposalBuilderState): ProposalAnalysis {
         : hasLab
           ? "propunere preliminară laborator / IVD"
           : "propunere preliminară infrastructură medicală";
+  const recommendedServices = Array.from(services);
+  const phasesList = Array.from(phases);
+  const nextStepsList = Array.from(nextSteps);
+  const assembly = assembleProposal({
+    projectType: form.projectType,
+    projectScale: form.projectScale,
+    imaging: form.imaging,
+    lab: form.lab,
+    shielding: form.shielding,
+    equipment: form.equipment,
+    projectStage: form.projectStage,
+    urgency: form.urgency,
+    description: form.description,
+    complexity,
+    score: normalizedScore,
+    proposalType,
+    recommendedServices,
+    budgetRange: budget.totalRange,
+    budgetBand: budget.band,
+    timelineDuration: timeline.estimatedDuration,
+    highestRisk: risks[0]?.level,
+  });
 
   return {
     title: `Propunere preliminară pentru ${form.projectType.toLowerCase()}`,
@@ -643,19 +666,20 @@ function generateProposal(form: ProposalBuilderState): ProposalAnalysis {
     score: normalizedScore,
     complexity,
     proposalType,
-    recommendedServices: Array.from(services),
-    phases: Array.from(phases),
+    recommendedServices,
+    phases: phasesList,
     budget,
     timeline,
     risks,
     assumptions: Array.from(assumptions),
     missingData: Array.from(missingData),
     confidence,
-    nextSteps: Array.from(nextSteps),
+    nextSteps: nextStepsList,
     nextStep:
       complexity === "Enterprise" ||
       complexity === "High-complexity medical infrastructure"
         ? "Solicită propunere tehnică personalizată ZES cu validare rapidă a riscurilor critice."
         : "Solicită propunere tehnică personalizată ZES pentru transformarea estimării într-un plan aplicat.",
+    assembly,
   };
 }

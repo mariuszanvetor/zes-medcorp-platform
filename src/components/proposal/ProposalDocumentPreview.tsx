@@ -101,6 +101,31 @@ export function ProposalDocumentPreview({
           </ol>
         </PreviewSection>
 
+        <PreviewSection title="Structura modulara">
+          <div className="grid gap-3">
+            {document.assembly.blocks.map((block) => (
+              <div
+                className="rounded-2xl border border-slate-200 bg-white p-4"
+                key={block.id}
+              >
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <p className="font-semibold text-slate-950">
+                      {block.title}
+                    </p>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">
+                      {block.summary}
+                    </p>
+                  </div>
+                  <span className="rounded-full border border-blue-100 bg-[#f7fbff] px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-[#0057b8]">
+                    {block.priority}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </PreviewSection>
+
         <div className="grid gap-8 xl:grid-cols-2">
           <PreviewSection title="Buget pe faze">
             <PreviewTable lines={document.budgetEstimate.phaseBreakdown} />
@@ -131,6 +156,16 @@ export function ProposalDocumentPreview({
                 </p>
               </div>
             ))}
+          </div>
+        </PreviewSection>
+
+        <PreviewSection title="Recomandari de secventiere">
+          <div className="rounded-2xl border border-blue-100 bg-[#f7fbff] p-5">
+            <ul className="grid gap-2 text-sm leading-6 text-slate-600">
+              {document.assembly.sequencingRecommendations.map((item) => (
+                <li key={item}>- {item}</li>
+              ))}
+            </ul>
           </div>
         </PreviewSection>
 

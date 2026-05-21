@@ -10,6 +10,7 @@ import type {
 } from "@/lib/ai-estimation";
 import { BUDGET_DISCLAIMER } from "@/lib/ai-estimation";
 import { brand } from "@/lib/brand";
+import type { AssembledProposal } from "@/lib/proposal-assembly";
 
 export type ProposalDocumentStatus = "preview" | "ready-for-review";
 
@@ -72,6 +73,7 @@ export type ProposalDocument = {
   missingInformation: string[];
   nextSteps: string[];
   nextStep: string;
+  assembly: AssembledProposal;
   disclaimer: string;
 };
 
@@ -91,6 +93,7 @@ export type ProposalDocumentSource = {
   confidence: ConfidenceEstimate;
   nextSteps: string[];
   nextStep: string;
+  assembly: AssembledProposal;
 };
 
 export function createProposalDocument(
@@ -135,6 +138,7 @@ export function createProposalDocument(
     missingInformation: source.missingData,
     nextSteps: source.nextSteps,
     nextStep: source.nextStep,
+    assembly: source.assembly,
     disclaimer: source.budget.disclaimer || BUDGET_DISCLAIMER,
   };
 }
