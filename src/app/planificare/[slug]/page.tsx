@@ -255,8 +255,8 @@ export default async function PlanningJourneyPage({ params }: JourneyPageProps) 
               href: journey.cta.href,
             }}
             secondaryAction={{
-              label: "Inapoi la planificare",
-              href: "/planificare",
+              label: "Completeaza Project Intake",
+              href: "/project-intake",
             }}
             title="Transforma traseul intr-o discutie tehnica aplicata."
             tone="light"

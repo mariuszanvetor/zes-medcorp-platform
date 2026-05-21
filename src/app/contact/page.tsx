@@ -59,6 +59,11 @@ const aiLinks = [
     href: "/service-diagnostic",
   },
   {
+    title: "Project Intake ZES",
+    description: "Completează datele esențiale înainte de o consultanță tehnică.",
+    href: "/project-intake",
+  },
+  {
     title: "Propunere preliminară",
     description: "Generează o propunere preliminară pentru discuția cu ZES.",
     href: "/proposal-builder",
@@ -170,7 +175,7 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {aiLinks.map((link) => (
               <Card
                 as="article"

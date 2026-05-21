@@ -21,6 +21,7 @@ const staticRoutes: Array<{
   { path: "/radiology-room-planner", changeFrequency: "monthly", priority: 0.8 },
   { path: "/service-diagnostic", changeFrequency: "monthly", priority: 0.78 },
   { path: "/proposal-builder", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/project-intake", changeFrequency: "monthly", priority: 0.81 },
   { path: "/planificare", changeFrequency: "monthly", priority: 0.84 },
   { path: "/knowledge-hub", changeFrequency: "weekly", priority: 0.86 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.82 },

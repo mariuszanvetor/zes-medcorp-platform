@@ -28,6 +28,12 @@ const tools = [
     href: "/service-diagnostic",
   },
   {
+    title: "Project Intake ZES",
+    description:
+      "Colectează structurat datele pentru o discuție tehnică mai clară: spațiu, documentație, aparatură, urgență și informații lipsă.",
+    href: "/project-intake",
+  },
+  {
     title: "Propunere preliminară",
     description:
       "Structurează o propunere preliminară pentru discuția tehnică: faze, buget, riscuri și întrebări deschise.",

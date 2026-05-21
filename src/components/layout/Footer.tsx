@@ -23,6 +23,7 @@ const aiToolLinks = [
   { label: "Estimare cameră RMN", href: "/calculatoare/cost-camera-rmn" },
   { label: "Planificare radiologie", href: "/radiology-room-planner" },
   { label: "Propunere preliminară", href: "/proposal-builder" },
+  { label: "Project Intake ZES", href: "/project-intake" },
 ];
 
 const knowledgeLinks = [

@@ -663,6 +663,13 @@ function createNextActions(context: ProposalContext): ProposalNextAction[] {
       priority: "core",
     },
     {
+      label: "Project Intake ZES",
+      href: "/project-intake",
+      reason: "Completeaza datele esentiale pentru o consultatie tehnica mai eficienta.",
+      type: "planning-journey",
+      priority: "validation",
+    },
+    {
       label: "Traseu de planificare",
       href: journeyHref(context),
       reason: "Parcurge pasii recomandati pentru scenariul apropiat proiectului.",

@@ -80,12 +80,12 @@ export default function PlanningPage() {
             description="Daca scenariul nu este clar, porneste cu o analiza preliminara. Rezultatul ramane orientativ si trebuie validat tehnic inainte de oferta finala."
             eyebrow="Nu stii exact traseul?"
             primaryAction={{
-              label: "Incepe cu Consultantul AI",
-              href: "/ai-project-advisor",
+              label: "Completeaza Project Intake",
+              href: "/project-intake",
             }}
             secondaryAction={{
-              label: "Discuta proiectul",
-              href: "/contact",
+              label: "Incepe cu Consultantul AI",
+              href: "/ai-project-advisor",
             }}
             title="ZES te ajuta sa separi etapa de orientare de decizia tehnica."
             tone="light"
