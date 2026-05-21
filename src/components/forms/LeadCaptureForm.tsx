@@ -48,6 +48,53 @@ export type LeadCaptureFormProps = {
   onSubmitted?: (payload: LeadPayload) => void;
 };
 
+type LeadApiMode =
+  | "mock"
+  | "live"
+  | "real"
+  | "config-error"
+  | "provider-error"
+  | "unsupported"
+  | string;
+
+type LeadApiResponse = {
+  success?: boolean;
+  ok?: boolean;
+  errors?: FormErrorMap;
+  message?: string;
+  retryAfterSeconds?: number;
+  storageMode?: LeadApiMode;
+  emailMode?: LeadApiMode;
+  sheetsMode?: LeadApiMode;
+  integrationMode?: string;
+  preparedPayloads?: {
+    internalNotification?: {
+      result?: {
+        ok?: boolean;
+        mode?: LeadApiMode;
+      };
+    };
+    storage?: {
+      result?: {
+        ok?: boolean;
+      };
+    };
+    sheets?: {
+      requested?: boolean;
+      result?: {
+        ok?: boolean;
+      };
+    };
+  };
+};
+
+class LeadSubmissionError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "LeadSubmissionError";
+  }
+}
+
 const baseFields: LeadFormExtraField[] = [
   { id: "name", label: "Nume", required: true },
   { id: "email", label: "Email", required: true },
@@ -142,6 +189,7 @@ export function LeadCaptureForm({
       return;
     }
 
+    setErrors({});
     setStatus("loading");
 
     try {
@@ -150,20 +198,74 @@ export function LeadCaptureForm({
         headers: { "Content-Type": "application/json" },
         method: "POST",
       });
+      const apiResult = await readLeadApiResponse(response);
+
+      logLeadSubmissionDebug(response, apiResult);
 
       if (!response.ok) {
-        throw new Error("Lead request was not accepted.");
+        if (response.status === 422 && apiResult?.errors) {
+          setErrors(apiResult.errors);
+          throw new LeadSubmissionError("Verifica datele marcate in formular.");
+        }
+
+        if (response.status === 429) {
+          throw new LeadSubmissionError(
+            getRateLimitMessage(apiResult?.retryAfterSeconds),
+          );
+        }
+
+        throw new LeadSubmissionError(
+          apiResult?.message ||
+            "Solicitarea nu a fost acceptata de server. Incearca din nou.",
+        );
+      }
+
+      if (!isSuccessfulLeadApiResponse(apiResult)) {
+        throw new LeadSubmissionError(getLeadApiFailureMessage(apiResult));
       }
 
       setStatus("success");
-      trackLeadEvent("lead_form_submit_success", leadTrackingPayload(payload));
-      onSubmitted?.(payload);
-    } catch {
+      setErrors({});
+      trackLeadEvent("lead_form_submit_success", {
+        ...leadTrackingPayload(payload),
+        emailMode: normalizeLeadMode(apiResult?.emailMode),
+        sheetsMode: normalizeLeadMode(apiResult?.sheetsMode),
+        storageMode: normalizeLeadMode(apiResult?.storageMode),
+      });
+
+      try {
+        onSubmitted?.(payload);
+      } catch (callbackError) {
+        if (process.env.NODE_ENV !== "production") {
+          console.debug("[LeadCaptureForm] onSubmitted callback failed after success.", {
+            error:
+              callbackError instanceof Error
+                ? callbackError.message
+                : "Unknown callback error",
+            sourcePage,
+            sourceTool,
+          });
+        }
+      }
+    } catch (error) {
       setStatus("error");
       trackLeadEvent("lead_form_submit_error", {
         ...leadTrackingPayload(payload),
-        status: "request_error",
+        status:
+          error instanceof LeadSubmissionError
+            ? "api_response_error"
+            : "request_error",
       });
+      if (error instanceof LeadSubmissionError) {
+        setErrors({ form: error.message });
+        return;
+      }
+
+      setErrors({
+        form: "Solicitarea nu a putut fi pregatita. Verifica datele si incearca din nou.",
+      });
+      return;
+
       setErrors({
         form: "Solicitarea nu a putut fi pregătită. Verifică datele și încearcă din nou.",
       });
@@ -310,6 +412,126 @@ function leadTrackingPayload(payload: LeadPayload) {
     riskLevel: payload.generatedRiskLevel,
     urgency: payload.urgency,
   };
+}
+
+async function readLeadApiResponse(response: Response): Promise<LeadApiResponse | null> {
+  const contentType = response.headers.get("content-type") ?? "";
+
+  if (!contentType.includes("application/json")) {
+    return null;
+  }
+
+  try {
+    return (await response.json()) as LeadApiResponse;
+  } catch {
+    return null;
+  }
+}
+
+function isSuccessfulLeadApiResponse(result: LeadApiResponse | null) {
+  if (!result) {
+    return true;
+  }
+
+  if (result.success === false || result.ok === false) {
+    return false;
+  }
+
+  if (
+    hasFatalMode(result.emailMode) ||
+    hasFatalMode(result.storageMode) ||
+    hasFatalMode(result.sheetsMode)
+  ) {
+    return false;
+  }
+
+  const internalNotification = result.preparedPayloads?.internalNotification?.result;
+  if (internalNotification && internalNotification.ok === false) {
+    return false;
+  }
+
+  const storage = result.preparedPayloads?.storage?.result;
+  if (storage && storage.ok === false) {
+    return false;
+  }
+
+  const sheets = result.preparedPayloads?.sheets;
+  if (sheets?.requested && sheets.result?.ok === false) {
+    return false;
+  }
+
+  return true;
+}
+
+function getLeadApiFailureMessage(result: LeadApiResponse | null) {
+  if (result?.errors) {
+    return "Verifica datele marcate in formular.";
+  }
+
+  if (hasFatalMode(result?.emailMode)) {
+    return "Solicitarea a ajuns la server, dar notificarea interna nu a fost confirmata. Echipa poate verifica configurarea email.";
+  }
+
+  if (result?.preparedPayloads?.internalNotification?.result?.ok === false) {
+    return "Solicitarea a ajuns la server, dar notificarea interna nu a fost confirmata. Incearca din nou sau contacteaza ZES direct.";
+  }
+
+  if (hasFatalMode(result?.sheetsMode) || result?.preparedPayloads?.sheets?.result?.ok === false) {
+    return "Solicitarea a fost pregatita, dar jurnalizarea interna nu a fost confirmata. Incearca din nou.";
+  }
+
+  return (
+    result?.message ||
+    "Solicitarea nu a putut fi pregatita. Verifica datele si incearca din nou."
+  );
+}
+
+function hasFatalMode(mode: LeadApiMode | undefined) {
+  const normalized = normalizeLeadMode(mode);
+
+  return (
+    normalized === "config-error" ||
+    normalized === "provider-error" ||
+    normalized === "unsupported" ||
+    normalized === "error"
+  );
+}
+
+function normalizeLeadMode(mode: LeadApiMode | undefined) {
+  if (!mode) return undefined;
+
+  const normalized = mode.toLowerCase();
+  if (normalized === "real") return "live";
+
+  return normalized;
+}
+
+function getRateLimitMessage(retryAfterSeconds: number | undefined) {
+  if (retryAfterSeconds && retryAfterSeconds > 0) {
+    return `O solicitare similara a fost trimisa recent. Incearca din nou peste aproximativ ${retryAfterSeconds} secunde.`;
+  }
+
+  return "O solicitare similara a fost trimisa recent. Asteapta cateva secunde inainte de retrimitere.";
+}
+
+function logLeadSubmissionDebug(
+  response: Response,
+  result: LeadApiResponse | null,
+) {
+  if (process.env.NODE_ENV === "production") {
+    return;
+  }
+
+  console.debug("[LeadCaptureForm] lead API response", {
+    apiOk: result?.ok,
+    emailMode: result?.emailMode,
+    httpOk: response.ok,
+    httpStatus: response.status,
+    integrationMode: result?.integrationMode,
+    sheetsMode: result?.sheetsMode,
+    storageMode: result?.storageMode,
+    success: result?.success,
+  });
 }
 
 function LeadInput({

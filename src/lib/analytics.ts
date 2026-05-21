@@ -44,6 +44,9 @@ export type AnalyticsPayload = {
   proposalId?: string;
   versionLabel?: string;
   status?: string;
+  emailMode?: string;
+  sheetsMode?: string;
+  storageMode?: string;
 };
 
 export type ToolTrackingId =
