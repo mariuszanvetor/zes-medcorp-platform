@@ -1,11 +1,19 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { hasFormErrors, validateLeadPayload } from "@/lib/forms";
+import {
+  renderHighPriorityAlertTemplate,
+  renderInternalLeadNotificationTemplate,
+  renderLeadConfirmationTemplate,
+} from "@/lib/email-templates";
 import { buildCrmPayload, sendToCrm } from "@/lib/integrations/crm-adapter";
 import {
   buildLeadConfirmationEmail,
   buildLeadNotificationEmail,
-  sendLeadNotification,
+  sendHighPriorityAlert,
+  sendInternalLeadNotification,
+  sendLeadConfirmation,
+  shouldPrepareHighPriorityAlert,
 } from "@/lib/integrations/email-adapter";
 import type { LeadPayload } from "@/lib/lead-types";
 import { scoreLead } from "@/lib/lead-scoring";
@@ -32,11 +40,18 @@ export async function POST(request: NextRequest) {
   const scoring = scoreLead(payload);
   const recommendedServices = parseRecommendedServices(payload);
   const crmPayload = buildCrmPayload(payload, scoring);
+  const emailContext = {
+    lead: payload,
+    leadId: "",
+    recommendedServices,
+    scoring,
+  };
   const storageResult = await saveLead({
     lead: payload,
     scoring,
   });
   const leadId = storageResult.leadId ?? `mock_${Date.now()}`;
+  emailContext.leadId = leadId;
   const crmResult = await sendToCrm(crmPayload);
   const notificationEmail = buildLeadNotificationEmail({
     lead: payload,
@@ -44,8 +59,22 @@ export async function POST(request: NextRequest) {
     recommendedServices,
     scoring,
   });
-  const notificationResult = await sendLeadNotification(notificationEmail);
   const confirmationEmail = buildLeadConfirmationEmail(payload, scoring);
+  const internalTemplate = renderInternalLeadNotificationTemplate(emailContext);
+  const confirmationTemplate = renderLeadConfirmationTemplate(emailContext);
+  const notificationResult =
+    await sendInternalLeadNotification(emailContext);
+  const confirmationResult = await sendLeadConfirmation(emailContext);
+  const highPriorityPrepared = shouldPrepareHighPriorityAlert({
+    lead: payload,
+    scoring,
+  });
+  const highPriorityResult = highPriorityPrepared
+    ? await sendHighPriorityAlert(emailContext)
+    : null;
+  const highPriorityTemplate = highPriorityPrepared
+    ? renderHighPriorityAlertTemplate(emailContext)
+    : null;
 
   return NextResponse.json({
     success: true,
@@ -53,6 +82,7 @@ export async function POST(request: NextRequest) {
     leadId,
     mode: "mock",
     storageMode: storageResult.storageMode,
+    emailMode: "mock",
     score: scoring.score,
     priority: scoring.priority,
     nextAction: scoring.nextAction,
@@ -66,11 +96,46 @@ export async function POST(request: NextRequest) {
       internalNotification: {
         priority: notificationEmail.priority,
         adminReviewLink: notificationEmail.adminReviewLink,
-        result: notificationResult,
+        template: {
+          subject: internalTemplate.subject,
+          priorityLabel: internalTemplate.priorityLabel,
+        },
+        result: {
+          ok: notificationResult.ok,
+          mode: notificationResult.mode,
+          provider: notificationResult.provider,
+          message: notificationResult.message,
+        },
       },
       confirmationEmail: {
         subject: confirmationEmail.subject,
         provider: confirmationEmail.provider,
+        template: {
+          subject: confirmationTemplate.subject,
+        },
+        result: {
+          ok: confirmationResult.ok,
+          mode: confirmationResult.mode,
+          provider: confirmationResult.provider,
+          message: confirmationResult.message,
+        },
+      },
+      highPriorityAlert: {
+        prepared: highPriorityPrepared,
+        template: highPriorityTemplate
+          ? {
+              subject: highPriorityTemplate.subject,
+              priorityLabel: highPriorityTemplate.priorityLabel,
+            }
+          : null,
+        result: highPriorityResult
+          ? {
+              ok: highPriorityResult.ok,
+              mode: highPriorityResult.mode,
+              provider: highPriorityResult.provider,
+              message: highPriorityResult.message,
+            }
+          : null,
       },
       storage: {
         mode: storageResult.storageMode,
@@ -81,7 +146,7 @@ export async function POST(request: NextRequest) {
       },
     },
     message:
-      "Lead payload validated, scored, mapped to mock CRM/email payloads and accepted by mock lead storage. No database, CRM or email integration is active yet.",
+      "Lead payload validated, scored, mapped to mock CRM/storage/email payloads and accepted by mock lead storage. No database, CRM or email integration is active yet.",
   });
 }
 
