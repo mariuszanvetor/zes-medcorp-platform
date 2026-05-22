@@ -99,6 +99,9 @@ Current state:
 | `AUTH_PROVIDER` | No | Yes, when admin auth is enabled | Future selected provider: Auth.js, Clerk, Supabase Auth or custom. |
 | `AUTH_SECRET` | No | Yes, for custom/server auth | Future server-side auth secret. Never commit a real value. |
 | `ADMIN_EMAILS` | No | Yes, for allowlisted admin access | Comma-separated internal admin emails for future access control. |
+| `ADMIN_ACCESS_ENABLED` | No | Optional first protection layer | Set to `true` to require the simple admin password gate for `/admin/leads` and `/admin/lead-flow`. Default is `false`. |
+| `ADMIN_ACCESS_PASSWORD` | No | Yes, if `ADMIN_ACCESS_ENABLED=true` | Server-side password for the temporary admin gate. Use a strong value in Vercel and never commit it. |
+| `ADMIN_ACCESS_TTL_SECONDS` | No | Optional | Temporary admin cookie lifetime. Default is `28800` seconds, with accepted values from 5 minutes to 24 hours. |
 | `NEXTAUTH_URL` | No | If using Auth.js | Canonical app URL for Auth.js / NextAuth. |
 | `NEXTAUTH_SECRET` | No | If using Auth.js | Auth.js session secret. Never commit a real value. |
 | `CLERK_SECRET_KEY` | No | If using Clerk | Clerk server-side secret key. Never commit a real value. |
@@ -106,7 +109,10 @@ Current state:
 
 Current state:
 
-- Admin auth is not enabled.
+- Full admin auth is not enabled.
+- Optional simple password protection is available through `/api/admin/verify-access`.
+- When `ADMIN_ACCESS_ENABLED=false`, admin stays in demo-open warning mode.
+- When `ADMIN_ACCESS_ENABLED=true`, admin content is rendered only after a valid password sets a temporary HTTP-only `/admin` cookie.
 - `/admin/leads` uses demo data only.
 - Admin routes remain noindex and absent from public navigation.
 - Do not connect real lead storage before admin authentication and authorization exist.

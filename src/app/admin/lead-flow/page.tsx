@@ -6,6 +6,7 @@ import {
   type LeadFlowCheck,
   type LeadFlowMonitorConfig,
 } from "@/components/admin/LeadFlowMonitor";
+import { canRenderAdminContent } from "@/lib/admin-access";
 import { getLeadIntegrationConfig } from "@/lib/integration-config";
 import { validateEmailConfig } from "@/lib/integrations/email-adapter";
 import { validateSheetsConfig } from "@/lib/integrations/google-sheets-adapter";
@@ -24,8 +25,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AdminLeadFlowPage() {
-  const config = buildLeadFlowMonitorConfig();
+export default async function AdminLeadFlowPage() {
+  const canRender = await canRenderAdminContent();
+  const config = canRender ? buildLeadFlowMonitorConfig() : null;
 
   return (
     <AdminShell
@@ -33,7 +35,7 @@ export default function AdminLeadFlowPage() {
       subtitle="Panou intern pentru verificarea modurilor active de lead capture, email, Google Sheets si storage. Nu afiseaza secrete si nu ruleaza teste automat."
       title="Lead Flow Monitor"
     >
-      <LeadFlowMonitor config={config} />
+      {config ? <LeadFlowMonitor config={config} /> : null}
     </AdminShell>
   );
 }

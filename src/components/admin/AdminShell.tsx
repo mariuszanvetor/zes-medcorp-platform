@@ -1,11 +1,16 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { AdminAccessGate } from "@/components/admin/AdminAccessGate";
 import { AdminAccessNotice } from "@/components/admin/AdminAccessNotice";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import {
+  getAdminAccessStatus,
+  hasValidAdminAccessCookie,
+} from "@/lib/admin-access";
 
 export type AdminShellProps = {
   title: string;
@@ -42,12 +47,16 @@ const adminNavItems = [
   },
 ];
 
-export function AdminShell({
+export async function AdminShell({
   title,
   subtitle,
   eyebrow = "Internal admin",
   children,
 }: AdminShellProps) {
+  const accessStatus = getAdminAccessStatus();
+  const hasAccess = await hasValidAdminAccessCookie();
+  const isLocked = accessStatus.enabled && !hasAccess;
+
   return (
     <main className="min-h-screen bg-[#f7fbff]">
       <Section
@@ -61,6 +70,9 @@ export function AdminShell({
                 <Badge variant="blue">{eyebrow}</Badge>
                 <Badge variant="neutral">noindex</Badge>
                 <Badge variant="neutral">mock data</Badge>
+                <Badge variant={accessStatus.enabled ? "blue" : "neutral"}>
+                  {accessStatus.enabled ? "password gate" : "demo open"}
+                </Badge>
               </div>
               <h1 className="mt-8 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
                 {title}
@@ -103,14 +115,26 @@ export function AdminShell({
             </Card>
           </div>
 
-          <div className="mt-10">
-            <AdminAccessNotice />
-          </div>
+          {!isLocked && (
+            <div className="mt-10">
+              <AdminAccessNotice accessEnabled={accessStatus.enabled} />
+            </div>
+          )}
         </Container>
       </Section>
 
       <Section spacing="md">
-        <Container size="xl">{children}</Container>
+        <Container size="xl">
+          {isLocked ? (
+            <AdminAccessGate
+              accessEnabled={accessStatus.enabled}
+              initialHasAccess={false}
+              passwordConfigured={accessStatus.passwordConfigured}
+            />
+          ) : (
+            children
+          )}
+        </Container>
       </Section>
     </main>
   );
