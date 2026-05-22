@@ -50,12 +50,13 @@ export function LeadFlowMonitor({ config }: LeadFlowMonitorProps) {
   const summary = useMemo(
     () => [
       ["Integration mode", config.integrationMode],
-      ["Expected email", config.expectedEmailMode],
-      ["Expected Sheets", config.expectedSheetsMode],
-      ["Storage", config.storageMode],
+      ["Expected email", labelForMode(config.expectedEmailMode)],
+      ["Expected Sheets", labelForMode(config.expectedSheetsMode)],
+      ["Storage", labelForMode(config.storageMode)],
     ],
     [config],
   );
+  const interpretation = result ? interpretTestResult(result) : null;
 
   async function runSafeTest() {
     setIsTesting(true);
@@ -114,14 +115,7 @@ export function LeadFlowMonitor({ config }: LeadFlowMonitorProps) {
               Nu afiseaza secrete, chei API sau valori din private key.
             </p>
           </div>
-          <div className="grid gap-2 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950 lg:max-w-md">
-            <p className="font-bold">Atentie</p>
-            <p>
-              Butonul de test poate trimite o notificare interna reala daca
-              email-ul este activ in productie. Foloseste doar datele demo
-              generate de sistem.
-            </p>
-          </div>
+          <ModeLegend />
         </div>
 
         <dl className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -147,6 +141,8 @@ export function LeadFlowMonitor({ config }: LeadFlowMonitorProps) {
         <CheckGroup checks={config.flags} title="Runtime flags" />
       </div>
 
+      <DailyOpsChecklist />
+
       <Card className="border-blue-100 bg-white" padding="lg">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div>
@@ -157,6 +153,11 @@ export function LeadFlowMonitor({ config }: LeadFlowMonitorProps) {
               Ruleaza un payload demo prin acelasi endpoint folosit de formulare.
               Testul respecta cooldown-ul API si poate declansa email sau Sheets
               daca acestea sunt active in mediul curent.
+            </p>
+            <p className="mt-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm font-semibold leading-7 text-amber-950">
+              Acest test poate trimite o notificare interna reala si poate scrie
+              un rand in Google Sheets daca integrarile sunt active in productie.
+              Nu introduce date reale aici.
             </p>
           </div>
           <Button isLoading={isTesting} onClick={runSafeTest} size="lg">
@@ -171,19 +172,102 @@ export function LeadFlowMonitor({ config }: LeadFlowMonitorProps) {
         )}
 
         {result && (
-          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            <ResultItem label="HTTP status" value={String(result.httpStatus)} />
-            <ResultItem label="Success" value={String(result.success ?? false)} />
-            <ResultItem label="Integration" value={result.integrationMode ?? "-"} />
-            <ResultItem label="Email mode" value={result.emailMode ?? "-"} />
-            <ResultItem label="Sheets mode" value={result.sheetsMode ?? "-"} />
-            <ResultItem label="Storage mode" value={result.storageMode ?? "-"} />
-            <ResultItem label="Score" value={String(result.score ?? "-")} />
-            <ResultItem label="Priority" value={result.priority ?? "-"} />
-          </div>
+          <>
+            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              <ResultItem label="HTTP status" value={String(result.httpStatus)} />
+              <ResultItem label="Success" value={String(result.success ?? false)} />
+              <ResultItem label="Integration" value={result.integrationMode ?? "-"} />
+              <ResultItem label="Email mode" value={labelForMode(result.emailMode)} />
+              <ResultItem label="Sheets mode" value={labelForMode(result.sheetsMode)} />
+              <ResultItem label="Storage mode" value={labelForMode(result.storageMode)} />
+              <ResultItem label="Score" value={String(result.score ?? "-")} />
+              <ResultItem label="Priority" value={result.priority ?? "-"} />
+            </div>
+
+            {interpretation && (
+              <div className="mt-6 grid gap-4 lg:grid-cols-3">
+                <InterpretationCard
+                  items={interpretation.succeeded}
+                  tone="success"
+                  title="Ce a reusit"
+                />
+                <InterpretationCard
+                  items={interpretation.failed}
+                  tone="error"
+                  title="Ce necesita atentie"
+                />
+                <InterpretationCard
+                  items={interpretation.nextChecks}
+                  tone="neutral"
+                  title="Ce verifici mai departe"
+                />
+              </div>
+            )}
+          </>
         )}
       </Card>
     </div>
+  );
+}
+
+function ModeLegend() {
+  const items = [
+    ["real / live", "activ in productie"],
+    ["mock", "simulare sigura"],
+    ["config-error", "configuratie incompleta"],
+    ["provider-error", "eroare la provider"],
+  ];
+
+  return (
+    <div className="grid gap-2 rounded-2xl border border-blue-100 bg-[#f7fbff] p-4 text-sm leading-6 text-slate-700 lg:max-w-md">
+      <p className="font-bold text-slate-950">Interpretare moduri</p>
+      <dl className="grid gap-2">
+        {items.map(([mode, meaning]) => (
+          <div className="flex items-center justify-between gap-4" key={mode}>
+            <dt className="font-semibold text-slate-950">{mode}</dt>
+            <dd>{meaning}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
+}
+
+function DailyOpsChecklist() {
+  const items = [
+    "Verifica daca emailurile de lead ajung in inboxul intern.",
+    "Verifica daca randurile apar in Google Sheet o singura data.",
+    "Verifica daca nu apar 429 false-positive in testele manuale.",
+    "Verifica evenimentele Resend pentru livrare sau respingere.",
+    "Verifica Vercel logs cand apare config-error sau provider-error.",
+    "Verifica saptamanal Search Console pentru acoperire si erori.",
+  ];
+
+  return (
+    <Card className="border-blue-100 bg-white" padding="lg">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div>
+          <Badge variant="cyan">Daily ops</Badge>
+          <h2 className="mt-4 text-2xl font-semibold tracking-tight text-slate-950">
+            Checklist operational
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600">
+            Rutina minima dupa activarea email + Google Sheets. Nu necesita
+            acces la secrete si nu modifica date.
+          </p>
+        </div>
+      </div>
+      <ul className="mt-6 grid gap-3 md:grid-cols-2">
+        {items.map((item) => (
+          <li
+            className="rounded-2xl border border-slate-200 bg-[#f7fbff] p-4 text-sm font-semibold leading-6 text-slate-700"
+            key={item}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </Card>
   );
 }
 
@@ -232,6 +316,165 @@ function ResultItem({ label, value }: { label: string; value: string }) {
       </p>
     </div>
   );
+}
+
+function InterpretationCard({
+  title,
+  items,
+  tone,
+}: {
+  title: string;
+  items: string[];
+  tone: "success" | "error" | "neutral";
+}) {
+  const toneClass =
+    tone === "success"
+      ? "border-emerald-200 bg-emerald-50 text-emerald-950"
+      : tone === "error"
+        ? "border-rose-200 bg-rose-50 text-rose-950"
+        : "border-blue-100 bg-[#f7fbff] text-slate-700";
+
+  return (
+    <div className={`rounded-2xl border p-5 ${toneClass}`}>
+      <h3 className="text-sm font-bold uppercase tracking-[0.14em]">
+        {title}
+      </h3>
+      <ul className="mt-4 grid gap-2 text-sm leading-6">
+        {(items.length ? items : ["Nicio observatie pentru acest test."]).map(
+          (item) => (
+            <li key={item}>{item}</li>
+          ),
+        )}
+      </ul>
+    </div>
+  );
+}
+
+function interpretTestResult(result: LeadFlowTestResult) {
+  const succeeded: string[] = [];
+  const failed: string[] = [];
+  const nextChecks: string[] = [];
+
+  if (result.httpStatus >= 200 && result.httpStatus < 300 && result.success) {
+    succeeded.push("Endpoint-ul /api/leads a acceptat payload-ul demo.");
+  } else if (result.httpStatus === 429) {
+    failed.push("Testul a fost blocat de cooldown-ul anti-duplicate.");
+    nextChecks.push("Asteapta cooldown-ul si ruleaza din nou testul.");
+  } else {
+    failed.push("Endpoint-ul nu a confirmat testul intern.");
+    nextChecks.push("Verifica Vercel logs si statusul API.");
+  }
+
+  addModeInterpretation({
+    failed,
+    mode: result.emailMode,
+    nextChecks,
+    service: "email",
+    succeeded,
+  });
+  addModeInterpretation({
+    failed,
+    mode: result.sheetsMode,
+    nextChecks,
+    service: "sheets",
+    succeeded,
+  });
+  addModeInterpretation({
+    failed,
+    mode: result.storageMode,
+    nextChecks,
+    service: "storage",
+    succeeded,
+  });
+
+  if (isActiveMode(result.emailMode)) {
+    nextChecks.push(
+      "Daca emailul nu ajunge, verifica inbox, spam/quarantine, Resend events, domeniu si MX/mailbox.",
+    );
+  }
+
+  if (result.sheetsMode === "config-error") {
+    nextChecks.push(
+      "Pentru Sheets config-error, verifica env vars: spreadsheet ID, client email, private key si tab name.",
+    );
+  }
+
+  if (result.sheetsMode === "provider-error") {
+    nextChecks.push(
+      "Pentru Sheets provider-error, verifica service account, share pe Sheet, Google Sheets API si numele tabului.",
+    );
+  }
+
+  return {
+    failed: unique(failed),
+    nextChecks: unique(nextChecks),
+    succeeded: unique(succeeded),
+  };
+}
+
+function addModeInterpretation({
+  service,
+  mode,
+  succeeded,
+  failed,
+  nextChecks,
+}: {
+  service: "email" | "sheets" | "storage";
+  mode?: string;
+  succeeded: string[];
+  failed: string[];
+  nextChecks: string[];
+}) {
+  if (isActiveMode(mode)) {
+    succeeded.push(`${labelForService(service)} este activ si confirmat.`);
+    return;
+  }
+
+  if (mode === "mock") {
+    succeeded.push(`${labelForService(service)} ruleaza in simulare sigura.`);
+    return;
+  }
+
+  if (mode === "config-error") {
+    failed.push(`${labelForService(service)} are o problema de configurare.`);
+    nextChecks.push("Verifica variabilele server-side din Vercel.");
+    return;
+  }
+
+  if (mode === "provider-error") {
+    failed.push(`${labelForService(service)} a primit eroare de la provider.`);
+    nextChecks.push("Verifica dashboard-ul providerului si logurile Vercel.");
+    return;
+  }
+
+  if (mode === "unsupported") {
+    failed.push(`${labelForService(service)} foloseste un provider neimplementat.`);
+  }
+}
+
+function labelForService(service: "email" | "sheets" | "storage") {
+  if (service === "email") return "Email";
+  if (service === "sheets") return "Google Sheets";
+
+  return "Storage";
+}
+
+function labelForMode(mode: string | undefined) {
+  if (!mode) return "-";
+  if (isActiveMode(mode)) return `${mode} - active`;
+  if (mode === "mock") return "mock - safe simulation";
+  if (mode === "config-error") return "config-error - configuration issue";
+  if (mode === "provider-error") return "provider-error - provider issue";
+
+  return mode;
+}
+
+function isActiveMode(mode: string | undefined) {
+  return mode === "real" || mode === "live";
+}
+
+function unique(items: string[]) {
+  return Array.from(new Set(items));
 }
 
 function createSafeTestPayload() {

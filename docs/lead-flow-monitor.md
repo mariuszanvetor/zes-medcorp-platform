@@ -49,6 +49,13 @@ The test result shows:
 
 ## Mode Meanings
 
+The monitor uses this label mapping:
+
+- `real` / `live`: active production integration.
+- `mock`: safe simulation; no external call for that layer.
+- `config-error`: configuration issue; usually missing or unsafe env vars.
+- `provider-error`: provider issue; env vars are present enough to attempt the call, but the external provider did not confirm success.
+
 ### `emailMode`
 
 - `mock`: no real email was sent.
@@ -69,6 +76,15 @@ The test result shows:
 - `mock`: no persistent database storage.
 
 ## Troubleshooting
+
+| Status | Meaning | First checks |
+| --- | --- | --- |
+| `mock` | Safe simulation. | Confirm this is expected for the current environment. |
+| `config-error` | Required configuration is missing or unsafe. | Check Vercel env vars. Do not print secrets. |
+| `provider-error` | Provider call failed or timed out. | Check provider dashboard and Vercel logs. |
+| `429` | Duplicate cooldown triggered. | Wait for cooldown, then retry once. |
+| email `live`, inbox empty | Resend accepted the send but mailbox did not show it yet. | Check inbox, spam/quarantine, Resend events, recipient address, domain and MX/mailbox setup. |
+| sheets `real`, row missing | API reported append success but the expected Sheet view does not show it. | Check tab name, filters, sorted ranges, Sheet ID and service account access. |
 
 ### `config-error`
 
@@ -130,3 +146,33 @@ The test uses stable demo contact data, so rapid repeated clicks can hit duplica
 - Do not paste secrets into browser-visible fields.
 - Do not use real client data in the diagnostic test.
 - Keep admin authentication requirement before showing real stored leads.
+
+## Daily Check Routine
+
+1. Open `/admin/lead-flow`.
+2. Confirm email mode is `live` when production notifications should be active.
+3. Confirm Sheets mode is `real` when logging should be active.
+4. Run one internal test lead only when needed.
+5. Verify the internal lead email reaches the expected mailbox.
+6. Verify a single row appears in the Google Sheet.
+7. Confirm there are no repeated `429` false positives during normal use.
+8. Review Resend events if an email is missing.
+9. Review Vercel logs if `config-error` or `provider-error` appears.
+10. Check Search Console weekly for indexation and coverage issues.
+
+## Rollback Guide
+
+If Google Sheets has problems but email works:
+
+```env
+LEAD_INTEGRATION_MODE=email-only
+```
+
+If Resend has delivery or configuration problems:
+
+```env
+EMAIL_PROVIDER=mock
+LEAD_INTEGRATION_MODE=mock
+```
+
+After changing env vars, redeploy and run one internal test from `/admin/lead-flow`.

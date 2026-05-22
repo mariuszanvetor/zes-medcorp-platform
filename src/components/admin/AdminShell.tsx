@@ -16,14 +16,14 @@ export type AdminShellProps = {
 
 const adminNavItems = [
   {
-    label: "Lead Review",
+    label: "Leaduri demo",
     href: "/admin/leads",
-    status: "Demo",
+    status: "Review",
   },
   {
-    label: "Lead Flow",
+    label: "Monitor flux leaduri",
     href: "/admin/lead-flow",
-    status: "Diagnostic",
+    status: "Ops",
   },
   {
     label: "Analytics",
