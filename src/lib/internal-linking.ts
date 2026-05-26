@@ -7,6 +7,7 @@ import {
 } from "@/data/calculators";
 import { seoClusters, type SeoCluster } from "@/data/seo-clusters";
 import { services, type Service } from "@/data/services";
+import { getServiceFunnelCrossLinks } from "@/lib/service-funnel-engine";
 import {
   topicTaxonomy,
   type AuthorityCluster,
@@ -92,6 +93,7 @@ export function buildInternalLinkPlan(
   const relatedServices = relationshipMap.services.map((href, index) =>
     serviceToRecommendation(href, index === 0 ? "primary-service" : "supporting-service"),
   );
+  const serviceFunnels = getServiceFunnelCrossLinks(blueprint);
   const calculators = relationshipMap.calculators.map((tool, index) =>
     toolToRecommendation(tool, "calculator", 92 - index),
   );
@@ -110,6 +112,7 @@ export function buildInternalLinkPlan(
     primaryCta,
     contextualLinks: uniqueRecommendations([
       ...relatedServices,
+      ...serviceFunnels,
       ...calculators,
       ...tools,
       ...relatedGuides,
@@ -117,7 +120,7 @@ export function buildInternalLinkPlan(
     ])
       .filter((link) => link.href !== primaryCta.href)
       .slice(0, 8),
-    relatedServices: relatedServices.slice(0, 4),
+    relatedServices: uniqueRecommendations([...relatedServices, ...serviceFunnels]).slice(0, 4),
     relatedTools: uniqueRecommendations([...calculators, ...tools]).slice(0, 4),
     relatedArticles: relatedArticles.slice(0, 4),
     relatedGuides,

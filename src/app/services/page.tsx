@@ -98,6 +98,33 @@ export default function ServicesPage() {
           </div>
         </Container>
       </Section>
+
+      <Section className="border-t border-blue-100 bg-[#f7fbff]" tone="transparent">
+        <Container>
+          <Card className="border-blue-100 bg-white" padding="lg">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-3xl">
+                <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
+                  Paginile comerciale de servicii
+                </p>
+                <h2 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">
+                  Vezi și serviciile comerciale construite pentru trafic cu intenție mare.
+                </h2>
+                <p className="mt-4 text-sm leading-7 text-slate-600">
+                  Dacă vrei pagini mai orientate spre decizie, consultanță și propunere preliminară,
+                  intră în noul hub comercial de servicii.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <Button href="/servicii" variant="secondary">
+                  Deschide hub-ul comercial
+                </Button>
+                <Button href="/proposal-builder">Proposal Builder</Button>
+              </div>
+            </div>
+          </Card>
+        </Container>
+      </Section>
     </>
   );
 }

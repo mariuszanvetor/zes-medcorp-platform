@@ -7,6 +7,7 @@ import { comparisonPages } from "@/data/comparisons";
 import { legalPages } from "@/data/legal-pages";
 import { planningJourneys } from "@/data/planning-journeys";
 import { seoClusters } from "@/data/seo-clusters";
+import { serviceFunnels } from "@/data/service-funnels";
 import { services } from "@/data/services";
 import { siteConfig } from "@/lib/seo";
 
@@ -17,6 +18,7 @@ const staticRoutes: Array<{
 }> = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/services", changeFrequency: "monthly", priority: 0.9 },
+  { path: "/servicii", changeFrequency: "monthly", priority: 0.88 },
   { path: "/about", changeFrequency: "monthly", priority: 0.74 },
   { path: "/companie", changeFrequency: "monthly", priority: 0.76 },
   { path: "/projects", changeFrequency: "monthly", priority: 0.76 },
@@ -41,6 +43,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.78,
+  }));
+
+  const serviceFunnelRoutes = serviceFunnels.map((page) => ({
+    url: new URL(`/servicii/${page.slug}`, siteConfig.url).toString(),
+    lastModified: new Date(page.updatedAt),
+    changeFrequency: "monthly" as const,
+    priority:
+      page.category === "radioprotectie-rf" || page.slug === "proiectare-camera-rmn"
+        ? 0.84
+        : 0.8,
   }));
 
   const articleRoutes = articles.map((article) => ({
@@ -125,6 +137,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: route.priority,
     })),
     ...serviceRoutes,
+    ...serviceFunnelRoutes,
     ...planningRoutes,
     ...calculatorRoutes,
     ...glossaryRoutes,
