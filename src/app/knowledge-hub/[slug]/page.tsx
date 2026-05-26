@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ArticleSchema } from "@/components/seo/ArticleSchema";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { FAQSchema } from "@/components/seo/FAQSchema";
+import { ReadingProgress } from "@/components/seo/ReadingProgress";
 import { LeadMagnetBlock } from "@/components/sections/LeadMagnetBlock";
 import { PlanningJourneyBlock } from "@/components/sections/PlanningJourneyBlock";
 import { RelatedContentBlocks } from "@/components/sections/RelatedContentBlocks";
@@ -81,11 +82,14 @@ export default async function KnowledgeHubArticlePage({
           { name: article.title, href: `/knowledge-hub/${article.slug}` },
         ]}
       />
+      <ReadingProgress />
       <ArticleSchema
         dateModified={article.updatedAt}
         datePublished={article.publishedAt}
         description={article.description}
         headline={article.title}
+        articleSection={article.category}
+        keywords={[article.targetKeyword, ...article.tags]}
         url={`/knowledge-hub/${article.slug}`}
       />
       <FAQSchema items={article.faqs} id={`faq-schema-${article.slug}`} />

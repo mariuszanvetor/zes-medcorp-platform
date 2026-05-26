@@ -3,6 +3,7 @@ import path from "node:path";
 
 const root = process.cwd();
 const articlePath = path.join(root, "src", "data", "articles.ts");
+const glossaryPath = path.join(root, "src", "data", "glossary.ts");
 const appDir = path.join(root, "src", "app");
 const publicDir = path.join(root, "public");
 
@@ -77,6 +78,19 @@ function extractArticleBlocks(source) {
   }
 
   return blocks.filter((block) => /slug:\s*"/.test(block));
+}
+
+function extractGlossarySlugs(source) {
+  const start = source.indexOf("const glossarySeeds");
+  const end = source.indexOf("function buildFaqs");
+
+  if (start === -1 || end === -1) {
+    errors.push("Could not locate glossarySeeds in src/data/glossary.ts.");
+    return [];
+  }
+
+  const body = source.slice(start, end);
+  return [...body.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]);
 }
 
 function buildRoutes(articleSlugs) {
@@ -287,12 +301,20 @@ function checkInternalReferences(routes) {
 const articleSource = fs.readFileSync(articlePath, "utf8");
 const blocks = extractArticleBlocks(articleSource);
 const articleSlugs = new Set(blocks.map((block) => getStringField(block, "slug")).filter(Boolean));
+const glossarySource = fs.readFileSync(glossaryPath, "utf8");
+const glossarySlugs = extractGlossarySlugs(glossarySource);
 const routes = buildRoutes(articleSlugs);
+
+for (const slug of glossarySlugs) {
+  routes.add(`/glosar/${slug}`);
+}
 
 checkArticleBlocks(blocks, articleSlugs, routes);
 checkInternalReferences(routes);
 
-console.log(`Content check scanned ${blocks.length} articles and ${routes.size} routes/articles.`);
+console.log(
+  `Content check scanned ${blocks.length} articles, ${glossarySlugs.length} glossary terms and ${routes.size} routes/articles.`,
+);
 
 if (warnings.length) {
   console.log(`Warnings (${warnings.length}):`);

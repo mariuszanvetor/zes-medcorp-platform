@@ -14,6 +14,8 @@ const roleLabels: Record<string, string> = {
   tool: "Instrument",
   guide: "Ghid",
   article: "Articol",
+  service: "Serviciu",
+  glossary: "Glosar",
   contact: "Contact",
 };
 

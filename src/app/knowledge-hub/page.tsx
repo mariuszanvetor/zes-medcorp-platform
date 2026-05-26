@@ -54,6 +54,12 @@ const internalLinks = [
     href: "/calculatoare/cost-camera-rmn",
   },
   {
+    title: "Glosar medical",
+    description:
+      "ClarificÄƒ termenii tehnici, comparaÈ›iile È™i checklist-urile care apar frecvent Ã®n proiectele medicale.",
+    href: "/glosar",
+  },
+  {
     title: "Radiology Room Planner",
     description:
       "Planifică cerințele pentru CT, RMN sau RX, cu separare clară între RF și protecție radiologică.",

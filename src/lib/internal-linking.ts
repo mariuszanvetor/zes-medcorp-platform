@@ -1,4 +1,5 @@
 import { articles, type Article, type ArticleTool } from "@/data/articles";
+import { glossaryTerms } from "@/data/glossary";
 import {
   programmaticCalculators,
   type ProgrammaticCalculatorDefinition,
@@ -26,6 +27,8 @@ export type LinkRole =
   | "tool"
   | "guide"
   | "article"
+  | "service"
+  | "glossary"
   | "contact";
 
 export type InternalLinkRecommendation = {
@@ -280,6 +283,19 @@ export function createLinkableContentIndex(): LinkableContent[] {
       text: [cluster.title, cluster.description, cluster.targetKeyword].join(" "),
       pillarHints: inferPillarsFromText(cluster.title + " " + cluster.description),
     })),
+    ...glossaryTerms.map((term) => ({
+      href: `/glosar/${term.slug}`,
+      label: term.title,
+      text: [
+        term.title,
+        term.description,
+        term.summary,
+        term.definition,
+        ...term.technicalNotes,
+        ...term.validationNotes,
+      ].join(" "),
+      pillarHints: inferPillarsFromText(term.title + " " + term.description),
+    })),
     ...articles.map((article) => ({
       href: `/knowledge-hub/${article.slug}`,
       label: article.title,
@@ -490,6 +506,39 @@ export function getSemanticGuideRecommendations(
     );
 }
 
+export function getSemanticGlossaryRecommendations(
+  article: Article,
+  limit = 4,
+): InternalLinkRecommendation[] {
+  const query = buildArticleText(article);
+
+  return glossaryTerms
+    .map((term) => {
+      const score = scoreTextMatch(query, [
+        term.title,
+        term.description,
+        term.summary,
+        term.definition,
+        ...term.technicalNotes,
+        ...term.validationNotes,
+        ...term.methodology,
+        ...term.standards,
+      ]);
+
+      return { term, score };
+    })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map(({ term, score }, index) => ({
+      label: term.title,
+      href: `/glosar/${term.slug}`,
+      role: "glossary" as const,
+      reason: term.summary,
+      priority: Math.min(92, 70 + score - index),
+    }));
+}
+
 export function getSemanticToolRecommendations(
   article: Article,
   limit = 4,
@@ -511,6 +560,7 @@ export function getArticleDiscoverySections(article: Article): RelatedContentSec
   const tools = getSemanticToolRecommendations(article, 3);
   const services = getSemanticServiceRecommendations(article, 4);
   const guides = getSemanticGuideRecommendations(article, 3);
+  const glossary = getSemanticGlossaryRecommendations(article, 4);
   const articlesForCluster = getSemanticArticleRecommendations(article, 5);
   const nextSteps = uniqueRecommendations([...calculators, ...tools]).slice(0, 4);
   const used = new Set<string>();
@@ -542,6 +592,12 @@ export function getArticleDiscoverySections(article: Article): RelatedContentSec
       description:
         "Resurse orientate pe cost, autorizare, infrastructura sau echipamente, in functie de intentie.",
       links: freshLinks(uniqueRecommendations([...guides, ...calculators]).slice(0, 4)),
+    },
+    {
+      title: "Glosar relevant",
+      description:
+        "Definitii si comparatii utile pentru a clarifica termenii tehnici si a evita confuziile de proiect.",
+      links: freshLinks(glossary),
     },
     {
       title: "Articole din acelasi cluster",

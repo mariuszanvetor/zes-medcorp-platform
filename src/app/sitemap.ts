@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { articles } from "@/data/articles";
 import { programmaticCalculators } from "@/data/calculators";
+import { glossaryTerms } from "@/data/glossary";
 import { legalPages } from "@/data/legal-pages";
 import { planningJourneys } from "@/data/planning-journeys";
 import { seoClusters } from "@/data/seo-clusters";
@@ -25,6 +26,7 @@ const staticRoutes: Array<{
   { path: "/proposal-builder", changeFrequency: "monthly", priority: 0.8 },
   { path: "/project-intake", changeFrequency: "monthly", priority: 0.81 },
   { path: "/planificare", changeFrequency: "monthly", priority: 0.84 },
+  { path: "/glosar", changeFrequency: "weekly", priority: 0.84 },
   { path: "/knowledge-hub", changeFrequency: "weekly", priority: 0.86 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.82 },
 ];
@@ -71,7 +73,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       calculator.slug === "cost-camera-rmn" ||
       calculator.slug === "cost-camera-ct"
         ? 0.82
-        : 0.78,
+      : 0.78,
+  }));
+
+  const glossaryRoutes = glossaryTerms.map((term) => ({
+    url: new URL(`/glosar/${term.slug}`, siteConfig.url).toString(),
+    lastModified: new Date(term.updatedAt),
+    changeFrequency: "monthly" as const,
+    priority:
+      term.contentType === "comparison" || term.contentType === "checklist"
+        ? 0.76
+        : 0.7,
   }));
 
   const planningRoutes = planningJourneys.map((journey) => ({
@@ -102,6 +114,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...serviceRoutes,
     ...planningRoutes,
     ...calculatorRoutes,
+    ...glossaryRoutes,
     ...clusterRoutes,
     ...articleRoutes,
     ...legalRoutes,

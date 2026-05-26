@@ -9,6 +9,9 @@ export type ArticleSchemaProps = {
   dateModified?: string;
   authorName?: string;
   image?: string;
+  keywords?: string[];
+  articleSection?: string | string[];
+  isAccessibleForFree?: boolean;
 };
 
 export function ArticleSchema({
@@ -19,6 +22,9 @@ export function ArticleSchema({
   dateModified,
   authorName = siteConfig.name,
   image,
+  keywords,
+  articleSection,
+  isAccessibleForFree = true,
 }: ArticleSchemaProps) {
   const canonical = getCanonicalUrl(url);
   const data: JsonLdObject = {
@@ -38,6 +44,7 @@ export function ArticleSchema({
       name: siteConfig.name,
       url: siteConfig.url,
     },
+    isAccessibleForFree,
   };
 
   if (dateModified) {
@@ -46,6 +53,14 @@ export function ArticleSchema({
 
   if (image) {
     data.image = getCanonicalUrl(image);
+  }
+
+  if (keywords?.length) {
+    data.keywords = keywords;
+  }
+
+  if (articleSection) {
+    data.articleSection = articleSection;
   }
 
   return <JsonLd data={data} id={`article-schema-${headline.toLowerCase().replace(/\s+/g, "-")}`} />;
