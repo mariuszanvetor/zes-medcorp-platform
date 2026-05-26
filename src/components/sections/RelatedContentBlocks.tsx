@@ -16,6 +16,7 @@ const roleLabels: Record<string, string> = {
   article: "Articol",
   comparison: "Comparație",
   service: "Serviciu",
+  hub: "Hub",
   glossary: "Glosar",
   contact: "Contact",
 };

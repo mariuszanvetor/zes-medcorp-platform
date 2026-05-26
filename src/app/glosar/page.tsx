@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 
+import { EcosystemNavigation } from "@/components/sections/EcosystemNavigation";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
@@ -61,6 +62,11 @@ export default function GlossaryHubPage() {
           </div>
         </Container>
       </Section>
+
+      <EcosystemNavigation
+        description="Daca un termen indica un proiect real, navigheaza catre comparatii, calculatoare, planificare sau servicii."
+        title="Glosarul face legatura cu restul site-ului"
+      />
 
       <Section className="bg-white" spacing="lg" tone="transparent">
         <Container>

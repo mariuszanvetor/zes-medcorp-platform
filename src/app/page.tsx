@@ -6,6 +6,7 @@ import { EquipmentServiceSection } from "@/components/sections/EquipmentServiceS
 import { EnterpriseTrustBand } from "@/components/sections/EnterpriseTrustBand";
 import { FinalCTASection } from "@/components/sections/FinalCTASection";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { EcosystemNavigation } from "@/components/sections/EcosystemNavigation";
 import { PlanningJourneyBlock } from "@/components/sections/PlanningJourneyBlock";
 import { RadiologyShieldingSection } from "@/components/sections/RadiologyShieldingSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
@@ -38,6 +39,11 @@ export default function Home() {
           />
         </Container>
       </Section>
+      <EcosystemNavigation
+        description="Porneste de la traseul care se potriveste situatiei tale si continua catre instrumente, comparatii, servicii sau analiza tehnica."
+        title="Cum incepi cu ZES?"
+        compact
+      />
       <AIIntroSection />
       <ServicesSection />
       <AIToolsPreviewSection />

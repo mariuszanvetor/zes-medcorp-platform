@@ -31,6 +31,7 @@ export type LinkRole =
   | "article"
   | "comparison"
   | "service"
+  | "hub"
   | "glossary"
   | "contact";
 
@@ -93,6 +94,7 @@ export function buildInternalLinkPlan(
   const relatedServices = relationshipMap.services.map((href, index) =>
     serviceToRecommendation(href, index === 0 ? "primary-service" : "supporting-service"),
   );
+  const hubLinks = getHubRecommendationsFromBlueprint(blueprint);
   const serviceFunnels = getServiceFunnelCrossLinks(blueprint);
   const calculators = relationshipMap.calculators.map((tool, index) =>
     toolToRecommendation(tool, "calculator", 92 - index),
@@ -112,6 +114,7 @@ export function buildInternalLinkPlan(
     primaryCta,
     contextualLinks: uniqueRecommendations([
       ...relatedServices,
+      ...hubLinks,
       ...serviceFunnels,
       ...calculators,
       ...tools,
@@ -613,6 +616,7 @@ export function getSemanticToolRecommendations(
 }
 
 export function getArticleDiscoverySections(article: Article): RelatedContentSection[] {
+  const hubs = getHubRecommendationsFromArticle(article);
   const calculators = getSemanticCalculatorRecommendations(article, 3);
   const tools = getSemanticToolRecommendations(article, 3);
   const services = getSemanticServiceRecommendations(article, 4);
@@ -633,6 +637,12 @@ export function getArticleDiscoverySections(article: Article): RelatedContentSec
     });
 
   return [
+    {
+      title: "Hub-uri esentiale",
+      description:
+        "Salt rapid catre hub-ul potrivit: servicii, calculatoare, comparatii, glosar, planificare, propunere sau intake.",
+      links: freshLinks(hubs),
+    },
     {
       title: "Planificare recomandata",
       description:
@@ -1071,6 +1081,169 @@ function articleToRecommendation(
       : "Related article supplied by content blueprint.",
     priority,
   };
+}
+
+function hubToRecommendation(
+  href: string,
+  label: string,
+  reason: string,
+  priority: number,
+): InternalLinkRecommendation {
+  return {
+    label,
+    href,
+    role: "hub",
+    reason,
+    priority,
+  };
+}
+
+function getHubRecommendationsFromBlueprint(
+  blueprint: Pick<
+    ArticleBlueprint,
+    "pillar" | "intent" | "funnelStage" | "projectComplexity" | "authorityCluster" | "commercialIntent"
+  >,
+) {
+  return getHubRecommendationsFromTraits({
+    pillar: blueprint.pillar,
+    intent: blueprint.intent,
+    funnelStage: blueprint.funnelStage,
+    projectComplexity: blueprint.projectComplexity,
+    authorityCluster: blueprint.authorityCluster,
+    commercialIntent: blueprint.commercialIntent,
+  });
+}
+
+function getHubRecommendationsFromArticle(article: Article) {
+  const profile = getArticleSemanticProfile(article);
+
+  return getHubRecommendationsFromTraits({
+    pillar: profile.pillars[0] ?? "planning-tools",
+    intent: profile.intent,
+    funnelStage: profile.funnelStage,
+    projectComplexity: profile.projectComplexity,
+    authorityCluster: profile.authorityClusters[0],
+    commercialIntent: profile.commercialIntent,
+  });
+}
+
+function getHubRecommendationsFromTraits(traits: {
+  pillar: TopicPillar;
+  intent: SearchIntent;
+  funnelStage: FunnelStage;
+  projectComplexity?: ProjectComplexity;
+  authorityCluster?: AuthorityCluster;
+  commercialIntent?: CommercialIntent;
+}) {
+  const hubs: InternalLinkRecommendation[] = [];
+  const technicalIntent =
+    traits.intent === "commercial-investigation" ||
+    traits.intent === "technical-planning" ||
+    traits.intent === "problem-solving";
+  const awarenessIntent =
+    traits.intent === "educational-authority" || traits.funnelStage === "awareness";
+  const projectIntent =
+    traits.commercialIntent === "high" ||
+    traits.commercialIntent === "urgent" ||
+    traits.funnelStage === "high-intent" ||
+    traits.projectComplexity === "high-complexity";
+
+  addIf(
+    hubs,
+    hubToRecommendation(
+      "/servicii",
+      "Servicii comerciale",
+      "Connect the article to the commercial service hub.",
+      96,
+    ),
+    traits.pillar !== "planning-tools" || projectIntent,
+  );
+
+  addIf(
+    hubs,
+    hubToRecommendation(
+      "/calculatoare",
+      "Calculatoare medicale",
+      "Move readers toward oriented estimates and project sizing.",
+      94,
+    ),
+    technicalIntent || projectIntent || traits.funnelStage !== "awareness",
+  );
+
+  addIf(
+    hubs,
+    hubToRecommendation(
+      "/comparatii",
+      "Comparații tehnice",
+      "Surface a comparison path when readers are weighing options.",
+      92,
+    ),
+    technicalIntent || awarenessIntent || traits.authorityCluster === "equipment-imaging",
+  );
+
+  addIf(
+    hubs,
+    hubToRecommendation(
+      "/glosar",
+      "Glosar medical",
+      "Help readers decode the technical language before they continue.",
+      90,
+    ),
+    awarenessIntent ||
+      traits.authorityCluster === "cncan-dsp" ||
+      traits.authorityCluster === "rmn-rf" ||
+      traits.authorityCluster === "ct-radiation",
+  );
+
+  addIf(
+    hubs,
+    hubToRecommendation(
+      "/planificare",
+      "Planificare proiect",
+      "Route readers into the scenario-based planning hub.",
+      89,
+    ),
+    traits.funnelStage === "awareness" ||
+      traits.funnelStage === "mid" ||
+      traits.pillar === "constructii-medicale" ||
+      traits.pillar === "proiectare-medicala" ||
+      traits.pillar === "modernizare-clinici",
+  );
+
+  addIf(
+    hubs,
+    hubToRecommendation(
+      "/knowledge-hub",
+      "Knowledge Hub",
+      "Keep the reader inside the educational resource library.",
+      88,
+    ),
+    true,
+  );
+
+  addIf(
+    hubs,
+    hubToRecommendation(
+      "/proposal-builder",
+      "Proposal Builder",
+      "Move high-intent readers toward a preliminary proposal.",
+      97,
+    ),
+    projectIntent || traits.intent === "commercial-investigation",
+  );
+
+  addIf(
+    hubs,
+    hubToRecommendation(
+      "/project-intake",
+      "Project Intake",
+      "Collect the technical details needed for a clearer analysis.",
+      98,
+    ),
+    projectIntent || traits.authorityCluster === "clinic-planning" || traits.authorityCluster === "modernization",
+  );
+
+  return uniqueRecommendations(hubs).slice(0, 6);
 }
 
 function clusterToRecommendation(

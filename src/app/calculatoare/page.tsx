@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { EcosystemNavigation } from "@/components/sections/EcosystemNavigation";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -113,6 +114,11 @@ export default function CalculatoareHubPage() {
           </div>
         </Container>
       </Section>
+
+      <EcosystemNavigation
+        description="Daca esti la etapa de estimare, continua spre comparatii, glosar sau planificare si apoi revino cu detaliile in Proposal Builder sau Project Intake."
+        title="Legaturi rapide din zona de estimare"
+      />
 
       <Section className="bg-white" spacing="lg" tone="transparent">
         <Container>

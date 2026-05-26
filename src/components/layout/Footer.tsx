@@ -6,32 +6,31 @@ import { Container } from "@/components/ui/Container";
 import { companyContact } from "@/lib/brand";
 
 const serviceLinks = [
-  { label: "Radiologie", href: "/services/radiologie" },
-  { label: "Ecranare RF", href: "/services/rf-shielding" },
-  { label: "Protectie radiologica", href: "/services/protectie-radiologica" },
-  { label: "Aparatura medicala", href: "/services/aparatura-medicala" },
-  { label: "Imagistica medicala", href: "/services/imagistica-medicala" },
-  { label: "IVD / laborator", href: "/services/ivd-laborator" },
-  {
-    label: "Service specializat",
-    href: "/services/service-aparatura-medicala",
-  },
+  { label: "Hub comercial ZES", href: "/servicii" },
+  { label: "Servicii generale", href: "/services" },
+  { label: "Proiectare camera RMN", href: "/servicii/proiectare-camera-rmn" },
+  { label: "Proiectare camera CT", href: "/servicii/proiectare-camera-ct" },
+  { label: "RF shielding pentru RMN", href: "/servicii/rf-shielding-rmn" },
+  { label: "Radioprotectie pentru imagistica", href: "/servicii/radioprotectie-imagistica" },
+  { label: "Modernizare clinica medicala", href: "/servicii/modernizare-clinica-medicala" },
 ];
 
 const aiToolLinks = [
-  { label: "Analiza preliminara", href: "/ai-project-advisor" },
-  { label: "Estimare proiect medical", href: "/calculator-proiect-medical" },
-  { label: "Estimare camera RMN", href: "/calculatoare/cost-camera-rmn" },
-  { label: "Planificare radiologie", href: "/radiology-room-planner" },
-  { label: "Propunere preliminara", href: "/proposal-builder" },
-  { label: "Project Intake ZES", href: "/project-intake" },
   { label: "Calculatoare medicale", href: "/calculatoare" },
+  { label: "Comparații tehnice", href: "/comparatii" },
+  { label: "Planificare proiect", href: "/planificare" },
+  { label: "Proposal Builder", href: "/proposal-builder" },
+  { label: "Project Intake ZES", href: "/project-intake" },
+  { label: "Calculator proiect medical", href: "/calculator-proiect-medical" },
+  { label: "Radiology Room Planner", href: "/radiology-room-planner" },
+  { label: "Service Diagnostic", href: "/service-diagnostic" },
+  { label: "Analiza preliminara", href: "/ai-project-advisor" },
 ];
 
 const knowledgeLinks = [
-  { label: "Planificare proiect", href: "/planificare" },
   { label: "Knowledge Hub", href: "/knowledge-hub" },
   { label: "Glosar medical", href: "/glosar" },
+  { label: "Planificare proiect", href: "/planificare" },
   { label: "Comparatii tehnice", href: "/comparatii" },
   { label: "Ghiduri tehnice", href: "/knowledge-hub#ghiduri-tehnice" },
   { label: "Autorizari", href: "/knowledge-hub#autorizari" },
@@ -53,9 +52,9 @@ const legalLinks = [
 ];
 
 const linkGroups = [
-  { title: "Servicii", links: serviceLinks },
+  { title: "Servicii comerciale", links: serviceLinks },
   { title: "Instrumente", links: aiToolLinks },
-  { title: "Knowledge Hub", links: knowledgeLinks },
+  { title: "Resurse", links: knowledgeLinks },
   { title: "Companie", links: companyLinks },
   { title: "Legal", links: legalLinks },
 ];

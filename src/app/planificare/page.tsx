@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { EcosystemNavigation } from "@/components/sections/EcosystemNavigation";
 import { PlanningJourneyBlock } from "@/components/sections/PlanningJourneyBlock";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Badge } from "@/components/ui/Badge";
@@ -60,6 +61,11 @@ export default function PlanningPage() {
           </div>
         </Container>
       </Section>
+
+      <EcosystemNavigation
+        description="Daca ai ales un traseu de planificare, poti continua catre calculatoare, comparatii, servicii sau analiza preliminara."
+        title="Ecosistemul potrivit pentru etapa ta"
+      />
 
       <Section className="bg-white" spacing="lg" tone="transparent">
         <Container>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 
+import { EcosystemNavigation } from "@/components/sections/EcosystemNavigation";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
@@ -70,6 +71,11 @@ export default function ComparatiiPage() {
           </div>
         </Container>
       </Section>
+
+      <EcosystemNavigation
+        description="Dupa ce compari optiunile, poti continua catre calculatoare, glosar, servicii sau direct spre Project Intake."
+        title="Compari aici, continui in restul ecosistemului"
+      />
 
       <Section className="bg-white" spacing="lg" tone="transparent">
         <Container>

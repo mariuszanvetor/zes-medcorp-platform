@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { EcosystemNavigation } from "@/components/sections/EcosystemNavigation";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -66,6 +67,11 @@ export default function ServiciiHubPage() {
           </div>
         </Container>
       </Section>
+
+      <EcosystemNavigation
+        description="Traseele ZES sunt conectate: serviciile comerciale, calculatoarele, comparatiile, glosarul si planificarea duc toate catre acelasi sistem de lucru."
+        title="Ecosistemul comercial ZES"
+      />
 
       <Section className="bg-white" tone="transparent">
         <Container>

@@ -6,6 +6,7 @@ const articlePath = path.join(root, "src", "data", "articles.ts");
 const comparisonPath = path.join(root, "src", "data", "comparisons.ts");
 const glossaryPath = path.join(root, "src", "data", "glossary.ts");
 const calculatorPath = path.join(root, "src", "data", "calculators.ts");
+const serviceFunnelsPath = path.join(root, "src", "data", "service-funnels.ts");
 const planningPath = path.join(root, "src", "data", "planning-journeys.ts");
 const seoIndexingPath = path.join(root, "src", "data", "seo-indexing-priorities.ts");
 const appDir = path.join(root, "src", "app");
@@ -228,6 +229,10 @@ function extractCalculatorBlocks(source) {
   }
 
   return blocks.filter((block) => /slug:\s*"/.test(block));
+}
+
+function extractServiceFunnelSlugs(source) {
+  return [...source.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]);
 }
 
 function buildRoutes(articleSlugs) {
@@ -652,6 +657,52 @@ function checkInternalReferences(routes) {
   }
 }
 
+function checkHubCoverage(routes, sitemapSource) {
+  const requiredHubRoutes = [
+    "/",
+    "/servicii",
+    "/calculatoare",
+    "/comparatii",
+    "/glosar",
+    "/knowledge-hub",
+    "/planificare",
+    "/proposal-builder",
+    "/project-intake",
+    "/services",
+    "/contact",
+  ];
+
+  const requiredCoreFunnelRoutes = [
+    "/servicii/proiectare-camera-rmn",
+    "/servicii/proiectare-camera-ct",
+    "/servicii/rf-shielding-rmn",
+    "/calculatoare/cost-camera-rmn",
+    "/calculatoare/cost-camera-ct",
+    "/comparatii/rmn-vs-ct",
+    "/glosar/faraday-cage-explicatie",
+    "/planificare/nu-stiu-de-unde-sa-incep",
+  ];
+
+  for (const route of requiredHubRoutes) {
+    if (!routes.has(route)) {
+      errors.push(`Required public hub route missing: ${route}`);
+    }
+  }
+
+  for (const route of requiredCoreFunnelRoutes) {
+    if (!routes.has(route)) {
+      errors.push(`Required funnel route missing: ${route}`);
+    }
+  }
+
+  const adminRoutes = ["/admin/leads", "/admin/lead-flow", "/admin/content-ops", "/admin/seo-launch"];
+  for (const route of adminRoutes) {
+    if (sitemapSource.includes(route)) {
+      errors.push(`Admin route leaked into sitemap source: ${route}`);
+    }
+  }
+}
+
 const articleSource = fs.readFileSync(articlePath, "utf8");
 const blocks = extractArticleBlocks(articleSource);
 const articleSlugs = new Set(blocks.map((block) => getStringField(block, "slug")).filter(Boolean));
@@ -671,7 +722,10 @@ const calculatorBlocks = extractCalculatorBlocks(calculatorSource);
 const calculatorSlugs = new Set(
   calculatorBlocks.map((block) => getStringField(block, "slug")).filter(Boolean),
 );
+const serviceFunnelSource = fs.readFileSync(serviceFunnelsPath, "utf8");
+const serviceFunnelSlugs = extractServiceFunnelSlugs(serviceFunnelSource);
 const routes = buildRoutes(articleSlugs);
+const sitemapSource = fs.readFileSync(path.join(appDir, "sitemap.ts"), "utf8");
 
 for (const slug of glossarySlugs) {
   routes.add(`/glosar/${slug}`);
@@ -693,10 +747,15 @@ for (const slug of calculatorSlugs) {
   routes.add(`/calculatoare/${slug}`);
 }
 
+for (const slug of serviceFunnelSlugs) {
+  routes.add(`/servicii/${slug}`);
+}
+
 checkArticleBlocks(blocks, articleSlugs, routes);
 checkComparisonBlocks(comparisonBlocks, comparisonSlugs, articleSlugs, new Set(glossarySlugs), routes);
 checkCalculatorBlocks(calculatorBlocks, routes);
 checkInternalReferences(routes);
+checkHubCoverage(routes, sitemapSource);
 
 console.log(
   `Content check scanned ${blocks.length} articles, ${comparisonBlocks.length} comparison pages, ${calculatorBlocks.length} calculators, ${glossarySlugs.length} glossary terms and ${routes.size} routes/articles.`,

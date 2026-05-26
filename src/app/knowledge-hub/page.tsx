@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 
+import { EcosystemNavigation } from "@/components/sections/EcosystemNavigation";
 import { KnowledgeHubArticles } from "@/components/sections/KnowledgeHubArticles";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Button } from "@/components/ui/Button";
@@ -128,6 +129,11 @@ export default function KnowledgeHubPage() {
           </div>
         </Container>
       </Section>
+
+      <EcosystemNavigation
+        description="Pune ghidurile in context si sari rapid catre comparatii, calculatoare, glosar, planificare sau propunere preliminara."
+        title="Alege urmatorul pas dupa citire"
+      />
 
       <Section className="bg-[#f7fafc]" tone="transparent">
         <Container>
