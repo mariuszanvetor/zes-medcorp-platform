@@ -3,6 +3,7 @@ import type { MetadataRoute } from "next";
 import { articles } from "@/data/articles";
 import { programmaticCalculators } from "@/data/calculators";
 import { glossaryTerms } from "@/data/glossary";
+import { comparisonPages } from "@/data/comparisons";
 import { legalPages } from "@/data/legal-pages";
 import { planningJourneys } from "@/data/planning-journeys";
 import { seoClusters } from "@/data/seo-clusters";
@@ -21,12 +22,14 @@ const staticRoutes: Array<{
   { path: "/projects", changeFrequency: "monthly", priority: 0.76 },
   { path: "/ai-project-advisor", changeFrequency: "monthly", priority: 0.85 },
   { path: "/calculator-proiect-medical", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/calculatoare", changeFrequency: "weekly", priority: 0.85 },
   { path: "/radiology-room-planner", changeFrequency: "monthly", priority: 0.8 },
   { path: "/service-diagnostic", changeFrequency: "monthly", priority: 0.78 },
   { path: "/proposal-builder", changeFrequency: "monthly", priority: 0.8 },
   { path: "/project-intake", changeFrequency: "monthly", priority: 0.81 },
   { path: "/planificare", changeFrequency: "monthly", priority: 0.84 },
   { path: "/glosar", changeFrequency: "weekly", priority: 0.84 },
+  { path: "/comparatii", changeFrequency: "weekly", priority: 0.83 },
   { path: "/knowledge-hub", changeFrequency: "weekly", priority: 0.86 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.82 },
 ];
@@ -62,6 +65,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       cluster.slug === "cost-camera-rmn" ||
       cluster.slug === "cost-camera-ct"
         ? 0.83
+        : 0.79,
+  }));
+
+  const comparisonRoutes = comparisonPages.map((page) => ({
+    url: new URL(`/comparatii/${page.slug}`, siteConfig.url).toString(),
+    lastModified: new Date(page.updatedAt),
+    changeFrequency: "monthly" as const,
+    priority:
+      page.hubGroup === "radioprotectie-rf" || page.slug === "rmn-vs-ct" || page.slug === "ct-vs-cbct"
+        ? 0.82
         : 0.79,
   }));
 
@@ -116,6 +129,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...calculatorRoutes,
     ...glossaryRoutes,
     ...clusterRoutes,
+    ...comparisonRoutes,
     ...articleRoutes,
     ...legalRoutes,
   ];

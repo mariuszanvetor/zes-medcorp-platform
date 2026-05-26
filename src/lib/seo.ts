@@ -68,7 +68,8 @@ function getOgContext(path: string): { label: string; variant: OgVariant } {
   if (
     path.startsWith("/knowledge-hub") ||
     path.startsWith("/ghiduri") ||
-    path.startsWith("/glosar")
+    path.startsWith("/glosar") ||
+    path.startsWith("/comparatii")
   ) {
     return { label: "Knowledge Hub", variant: "knowledge" };
   }

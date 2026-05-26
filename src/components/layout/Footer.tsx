@@ -8,9 +8,9 @@ import { companyContact } from "@/lib/brand";
 const serviceLinks = [
   { label: "Radiologie", href: "/services/radiologie" },
   { label: "Ecranare RF", href: "/services/rf-shielding" },
-  { label: "Protecție radiologică", href: "/services/protectie-radiologica" },
-  { label: "Aparatură medicală", href: "/services/aparatura-medicala" },
-  { label: "Imagistică medicală", href: "/services/imagistica-medicala" },
+  { label: "Protectie radiologica", href: "/services/protectie-radiologica" },
+  { label: "Aparatura medicala", href: "/services/aparatura-medicala" },
+  { label: "Imagistica medicala", href: "/services/imagistica-medicala" },
   { label: "IVD / laborator", href: "/services/ivd-laborator" },
   {
     label: "Service specializat",
@@ -19,20 +19,22 @@ const serviceLinks = [
 ];
 
 const aiToolLinks = [
-  { label: "Analiză preliminară", href: "/ai-project-advisor" },
+  { label: "Analiza preliminara", href: "/ai-project-advisor" },
   { label: "Estimare proiect medical", href: "/calculator-proiect-medical" },
-  { label: "Estimare cameră RMN", href: "/calculatoare/cost-camera-rmn" },
+  { label: "Estimare camera RMN", href: "/calculatoare/cost-camera-rmn" },
   { label: "Planificare radiologie", href: "/radiology-room-planner" },
-  { label: "Propunere preliminară", href: "/proposal-builder" },
+  { label: "Propunere preliminara", href: "/proposal-builder" },
   { label: "Project Intake ZES", href: "/project-intake" },
+  { label: "Calculatoare medicale", href: "/calculatoare" },
 ];
 
 const knowledgeLinks = [
   { label: "Planificare proiect", href: "/planificare" },
   { label: "Knowledge Hub", href: "/knowledge-hub" },
   { label: "Glosar medical", href: "/glosar" },
+  { label: "Comparatii tehnice", href: "/comparatii" },
   { label: "Ghiduri tehnice", href: "/knowledge-hub#ghiduri-tehnice" },
-  { label: "Autorizări", href: "/knowledge-hub#autorizari" },
+  { label: "Autorizari", href: "/knowledge-hub#autorizari" },
 ];
 
 const companyLinks = [
@@ -43,7 +45,7 @@ const companyLinks = [
 ];
 
 const legalLinks = [
-  { label: "Confidențialitate", href: "/privacy-policy" },
+  { label: "Confidentialitate", href: "/privacy-policy" },
   { label: "Termeni", href: "/terms" },
   { label: "Cookies", href: "/cookie-policy" },
   { label: "GDPR", href: "/gdpr" },
@@ -93,7 +95,7 @@ export function Footer() {
             </div>
             <div className="mt-6">
               <Button href="/contact" size="sm" variant="outline">
-                Solicitați evaluare tehnică
+                Solicita evaluare tehnica
               </Button>
             </div>
           </div>
@@ -123,15 +125,15 @@ export function Footer() {
 
         <div className="flex flex-col gap-3 border-t border-white/10 py-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            &copy; {currentYear} {companyContact.legalName}. CUI{" "}
-            {companyContact.cui} · Reg. Com. {companyContact.tradeRegister}
+            &copy; {currentYear} {companyContact.legalName}. CUI {companyContact.cui} ·
+            Reg. Com. {companyContact.tradeRegister}
           </p>
           <div className="flex gap-4">
             <Link className="transition hover:text-slate-300" href="/contact">
               Contact
             </Link>
             <Link className="transition hover:text-slate-300" href="/privacy-policy">
-              Confidențialitate
+              Confidentialitate
             </Link>
             <Link className="transition hover:text-slate-300" href="/terms">
               Termeni

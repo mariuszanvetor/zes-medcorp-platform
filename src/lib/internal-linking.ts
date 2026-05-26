@@ -1,4 +1,5 @@
 import { articles, type Article, type ArticleTool } from "@/data/articles";
+import { comparisonPages, type ComparisonPageData } from "@/data/comparisons";
 import { glossaryTerms } from "@/data/glossary";
 import {
   programmaticCalculators,
@@ -27,6 +28,7 @@ export type LinkRole =
   | "tool"
   | "guide"
   | "article"
+  | "comparison"
   | "service"
   | "glossary"
   | "contact";
@@ -283,6 +285,12 @@ export function createLinkableContentIndex(): LinkableContent[] {
       text: [cluster.title, cluster.description, cluster.targetKeyword].join(" "),
       pillarHints: inferPillarsFromText(cluster.title + " " + cluster.description),
     })),
+    ...comparisonPages.map((page) => ({
+      href: `/comparatii/${page.slug}`,
+      label: page.title,
+      text: buildComparisonText(page),
+      pillarHints: inferPillarsFromText(page.title + " " + page.description),
+    })),
     ...glossaryTerms.map((term) => ({
       href: `/glosar/${term.slug}`,
       label: term.title,
@@ -506,6 +514,52 @@ export function getSemanticGuideRecommendations(
     );
 }
 
+export function getSemanticComparisonRecommendations(
+  article: Article,
+  limit = 4,
+): InternalLinkRecommendation[] {
+  const sourceProfile = getArticleSemanticProfile(article);
+  const query = buildArticleText(article);
+
+  return comparisonPages
+    .map((page) => {
+      const profile = profileFromText(`comparison-${page.slug}`, buildComparisonText(page));
+      const score =
+        scoreSemanticRelevance(sourceProfile, profile) +
+        scoreTextMatch(query, [
+          page.title,
+          page.description,
+          page.targetKeyword,
+          page.category,
+          page.summaryVerdict,
+          ...page.entities.flatMap((entity) => [
+            entity.label,
+            entity.summary,
+            ...entity.chooseWhen,
+            ...entity.tradeoffs,
+          ]),
+          ...page.decisionFactors,
+          ...page.costImplications,
+          ...page.infrastructureImplications,
+          ...page.regulatoryNotes,
+          ...page.mistakesToAvoid,
+          ...page.faqs.flatMap((faq) => [faq.question, faq.answer]),
+        ]);
+
+      return { page, score };
+    })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map(({ page, score }, index) => ({
+      label: page.title,
+      href: `/comparatii/${page.slug}`,
+      role: "comparison" as const,
+      reason: page.summaryVerdict,
+      priority: Math.min(92, 68 + score - index),
+    }));
+}
+
 export function getSemanticGlossaryRecommendations(
   article: Article,
   limit = 4,
@@ -560,6 +614,7 @@ export function getArticleDiscoverySections(article: Article): RelatedContentSec
   const tools = getSemanticToolRecommendations(article, 3);
   const services = getSemanticServiceRecommendations(article, 4);
   const guides = getSemanticGuideRecommendations(article, 3);
+  const comparisons = getSemanticComparisonRecommendations(article, 3);
   const glossary = getSemanticGlossaryRecommendations(article, 4);
   const articlesForCluster = getSemanticArticleRecommendations(article, 5);
   const nextSteps = uniqueRecommendations([...calculators, ...tools]).slice(0, 4);
@@ -592,6 +647,12 @@ export function getArticleDiscoverySections(article: Article): RelatedContentSec
       description:
         "Resurse orientate pe cost, autorizare, infrastructura sau echipamente, in functie de intentie.",
       links: freshLinks(uniqueRecommendations([...guides, ...calculators]).slice(0, 4)),
+    },
+    {
+      title: "Comparatii tehnice utile",
+      description:
+        "Pagini care clarifica diferentele reale intre optiuni apropiate si ajuta la decizia corecta.",
+      links: freshLinks(comparisons),
     },
     {
       title: "Glosar relevant",
@@ -665,6 +726,31 @@ function buildArticleText(article: Article) {
       section.callout?.body ?? "",
     ]),
     ...article.faqs.flatMap((faq) => [faq.question, faq.answer]),
+  ].join(" ");
+}
+
+function buildComparisonText(page: ComparisonPageData) {
+  return [
+    page.slug,
+    page.title,
+    page.description,
+    page.targetKeyword,
+    page.category,
+    page.intro,
+    page.summaryVerdict,
+    ...page.entities.flatMap((entity) => [
+      entity.label,
+      entity.summary,
+      ...entity.chooseWhen,
+      ...entity.tradeoffs,
+    ]),
+    ...page.comparisonTable.rows.flatMap((row) => [row.label, ...Object.values(row.values)]),
+    ...page.decisionFactors,
+    ...page.costImplications,
+    ...page.infrastructureImplications,
+    ...page.regulatoryNotes,
+    ...page.mistakesToAvoid,
+    ...page.faqs.flatMap((faq) => [faq.question, faq.answer]),
   ].join(" ");
 }
 
