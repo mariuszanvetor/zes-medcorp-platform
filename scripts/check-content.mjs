@@ -7,6 +7,7 @@ const comparisonPath = path.join(root, "src", "data", "comparisons.ts");
 const glossaryPath = path.join(root, "src", "data", "glossary.ts");
 const calculatorPath = path.join(root, "src", "data", "calculators.ts");
 const planningPath = path.join(root, "src", "data", "planning-journeys.ts");
+const seoIndexingPath = path.join(root, "src", "data", "seo-indexing-priorities.ts");
 const appDir = path.join(root, "src", "app");
 const publicDir = path.join(root, "public");
 
@@ -107,6 +108,19 @@ function extractPlanningSlugs(source) {
 
   const body = source.slice(start, end);
   return [...body.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]);
+}
+
+function extractSeoIndexingUrls(source) {
+  const start = source.indexOf("export const seoIndexingPriorityGroups");
+  const end = source.indexOf("export const seoIndexingPriorityItems");
+
+  if (start === -1 || end === -1) {
+    errors.push("Could not locate seoIndexingPriorityGroups in src/data/seo-indexing-priorities.ts.");
+    return [];
+  }
+
+  const body = source.slice(start, end);
+  return [...body.matchAll(/item\("([^"]+)"/g)].map((match) => match[1]);
 }
 
 function extractComparisonBlocks(source) {
@@ -650,6 +664,8 @@ const glossarySource = fs.readFileSync(glossaryPath, "utf8");
 const glossarySlugs = extractGlossarySlugs(glossarySource);
 const planningSource = fs.readFileSync(planningPath, "utf8");
 const planningSlugs = extractPlanningSlugs(planningSource);
+const seoIndexingSource = fs.readFileSync(seoIndexingPath, "utf8");
+const seoIndexingUrls = extractSeoIndexingUrls(seoIndexingSource);
 const calculatorSource = fs.readFileSync(calculatorPath, "utf8");
 const calculatorBlocks = extractCalculatorBlocks(calculatorSource);
 const calculatorSlugs = new Set(
@@ -667,6 +683,10 @@ for (const slug of comparisonSlugs) {
 
 for (const slug of planningSlugs) {
   routes.add(`/planificare/${slug}`);
+}
+
+for (const url of seoIndexingUrls) {
+  routes.add(url);
 }
 
 for (const slug of calculatorSlugs) {
