@@ -36,12 +36,12 @@ const adminNavItems = [
     status: "SEO",
   },
   {
-    label: "Analytics",
-    href: "#",
-    status: "Future",
+    label: "Content Ops",
+    href: "/admin/content-ops",
+    status: "Ops",
   },
   {
-    label: "Content Ops",
+    label: "Analytics",
     href: "#",
     status: "Future",
   },
