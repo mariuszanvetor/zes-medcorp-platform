@@ -8,6 +8,7 @@ import type {
   SearchIntent,
   TopicPillar,
 } from "@/lib/content-engine";
+import { authorityBatch70 } from "./authority-batch-70";
 
 export const articleCategories = [
   "Infrastructură medicală",
@@ -5765,7 +5766,7 @@ const proposalBuilderTool: ArticleTool = {
   href: "/proposal-builder",
 };
 
-export const articles: Article[] = [...baseArticles, ...overnightSeoArticles].map((article) => {
+export const articles: Article[] = [...baseArticles, ...overnightSeoArticles, ...authorityBatch70].map((article) => {
   const upgradedArticle = {
     ...article,
     ...authorityArticleUpgrades[article.slug],

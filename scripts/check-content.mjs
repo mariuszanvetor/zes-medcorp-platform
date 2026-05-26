@@ -3,6 +3,7 @@ import path from "node:path";
 
 const root = process.cwd();
 const articlePath = path.join(root, "src", "data", "articles.ts");
+const authorityBatchPath = path.join(root, "src", "data", "authority-batch-70.ts");
 const comparisonPath = path.join(root, "src", "data", "comparisons.ts");
 const glossaryPath = path.join(root, "src", "data", "glossary.ts");
 const calculatorPath = path.join(root, "src", "data", "calculators.ts");
@@ -31,17 +32,17 @@ function walk(dir, out = []) {
   return out;
 }
 
-function extractArticleBlocks(source) {
-  const start = source.indexOf("const baseArticles");
-  const authorityStart = source.indexOf("const authorityArticleUpgrades");
+function extractArticleBlocks(source, startToken, endToken = null) {
+  const start = source.indexOf(startToken);
 
-  if (start === -1 || authorityStart === -1) {
-    errors.push("Could not locate baseArticles or authorityArticleUpgrades in src/data/articles.ts.");
+  if (start === -1) {
+    errors.push(`Could not locate ${startToken} in article source.`);
     return [];
   }
 
   const arrayStart = source.indexOf("[", start);
-  const body = source.slice(arrayStart + 1, authorityStart);
+  const end = endToken ? source.indexOf(endToken, arrayStart) : source.length;
+  const body = source.slice(arrayStart + 1, end === -1 ? source.length : end);
   const blocks = [];
   let depth = 0;
   let blockStart = -1;
@@ -704,8 +705,17 @@ function checkHubCoverage(routes, sitemapSource) {
 }
 
 const articleSource = fs.readFileSync(articlePath, "utf8");
-const blocks = extractArticleBlocks(articleSource);
-const articleSlugs = new Set(blocks.map((block) => getStringField(block, "slug")).filter(Boolean));
+const blocks = extractArticleBlocks(
+  articleSource,
+  "const baseArticles",
+  "const authorityArticleUpgrades",
+);
+const batchSource = fs.readFileSync(authorityBatchPath, "utf8");
+const batchBlocks = extractArticleBlocks(batchSource, "export const authorityBatch70");
+const articleBlocks = [...blocks, ...batchBlocks];
+const articleSlugs = new Set(
+  articleBlocks.map((block) => getStringField(block, "slug")).filter(Boolean),
+);
 const comparisonSource = fs.readFileSync(comparisonPath, "utf8");
 const comparisonBlocks = extractComparisonBlocks(comparisonSource);
 const comparisonSlugs = new Set(
@@ -751,14 +761,14 @@ for (const slug of serviceFunnelSlugs) {
   routes.add(`/servicii/${slug}`);
 }
 
-checkArticleBlocks(blocks, articleSlugs, routes);
+checkArticleBlocks(articleBlocks, articleSlugs, routes);
 checkComparisonBlocks(comparisonBlocks, comparisonSlugs, articleSlugs, new Set(glossarySlugs), routes);
 checkCalculatorBlocks(calculatorBlocks, routes);
 checkInternalReferences(routes);
 checkHubCoverage(routes, sitemapSource);
 
 console.log(
-  `Content check scanned ${blocks.length} articles, ${comparisonBlocks.length} comparison pages, ${calculatorBlocks.length} calculators, ${glossarySlugs.length} glossary terms and ${routes.size} routes/articles.`,
+  `Content check scanned ${articleBlocks.length} articles, ${comparisonBlocks.length} comparison pages, ${calculatorBlocks.length} calculators, ${glossarySlugs.length} glossary terms and ${routes.size} routes/articles.`,
 );
 
 if (warnings.length) {
