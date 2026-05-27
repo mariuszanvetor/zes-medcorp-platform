@@ -23,6 +23,7 @@ import {
   loadDiscoveryContext,
   type SerializableDiscoveryContext,
 } from "@/lib/ai-intelligence/discovery-context";
+import { createProposalIntelligence } from "@/lib/ai-intelligence/proposal-intelligence";
 import { assembleProposal } from "@/lib/proposal-assembly";
 import { cn } from "@/lib/utils";
 
@@ -806,6 +807,16 @@ function generateProposal(
     timelineDuration: timeline.estimatedDuration,
     highestRisk: risks[0]?.level,
   });
+  const proposalIntelligence = createProposalIntelligence({
+    discoveryContext,
+    form,
+    proposalSignals: {
+      budgetRange: budget.totalRange,
+      complexity,
+      riskLevel: risks[0]?.level,
+      score: normalizedScore,
+    },
+  });
 
   return {
     title: `Propunere preliminară pentru ${form.projectType.toLowerCase()}`,
@@ -830,5 +841,6 @@ function generateProposal(
         ? "Solicită propunere tehnică personalizată ZES cu validare rapidă a riscurilor critice."
         : "Solicită propunere tehnică personalizată ZES pentru transformarea estimării într-un plan aplicat.",
     assembly,
+    proposalIntelligence,
   };
 }

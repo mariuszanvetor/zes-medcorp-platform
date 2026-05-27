@@ -196,6 +196,20 @@ class ProposalPdfWriter {
     this.paragraph(this.document.assembly.summary);
     this.list(this.document.assumptions.slice(0, 6));
 
+    if (this.document.proposalIntelligence) {
+      this.section("Intelligence propunere");
+      this.callout(
+        `Readiness ${this.document.proposalIntelligence.proposalReadinessScore}/100`,
+        this.document.proposalIntelligence.projectIntelligenceSummary,
+      );
+      this.keyValues([
+        ["Complexitate", String(this.document.proposalIntelligence.complexityAnalysis.level)],
+        ["Urmator pas", this.document.proposalIntelligence.nextBestAction],
+      ]);
+      this.section("Pregatire discutie tehnica");
+      this.list(this.document.proposalIntelligence.discussionPrep.slice(0, 6));
+    }
+
     this.section("Ipoteze folosite");
     this.list(this.document.assumptions);
   }
@@ -281,7 +295,10 @@ class ProposalPdfWriter {
     this.list(this.document.missingInformation);
 
     this.section("Note de validare");
-    this.list(this.document.assembly.validationNeeds);
+    this.list([
+      ...this.document.assembly.validationNeeds,
+      ...(this.document.proposalIntelligence?.validationNeeds ?? []),
+    ]);
   }
 
   private nextStepsAndDisclaimer() {

@@ -68,6 +68,42 @@ export function ProposalDocumentPreview({
       </header>
 
       <div className="grid gap-8 p-6 sm:p-8">
+        {document.proposalIntelligence && (
+          <PreviewSection title="Intelligence propunere">
+            <div className="grid gap-4">
+              <div className="rounded-2xl border border-blue-100 bg-[#f7fbff] p-5">
+                <p className="text-sm leading-7 text-slate-700">
+                  {document.proposalIntelligence.projectIntelligenceSummary}
+                </p>
+                <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                  <SummaryTile
+                    label="Readiness"
+                    value={`${document.proposalIntelligence.proposalReadinessScore}/100`}
+                  />
+                  <SummaryTile
+                    label="Complexitate"
+                    value={String(document.proposalIntelligence.complexityAnalysis.level)}
+                  />
+                  <SummaryTile
+                    label="Urmator pas"
+                    value={document.proposalIntelligence.nextBestAction}
+                  />
+                </div>
+              </div>
+              <div className="grid gap-4 lg:grid-cols-2">
+                <PreviewList
+                  title="Validari recomandate"
+                  items={document.proposalIntelligence.validationNeeds.slice(0, 6)}
+                />
+                <PreviewList
+                  title="Informatii lipsa"
+                  items={document.proposalIntelligence.missingInformation.slice(0, 6)}
+                />
+              </div>
+            </div>
+          </PreviewSection>
+        )}
+
         <PreviewSection title="Servicii recomandate">
           <div className="grid gap-3 md:grid-cols-2">
             {document.recommendedServices.map((service) => (

@@ -8,6 +8,7 @@ import {
   loadDiscoveryContext,
   type SerializableDiscoveryContext,
 } from "@/lib/ai-intelligence/discovery-context";
+import type { ProposalIntelligenceOutput } from "@/lib/ai-intelligence/proposal-intelligence";
 import type { LeadSummaryPreview } from "@/lib/lead-types";
 
 export type ProposalBuilderLeadCTAProps = {
@@ -16,6 +17,7 @@ export type ProposalBuilderLeadCTAProps = {
   generatedBudgetRange?: string;
   generatedRiskLevel?: string;
   generatedComplexity?: string;
+  proposalIntelligence?: ProposalIntelligenceOutput;
 };
 
 export function ProposalBuilderLeadCTA({
@@ -24,6 +26,7 @@ export function ProposalBuilderLeadCTA({
   generatedBudgetRange,
   generatedRiskLevel,
   generatedComplexity,
+  proposalIntelligence,
 }: ProposalBuilderLeadCTAProps) {
   const [discoveryContext, setDiscoveryContext] = useState<SerializableDiscoveryContext | null>(null);
   useEffect(() => {
@@ -31,11 +34,22 @@ export function ProposalBuilderLeadCTA({
   }, []);
 
   const mergedSummary = useMemo(() => {
-    if (!discoveryContext) return generatedSummary;
-    return [generatedSummary, createDiscoveryContextSummary(discoveryContext)]
+    const intelligenceSummary = proposalIntelligence
+      ? [
+          `Proposal intelligence: readiness ${proposalIntelligence.proposalReadinessScore}/100, complexitate ${proposalIntelligence.complexityAnalysis.level}, informatii lipsa ${proposalIntelligence.missingInformation.length}.`,
+          proposalIntelligence.projectIntelligenceSummary,
+          ...proposalIntelligence.internalLeadNotes,
+        ].join("\n")
+      : "";
+
+    return [
+      generatedSummary,
+      discoveryContext ? createDiscoveryContextSummary(discoveryContext) : "",
+      intelligenceSummary,
+    ]
       .filter(Boolean)
       .join("\n\n");
-  }, [discoveryContext, generatedSummary]);
+  }, [discoveryContext, generatedSummary, proposalIntelligence]);
 
   return (
     <LeadCaptureForm

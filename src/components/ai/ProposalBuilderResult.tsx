@@ -24,6 +24,7 @@ import type {
 } from "@/lib/ai-estimation";
 import { BUDGET_DISCLAIMER } from "@/lib/ai-estimation";
 import { trackEvent } from "@/lib/analytics";
+import type { ProposalIntelligenceOutput } from "@/lib/ai-intelligence/proposal-intelligence";
 import type { AssembledProposal } from "@/lib/proposal-assembly";
 import { createProposalDocument } from "@/lib/proposal-document";
 import {
@@ -49,6 +50,7 @@ export type ProposalAnalysis = {
   nextSteps: string[];
   nextStep: string;
   assembly: AssembledProposal;
+  proposalIntelligence: ProposalIntelligenceOutput;
 };
 
 export type ProposalBuilderResultProps = {
@@ -157,6 +159,8 @@ export function ProposalBuilderResult({ result }: ProposalBuilderResultProps) {
         </div>
       </Card>
 
+      <ProposalIntelligencePanel intelligence={result.proposalIntelligence} />
+
       <ProposalAssemblyView result={result} />
 
       <div className="grid gap-5 lg:grid-cols-2">
@@ -257,6 +261,7 @@ export function ProposalBuilderResult({ result }: ProposalBuilderResultProps) {
         generatedComplexity={result.complexity}
         generatedRiskLevel={result.risks[0]?.level}
         generatedSummary={result.executiveSummary}
+        proposalIntelligence={result.proposalIntelligence}
         summary={{
           budgetRange: result.budget.totalRange,
           complexity: result.complexity,
@@ -265,6 +270,176 @@ export function ProposalBuilderResult({ result }: ProposalBuilderResultProps) {
           riskLevel: result.risks[0]?.level,
         }}
       />
+    </div>
+  );
+}
+
+function ProposalIntelligencePanel({
+  intelligence,
+}: {
+  intelligence: ProposalIntelligenceOutput;
+}) {
+  const topRisk = intelligence.riskAnalysis[0];
+
+  return (
+    <Card className="border-blue-100 bg-white" padding="lg">
+      <div className="grid gap-8 xl:grid-cols-[0.62fr_0.38fr]">
+        <div>
+          <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
+            Intelligence propunere
+          </p>
+          <h3 className="mt-3 text-3xl font-semibold leading-tight text-slate-950">
+            Interpretare determinista pentru discutia tehnica
+          </h3>
+          <p className="mt-4 text-base leading-8 text-slate-600">
+            {intelligence.projectIntelligenceSummary}
+          </p>
+          {intelligence.importedDiscoverySummary && (
+            <div className="mt-5 rounded-2xl border border-cyan-100 bg-cyan-50/70 p-4">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
+                Context AI Discovery importat
+              </p>
+              <p className="mt-2 text-sm leading-7 text-slate-700">
+                {intelligence.importedDiscoverySummary}
+              </p>
+              <p className="mt-2 text-xs font-semibold text-slate-500">
+                Puteti modifica sau ignora contextul. Interpretarea ramane
+                preliminara si necesita validare tehnica.
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div className="grid gap-3">
+          <SummaryMetric
+            label="Readiness propunere"
+            value={`${intelligence.proposalReadinessScore}/100`}
+          />
+          <SummaryMetric
+            label="Complexitate"
+            value={String(intelligence.complexityAnalysis.level)}
+          />
+          <SummaryMetric
+            label="Risc principal"
+            value={topRisk ? `${topRisk.label} (${topRisk.severity})` : "De validat"}
+          />
+        </div>
+      </div>
+
+      <div className="mt-8 grid gap-5 lg:grid-cols-3">
+        <ProposalListCard
+          items={intelligence.likelyInfrastructureAreas}
+          title="Zone probabile de infrastructura"
+        />
+        <ProposalListCard
+          items={intelligence.recommendedServices}
+          title="Arii ZES recomandate"
+        />
+        <ProposalListCard
+          items={intelligence.validationNeeds}
+          title="Validari necesare"
+        />
+      </div>
+
+      <div className="mt-5 grid gap-5 lg:grid-cols-[0.38fr_0.62fr]">
+        <ProposalListCard
+          items={intelligence.discussionPrep}
+          title="Ce sa pregatiti pentru discutie"
+        />
+        <Card className="border-blue-100 bg-[#f7fbff]" padding="lg">
+          <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
+            Calculatoare si resurse conectate
+          </p>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {intelligence.recommendedResources.slice(0, 6).map((resource) => (
+              <TrackedLink
+                className="rounded-2xl border border-blue-100 bg-white p-4 transition hover:border-blue-200 hover:shadow-[0_18px_45px_rgba(0,87,184,0.08)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                href={resource.href}
+                key={resource.href}
+                tracking={{
+                  ctaLabel: resource.label,
+                  destination: resource.href,
+                  sourcePage: "/proposal-builder",
+                  sourceTool: "proposal-builder",
+                }}
+              >
+                <span className="block text-sm font-semibold text-slate-950">
+                  {resource.label}
+                </span>
+                <span className="mt-2 block text-xs font-bold uppercase tracking-[0.12em] text-[#0057b8]">
+                  {resource.type}
+                </span>
+                <span className="mt-2 block text-xs leading-5 text-slate-500">
+                  {resource.reason}
+                </span>
+              </TrackedLink>
+            ))}
+          </div>
+        </Card>
+      </div>
+
+      <div className="mt-5 grid gap-5 lg:grid-cols-2">
+        <Card className="border-blue-100 bg-[#f7fbff]" padding="lg">
+          <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
+            Riscuri semnalate
+          </p>
+          <div className="mt-5 grid gap-3">
+            {intelligence.riskAnalysis.map((risk) => (
+              <div
+                className="rounded-2xl border border-blue-100 bg-white p-4"
+                key={`${risk.label}-${risk.severity}`}
+              >
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                  <p className="text-sm font-semibold text-slate-950">
+                    {risk.label}
+                  </p>
+                  <Badge variant={risk.severity === "Critical" ? "critical" : "blue"}>
+                    {risk.severity}
+                  </Badge>
+                </div>
+                <p className="mt-2 text-sm leading-6 text-slate-600">
+                  {risk.reason}
+                </p>
+                <p className="mt-2 text-sm font-semibold leading-6 text-blue-900">
+                  Validare: {risk.validationNeed}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        <Card className="border-blue-100 bg-white" padding="lg">
+          <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
+            Clarificari si urmatorul pas
+          </p>
+          <p className="mt-5 text-xl font-semibold leading-8 text-slate-950">
+            {intelligence.nextBestAction}
+          </p>
+          <div className="mt-5 grid gap-3">
+            {intelligence.missingInformation.slice(0, 6).map((item) => (
+              <p
+                className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-700"
+                key={item}
+              >
+                {item}
+              </p>
+            ))}
+          </div>
+        </Card>
+      </div>
+    </Card>
+  );
+}
+
+function SummaryMetric({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl border border-blue-100 bg-[#f7fbff] p-5">
+      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
+        {label}
+      </p>
+      <p className="mt-3 text-xl font-semibold leading-7 text-slate-950">
+        {value}
+      </p>
     </div>
   );
 }

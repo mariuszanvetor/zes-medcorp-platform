@@ -9,6 +9,7 @@ import type {
   TimelinePhase,
 } from "@/lib/ai-estimation";
 import { BUDGET_DISCLAIMER } from "@/lib/ai-estimation";
+import type { ProposalIntelligenceOutput } from "@/lib/ai-intelligence/proposal-intelligence";
 import { brand, companyContact } from "@/lib/brand";
 import type { AssembledProposal } from "@/lib/proposal-assembly";
 import {
@@ -84,6 +85,7 @@ export type ProposalDocument = {
   nextSteps: string[];
   nextStep: string;
   assembly: AssembledProposal;
+  proposalIntelligence?: ProposalIntelligenceOutput;
   snapshot: ProposalSnapshot;
   disclaimer: string;
 };
@@ -105,6 +107,7 @@ export type ProposalDocumentSource = {
   nextSteps: string[];
   nextStep: string;
   assembly: AssembledProposal;
+  proposalIntelligence?: ProposalIntelligenceOutput;
 };
 
 export function createProposalDocument(
@@ -166,6 +169,7 @@ export function createProposalDocument(
     nextSteps: source.nextSteps,
     nextStep: source.nextStep,
     assembly: source.assembly,
+    proposalIntelligence: source.proposalIntelligence,
     snapshot: undefined as unknown as ProposalSnapshot,
     disclaimer: source.budget.disclaimer || BUDGET_DISCLAIMER,
   } satisfies ProposalDocument;

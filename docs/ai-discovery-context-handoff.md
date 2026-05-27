@@ -79,6 +79,10 @@ Proposal Builder now:
 - shows “Context preluat din AI Discovery”;
 - pre-fills safe fields such as project type, imaging, shielding, lab, equipment, stage and description;
 - adds discovery assumptions, missing information and validation needs into proposal assembly;
+- passes imported context into the deterministic proposal intelligence engine;
+- shows readiness, risk, missing information and validation needs in the proposal result;
+- includes a compact intelligence section in the exported PDF;
+- enriches the lead summary with readiness, risk/complexity and missing information count;
 - allows the user to ignore the context;
 - includes context-derived assumptions/missing info in generated proposal/PDF output through the existing proposal data model.
 
