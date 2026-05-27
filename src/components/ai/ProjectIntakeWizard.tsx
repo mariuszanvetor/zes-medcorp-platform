@@ -9,6 +9,12 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { trackEvent } from "@/lib/analytics";
+import {
+  clearDiscoveryContext,
+  createDiscoveryContextSummary,
+  loadDiscoveryContext,
+  type SerializableDiscoveryContext,
+} from "@/lib/ai-intelligence/discovery-context";
 import { cn } from "@/lib/utils";
 
 type Recommendation = {
@@ -152,12 +158,19 @@ export function ProjectIntakeWizard() {
   const [currentStep, setCurrentStep] = useState(0);
   const [form, setForm] = useState<IntakeState>(initialState);
   const [hasCompleted, setHasCompleted] = useState(false);
+  const [discoveryContext, setDiscoveryContext] = useState<SerializableDiscoveryContext | null>(null);
   const result = useMemo(() => buildIntakeResult(form), [form]);
 
   useEffect(() => {
+    const context = loadDiscoveryContext();
+    if (context) {
+      setDiscoveryContext(context);
+      setForm((current) => prefillIntakeFromDiscovery(current, context));
+    }
+
     trackEvent("intake_start", {
       sourcePage: "/project-intake",
-      sourceTool: "project-intake",
+      sourceTool: context ? "project-intake-from-discovery" : "project-intake",
     });
   }, []);
 
@@ -247,6 +260,31 @@ export function ProjectIntakeWizard() {
             {result.readinessLevel}
           </p>
         </div>
+        {discoveryContext && (
+          <div className="mt-5 rounded-2xl border border-blue-100 bg-white p-4">
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#0057b8]">
+              Context AI Discovery
+            </p>
+            <p className="mt-2 text-xs leading-6 text-slate-600">
+              {createDiscoveryContextSummary(discoveryContext)}
+            </p>
+            <p className="mt-3 text-xs font-semibold leading-6 text-slate-500">
+              Poti modifica sau ignora aceste date. Contextul este folosit doar local pentru a continua proiectul.
+            </p>
+            <Button
+              className="mt-3"
+              size="sm"
+              type="button"
+              variant="secondary"
+              onClick={() => {
+                clearDiscoveryContext();
+                setDiscoveryContext(null);
+              }}
+            >
+              Ignora contextul
+            </Button>
+          </div>
+        )}
       </Card>
 
       <div className="grid gap-6">
@@ -385,7 +423,7 @@ export function ProjectIntakeWizard() {
         ) : (
           <>
             <ProjectIntakeSummary result={result} />
-            <ProjectIntakeLeadCTA result={result} />
+            <ProjectIntakeLeadCTA discoveryContext={discoveryContext} result={result} />
           </>
         )}
 
@@ -431,6 +469,83 @@ export function ProjectIntakeWizard() {
       </div>
     </div>
   );
+}
+
+function prefillIntakeFromDiscovery(
+  current: IntakeState,
+  context: SerializableDiscoveryContext,
+): IntakeState {
+  const domains = new Set(context.project.domains);
+  const requirements = new Set<string>();
+
+  if (domains.has("radiology") || domains.has("ct") || domains.has("mri")) requirements.add(optionLike(technicalRequirements, "Radiologie"));
+  if (domains.has("mri")) requirements.add(optionLike(technicalRequirements, "RF shielding"));
+  if (domains.has("ct") || domains.has("radiology") || domains.has("dental")) requirements.add(optionLike(technicalRequirements, "Protectie radiologica", "Protec"));
+  if (domains.has("ivd-laboratory")) requirements.add(optionLike(technicalRequirements, "IVD"));
+  if (domains.has("mri") || domains.has("ct") || domains.has("ultrasound")) requirements.add(optionLike(technicalRequirements, "Aparatura imagistica", "Aparatur"));
+  if (domains.has("medical-electrical") || domains.has("hvac") || domains.has("ups-power")) requirements.add(optionLike(technicalRequirements, "HVAC"));
+
+  return {
+    ...current,
+    projectType: mapDiscoveryIntakeProjectType(domains, context),
+    projectStage: mapDiscoveryIntakeStage(context.project.stage),
+    buildingType: context.project.knownAnswers.existingBuilding ? optionLike(buildingTypes, "Cladire existenta", "Cl") : current.buildingType,
+    spaceStatus: context.project.knownAnswers.existingBuilding ? optionLike(spaceStatuses, "Spatiu medical existent", "Spa") : current.spaceStatus,
+    plansStatus: context.project.knownAnswers.plansAvailable ? "Disponibil" : current.plansStatus,
+    equipmentSpecsStatus: context.project.knownAnswers.equipmentSpecsAvailable ? "Disponibil" : current.equipmentSpecsStatus,
+    budgetStatus: context.project.knownAnswers.budgetKnown ? "Disponibil" : current.budgetStatus,
+    timelineStatus: context.project.knownAnswers.timelineKnown ? "Disponibil" : current.timelineStatus,
+    urgency: context.intelligence.riskLevel === "critical" ? "Imediat" : current.urgency,
+    technicalRequirements: requirements.size ? [...requirements] : current.technicalRequirements,
+    businessGoal: [
+      current.businessGoal,
+      "Context preluat din AI Discovery:",
+      context.generatedSummary,
+      context.project.notes ? `Note initiale: ${context.project.notes}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n\n"),
+  };
+}
+
+function mapDiscoveryIntakeProjectType(
+  domains: Set<string>,
+  context: SerializableDiscoveryContext,
+) {
+  if (domains.has("mri")) return "RMN";
+  if (domains.has("ct") || domains.has("radiology") || domains.has("dental")) return "CT / RX";
+  if (domains.has("ivd-laboratory")) return "Laborator IVD";
+  if (domains.has("clinic-modernization") || context.project.knownAnswers.modernization) return optionLike(projectTypes, "Modernizare");
+  if (domains.has("surgery-or") || domains.has("ati-critical-care") || domains.has("sterilization")) return optionLike(projectTypes, "Clinica noua", "Clinic");
+  if (domains.has("healthcare-infrastructure")) return optionLike(projectTypes, "Clinica noua", "Clinic");
+  return optionLike(projectTypes, "Nu stiu", "Nu");
+}
+
+function mapDiscoveryIntakeStage(stage: string) {
+  if (stage === "budgeting" || stage === "feasibility") return "Bugetare";
+  if (stage === "design") return "Proiectare";
+  if (stage === "authorization") return "Autorizare";
+  if (stage === "execution" || stage === "commissioning") return optionLike(projectStages, "Executie", "Execu");
+  if (stage === "procurement") return optionLike(projectStages, "Echipament");
+  if (stage === "active-issue") return optionLike(projectStages, "Problema", "Problem");
+  return "Idee";
+}
+
+function optionLike(options: readonly string[], normalizedNeedle: string, fallbackNeedle = normalizedNeedle) {
+  const normalized = normalizeForMatch(normalizedNeedle);
+  const fallback = normalizeForMatch(fallbackNeedle);
+  return (
+    options.find((option) => normalizeForMatch(option).includes(normalized)) ??
+    options.find((option) => normalizeForMatch(option).includes(fallback)) ??
+    options[0]
+  );
+}
+
+function normalizeForMatch(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 }
 
 function StepHeader({ step }: { step: number }) {

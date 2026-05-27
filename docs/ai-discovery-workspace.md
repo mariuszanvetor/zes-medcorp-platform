@@ -51,14 +51,18 @@ The form still uses the existing `/api/leads` flow, so Resend and Google Sheets 
 
 ## Future context handoff
 
-The current Proposal Builder and Project Intake links include lightweight query parameters:
+Phase 71D adds local context handoff. The current Proposal Builder and Project Intake links include lightweight query parameters:
 
 - `source=ai-discovery`
 - `domains`
 - `risk`
 - `confidence`
 
-Future phases can replace this with a safe local project context model or authenticated workspace storage. Until storage exists, the workspace should not imply that full context is automatically transferred.
+The full compact discovery context is saved locally in `sessionStorage` and `localStorage` using `src/lib/ai-intelligence/discovery-context.ts`. It can be loaded by Proposal Builder and Project Intake to show a summary, prefill safe fields and include a compact generated summary in lead submissions.
+
+Detailed notes or sensitive data are not put in URLs. The user can edit or ignore imported context at any time.
+
+See `docs/ai-discovery-context-handoff.md` for implementation details.
 
 ## Future AI API path
 

@@ -1,14 +1,26 @@
 "use client";
 
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
+import {
+  createDiscoveryContextSummary,
+  type SerializableDiscoveryContext,
+} from "@/lib/ai-intelligence/discovery-context";
 import { trackEvent } from "@/lib/analytics";
 import type { ProjectIntakeResult } from "@/components/ai/ProjectIntakeWizard";
 
 export type ProjectIntakeLeadCTAProps = {
   result: ProjectIntakeResult;
+  discoveryContext?: SerializableDiscoveryContext | null;
 };
 
-export function ProjectIntakeLeadCTA({ result }: ProjectIntakeLeadCTAProps) {
+export function ProjectIntakeLeadCTA({ result, discoveryContext }: ProjectIntakeLeadCTAProps) {
+  const generatedSummary = [
+    result.generatedSummary,
+    discoveryContext ? createDiscoveryContextSummary(discoveryContext) : "",
+  ]
+    .filter(Boolean)
+    .join("\n\n");
+
   return (
     <LeadCaptureForm
       description="Trimite contextul structurat către ZES pentru o discuție tehnică mai clară. Informațiile rămân orientative până la validarea planurilor, echipamentelor și documentației."
@@ -31,13 +43,13 @@ export function ProjectIntakeLeadCTA({ result }: ProjectIntakeLeadCTAProps) {
       ]}
       generatedComplexity={`${result.technicalComplexity} / ${result.readinessLevel}`}
       generatedRiskLevel={result.riskLevel}
-      generatedSummary={result.generatedSummary}
-      inquiryType="Project intake tehnic"
+      generatedSummary={generatedSummary}
+      inquiryType={discoveryContext ? "Project intake tehnic din AI Discovery" : "Project intake tehnic"}
       onSubmitted={() => {
         trackEvent("intake_lead_submit", {
           sourcePage: "/project-intake",
-          sourceTool: "project-intake",
-          inquiryType: "Project intake tehnic",
+          sourceTool: discoveryContext ? "project-intake-from-discovery" : "project-intake",
+          inquiryType: discoveryContext ? "Project intake tehnic din AI Discovery" : "Project intake tehnic",
           projectType: result.projectType,
           complexity: result.technicalComplexity,
           riskLevel: result.riskLevel,
@@ -45,7 +57,7 @@ export function ProjectIntakeLeadCTA({ result }: ProjectIntakeLeadCTAProps) {
         });
       }}
       sourcePage="/project-intake"
-      sourceTool="project-intake"
+      sourceTool={discoveryContext ? "project-intake-from-discovery" : "project-intake"}
       submitLabel="Trimite informațiile pentru analiza ZES"
       successDescription="Informațiile au fost pregătite pentru triere tehnică. Următorul pas real este validarea lor cu planuri, echipamente și documentație."
       successTitle="Intake-ul a fost pregătit pentru analiză."

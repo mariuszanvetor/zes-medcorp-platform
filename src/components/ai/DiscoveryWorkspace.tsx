@@ -9,6 +9,11 @@ import { DiscoveryLeadCTA } from "@/components/ai/DiscoveryLeadCTA";
 import { DiscoveryUploadGuidance } from "@/components/ai/DiscoveryUploadGuidance";
 import { Button } from "@/components/ui/Button";
 import {
+  createSerializableDiscoveryContext,
+  saveDiscoveryContext,
+  type DiscoveryContextNextStep,
+} from "@/lib/ai-intelligence/discovery-context";
+import {
   orchestrateAdaptiveDiscovery,
   type OrchestratedDiscoveryResult,
 } from "@/lib/ai-intelligence/discovery-orchestrator";
@@ -76,6 +81,7 @@ export function DiscoveryWorkspace() {
   }
 
   function showLeadCapture() {
+    persistDiscoveryContext("technical-review");
     setShowLeadForm(true);
     trackEvent("ai_discovery_step", {
       sourcePage: "/ai-discovery",
@@ -84,6 +90,16 @@ export function DiscoveryWorkspace() {
       complexity: result.riskAssessment.complexityLevel,
       riskLevel: result.riskAssessment.riskLevel,
     });
+  }
+
+  function persistDiscoveryContext(selectedNextStep: DiscoveryContextNextStep) {
+    saveDiscoveryContext(
+      createSerializableDiscoveryContext({
+        input: context,
+        result,
+        selectedNextStep,
+      }),
+    );
   }
 
   const handoffQuery = buildHandoffQuery(result);
@@ -124,14 +140,15 @@ export function DiscoveryWorkspace() {
                 sourceTool: "ai-discovery",
               }}
               variant="secondary"
-              onClick={() =>
+              onClick={() => {
+                persistDiscoveryContext("proposal-builder");
                 trackEvent("ai_discovery_to_proposal", {
                   sourcePage: "/ai-discovery",
                   sourceTool: "ai-discovery",
                   complexity: result.riskAssessment.complexityLevel,
                   riskLevel: result.riskAssessment.riskLevel,
-                })
-              }
+                });
+              }}
             >
               Continue to Proposal Builder
             </TrackedButtonLink>
@@ -145,14 +162,15 @@ export function DiscoveryWorkspace() {
                 sourceTool: "ai-discovery",
               }}
               variant="secondary"
-              onClick={() =>
+              onClick={() => {
+                persistDiscoveryContext("project-intake");
                 trackEvent("ai_discovery_to_intake", {
                   sourcePage: "/ai-discovery",
                   sourceTool: "ai-discovery",
                   complexity: result.riskAssessment.complexityLevel,
                   riskLevel: result.riskAssessment.riskLevel,
-                })
-              }
+                });
+              }}
             >
               Continue to Project Intake
             </TrackedButtonLink>

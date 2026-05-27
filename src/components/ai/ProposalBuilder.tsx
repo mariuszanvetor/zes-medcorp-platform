@@ -1,7 +1,7 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import {
   ProposalBuilderResult,
@@ -17,6 +17,12 @@ import {
   risk as createRisk,
 } from "@/lib/ai-estimation";
 import { trackToolComplete, trackToolStart } from "@/lib/analytics";
+import {
+  clearDiscoveryContext,
+  createDiscoveryContextSummary,
+  loadDiscoveryContext,
+  type SerializableDiscoveryContext,
+} from "@/lib/ai-intelligence/discovery-context";
 import { assembleProposal } from "@/lib/proposal-assembly";
 import { cn } from "@/lib/utils";
 
@@ -106,11 +112,20 @@ const initialState: ProposalBuilderState = {
 export function ProposalBuilder() {
   const [form, setForm] = useState<ProposalBuilderState>(initialState);
   const [result, setResult] = useState<ProposalAnalysis | null>(null);
+  const [discoveryContext, setDiscoveryContext] = useState<SerializableDiscoveryContext | null>(null);
 
   const completion = useMemo(() => {
     const filled = Object.entries(form).filter(([, value]) => value.trim()).length;
     return Math.round((filled / Object.keys(form).length) * 100);
   }, [form]);
+
+  useEffect(() => {
+    const context = loadDiscoveryContext();
+    if (!context) return;
+
+    setDiscoveryContext(context);
+    setForm((current) => prefillProposalFromDiscovery(current, context));
+  }, []);
 
   function updateField<K extends keyof ProposalBuilderState>(
     field: K,
@@ -126,7 +141,7 @@ export function ProposalBuilder() {
       urgency: form.urgency,
     });
 
-    const analysis = generateProposal(form);
+    const analysis = generateProposal(form, discoveryContext);
     setResult(analysis);
     trackToolComplete("proposal-builder", {
       sourcePage: "/proposal-builder",
@@ -170,6 +185,34 @@ export function ProposalBuilder() {
         </Card>
 
         <form className="grid gap-5" onSubmit={handleSubmit}>
+          {discoveryContext && (
+            <Card className="border-cyan-300/20" variant="glass">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <p className="text-sm font-semibold text-cyan-100">
+                    Context preluat din AI Discovery
+                  </p>
+                  <p className="mt-3 text-sm leading-7 text-slate-300">
+                    {createDiscoveryContextSummary(discoveryContext)}
+                  </p>
+                  <p className="mt-3 text-xs font-semibold leading-6 text-slate-400">
+                    Poti modifica sau ignora aceste date. Contextul este folosit local pentru continuarea proiectului si nu inlocuieste analiza tehnica finala.
+                  </p>
+                </div>
+                <Button
+                  size="sm"
+                  type="button"
+                  variant="ghost"
+                  onClick={() => {
+                    clearDiscoveryContext();
+                    setDiscoveryContext(null);
+                  }}
+                >
+                  Ignora contextul
+                </Button>
+              </div>
+            </Card>
+          )}
           <OptionGroup
             label="Tip proiect"
             options={projectTypes}
@@ -297,7 +340,103 @@ function OptionGroup<T extends string>({
   );
 }
 
-function generateProposal(form: ProposalBuilderState): ProposalAnalysis {
+function prefillProposalFromDiscovery(
+  current: ProposalBuilderState,
+  context: SerializableDiscoveryContext,
+): ProposalBuilderState {
+  const domains = new Set(context.project.domains);
+  const notes = [
+    current.description,
+    "Context preluat din AI Discovery:",
+    context.generatedSummary,
+    context.project.notes ? `Note initiale: ${context.project.notes}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n\n");
+
+  return {
+    ...current,
+    projectType: mapDiscoveryProjectType(domains, context),
+    imaging: mapDiscoveryImaging(domains),
+    lab: domains.has("ivd-laboratory") ? "Da" : current.lab,
+    shielding: mapDiscoveryShielding(domains),
+    equipment: mapDiscoveryEquipment(context),
+    projectStage: mapDiscoveryProposalStage(context.project.stage),
+    urgency: context.intelligence.riskLevel === "critical" ? "Imediat" : current.urgency,
+    description: notes,
+  };
+}
+
+function mapDiscoveryProjectType(
+  domains: Set<string>,
+  context: SerializableDiscoveryContext,
+): ProposalBuilderState["projectType"] {
+  if (domains.has("ivd-laboratory")) return "Laborator / IVD";
+  if (domains.has("radiology") || domains.has("mri") || domains.has("ct")) return "Radiologie";
+  if (domains.has("clinic-modernization") || context.project.knownAnswers.modernization) {
+    return optionLike(projectTypes, "Modernizare") as ProposalBuilderState["projectType"];
+  }
+  if (domains.has("dental") || domains.has("cardiology") || domains.has("ultrasound")) return "Cabinet medical";
+  if (domains.has("surgery-or") || domains.has("ati-critical-care") || domains.has("sterilization")) return optionLike(projectTypes, "Spital") as ProposalBuilderState["projectType"];
+  return optionLike(projectTypes, "Clinica", "Clinic") as ProposalBuilderState["projectType"];
+}
+
+function mapDiscoveryImaging(domains: Set<string>): ProposalBuilderState["imaging"] {
+  if (domains.has("mri") && (domains.has("ct") || domains.has("radiology"))) return "Mai multe echipamente";
+  if (domains.has("mri")) return "RMN";
+  if (domains.has("ct")) return "CT";
+  if (domains.has("radiology") || domains.has("dental")) return "RX";
+  if (domains.has("ultrasound")) return "Ecografie";
+  return optionLike(imagingOptions, "Nu stiu", "Nu") as ProposalBuilderState["imaging"];
+}
+
+function mapDiscoveryShielding(domains: Set<string>): ProposalBuilderState["shielding"] {
+  const hasRf = domains.has("mri");
+  const hasRadioprotection = domains.has("ct") || domains.has("radiology") || domains.has("dental");
+  if (hasRf && hasRadioprotection) return "Ambele";
+  if (hasRf) return "RF shielding pentru RMN";
+  if (hasRadioprotection) return optionLike(shieldingOptions, "Protectie radiologica", "Protec") as ProposalBuilderState["shielding"];
+  return optionLike(shieldingOptions, "Nu stiu", "Nu") as ProposalBuilderState["shielding"];
+}
+
+function mapDiscoveryEquipment(context: SerializableDiscoveryContext): ProposalBuilderState["equipment"] {
+  if (context.project.knownAnswers.equipmentSpecsAvailable) return "Integrare";
+  if (context.project.domains.some((domain) => ["mri", "ct", "ivd-laboratory", "dental", "cardiology", "ultrasound"].includes(domain))) {
+    return optionLike(equipmentOptions, "Achizitie + integrare", "Achizi") as ProposalBuilderState["equipment"];
+  }
+  return optionLike(equipmentOptions, "Nu stiu", "Nu") as ProposalBuilderState["equipment"];
+}
+
+function mapDiscoveryProposalStage(stage: string): ProposalBuilderState["projectStage"] {
+  if (stage === "budgeting" || stage === "feasibility") return "Bugetare";
+  if (stage === "design" || stage === "authorization") return "Proiectare";
+  if (stage === "execution" || stage === "commissioning") return optionLike(projectStages, "In executie", "execu") as ProposalBuilderState["projectStage"];
+  if (stage === "procurement") return optionLike(projectStages, "Aparatura", "Aparatur") as ProposalBuilderState["projectStage"];
+  if (stage === "active-issue") return optionLike(projectStages, "Problema", "Problem") as ProposalBuilderState["projectStage"];
+  return "Idee / explorare";
+}
+
+function optionLike(options: readonly string[], normalizedNeedle: string, fallbackNeedle = normalizedNeedle) {
+  const normalized = normalizeForMatch(normalizedNeedle);
+  const fallback = normalizeForMatch(fallbackNeedle);
+  return (
+    options.find((option) => normalizeForMatch(option).includes(normalized)) ??
+    options.find((option) => normalizeForMatch(option).includes(fallback)) ??
+    options[0]
+  );
+}
+
+function normalizeForMatch(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+function generateProposal(
+  form: ProposalBuilderState,
+  discoveryContext?: SerializableDiscoveryContext | null,
+): ProposalAnalysis {
   let score = 18;
   const hasRmn = form.imaging === "RMN" || form.imaging === "Mai multe echipamente";
   const hasCtRx =
@@ -585,6 +724,16 @@ function generateProposal(form: ProposalBuilderState): ProposalAnalysis {
     assumptions.add("Descrierea oferă context suficient pentru o primă interpretare tehnică.");
   } else {
     missingData.add("Descriere extinsă: locație, obiectiv, constrângeri, buget, termen și echipamente vizate");
+  }
+
+  if (discoveryContext) {
+    score += Math.min(10, Math.round(discoveryContext.intelligence.readinessScore / 14));
+    assumptions.add(`Context initial preluat din AI Discovery: risc ${discoveryContext.intelligence.riskLevel}, complexitate ${discoveryContext.intelligence.complexityLevel}, incredere ${discoveryContext.intelligence.confidenceScore}/100.`);
+    assumptions.add("Contextul AI Discovery este local si preliminar; utilizatorul poate modifica sau ignora datele in Proposal Builder.");
+    discoveryContext.recommendations.suggestedServices.forEach((service) => services.add(service));
+    discoveryContext.intelligence.missingInformation.forEach((item) => missingData.add(`AI Discovery - informatie lipsa: ${item}`));
+    discoveryContext.intelligence.validationNeeds.forEach((need) => missingData.add(`AI Discovery - validare necesara: ${need}`));
+    discoveryContext.recommendations.nextActions.forEach((action) => nextSteps.add(action));
   }
 
   const normalizedScore = Math.min(score, 100);

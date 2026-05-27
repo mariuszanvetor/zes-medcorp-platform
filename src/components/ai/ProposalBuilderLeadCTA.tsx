@@ -1,6 +1,13 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
+
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
+import {
+  createDiscoveryContextSummary,
+  loadDiscoveryContext,
+  type SerializableDiscoveryContext,
+} from "@/lib/ai-intelligence/discovery-context";
 import type { LeadSummaryPreview } from "@/lib/lead-types";
 
 export type ProposalBuilderLeadCTAProps = {
@@ -18,6 +25,18 @@ export function ProposalBuilderLeadCTA({
   generatedRiskLevel,
   generatedComplexity,
 }: ProposalBuilderLeadCTAProps) {
+  const [discoveryContext, setDiscoveryContext] = useState<SerializableDiscoveryContext | null>(null);
+  useEffect(() => {
+    setDiscoveryContext(loadDiscoveryContext());
+  }, []);
+
+  const mergedSummary = useMemo(() => {
+    if (!discoveryContext) return generatedSummary;
+    return [generatedSummary, createDiscoveryContextSummary(discoveryContext)]
+      .filter(Boolean)
+      .join("\n\n");
+  }, [discoveryContext, generatedSummary]);
+
   return (
     <LeadCaptureForm
       description="Propunerea rămâne preliminară până la validarea planurilor, echipamentelor și stadiului de proiect. Folosiți formularul pentru a cere o discuție tehnică pe ipotezele generate."
@@ -28,10 +47,10 @@ export function ProposalBuilderLeadCTA({
       generatedBudgetRange={generatedBudgetRange}
       generatedComplexity={generatedComplexity}
       generatedRiskLevel={generatedRiskLevel}
-      generatedSummary={generatedSummary}
-      inquiryType="Proposal Builder"
+      generatedSummary={mergedSummary}
+      inquiryType={discoveryContext ? "Proposal Builder din AI Discovery" : "Proposal Builder"}
       sourcePage="/proposal-builder"
-      sourceTool="proposal-builder"
+      sourceTool={discoveryContext ? "proposal-builder-from-discovery" : "proposal-builder"}
       submitLabel="Solicitați discuție pe propunere"
       summary={summary}
       title="Transformați propunerea preliminară într-o discuție aplicată."
