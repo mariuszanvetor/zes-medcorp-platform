@@ -1,4 +1,6 @@
 import { TrackedLink } from "@/components/analytics/TrackedLink";
+import { Badge } from "@/components/ui/Badge";
+import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 
@@ -10,39 +12,39 @@ const tools = [
     href: "/ai-discovery",
   },
   {
-    title: "Analiză preliminară proiect",
+    title: "Analiza preliminara proiect",
     description:
-      "Clarifică tipul de proiect, riscurile inițiale și serviciile ZES care merită discutate.",
+      "Clarifica tipul de proiect, riscurile initiale si serviciile ZES care merita discutate.",
     href: "/ai-project-advisor",
   },
   {
-    title: "Estimare orientativă proiect",
+    title: "Estimare orientativa proiect",
     description:
-      "Oferă o orientare de complexitate, buget și date lipsă, fără să promită prețuri finale.",
+      "Ofera o orientare de complexitate, buget si date lipsa, fara sa promita preturi finale.",
     href: "/calculator-proiect-medical",
   },
   {
-    title: "Planificare cameră radiologie",
+    title: "Planificare camera radiologie",
     description:
-      "Separă cerințele RMN/RF de protecția radiologică necesară pentru CT și RX.",
+      "Separa cerintele RMN/RF de protectia radiologica necesara pentru CT si RX.",
     href: "/radiology-room-planner",
   },
   {
-    title: "Evaluare service aparatură",
+    title: "Evaluare service aparatura",
     description:
-      "Ajută la trierea unei probleme de aparatură și la pregătirea datelor pentru service.",
+      "Ajuta la trierea unei probleme de aparatura si la pregatirea datelor pentru service.",
     href: "/service-diagnostic",
   },
   {
     title: "Project Intake ZES",
     description:
-      "Colectează structurat datele pentru o discuție tehnică mai clară: spațiu, documentație, aparatură, urgență și informații lipsă.",
+      "Colecteaza structurat datele pentru o discutie tehnica mai clara: spatiu, documentatie, aparatura, urgenta si informatii lipsa.",
     href: "/project-intake",
   },
   {
-    title: "Propunere preliminară",
+    title: "Propunere preliminara",
     description:
-      "Structurează o propunere preliminară pentru discuția tehnică: faze, buget, riscuri și întrebări deschise.",
+      "Structureaza o propunere preliminara pentru discutia tehnica: faze, buget, riscuri si intrebari deschise.",
     href: "/proposal-builder",
   },
 ];
@@ -51,46 +53,44 @@ export function AIToolsPreviewSection() {
   return (
     <Section className="bg-white" id="ai-tools" spacing="xl" tone="transparent">
       <Container>
-        <div className="overflow-hidden rounded-[2rem] bg-[#003f7c] text-white shadow-[0_36px_110px_rgba(0,63,124,0.24)]">
-          <div className="grid gap-12 p-8 sm:p-12 lg:grid-cols-[0.88fr_1.12fr] lg:p-16">
-            <div>
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-100">
-                Planificare tehnică
-              </p>
-              <h2 className="mt-6 text-4xl font-semibold leading-tight text-balance sm:text-5xl">
-                Planificare tehnică mai clară, înainte de investiție.
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-blue-50/86">
-                Instrumentele ZES ajută la ordonarea primelor decizii: ce trebuie
-                verificat, ce poate schimba bugetul și ce informații lipsesc
-                înainte de o ofertă reală.
-              </p>
-            </div>
-            <div className="grid gap-4">
-              {tools.map((tool) => (
-                <TrackedLink
-                  className="group rounded-2xl border border-white/14 bg-white/[0.08] p-6 transition hover:bg-white/[0.13] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                  href={tool.href}
-                  key={tool.title}
-                  tracking={{
-                    ctaLabel: tool.title,
-                    destination: tool.href,
-                    sourcePage: "/",
-                    sourceTool: "homepage-ai-tools-preview",
-                  }}
-                >
-                  <h3 className="text-xl font-semibold text-white">
+        <div className="grid gap-10 lg:grid-cols-[0.34fr_0.66fr] lg:items-start">
+          <div>
+            <Badge variant="blue">Instrumente de planificare</Badge>
+            <h2 className="mt-5 text-3xl font-semibold leading-tight text-slate-950 sm:text-4xl">
+              Decizii mai clare inainte de investitia medicala.
+            </h2>
+            <p className="mt-5 text-base leading-8 text-slate-600">
+              Instrumentele ZES ordoneaza primele decizii: ce trebuie verificat,
+              ce poate schimba bugetul si ce informatii lipsesc inainte de o
+              oferta reala sau de o discutie tehnica.
+            </p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {tools.map((tool) => (
+              <TrackedLink
+                className="group block h-full"
+                href={tool.href}
+                key={tool.title}
+                tracking={{
+                  ctaLabel: tool.title,
+                  destination: tool.href,
+                  sourcePage: "/",
+                  sourceTool: "homepage-ai-tools-preview",
+                }}
+              >
+                <Card className="h-full border-blue-100 bg-[#f7fbff]" interactive padding="lg">
+                  <h3 className="text-lg font-semibold leading-7 text-slate-950">
                     {tool.title}
                   </h3>
-                  <p className="mt-3 max-w-xl text-sm leading-7 text-blue-50/78">
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
                     {tool.description}
                   </p>
-                  <span className="mt-5 inline-flex text-sm font-bold text-white transition group-hover:translate-x-1">
-                    Deschide instrumentul →
+                  <span className="mt-5 inline-flex text-sm font-bold text-[#0057b8] transition group-hover:translate-x-1">
+                    Deschide instrumentul -&gt;
                   </span>
-                </TrackedLink>
-              ))}
-            </div>
+                </Card>
+              </TrackedLink>
+            ))}
           </div>
         </div>
       </Container>

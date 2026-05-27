@@ -2,9 +2,9 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 
 const capabilities = [
-  "Infrastructură medicală",
-  "Imagistică & IVD",
-  "RF & protecție radiologică",
+  "Infrastructura medicala",
+  "Imagistica si IVD",
+  "RF si radioprotectie",
   "Service specializat",
 ];
 
@@ -12,10 +12,10 @@ export function AIIntroSection() {
   return (
     <Section className="border-y border-slate-200 bg-white" spacing="sm" tone="transparent">
       <Container>
-        <div className="grid gap-4 md:grid-cols-4">
+        <div className="grid gap-3 md:grid-cols-4">
           {capabilities.map((capability) => (
             <div
-              className="flex min-h-24 items-center justify-center rounded-2xl bg-slate-50 px-6 text-center text-sm font-semibold text-slate-700"
+              className="flex min-h-20 items-center justify-center rounded-lg border border-blue-100 bg-[#f7fbff] px-5 text-center text-sm font-semibold text-slate-700"
               key={capability}
             >
               {capability}

@@ -13,15 +13,15 @@ export type CardProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 const cardBase =
-  "relative overflow-hidden rounded-[1.25rem] border transition-[border-color,box-shadow,transform] duration-200 ease-out";
+  "relative overflow-hidden rounded-lg border transition-[border-color,box-shadow,transform] duration-200 ease-out";
 
 const cardVariants: Record<CardVariant, string> = {
   surface:
-    "border-slate-200 bg-white text-slate-950 shadow-[0_18px_60px_rgba(15,23,42,0.055)]",
+    "border-slate-200 bg-white text-slate-950 shadow-[0_12px_36px_rgba(15,23,42,0.045)]",
   dark:
-    "border-white/10 bg-slate-950/95 text-white shadow-[0_24px_70px_rgba(2,6,23,0.38)]",
+    "border-white/10 bg-slate-950/95 text-white shadow-[0_20px_54px_rgba(2,6,23,0.32)]",
   glass:
-    "border-white/10 bg-white/[0.06] text-white shadow-[0_24px_70px_rgba(2,6,23,0.28)] backdrop-blur-xl",
+    "border-white/10 bg-white/[0.06] text-white shadow-[0_18px_50px_rgba(2,6,23,0.22)] backdrop-blur-xl",
   outline: "border-slate-200 bg-transparent text-slate-950",
 };
 
@@ -47,7 +47,7 @@ export function Card({
         cardVariants[variant],
         cardPadding[padding],
         interactive &&
-          "motion-safe:hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_26px_80px_rgba(0,87,184,0.11)]",
+          "motion-safe:hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-[0_18px_50px_rgba(0,87,184,0.09)]",
         className,
       )}
       {...props}
