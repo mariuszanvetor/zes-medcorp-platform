@@ -537,7 +537,15 @@ function LeadList({
                   <p className="mt-1 text-xs text-slate-500">{lead.contactName}</p>
                 </td>
                 <td className="px-6 py-5 text-slate-600">{lead.projectType}</td>
-                <td className="px-6 py-5 text-slate-600">{lead.sourceTool}</td>
+                <td className="px-6 py-5 text-slate-600">
+                  <p>{lead.sourceTool}</p>
+                  {lead.aiMode && (
+                    <p className="mt-1 text-xs font-semibold text-[#0057b8]">
+                      AI: {lead.aiMode}
+                      {lead.aiIntent ? ` / ${lead.aiIntent}` : ""}
+                    </p>
+                  )}
+                </td>
                 <td className="px-6 py-5">
                   <ScorePill score={lead.leadScore} priority={lead.priority} />
                 </td>
@@ -678,6 +686,8 @@ function LeadDetail({
         <DetailStat label="Incredere" value={intelligence.confidenceLevel} />
         <DetailStat label="Context sursa" value={intelligence.sourceContext} />
         <DetailStat label="Domeniu" value={lead.projectDomain ?? classifyProject(lead)} />
+        {lead.aiMode && <DetailStat label="AI mode" value={lead.aiMode} />}
+        {lead.aiIntent && <DetailStat label="AI intent" value={lead.aiIntent} />}
       </div>
 
       <div className="mt-8 rounded-lg border border-blue-100 bg-[#f7fbff] p-5">
@@ -705,6 +715,8 @@ function LeadDetail({
             `Intent comercial: ${intelligence.commercialIntent}`,
             `Incredere: ${intelligence.confidenceLevel}`,
             `Context sursa: ${intelligence.sourceContext}`,
+            lead.aiMode ? `AI mode: ${lead.aiMode}` : "",
+            lead.aiIntent ? `AI intent: ${lead.aiIntent}` : "",
           ]}
         />
         <DetailList

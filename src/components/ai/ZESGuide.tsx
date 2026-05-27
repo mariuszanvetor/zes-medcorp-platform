@@ -18,11 +18,22 @@ import {
   type ZESAssistantTurn,
   type ZESConversationState,
 } from "@/lib/zes-guide-engine";
+import {
+  type ZESGuideApiResponse,
+  type ZESGuideHistoryItem,
+  type ZESAIRuntimeMode,
+} from "@/lib/zes-ai";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
 type ConversationItem =
-  | { role: "assistant"; text: string; turn?: ZESAssistantTurn }
+  | {
+      role: "assistant";
+      text: string;
+      turn?: ZESAssistantTurn;
+      aiMode?: ZESAIRuntimeMode;
+      aiModel?: string | null;
+    }
   | { role: "user"; text: string };
 
 type ZESGuideProps = {
@@ -56,6 +67,9 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
   const [leadStatus, setLeadStatus] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
   );
+  const [isResponding, setIsResponding] = useState(false);
+  const [runtimeMode, setRuntimeMode] = useState<ZESAIRuntimeMode>("mock");
+  const [runtimeModel, setRuntimeModel] = useState<string | null>(null);
   const [leadModes, setLeadModes] = useState<{
     emailMode?: string;
     sheetsMode?: string;
@@ -88,55 +102,54 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
 
   function handlePrompt(prompt: string) {
     setQuery(prompt);
-    handleSend(prompt);
+    void handleSend(prompt);
   }
 
-  function handleSend(overrideValue?: string) {
+  async function handleSend(overrideValue?: string) {
     const text = (overrideValue ?? query).trim();
-    if (!text) return;
+    if (!text || isResponding) return;
 
-    if (!conversationState) {
-      const started = startZESConversation(text);
-      setConversationState(started.state);
+    setIsResponding(true);
+    setCaptureVisible(false);
+    setLeadStatus("idle");
+    setLeadModes(null);
+    setQuery("");
+
+    try {
+      const response = await requestZESReply({
+        history: toHistoryItems(conversation),
+        message: text,
+        state: conversationState,
+      });
+
+      setConversationState(response.state);
+      setRuntimeMode(response.aiMode);
+      setRuntimeModel(response.aiModel);
       setConversation((current) => [
         ...current,
         { role: "user", text },
-        { role: "assistant", text: composeAssistantText(started.turn), turn: started.turn },
+        {
+          role: "assistant",
+          text: composeAssistantText(response.turn),
+          turn: response.turn,
+          aiMode: response.aiMode,
+          aiModel: response.aiModel,
+        },
       ]);
-      setCaptureVisible(false);
-      setLeadStatus("idle");
-      setLeadModes(null);
+
+      if (response.turn.highIntentClose) {
+        setCaptureVisible(true);
+      }
+
       trackEvent("ai_discovery_step", {
         sourcePage: "/",
         sourceTool: "zes-guide",
-        status: `start:${started.state.pathId}`,
+        status: `${conversationState ? "progress" : "start"}:${response.state.pathId}:${response.aiMode}`,
+        urgency: response.turn.leadSnapshot.urgency,
       });
-      setQuery("");
-      return;
+    } finally {
+      setIsResponding(false);
     }
-
-    const progressed = continueZESConversation(conversationState, text);
-    setConversationState(progressed.state);
-    setConversation((current) => [
-      ...current,
-      { role: "user", text },
-      {
-        role: "assistant",
-        text: composeAssistantText(progressed.turn),
-        turn: progressed.turn,
-      },
-    ]);
-    if (progressed.turn.highIntentClose) {
-      setCaptureVisible(true);
-    }
-
-    trackEvent("ai_discovery_step", {
-      sourcePage: "/",
-      sourceTool: "zes-guide",
-      status: `progress:${progressed.state.pathId}`,
-      urgency: progressed.turn.leadSnapshot.urgency,
-    });
-    setQuery("");
   }
 
   async function submitLeadCapture() {
@@ -159,6 +172,8 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
       recommendedFollowUp: lastTurn.leadSnapshot.nextStep,
       selectedServices: lastTurn.suggestedServices.map((item) => item.label).join(", "),
       missingInfo: lastTurn.leadSnapshot.missingInfo.join(" | "),
+      aiMode: runtimeMode,
+      aiModel: runtimeModel ?? "",
     };
 
     const payload = createLeadPayload({
@@ -166,7 +181,7 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
       sourcePage: "/",
       inquiryType: "ZES Guide conversation",
       values: rawValues,
-      generatedSummary: buildGeneratedSummary(lastTurn, conversationState),
+      generatedSummary: buildGeneratedSummary(lastTurn, conversationState, runtimeMode, runtimeModel),
       generatedRiskLevel: mapUrgencyToRisk(lastTurn.leadSnapshot.urgency),
       generatedComplexity: `${lastTurn.leadSnapshot.domain} / ${lastTurn.leadSnapshot.maturity}`,
     });
@@ -273,7 +288,7 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
               ZES guided planning mode
             </span>
             <span className="rounded-lg border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-slate-700">
-              deterministic mock intelligence
+              {formatRuntimeLabel(runtimeMode, runtimeModel)}
             </span>
           </div>
           <h3 className="mt-4 text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">
@@ -304,23 +319,35 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
                 </p>
                 <p className="mt-1 whitespace-pre-line">{item.text}</p>
                 {item.role === "assistant" && item.turn && (
-                  <TurnDetails turn={item.turn} />
+                  <TurnDetails
+                    aiMode={item.aiMode}
+                    aiModel={item.aiModel}
+                    turn={item.turn}
+                  />
                 )}
               </div>
             ))}
           </div>
 
           <div className="mt-4 rounded-lg border border-slate-200 bg-white p-3">
-            <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
-              Start rapid
-            </p>
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
+                Start rapid
+              </p>
+              <p className="text-xs leading-6 text-slate-500">
+                Nu introduce date medicale sensibile sau date de pacient. ZES foloseste
+                contextul doar pentru raspunsul curent si pentru pregatirea solicitarii.
+              </p>
+            </div>
             <div className="mt-2 flex flex-wrap gap-2">
               {zesGuideStarters.map((starter) => (
                 <button
                   className="rounded-lg border border-blue-100 bg-[#f7fbff] px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
                   key={starter}
                   type="button"
-                  onClick={() => handlePrompt(starter)}
+                  onClick={() => {
+                    void handlePrompt(starter);
+                  }}
                 >
                   {starter}
                 </button>
@@ -330,7 +357,7 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
               className="mt-3 flex flex-col gap-2 sm:flex-row"
               onSubmit={(event) => {
                 event.preventDefault();
-                handleSend();
+                void handleSend();
               }}
             >
               <input
@@ -339,7 +366,7 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
                 placeholder="Vreau sa deschid o clinica CT | Am un aparat defect si am nevoie de service | Am nevoie de camera RMN"
                 value={query}
               />
-              <Button size="lg" type="submit">
+              <Button isLoading={isResponding} size="lg" type="submit">
                 Trimite
               </Button>
             </form>
@@ -483,6 +510,23 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
         <aside className="grid gap-3">
           <div className="rounded-lg border border-blue-100 bg-white p-4">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
+              ZES runtime
+            </p>
+            <div className="mt-3 grid gap-3 text-sm leading-6 text-slate-700">
+              <p>
+                <span className="font-semibold text-slate-950">Mod activ:</span>{" "}
+                {formatRuntimeLabel(runtimeMode, runtimeModel)}
+              </p>
+              <p>
+                <span className="font-semibold text-slate-950">Rol ZES:</span>{" "}
+                consultanta tehnica preliminara, triere service, pregatire context
+                pentru ofertare si calificare comerciala.
+              </p>
+            </div>
+          </div>
+
+          <div className="rounded-lg border border-blue-100 bg-white p-4">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
               Capabilitati ZES
             </p>
             <div className="mt-2 flex flex-wrap gap-2">
@@ -571,9 +615,22 @@ function composeAssistantText(turn: ZESAssistantTurn) {
   return parts.join("\n");
 }
 
-function TurnDetails({ turn }: { turn: ZESAssistantTurn }) {
+function TurnDetails({
+  turn,
+  aiMode,
+  aiModel,
+}: {
+  turn: ZESAssistantTurn;
+  aiMode?: ZESAIRuntimeMode;
+  aiModel?: string | null;
+}) {
   return (
     <div className="mt-3 grid gap-2 rounded-lg border border-blue-100 bg-[#f7fbff] p-3 text-xs text-slate-700">
+      {aiMode && (
+        <p className="font-semibold text-[#0057b8]">
+          Runtime: {formatRuntimeLabel(aiMode, aiModel ?? null)}
+        </p>
+      )}
       <p className="font-semibold text-slate-900">{turn.internalCapabilityNote}</p>
       <p>
         Servicii sugerate:{" "}
@@ -661,9 +718,12 @@ function mapUrgencyToRisk(urgency: string) {
 function buildGeneratedSummary(
   turn: ZESAssistantTurn,
   state: ZESConversationState,
+  runtimeMode: ZESAIRuntimeMode,
+  runtimeModel: string | null,
 ) {
   return [
     `ZES Guide summary.`,
+    `AI mode: ${runtimeMode}${runtimeModel ? ` (${runtimeModel})` : ""}.`,
     `Need: ${turn.leadSnapshot.detectedNeed}.`,
     `Domain: ${turn.leadSnapshot.domain}.`,
     `Urgency: ${turn.leadSnapshot.urgency}.`,
@@ -693,3 +753,67 @@ const defaultCtas = [
   { label: "Pregateste cerere oferta", href: "/proposal-builder?source=zes-guide", kind: "tool", availability: "available" },
   { label: "Trimite datele catre ZESCORP", href: "/project-intake?source=zes-guide", kind: "tool", availability: "available" },
 ] as const;
+
+async function requestZESReply({
+  message,
+  state,
+  history,
+}: {
+  message: string;
+  state: ZESConversationState | null;
+  history: ZESGuideHistoryItem[];
+}): Promise<ZESGuideApiResponse> {
+  try {
+    const response = await fetch("/api/zes-guide", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message,
+        state,
+        history,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`ZES route returned ${response.status}.`);
+    }
+
+    return (await response.json()) as ZESGuideApiResponse;
+  } catch {
+    const fallback = state
+      ? continueZESConversation(state, message)
+      : startZESConversation(message);
+
+    return {
+      ok: true,
+      aiMode: "fallback",
+      aiModel: null,
+      reason: "Client-side deterministic fallback.",
+      state: fallback.state,
+      turn: fallback.turn,
+    };
+  }
+}
+
+function toHistoryItems(conversation: ConversationItem[]): ZESGuideHistoryItem[] {
+  return conversation
+    .slice(-8)
+    .map((item) => ({
+      role: item.role,
+      text: item.text,
+    }));
+}
+
+function formatRuntimeLabel(mode: ZESAIRuntimeMode, model: string | null) {
+  if (mode === "real") {
+    return model ? `server-side AI active (${model})` : "server-side AI active";
+  }
+
+  if (mode === "fallback") {
+    return model
+      ? `AI fallback to deterministic guidance (${model})`
+      : "AI fallback to deterministic guidance";
+  }
+
+  return "deterministic fallback mode";
+}

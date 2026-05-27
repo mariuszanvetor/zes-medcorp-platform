@@ -2,11 +2,12 @@
 
 This checklist is for the ZES MEDCORP staging/live demo before a deploy review or client presentation.
 
-The platform currently presents deterministic planning intelligence, local handoff, mock document context, proposal PDF export and internal admin demo workflows. It must not be presented as a live AI engineering approval system, CRM, database, OCR pipeline or regulatory authority.
+The platform currently presents ZES-guided planning with either server-side AI or deterministic fallback, local handoff, mock document context, proposal PDF export and internal admin demo workflows. It must not be presented as an engineering approval system, CRM, database, OCR pipeline or regulatory authority.
 
 ## Demo boundaries
 
-- AI Discovery is deterministic and preliminary.
+- AI Discovery remains preliminary.
+- Homepage ZES can run in `real`, `fallback` or `mock` mode depending on server-side environment configuration.
 - Proposal Builder creates an orientative technical proposal, not a final offer or engineering approval.
 - Project Intake collects structured project context for a later technical discussion.
 - Mock document intelligence uses descriptors only. No real file upload, OCR, parsing or storage is active.
@@ -19,7 +20,7 @@ The platform currently presents deterministic planning intelligence, local hando
 1. Open `/`.
 2. Verify `/#zes-guide` is the dominant above-the-fold entry.
 3. Test `Discuta cu ZES` with at least one starter prompt and one free-text prompt.
-4. Verify ZES returns deterministic consultative guidance (intent, missing info, next action and CTA routing).
+4. Verify ZES returns consultative guidance with a visible runtime label (`real`, `fallback` or `mock`).
 5. Verify capability chips and lead summary update after each meaningful assistant response.
 6. Verify document language is clearly demo-only (no fake parsing claims).
 7. Trigger a high-intent ZES path (service urgent or CT/RMN) and verify inline lead capture appears.
@@ -119,7 +120,8 @@ Use one controlled test payload at most unless debugging:
 
 ## Mock-only limitations to mention
 
-- No real AI API is connected.
+- Real AI may be connected only server-side and only when `ZES_AI_ENABLED=true` plus `OPENAI_API_KEY` are configured.
+- If AI is disabled or unavailable, ZES must remain useful through deterministic fallback.
 - No real OCR, upload endpoint or document parsing is active.
 - No proposal persistence exists.
 - No CRM, database or real admin data source is active.

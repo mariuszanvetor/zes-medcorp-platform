@@ -20,8 +20,11 @@ export type LeadFlowMonitorConfig = {
   expectedEmailMode: string;
   expectedSheetsMode: string;
   storageMode: string;
+  expectedAiMode: string;
+  aiModel: string;
   resend: LeadFlowCheck[];
   sheets: LeadFlowCheck[];
+  zesAi: LeadFlowCheck[];
   flags: LeadFlowCheck[];
 };
 
@@ -55,6 +58,7 @@ export function LeadFlowMonitor({ config }: LeadFlowMonitorProps) {
   const summary = useMemo(
     () => [
       ["Integration mode", config.integrationMode],
+      ["ZES AI", labelForMode(config.expectedAiMode)],
       ["Expected email", labelForMode(config.expectedEmailMode)],
       ["Expected Sheets", labelForMode(config.expectedSheetsMode)],
       ["Storage", labelForMode(config.storageMode)],
@@ -162,6 +166,7 @@ export function LeadFlowMonitor({ config }: LeadFlowMonitorProps) {
       <LeadLifecycleTimeline />
 
       <div className="grid gap-6 xl:grid-cols-3">
+        <CheckGroup checks={config.zesAi} title="ZES AI" />
         <CheckGroup checks={config.resend} title="Resend / email" />
         <CheckGroup checks={config.sheets} title="Google Sheets" />
         <CheckGroup checks={config.flags} title="Runtime flags" />
@@ -650,6 +655,7 @@ function labelForService(service: "email" | "sheets" | "storage") {
 function labelForMode(mode: string | undefined) {
   if (!mode) return "-";
   if (isActiveMode(mode)) return `${mode} - active`;
+  if (mode === "fallback") return "fallback - deterministic safety layer";
   if (mode === "mock") return "mock - safe simulation";
   if (mode === "config-error") return "config-error - configuration issue";
   if (mode === "provider-error") return "provider-error - provider issue";

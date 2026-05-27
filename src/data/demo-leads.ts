@@ -26,6 +26,8 @@ export type DemoLead = {
   id: string;
   sourceTool: string;
   sourcePage: string;
+  aiMode?: "real" | "fallback" | "mock";
+  aiIntent?: string;
   projectType: string;
   inquiryType: string;
   company: string;
@@ -79,6 +81,8 @@ export const demoLeads: DemoLead[] = [
     id: "ZES-LEAD-1300",
     sourceTool: "ZES Guide",
     sourcePage: "/",
+    aiMode: "fallback",
+    aiIntent: "service-maintenance",
     projectType: "Service urgent imagistica",
     inquiryType: "ZES Guide conversation / service",
     company: "Service Demo Clinic",
@@ -141,6 +145,8 @@ export const demoLeads: DemoLead[] = [
     id: "ZES-LEAD-1301",
     sourceTool: "ZES Guide",
     sourcePage: "/",
+    aiMode: "real",
+    aiIntent: "ct-project",
     projectType: "Proiect CT clinic nou",
     inquiryType: "ZES Guide conversation / proiect",
     company: "CT Demo Project",

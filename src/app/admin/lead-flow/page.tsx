@@ -10,6 +10,7 @@ import { canRenderAdminContent } from "@/lib/admin-access";
 import { getLeadIntegrationConfig } from "@/lib/integration-config";
 import { validateEmailConfig } from "@/lib/integrations/email-adapter";
 import { validateSheetsConfig } from "@/lib/integrations/google-sheets-adapter";
+import { getZESAIConfig } from "@/lib/zes-ai";
 
 export const dynamic = "force-dynamic";
 
@@ -44,11 +45,18 @@ function buildLeadFlowMonitorConfig(): LeadFlowMonitorConfig {
   const integrationConfig = getLeadIntegrationConfig();
   const emailConfig = validateEmailConfig({ requiresInternalRecipient: true });
   const sheetsConfig = validateSheetsConfig(integrationConfig.sheetsRequested);
+  const zesAiConfig = getZESAIConfig();
   const emailProvider = process.env.EMAIL_PROVIDER || "mock";
   const storageProvider = process.env.LEAD_STORAGE_PROVIDER || "mock";
 
   return {
     integrationMode: integrationConfig.mode,
+    expectedAiMode: zesAiConfig.enabled
+      ? "real"
+      : zesAiConfig.requested
+        ? "mock"
+        : "mock",
+    aiModel: zesAiConfig.model,
     expectedEmailMode: integrationConfig.emailRequested
       ? emailConfig.mode
       : "mock",
@@ -58,6 +66,7 @@ function buildLeadFlowMonitorConfig(): LeadFlowMonitorConfig {
         : "config-error"
       : "mock",
     storageMode: storageProvider,
+    zesAi: buildZesAiChecks(zesAiConfig),
     resend: buildResendChecks({
       emailProvider,
       emailRequested: integrationConfig.emailRequested,
@@ -67,6 +76,24 @@ function buildLeadFlowMonitorConfig(): LeadFlowMonitorConfig {
     }),
     flags: buildFlagChecks(),
   };
+}
+
+function buildZesAiChecks(config: ReturnType<typeof getZESAIConfig>): LeadFlowCheck[] {
+  return [
+    {
+      label: "ZES AI enabled flag",
+      status: config.requested ? "configured" : "safe",
+      detail: config.requested
+        ? "ZES_AI_ENABLED=true. Server-side AI poate fi folosit cand cheia este prezenta."
+        : "ZES ruleaza in fallback determinist pana la activarea explicita a AI-ului.",
+    },
+    presenceCheck("OpenAI API key", "OPENAI_API_KEY", true),
+    {
+      label: "ZES AI model",
+      status: config.model ? "configured" : "missing",
+      detail: `Model curent: ${config.model}.`,
+    },
+  ];
 }
 
 function buildResendChecks({

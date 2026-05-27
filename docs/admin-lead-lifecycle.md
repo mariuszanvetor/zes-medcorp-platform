@@ -15,6 +15,12 @@ This document describes the current internal demo lifecycle for lead intelligenc
 
 Phase 75G adds `ZES Guide` as a visible lead source in demo review. These leads represent inline conversational captures from homepage.
 
+Phase 76A adds runtime visibility for ZES AI:
+
+- `real`: server-side OpenAI response was accepted and merged into the ZES turn;
+- `fallback`: AI was requested, but ZES returned to deterministic guidance because the provider response failed, timed out or could not be validated;
+- `mock`: AI is disabled or missing configuration, so ZES remains deterministic.
+
 ## Phase 71L mock action workflow
 
 `/admin/leads` now includes a deterministic mock admin workflow for selected demo leads.
@@ -51,6 +57,8 @@ It intentionally avoids PII-heavy data and does not include email, phone, raw no
 ## Fields that should appear in admin review
 
 - lead source and source page;
+- ZES AI mode when the source is `ZES Guide`;
+- ZES AI intent when the source is `ZES Guide`;
 - project domain or project type;
 - readiness score;
 - risk and complexity;
@@ -94,11 +102,11 @@ All examples use fake demo data only.
 
 1. Open `/admin/lead-flow` and confirm the lifecycle timeline is visible.
 2. Run the safe internal test only when duplicate cooldown will not interfere.
-3. Confirm the response summary shows integration, email, Sheets and storage modes.
+3. Confirm the response summary shows integration, ZES AI, email, Sheets and storage modes.
 4. Open `/admin/leads`.
 5. Select the AI Discovery demo lead and verify mock document context appears.
 6. Select Proposal Builder, Project Intake, service and equipment demo leads.
-7. Confirm each lead displays source context, readiness, risk, complexity and recommended next action.
+7. Confirm each ZES Guide lead displays source context, AI mode, intent, readiness, risk, complexity and recommended next action.
 8. Confirm no secrets, real customer data or raw document contents appear.
 9. Apply each mock action status to a selected lead.
 10. Confirm the list badge updates locally and the action appears in local review history.

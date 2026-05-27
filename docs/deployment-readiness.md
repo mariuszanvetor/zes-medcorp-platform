@@ -10,7 +10,8 @@ This document is the staging/live demo checklist for SITE ZESCORP. It focuses on
 - Admin routes are dynamic, internal, noindex/nofollow and excluded from sitemap.
 - Sitemap is generated from public route/data sources only.
 - Robots points crawlers to `/sitemap.xml`.
-- AI Discovery, Proposal Builder, Project Intake and mock document intelligence remain deterministic and preliminary.
+- AI Discovery, Proposal Builder, Project Intake and mock document intelligence remain preliminary.
+- ZES homepage conversation can run in `real`, `fallback` or `mock` mode depending on server-side AI configuration.
 
 ## Public vs admin routes
 
@@ -48,6 +49,8 @@ Admin requirements:
 Safe default:
 
 ```env
+ZES_AI_ENABLED=false
+ZES_AI_MODEL=gpt-5.4
 LEAD_INTEGRATION_MODE=mock
 EMAIL_PROVIDER=mock
 LEAD_STORAGE_PROVIDER=mock
@@ -55,6 +58,16 @@ LEAD_CONFIRMATION_EMAIL_ENABLED=false
 HIGH_PRIORITY_ALERT_EMAIL_ENABLED=false
 ADMIN_ACCESS_ENABLED=false
 ```
+
+Optional server-side AI activation:
+
+```env
+ZES_AI_ENABLED=true
+ZES_AI_MODEL=gpt-5.4
+OPENAI_API_KEY=
+```
+
+`OPENAI_API_KEY` must remain server-side only and must never be prefixed with `NEXT_PUBLIC_`.
 
 Recommended staging/live demo admin gate:
 
@@ -98,6 +111,9 @@ Do not prefix secrets with `NEXT_PUBLIC_`.
 
 ## Mock vs real integration modes
 
+- `ZES AI mock`: `ZES_AI_ENABLED=false` or missing key. Homepage ZES uses the deterministic engine directly.
+- `ZES AI fallback`: AI is requested but the provider response fails validation or times out. ZES falls back automatically to deterministic guidance.
+- `ZES AI real`: server-side AI returns validated structured JSON and the UI labels the runtime accordingly.
 - `mock`: lead submission returns safe mock modes and does not call external providers.
 - `email-only`: internal notification email may send if `EMAIL_PROVIDER=resend` is correctly configured.
 - `sheets-only`: Sheets may be attempted if Sheets env vars are configured.
@@ -116,8 +132,10 @@ For SITE ZESCORP staging/live demo, keep integrations mock unless a controlled r
 6. Confirm admin password env is set if admin pages are used outside a private preview.
 7. Confirm `https://www.zescorp.ro` remains the canonical base URL.
 8. Confirm homepage CTAs point to AI Discovery, Proposal Builder and Project Intake.
-9. Confirm public copy does not imply real generative AI, compliance guarantees or final engineering approval.
-10. Confirm legal pages remain accessible.
+9. Confirm public copy does not imply compliance guarantees or final engineering approval.
+10. If `ZES_AI_ENABLED=true`, confirm `OPENAI_API_KEY` exists only in server-side environment configuration.
+11. Confirm privacy text near ZES input is visible.
+12. Confirm legal pages remain accessible.
 
 ## Post-deploy smoke checklist
 
@@ -127,6 +145,7 @@ Open:
 - `/ai-discovery`
 - `/proposal-builder`
 - `/project-intake`
+- `/api/zes-guide` through homepage ZES interaction or route test
 - `/admin/lead-flow`
 - `/admin/leads`
 - `/sitemap.xml`
@@ -139,6 +158,8 @@ Verify:
 - admin pages include noindex/nofollow;
 - sitemap excludes `/admin/*`;
 - AI Discovery, Proposal Builder and Project Intake submit successfully in mock mode;
+- ZES chat works in `mock` mode when AI is disabled or keyless;
+- if AI is enabled, ZES surfaces `real` or `fallback` runtime without breaking the conversation;
 - lead response shows `integrationMode=mock`, `emailMode=mock`, `sheetsMode=mock`, `storageMode=mock`;
 - no false error state appears after a successful mock response.
 
@@ -169,6 +190,7 @@ Redeploy after environment changes and run one controlled internal test from `/a
 ## Known staging/demo limitations
 
 - AI Discovery is deterministic, not connected to a real AI API.
+- ZES can use real AI only when explicitly enabled server-side; otherwise it remains deterministic.
 - Mock document intelligence uses descriptors only; no uploads or parsing are active.
 - Admin lead workflow is client-side session state only.
 - No CRM, database or persistent lead dashboard is active.

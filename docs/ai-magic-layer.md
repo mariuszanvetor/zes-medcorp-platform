@@ -4,17 +4,17 @@ The AI Magic Layer is the product direction for an AI-assisted medical infrastru
 
 It is not a generic chatbot. It is a guided planning and commercial-intelligence layer for clinics, imaging projects, laboratories, modernization work and service needs.
 
-Current Phase 75A status:
+Current Phase 76A status:
 
-- deterministic only;
-- mock-safe;
-- no real OpenAI API calls;
+- server-side OpenAI integration is available for ZES through `/api/zes-guide`;
+- fallback to deterministic behavior remains required;
+- no client-side API key exposure;
 - no streaming;
 - no server-side conversational memory;
 - no OCR or document parsing;
 - no CRM, database or authenticated lead workspace.
 
-Phase 75B/75C/75D/75E/75F/75G status:
+Phase 75B/75C/75D/75E/75F/75G/76A status:
 
 - AI Magic scenarios are now connected to `/ai-discovery` via deterministic query handoff;
 - scenario seeds prefill discovery intent, stage, domains and urgency;
@@ -28,7 +28,9 @@ Phase 75B/75C/75D/75E/75F/75G status:
 - homepage now treats ZES as the primary above-the-fold conversational entry (`Discuta cu ZES despre proiectul tau medical`);
 - ZES runs scenario-specific follow-up paths (service, CT, RMN, funding, ofertare echipamente) and builds lead summaries progressively;
 - high-intent ZES conversations can open inline lead capture and submit through existing mock-safe `/api/leads` flow;
-- no real AI provider, streaming, OCR, CRM or persistence changes were introduced.
+- Phase 76A adds a real AI path with validated structured JSON output, while preserving deterministic fallback;
+- ZES runtime can now be `real`, `fallback` or `mock`;
+- no CRM or persistence changes were introduced.
 
 ## Product vision
 
@@ -160,7 +162,13 @@ Future real AI should enrich summaries, but deterministic scoring should remain 
 
 ## Future AI integration boundaries
 
-Real AI integration may be introduced later for:
+Real AI integration is now partially introduced for:
+
+- server-side conversation phrasing;
+- structured intent and next-step guidance;
+- lead-readiness support inside the current homepage ZES flow.
+
+Further AI integration may later expand into:
 
 - conversational phrasing;
 - summarization;
@@ -179,7 +187,7 @@ Real AI must not:
 - store documents without clear consent and retention policy;
 - replace specialist review.
 
-Any future AI provider should be wrapped behind a server-side adapter with:
+The current AI provider path is wrapped behind a server-side adapter with:
 
 - explicit environment controls;
 - mock fallback;
@@ -188,6 +196,18 @@ Any future AI provider should be wrapped behind a server-side adapter with:
 - safe error handling;
 - no secret exposure;
 - no client-side API keys.
+
+Current env variables:
+
+- `ZES_AI_ENABLED`
+- `ZES_AI_MODEL`
+- `OPENAI_API_KEY`
+
+Recommended defaults:
+
+- keep `ZES_AI_ENABLED=false` in safe demos or when costs must be near-zero;
+- use `gpt-5.4` as the baseline model;
+- use `gpt-5.5` only when a higher-cost premium runtime is justified.
 
 ## Deterministic fallback behavior
 
@@ -244,7 +264,8 @@ Every public AI Magic surface should clearly label the current mode:
 
 - AI-assisted demo;
 - guided planning mode;
-- deterministic mock intelligence;
+- deterministic fallback mode;
+- server-side AI active;
 - preliminary guidance;
 - validation needed.
 
