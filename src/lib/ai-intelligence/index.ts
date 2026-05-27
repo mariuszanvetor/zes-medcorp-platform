@@ -10,3 +10,4 @@ export * from "@/lib/ai-intelligence/lead-proposal-intelligence";
 export * from "@/lib/ai-intelligence/lead-intelligence";
 export * from "@/lib/ai-intelligence/proposal-intelligence";
 export * from "@/lib/ai-intelligence/safety";
+export * from "@/lib/ai-magic-layer";

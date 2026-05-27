@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { AIIntroSection } from "@/components/sections/AIIntroSection";
+import { AIMagicLayerSection } from "@/components/sections/AIMagicLayerSection";
 import { AIToolsPreviewSection } from "@/components/sections/AIToolsPreviewSection";
 import { EquipmentServiceSection } from "@/components/sections/EquipmentServiceSection";
 import { EnterpriseTrustBand } from "@/components/sections/EnterpriseTrustBand";
@@ -46,6 +47,7 @@ export default function Home() {
         compact
       />
       <PublicDemoEntrySection />
+      <AIMagicLayerSection />
       <AIIntroSection />
       <ServicesSection />
       <AIToolsPreviewSection />
