@@ -26,7 +26,7 @@ export function AIMagicLayerSection() {
 
   return (
     <Section
-      className="border-y border-blue-100 bg-[linear-gradient(180deg,#ffffff_0%,#f7fbff_100%)]"
+      className="border-y border-blue-200 bg-[linear-gradient(180deg,#ffffff_0%,#f3f9ff_52%,#eef6ff_100%)]"
       spacing="xl"
       tone="transparent"
     >
@@ -34,24 +34,26 @@ export function AIMagicLayerSection() {
         <div className="grid gap-10 xl:grid-cols-[0.38fr_0.62fr] xl:items-start">
           <div>
             <div className="flex flex-wrap gap-2">
-              <Badge variant="blue">AI Copilot / Guided Planning</Badge>
-              <Badge variant="neutral">AI-assisted demo</Badge>
+              <Badge variant="blue">ZES AI Copilot</Badge>
+              <Badge variant="neutral">ZES Guided Planning</Badge>
               <Badge variant="neutral">deterministic mock intelligence</Badge>
             </div>
-            <h2 className="mt-6 text-3xl font-semibold leading-tight text-slate-950 sm:text-4xl">
-              Un sales engineer asistat pentru primele decizii medicale.
+            <h2 className="mt-6 text-3xl font-semibold leading-tight text-slate-950 sm:text-5xl">
+              Planificare ghidata cu ZES pentru decizii medicale critice.
             </h2>
             <p className="mt-5 text-base leading-8 text-slate-600">
-              Stratul AI Magic simuleaza modul in care ZES poate ghida un
-              proiect medical: intrebari adaptive, recomandari de infrastructura,
-              readiness comercial si urmatorul pas potrivit. In aceasta etapa nu
-              exista apeluri AI reale, memorie server-side sau validare finala.
+              ZES Copilot simuleaza modul in care un sales engineer tehnic
+              structureaza un proiect medical: intrebari adaptive, recomandari
+              de infrastructura, readiness comercial si urmatorul pas potrivit.
+              In aceasta etapa nu exista apeluri AI reale, memorie server-side
+              sau validare finala.
             </p>
             <div className="mt-7 grid gap-3 text-sm font-semibold text-slate-700">
               {[
                 "Planificare ghidata pentru CT, RMN, modernizare si service",
                 "Semnale comerciale: urgenta, maturitate, oportunitate",
                 "Recomandari tehnice preliminare, cu validare umana necesara",
+                "Diferentiere clara fata de formulare statice: context, ritm, prioritizare",
               ].map((item) => (
                 <div className="flex gap-3" key={item}>
                   <span
@@ -66,14 +68,14 @@ export function AIMagicLayerSection() {
               <TrackedButtonLink
                 href={`/ai-discovery?source=ai-magic-layer&scenario=${selectedScenario}`}
                 tracking={{
-                  ctaLabel: "Continua in AI Discovery",
+                  ctaLabel: "Porneste ZES Copilot",
                   destination: `/ai-discovery?source=ai-magic-layer&scenario=${selectedScenario}`,
                   sourcePage: "/",
                   sourceTool: "ai-magic-layer",
                   status: selectedScenario,
                 }}
               >
-                Continua in AI Discovery
+                Porneste ZES Copilot
               </TrackedButtonLink>
               <TrackedButtonLink
                 href="/project-intake"
@@ -85,16 +87,16 @@ export function AIMagicLayerSection() {
                 }}
                 variant="secondary"
               >
-                Trimite context proiect
+                Trimite context pentru analiza
               </TrackedButtonLink>
             </div>
           </div>
 
-          <Card className="border-blue-100 bg-white" padding="lg">
+          <Card className="border-blue-200 bg-white shadow-[0_22px_52px_rgba(0,87,184,0.09)]" padding="lg">
             <div className="grid gap-6 lg:grid-cols-[0.42fr_0.58fr]">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#0057b8]">
-                  Selecteaza scenariul
+                  Selecteaza scenariul ZES
                 </p>
                 <div className="mt-4 grid gap-2">
                   {aiMagicScenarios.map((scenario) => (
@@ -136,7 +138,7 @@ export function AIMagicLayerSection() {
                     {analysis.scenario.userPrompt}
                   </p>
                   <p className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-[#0057b8]">
-                    Copilot ZES
+                    ZES Copilot
                   </p>
                   <p className="mt-2 text-sm leading-7 text-slate-600">
                     {analysis.assistantResponse}
@@ -196,6 +198,9 @@ export function AIMagicLayerSection() {
                       </Badge>
                     ))}
                   </div>
+                  <p className="mt-4 text-xs leading-6 text-slate-600">
+                    ZES estimeaza nivelul de pregatire comerciala in functie de contextul tehnic disponibil.
+                  </p>
                 </div>
 
                 <div className="rounded-lg border border-blue-100 bg-[#f7fbff] p-5">

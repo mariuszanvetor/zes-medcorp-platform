@@ -14,12 +14,15 @@ Current Phase 75A status:
 - no OCR or document parsing;
 - no CRM, database or authenticated lead workspace.
 
-Phase 75B/75C status:
+Phase 75B/75C/75D status:
 
 - AI Magic scenarios are now connected to `/ai-discovery` via deterministic query handoff;
 - scenario seeds prefill discovery intent, stage, domains and urgency;
 - AI Discovery includes scenario-aware conversational guidance and commercial hints;
+- AI Discovery uses a stronger ZES Copilot presence with layered intelligence cards, dependency groups and opportunity markers;
+- conversational rhythm is segmented into guidance, scenario blockers, transitions and advisory notes;
 - local context handoff carries AI Magic fields into Proposal Builder and Project Intake summaries;
+- homepage AI Magic section now positions `ZES AI Copilot` as the primary guided planning entry;
 - no real AI provider, streaming, OCR, CRM or persistence changes were introduced.
 
 ## Product vision

@@ -23,19 +23,21 @@ export function DiscoveryIntelligencePanel({
   const serviceRecommendations = buildServiceRecommendations(result, aiMagicAnalysis);
   const complianceHints = buildComplianceHints(result, aiMagicAnalysis);
   const nextBestAction = buildNextBestAction(result, aiMagicAnalysis);
+  const dependencyGroups = buildDependencyGroups(result, aiMagicAnalysis);
+  const opportunityMarkers = buildOpportunityMarkers(result, aiMagicAnalysis);
 
   return (
     <aside className="grid gap-4 lg:sticky lg:top-24">
       <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_12px_36px_rgba(0,87,184,0.07)]">
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
-          AI copilot panel
+          ZES Copilot
         </p>
         <h2 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">
-          Rezumat preliminar live
+          Inteligenta preliminara live
         </h2>
         <div className="mt-5 grid grid-cols-2 gap-3">
           <Metric label="Incredere" value={`${result.confidenceScore}/100`} tone={result.confidenceLevel} />
-          <Metric label="Readiness" value={`${readinessValue}/100`} tone="high" />
+          <Metric label="Project readiness" value={`${readinessValue}/100`} tone="high" />
           <Metric label="Risc" value={result.riskAssessment.riskLevel} tone={riskTone(result.riskAssessment.riskLevel)} />
           <Metric label="Complexitate" value={result.riskAssessment.complexityLevel} tone={riskTone(result.riskAssessment.riskLevel)} />
         </div>
@@ -53,7 +55,7 @@ export function DiscoveryIntelligencePanel({
       </Panel>
 
       {aiMagicAnalysis && (
-        <Panel title="Commercial guidance hints">
+        <Panel title="ZES commercial guidance">
           <div className="grid gap-3 sm:grid-cols-2">
             <Metric label="Planning readiness" value={`${aiMagicAnalysis.planningReadiness}/100`} tone="high" />
             <Metric label="Commercial readiness" value={`${aiMagicAnalysis.commercialReadiness}/100`} tone="high" />
@@ -78,6 +80,16 @@ export function DiscoveryIntelligencePanel({
           </p>
         </Panel>
       )}
+
+      <Panel title="Opportunity markers">
+        <div className="grid gap-2">
+          {opportunityMarkers.map((marker) => (
+            <div className="rounded-lg border border-blue-100 bg-[#f7fbff] p-3" key={marker}>
+              <p className="text-sm font-semibold leading-6 text-slate-800">{marker}</p>
+            </div>
+          ))}
+        </div>
+      </Panel>
 
       <Panel title="Checkpoint-uri proiect">
         <div className="grid gap-3">
@@ -140,6 +152,25 @@ export function DiscoveryIntelligencePanel({
             </li>
           ))}
         </ul>
+      </Panel>
+
+      <Panel title="Dependency groups">
+        <div className="grid gap-3">
+          {dependencyGroups.map((group) => (
+            <div className="rounded-lg border border-slate-200 bg-slate-50 p-3" key={group.title}>
+              <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
+                {group.title}
+              </p>
+              <ul className="mt-2 grid gap-1">
+                {group.items.map((item) => (
+                  <li className="text-sm leading-6 text-slate-700" key={item}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </Panel>
 
       <Panel title="Servicii recomandate">
@@ -323,10 +354,121 @@ function buildNextBestAction(
   aiMagicAnalysis: AiMagicAnalysis | null,
 ) {
   if (aiMagicAnalysis?.recommendedNextSteps.length) {
-    return `Recomandare copilot: ${aiMagicAnalysis.recommendedNextSteps[0]}. ${result.continueWithAssumptionsNote}`;
+    return `ZES recomanda urmatorul pas: ${aiMagicAnalysis.recommendedNextSteps[0]}. ${result.continueWithAssumptionsNote}`;
   }
 
-  return result.continueWithAssumptionsNote;
+  return `ZES recomanda continuarea cu validari tehnice etapizate. ${result.continueWithAssumptionsNote}`;
+}
+
+function buildDependencyGroups(
+  result: OrchestratedDiscoveryResult,
+  aiMagicAnalysis: AiMagicAnalysis | null,
+) {
+  const domains = new Set(result.detectedDomains);
+  const groups: Array<{ title: string; items: string[] }> = [];
+
+  if (domains.has("mri")) {
+    groups.push({
+      title: "RMN infrastructura",
+      items: [
+        "RF shielding si validare camera Faraday",
+        "Analiza traseu instalare magnet si acces",
+        "Coordonare HVAC, electric si siguranta quench",
+      ],
+    });
+  }
+
+  if (domains.has("ct") || domains.has("radiology") || domains.has("dental")) {
+    groups.push({
+      title: "CT / RX / radiologie",
+      items: [
+        "Revizuire radioprotectie si configuratie camera",
+        "Planificare CNCAN in functie de etapa proiectului",
+        "Corelare flux pacienti cu configuratia echipamentului",
+      ],
+    });
+  }
+
+  if (
+    domains.has("clinic-modernization") ||
+    aiMagicAnalysis?.scenario.id === "imaging-expansion" ||
+    aiMagicAnalysis?.scenario.id === "radiology-modernization"
+  ) {
+    groups.push({
+      title: "Modernizare si continuitate",
+      items: [
+        "Etapizare implementare pentru reducerea downtime-ului",
+        "Coordonare multi-vendor si secventiere operationala",
+        "Validari intermediare inainte de punerea in functiune",
+      ],
+    });
+  }
+
+  if (aiMagicAnalysis?.scenario.id === "service-maintenance") {
+    groups.push({
+      title: "Service / mentenanta",
+      items: [
+        "Prioritizare dupa impact operational si urgenta",
+        "Clarificare piese critice si interval de interventie",
+        "Plan preventiv pentru reducerea incidentelor repetate",
+      ],
+    });
+  }
+
+  if (!groups.length) {
+    groups.push({
+      title: "Dependente generale",
+      items: [
+        "Confirmare date tehnice minime ale proiectului",
+        "Validare infrastructura HVAC/electrica pe configuratia finala",
+        "Aliniere intre obiective comerciale si fezabilitatea tehnica",
+      ],
+    });
+  }
+
+  return groups.slice(0, 3);
+}
+
+function buildOpportunityMarkers(
+  result: OrchestratedDiscoveryResult,
+  aiMagicAnalysis: AiMagicAnalysis | null,
+) {
+  const markers: string[] = [];
+
+  if (aiMagicAnalysis) {
+    markers.push(
+      `Nivelul actual de pregatire comerciala este ${readinessBand(aiMagicAnalysis.commercialReadiness)}.`,
+    );
+    markers.push(
+      `Maturitatea implementarii este ${aiMagicAnalysis.projectMaturity}, iar complexitatea este ${aiMagicAnalysis.infrastructureComplexity}.`,
+    );
+  }
+
+  if (result.riskAssessment.riskLevel === "high" || result.riskAssessment.riskLevel === "critical") {
+    markers.push(
+      "ZES identifica posibile blocaje de infrastructura; este recomandata validarea tehnica inainte de executie.",
+    );
+  }
+
+  if (result.leadIntelligence.urgencyScore >= 70) {
+    markers.push(
+      "Scenariul indica urgenta operationala ridicata; prioritar este un plan de actiune si secventiere.",
+    );
+  }
+
+  if (!markers.length) {
+    markers.push(
+      "Profilul actual permite avansarea cu ipoteze preliminare, urmata de validare tehnica punctuala.",
+    );
+  }
+
+  return markers.slice(0, 4);
+}
+
+function readinessBand(value: number) {
+  if (value >= 80) return "ridicat";
+  if (value >= 60) return "moderat";
+  return "incipient";
 }
 
 function Metric({

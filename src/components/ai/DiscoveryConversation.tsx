@@ -62,6 +62,7 @@ export function DiscoveryConversation({
   const blockers = aiMagicAnalysis?.likelyMissingItems ?? [];
   const scenarioConcerns = aiMagicAnalysis?.projectConcerns ?? [];
   const concernQuestions = aiMagicAnalysis?.guidedQuestions ?? [];
+  const scenarioTransitions = buildScenarioTransitions(aiMagicAnalysis);
 
   function toggleDomain(domainId: MedicalDomainId) {
     const current = new Set(context.domains ?? []);
@@ -76,19 +77,19 @@ export function DiscoveryConversation({
         <div className="grid gap-4 lg:grid-cols-[0.52fr_0.48fr]">
           <div className="rounded-lg border border-blue-100 bg-[#f7fbff] p-4">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
-              Copilot ZES
+              ZES Copilot
             </p>
             <p className="mt-2 text-sm font-semibold leading-7 text-slate-950">
               {aiMagicAnalysis
                 ? aiMagicAnalysis.assistantResponse
-                : "Te ghidez pas cu pas pentru a clarifica domeniul, riscurile si datele necesare unei discutii tehnice productive."}
+                : "ZES analizeaza contextul proiectului si te ghideaza pas cu pas pentru clarificarea riscurilor, dependentelor si datelor necesare unei discutii tehnice productive."}
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               <span className="rounded-lg border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-slate-700">
-                AI-assisted demo
+                ZES AI-assisted demo
               </span>
               <span className="rounded-lg border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-slate-700">
-                guided planning mode
+                ZES guided planning mode
               </span>
               <span className="rounded-lg border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-slate-700">
                 deterministic mock intelligence
@@ -133,6 +134,10 @@ export function DiscoveryConversation({
               items={concernQuestions}
               title="Intrebari recomandate"
             />
+            <ScenarioList
+              items={scenarioTransitions}
+              title="Tranzitii recomandate"
+            />
             <div className="rounded-lg border border-slate-200 bg-[#f7fbff] p-4">
               <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
                 Oportunitate comerciala
@@ -159,6 +164,9 @@ export function DiscoveryConversation({
               </div>
             </div>
           </div>
+          <p className="mt-4 rounded-lg border border-blue-100 bg-blue-50 p-4 text-sm leading-7 text-slate-800">
+            Pe baza profilului infrastructurii, ZES recomanda validarea timpurie a utilitatilor critice (HVAC, electric, shielding/radioprotectie) inaintea deciziilor finale de implementare.
+          </p>
         </section>
       )}
 
@@ -170,8 +178,8 @@ export function DiscoveryConversation({
           Spune-ne ce incerci sa planifici.
         </h2>
         <p className="mt-3 text-sm leading-7 text-slate-600">
-          Poti raspunde partial. Workspace-ul continua cu ipoteze preliminare si marcheaza ce trebuie validat ulterior.
-        </p>
+            Poti raspunde partial. Workspace-ul continua cu ipoteze preliminare si marcheaza ce trebuie validat ulterior.
+          </p>
 
         <label className="mt-5 grid gap-2" htmlFor="discovery-description">
           <span className="text-sm font-semibold text-slate-700">
@@ -355,6 +363,54 @@ function ScenarioList({ title, items }: { title: string; items: string[] }) {
       </ul>
     </div>
   );
+}
+
+function buildScenarioTransitions(aiMagicAnalysis: AiMagicAnalysis | null) {
+  if (!aiMagicAnalysis) {
+    return [
+      "Clarificare intentie si obiective tehnico-comerciale",
+      "Validare ipoteze de infrastructura cu date partiale",
+      "Definire urmator pas: Proposal Builder, Intake sau review tehnic",
+    ];
+  }
+
+  if (aiMagicAnalysis.scenario.id === "ct-clinic") {
+    return [
+      "Revizuirea radioprotectiei este recomandata inainte de implementare.",
+      "ZES recomanda validarea HVAC si electrica inainte de configuratia finala.",
+      "Pregatiti datele CNCAN pentru etapizarea tehnica si comerciala.",
+    ];
+  }
+
+  if (aiMagicAnalysis.scenario.id === "mri-room") {
+    return [
+      "ZES recomanda validarea RF shielding si traseului de instalare RMN.",
+      "Planificati evaluarea HVAC/electric pe baza cerintelor furnizorului.",
+      "Documentati ipotezele de siguranta si acces inainte de ofertare.",
+    ];
+  }
+
+  if (aiMagicAnalysis.scenario.id === "imaging-expansion") {
+    return [
+      "Proiectul pare potrivit pentru implementare etapizata.",
+      "Separati pachetele tehnice de impactul operational asupra clinicii.",
+      "Corelati bugetul orientativ cu fazele de integrare.",
+    ];
+  }
+
+  if (aiMagicAnalysis.scenario.id === "radiology-modernization") {
+    return [
+      "Stabiliti prioritatile de modernizare in functie de downtime acceptat.",
+      "Validati compatibilitatea noilor echipamente cu infrastructura existenta.",
+      "Definiti secventierea pentru continuitate operationala.",
+    ];
+  }
+
+  return [
+    "Prioritizati urgenta si impactul operational asupra activitatii curente.",
+    "Clarificati acoperirea contractuala pentru service si mentenanta.",
+    "Definiti urmatorul pas comercial: triere rapida sau evaluare extinsa.",
+  ];
 }
 
 function ToggleRow({

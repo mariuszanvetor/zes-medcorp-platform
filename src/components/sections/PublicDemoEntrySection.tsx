@@ -8,9 +8,9 @@ import { Section } from "@/components/ui/Section";
 const demoPaths = [
   {
     title: "Testeaza fluxul de planificare",
-    body: "Porneste cu AI Discovery pentru a clarifica domeniul proiectului, riscurile, informatiile lipsa si urmatorul pas. Fluxul este determinist, preliminar si orientat spre validare tehnica.",
+    body: "Porneste cu ZES Copilot pentru a clarifica domeniul proiectului, riscurile, informatiile lipsa si urmatorul pas. Fluxul este determinist, preliminar si orientat spre validare tehnica.",
     href: "/ai-discovery",
-    cta: "Deschide AI Discovery",
+    cta: "Deschide ZES Copilot",
   },
   {
     title: "Genereaza context pentru ofertare",
@@ -51,13 +51,13 @@ export function PublicDemoEntrySection() {
                 className="rounded-xl"
                 href="/ai-discovery"
                 tracking={{
-                  ctaLabel: "Testeaza AI Discovery",
+                  ctaLabel: "Testeaza ZES Copilot",
                   destination: "/ai-discovery",
                   sourcePage: "/",
                   sourceTool: "public-demo-entry",
                 }}
               >
-                Testeaza AI Discovery
+                Testeaza ZES Copilot
               </TrackedButtonLink>
               <TrackedButtonLink
                 className="rounded-xl"

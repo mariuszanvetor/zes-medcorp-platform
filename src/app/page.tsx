@@ -26,6 +26,7 @@ export default function Home() {
       <BreadcrumbSchema items={[{ name: "Acasă", href: "/" }]} />
       <HeroSection />
       <EnterpriseTrustBand sourcePage="/" />
+      <AIMagicLayerSection />
       <Section
         className="border-y border-blue-100 bg-white"
         spacing="lg"
@@ -47,7 +48,6 @@ export default function Home() {
         compact
       />
       <PublicDemoEntrySection />
-      <AIMagicLayerSection />
       <AIIntroSection />
       <ServicesSection />
       <AIToolsPreviewSection />

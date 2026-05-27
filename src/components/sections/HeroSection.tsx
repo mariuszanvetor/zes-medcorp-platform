@@ -7,7 +7,7 @@ import { Section } from "@/components/ui/Section";
 const visualSignals = ["CT", "RMN", "RX", "IVD", "Service"];
 
 const trustSignals = [
-  "Planificare preliminara asistata",
+  "Planificare preliminara asistata de ZES Copilot",
   "Validare tehnica inainte de decizii finale",
   "Integrare infrastructura + aparatura + service",
 ];
@@ -39,12 +39,12 @@ export function HeroSection() {
                 href="/ai-discovery"
                 size="lg"
                 tracking={{
-                  ctaLabel: "Incepeti cu AI Discovery",
+                  ctaLabel: "Porneste ZES Copilot",
                   destination: "/ai-discovery",
                   sourcePage: "/",
                 }}
               >
-                Incepeti cu AI Discovery
+                Porneste ZES Copilot
               </TrackedButtonLink>
               <TrackedButtonLink
                 className="rounded-xl border-blue-200 px-7 text-[#0057b8]"

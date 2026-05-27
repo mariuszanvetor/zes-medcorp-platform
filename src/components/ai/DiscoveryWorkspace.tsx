@@ -176,7 +176,7 @@ export function DiscoveryWorkspace() {
             Continuare
           </p>
           <h2 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">
-            Transforma discovery-ul in urmatorul pas.
+            Transforma contextul ZES Guided Planning in urmatorul pas.
           </h2>
           <p className="mt-3 text-sm leading-7 text-slate-600">
             Poti trimite contextul pentru analiza preliminara sau il poti continua in Proposal Builder ori Project Intake. Contextul este salvat local in browser, poate fi editat sau ignorat la pasul urmator si ramane preliminar pana la validarea tehnica.
@@ -259,13 +259,13 @@ function WorkspaceIntro({
       <div className="grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
-            Workspace determinist
+            ZES Guided Planning
           </p>
           <h2 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">
-            Discovery asistat, fara promisiuni automate.
+            Copilot tehnic-comercial, fara promisiuni automate.
           </h2>
           <p className="mt-3 text-sm leading-7 text-slate-600">
-            Sistemul foloseste reguli deterministe pentru domenii, intrebari, riscuri si recomandari. Nu genereaza aprobari, nu inlocuieste proiectarea si nu cere documente ca sa continui.
+            ZES foloseste reguli deterministe pentru domenii, intrebari, riscuri si recomandari. Nu genereaza aprobari, nu inlocuieste proiectarea si nu cere documente ca sa continui.
           </p>
         </div>
         <div className="rounded-2xl border border-blue-100 bg-white p-4 text-sm font-semibold leading-6 text-slate-700">
@@ -282,7 +282,7 @@ function WorkspaceIntro({
       {aiMagicAnalysis && (
         <div className="mt-5 rounded-lg border border-blue-100 bg-white p-4">
           <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#0057b8]">
-            AI-assisted demo
+            ZES AI-assisted demo
           </p>
           <p className="mt-2 text-sm font-semibold text-slate-950">
             Scenario activ: {aiMagicAnalysis.scenario.label}
@@ -292,7 +292,7 @@ function WorkspaceIntro({
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
             <span className="rounded-lg border border-blue-100 bg-[#f7fbff] px-3 py-1 text-xs font-bold text-slate-700">
-              guided planning mode
+              ZES guided planning mode
             </span>
             <span className="rounded-lg border border-blue-100 bg-[#f7fbff] px-3 py-1 text-xs font-bold text-slate-700">
               deterministic mock intelligence

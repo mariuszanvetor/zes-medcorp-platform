@@ -18,7 +18,7 @@ The platform currently presents deterministic planning intelligence, local hando
 
 1. Open `/`.
 2. Verify the hero is clear, premium and points to AI Discovery and Project Intake.
-3. Open `/ai-discovery`.
+3. Open `/ai-discovery` (ZES AI Copilot workspace).
 4. Optional: open `/ai-discovery?scenario=ct-clinic` or `/ai-discovery?scenario=mri-room` to demo AI Magic scenario handoff.
 4. Answer a few guided questions.
 5. Use `Continua cu ipoteze preliminare` if details are incomplete.
@@ -32,11 +32,12 @@ The platform currently presents deterministic planning intelligence, local hando
 13. Verify the imported context appears in Project Intake and remains editable.
 14. Submit a lead only in the intended environment and with safe test data.
 
-For Phase 75C conversational demo quality, also confirm:
+For Phase 75C/75D conversational demo quality, also confirm:
 
-- assistant-style guidance is visible in AI Discovery;
+- ZES Copilot guidance is visible in AI Discovery;
 - scenario concerns and blockers are visible for seeded scenarios;
 - project and commercial readiness indicators are visible in the sidebar;
+- dependency groups and opportunity markers are visible in the sidebar;
 - compliance/funding hints stay preliminary and non-committal.
 
 ## Admin demo flow
@@ -141,3 +142,4 @@ For a safe demo fallback:
 - Sitemap excludes admin routes.
 - Demo data is clearly labeled as mock/internal.
 - Public copy remains professional, technical and preliminary.
+- ZES branding is consistent: `ZES`, `ZES Copilot`, `ZES AI Copilot`, `ZES Guided Planning`.

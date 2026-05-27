@@ -4,6 +4,22 @@ Phase 72A audit scope: homepage, AI Discovery, Proposal Builder, Project Intake,
 
 This phase is audit and planning only. No business logic, integrations or route architecture should change as part of this document.
 
+## Phase 75D addendum (ZES Copilot presence)
+
+The platform now applies a targeted visual/voice upgrade on top of the earlier design audit:
+
+- `ZES Copilot` naming is now the primary AI presence across homepage and AI Discovery.
+- AI Discovery sidebar uses layered intelligence cards (readiness, risk, blockers, dependencies, opportunity markers).
+- Conversational rhythm in discovery now includes scenario transitions and infrastructure advisory notes.
+- Homepage now surfaces the AI Magic section earlier for stronger enterprise guided-planning positioning.
+
+Design intent remains unchanged:
+
+- calm medical-business visual language,
+- deterministic/mock-safe behavior disclosure,
+- no fake streaming or chatbot theatrics,
+- no changes to lead/API logic.
+
 ## Methodology
 
 Reviewed:

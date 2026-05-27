@@ -84,7 +84,7 @@ export const aiMagicScenarios: AiMagicScenario[] = [
 ];
 
 const baseSafetyNote =
-  "Recomandarile sunt preliminare si deterministe. Nu reprezinta proiectare finala, aprobare reglementara sau oferta comerciala ferma.";
+  "Recomandarile ZES sunt preliminare si deterministe. Nu reprezinta proiectare finala, aprobare reglementara sau oferta comerciala ferma.";
 
 export type AiMagicDiscoverySeed = {
   scenarioId: AiMagicScenarioId;
@@ -209,7 +209,7 @@ export function createAiMagicAnalysis(
     return {
       scenario,
       assistantResponse:
-        "Pentru RMN, primul pas este separarea cerintelor RF shielding de restul infrastructurii: acces magnet, HVAC, electric, structura si conditiile echipamentului ales.",
+        "Pe baza profilului infrastructurii, ZES recomanda sa separi cerintele RF shielding de restul infrastructurii: acces magnet, HVAC, electric, structura si conditiile echipamentului ales.",
       guidedQuestions: [
         "Este stabilit modelul RMN sau doar clasa generala, de exemplu 1.5T / 3T?",
         "Exista planuri ale camerei, traseu de acces si date despre structura cladirii?",
@@ -243,7 +243,7 @@ export function createAiMagicAnalysis(
       commercialReadiness: 58,
       infrastructureComplexity: "critical",
       salesSignals: ["RF shielding", "HVAC/electric", "acces magnet", "validare tehnica"],
-      statusLabels: ["AI-assisted demo", "guided planning mode", "deterministic mock intelligence"],
+      statusLabels: ["ZES AI-assisted demo", "ZES guided planning mode", "deterministic mock intelligence"],
       safetyNote: baseSafetyNote,
     };
   }
@@ -252,7 +252,7 @@ export function createAiMagicAnalysis(
     return {
       scenario,
       assistantResponse:
-        "Pentru o extindere de imagistica, decizia importanta este daca spatiul existent poate sustine echipamentele, fluxul pacientilor, autorizarea si continuitatea operationala.",
+        "Pentru extindere imagistica, ZES analizeaza daca spatiul existent poate sustine echipamentele, fluxul pacientilor, autorizarea si continuitatea operationala.",
       guidedQuestions: [
         "Ce modalitati sunt vizate: CT, RMN, RX, ecografie sau o combinatie?",
         "Spatiul este deja medical sau necesita conversie / reamenajare?",
@@ -286,7 +286,7 @@ export function createAiMagicAnalysis(
       commercialReadiness: 64,
       infrastructureComplexity: "high",
       salesSignals: ["multi-modalitate", "spatiu existent", "etapizare", "flux pacienti"],
-      statusLabels: ["AI-assisted demo", "sales-aware guidance", "deterministic mock intelligence"],
+      statusLabels: ["ZES AI-assisted demo", "ZES sales-aware guidance", "deterministic mock intelligence"],
       safetyNote: baseSafetyNote,
     };
   }
@@ -295,7 +295,7 @@ export function createAiMagicAnalysis(
     return {
       scenario,
       assistantResponse:
-        "Pentru modernizarea radiologiei, copilotul trateaza proiectul ca o combinatie intre risc operational, continuitate, infrastructura existenta si cerinte noi ale echipamentelor.",
+        "Pentru modernizarea radiologiei, ZES trateaza proiectul ca o combinatie intre risc operational, continuitate, infrastructura existenta si cerinte noi ale echipamentelor.",
       guidedQuestions: [
         "Ce echipamente raman active si ce echipamente se inlocuiesc?",
         "Care este downtime-ul maxim acceptabil?",
@@ -329,7 +329,7 @@ export function createAiMagicAnalysis(
       commercialReadiness: 69,
       infrastructureComplexity: "high",
       salesSignals: ["downtime", "modernizare", "service", "etapizare"],
-      statusLabels: ["AI-assisted demo", "guided planning mode", "commercial readiness"],
+      statusLabels: ["ZES AI-assisted demo", "ZES guided planning mode", "commercial readiness"],
       safetyNote: baseSafetyNote,
     };
   }
@@ -338,7 +338,7 @@ export function createAiMagicAnalysis(
     return {
       scenario,
       assistantResponse:
-        "Pentru service, copilotul prioritizeaza impactul operational: simptome, echipament, istoric, piese, urgenta si riscul de oprire.",
+        "Pentru service, ZES prioritizeaza impactul operational: simptome, echipament, istoric, piese, urgenta si riscul de oprire.",
       guidedQuestions: [
         "Ce echipament este afectat si care este modelul / seria?",
         "Problema opreste activitatea sau doar reduce capacitatea?",
@@ -372,7 +372,7 @@ export function createAiMagicAnalysis(
       commercialReadiness: 72,
       infrastructureComplexity: "moderate",
       salesSignals: ["downtime", "mentenanta", "piese", "continuitate"],
-      statusLabels: ["AI-assisted demo", "service triage", "deterministic mock intelligence"],
+      statusLabels: ["ZES AI-assisted demo", "ZES service triage", "deterministic mock intelligence"],
       safetyNote: baseSafetyNote,
     };
   }
@@ -380,7 +380,7 @@ export function createAiMagicAnalysis(
   return {
     scenario,
     assistantResponse:
-      "Pentru un proiect CT, copilotul separa rapid deciziile comerciale de cerintele tehnice: echipament, camera, radioprotectie, CNCAN, electric, HVAC si flux pacienti.",
+      "Pentru un proiect CT, ZES separa rapid deciziile comerciale de cerintele tehnice: echipament, camera, radioprotectie, CNCAN, electric, HVAC si flux pacienti.",
     guidedQuestions: [
       "Este ales echipamentul CT sau sunt comparate mai multe variante?",
       "Exista plan camera, vecinatati si informatii despre spatiile adiacente?",
@@ -414,7 +414,7 @@ export function createAiMagicAnalysis(
     commercialReadiness: 70,
     infrastructureComplexity: "high",
     salesSignals: ["CNCAN", "radioprotectie", "HVAC/electric", "flux pacienti"],
-    statusLabels: ["AI-assisted demo", "guided planning mode", "deterministic mock intelligence"],
+    statusLabels: ["ZES AI-assisted demo", "ZES guided planning mode", "deterministic mock intelligence"],
     safetyNote: baseSafetyNote,
   };
 }
