@@ -36,15 +36,28 @@ export function HeroSection() {
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <TrackedButtonLink
                 className="rounded-xl px-7"
-                href="/ai-discovery"
+                href="/#zes-guide"
                 size="lg"
                 tracking={{
-                  ctaLabel: "Porneste ZES Copilot",
-                  destination: "/ai-discovery",
+                  ctaLabel: "Discuta cu ZES",
+                  destination: "/#zes-guide",
                   sourcePage: "/",
                 }}
               >
-                Porneste ZES Copilot
+                Discuta cu ZES
+              </TrackedButtonLink>
+              <TrackedButtonLink
+                className="rounded-xl border-blue-200 px-7 text-[#0057b8]"
+                href="/ai-discovery"
+                size="lg"
+                tracking={{
+                  ctaLabel: "Continua cu AI Discovery",
+                  destination: "/ai-discovery",
+                  sourcePage: "/",
+                }}
+                variant="secondary"
+              >
+                Continua cu AI Discovery
               </TrackedButtonLink>
               <TrackedButtonLink
                 className="rounded-xl border-blue-200 px-7 text-[#0057b8]"

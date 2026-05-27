@@ -19,6 +19,20 @@ Extra QA checks:
 5. Confirm compliance/funding hints stay preliminary and never claim guaranteed approvals.
 6. Confirm copy remains professional and sales-aware without aggressive language.
 
+## Phase 75E ZES Guide QA focus
+
+Phase 75E introduces a visible deterministic conversational guide on homepage.
+
+Extra QA checks:
+
+1. Open `/#zes-guide` and confirm `Discuta cu ZES` is visible above the fold journey blocks.
+2. Confirm starter prompts are visible and clickable.
+3. Submit a free-text question and confirm ZES returns deterministic response blocks.
+4. Confirm each response includes intent summary, missing questions and next best action framing.
+5. Confirm CTA routing points to existing flows (`/ai-discovery`, `/proposal-builder`, `/project-intake`, `/service-diagnostic`, `/contact`) without dead links.
+6. Confirm no fake streaming, no typing simulation and no claims of real AI activation.
+7. Confirm AI Discovery page includes an explicit entry hint toward `Discuta cu ZES`.
+
 ## Phase 71H visual QA notes
 
 Automated in-app browser QA was attempted against the local production server on May 27, 2026, but the Codex browser pane was not available in this desktop session. The browser connection returned `No active Codex browser pane available`.

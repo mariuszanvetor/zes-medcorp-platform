@@ -63,6 +63,18 @@ export default function AiDiscoveryPage() {
                 </div>
               ))}
             </div>
+            <div className="mx-auto mt-6 max-w-4xl rounded-lg border border-blue-100 bg-white p-4 text-left shadow-[0_10px_28px_rgba(0,87,184,0.06)]">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
+                ZES Guide entry
+              </p>
+              <p className="mt-2 text-sm leading-7 text-slate-700">
+                Daca preferi o discutie scurta, deschide{" "}
+                <a className="font-semibold text-[#0057b8] underline decoration-blue-200 underline-offset-4" href="/#zes-guide">
+                  Discuta cu ZES
+                </a>{" "}
+                si primesti direct recomandari consultative, apoi continui cu AI Discovery, Proposal Builder sau Project Intake.
+              </p>
+            </div>
           </div>
         </Container>
       </Section>

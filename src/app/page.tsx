@@ -12,6 +12,7 @@ import { PlanningJourneyBlock } from "@/components/sections/PlanningJourneyBlock
 import { PublicDemoEntrySection } from "@/components/sections/PublicDemoEntrySection";
 import { RadiologyShieldingSection } from "@/components/sections/RadiologyShieldingSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
+import { ZESGuideSection } from "@/components/sections/ZESGuideSection";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -25,6 +26,7 @@ export default function Home() {
     <>
       <BreadcrumbSchema items={[{ name: "Acasă", href: "/" }]} />
       <HeroSection />
+      <ZESGuideSection />
       <EnterpriseTrustBand sourcePage="/" />
       <AIMagicLayerSection />
       <Section
