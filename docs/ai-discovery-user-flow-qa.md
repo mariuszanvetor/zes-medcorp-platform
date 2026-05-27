@@ -201,6 +201,11 @@ Check `/admin/leads`:
 - AI Discovery demo lead shows mock document context;
 - Proposal Builder, Project Intake, service and equipment leads show source context and intelligence summary;
 - recommended next action and missing information are easy to find.
+- mock admin workflow label is visible;
+- local status badges include New, Reviewed, Needs clarification, Ready for offer and High priority;
+- changing follow-up type or next action creates a local action history entry;
+- action history avoids email, phone, raw notes and document contents;
+- reloading the page resets workflow state.
 
 No admin screen should show raw document content, real customer data, API keys or private env values.
 

@@ -450,9 +450,17 @@ export function LeadReviewCenter() {
           leads={filteredLeads}
           onSelectLead={setSelectedLeadId}
           selectedLeadId={selectedLead.id}
+          workflowByLeadId={workflowByLeadId}
         />
-        <LeadDetail lead={selectedLead} scoring={selectedScoring} />
+        <LeadDetail
+          lead={selectedLead}
+          onWorkflowUpdate={updateMockWorkflow}
+          scoring={selectedScoring}
+          workflow={selectedWorkflow}
+        />
       </div>
+
+      <MockActionHistoryPanel history={actionHistory} />
     </div>
   );
 }
@@ -474,10 +482,12 @@ function LeadList({
   leads,
   selectedLeadId,
   onSelectLead,
+  workflowByLeadId,
 }: {
   leads: DemoLead[];
   selectedLeadId: string;
   onSelectLead: (leadId: string) => void;
+  workflowByLeadId: Record<string, MockWorkflowState>;
 }) {
   return (
     <Card className="border-blue-100 bg-white" padding="none">
@@ -491,7 +501,7 @@ function LeadList({
       </div>
 
       <div className="hidden overflow-x-auto lg:block">
-        <table className="w-full min-w-[1420px] text-left text-sm">
+        <table className="w-full min-w-[1540px] text-left text-sm">
           <thead className="bg-[#f7fbff] text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
             <tr>
               <th className="px-6 py-4">Companie</th>
@@ -503,6 +513,7 @@ function LeadList({
               <th className="px-6 py-4">Urgență</th>
               <th className="px-6 py-4">Risc</th>
               <th className="px-6 py-4">Status</th>
+              <th className="px-6 py-4">Mock workflow</th>
               <th className="px-6 py-4">Next step</th>
             </tr>
           </thead>
@@ -547,6 +558,18 @@ function LeadList({
                 <td className="px-6 py-5">
                   <Badge variant={statusVariant[lead.status]}>{lead.status}</Badge>
                 </td>
+                <td className="px-6 py-5">
+                  <Badge
+                    variant={
+                      mockWorkflowStatusVariant[
+                        (workflowByLeadId[lead.id] ?? createInitialMockWorkflow(lead))
+                          .status
+                      ]
+                    }
+                  >
+                    {(workflowByLeadId[lead.id] ?? createInitialMockWorkflow(lead)).status}
+                  </Badge>
+                </td>
                 <td className="px-6 py-5 text-slate-600">
                   {lead.recommendedNextStep}
                 </td>
@@ -575,6 +598,15 @@ function LeadList({
               <Badge variant={priorityVariant[lead.priority]}>
                 {lead.leadScore}/100
               </Badge>
+              <Badge
+                variant={
+                  mockWorkflowStatusVariant[
+                    (workflowByLeadId[lead.id] ?? createInitialMockWorkflow(lead)).status
+                  ]
+                }
+              >
+                {(workflowByLeadId[lead.id] ?? createInitialMockWorkflow(lead)).status}
+              </Badge>
             </div>
             <p className="mt-4 text-lg font-semibold text-slate-950">
               {lead.company}
@@ -598,9 +630,13 @@ function LeadList({
 function LeadDetail({
   lead,
   scoring,
+  workflow,
+  onWorkflowUpdate,
 }: {
   lead: DemoLead;
   scoring: LeadScoreResult;
+  workflow: MockWorkflowState;
+  onWorkflowUpdate: (lead: DemoLead, update: MockWorkflowUpdate) => void;
 }) {
   const followUp = createFollowUpOutline(lead);
   const intelligence = createLeadIntelligenceView(lead, scoring);
@@ -622,6 +658,9 @@ function LeadDetail({
         <div className="flex flex-wrap gap-2">
           <Badge variant={priorityVariant[lead.priority]}>{lead.priority}</Badge>
           <Badge variant={statusVariant[lead.status]}>{lead.status}</Badge>
+          <Badge variant={mockWorkflowStatusVariant[workflow.status]}>
+            {workflow.status}
+          </Badge>
         </div>
       </div>
 
@@ -691,6 +730,12 @@ function LeadDetail({
         </p>
       </div>
 
+      <MockWorkflowControls
+        lead={lead}
+        onWorkflowUpdate={onWorkflowUpdate}
+        workflow={workflow}
+      />
+
       <div className="mt-7 rounded-2xl border border-slate-200 bg-slate-50 p-5">
         <p className="text-sm font-bold uppercase tracking-[0.14em] text-slate-700">
           Follow-up message outline
@@ -707,6 +752,190 @@ function LeadDetail({
           Internal notes
         </p>
         <p className="mt-4 text-sm leading-7 text-amber-950">{lead.notes}</p>
+      </div>
+    </Card>
+  );
+}
+
+function MockWorkflowControls({
+  lead,
+  workflow,
+  onWorkflowUpdate,
+}: {
+  lead: DemoLead;
+  workflow: MockWorkflowState;
+  onWorkflowUpdate: (lead: DemoLead, update: MockWorkflowUpdate) => void;
+}) {
+  return (
+    <div className="mt-7 rounded-2xl border border-blue-100 bg-[#f7fbff] p-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <Badge variant="cyan">mock admin workflow</Badge>
+          <h3 className="mt-3 text-lg font-semibold text-slate-950">
+            Actiuni locale pentru review
+          </h3>
+          <p className="mt-2 text-sm leading-7 text-slate-600">
+            Controale demo pentru triere interna. Nu exista persistenta, CRM,
+            email sau Sheets write.
+          </p>
+        </div>
+        <Badge variant={mockWorkflowStatusVariant[workflow.status]}>
+          {workflow.status}
+        </Badge>
+      </div>
+
+      <div className="mt-5 grid gap-4">
+        <label className="grid gap-2">
+          <span className="text-sm font-semibold text-slate-700">
+            Follow-up type
+          </span>
+          <select
+            className="min-h-12 rounded-xl border border-blue-100 bg-white px-4 text-sm font-semibold text-slate-950 outline-none transition focus:border-blue-300"
+            onChange={(event) =>
+              onWorkflowUpdate(lead, {
+                followUpType: event.target.value,
+                historyLabel: "Follow-up type changed",
+              })
+            }
+            value={workflow.followUpType}
+          >
+            {followUpOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="grid gap-2">
+          <span className="text-sm font-semibold text-slate-700">
+            Selected next action
+          </span>
+          <select
+            className="min-h-12 rounded-xl border border-blue-100 bg-white px-4 text-sm font-semibold text-slate-950 outline-none transition focus:border-blue-300"
+            onChange={(event) =>
+              onWorkflowUpdate(lead, {
+                nextAction: event.target.value,
+                historyLabel: "Next action changed",
+              })
+            }
+            value={workflow.nextAction}
+          >
+            {unique([workflow.nextAction, ...nextActionOptions]).map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+        <Button
+          onClick={() =>
+            onWorkflowUpdate(lead, {
+              status: "Reviewed",
+              historyLabel: "Marked as reviewed",
+            })
+          }
+          variant="secondary"
+        >
+          Mark as reviewed
+        </Button>
+        <Button
+          onClick={() =>
+            onWorkflowUpdate(lead, {
+              status: "Needs clarification",
+              nextAction: "Solicita planuri si dimensiuni",
+              historyLabel: "Marked as needs clarification",
+            })
+          }
+          variant="secondary"
+        >
+          Needs clarification
+        </Button>
+        <Button
+          onClick={() =>
+            onWorkflowUpdate(lead, {
+              followUpType: "commercial-offer",
+              nextAction: "Pregateste oferta preliminara",
+              status: "Ready for offer",
+              historyLabel: "Marked as ready for offer",
+            })
+          }
+        >
+          Ready for offer
+        </Button>
+        <Button
+          onClick={() =>
+            onWorkflowUpdate(lead, {
+              status: "High priority",
+              nextAction: "Programeaza discutie tehnica",
+              historyLabel: "Marked as high priority",
+            })
+          }
+        >
+          High priority
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+function MockActionHistoryPanel({
+  history,
+}: {
+  history: MockActionHistoryItem[];
+}) {
+  return (
+    <Card className="border-blue-100 bg-white" padding="lg">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div>
+          <Badge variant="neutral">mock action history</Badge>
+          <h2 className="mt-4 text-2xl font-semibold tracking-tight text-slate-950">
+            Local review history
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600">
+            Istoric temporar pentru actiunile din aceasta sesiune de browser.
+            Nu include date personale grele si se pierde la reincarcarea paginii.
+          </p>
+        </div>
+        <Badge variant="cyan">{history.length} actions</Badge>
+      </div>
+
+      <div className="mt-6 grid gap-3">
+        {history.length === 0 ? (
+          <div className="rounded-2xl border border-slate-200 bg-[#f7fbff] p-5 text-sm leading-7 text-slate-600">
+            Nicio actiune locala inca. Selecteaza un lead demo si aplica un pas
+            de review pentru a vedea istoricul.
+          </div>
+        ) : (
+          history.map((item) => (
+            <div
+              className="rounded-2xl border border-slate-200 bg-[#f7fbff] p-5"
+              key={item.id}
+            >
+              <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+                <div>
+                  <p className="text-sm font-semibold text-slate-950">
+                    {item.historyLabel}
+                  </p>
+                  <p className="mt-2 text-xs leading-5 text-slate-500">
+                    {item.timestamp} / {item.leadLabel} / {item.source}
+                  </p>
+                </div>
+                <Badge variant={mockWorkflowStatusVariant[item.status]}>
+                  {item.status}
+                </Badge>
+              </div>
+              <p className="mt-3 text-sm leading-7 text-slate-600">
+                Follow-up: <span className="font-semibold">{item.followUpType}</span>
+                {" / "}
+                Next action: <span className="font-semibold">{item.nextAction}</span>
+              </p>
+            </div>
+          ))
+        )}
       </div>
     </Card>
   );
@@ -898,6 +1127,20 @@ function MockDocumentDetail({
       </p>
     </div>
   );
+}
+
+function createInitialMockWorkflow(lead: DemoLead): MockWorkflowState {
+  return {
+    status: "New",
+    followUpType:
+      lead.followUpType ??
+      (lead.riskLevel === "Critic"
+        ? "technical-review"
+        : lead.readinessScore >= 70
+          ? "proposal-preparation"
+          : "technical-clarification"),
+    nextAction: lead.recommendedNextStep || nextActionOptions[0],
+  };
 }
 
 function filterLeads(leads: DemoLead[], filters: FilterState) {

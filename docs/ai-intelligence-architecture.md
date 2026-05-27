@@ -247,6 +247,8 @@ Phase 71J adds visible mock UI in AI Discovery and admin lead-flow monitoring. T
 
 Phase 71K connects these signals to an internal demo lead lifecycle. `/admin/lead-flow` now explains the path from AI Discovery, mock document context, Proposal Builder and Project Intake into admin review. `/admin/leads` surfaces deterministic demo intelligence summaries and mock document context for review, while keeping all admin data mock-only.
 
+Phase 71L adds a deterministic mock action workflow to `/admin/leads`. It helps reviewers rehearse triage actions such as Reviewed, Needs clarification, Ready for offer and High priority. The action state is client-side only and does not become part of the intelligence model, storage layer, email layer or Sheets log.
+
 ## Safety and trust principles
 
 Core principles:

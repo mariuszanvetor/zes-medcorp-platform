@@ -232,6 +232,16 @@ The demo review center should make these fields visible without connecting real 
 
 See `docs/admin-lead-lifecycle.md` for the internal QA routine and future CRM/storage path.
 
+Phase 71L adds local-only admin action controls on `/admin/leads`. These controls let the reviewer simulate review status, follow-up type and next action selection, then record a timestamped local history item. This is intentionally not a source of truth for Lead Intelligence. It is a UI rehearsal for a future CRM/storage workflow.
+
+Lead Intelligence rules for this mock workflow:
+
+- do not treat local workflow status as persisted lead status;
+- do not send workflow actions to analytics;
+- do not trigger email, Sheets or CRM;
+- do not include PII-heavy fields in the action history;
+- keep action labels deterministic and review-oriented.
+
 ## Future CRM mapping
 
 When CRM integration is added, map these fields into internal CRM properties:

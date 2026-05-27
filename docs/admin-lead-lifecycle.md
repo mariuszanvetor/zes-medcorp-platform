@@ -13,6 +13,39 @@ This document describes the current internal demo lifecycle for lead intelligenc
 7. `/admin/leads` displays deterministic demo leads for review, including readiness, risk, complexity, source context, intelligence summary and mock document context where present.
 8. `/admin/lead-flow` shows integration mode diagnostics and the mock-safe lifecycle timeline.
 
+## Phase 71L mock action workflow
+
+`/admin/leads` now includes a deterministic mock admin workflow for selected demo leads.
+
+Available client-side actions:
+
+- mark as reviewed;
+- assign follow-up type;
+- choose next action;
+- mark as ready for offer;
+- mark as needs clarification;
+- mark as high priority.
+
+Mock workflow statuses:
+
+- New;
+- Reviewed;
+- Needs clarification;
+- Ready for offer;
+- High priority.
+
+The workflow state is browser memory only. It is not written to an API, database, CRM, email provider or Google Sheets. Reloading the page resets the workflow state.
+
+The action history panel records:
+
+- local timestamp;
+- lead company/source label;
+- workflow status;
+- follow-up type;
+- selected next action.
+
+It intentionally avoids PII-heavy data and does not include email, phone, raw notes or document contents.
+
 ## Fields that should appear in admin review
 
 - lead source and source page;
@@ -63,3 +96,6 @@ All examples use fake demo data only.
 6. Select Proposal Builder, Project Intake, service and equipment demo leads.
 7. Confirm each lead displays source context, readiness, risk, complexity and recommended next action.
 8. Confirm no secrets, real customer data or raw document contents appear.
+9. Apply each mock action status to a selected lead.
+10. Confirm the list badge updates locally and the action appears in local review history.
+11. Reload the page and confirm the mock workflow resets, proving no persistence was added.
