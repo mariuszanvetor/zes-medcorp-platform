@@ -94,7 +94,7 @@ export default function ProposalBuilderPage() {
                 </TrackedButtonLink>
               </div>
             </div>
-            <div className="rounded-[1.5rem] border border-blue-100 bg-white p-8 shadow-[0_24px_80px_rgba(0,87,184,0.10)]">
+            <div className="rounded-lg border border-blue-100 bg-white p-8 shadow-[0_12px_36px_rgba(0,87,184,0.06)]">
               <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#0057b8]">
                 Draft tehnic orientativ
               </p>
@@ -103,7 +103,7 @@ export default function ProposalBuilderPage() {
                 reprezintă ofertă finală și trebuie validat pe planuri, echipamente
                 și condiții reale de amplasament.
               </p>
-              <p className="mt-5 rounded-2xl border border-blue-100 bg-blue-50 p-4 text-sm font-bold leading-7 text-blue-900">
+              <p className="mt-5 rounded-lg border border-blue-100 bg-blue-50 p-4 text-sm font-bold leading-7 text-blue-900">
                 {BUDGET_DISCLAIMER}
               </p>
             </div>
@@ -117,7 +117,7 @@ export default function ProposalBuilderPage() {
         title="Un draft de propunere trebuie să rămână verificabil."
       />
 
-      <Section className="bg-slate-950" tone="graphite">
+      <Section className="bg-[#f7fafc]" tone="transparent">
         <Container>
           <div id="proposal">
             <ProposalBuilder />

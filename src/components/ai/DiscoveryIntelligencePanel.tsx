@@ -12,7 +12,7 @@ export function DiscoveryIntelligencePanel({
 }) {
   return (
     <aside className="grid gap-4 lg:sticky lg:top-24">
-      <section className="rounded-[1.5rem] border border-blue-100 bg-white p-5 shadow-[0_24px_80px_rgba(0,87,184,0.10)]">
+      <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_12px_36px_rgba(0,87,184,0.07)]">
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
           Live intelligence
         </p>
@@ -25,7 +25,7 @@ export function DiscoveryIntelligencePanel({
           <Metric label="Risc" value={result.riskAssessment.riskLevel} tone={riskTone(result.riskAssessment.riskLevel)} />
           <Metric label="Complexitate" value={result.riskAssessment.complexityLevel} tone={riskTone(result.riskAssessment.riskLevel)} />
         </div>
-        <p className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-xs font-semibold leading-6 text-amber-900">
+        <p className="mt-5 rounded-lg border border-amber-200 bg-amber-50 p-4 text-xs font-semibold leading-6 text-amber-900">
           {result.safeDisclaimer}
         </p>
       </section>
@@ -38,7 +38,7 @@ export function DiscoveryIntelligencePanel({
         {result.missingInformation.length ? (
           <ul className="grid gap-2">
             {result.missingInformation.slice(0, 5).map((item) => (
-              <li className="rounded-2xl bg-slate-50 p-3 text-sm leading-6 text-slate-700" key={item.id}>
+              <li className="rounded-lg bg-slate-50 p-3 text-sm leading-6 text-slate-700" key={item.id}>
                 <span className="font-semibold text-slate-950">{item.label}</span>
                 <span className="block text-xs text-slate-500">{item.reason}</span>
               </li>
@@ -54,7 +54,7 @@ export function DiscoveryIntelligencePanel({
       <Panel title="Riscuri si validari">
         <ul className="grid gap-2">
           {result.riskAssessment.riskReasons.slice(0, 4).map((reason) => (
-            <li className="rounded-2xl bg-[#f7fbff] p-3 text-sm leading-6 text-slate-700" key={reason}>
+            <li className="rounded-lg bg-[#f7fbff] p-3 text-sm leading-6 text-slate-700" key={reason}>
               {reason}
             </li>
           ))}
@@ -63,7 +63,7 @@ export function DiscoveryIntelligencePanel({
           <div className="mt-3 flex flex-wrap gap-2">
             {result.riskAssessment.validationNeeds.slice(0, 5).map((need) => (
               <span
-                className="rounded-full border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-[#0057b8]"
+              className="rounded-lg border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-[#0057b8]"
                 key={need}
               >
                 {need}
@@ -77,7 +77,7 @@ export function DiscoveryIntelligencePanel({
         <div className="grid gap-2">
           {result.relevantResources.slice(0, 6).map((resource) => (
             <a
-              className="rounded-2xl border border-blue-100 bg-white p-3 text-sm font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
+              className="rounded-lg border border-blue-100 bg-white p-3 text-sm font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
               href={resource.href}
               key={`${resource.type}-${resource.href}`}
             >
@@ -114,7 +114,7 @@ function Metric({
   return (
     <div
       className={cn(
-        "rounded-2xl border p-3",
+        "rounded-lg border p-3",
         tone === "high"
           ? "border-blue-100 bg-blue-50 text-blue-900"
           : tone === "medium"
@@ -132,7 +132,7 @@ function Metric({
 
 function Panel({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section className="rounded-[1.5rem] border border-blue-100 bg-white p-5 shadow-[0_18px_60px_rgba(0,87,184,0.07)]">
+    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_10px_32px_rgba(0,87,184,0.055)]">
       <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
         {title}
       </h3>
@@ -147,7 +147,7 @@ function TagList({ items }: { items: string[] }) {
     <div className="flex flex-wrap gap-2">
       {unique.map((item) => (
         <span
-          className="rounded-full border border-blue-100 bg-[#f7fbff] px-3 py-1 text-xs font-bold text-slate-700"
+          className="rounded-lg border border-blue-100 bg-[#f7fbff] px-3 py-1 text-xs font-bold text-slate-700"
           key={item}
         >
           {item}

@@ -8,7 +8,7 @@ export function DiscoveryUploadGuidance({
   prompts: UploadPrompt[];
 }) {
   return (
-    <section className="rounded-[1.5rem] border border-blue-100 bg-white p-5 shadow-[0_24px_80px_rgba(0,87,184,0.08)] sm:p-6">
+    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_12px_36px_rgba(0,87,184,0.055)] sm:p-6">
       <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
         Documente utile, optionale
       </p>
@@ -21,13 +21,13 @@ export function DiscoveryUploadGuidance({
 
       <div className="mt-5 grid gap-3 sm:grid-cols-2">
         {prompts.slice(0, 4).map((prompt) => (
-          <div className="rounded-2xl border border-blue-100 bg-[#f7fbff] p-4" key={prompt.id}>
+          <div className="rounded-lg border border-blue-100 bg-[#f7fbff] p-4" key={prompt.id}>
             <p className="text-sm font-semibold text-slate-950">{prompt.title}</p>
             <p className="mt-2 text-xs leading-6 text-slate-600">{prompt.reason}</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {prompt.artifactTypes.map((type) => (
                 <span
-                  className="rounded-full border border-blue-100 bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[#0057b8]"
+                  className="rounded-lg border border-blue-100 bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[#0057b8]"
                   key={type}
                 >
                   {type}
@@ -38,7 +38,7 @@ export function DiscoveryUploadGuidance({
         ))}
       </div>
 
-      <p className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-xs font-semibold leading-6 text-slate-600">
+      <p className="mt-5 rounded-lg border border-slate-200 bg-slate-50 p-4 text-xs font-semibold leading-6 text-slate-600">
         Uploadul real nu este activ in aceasta etapa. Nu trimiteti date medicale despre pacienti. Documentele vor deveni utile intr-o faza viitoare de analiza documentara, dupa reguli clare de securitate si confidentialitate.
       </p>
     </section>

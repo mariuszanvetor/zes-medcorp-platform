@@ -145,7 +145,7 @@ export function LeadFlowMonitor({ config }: LeadFlowMonitorProps) {
         <dl className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {summary.map(([label, value]) => (
             <div
-              className="rounded-2xl border border-slate-200 bg-[#f7fbff] p-5"
+              className="rounded-lg border border-slate-200 bg-[#f7fbff] p-5"
               key={label}
             >
               <dt className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
@@ -229,7 +229,7 @@ export function LeadFlowMonitor({ config }: LeadFlowMonitorProps) {
               Testul respecta cooldown-ul API si poate declansa email sau Sheets
               daca acestea sunt active in mediul curent.
             </p>
-            <p className="mt-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm font-semibold leading-7 text-amber-950">
+            <p className="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm font-semibold leading-7 text-amber-950">
               Acest test poate trimite o notificare interna reala si poate scrie
               un rand in Google Sheets daca integrarile sunt active in productie.
               Nu introduce date reale aici.
@@ -241,7 +241,7 @@ export function LeadFlowMonitor({ config }: LeadFlowMonitorProps) {
         </div>
 
         {error && (
-          <div className="mt-6 rounded-2xl border border-rose-200 bg-rose-50 p-5 text-sm font-semibold leading-7 text-rose-800">
+          <div className="mt-6 rounded-lg border border-rose-200 bg-rose-50 p-5 text-sm font-semibold leading-7 text-rose-800">
             {error}
           </div>
         )}
@@ -358,7 +358,7 @@ function LeadLifecycleTimeline() {
       <div className="mt-7 grid gap-4">
         {stages.map((stage, index) => (
           <div
-            className="grid gap-4 rounded-2xl border border-slate-200 bg-[#f7fbff] p-5 lg:grid-cols-[0.08fr_0.26fr_0.42fr_0.24fr] lg:items-start"
+            className="grid gap-4 rounded-lg border border-slate-200 bg-[#f7fbff] p-5 lg:grid-cols-[0.08fr_0.26fr_0.42fr_0.24fr] lg:items-start"
             key={stage.source}
           >
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0057b8] text-sm font-bold text-white">
@@ -407,7 +407,7 @@ function ModeLegend() {
   ];
 
   return (
-    <div className="grid gap-2 rounded-2xl border border-blue-100 bg-[#f7fbff] p-4 text-sm leading-6 text-slate-700 lg:max-w-md">
+    <div className="grid gap-2 rounded-lg border border-blue-100 bg-[#f7fbff] p-4 text-sm leading-6 text-slate-700 lg:max-w-md">
       <p className="font-bold text-slate-950">Interpretare moduri</p>
       <dl className="grid gap-2">
         {items.map(([mode, meaning]) => (
@@ -448,7 +448,7 @@ function DailyOpsChecklist() {
       <ul className="mt-6 grid gap-3 md:grid-cols-2">
         {items.map((item) => (
           <li
-            className="rounded-2xl border border-slate-200 bg-[#f7fbff] p-4 text-sm font-semibold leading-6 text-slate-700"
+            className="rounded-lg border border-slate-200 bg-[#f7fbff] p-4 text-sm font-semibold leading-6 text-slate-700"
             key={item}
           >
             {item}
@@ -472,7 +472,7 @@ function CheckGroup({
       <div className="mt-5 grid gap-3">
         {checks.map((check) => (
           <div
-            className="rounded-2xl border border-slate-200 bg-[#f7fbff] p-4"
+            className="rounded-lg border border-slate-200 bg-[#f7fbff] p-4"
             key={check.label}
           >
             <div className="flex items-start justify-between gap-3">
@@ -495,7 +495,7 @@ function CheckGroup({
 
 function ResultItem({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-[#f7fbff] p-4">
+    <div className="rounded-lg border border-slate-200 bg-[#f7fbff] p-4">
       <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
         {label}
       </p>
@@ -523,7 +523,7 @@ function InterpretationCard({
         : "border-blue-100 bg-[#f7fbff] text-slate-700";
 
   return (
-    <div className={`rounded-2xl border p-5 ${toneClass}`}>
+    <div className={`rounded-lg border p-5 ${toneClass}`}>
       <h3 className="text-sm font-bold uppercase tracking-[0.14em]">
         {title}
       </h3>

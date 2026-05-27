@@ -110,7 +110,7 @@ export function DiscoveryWorkspace() {
   const handoffQuery = buildHandoffQuery(result);
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_25rem] lg:items-start">
+    <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-start">
       <main className="grid min-w-0 gap-6">
         <WorkspaceIntro result={result} assumptionMode={assumptionMode} />
         <DiscoveryConversation
@@ -125,7 +125,7 @@ export function DiscoveryWorkspace() {
           context={context}
           onChange={setMockDocumentContext}
         />
-        <section className="rounded-[1.5rem] border border-blue-100 bg-white p-5 shadow-[0_24px_80px_rgba(0,87,184,0.08)] sm:p-6">
+        <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_12px_36px_rgba(0,87,184,0.055)] sm:p-6">
           <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
             Continuare
           </p>
@@ -207,7 +207,7 @@ function WorkspaceIntro({
   assumptionMode: boolean;
 }) {
   return (
-    <section className="rounded-[1.5rem] border border-blue-100 bg-[#f7fbff] p-5 sm:p-6">
+    <section className="rounded-lg border border-blue-100 bg-[#f7fbff] p-5 sm:p-6">
       <div className="grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">

@@ -66,7 +66,7 @@ export function DiscoveryConversation({
 
   return (
     <div className="grid gap-6">
-      <section className="rounded-[1.5rem] border border-blue-100 bg-white p-5 shadow-[0_24px_80px_rgba(0,87,184,0.08)] sm:p-6">
+      <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_12px_36px_rgba(0,87,184,0.055)] sm:p-6">
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
           Context proiect
         </p>
@@ -82,7 +82,7 @@ export function DiscoveryConversation({
             Descriere libera
           </span>
           <textarea
-            className="min-h-36 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-7 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-blue-300 focus:bg-white"
+            className="min-h-36 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-7 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-blue-300 focus:bg-white"
             id="discovery-description"
             onChange={(event) => onPatch({ freeText: event.target.value })}
             placeholder="Exemplu: modernizare clinica existenta, camera RMN, laborator IVD, cabinet cardiologie, sala operatie, HVAC/electric neclar..."
@@ -91,7 +91,7 @@ export function DiscoveryConversation({
         </label>
       </section>
 
-      <section className="rounded-[1.5rem] border border-blue-100 bg-white p-5 shadow-[0_24px_80px_rgba(0,87,184,0.08)] sm:p-6">
+      <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_12px_36px_rgba(0,87,184,0.055)] sm:p-6">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
@@ -113,9 +113,9 @@ export function DiscoveryConversation({
           {domainOptions.map((option) => (
             <button
               className={cn(
-                "rounded-full border px-4 py-2 text-sm font-semibold transition",
+                "rounded-lg border px-4 py-2 text-sm font-semibold transition",
                 selectedDomains.has(option.id)
-                  ? "border-[#0057b8] bg-[#0057b8] text-white shadow-[0_12px_28px_rgba(0,87,184,0.18)]"
+                  ? "border-[#0057b8] bg-[#0057b8] text-white shadow-[0_10px_24px_rgba(0,87,184,0.14)]"
                   : "border-blue-100 bg-[#f7fbff] text-slate-700 hover:border-blue-200 hover:bg-white",
               )}
               key={option.id}
@@ -128,7 +128,7 @@ export function DiscoveryConversation({
         </div>
       </section>
 
-      <section className="rounded-[1.5rem] border border-blue-100 bg-white p-5 shadow-[0_24px_80px_rgba(0,87,184,0.08)] sm:p-6">
+      <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_12px_36px_rgba(0,87,184,0.055)] sm:p-6">
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
           Stadiu si documentatie
         </p>
@@ -139,7 +139,7 @@ export function DiscoveryConversation({
               {stageOptions.map((option) => (
                 <button
                   className={cn(
-                    "rounded-full border px-4 py-2 text-sm font-semibold transition",
+                    "rounded-lg border px-4 py-2 text-sm font-semibold transition",
                     context.projectStage === option.value
                       ? "border-[#0057b8] bg-blue-50 text-[#0057b8]"
                       : "border-slate-200 bg-white text-slate-600 hover:border-blue-200",
@@ -199,7 +199,7 @@ export function DiscoveryConversation({
         </div>
       </section>
 
-      <section className="rounded-[1.5rem] border border-blue-100 bg-white p-5 shadow-[0_24px_80px_rgba(0,87,184,0.08)] sm:p-6">
+      <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_12px_36px_rgba(0,87,184,0.055)] sm:p-6">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
@@ -240,7 +240,7 @@ function ToggleRow({
   return (
     <button
       className={cn(
-        "flex min-h-12 items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition",
+        "flex min-h-12 items-center justify-between gap-3 rounded-lg border px-4 py-3 text-left text-sm font-semibold transition",
         checked
           ? "border-blue-200 bg-blue-50 text-[#0057b8]"
           : "border-slate-200 bg-slate-50 text-slate-700 hover:border-blue-200 hover:bg-white",
@@ -275,7 +275,7 @@ function QuestionCard({
   onAnswer: (answer: string) => void;
 }) {
   return (
-    <div className="rounded-2xl border border-blue-100 bg-[#f7fbff] p-4">
+    <div className="rounded-lg border border-blue-100 bg-[#f7fbff] p-4">
       <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
         {question.stage}
       </p>
@@ -285,7 +285,7 @@ function QuestionCard({
       <div className="mt-4 flex flex-wrap gap-2">
         {["Da / exista", "Nu", "Nu stiu inca"].map((answer) => (
           <button
-            className="rounded-full border border-blue-100 bg-white px-3 py-2 text-xs font-bold text-slate-700 transition hover:border-blue-200 hover:text-[#0057b8]"
+            className="rounded-lg border border-blue-100 bg-white px-3 py-2 text-xs font-bold text-slate-700 transition hover:border-blue-200 hover:text-[#0057b8]"
             key={answer}
             type="button"
             onClick={() => onAnswer(answer)}

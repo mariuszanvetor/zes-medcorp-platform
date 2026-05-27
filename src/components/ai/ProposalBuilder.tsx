@@ -162,48 +162,48 @@ export function ProposalBuilder() {
   return (
     <div className="grid gap-10">
       <div className="grid gap-8 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
-        <Card className="sticky top-24" variant="glass">
-          <p className="text-sm font-semibold text-cyan-100">
+        <Card className="sticky top-24 border-blue-100 bg-white" padding="lg">
+          <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#0057b8]">
             Proposal intelligence
           </p>
-          <h2 className="mt-3 text-2xl font-semibold text-white">
+          <h2 className="mt-3 text-2xl font-semibold text-slate-950">
             Propunere tehnică preliminară, nu ofertă finală
           </h2>
-          <p className="mt-3 text-sm leading-7 text-slate-300">
+          <p className="mt-3 text-sm leading-7 text-slate-600">
             Generatorul combină infrastructură, imagistică, IVD, ecranare,
             aparatură, service, timeline și risc pentru a produce o structură
             de pre-ofertă tehnică.
           </p>
-          <div className="mt-6 h-2 rounded-full bg-white/10">
+          <div className="mt-6 h-2 rounded-full bg-blue-100">
             <div
-              className="h-2 rounded-full bg-cyan-300 transition-all"
+              className="h-2 rounded-full bg-[#0057b8] transition-all"
               style={{ width: `${completion}%` }}
             />
           </div>
-          <p className="mt-3 text-xs font-semibold text-slate-400">
+          <p className="mt-3 text-xs font-semibold text-slate-500">
             Date completate: {completion}%
           </p>
         </Card>
 
         <form className="grid gap-5" onSubmit={handleSubmit}>
           {discoveryContext && (
-            <Card className="border-cyan-300/20" variant="glass">
+            <Card className="border-blue-100 bg-white" padding="lg">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-cyan-100">
+                  <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#0057b8]">
                     Context preluat din AI Discovery
                   </p>
-                  <p className="mt-3 text-sm leading-7 text-slate-300">
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
                     {createDiscoveryContextSummary(discoveryContext)}
                   </p>
-                  <p className="mt-3 text-xs font-semibold leading-6 text-slate-400">
+                  <p className="mt-3 text-xs font-semibold leading-6 text-slate-500">
                     Poti modifica sau ignora aceste date. Contextul este folosit local pentru continuarea proiectului si nu inlocuieste analiza tehnica finala.
                   </p>
                 </div>
                 <Button
                   size="sm"
                   type="button"
-                  variant="ghost"
+                  variant="secondary"
                   onClick={() => {
                     clearDiscoveryContext();
                     setDiscoveryContext(null);
@@ -263,13 +263,13 @@ export function ProposalBuilder() {
             onChange={(value) => updateField("urgency", value)}
           />
 
-          <Card variant="glass">
+          <Card className="border-blue-100 bg-white" padding="lg">
             <label className="grid gap-3" htmlFor="proposal-description">
-              <span className="text-sm font-semibold text-white">
+              <span className="text-sm font-semibold text-slate-800">
                 Descriere proiect
               </span>
               <textarea
-                className="min-h-36 rounded-lg border border-white/10 bg-slate-950/55 px-4 py-3 text-sm leading-7 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300/50 focus:bg-slate-950/70"
+                className="min-h-36 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-7 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-blue-300 focus:bg-white"
                 id="proposal-description"
                 name="proposal-description"
                 onChange={(event) =>
@@ -306,9 +306,9 @@ function OptionGroup<T extends string>({
   onChange,
 }: OptionGroupProps<T>) {
   return (
-    <Card variant="glass">
+    <Card className="border-blue-100 bg-white" padding="lg">
       <fieldset>
-        <legend className="text-sm font-semibold text-white">{label}</legend>
+        <legend className="text-sm font-semibold text-slate-800">{label}</legend>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {options.map((option) => {
             const selected = option === value;
@@ -318,8 +318,8 @@ function OptionGroup<T extends string>({
                 className={cn(
                   "cursor-pointer rounded-lg border px-4 py-3 text-sm font-semibold leading-6 transition",
                   selected
-                    ? "border-cyan-300/50 bg-cyan-300/12 text-cyan-50 shadow-[0_14px_40px_rgba(34,211,238,0.12)]"
-                    : "border-white/10 bg-slate-950/45 text-slate-300 hover:border-white/20 hover:bg-white/[0.06]",
+                    ? "border-blue-300 bg-[#f0f7ff] text-[#0057b8] shadow-[0_10px_28px_rgba(0,87,184,0.08)]"
+                    : "border-slate-200 bg-slate-50 text-slate-700 hover:border-blue-100 hover:bg-white",
                 )}
                 key={option}
               >

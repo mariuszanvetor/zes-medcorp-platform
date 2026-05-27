@@ -283,7 +283,7 @@ export function LeadReviewCenter() {
           <div className="mt-8 grid gap-3 md:grid-cols-4 xl:grid-cols-7">
             {funnel.map((stage) => (
               <div
-                className="rounded-2xl border border-blue-100 bg-[#f7fbff] p-4"
+                className="rounded-lg border border-blue-100 bg-[#f7fbff] p-4"
                 key={stage.status}
               >
                 <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#0057b8]">
@@ -311,7 +311,7 @@ export function LeadReviewCenter() {
             {priorityQueue.map((lead) => (
               <button
                 className={cn(
-                  "rounded-2xl border p-4 text-left transition hover:border-blue-200 hover:bg-[#f7fbff]",
+                  "rounded-lg border p-4 text-left transition hover:border-blue-200 hover:bg-[#f7fbff]",
                   selectedLead.id === lead.id ? "border-blue-300 bg-blue-50" : "border-slate-200 bg-white",
                 )}
                 key={lead.id}
@@ -343,7 +343,7 @@ export function LeadReviewCenter() {
           <div className="mt-6 grid gap-4">
             {nextActionGroups.map((group) => (
               <div
-                className="rounded-2xl border border-slate-200 bg-white p-4"
+                className="rounded-lg border border-slate-200 bg-white p-4"
                 key={group.title}
               >
                 <div className="flex items-center justify-between gap-3">
@@ -583,7 +583,7 @@ function LeadList({
         {leads.map((lead) => (
           <button
             className={cn(
-              "rounded-2xl border p-5 text-left transition",
+              "rounded-lg border p-5 text-left transition",
               selectedLeadId === lead.id
                 ? "border-blue-300 bg-blue-50"
                 : "border-slate-200 bg-white hover:border-blue-200",
@@ -680,7 +680,7 @@ function LeadDetail({
         <DetailStat label="Domeniu" value={lead.projectDomain ?? classifyProject(lead)} />
       </div>
 
-      <div className="mt-8 rounded-2xl border border-blue-100 bg-[#f7fbff] p-5">
+      <div className="mt-8 rounded-lg border border-blue-100 bg-[#f7fbff] p-5">
         <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#0057b8]">
           Project summary
         </p>
@@ -718,7 +718,7 @@ function LeadDetail({
         <DetailList title="Ipoteze" items={lead.assumptions} />
       </div>
 
-      <div className="mt-7 rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_14px_50px_rgba(0,87,184,0.06)]">
+      <div className="mt-7 rounded-lg border border-blue-100 bg-white p-5 shadow-[0_10px_32px_rgba(0,87,184,0.05)]">
         <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#0057b8]">
           Recommended next action
         </p>
@@ -736,7 +736,7 @@ function LeadDetail({
         workflow={workflow}
       />
 
-      <div className="mt-7 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+      <div className="mt-7 rounded-lg border border-slate-200 bg-slate-50 p-5">
         <p className="text-sm font-bold uppercase tracking-[0.14em] text-slate-700">
           Follow-up message outline
         </p>
@@ -747,7 +747,7 @@ function LeadDetail({
         </ul>
       </div>
 
-      <div className="mt-7 rounded-2xl border border-amber-200 bg-amber-50 p-5">
+      <div className="mt-7 rounded-lg border border-amber-200 bg-amber-50 p-5">
         <p className="text-sm font-bold uppercase tracking-[0.14em] text-amber-900">
           Internal notes
         </p>
@@ -767,7 +767,7 @@ function MockWorkflowControls({
   onWorkflowUpdate: (lead: DemoLead, update: MockWorkflowUpdate) => void;
 }) {
   return (
-    <div className="mt-7 rounded-2xl border border-blue-100 bg-[#f7fbff] p-5">
+    <div className="mt-7 rounded-lg border border-blue-100 bg-[#f7fbff] p-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <Badge variant="cyan">mock admin workflow</Badge>

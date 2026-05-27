@@ -227,7 +227,7 @@ export function ProjectIntakeWizard() {
             return (
               <button
                 className={cn(
-                  "flex items-center gap-3 rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition",
+                  "flex items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm font-semibold transition",
                   active
                     ? "border-blue-200 bg-[#f7fbff] text-[#0057b8]"
                     : "border-slate-200 bg-white text-slate-600 hover:border-blue-100 hover:bg-slate-50",
@@ -249,7 +249,7 @@ export function ProjectIntakeWizard() {
             );
           })}
         </div>
-        <div className="mt-7 rounded-2xl border border-blue-100 bg-[#f7fbff] p-4">
+        <div className="mt-7 rounded-lg border border-blue-100 bg-[#f7fbff] p-4">
           <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#0057b8]">
             Scor curent
           </p>
@@ -261,7 +261,7 @@ export function ProjectIntakeWizard() {
           </p>
         </div>
         {discoveryContext && (
-          <div className="mt-5 rounded-2xl border border-blue-100 bg-white p-4">
+          <div className="mt-5 rounded-lg border border-blue-100 bg-white p-4">
             <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#0057b8]">
               Context AI Discovery
             </p>
@@ -396,7 +396,7 @@ export function ProjectIntakeWizard() {
                     Obiectivul proiectului
                   </span>
                   <textarea
-                    className="min-h-36 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-7 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-blue-300 focus:bg-white"
+                    className="min-h-36 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-7 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-blue-300 focus:bg-white"
                     id="business-goal"
                     onChange={(event) => updateField("businessGoal", event.target.value)}
                     placeholder="Ex: deschidere clinică de diagnostic, modernizare radiologie, reducerea downtime-ului, pregătire pentru echipament RMN."
@@ -585,9 +585,9 @@ function RadioGrid({
           return (
             <label
               className={cn(
-                "cursor-pointer rounded-2xl border px-4 py-3 text-sm font-semibold leading-6 transition",
+                "cursor-pointer rounded-lg border px-4 py-3 text-sm font-semibold leading-6 transition",
                 selected
-                  ? "border-blue-300 bg-[#f0f7ff] text-[#0057b8] shadow-[0_12px_34px_rgba(0,87,184,0.08)]"
+                  ? "border-blue-300 bg-[#f0f7ff] text-[#0057b8] shadow-[0_10px_28px_rgba(0,87,184,0.07)]"
                   : "border-slate-200 bg-white text-slate-600 hover:border-blue-100 hover:bg-slate-50",
               )}
               key={option}
@@ -628,9 +628,9 @@ function CheckboxGrid({
           return (
             <label
               className={cn(
-                "cursor-pointer rounded-2xl border px-4 py-3 text-sm font-semibold leading-6 transition",
+                "cursor-pointer rounded-lg border px-4 py-3 text-sm font-semibold leading-6 transition",
                 selected
-                  ? "border-blue-300 bg-[#f0f7ff] text-[#0057b8] shadow-[0_12px_34px_rgba(0,87,184,0.08)]"
+                  ? "border-blue-300 bg-[#f0f7ff] text-[#0057b8] shadow-[0_10px_28px_rgba(0,87,184,0.07)]"
                   : "border-slate-200 bg-white text-slate-600 hover:border-blue-100 hover:bg-slate-50",
               )}
               key={option}
@@ -665,7 +665,7 @@ function TextInput({
     <label className="grid gap-3">
       <span className="text-sm font-bold text-slate-800">{label}</span>
       <input
-        className="min-h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-blue-300 focus:bg-white"
+        className="min-h-12 rounded-lg border border-slate-200 bg-slate-50 px-4 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-blue-300 focus:bg-white"
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
         value={value}

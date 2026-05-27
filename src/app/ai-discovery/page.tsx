@@ -55,7 +55,7 @@ export default function AiDiscoveryPage() {
                 "Handoff catre analiza tehnica",
               ].map((item) => (
                 <div
-                  className="rounded-2xl border border-blue-100 bg-white p-4 text-sm font-semibold leading-6 text-slate-700 shadow-[0_18px_60px_rgba(0,87,184,0.06)]"
+                  className="rounded-lg border border-blue-100 bg-white p-4 text-sm font-semibold leading-6 text-slate-700 shadow-[0_10px_32px_rgba(0,87,184,0.045)]"
                   key={item}
                 >
                   {item}

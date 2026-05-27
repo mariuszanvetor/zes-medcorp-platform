@@ -91,7 +91,7 @@ export default function ProjectIntakePage() {
               </div>
             </div>
 
-            <div className="rounded-[1.5rem] border border-blue-100 bg-white p-8 shadow-[0_24px_80px_rgba(0,87,184,0.10)]">
+            <div className="rounded-lg border border-blue-100 bg-white p-8 shadow-[0_12px_36px_rgba(0,87,184,0.06)]">
               <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
                 Pentru leaduri serioase
               </p>
@@ -106,7 +106,7 @@ export default function ProjectIntakePage() {
                   "Pregătește documentele pentru o analiză tehnică reală.",
                   "Reduce întrebările de bază din prima discuție.",
                 ].map((item) => (
-                  <div className="rounded-2xl bg-[#f7fbff] p-4" key={item}>
+                  <div className="rounded-lg bg-[#f7fbff] p-4" key={item}>
                     {item}
                   </div>
                 ))}

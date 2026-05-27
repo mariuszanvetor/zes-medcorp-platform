@@ -109,19 +109,19 @@ export function ProposalBuilderResult({ result }: ProposalBuilderResultProps) {
 
   return (
     <div className="grid gap-6">
-      <Card className="border-cyan-300/20" variant="glass">
+      <Card className="border-blue-100 bg-white" padding="lg">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <p className="text-sm font-semibold text-cyan-100">
+            <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#0057b8]">
               Propunere preliminară
             </p>
-            <h2 className="mt-3 text-3xl font-semibold leading-tight text-white">
+            <h2 className="mt-3 text-3xl font-semibold leading-tight text-slate-950">
               {result.title}
             </h2>
-            <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-300">
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-600">
               {result.executiveSummary}
             </p>
-            <p className="mt-4 text-sm font-semibold text-cyan-100">
+            <p className="mt-4 text-sm font-semibold text-[#0057b8]">
               {BUDGET_DISCLAIMER}
             </p>
           </div>
@@ -165,13 +165,11 @@ export function ProposalBuilderResult({ result }: ProposalBuilderResultProps) {
 
       <div className="grid gap-5 lg:grid-cols-2">
         <InsightListPanel
-          dark
           eyebrow="Servicii"
           items={result.recommendedServices}
           title="Servicii ZES incluse în propunerea preliminară"
         />
         <InsightListPanel
-          dark
           eyebrow="Etapizare"
           items={result.phases}
           title="Faze propuse"
@@ -206,16 +204,16 @@ export function ProposalBuilderResult({ result }: ProposalBuilderResultProps) {
         </p>
       </Card>
 
-      <Card className="border-cyan-300/20" padding="lg" variant="glass">
+      <Card className="border-blue-100 bg-white" padding="lg">
         <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <p className="text-sm font-semibold text-cyan-100">
+            <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#0057b8]">
               Previzualizare propunere
             </p>
-            <h3 className="mt-2 text-2xl font-semibold text-white">
+            <h3 className="mt-2 text-2xl font-semibold text-slate-950">
               Structură pregătită pentru export PDF
             </h3>
-            <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300">
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600">
               Acesta este un document de lucru, construit din rezultatul
               Proposal Builder. Exportul este determinist și rămâne preliminar
               până la validarea tehnică ZES.
