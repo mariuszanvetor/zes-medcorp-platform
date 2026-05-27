@@ -127,6 +127,111 @@ This mirrors how future real lead data can be reviewed once stronger auth and pe
 - Keep intelligence deterministic and preliminary.
 - Avoid legal, regulatory or engineering certainty language.
 
+## Future persistence boundary
+
+When local handoff moves to server persistence, lead intelligence should store a compact review summary, not the full browser context. Recommended persisted fields:
+
+- lead source and source context;
+- project domain and stage;
+- readiness, urgency, complexity and risk;
+- missing information summary;
+- validation needs;
+- recommended services and next action;
+- follow-up priority and follow-up type;
+- confidence level;
+- linked discovery context ID or proposal snapshot ID where available.
+
+Avoid storing:
+
+- raw long notes unless explicitly submitted by the user as part of a lead;
+- patient data or clinical records;
+- raw uploaded plans/photos before consent, authentication and retention rules exist;
+- provider error payloads;
+- analytics identifiers that can identify the person.
+
+Migration path:
+
+1. Continue sending compact intelligence through `/api/leads`.
+2. Add server-side context IDs after authentication and data retention rules exist.
+3. Map the compact lead intelligence into Google Sheets/CRM fields.
+4. Keep admin review behind stronger auth before showing real stored leads.
+5. Add deletion/export processes before storing documents or long-term project records.
+
+## Future document-derived signals
+
+Phase 71I prepares document parsing in mock mode only. Phase 71J makes mock document context visible in AI Discovery and `/admin/lead-flow`. Lead Intelligence should not assume any real document parsing is active yet.
+
+When a future parsing layer is enabled, Lead Intelligence may consume only compact reviewed signals:
+
+- document type submitted;
+- plans available;
+- equipment sheet available;
+- equipment list/table available;
+- site photos available;
+- missing information labels;
+- validation needs;
+- parser confidence and warnings.
+
+Do not include:
+
+- raw document text;
+- file contents;
+- screenshots or image data;
+- patient data;
+- unreviewed OCR output;
+- full filenames if they may contain personal or sensitive information.
+
+Email, Sheets and future CRM should receive document-derived summaries only after the user submits a lead and accepts the parsed context.
+
+Current mock document summaries may include:
+
+- document type descriptor such as PDF, DOCX, XLSX or image;
+- mock extraction signals;
+- missing information;
+- privacy warnings;
+- suggested next action;
+- target flows.
+
+They must not include:
+
+- actual file bytes;
+- raw OCR text;
+- real uploaded filenames from users;
+- private document content.
+
+## QA expectations
+
+- AI Discovery leads include domain, stage, confidence, missing info count, risk, complexity and next action.
+- Proposal Builder leads include proposal intelligence summary and readiness.
+- Project Intake leads include readiness, risk, complexity and missing information.
+- Calculator leads still receive deterministic domain/risk/readiness inference even without discovery context.
+- `/admin/lead-flow` should show the safe response fields without exposing raw notes.
+
+## Admin lifecycle visibility
+
+Phase 71K adds a clearer demo lead lifecycle across `/admin/lead-flow` and `/admin/leads`.
+
+The admin monitor should show how context moves through:
+
+- AI Discovery;
+- mock document context;
+- Proposal Builder;
+- Project Intake;
+- admin review.
+
+The demo review center should make these fields visible without connecting real storage:
+
+- source context;
+- project domain;
+- readiness score;
+- risk and complexity;
+- intelligence summary;
+- recommended next action;
+- missing information;
+- mock document context when available.
+
+See `docs/admin-lead-lifecycle.md` for the internal QA routine and future CRM/storage path.
+
 ## Future CRM mapping
 
 When CRM integration is added, map these fields into internal CRM properties:

@@ -6,6 +6,7 @@ import { TrackedButtonLink } from "@/components/analytics/TrackedButtonLink";
 import { DiscoveryConversation } from "@/components/ai/DiscoveryConversation";
 import { DiscoveryIntelligencePanel } from "@/components/ai/DiscoveryIntelligencePanel";
 import { DiscoveryLeadCTA } from "@/components/ai/DiscoveryLeadCTA";
+import { DiscoveryMockDocumentPanel } from "@/components/ai/DiscoveryMockDocumentPanel";
 import { DiscoveryUploadGuidance } from "@/components/ai/DiscoveryUploadGuidance";
 import { Button } from "@/components/ui/Button";
 import {
@@ -13,6 +14,7 @@ import {
   saveDiscoveryContext,
   type DiscoveryContextNextStep,
 } from "@/lib/ai-intelligence/discovery-context";
+import type { MockDocumentParsingResult } from "@/lib/ai-intelligence/document-intelligence";
 import {
   orchestrateAdaptiveDiscovery,
   type OrchestratedDiscoveryResult,
@@ -37,6 +39,8 @@ export function DiscoveryWorkspace() {
   const [context, setContext] = useState<IntelligenceInput>(initialContext);
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [assumptionMode, setAssumptionMode] = useState(false);
+  const [mockDocumentContext, setMockDocumentContext] =
+    useState<MockDocumentParsingResult | null>(null);
 
   const result = useMemo(() => orchestrateAdaptiveDiscovery(context), [context]);
 
@@ -96,6 +100,7 @@ export function DiscoveryWorkspace() {
     saveDiscoveryContext(
       createSerializableDiscoveryContext({
         input: context,
+        mockDocumentContext,
         result,
         selectedNextStep,
       }),
@@ -116,6 +121,10 @@ export function DiscoveryWorkspace() {
           onPatch={patchContext}
         />
         <DiscoveryUploadGuidance prompts={result.uploadPrompts} />
+        <DiscoveryMockDocumentPanel
+          context={context}
+          onChange={setMockDocumentContext}
+        />
         <section className="rounded-[1.5rem] border border-blue-100 bg-white p-5 shadow-[0_24px_80px_rgba(0,87,184,0.08)] sm:p-6">
           <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
             Continuare
@@ -124,7 +133,7 @@ export function DiscoveryWorkspace() {
             Transforma discovery-ul in urmatorul pas.
           </h2>
           <p className="mt-3 text-sm leading-7 text-slate-600">
-            Poti trimite contextul pentru analiza preliminara, continua spre Proposal Builder sau completa Project Intake. Handoff-ul complet prin context salvat va fi disponibil intr-o etapa viitoare.
+            Poti trimite contextul pentru analiza preliminara sau il poti continua in Proposal Builder ori Project Intake. Contextul este salvat local in browser, poate fi editat sau ignorat la pasul urmator si ramane preliminar pana la validarea tehnica.
           </p>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Button size="lg" onClick={showLeadCapture}>
@@ -150,7 +159,7 @@ export function DiscoveryWorkspace() {
                 });
               }}
             >
-              Continue to Proposal Builder
+              Continua spre Proposal Builder
             </TrackedButtonLink>
             <TrackedButtonLink
               href={`/project-intake${handoffQuery}`}
@@ -172,12 +181,17 @@ export function DiscoveryWorkspace() {
                 });
               }}
             >
-              Continue to Project Intake
+              Continua spre Project Intake
             </TrackedButtonLink>
           </div>
         </section>
 
-        {showLeadForm && <DiscoveryLeadCTA result={result} />}
+        {showLeadForm && (
+          <DiscoveryLeadCTA
+            mockDocumentContext={mockDocumentContext}
+            result={result}
+          />
+        )}
       </main>
 
       <DiscoveryIntelligencePanel result={result} />

@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import { Badge, type BadgeVariant } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { createMockDocumentParsingResult } from "@/lib/ai-intelligence/document-intelligence";
 
 export type LeadFlowCheckStatus = "safe" | "configured" | "missing" | "disabled" | "attention";
 
@@ -61,6 +62,21 @@ export function LeadFlowMonitor({ config }: LeadFlowMonitorProps) {
     [config],
   );
   const interpretation = result ? interpretTestResult(result) : null;
+  const mockDocumentStatus = useMemo(
+    () =>
+      createMockDocumentParsingResult(
+        {
+          fileName: "admin-lead-flow-demo.pdf",
+          mimeType: "application/pdf",
+          sizeBytes: 2.4 * 1024 * 1024,
+        },
+        {
+          domains: ["mri", "ct"],
+          projectStage: "budgeting",
+        },
+      ),
+    [],
+  );
 
   async function runSafeTest() {
     setIsTesting(true);
@@ -143,6 +159,8 @@ export function LeadFlowMonitor({ config }: LeadFlowMonitorProps) {
         </dl>
       </Card>
 
+      <LeadLifecycleTimeline />
+
       <div className="grid gap-6 xl:grid-cols-3">
         <CheckGroup checks={config.resend} title="Resend / email" />
         <CheckGroup checks={config.sheets} title="Google Sheets" />
@@ -150,6 +168,55 @@ export function LeadFlowMonitor({ config }: LeadFlowMonitorProps) {
       </div>
 
       <DailyOpsChecklist />
+
+      <Card className="border-blue-100 bg-white" padding="lg">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <Badge variant="neutral">Document parsing mock</Badge>
+            <h2 className="mt-4 text-2xl font-semibold tracking-tight text-slate-950">
+              Vizibilitate context documentar demo
+            </h2>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600">
+              Panoul arata cum ar putea aparea contextul documentar in lead ops,
+              fara upload real, fara OCR si fara continut de fisier. Este doar o
+              simulare determinista pentru pregatirea fluxului viitor.
+            </p>
+          </div>
+          <Badge variant="blue">{mockDocumentStatus.mode}</Badge>
+        </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <ResultItem label="Document type" value={mockDocumentStatus.fileType} />
+          <ResultItem
+            label="Future accepted"
+            value={String(mockDocumentStatus.acceptedForFutureParsing)}
+          />
+          <ResultItem
+            label="Targets"
+            value={mockDocumentStatus.contextTargets.join(", ")}
+          />
+          <ResultItem
+            label="Next action"
+            value={mockDocumentStatus.suggestedNextAction}
+          />
+        </div>
+        <div className="mt-5 grid gap-4 lg:grid-cols-3">
+          <InterpretationCard
+            items={mockDocumentStatus.mockSignals}
+            title="Semnale mock"
+            tone="neutral"
+          />
+          <InterpretationCard
+            items={mockDocumentStatus.missingInformation}
+            title="Informatii lipsa"
+            tone="neutral"
+          />
+          <InterpretationCard
+            items={[...mockDocumentStatus.privacyNotes, ...mockDocumentStatus.warnings]}
+            title="Privacy / siguranta"
+            tone="neutral"
+          />
+        </div>
+      </Card>
 
       <Card className="border-blue-100 bg-white" padding="lg">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
@@ -219,6 +286,115 @@ export function LeadFlowMonitor({ config }: LeadFlowMonitorProps) {
         )}
       </Card>
     </div>
+  );
+}
+
+function LeadLifecycleTimeline() {
+  const stages = [
+    {
+      source: "AI Discovery",
+      domain: "imagistica / clinica / laborator",
+      readiness: "context partial",
+      risk: "calculat determinist",
+      complexity: "multi-domain",
+      mode: "local handoff",
+      action: "Clarifica domeniul, etapa, documentele disponibile si nevoile tehnice.",
+    },
+    {
+      source: "Mock Document Context",
+      domain: "PDF / DOCX / XLSX / imagine",
+      readiness: "descriptor-only",
+      risk: "privacy review",
+      complexity: "mock",
+      mode: "no upload",
+      action: "Arata ce semnale ar fi extrase ulterior, fara fisiere si fara OCR.",
+    },
+    {
+      source: "Proposal Builder",
+      domain: "propunere preliminara",
+      readiness: "scor + ipoteze",
+      risk: "validare necesara",
+      complexity: "proiect",
+      mode: "deterministic",
+      action: "Transforma contextul in recomandari, lipsuri si pasi de validare.",
+    },
+    {
+      source: "Project Intake",
+      domain: "date structurate proiect",
+      readiness: "campuri completate",
+      risk: "triage intern",
+      complexity: "operational",
+      mode: "frontend-only",
+      action: "Colecteaza informatii utile pentru discutia tehnica initiala.",
+    },
+    {
+      source: "Admin Review",
+      domain: "lead intelligence",
+      readiness: "review intern",
+      risk: "prioritizat",
+      complexity: "clasificat",
+      mode: "mock email / mock sheets / mock storage",
+      action: "Verifica sumarul, lipsurile, serviciile recomandate si urmatorul follow-up.",
+    },
+  ];
+
+  return (
+    <Card className="border-blue-100 bg-white" padding="lg">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div>
+          <Badge variant="cyan">Demo lifecycle</Badge>
+          <h2 className="mt-4 text-2xl font-semibold tracking-tight text-slate-950">
+            Lead intelligence lifecycle
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600">
+            Traseu intern demo pentru cum contextul din AI Discovery, Proposal
+            Builder, Project Intake si document intelligence mock ajunge in
+            revizuirea administrativa. Totul ramane determinist si mock-safe.
+          </p>
+        </div>
+        <Badge variant="neutral">demo / no persistence</Badge>
+      </div>
+
+      <div className="mt-7 grid gap-4">
+        {stages.map((stage, index) => (
+          <div
+            className="grid gap-4 rounded-2xl border border-slate-200 bg-[#f7fbff] p-5 lg:grid-cols-[0.08fr_0.26fr_0.42fr_0.24fr] lg:items-start"
+            key={stage.source}
+          >
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0057b8] text-sm font-bold text-white">
+              {index + 1}
+            </div>
+            <div>
+              <p className="text-sm font-bold text-slate-950">{stage.source}</p>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#0057b8]">
+                {stage.domain}
+              </p>
+            </div>
+            <div className="grid gap-2 text-sm leading-6 text-slate-700 sm:grid-cols-3">
+              <span>
+                <strong className="text-slate-950">Readiness:</strong>{" "}
+                {stage.readiness}
+              </span>
+              <span>
+                <strong className="text-slate-950">Risk:</strong> {stage.risk}
+              </span>
+              <span>
+                <strong className="text-slate-950">Complexity:</strong>{" "}
+                {stage.complexity}
+              </span>
+            </div>
+            <div>
+              <Badge variant={stage.mode.includes("mock") ? "neutral" : "blue"}>
+                {stage.mode}
+              </Badge>
+              <p className="mt-3 text-sm leading-6 text-slate-600">
+                {stage.action}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Card>
   );
 }
 
@@ -503,7 +679,7 @@ function createSafeTestPayload() {
     message:
       "Payload demo generat din panoul intern Lead Flow Monitor. Nu contine date reale de client.",
     generatedSummary:
-      "Test intern pentru verificarea emailMode, sheetsMode, storageMode si integrationMode.",
+      "Test intern pentru verificarea emailMode, sheetsMode, storageMode si integrationMode. Include context documentar mock, fara upload real si fara continut de fisier.",
     generatedBudgetRange: "Test intern",
     generatedRiskLevel: "Redus",
     generatedComplexity: "Basic",

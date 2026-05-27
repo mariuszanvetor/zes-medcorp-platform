@@ -38,6 +38,32 @@ type FilterState = {
   sort: SortOption;
 };
 
+type MockWorkflowStatus =
+  | "New"
+  | "Reviewed"
+  | "Needs clarification"
+  | "Ready for offer"
+  | "High priority";
+
+type MockWorkflowState = {
+  status: MockWorkflowStatus;
+  followUpType: string;
+  nextAction: string;
+};
+
+type MockWorkflowUpdate = Partial<MockWorkflowState> & {
+  historyLabel: string;
+};
+
+type MockActionHistoryItem = MockWorkflowState & {
+  id: string;
+  leadId: string;
+  leadLabel: string;
+  source: string;
+  timestamp: string;
+  historyLabel: string;
+};
+
 const initialFilters: FilterState = {
   status: "Toate",
   source: "Toate",
@@ -91,9 +117,41 @@ const sortLabels: Record<SortOption, string> = {
   "readiness-score": "Readiness maxim",
 };
 
+const mockWorkflowStatusVariant: Record<
+  MockWorkflowStatus,
+  "neutral" | "blue" | "cyan" | "dark" | "critical"
+> = {
+  New: "neutral",
+  Reviewed: "cyan",
+  "Needs clarification": "dark",
+  "Ready for offer": "blue",
+  "High priority": "critical",
+};
+
+const followUpOptions = [
+  "technical-clarification",
+  "technical-review",
+  "proposal-preparation",
+  "service-triage",
+  "commercial-offer",
+];
+
+const nextActionOptions = [
+  "Solicita planuri si dimensiuni",
+  "Confirma echipamentul propus",
+  "Verifica status DSP/CNCAN",
+  "Pregateste analiza tehnica",
+  "Pregateste oferta preliminara",
+  "Programeaza discutie tehnica",
+];
+
 export function LeadReviewCenter() {
   const [filters, setFilters] = useState<FilterState>(initialFilters);
   const [selectedLeadId, setSelectedLeadId] = useState(demoLeads[0]?.id);
+  const [workflowByLeadId, setWorkflowByLeadId] = useState<
+    Record<string, MockWorkflowState>
+  >({});
+  const [actionHistory, setActionHistory] = useState<MockActionHistoryItem[]>([]);
   const scoringByLeadId = useMemo(
     () => new Map(demoLeads.map((lead) => [lead.id, scoreDemoLead(lead)])),
     [],
@@ -110,6 +168,8 @@ export function LeadReviewCenter() {
     demoLeads[0];
   const selectedScoring =
     scoringByLeadId.get(selectedLead.id) ?? scoreDemoLead(selectedLead);
+  const selectedWorkflow =
+    workflowByLeadId[selectedLead.id] ?? createInitialMockWorkflow(selectedLead);
   const metrics = useMemo(() => createMetrics(demoLeads), []);
   const funnel = useMemo(() => createFunnel(demoLeads), []);
   const priorityQueue = useMemo(
@@ -142,16 +202,70 @@ export function LeadReviewCenter() {
     setFilters((current) => ({ ...current, [key]: value }));
   }
 
+  function updateMockWorkflow(lead: DemoLead, update: MockWorkflowUpdate) {
+    const current = workflowByLeadId[lead.id] ?? createInitialMockWorkflow(lead);
+    const next = {
+      ...current,
+      ...update,
+    };
+
+    setWorkflowByLeadId((previous) => ({
+      ...previous,
+      [lead.id]: {
+        status: next.status,
+        followUpType: next.followUpType,
+        nextAction: next.nextAction,
+      },
+    }));
+    setActionHistory((previous) =>
+      [
+        {
+          id: `${lead.id}-${Date.now()}`,
+          leadId: lead.id,
+          leadLabel: lead.company,
+          source: lead.sourceTool,
+          timestamp: new Date().toLocaleString("ro-RO", {
+            dateStyle: "short",
+            timeStyle: "short",
+          }),
+          status: next.status,
+          followUpType: next.followUpType,
+          nextAction: next.nextAction,
+          historyLabel: update.historyLabel,
+        },
+        ...previous,
+      ].slice(0, 12),
+    );
+  }
+
   return (
     <div className="grid gap-8">
-      <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-6">
+      <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-7">
         <MetricCard label="Total leads" value={String(metrics.total)} />
         <MetricCard label="Prioritare" value={String(metrics.highPriority)} />
         <MetricCard label="Risc critic" value={String(metrics.criticalRisk)} />
         <MetricCard label="Scor mediu" value={`${metrics.averageScore}/100`} />
         <MetricCard label="Readiness mediu" value={`${metrics.averageReadiness}/100`} />
+        <MetricCard label="Doc mock" value={String(metrics.mockDocumentLeads)} />
         <MetricCard label="Sursa principală" value={metrics.mostCommonSource} />
       </section>
+
+      <Card className="border-blue-100 bg-white" padding="lg">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <Badge variant="cyan">mock admin workflow</Badge>
+            <h2 className="mt-4 text-2xl font-semibold tracking-tight text-slate-950">
+              Client-side review actions
+            </h2>
+            <p className="mt-3 max-w-4xl text-sm leading-7 text-slate-600">
+              Aceste controale simuleaza trierea interna a leadurilor demo. Starea
+              este pastrata doar in memoria paginii si nu trimite email, nu scrie
+              in Sheets, nu creeaza CRM task si nu persista intr-o baza de date.
+            </p>
+          </div>
+          <Badge variant="neutral">local only</Badge>
+        </div>
+      </Card>
 
       <section className="grid gap-8 xl:grid-cols-[0.66fr_0.34fr]">
         <Card className="border-blue-100 bg-white" padding="lg">
@@ -524,6 +638,7 @@ function LeadDetail({
         <DetailStat label="Intent comercial" value={intelligence.commercialIntent} />
         <DetailStat label="Incredere" value={intelligence.confidenceLevel} />
         <DetailStat label="Context sursa" value={intelligence.sourceContext} />
+        <DetailStat label="Domeniu" value={lead.projectDomain ?? classifyProject(lead)} />
       </div>
 
       <div className="mt-8 rounded-2xl border border-blue-100 bg-[#f7fbff] p-5">
@@ -536,6 +651,13 @@ function LeadDetail({
       </div>
 
       <div className="mt-6 grid gap-5">
+        <DetailList
+          title="Intelligence summary mock"
+          items={[lead.intelligenceSummary ?? lead.generatedSummary]}
+        />
+        {lead.mockDocumentContext && (
+          <MockDocumentDetail context={lead.mockDocumentContext} />
+        )}
         <DetailList
           title="Lead intelligence"
           items={[
@@ -747,6 +869,37 @@ function DetailList({ title, items }: { title: string; items: string[] }) {
   );
 }
 
+function MockDocumentDetail({
+  context,
+}: {
+  context: NonNullable<DemoLead["mockDocumentContext"]>;
+}) {
+  return (
+    <div className="rounded-2xl border border-blue-100 bg-[#f7fbff] p-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-[#0057b8]">
+            Mock document context
+          </h3>
+          <p className="mt-2 text-sm font-semibold text-slate-950">
+            {context.label} / {context.fileType} / {context.mode}
+          </p>
+        </div>
+        <Badge variant="neutral">demo only</Badge>
+      </div>
+      <div className="mt-5 grid gap-4 lg:grid-cols-2">
+        <DetailList title="Semnale mock" items={context.mockSignals} />
+        <DetailList title="Informatii lipsa" items={context.missingInformation} />
+        <DetailList title="Fluxuri tinta" items={context.targetFlows} />
+        <DetailList title="Privacy" items={context.privacyWarnings} />
+      </div>
+      <p className="mt-5 rounded-2xl border border-white bg-white p-4 text-sm font-semibold leading-7 text-slate-700">
+        Pas sugerat: {context.suggestedNextAction}
+      </p>
+    </div>
+  );
+}
+
 function filterLeads(leads: DemoLead[], filters: FilterState) {
   return leads.filter((lead) => {
     const statusMatch = filters.status === "Toate" || lead.status === filters.status;
@@ -800,6 +953,7 @@ function createMetrics(leads: DemoLead[]) {
     mostCommonSource,
     averageScore,
     averageReadiness,
+    mockDocumentLeads: leads.filter((lead) => lead.mockDocumentContext).length,
   };
 }
 

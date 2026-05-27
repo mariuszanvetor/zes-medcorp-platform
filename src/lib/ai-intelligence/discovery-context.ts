@@ -1,4 +1,5 @@
 import type { OrchestratedDiscoveryResult } from "@/lib/ai-intelligence/discovery-orchestrator";
+import type { MockDocumentParsingResult } from "@/lib/ai-intelligence/document-intelligence";
 import type { IntelligenceInput, MedicalDomainId } from "@/lib/ai-intelligence/types";
 
 export const DISCOVERY_CONTEXT_STORAGE_KEY = "zes.aiDiscovery.context.v1";
@@ -9,6 +10,18 @@ export type DiscoveryContextNextStep =
   | "project-intake"
   | "technical-review"
   | "unknown";
+
+export type SerializableMockDocumentContext = {
+  mode: "mock";
+  fileType: string;
+  acceptedForFutureParsing: boolean;
+  mockSignals: string[];
+  missingInformation: string[];
+  warnings: string[];
+  privacyNotes: string[];
+  contextTargets: string[];
+  suggestedNextAction: string;
+};
 
 export type SerializableDiscoveryContext = {
   id: string;
@@ -47,15 +60,18 @@ export type SerializableDiscoveryContext = {
     uploadNeededFlags: string[];
     nextActions: string[];
   };
+  mockDocumentContext?: SerializableMockDocumentContext;
   generatedSummary: string;
 };
 
 export function createSerializableDiscoveryContext({
   input,
+  mockDocumentContext,
   result,
   selectedNextStep = "unknown",
 }: {
   input: IntelligenceInput;
+  mockDocumentContext?: MockDocumentParsingResult | null;
   result: OrchestratedDiscoveryResult;
   selectedNextStep?: DiscoveryContextNextStep;
 }): SerializableDiscoveryContext {
@@ -104,6 +120,9 @@ export function createSerializableDiscoveryContext({
       uploadNeededFlags: result.uploadPrompts.map((prompt) => prompt.title).slice(0, 6),
       nextActions: result.recommendations.map((item) => item.title).slice(0, 6),
     },
+    mockDocumentContext: mockDocumentContext
+      ? serializeMockDocumentContext(mockDocumentContext)
+      : undefined,
     generatedSummary: "",
   };
 
@@ -166,8 +185,11 @@ export function createDiscoveryContextSummary(context: SerializableDiscoveryCont
     `Validari necesare: ${context.intelligence.validationNeeds.join("; ") || "de clarificat"}.`,
     `Servicii sugerate: ${context.recommendations.suggestedServices.join("; ") || "de clarificat"}.`,
     `Documente utile: ${context.recommendations.uploadNeededFlags.join("; ") || "nu sunt marcate"}.`,
+    context.mockDocumentContext
+      ? `Context documentar mock: ${context.mockDocumentContext.fileType}; semnale: ${context.mockDocumentContext.mockSignals.join("; ") || "nu sunt marcate"}; informatii lipsa: ${context.mockDocumentContext.missingInformation.join("; ") || "nu sunt marcate"}.`
+      : "",
     "Acest context este local, preliminar si nu inlocuieste analiza tehnica finala.",
-  ].join("\n");
+  ].filter(Boolean).join("\n");
 }
 
 export function hasDiscoveryContextQuery(searchParams: URLSearchParams) {
@@ -200,7 +222,42 @@ function sanitizeDiscoveryContext(value: unknown): SerializableDiscoveryContext 
       uploadNeededFlags: (context.recommendations?.uploadNeededFlags ?? []).slice(0, 6),
       nextActions: (context.recommendations?.nextActions ?? []).slice(0, 6),
     },
+    mockDocumentContext: sanitizeMockDocumentContext(context.mockDocumentContext),
     generatedSummary: truncate(context.generatedSummary, 1600) ?? "",
+  };
+}
+
+function serializeMockDocumentContext(
+  result: MockDocumentParsingResult,
+): SerializableMockDocumentContext {
+  return {
+    mode: "mock",
+    fileType: result.fileType,
+    acceptedForFutureParsing: result.acceptedForFutureParsing,
+    mockSignals: result.mockSignals.slice(0, 8),
+    missingInformation: result.missingInformation.slice(0, 8),
+    warnings: result.warnings.slice(0, 8),
+    privacyNotes: result.privacyNotes.slice(0, 6),
+    contextTargets: result.contextTargets.slice(0, 4),
+    suggestedNextAction: truncate(result.suggestedNextAction, 280) ?? "",
+  };
+}
+
+function sanitizeMockDocumentContext(
+  value: SerializableMockDocumentContext | undefined,
+): SerializableMockDocumentContext | undefined {
+  if (!value || value.mode !== "mock" || !value.fileType) return undefined;
+
+  return {
+    mode: "mock",
+    fileType: truncate(value.fileType, 40) ?? "unknown",
+    acceptedForFutureParsing: Boolean(value.acceptedForFutureParsing),
+    mockSignals: (value.mockSignals ?? []).slice(0, 8).map((item) => truncate(item, 160) ?? ""),
+    missingInformation: (value.missingInformation ?? []).slice(0, 8).map((item) => truncate(item, 160) ?? ""),
+    warnings: (value.warnings ?? []).slice(0, 8).map((item) => truncate(item, 160) ?? ""),
+    privacyNotes: (value.privacyNotes ?? []).slice(0, 6).map((item) => truncate(item, 160) ?? ""),
+    contextTargets: (value.contextTargets ?? []).slice(0, 4).map((item) => truncate(item, 80) ?? ""),
+    suggestedNextAction: truncate(value.suggestedNextAction, 280) ?? "",
   };
 }
 

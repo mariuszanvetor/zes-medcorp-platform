@@ -6,20 +6,27 @@ It is not a generic chatbot and it does not use a real AI API yet. The workspace
 
 ## What it does now
 
-- Accepts partial project context through structured controls and free text.
-- Supports multiple medical infrastructure domains, including imaging, RMN, CT, radiology, dental, IVD/laboratory, OR, ATI, sterilization, cardiology, ultrasound, modernization, HVAC, electrical, UPS and workflow.
-- Runs `orchestrateAdaptiveDiscovery()` client-side with deterministic rules.
-- Shows live detected domains, confidence, missing information, risk, complexity, readiness score and recommended resources.
-- Suggests optional document types such as sketches, plans, equipment datasheets, photos and technical plans.
-- Allows users to continue with assumptions instead of blocking when details are missing.
-- Offers handoff CTAs to Proposal Builder and Project Intake.
-- Uses `LeadCaptureForm` to send discovery context for preliminary ZES review.
+- guides the user through deterministic project discovery;
+- supports partial answers and "continue with assumptions";
+- saves compact local context for Proposal Builder and Project Intake;
+- marks uploads/documents as optional future inputs;
+- sends only compact lead context when the user submits a lead.
+- accepts partial project context through structured controls and free text;
+- supports multiple medical infrastructure domains, including imaging, RMN, CT, radiology, dental, IVD/laboratory, OR, ATI, sterilization, cardiology, ultrasound, modernization, HVAC, electrical, UPS and workflow;
+- runs `orchestrateAdaptiveDiscovery()` client-side with deterministic rules;
+- shows live detected domains, confidence, missing information, risk, complexity, readiness score and recommended resources;
+- suggests optional document types such as sketches, plans, equipment datasheets, photos and technical plans;
+- shows a descriptor-based mock document parsing preview for future PDF/DOCX/XLSX/image support;
+- allows users to continue with assumptions instead of blocking when details are missing;
+- offers handoff CTAs to Proposal Builder and Project Intake;
+- uses `LeadCaptureForm` to send discovery context for preliminary ZES review.
 
 ## What it does not do yet
 
 - It does not call a real AI model.
 - It does not upload or process files.
 - It does not perform OCR, image analysis or document understanding.
+- It does not expose a real file input.
 - It does not store project sessions permanently.
 - It does not produce final engineering validation.
 - It does not claim CNCAN, DSP or other regulatory approval.
@@ -64,6 +71,80 @@ Detailed notes or sensitive data are not put in URLs. The user can edit or ignor
 
 See `docs/ai-discovery-context-handoff.md` for implementation details.
 
+## Future persistence layer
+
+Current behavior is intentionally local-only. The handoff context is stored under:
+
+- `zes.aiDiscovery.context.v1` in `sessionStorage`;
+- the same key in `localStorage` as a fallback when the user returns to the flow.
+
+When backend persistence is introduced, the following data can move from local browser storage to server-side project context storage:
+
+- context ID, version, created/updated timestamps and source;
+- detected domains and project stage;
+- safe structured answers such as plans available, equipment specs available, budget known and timeline known;
+- compact notes summary, not unbounded raw notes;
+- confidence, readiness, risk and complexity values;
+- missing information labels and validation needs;
+- recommended services, calculators, resources and next actions;
+- selected next step such as Proposal Builder, Project Intake or technical review.
+
+Do not persist by default:
+
+- name, email, phone or company before an explicit lead submission;
+- patient data or medical records;
+- raw uploads, photos, PDFs or sketches before explicit upload consent and retention rules exist;
+- provider payloads, API responses, analytics identifiers or secrets;
+- long free-text notes without truncation and review.
+
+Recommended safe handoff payload shape:
+
+```ts
+type PersistedDiscoveryContext = {
+  contextId: string;
+  version: "v1";
+  createdAt: string;
+  updatedAt: string;
+  source: "ai-discovery";
+  selectedNextStep: "proposal-builder" | "project-intake" | "technical-review" | "unknown";
+  project: {
+    domains: string[];
+    stage: string;
+    knownAnswers: Record<string, boolean | string | number | undefined>;
+    notesSummary?: string;
+  };
+  intelligence: {
+    confidenceScore: number;
+    readinessScore: number;
+    riskLevel: string;
+    complexityLevel: string;
+    missingInformation: string[];
+    validationNeeds: string[];
+  };
+  recommendations: {
+    suggestedServices: string[];
+    suggestedCalculators: Array<{ label: string; href: string }>;
+    suggestedResources: Array<{ label: string; href: string; type: string }>;
+    nextActions: string[];
+  };
+  privacy: {
+    containsPii: false;
+    containsPatientData: false;
+    retentionClass: "project-intake-preliminary";
+  };
+};
+```
+
+Migration path:
+
+1. Keep local storage as the default handoff during the frontend-only phase.
+2. Add authenticated server persistence only after admin/auth and retention rules exist.
+3. Store compact context only after explicit user action, such as "trimite pentru analiza preliminara".
+4. Replace full local handoff with a short `contextId` reference in URLs.
+5. Load the context server-side in Proposal Builder, Project Intake and admin review.
+6. Add deletion/export/retention procedures before storing real project documents.
+7. Keep deterministic safety framing even after real AI or document intelligence is added.
+
 ## Future AI API path
 
 Recommended order:
@@ -84,6 +165,37 @@ Recommended order:
 3. Store files only after storage/auth decisions exist.
 4. Add OCR/vision extraction as a separate server-side pipeline.
 5. Return extracted signals with confidence and limitations, never final approvals.
+
+Phase 71I adds the safe document parsing architecture in `docs/document-parsing-architecture.md` and mock-only helpers in `src/lib/ai-intelligence/document-intelligence.ts`.
+
+Supported future inputs:
+
+- PDF project documents and equipment sheets;
+- DOC/DOCX briefs, notes and project specifications;
+- XLS/XLSX equipment lists, budget tables and room schedules;
+- images/screenshots for site photos, sketches and plan captures.
+
+Until a later phase enables real parsing, AI Discovery should only show upload guidance. It must not expose an active upload control, parse documents, persist files or imply that document intelligence is already active.
+
+## Mock document preview
+
+Phase 71J adds `DiscoveryMockDocumentPanel` as a visible demo surface. The user can choose a predefined descriptor such as:
+
+- plan camera PDF;
+- brief proiect DOCX;
+- lista echipamente XLSX;
+- fotografie / screenshot.
+
+The workspace then shows deterministic mock context:
+
+- detected document type;
+- possible future extraction signals;
+- target flows for the context;
+- missing information;
+- privacy warnings;
+- suggested next action.
+
+If the user continues to Proposal Builder, Project Intake or lead submission, the local discovery context may include `mockDocumentContext`. This is still compact and local. It does not contain a real file, file bytes, OCR text, uploaded content or raw document data.
 
 ## Validation checklist
 

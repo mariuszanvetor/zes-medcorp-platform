@@ -221,11 +221,13 @@ The scoring is not a sales guarantee. It is intended to help the team understand
 
 ## Document and plan understanding prep
 
-No OCR, vision or document analysis has been implemented in this phase.
+No OCR, vision or real document analysis is active.
 
 The architecture prepares interfaces for future:
 
 - PDF analysis;
+- DOC/DOCX brief parsing;
+- XLS/XLSX equipment or budget table parsing;
 - room plans;
 - sketches;
 - equipment sheets;
@@ -238,6 +240,12 @@ Future document understanding should extract only planning signals such as dimen
 Privacy rule:
 
 - users should be encouraged to remove unnecessary personal or sensitive data before upload.
+
+Phase 71I formalizes this layer in `docs/document-parsing-architecture.md` and extends `src/lib/ai-intelligence/document-intelligence.ts` with mock-only helpers for future file policies. These helpers classify descriptors and generate deterministic mock signals only; they do not read files, parse content, call OCR, call AI APIs or persist uploads.
+
+Phase 71J adds visible mock UI in AI Discovery and admin lead-flow monitoring. This UI uses predefined descriptors only. It can pass compact `mockDocumentContext` through local handoff, but it still does not expose real upload controls or process documents.
+
+Phase 71K connects these signals to an internal demo lead lifecycle. `/admin/lead-flow` now explains the path from AI Discovery, mock document context, Proposal Builder and Project Intake into admin review. `/admin/leads` surfaces deterministic demo intelligence summaries and mock document context for review, while keeping all admin data mock-only.
 
 ## Safety and trust principles
 

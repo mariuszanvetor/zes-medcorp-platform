@@ -3,11 +3,15 @@
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
 import type { LeadPayload, LeadSummaryPreview } from "@/lib/lead-types";
 import type { OrchestratedDiscoveryResult } from "@/lib/ai-intelligence/discovery-orchestrator";
+import type { MockDocumentParsingResult } from "@/lib/ai-intelligence/document-intelligence";
+import { summarizeMockDocumentParsing } from "@/lib/ai-intelligence/document-intelligence";
 import { trackEvent } from "@/lib/analytics";
 
 export function DiscoveryLeadCTA({
+  mockDocumentContext,
   result,
 }: {
+  mockDocumentContext?: MockDocumentParsingResult | null;
   result: OrchestratedDiscoveryResult;
 }) {
   const summary: LeadSummaryPreview = {
@@ -24,7 +28,7 @@ export function DiscoveryLeadCTA({
       eyebrow="Analiza preliminara"
       generatedComplexity={result.riskAssessment.complexityLevel}
       generatedRiskLevel={result.riskAssessment.riskLevel}
-      generatedSummary={buildGeneratedSummary(result)}
+      generatedSummary={buildGeneratedSummary(result, mockDocumentContext)}
       inquiryType="AI discovery workspace"
       sourcePage="/ai-discovery"
       sourceTool="ai-discovery"
@@ -48,7 +52,10 @@ export function DiscoveryLeadCTA({
   );
 }
 
-function buildGeneratedSummary(result: OrchestratedDiscoveryResult) {
+function buildGeneratedSummary(
+  result: OrchestratedDiscoveryResult,
+  mockDocumentContext?: MockDocumentParsingResult | null,
+) {
   return [
     `AI Discovery preliminary context.`,
     `Detected domains: ${result.detectedDomains.join(", ") || "not clear"}.`,
@@ -59,6 +66,9 @@ function buildGeneratedSummary(result: OrchestratedDiscoveryResult) {
     `Validation needs: ${result.riskAssessment.validationNeeds.slice(0, 6).join("; ") || "to be clarified"}.`,
     `Recommended next action: ${result.leadIntelligence.internalSummary}.`,
     `Recommended next actions: ${result.recommendations.map((item) => item.title).slice(0, 5).join("; ")}.`,
+    mockDocumentContext
+      ? `Mock document context:\n${summarizeMockDocumentParsing(mockDocumentContext)}`
+      : "",
     `Safety note: preliminary planning support only; final requirements depend on project, equipment, site and competent validation.`,
-  ].join("\n");
+  ].filter(Boolean).join("\n");
 }

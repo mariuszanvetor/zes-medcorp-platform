@@ -201,6 +201,12 @@ export type ProposalIntelligenceContext = {
 
 export type DocumentArtifactType =
   | "pdf"
+  | "doc"
+  | "docx"
+  | "xls"
+  | "xlsx"
+  | "image"
+  | "screenshot"
   | "room-plan"
   | "sketch"
   | "equipment-spec"

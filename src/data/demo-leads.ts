@@ -42,6 +42,18 @@ export type DemoLead = {
   status: LeadStatus;
   recommendedNextStep: string;
   recommendedServices: string[];
+  projectDomain?: string;
+  intelligenceSummary?: string;
+  mockDocumentContext?: {
+    mode: "mock";
+    fileType: string;
+    label: string;
+    targetFlows: string[];
+    mockSignals: string[];
+    missingInformation: string[];
+    privacyWarnings: string[];
+    suggestedNextAction: string;
+  };
   sourceContext?: string;
   followUpPriority?: LeadPriority;
   followUpType?:
@@ -89,6 +101,31 @@ export const demoLeads: DemoLead[] = [
       "Modernizare clinica medicala",
       "Coordonare HVAC/electric/UPS",
     ],
+    projectDomain: "Modernizare + imagistica",
+    intelligenceSummary:
+      "Demo AI Discovery cu context documentar mock. Necesita validare pe planuri, echipamente, HVAC/electric si autorizari.",
+    mockDocumentContext: {
+      mode: "mock",
+      fileType: "PDF",
+      label: "Plan camera / brief proiect demo",
+      targetFlows: ["AI Discovery", "Proposal Builder", "Project Intake", "Lead Intelligence"],
+      mockSignals: [
+        "plan camera",
+        "cerinte echipamente imagistica",
+        "posibile constrangeri HVAC/electric",
+      ],
+      missingInformation: [
+        "dimensiuni confirmate",
+        "versiune plan",
+        "fisa echipament finala",
+      ],
+      privacyWarnings: [
+        "mock only: nu exista fisier incarcat",
+        "nu include date pacienti sau continut documentar brut",
+      ],
+      suggestedNextAction:
+        "Cereti planul real si fisele tehnice inainte de propunerea tehnica.",
+    },
     sourceContext: "AI Discovery / context local importat",
     followUpPriority: "Critical / immediate opportunity",
     followUpType: "urgent-technical-review",
@@ -154,6 +191,9 @@ export const demoLeads: DemoLead[] = [
       "Aparatură medicală",
       "Service și mentenanță",
     ],
+    projectDomain: "Clinica noua / imagistica / IVD",
+    intelligenceSummary:
+      "Demo Project Intake cu readiness ridicat si risc critic; potrivit pentru analiza tehnica si triere rapida.",
     missingInformation: [
       "Planuri și releveu",
       "Lista echipamentelor imagistică / IVD",
@@ -203,6 +243,9 @@ export const demoLeads: DemoLead[] = [
       "Integrare aparatură",
       "Consultanță tehnică",
     ],
+    projectDomain: "RMN / RF shielding",
+    intelligenceSummary:
+      "Demo Proposal Builder pentru camera RMN; context suficient pentru propunere preliminara, dar lipsesc fisa RMN si date RF.",
     missingInformation: [
       "Fișă tehnică RMN",
       "Dimensiuni cameră și acces magnet",
@@ -350,6 +393,9 @@ export const demoLeads: DemoLead[] = [
       "Mentenanță preventivă",
       "Evaluare tehnică ZES",
     ],
+    projectDomain: "Service / mentenanta imagistica",
+    intelligenceSummary:
+      "Demo high-urgency service lead cu potential downtime; cere triere rapida si colectarea codurilor de eroare.",
     missingInformation: [
       "Model și serie",
       "Coduri de eroare",
@@ -448,6 +494,9 @@ export const demoLeads: DemoLead[] = [
       "Protecție radiologică",
       "Service aparatură",
     ],
+    projectDomain: "Oferta echipamente / CT",
+    intelligenceSummary:
+      "Demo lead comercial pentru oferta si integrare CT; trebuie separate costul echipamentului, pregatirea camerei si service-ul.",
     missingInformation: [
       "Model CT analizat",
       "Status cameră existentă",

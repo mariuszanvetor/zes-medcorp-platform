@@ -66,6 +66,51 @@ Proposal Builder lead submissions include a compact generated summary with:
 
 The flow must not send PII to analytics. Full raw discovery notes should not be added unless the user explicitly submits them as part of the lead form message.
 
+## Future persistence handoff
+
+Proposal Builder currently reads AI Discovery context from local browser storage. When a backend persistence layer exists, Proposal Builder should:
+
+- load a compact discovery context by `contextId`, not by detailed query parameters;
+- show the same `Context preluat din AI Discovery` review block before using imported data;
+- allow the user to ignore or edit imported data before generating a proposal;
+- create a proposal snapshot that references the context ID, proposal version and generated timestamp;
+- include only compact assumptions, missing information and validation needs in the PDF;
+- keep raw notes, documents and PII out of analytics and public URLs;
+- treat server-loaded context as user-provided preliminary context, not validated engineering input.
+
+Suggested persisted proposal intelligence fields:
+
+- proposal readiness score;
+- complexity level and top complexity drivers;
+- risk level and risk reasons;
+- missing information count and labels;
+- validation needs;
+- recommended services/resources;
+- next best action;
+- internal lead notes summary;
+- source context such as `proposal-builder-from-discovery`.
+
+## Future document context
+
+Phase 71I prepares document parsing as a mock-only architecture. Proposal Builder should not consume real parsed documents yet.
+
+When a later phase enables parsing, Proposal Builder may use reviewed document context to:
+
+- add a short document-derived assumptions section;
+- mark plans, equipment sheets or equipment tables as available;
+- list missing information found from the document review;
+- improve proposal readiness only after the user accepts the imported context;
+- include a compact document context note in the PDF.
+
+It must not:
+
+- include raw document text in the PDF;
+- treat parsed content as final engineering validation;
+- guarantee prices, timelines, CNCAN/DSP approval or technical compliance;
+- send file contents to analytics, email or Google Sheets.
+
+See `docs/document-parsing-architecture.md` for file limits, privacy handling and future parsing boundaries.
+
 ## Safety boundaries
 
 The system must always frame outputs as preliminary:
@@ -83,6 +128,14 @@ Use language such as:
 - `orientativ`;
 - `preliminar`;
 - `de clarificat inainte de oferta finala`.
+
+## QA expectations
+
+- Direct Proposal Builder works without AI Discovery context.
+- Proposal Builder from AI Discovery shows imported context and allows ignoring it.
+- PDF includes proposal intelligence without becoming a long technical report.
+- Lead payload includes only compact intelligence, not raw long notes.
+- Successful mock/live email and mock/real Sheets modes must produce a success state in the frontend.
 
 ## Future real AI path
 

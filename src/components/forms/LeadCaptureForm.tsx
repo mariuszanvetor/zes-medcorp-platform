@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { FormEvent } from "react";
 import { useEffect, useMemo, useState } from "react";
@@ -110,8 +110,8 @@ export function LeadCaptureForm({
   title,
   description,
   submitLabel,
-  successTitle = "Solicitarea a fost pregătită pentru evaluare.",
-  successDescription = "Un consultant ZES poate continua discuția cu întrebări tehnice, validarea ipotezelor și pașii următori.",
+  successTitle = "Solicitarea a fost pregatita pentru evaluare.",
+  successDescription = "Un consultant ZES poate continua discutia cu intrebari tehnice, validarea ipotezelor si pasii urmatori.",
   tone = "dark",
   extraFields = [],
   summary,
@@ -175,7 +175,7 @@ export function LeadCaptureForm({
 
     for (const field of extraFields) {
       if (field.required && !values[field.id]?.trim()) {
-        validationErrors[field.id] = `Completează ${field.label.toLowerCase()}.`;
+        validationErrors[field.id] = `Completeaza ${field.label.toLowerCase()}.`;
       }
     }
 
@@ -264,11 +264,6 @@ export function LeadCaptureForm({
       setErrors({
         form: "Solicitarea nu a putut fi pregatita. Verifica datele si incearca din nou.",
       });
-      return;
-
-      setErrors({
-        form: "Solicitarea nu a putut fi pregătită. Verifică datele și încearcă din nou.",
-      });
     }
   }
 
@@ -320,13 +315,13 @@ export function LeadCaptureForm({
             )}
           >
             <p className={cn("font-bold", isDark ? "text-cyan-100" : "text-[#0057b8]")}>
-              Ce se întâmplă după trimitere
+              Ce se intampla dupa trimitere
             </p>
             <p className="mt-2">
-              Contextul este folosit pentru triere tehnică și pregătirea unei
-              discuții aplicate. Estimările rămân preliminare până la verificarea
-              planurilor, echipamentelor și documentației. Nu include date
-              medicale despre pacienți.
+              Contextul este folosit pentru triere tehnica si pregatirea unei
+              discutii aplicate. Estimarile raman preliminare pana la verificarea
+              planurilor, echipamentelor si documentatiei. Nu include date
+              medicale despre pacienti.
             </p>
           </div>
           <LeadSummaryPanel summary={summary} tone={tone} />
@@ -357,8 +352,8 @@ export function LeadCaptureForm({
               isDark ? "text-slate-400" : "text-slate-500",
             )}
           >
-            Câmpurile marcate cu * sunt necesare pentru contact și clarificarea
-            solicitării. Câmpurile opționale ajută la o triere mai bună.
+            Campurile marcate cu * sunt necesare pentru contact si clarificarea
+            solicitarii. Campurile optionale ajuta la o triere mai buna.
           </p>
           <div className="grid gap-4 sm:grid-cols-2">
             {fields.map((field) => (
@@ -384,7 +379,7 @@ export function LeadCaptureForm({
             size="lg"
             type="submit"
           >
-            {isLoading ? "Pregătim solicitarea..." : submitLabel}
+            {isLoading ? "Pregatim solicitarea..." : submitLabel}
           </Button>
           <p
             className={cn(
@@ -392,8 +387,8 @@ export function LeadCaptureForm({
               isDark ? "text-slate-400" : "text-slate-500",
             )}
           >
-            Această trimitere pregătește contextul pentru discuția tehnică. Nu
-            reprezintă ofertă comercială sau validare finală de proiect.
+            Aceasta trimitere pregateste contextul pentru discutia tehnica. Nu
+            reprezinta oferta comerciala sau validare finala de proiect.
           </p>
         </form>
       </div>
@@ -561,7 +556,7 @@ function LeadInput({
         )}
       >
         {field.label}
-        {field.required ? " *" : " (opțional)"}
+        {field.required ? " *" : " (optional)"}
       </span>
       {field.type === "select" ? (
         <select
@@ -618,14 +613,14 @@ function LeadTextarea({
           isDark ? "text-slate-200" : "text-slate-700",
         )}
       >
-        Mesaj opțional
+        Mesaj optional
       </span>
       <textarea
         aria-invalid={Boolean(error)}
         className={cn(inputClassName(tone, Boolean(error)), "min-h-32 py-3 leading-7")}
         id="lead-message"
         onChange={(event) => onChange(event.target.value)}
-        placeholder="Adaugă locație, termen, echipamente, stadiu autorizări sau constrângeri tehnice. Nu include date medicale despre pacienți."
+        placeholder="Adauga locatie, termen, echipamente, stadiu autorizari sau constrangeri tehnice. Nu include date medicale despre pacienti."
         value={value}
       />
       {error && <FieldError>{error}</FieldError>}
@@ -649,7 +644,7 @@ function LeadSummaryPanel({
     ["Complexitate", summary.complexity],
     ["Buget orientativ", summary.budgetRange],
     ["Risc estimat", summary.riskLevel],
-    ["Urgență", summary.urgency],
+    ["Urgenta", summary.urgency],
     ["Pas recomandat", summary.nextStep],
   ].filter(([, value]) => value);
 
@@ -672,7 +667,7 @@ function LeadSummaryPanel({
           isDark ? "text-cyan-100" : "text-[#0057b8]",
         )}
       >
-        Rezumat pentru discuția tehnică
+        Rezumat pentru discutia tehnica
       </p>
       <dl className="mt-4 grid gap-3">
         {items.map(([label, value]) => (

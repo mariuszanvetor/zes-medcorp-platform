@@ -309,7 +309,19 @@ function buildInternalSummary({
 }
 
 function containsAny(value: string, tokens: string[]) {
-  return tokens.some((token) => value.includes(normalize(token)));
+  return tokens.some((token) => {
+    const normalizedToken = normalize(token);
+
+    if (normalizedToken.length <= 3) {
+      return new RegExp(`(^|[^a-z0-9])${escapeRegExp(normalizedToken)}([^a-z0-9]|$)`).test(value);
+    }
+
+    return value.includes(normalizedToken);
+  });
+}
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function normalize(value: string) {
