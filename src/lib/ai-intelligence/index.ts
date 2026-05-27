@@ -1,6 +1,7 @@
 export * from "@/lib/ai-intelligence/types";
 export * from "@/lib/ai-intelligence/domain-graph";
 export * from "@/lib/ai-intelligence/discovery";
+export * from "@/lib/ai-intelligence/discovery-orchestrator";
 export * from "@/lib/ai-intelligence/recommendation-engine";
 export * from "@/lib/ai-intelligence/regulatory-awareness";
 export * from "@/lib/ai-intelligence/document-intelligence";

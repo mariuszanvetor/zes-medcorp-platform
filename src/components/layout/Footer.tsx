@@ -16,6 +16,7 @@ const serviceLinks = [
 ];
 
 const aiToolLinks = [
+  { label: "AI Discovery", href: "/ai-discovery" },
   { label: "Calculatoare medicale", href: "/calculatoare" },
   { label: "Comparații tehnice", href: "/comparatii" },
   { label: "Planificare proiect", href: "/planificare" },

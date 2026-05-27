@@ -22,6 +22,7 @@ const staticRoutes: Array<{
   { path: "/about", changeFrequency: "monthly", priority: 0.74 },
   { path: "/companie", changeFrequency: "monthly", priority: 0.76 },
   { path: "/projects", changeFrequency: "monthly", priority: 0.76 },
+  { path: "/ai-discovery", changeFrequency: "monthly", priority: 0.86 },
   { path: "/ai-project-advisor", changeFrequency: "monthly", priority: 0.85 },
   { path: "/calculator-proiect-medical", changeFrequency: "monthly", priority: 0.8 },
   { path: "/calculatoare", changeFrequency: "weekly", priority: 0.85 },

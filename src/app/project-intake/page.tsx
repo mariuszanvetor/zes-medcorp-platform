@@ -75,6 +75,19 @@ export default function ProjectIntakePage() {
                 >
                   Propunere preliminară
                 </TrackedButtonLink>
+                <TrackedButtonLink
+                  href="/ai-discovery"
+                  size="lg"
+                  tracking={{
+                    ctaLabel: "Porneste cu AI Discovery",
+                    destination: "/ai-discovery",
+                    sourcePage: "/project-intake",
+                    sourceTool: "project-intake",
+                  }}
+                  variant="secondary"
+                >
+                  AI Discovery
+                </TrackedButtonLink>
               </div>
             </div>
 

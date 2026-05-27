@@ -4,6 +4,12 @@ import { Section } from "@/components/ui/Section";
 
 const tools = [
   {
+    title: "AI Discovery medical",
+    description:
+      "Workspace ghidat pentru clarificarea domeniului, riscurilor, documentelor utile si pasilor urmatori, fara AI generativ sau promisiuni automate.",
+    href: "/ai-discovery",
+  },
+  {
     title: "Analiză preliminară proiect",
     description:
       "Clarifică tipul de proiect, riscurile inițiale și serviciile ZES care merită discutate.",

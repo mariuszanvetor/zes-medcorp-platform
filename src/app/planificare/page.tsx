@@ -90,8 +90,8 @@ export default function PlanningPage() {
               href: "/project-intake",
             }}
             secondaryAction={{
-              label: "Incepe cu Consultantul AI",
-              href: "/ai-project-advisor",
+              label: "Incepe cu AI Discovery",
+              href: "/ai-discovery",
             }}
             title="ZES te ajuta sa separi etapa de orientare de decizia tehnica."
             tone="light"

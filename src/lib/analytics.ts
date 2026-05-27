@@ -15,6 +15,12 @@ export const analyticsEventNames = [
   "intake_next_step_click",
   "proposal_pdf_export",
   "proposal_print",
+  "ai_discovery_start",
+  "ai_discovery_step",
+  "ai_discovery_continue_with_assumptions",
+  "ai_discovery_lead_submit",
+  "ai_discovery_to_proposal",
+  "ai_discovery_to_intake",
   "lead_form_view",
   "lead_form_submit_attempt",
   "lead_form_submit_success",
@@ -56,6 +62,7 @@ export type ToolTrackingId =
   | "service-diagnostic"
   | "proposal-builder"
   | "project-intake"
+  | "ai-discovery"
   | "programmatic-calculator";
 
 type AnalyticsWindow = Window & {
@@ -69,6 +76,7 @@ const toolCompletionEvents: Record<ToolTrackingId, AnalyticsEventName> = {
   "service-diagnostic": "service_diagnostic_complete",
   "proposal-builder": "proposal_builder_complete",
   "project-intake": "intake_complete",
+  "ai-discovery": "ai_discovery_step",
   "programmatic-calculator": "programmatic_calculator_complete",
 };
 
@@ -193,7 +201,8 @@ function getContextualCTAEvents(
     destination.includes("/radiology-room-planner") ||
     destination.includes("/service-diagnostic") ||
     destination.includes("/proposal-builder") ||
-    destination.includes("/project-intake")
+    destination.includes("/project-intake") ||
+    destination.includes("/ai-discovery")
   ) {
     events.add("ai_tool_click");
   }

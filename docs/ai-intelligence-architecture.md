@@ -35,8 +35,10 @@ Key files:
 
 - `src/lib/ai-intelligence/types.ts`
 - `src/data/intelligence/medical-domains.ts`
+- `src/data/intelligence/discovery-fixtures.ts`
 - `src/lib/ai-intelligence/domain-graph.ts`
 - `src/lib/ai-intelligence/discovery.ts`
+- `src/lib/ai-intelligence/discovery-orchestrator.ts`
 - `src/lib/ai-intelligence/recommendation-engine.ts`
 - `src/lib/ai-intelligence/regulatory-awareness.ts`
 - `src/lib/ai-intelligence/document-intelligence.ts`
@@ -125,12 +127,32 @@ The model supports:
 - skipped-stage logic;
 - future upload suggestions.
 
+Phase 71B adds `orchestrateAdaptiveDiscovery()`, the deterministic orchestration layer that combines domain matching, discovery planning, domain-specific questions, upload prompts, risk assessment, recommendations, lead intelligence and safe disclaimer output.
+
+The orchestrator returns:
+
+- detected and related domains;
+- project stage;
+- confidence score;
+- missing information;
+- next best questions;
+- optional upload prompts;
+- non-blocking continuation guidance;
+- risk and complexity levels;
+- recommended next actions and resources;
+- lead readiness, urgency and follow-up signal;
+- proposal preparation notes.
+
+Discovery remains non-blocking. Missing information reduces confidence and adds validation needs, but the user may continue with assumptions unless risk and missing critical details are both extreme.
+
 Example behavior:
 
 - An RMN project should quickly ask about equipment, room, RF shielding, HVAC, power, access and available plans.
 - A CT/RX project should route toward radioprotection, CNCAN-aware planning, layout and controlled-area considerations.
 - An IVD project should emphasize workflow, analyzers, utilities, LIS/integration, validation and service access.
 - A modernization project should ask about downtime, phasing, existing infrastructure and operational continuity.
+
+Detailed orchestrator behavior is documented in `docs/adaptive-discovery-orchestrator.md`.
 
 ## Recommendation engine design
 

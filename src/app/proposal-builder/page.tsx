@@ -79,6 +79,19 @@ export default function ProposalBuilderPage() {
                 >
                   Discutați propunerea
                 </TrackedButtonLink>
+                <TrackedButtonLink
+                  href="/ai-discovery"
+                  size="lg"
+                  tracking={{
+                    ctaLabel: "Clarifica proiectul in AI Discovery",
+                    destination: "/ai-discovery",
+                    sourcePage: "/proposal-builder",
+                    sourceTool: "proposal-builder",
+                  }}
+                  variant="secondary"
+                >
+                  AI Discovery
+                </TrackedButtonLink>
               </div>
             </div>
             <div className="rounded-[1.5rem] border border-blue-100 bg-white p-8 shadow-[0_24px_80px_rgba(0,87,184,0.10)]">
