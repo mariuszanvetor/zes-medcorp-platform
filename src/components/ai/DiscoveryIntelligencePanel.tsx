@@ -3,11 +3,14 @@
 import type { ReactNode } from "react";
 
 import type { OrchestratedDiscoveryResult } from "@/lib/ai-intelligence/discovery-orchestrator";
+import type { AiMagicAnalysis } from "@/lib/ai-magic-layer";
 import { cn } from "@/lib/utils";
 
 export function DiscoveryIntelligencePanel({
+  aiMagicAnalysis,
   result,
 }: {
+  aiMagicAnalysis: AiMagicAnalysis | null;
   result: OrchestratedDiscoveryResult;
 }) {
   return (
@@ -33,6 +36,33 @@ export function DiscoveryIntelligencePanel({
       <Panel title="Domenii detectate">
         <TagList items={[...result.detectedDomains, ...result.relatedDomains.slice(0, 3)]} />
       </Panel>
+
+      {aiMagicAnalysis && (
+        <Panel title="Commercial guidance hints">
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Metric label="Planning readiness" value={`${aiMagicAnalysis.planningReadiness}/100`} tone="high" />
+            <Metric label="Commercial readiness" value={`${aiMagicAnalysis.commercialReadiness}/100`} tone="high" />
+            <Metric label="Urgenta probabila" value={aiMagicAnalysis.likelyUrgency} tone="medium" />
+            <Metric label="Maturitate proiect" value={aiMagicAnalysis.projectMaturity} tone="medium" />
+          </div>
+          <p className="mt-4 text-sm font-semibold leading-7 text-slate-900">
+            Oportunitate: {aiMagicAnalysis.commercialOpportunityType}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {aiMagicAnalysis.salesSignals.map((signal) => (
+              <span
+                className="rounded-lg border border-blue-100 bg-[#f7fbff] px-3 py-1 text-xs font-bold text-slate-700"
+                key={signal}
+              >
+                {signal}
+              </span>
+            ))}
+          </div>
+          <p className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs font-semibold leading-6 text-amber-900">
+            {aiMagicAnalysis.safetyNote}
+          </p>
+        </Panel>
+      )}
 
       <Panel title="Informatii lipsa">
         {result.missingInformation.length ? (

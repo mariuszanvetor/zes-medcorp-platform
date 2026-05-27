@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 import { TrackedButtonLink } from "@/components/analytics/TrackedButtonLink";
 import { DiscoveryConversation } from "@/components/ai/DiscoveryConversation";
@@ -21,6 +22,13 @@ import {
 } from "@/lib/ai-intelligence/discovery-orchestrator";
 import type { DiscoveryQuestion, IntelligenceInput } from "@/lib/ai-intelligence/types";
 import { trackEvent } from "@/lib/analytics";
+import {
+  createAiMagicAnalysis,
+  createAiMagicDiscoverySeed,
+  parseAiMagicScenarioId,
+  type AiMagicAnalysis,
+  type AiMagicScenarioId,
+} from "@/lib/ai-magic-layer";
 
 const initialContext: IntelligenceInput = {
   freeText: "",
@@ -36,20 +44,34 @@ const initialContext: IntelligenceInput = {
 };
 
 export function DiscoveryWorkspace() {
+  const searchParams = useSearchParams();
+  const scenarioFromQuery = parseAiMagicScenarioId(searchParams.get("scenario"));
   const [context, setContext] = useState<IntelligenceInput>(initialContext);
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [assumptionMode, setAssumptionMode] = useState(false);
   const [mockDocumentContext, setMockDocumentContext] =
     useState<MockDocumentParsingResult | null>(null);
+  const [seededScenarioId, setSeededScenarioId] = useState<AiMagicScenarioId | null>(
+    null,
+  );
 
   const result = useMemo(() => orchestrateAdaptiveDiscovery(context), [context]);
+  const aiMagicAnalysis = useMemo(
+    () => (scenarioFromQuery ? createAiMagicAnalysis(scenarioFromQuery) : null),
+    [scenarioFromQuery],
+  );
+  const guidedQuestions = useMemo(
+    () => mergeScenarioQuestions(result.nextBestQuestions, aiMagicAnalysis),
+    [result.nextBestQuestions, aiMagicAnalysis],
+  );
 
   useEffect(() => {
     trackEvent("ai_discovery_start", {
       sourcePage: "/ai-discovery",
       sourceTool: "ai-discovery",
+      status: scenarioFromQuery ? `scenario:${scenarioFromQuery}` : "standard",
     });
-  }, []);
+  }, [scenarioFromQuery]);
 
   function patchContext(patch: Partial<IntelligenceInput>) {
     setContext((current) => ({ ...current, ...patch }));
@@ -59,6 +81,24 @@ export function DiscoveryWorkspace() {
       status: Object.keys(patch).join(","),
     });
   }
+
+  useEffect(() => {
+    if (!scenarioFromQuery || seededScenarioId === scenarioFromQuery) return;
+
+    const seed = createAiMagicDiscoverySeed(scenarioFromQuery);
+    setContext((current) => ({
+      ...current,
+      ...seed.contextPatch,
+      freeText: [seed.scenarioSummary, current.freeText].filter(Boolean).join("\n"),
+    }));
+    setSeededScenarioId(scenarioFromQuery);
+
+    trackEvent("ai_discovery_step", {
+      sourcePage: "/ai-discovery",
+      sourceTool: "ai-discovery",
+      status: `ai-magic-seed:${scenarioFromQuery}`,
+    });
+  }, [scenarioFromQuery, seededScenarioId]);
 
   function answerQuestion(question: DiscoveryQuestion, answer: string) {
     const line = `${question.prompt} Raspuns: ${answer}.`;
@@ -103,6 +143,7 @@ export function DiscoveryWorkspace() {
         mockDocumentContext,
         result,
         selectedNextStep,
+        aiMagicAnalysis,
       }),
     );
   }
@@ -112,10 +153,14 @@ export function DiscoveryWorkspace() {
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-start">
       <main className="grid min-w-0 gap-6">
-        <WorkspaceIntro result={result} assumptionMode={assumptionMode} />
+        <WorkspaceIntro
+          aiMagicAnalysis={aiMagicAnalysis}
+          result={result}
+          assumptionMode={assumptionMode}
+        />
         <DiscoveryConversation
           context={context}
-          nextQuestions={result.nextBestQuestions}
+          nextQuestions={guidedQuestions}
           onAnswerQuestion={answerQuestion}
           onContinueWithAssumptions={continueWithAssumptions}
           onPatch={patchContext}
@@ -194,15 +239,17 @@ export function DiscoveryWorkspace() {
         )}
       </main>
 
-      <DiscoveryIntelligencePanel result={result} />
+      <DiscoveryIntelligencePanel aiMagicAnalysis={aiMagicAnalysis} result={result} />
     </div>
   );
 }
 
 function WorkspaceIntro({
+  aiMagicAnalysis,
   result,
   assumptionMode,
 }: {
+  aiMagicAnalysis: AiMagicAnalysis | null;
   result: OrchestratedDiscoveryResult;
   assumptionMode: boolean;
 }) {
@@ -231,8 +278,56 @@ function WorkspaceIntro({
               : "Necesita clarificari minime"}
         </div>
       </div>
+      {aiMagicAnalysis && (
+        <div className="mt-5 rounded-lg border border-blue-100 bg-white p-4">
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#0057b8]">
+            AI-assisted demo
+          </p>
+          <p className="mt-2 text-sm font-semibold text-slate-950">
+            Scenario activ: {aiMagicAnalysis.scenario.label}
+          </p>
+          <p className="mt-2 text-sm leading-7 text-slate-600">
+            {aiMagicAnalysis.assistantResponse}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <span className="rounded-lg border border-blue-100 bg-[#f7fbff] px-3 py-1 text-xs font-bold text-slate-700">
+              guided planning mode
+            </span>
+            <span className="rounded-lg border border-blue-100 bg-[#f7fbff] px-3 py-1 text-xs font-bold text-slate-700">
+              deterministic mock intelligence
+            </span>
+            <span className="rounded-lg border border-blue-100 bg-[#f7fbff] px-3 py-1 text-xs font-bold text-slate-700">
+              commercial readiness {aiMagicAnalysis.commercialReadiness}/100
+            </span>
+          </div>
+        </div>
+      )}
     </section>
   );
+}
+
+function mergeScenarioQuestions(
+  discoveryQuestions: DiscoveryQuestion[],
+  aiMagicAnalysis: AiMagicAnalysis | null,
+) {
+  if (!aiMagicAnalysis) return discoveryQuestions;
+
+  const scenarioQuestions = aiMagicAnalysis.guidedQuestions.map((prompt, index) => ({
+    id: `ai-magic-${aiMagicAnalysis.scenario.id}-${index + 1}`,
+    stage: "intent" as const,
+    prompt,
+    requiredForConfidence: index < 2,
+  }));
+
+  const seen = new Set<string>();
+  const merged = [...scenarioQuestions, ...discoveryQuestions].filter((question) => {
+    const key = question.prompt.toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  return merged.slice(0, 7);
 }
 
 function buildHandoffQuery(result: OrchestratedDiscoveryResult) {

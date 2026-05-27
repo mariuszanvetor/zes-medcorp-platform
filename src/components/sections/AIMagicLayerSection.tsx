@@ -64,12 +64,13 @@ export function AIMagicLayerSection() {
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row xl:flex-col 2xl:flex-row">
               <TrackedButtonLink
-                href="/ai-discovery"
+                href={`/ai-discovery?source=ai-magic-layer&scenario=${selectedScenario}`}
                 tracking={{
                   ctaLabel: "Continua in AI Discovery",
-                  destination: "/ai-discovery",
+                  destination: `/ai-discovery?source=ai-magic-layer&scenario=${selectedScenario}`,
                   sourcePage: "/",
                   sourceTool: "ai-magic-layer",
+                  status: selectedScenario,
                 }}
               >
                 Continua in AI Discovery

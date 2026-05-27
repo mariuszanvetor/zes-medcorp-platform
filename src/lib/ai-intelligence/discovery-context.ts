@@ -1,6 +1,7 @@
 import type { OrchestratedDiscoveryResult } from "@/lib/ai-intelligence/discovery-orchestrator";
 import type { MockDocumentParsingResult } from "@/lib/ai-intelligence/document-intelligence";
 import type { IntelligenceInput, MedicalDomainId } from "@/lib/ai-intelligence/types";
+import type { AiMagicAnalysis, AiMagicScenarioId } from "@/lib/ai-magic-layer";
 
 export const DISCOVERY_CONTEXT_STORAGE_KEY = "zes.aiDiscovery.context.v1";
 export const DISCOVERY_CONTEXT_QUERY_SOURCE = "ai-discovery";
@@ -60,6 +61,19 @@ export type SerializableDiscoveryContext = {
     uploadNeededFlags: string[];
     nextActions: string[];
   };
+  aiMagic?: {
+    scenarioId: AiMagicScenarioId;
+    scenarioLabel: string;
+    commercialOpportunityType: string;
+    likelyUrgency: string;
+    projectMaturity: string;
+    planningReadiness: number;
+    commercialReadiness: number;
+    infrastructureComplexity: string;
+    salesSignals: string[];
+    suggestedServices: Array<{ label: string; href: string }>;
+    recommendedNextSteps: string[];
+  };
   mockDocumentContext?: SerializableMockDocumentContext;
   generatedSummary: string;
 };
@@ -69,11 +83,13 @@ export function createSerializableDiscoveryContext({
   mockDocumentContext,
   result,
   selectedNextStep = "unknown",
+  aiMagicAnalysis,
 }: {
   input: IntelligenceInput;
   mockDocumentContext?: MockDocumentParsingResult | null;
   result: OrchestratedDiscoveryResult;
   selectedNextStep?: DiscoveryContextNextStep;
+  aiMagicAnalysis?: AiMagicAnalysis | null;
 }): SerializableDiscoveryContext {
   const now = new Date().toISOString();
   const context: SerializableDiscoveryContext = {
@@ -120,6 +136,23 @@ export function createSerializableDiscoveryContext({
       uploadNeededFlags: result.uploadPrompts.map((prompt) => prompt.title).slice(0, 6),
       nextActions: result.recommendations.map((item) => item.title).slice(0, 6),
     },
+    aiMagic: aiMagicAnalysis
+      ? {
+          scenarioId: aiMagicAnalysis.scenario.id,
+          scenarioLabel: aiMagicAnalysis.scenario.label,
+          commercialOpportunityType: aiMagicAnalysis.commercialOpportunityType,
+          likelyUrgency: aiMagicAnalysis.likelyUrgency,
+          projectMaturity: aiMagicAnalysis.projectMaturity,
+          planningReadiness: aiMagicAnalysis.planningReadiness,
+          commercialReadiness: aiMagicAnalysis.commercialReadiness,
+          infrastructureComplexity: aiMagicAnalysis.infrastructureComplexity,
+          salesSignals: aiMagicAnalysis.salesSignals.slice(0, 8),
+          suggestedServices: aiMagicAnalysis.suggestedServices
+            .slice(0, 6)
+            .map(({ label, href }) => ({ label, href })),
+          recommendedNextSteps: aiMagicAnalysis.recommendedNextSteps.slice(0, 6),
+        }
+      : undefined,
     mockDocumentContext: mockDocumentContext
       ? serializeMockDocumentContext(mockDocumentContext)
       : undefined,
@@ -184,6 +217,12 @@ export function createDiscoveryContextSummary(context: SerializableDiscoveryCont
     `Informatii lipsa: ${context.intelligence.missingInformation.join("; ") || "nu sunt marcate"}.`,
     `Validari necesare: ${context.intelligence.validationNeeds.join("; ") || "de clarificat"}.`,
     `Servicii sugerate: ${context.recommendations.suggestedServices.join("; ") || "de clarificat"}.`,
+    context.aiMagic
+      ? `AI Magic: ${context.aiMagic.scenarioLabel}; oportunitate ${context.aiMagic.commercialOpportunityType}; urgency ${context.aiMagic.likelyUrgency}; maturity ${context.aiMagic.projectMaturity}; planning readiness ${context.aiMagic.planningReadiness}/100; commercial readiness ${context.aiMagic.commercialReadiness}/100; complexitate ${context.aiMagic.infrastructureComplexity}.`
+      : "",
+    context.aiMagic
+      ? `Semnale comerciale: ${context.aiMagic.salesSignals.join("; ") || "nu sunt marcate"}.`
+      : "",
     `Documente utile: ${context.recommendations.uploadNeededFlags.join("; ") || "nu sunt marcate"}.`,
     context.mockDocumentContext
       ? `Context documentar mock: ${context.mockDocumentContext.fileType}; semnale: ${context.mockDocumentContext.mockSignals.join("; ") || "nu sunt marcate"}; informatii lipsa: ${context.mockDocumentContext.missingInformation.join("; ") || "nu sunt marcate"}.`
@@ -222,8 +261,42 @@ function sanitizeDiscoveryContext(value: unknown): SerializableDiscoveryContext 
       uploadNeededFlags: (context.recommendations?.uploadNeededFlags ?? []).slice(0, 6),
       nextActions: (context.recommendations?.nextActions ?? []).slice(0, 6),
     },
+    aiMagic: sanitizeAiMagicContext(context.aiMagic),
     mockDocumentContext: sanitizeMockDocumentContext(context.mockDocumentContext),
     generatedSummary: truncate(context.generatedSummary, 1600) ?? "",
+  };
+}
+
+function sanitizeAiMagicContext(
+  value: SerializableDiscoveryContext["aiMagic"],
+): SerializableDiscoveryContext["aiMagic"] {
+  if (!value || !value.scenarioId || !value.scenarioLabel) return undefined;
+
+  return {
+    scenarioId: value.scenarioId,
+    scenarioLabel: truncate(value.scenarioLabel, 60) ?? "unknown",
+    commercialOpportunityType: truncate(value.commercialOpportunityType, 180) ?? "",
+    likelyUrgency: truncate(value.likelyUrgency, 40) ?? "",
+    projectMaturity: truncate(value.projectMaturity, 40) ?? "",
+    planningReadiness: Number.isFinite(value.planningReadiness)
+      ? Math.max(0, Math.min(100, value.planningReadiness))
+      : 0,
+    commercialReadiness: Number.isFinite(value.commercialReadiness)
+      ? Math.max(0, Math.min(100, value.commercialReadiness))
+      : 0,
+    infrastructureComplexity: truncate(value.infrastructureComplexity, 40) ?? "",
+    salesSignals: (value.salesSignals ?? [])
+      .slice(0, 8)
+      .map((item) => truncate(item, 120) ?? ""),
+    suggestedServices: (value.suggestedServices ?? [])
+      .slice(0, 6)
+      .map((item) => ({
+        label: truncate(item.label, 120) ?? "",
+        href: truncate(item.href, 200) ?? "",
+      })),
+    recommendedNextSteps: (value.recommendedNextSteps ?? [])
+      .slice(0, 6)
+      .map((item) => truncate(item, 180) ?? ""),
   };
 }
 

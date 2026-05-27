@@ -1,3 +1,10 @@
+import type {
+  IntelligenceInput,
+  IntelligenceIntent,
+  MedicalDomainId,
+  ProjectStage,
+} from "@/lib/ai-intelligence/types";
+
 export type AiMagicScenarioId =
   | "ct-clinic"
   | "mri-room"
@@ -78,6 +85,119 @@ export const aiMagicScenarios: AiMagicScenario[] = [
 
 const baseSafetyNote =
   "Recomandarile sunt preliminare si deterministe. Nu reprezinta proiectare finala, aprobare reglementara sau oferta comerciala ferma.";
+
+export type AiMagicDiscoverySeed = {
+  scenarioId: AiMagicScenarioId;
+  contextPatch: Partial<IntelligenceInput>;
+  scenarioSummary: string;
+};
+
+export function parseAiMagicScenarioId(
+  value: string | null | undefined,
+): AiMagicScenarioId | null {
+  if (!value) return null;
+  const validIds = new Set(aiMagicScenarios.map((scenario) => scenario.id));
+  return validIds.has(value as AiMagicScenarioId)
+    ? (value as AiMagicScenarioId)
+    : null;
+}
+
+export function createAiMagicDiscoverySeed(
+  scenarioId: AiMagicScenarioId,
+): AiMagicDiscoverySeed {
+  const analysis = createAiMagicAnalysis(scenarioId);
+  const stageMap: Record<AiMagicScenarioId, ProjectStage> = {
+    "ct-clinic": "budgeting",
+    "mri-room": "feasibility",
+    "imaging-expansion": "feasibility",
+    "radiology-modernization": "design",
+    "service-maintenance": "active-issue",
+  };
+  const intentMap: Record<AiMagicScenarioId, IntelligenceIntent> = {
+    "ct-clinic": "new-project",
+    "mri-room": "equipment-acquisition",
+    "imaging-expansion": "modernization",
+    "radiology-modernization": "modernization",
+    "service-maintenance": "service-issue",
+  };
+  const domainMap: Record<AiMagicScenarioId, MedicalDomainId[]> = {
+    "ct-clinic": [
+      "ct",
+      "radiology",
+      "medical-electrical",
+      "hvac",
+      "healthcare-infrastructure",
+    ],
+    "mri-room": [
+      "mri",
+      "radiology",
+      "medical-electrical",
+      "hvac",
+      "ups-power",
+    ],
+    "imaging-expansion": [
+      "clinic-modernization",
+      "radiology",
+      "ct",
+      "mri",
+      "operational-workflow",
+      "medical-electrical",
+      "hvac",
+    ],
+    "radiology-modernization": [
+      "clinic-modernization",
+      "radiology",
+      "medical-electrical",
+      "hvac",
+      "operational-workflow",
+    ],
+    "service-maintenance": [
+      "operational-workflow",
+      "medical-electrical",
+      "ups-power",
+      "radiology",
+    ],
+  };
+  const urgencyTextMap: Record<AiMagicAnalysis["likelyUrgency"], string> = {
+    exploratory: "Exploratory",
+    planning: "3-6 months",
+    active: "1-3 months",
+    urgent: "Immediate",
+  };
+  const currentDomains = domainMap[scenarioId];
+  const contextPatch: Partial<IntelligenceInput> = {
+    intent: intentMap[scenarioId],
+    projectStage: stageMap[scenarioId],
+    domains: currentDomains,
+    urgency: urgencyTextMap[analysis.likelyUrgency],
+    existingBuilding:
+      scenarioId === "imaging-expansion" ||
+      scenarioId === "radiology-modernization" ||
+      scenarioId === "service-maintenance",
+    modernization:
+      scenarioId === "imaging-expansion" ||
+      scenarioId === "radiology-modernization",
+    budgetKnown: analysis.commercialReadiness >= 65,
+    timelineKnown: analysis.likelyUrgency === "active" || analysis.likelyUrgency === "urgent",
+    plansAvailable: false,
+    equipmentSpecsAvailable: false,
+    locationKnown: false,
+    surfaceKnown: false,
+  };
+
+  return {
+    scenarioId,
+    contextPatch,
+    scenarioSummary: [
+      `Scenario AI Magic: ${analysis.scenario.label}.`,
+      `Opportunity: ${analysis.commercialOpportunityType}.`,
+      `Planning readiness: ${analysis.planningReadiness}/100.`,
+      `Commercial readiness: ${analysis.commercialReadiness}/100.`,
+      `Complexity: ${analysis.infrastructureComplexity}.`,
+      `Top concerns: ${analysis.projectConcerns.slice(0, 2).join("; ")}.`,
+    ].join(" "),
+  };
+}
 
 export function createAiMagicAnalysis(
   scenarioId: AiMagicScenarioId = "ct-clinic",

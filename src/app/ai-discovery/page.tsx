@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import { DiscoveryWorkspace } from "@/components/ai/DiscoveryWorkspace";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
@@ -68,7 +69,9 @@ export default function AiDiscoveryPage() {
 
       <Section className="bg-[#f7fafc]" spacing="xl" tone="transparent">
         <Container>
-          <DiscoveryWorkspace />
+          <Suspense fallback={null}>
+            <DiscoveryWorkspace />
+          </Suspense>
         </Container>
       </Section>
     </>
