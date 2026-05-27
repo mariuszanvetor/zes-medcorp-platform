@@ -14,6 +14,14 @@ Current Phase 75A status:
 - no OCR or document parsing;
 - no CRM, database or authenticated lead workspace.
 
+Phase 75B/75C status:
+
+- AI Magic scenarios are now connected to `/ai-discovery` via deterministic query handoff;
+- scenario seeds prefill discovery intent, stage, domains and urgency;
+- AI Discovery includes scenario-aware conversational guidance and commercial hints;
+- local context handoff carries AI Magic fields into Proposal Builder and Project Intake summaries;
+- no real AI provider, streaming, OCR, CRM or persistence changes were introduced.
+
 ## Product vision
 
 The future experience should help a serious medical buyer move from unclear project intent to a structured technical and commercial discussion.
@@ -193,6 +201,14 @@ Phase 75A implements this fallback as a homepage guided planning concept section
 - `src/lib/ai-magic-layer.ts`;
 - `src/components/sections/AIMagicLayerSection.tsx`;
 - existing AI Discovery, Proposal Builder and Project Intake paths.
+
+Phase 75C extends fallback behavior inside `/ai-discovery`:
+
+- assistant-style guidance cards;
+- scenario-specific blockers and recommended questions;
+- commercial readiness markers and next-step hints;
+- copilot sidebar with deterministic project/commercial readiness;
+- compliance/funding hints only when relevant to the detected domains and scenario.
 
 ## Privacy and PII boundaries
 

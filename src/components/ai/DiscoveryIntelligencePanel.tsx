@@ -13,20 +13,35 @@ export function DiscoveryIntelligencePanel({
   aiMagicAnalysis: AiMagicAnalysis | null;
   result: OrchestratedDiscoveryResult;
 }) {
+  const readinessValue = result.leadIntelligence.readinessScore;
+  const commercialValue = aiMagicAnalysis?.commercialReadiness ?? Math.min(95, readinessValue + 8);
+  const blockers = [
+    ...result.missingInformation.slice(0, 3).map((item) => item.label),
+    ...(aiMagicAnalysis?.likelyMissingItems.slice(0, 2) ?? []),
+  ];
+  const checkpoints = buildProjectCheckpoints(result, aiMagicAnalysis);
+  const serviceRecommendations = buildServiceRecommendations(result, aiMagicAnalysis);
+  const complianceHints = buildComplianceHints(result, aiMagicAnalysis);
+  const nextBestAction = buildNextBestAction(result, aiMagicAnalysis);
+
   return (
     <aside className="grid gap-4 lg:sticky lg:top-24">
       <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_12px_36px_rgba(0,87,184,0.07)]">
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
-          Live intelligence
+          AI copilot panel
         </p>
         <h2 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">
-          Rezumat preliminar
+          Rezumat preliminar live
         </h2>
         <div className="mt-5 grid grid-cols-2 gap-3">
           <Metric label="Incredere" value={`${result.confidenceScore}/100`} tone={result.confidenceLevel} />
-          <Metric label="Readiness" value={`${result.leadIntelligence.readinessScore}/100`} tone="high" />
+          <Metric label="Readiness" value={`${readinessValue}/100`} tone="high" />
           <Metric label="Risc" value={result.riskAssessment.riskLevel} tone={riskTone(result.riskAssessment.riskLevel)} />
           <Metric label="Complexitate" value={result.riskAssessment.complexityLevel} tone={riskTone(result.riskAssessment.riskLevel)} />
+        </div>
+        <div className="mt-4 grid gap-2">
+          <ProgressRow label="Project readiness" tone="blue" value={readinessValue} />
+          <ProgressRow label="Commercial readiness" tone="cyan" value={commercialValue} />
         </div>
         <p className="mt-5 rounded-lg border border-amber-200 bg-amber-50 p-4 text-xs font-semibold leading-6 text-amber-900">
           {result.safeDisclaimer}
@@ -63,6 +78,20 @@ export function DiscoveryIntelligencePanel({
           </p>
         </Panel>
       )}
+
+      <Panel title="Checkpoint-uri proiect">
+        <div className="grid gap-3">
+          {checkpoints.map((checkpoint) => (
+            <div className="rounded-lg border border-slate-200 bg-[#f7fbff] p-3" key={checkpoint.label}>
+              <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
+                {checkpoint.label}
+              </p>
+              <p className="mt-1 text-sm font-semibold text-slate-900">{checkpoint.status}</p>
+              <p className="mt-1 text-xs leading-6 text-slate-600">{checkpoint.note}</p>
+            </div>
+          ))}
+        </div>
+      </Panel>
 
       <Panel title="Informatii lipsa">
         {result.missingInformation.length ? (
@@ -103,6 +132,40 @@ export function DiscoveryIntelligencePanel({
         )}
       </Panel>
 
+      <Panel title="Likely blockers">
+        <ul className="grid gap-2">
+          {blockers.slice(0, 5).map((blocker) => (
+            <li className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm leading-6 text-slate-700" key={blocker}>
+              {blocker}
+            </li>
+          ))}
+        </ul>
+      </Panel>
+
+      <Panel title="Servicii recomandate">
+        <div className="grid gap-2">
+          {serviceRecommendations.slice(0, 5).map((service) => (
+            <a
+              className="rounded-lg border border-blue-100 bg-white p-3 text-sm font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
+              href={service.href}
+              key={`${service.href}-${service.label}`}
+            >
+              {service.label}
+            </a>
+          ))}
+        </div>
+      </Panel>
+
+      <Panel title="Compliance / finantare hints">
+        <ul className="grid gap-2">
+          {complianceHints.map((hint) => (
+            <li className="rounded-lg border border-blue-100 bg-[#f7fbff] p-3 text-sm leading-6 text-slate-700" key={hint}>
+              {hint}
+            </li>
+          ))}
+        </ul>
+      </Panel>
+
       <Panel title="Resurse recomandate">
         <div className="grid gap-2">
           {result.relevantResources.slice(0, 6).map((resource) => (
@@ -121,15 +184,149 @@ export function DiscoveryIntelligencePanel({
       </Panel>
 
       <Panel title="Urmator pas">
-        <p className="text-sm leading-7 text-slate-600">
-          {result.continueWithAssumptionsNote}
-        </p>
+        <p className="text-sm leading-7 text-slate-600">{nextBestAction}</p>
         <p className="mt-3 text-sm font-semibold leading-7 text-slate-900">
           Follow-up recomandat: {followUpLabel(result.leadIntelligence.recommendedFollowUpType)}
         </p>
       </Panel>
     </aside>
   );
+}
+
+function ProgressRow({
+  label,
+  value,
+  tone,
+}: {
+  label: string;
+  value: number;
+  tone: "blue" | "cyan";
+}) {
+  const barClass = tone === "blue" ? "bg-[#0057b8]" : "bg-cyan-600";
+  return (
+    <div>
+      <div className="flex items-center justify-between gap-2 text-xs font-semibold text-slate-600">
+        <span>{label}</span>
+        <span>{value}%</span>
+      </div>
+      <div className="mt-1 h-2 rounded-full bg-blue-100">
+        <div
+          className={cn("h-2 rounded-full", barClass)}
+          style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function buildProjectCheckpoints(
+  result: OrchestratedDiscoveryResult,
+  aiMagicAnalysis: AiMagicAnalysis | null,
+) {
+  const checkpoints = [
+    {
+      label: "Stadiu proiect",
+      status: result.projectStage,
+      note: "Se ajusteaza pe masura ce clarifici informatiile tehnice.",
+    },
+    {
+      label: "Documentatie",
+      status:
+        result.missingInformation.some((item) => item.stage === "documentation")
+          ? "Partiala"
+          : "Acceptabila",
+      note: "Planuri, fise echipament si status autorizari cresc viteza analizei.",
+    },
+    {
+      label: "Blocaje operationale",
+      status: result.riskAssessment.riskLevel,
+      note:
+        aiMagicAnalysis?.infrastructureComplexity === "critical"
+          ? "Scenariul cere secventiere atenta si validari timpurii."
+          : "Poate continua cu ipoteze preliminare, apoi validare tehnica.",
+    },
+  ];
+
+  return checkpoints;
+}
+
+function buildServiceRecommendations(
+  result: OrchestratedDiscoveryResult,
+  aiMagicAnalysis: AiMagicAnalysis | null,
+) {
+  const fromResources = result.relevantResources
+    .filter((item) => item.type === "service")
+    .map(({ label, href }) => ({ label, href }));
+  const fromScenario =
+    aiMagicAnalysis?.suggestedServices.map(({ label, href }) => ({ label, href })) ?? [];
+  const fallback = result.likelyServices.map((label) => ({
+    label,
+    href: "/services",
+  }));
+
+  const merged = [...fromScenario, ...fromResources, ...fallback];
+  const seen = new Set<string>();
+  return merged.filter((item) => {
+    const key = `${item.label}-${item.href}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function buildComplianceHints(
+  result: OrchestratedDiscoveryResult,
+  aiMagicAnalysis: AiMagicAnalysis | null,
+) {
+  const domains = new Set(result.detectedDomains);
+  const hints: string[] = [];
+
+  if (domains.has("ct") || domains.has("radiology") || domains.has("dental")) {
+    hints.push(
+      "Proiectele CT/RX au nevoie de planificare radioprotectie si coordonare CNCAN inainte de executie.",
+    );
+  }
+  if (domains.has("mri")) {
+    hints.push(
+      "Proiectele RMN cer RF shielding, analiza traseu de instalare si verificarea conditiilor de siguranta/quench.",
+    );
+  }
+  if (
+    domains.has("clinic-modernization") ||
+    aiMagicAnalysis?.scenario.id === "imaging-expansion"
+  ) {
+    hints.push(
+      "Modernizarea sau extinderea imagistica beneficiaza de implementare etapizata pentru a reduce downtime-ul.",
+    );
+  }
+  if (
+    aiMagicAnalysis &&
+    aiMagicAnalysis.commercialReadiness >= 65 &&
+    aiMagicAnalysis.planningReadiness >= 60
+  ) {
+    hints.push(
+      "Pentru proiecte pregatite de finantare, pregatiti specificatii tehnice, bugete orientative si documentatie de furnizor.",
+    );
+  }
+
+  if (!hints.length) {
+    hints.push(
+      "Clarificati devreme documentatia tehnica, constrangerile de amplasament si intervalul de buget pentru o analiza comerciala utila.",
+    );
+  }
+
+  return hints.slice(0, 4);
+}
+
+function buildNextBestAction(
+  result: OrchestratedDiscoveryResult,
+  aiMagicAnalysis: AiMagicAnalysis | null,
+) {
+  if (aiMagicAnalysis?.recommendedNextSteps.length) {
+    return `Recomandare copilot: ${aiMagicAnalysis.recommendedNextSteps[0]}. ${result.continueWithAssumptionsNote}`;
+  }
+
+  return result.continueWithAssumptionsNote;
 }
 
 function Metric({

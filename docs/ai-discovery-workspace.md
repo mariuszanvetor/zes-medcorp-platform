@@ -4,6 +4,14 @@
 
 It is not a generic chatbot and it does not use a real AI API yet. The workspace uses the Phase 71A/71B deterministic orchestrator to guide users through project context, missing information, risk signals and next-step recommendations.
 
+Phase 75C adds a premium conversational planning layer on top of the same deterministic engine:
+
+- assistant-style guidance cards and project context cards;
+- progressive question flow with scenario-aware prompts;
+- AI copilot sidebar with project and commercial readiness markers;
+- deterministic compliance/funding hints where relevant;
+- no streaming, no model improvisation and no API behavior changes.
+
 ## What it does now
 
 - guides the user through deterministic project discovery;
@@ -20,6 +28,9 @@ It is not a generic chatbot and it does not use a real AI API yet. The workspace
 - allows users to continue with assumptions instead of blocking when details are missing;
 - offers handoff CTAs to Proposal Builder and Project Intake;
 - uses `LeadCaptureForm` to send discovery context for preliminary ZES review.
+- accepts AI Magic scenario handoff from query params such as `?scenario=ct-clinic` and `?scenario=mri-room`;
+- applies deterministic scenario seeds for intent, stage, domains and urgency;
+- carries AI Magic commercial context in local handoff summaries for Proposal Builder and Project Intake.
 
 ## What it does not do yet
 
@@ -66,6 +77,14 @@ Phase 71D adds local context handoff. The current Proposal Builder and Project I
 - `confidence`
 
 The full compact discovery context is saved locally in `sessionStorage` and `localStorage` using `src/lib/ai-intelligence/discovery-context.ts`. It can be loaded by Proposal Builder and Project Intake to show a summary, prefill safe fields and include a compact generated summary in lead submissions.
+
+Phase 75B/75C extends the local handoff with an optional `aiMagic` block:
+
+- scenario id and scenario label;
+- opportunity type, urgency and maturity;
+- planning/commercial readiness and complexity;
+- sales signals;
+- suggested services and recommended next steps.
 
 Detailed notes or sensitive data are not put in URLs. The user can edit or ignore imported context at any time.
 

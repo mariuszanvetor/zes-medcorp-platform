@@ -6,6 +6,19 @@ AI Discovery -> Proposal Builder -> PDF -> lead submission -> email / Sheets / a
 
 The flow remains deterministic and preliminary. It does not use a real AI API, database, CRM, authentication changes or active document upload.
 
+## Phase 75C conversational QA focus
+
+Phase 75C upgrades AI Discovery from form-like sections to a conversational guided planning experience.
+
+Extra QA checks:
+
+1. Confirm assistant guidance cards and project context cards are visible at the top of `/ai-discovery`.
+2. Confirm scenario-aware blocks appear when a scenario is passed, for example `/ai-discovery?scenario=ct-clinic` and `/ai-discovery?scenario=mri-room`.
+3. Confirm scenario blocks show concerns, likely blockers, recommended questions and suggested services.
+4. Confirm sidebar shows project readiness, commercial readiness, risk and complexity indicators.
+5. Confirm compliance/funding hints stay preliminary and never claim guaranteed approvals.
+6. Confirm copy remains professional and sales-aware without aggressive language.
+
 ## Phase 71H visual QA notes
 
 Automated in-app browser QA was attempted against the local production server on May 27, 2026, but the Codex browser pane was not available in this desktop session. The browser connection returned `No active Codex browser pane available`.

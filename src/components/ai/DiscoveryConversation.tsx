@@ -6,10 +6,12 @@ import type {
   MedicalDomainId,
   ProjectStage,
 } from "@/lib/ai-intelligence/types";
+import type { AiMagicAnalysis } from "@/lib/ai-magic-layer";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
 export type DiscoveryConversationProps = {
+  aiMagicAnalysis: AiMagicAnalysis | null;
   context: IntelligenceInput;
   nextQuestions: DiscoveryQuestion[];
   onPatch: (patch: Partial<IntelligenceInput>) => void;
@@ -49,6 +51,7 @@ const stageOptions: Array<{ value: ProjectStage; label: string }> = [
 ];
 
 export function DiscoveryConversation({
+  aiMagicAnalysis,
   context,
   nextQuestions,
   onPatch,
@@ -56,6 +59,9 @@ export function DiscoveryConversation({
   onContinueWithAssumptions,
 }: DiscoveryConversationProps) {
   const selectedDomains = new Set(context.domains ?? []);
+  const blockers = aiMagicAnalysis?.likelyMissingItems ?? [];
+  const scenarioConcerns = aiMagicAnalysis?.projectConcerns ?? [];
+  const concernQuestions = aiMagicAnalysis?.guidedQuestions ?? [];
 
   function toggleDomain(domainId: MedicalDomainId) {
     const current = new Set(context.domains ?? []);
@@ -66,6 +72,96 @@ export function DiscoveryConversation({
 
   return (
     <div className="grid gap-6">
+      <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_12px_36px_rgba(0,87,184,0.055)] sm:p-6">
+        <div className="grid gap-4 lg:grid-cols-[0.52fr_0.48fr]">
+          <div className="rounded-lg border border-blue-100 bg-[#f7fbff] p-4">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
+              Copilot ZES
+            </p>
+            <p className="mt-2 text-sm font-semibold leading-7 text-slate-950">
+              {aiMagicAnalysis
+                ? aiMagicAnalysis.assistantResponse
+                : "Te ghidez pas cu pas pentru a clarifica domeniul, riscurile si datele necesare unei discutii tehnice productive."}
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <span className="rounded-lg border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-slate-700">
+                AI-assisted demo
+              </span>
+              <span className="rounded-lg border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-slate-700">
+                guided planning mode
+              </span>
+              <span className="rounded-lg border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-slate-700">
+                deterministic mock intelligence
+              </span>
+            </div>
+          </div>
+          <div className="rounded-lg border border-slate-200 bg-white p-4">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
+              Context proiect
+            </p>
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              <ContextPill label="Stadiu" value={context.projectStage ?? "idea"} />
+              <ContextPill label="Domenii" value={String(selectedDomains.size)} />
+              <ContextPill
+                label="Planuri"
+                value={context.plansAvailable ? "Da" : "Nu"}
+              />
+              <ContextPill
+                label="Specificatii"
+                value={context.equipmentSpecsAvailable ? "Da" : "Nu"}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {aiMagicAnalysis && (
+        <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_12px_36px_rgba(0,87,184,0.055)] sm:p-6">
+          <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
+            Scenariu activ: {aiMagicAnalysis.scenario.label}
+          </p>
+          <div className="mt-4 grid gap-4 lg:grid-cols-2">
+            <ScenarioList
+              items={scenarioConcerns}
+              title="Concern-uri specifice"
+            />
+            <ScenarioList
+              items={blockers}
+              title="Blocaje probabile"
+            />
+            <ScenarioList
+              items={concernQuestions}
+              title="Intrebari recomandate"
+            />
+            <div className="rounded-lg border border-slate-200 bg-[#f7fbff] p-4">
+              <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
+                Oportunitate comerciala
+              </p>
+              <p className="mt-2 text-sm font-semibold leading-7 text-slate-950">
+                {aiMagicAnalysis.commercialOpportunityType}
+              </p>
+              <p className="mt-2 text-xs leading-6 text-slate-600">
+                Urgenta probabila: {aiMagicAnalysis.likelyUrgency}. Maturitate:
+                {" "}
+                {aiMagicAnalysis.projectMaturity}. Complexitate:
+                {" "}
+                {aiMagicAnalysis.infrastructureComplexity}.
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {aiMagicAnalysis.suggestedServices.slice(0, 4).map((service) => (
+                  <span
+                    className="rounded-lg border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-[#0057b8]"
+                    key={service.href}
+                  >
+                    {service.label}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_12px_36px_rgba(0,87,184,0.055)] sm:p-6">
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
           Context proiect
@@ -203,10 +299,10 @@ export function DiscoveryConversation({
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
-              Intrebari adaptive
+              Flux conversatie
             </p>
             <h2 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">
-              Urmatoarele clarificari utile
+              Urmatoarele intrebari utile, in ordinea prioritatii.
             </h2>
           </div>
           <Button size="sm" variant="secondary" onClick={onContinueWithAssumptions}>
@@ -215,15 +311,48 @@ export function DiscoveryConversation({
         </div>
 
         <div className="mt-5 grid gap-3">
-          {nextQuestions.slice(0, 5).map((question) => (
+          {nextQuestions.slice(0, 6).map((question, index) => (
             <QuestionCard
               key={question.id}
+              order={index + 1}
               question={question}
               onAnswer={(answer) => onAnswerQuestion(question, answer)}
             />
           ))}
         </div>
       </section>
+    </div>
+  );
+}
+
+function ContextPill({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
+      <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-slate-500">
+        {label}
+      </p>
+      <p className="mt-1 text-sm font-semibold text-slate-900">{value}</p>
+    </div>
+  );
+}
+
+function ScenarioList({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-[#f7fbff] p-4">
+      <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
+        {title}
+      </p>
+      <ul className="mt-3 grid gap-2">
+        {items.slice(0, 4).map((item) => (
+          <li className="flex gap-2 text-sm leading-6 text-slate-700" key={item}>
+            <span
+              aria-hidden="true"
+              className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0057b8]"
+            />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -268,17 +397,24 @@ function ToggleRow({
 }
 
 function QuestionCard({
+  order,
   question,
   onAnswer,
 }: {
+  order: number;
   question: DiscoveryQuestion;
   onAnswer: (answer: string) => void;
 }) {
   return (
     <div className="rounded-lg border border-blue-100 bg-[#f7fbff] p-4">
-      <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
-        {question.stage}
-      </p>
+      <div className="flex items-center justify-between gap-2">
+        <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
+          {question.stage}
+        </p>
+        <span className="rounded-lg border border-blue-100 bg-white px-2 py-1 text-[11px] font-bold text-[#0057b8]">
+          Pas {order}
+        </span>
+      </div>
       <p className="mt-2 text-sm font-semibold leading-7 text-slate-900">
         {question.prompt}
       </p>

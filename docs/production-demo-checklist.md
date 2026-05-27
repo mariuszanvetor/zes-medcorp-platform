@@ -19,6 +19,7 @@ The platform currently presents deterministic planning intelligence, local hando
 1. Open `/`.
 2. Verify the hero is clear, premium and points to AI Discovery and Project Intake.
 3. Open `/ai-discovery`.
+4. Optional: open `/ai-discovery?scenario=ct-clinic` or `/ai-discovery?scenario=mri-room` to demo AI Magic scenario handoff.
 4. Answer a few guided questions.
 5. Use `Continua cu ipoteze preliminare` if details are incomplete.
 6. Review the live intelligence panel: domains, missing information, readiness, risk, complexity and recommended next actions.
@@ -30,6 +31,13 @@ The platform currently presents deterministic planning intelligence, local hando
 12. Return to `/ai-discovery` or open `/project-intake`.
 13. Verify the imported context appears in Project Intake and remains editable.
 14. Submit a lead only in the intended environment and with safe test data.
+
+For Phase 75C conversational demo quality, also confirm:
+
+- assistant-style guidance is visible in AI Discovery;
+- scenario concerns and blockers are visible for seeded scenarios;
+- project and commercial readiness indicators are visible in the sidebar;
+- compliance/funding hints stay preliminary and non-committal.
 
 ## Admin demo flow
 

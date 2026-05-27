@@ -159,6 +159,7 @@ export function DiscoveryWorkspace() {
           assumptionMode={assumptionMode}
         />
         <DiscoveryConversation
+          aiMagicAnalysis={aiMagicAnalysis}
           context={context}
           nextQuestions={guidedQuestions}
           onAnswerQuestion={answerQuestion}
