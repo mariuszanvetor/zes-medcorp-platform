@@ -51,7 +51,7 @@ Do not commit real values. Store them only in the hosting provider environment s
 
 ## Suggested Columns
 
-Create the `Leads` tab with this header row:
+Create the `Leads` tab with this header row. Phase 71F expands the row to include lead intelligence fields; update the Sheet header before switching `LEAD_INTEGRATION_MODE=email-and-sheets` in production.
 
 1. `Date`
 2. `Lead ID`
@@ -66,7 +66,16 @@ Create the `Leads` tab with this header row:
 11. `Message`
 12. `Recommended Services`
 13. `Next Action`
-14. `Status`
+14. `Readiness Score`
+15. `Complexity`
+16. `Risk`
+17. `Recommended Next Action`
+18. `Suggested Services`
+19. `Missing Info`
+20. `Source Context`
+21. `Follow-up Priority`
+22. `Follow-up Type`
+23. `Status`
 
 ## Fields To Store
 
@@ -88,6 +97,12 @@ Recommended initial fields:
 - risk level
 - lead score
 - priority
+- readiness score
+- lead intelligence complexity
+- lead intelligence risk
+- missing information summary
+- source context
+- follow-up priority and type
 - recommended next action
 - recommended services
 - status, defaulting to `Nou`

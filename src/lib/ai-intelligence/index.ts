@@ -7,5 +7,6 @@ export * from "@/lib/ai-intelligence/recommendation-engine";
 export * from "@/lib/ai-intelligence/regulatory-awareness";
 export * from "@/lib/ai-intelligence/document-intelligence";
 export * from "@/lib/ai-intelligence/lead-proposal-intelligence";
+export * from "@/lib/ai-intelligence/lead-intelligence";
 export * from "@/lib/ai-intelligence/proposal-intelligence";
 export * from "@/lib/ai-intelligence/safety";

@@ -1,5 +1,6 @@
 import { createSign } from "node:crypto";
 
+import type { LeadIntelligence } from "@/lib/ai-intelligence/lead-intelligence";
 import type { LeadIntegrationMode } from "@/lib/integration-config";
 import type { LeadPayload } from "@/lib/lead-types";
 import type { LeadScoreResult } from "@/lib/lead-scoring";
@@ -27,6 +28,15 @@ export type GoogleSheetsLeadRow = {
   riskLevel?: string;
   recommendedNextStep: string;
   recommendedServices: string;
+  readinessScore?: number;
+  intelligenceComplexity?: string;
+  intelligenceRisk?: string;
+  intelligenceRecommendedNextAction?: string;
+  suggestedServices?: string;
+  missingInfo?: string;
+  sourceContext?: string;
+  followUpPriority?: string;
+  followUpType?: string;
   message?: string;
   status: string;
 };
@@ -61,6 +71,7 @@ export type BuildGoogleSheetsLeadRowInput = {
   scoring: LeadScoreResult;
   leadId: string;
   recommendedServices?: string[];
+  leadIntelligence?: LeadIntelligence;
 };
 
 type GoogleTokenResponse = {
@@ -76,6 +87,7 @@ export function buildGoogleSheetsLeadRow({
   scoring,
   leadId,
   recommendedServices = [],
+  leadIntelligence,
 }: BuildGoogleSheetsLeadRowInput): GoogleSheetsLeadRow {
   return {
     timestamp: lead.timestamp || new Date().toISOString(),
@@ -94,8 +106,17 @@ export function buildGoogleSheetsLeadRow({
     estimatedBudgetRange: lead.generatedBudgetRange,
     complexity: lead.generatedComplexity,
     riskLevel: lead.generatedRiskLevel,
-    recommendedNextStep: scoring.nextAction,
+    recommendedNextStep: leadIntelligence?.recommendedNextAction ?? scoring.nextAction,
     recommendedServices: recommendedServices.join(", "),
+    readinessScore: leadIntelligence?.readinessScore,
+    intelligenceComplexity: leadIntelligence?.complexityLevel,
+    intelligenceRisk: leadIntelligence?.riskLevel,
+    intelligenceRecommendedNextAction: leadIntelligence?.recommendedNextAction,
+    suggestedServices: leadIntelligence?.recommendedServices.join(", "),
+    missingInfo: leadIntelligence?.missingInformationSummary,
+    sourceContext: leadIntelligence?.sourceContext,
+    followUpPriority: leadIntelligence?.followUpPriority,
+    followUpType: leadIntelligence?.followUpType,
     message: lead.message,
     status: "Nou",
   };
@@ -276,7 +297,7 @@ async function appendRowWithSheetsApi({
   spreadsheetId: string;
   tabName: string;
 }) {
-  const range = encodeURIComponent(`${quoteSheetName(tabName)}!A:N`);
+  const range = encodeURIComponent(`${quoteSheetName(tabName)}!A:W`);
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(
     spreadsheetId,
   )}/values/${range}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
@@ -312,6 +333,15 @@ function googleSheetsRowToValues(row: GoogleSheetsLeadRow) {
     row.message ?? "",
     row.recommendedServices,
     row.recommendedNextStep,
+    row.readinessScore ?? "",
+    row.intelligenceComplexity ?? row.complexity ?? "",
+    row.intelligenceRisk ?? row.riskLevel ?? "",
+    row.intelligenceRecommendedNextAction ?? row.recommendedNextStep,
+    row.suggestedServices ?? row.recommendedServices,
+    row.missingInfo ?? "",
+    row.sourceContext ?? `${row.sourceTool} / ${row.sourcePage}`,
+    row.followUpPriority ?? row.priority,
+    row.followUpType ?? "",
     row.status,
   ];
 }

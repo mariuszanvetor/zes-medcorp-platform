@@ -42,6 +42,17 @@ export type DemoLead = {
   status: LeadStatus;
   recommendedNextStep: string;
   recommendedServices: string[];
+  sourceContext?: string;
+  followUpPriority?: LeadPriority;
+  followUpType?:
+    | "educational-nurture"
+    | "technical-clarification"
+    | "proposal-preparation"
+    | "urgent-technical-review";
+  commercialIntent?: "low" | "medium" | "high";
+  confidenceLevel?: "low" | "medium" | "high";
+  validationNeeds?: string[];
+  recommendedCalculators?: Array<{ label: string; href: string }>;
   missingInformation: string[];
   createdAt: string;
   lastActionAt: string;
@@ -52,6 +63,70 @@ export type DemoLead = {
 };
 
 export const demoLeads: DemoLead[] = [
+  {
+    id: "ZES-LEAD-1200",
+    sourceTool: "AI Discovery",
+    sourcePage: "/ai-discovery",
+    projectType: "Modernizare clinica cu imagistica",
+    inquiryType: "AI discovery workspace",
+    company: "Demo Medical Intelligence",
+    contactName: "Simona Radu",
+    email: "simona.radu@demo.invalid",
+    phone: "+40 766 000 111",
+    urgency: "1-3 luni",
+    estimatedBudgetRange: "De validat dupa planuri",
+    complexity: "Advanced",
+    riskLevel: "Ridicat",
+    readinessScore: 67,
+    leadScore: 82,
+    priority: "Critical / immediate opportunity",
+    status: "Prioritar",
+    recommendedNextStep:
+      "Contact rapid pentru clarificarea spatiului, echipamentelor si documentatiei inainte de propunere.",
+    recommendedServices: [
+      "Analiza tehnica preliminara",
+      "Planificare infrastructura imagistica",
+      "Modernizare clinica medicala",
+      "Coordonare HVAC/electric/UPS",
+    ],
+    sourceContext: "AI Discovery / context local importat",
+    followUpPriority: "Critical / immediate opportunity",
+    followUpType: "urgent-technical-review",
+    commercialIntent: "high",
+    confidenceLevel: "medium",
+    validationNeeds: [
+      "Planuri si releveu pentru spatiul existent",
+      "Lista echipamentelor propuse",
+      "Verificare HVAC, electric si UPS",
+      "Clarificare DSP/CNCAN unde este aplicabil",
+    ],
+    recommendedCalculators: [
+      { label: "Calculator proiect medical", href: "/calculator-proiect-medical" },
+      { label: "Estimare infrastructura radiologie", href: "/calculatoare/infrastructura-radiologie-estimare" },
+    ],
+    missingInformation: [
+      "Planuri si dimensiuni confirmate",
+      "Lista echipamentelor imagistica",
+      "Status documentatie si autorizari",
+      "Buget tinta si calendar decizie",
+    ],
+    createdAt: "2026-05-27T07:30:00.000Z",
+    lastActionAt: "2026-05-27T07:45:00.000Z",
+    notes:
+      "Lead demo generat din AI Discovery. Bun pentru review tehnic rapid si preluare in Proposal Builder.",
+    generatedSummary:
+      "AI Discovery indica modernizare clinica cu imagistica, risc ridicat, readiness mediu si nevoie de validare pe planuri, HVAC, electric, UPS si documentatie.",
+    assumptions: [
+      "Spatiul exista si necesita fazare.",
+      "Echipamentele nu sunt complet blocate.",
+      "Contextul este preliminar si trebuie validat tehnic.",
+    ],
+    scoreRationale: [
+      "AI Discovery furnizeaza context structurat.",
+      "Modernizarea si imagistica cresc riscul tehnic.",
+      "Urgenta 1-3 luni justifica follow-up rapid.",
+    ],
+  },
   {
     id: "ZES-LEAD-1101",
     sourceTool: "Project Intake",

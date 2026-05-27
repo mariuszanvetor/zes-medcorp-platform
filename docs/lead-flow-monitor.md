@@ -46,6 +46,12 @@ The test result shows:
 - storage mode
 - score
 - priority
+- readiness score
+- risk level
+- complexity level
+- recommended next action
+
+The response intentionally stays compact. It does not expose the full lead message, API keys, private key values or provider request payloads.
 
 ## Mode Meanings
 
@@ -74,6 +80,27 @@ The monitor uses this label mapping:
 ### `storageMode`
 
 - `mock`: no persistent database storage.
+
+## Lead Intelligence Fields
+
+Every valid lead is enriched server-side with deterministic intelligence:
+
+- project domain;
+- project stage;
+- readiness score;
+- urgency score;
+- complexity;
+- risk;
+- missing information summary;
+- validation needs;
+- recommended services;
+- recommended calculators;
+- recommended next action;
+- commercial intent;
+- confidence level;
+- follow-up priority and type.
+
+Email and Google Sheets use these fields for internal review. The browser response receives only safe summary fields.
 
 ## Troubleshooting
 

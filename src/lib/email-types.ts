@@ -1,4 +1,5 @@
 import type { LeadPayload } from "@/lib/lead-types";
+import type { LeadIntelligence } from "@/lib/ai-intelligence/lead-intelligence";
 import type { LeadPriority, LeadScoreResult } from "@/lib/lead-scoring";
 
 export type EmailProvider = "resend" | "sendgrid" | "smtp" | "gmail-workspace" | "mock";
@@ -28,6 +29,7 @@ export type LeadNotificationEmail = {
   nextStep: string;
   adminReviewLink: string;
   scoring: LeadScoreResult;
+  leadIntelligence?: LeadIntelligence;
   createdAt: string;
 };
 
@@ -53,4 +55,5 @@ export type EmailBuildContext = {
   scoring: LeadScoreResult;
   leadId: string;
   recommendedServices?: string[];
+  leadIntelligence?: LeadIntelligence;
 };

@@ -2,6 +2,7 @@ import type {
   LeadConfirmationEmail,
   LeadNotificationEmail,
 } from "@/lib/email-types";
+import type { LeadIntelligence } from "@/lib/ai-intelligence/lead-intelligence";
 import type { LeadPayload } from "@/lib/lead-types";
 import type { LeadScoreResult } from "@/lib/lead-scoring";
 
@@ -20,6 +21,7 @@ export type LeadEmailTemplateContext = {
   scoring: LeadScoreResult;
   leadId: string;
   recommendedServices?: string[];
+  leadIntelligence?: LeadIntelligence;
   adminReviewLink?: string;
 };
 
@@ -28,6 +30,7 @@ export function renderInternalLeadNotificationTemplate({
   scoring,
   leadId,
   recommendedServices = [],
+  leadIntelligence,
   adminReviewLink = `/admin/leads?leadId=${encodeURIComponent(leadId)}`,
 }: LeadEmailTemplateContext): RenderedEmailTemplate {
   const summary = createLeadSummary(lead);
@@ -40,6 +43,25 @@ export function renderInternalLeadNotificationTemplate({
   const scoringReasons = scoring.reasons.length
     ? scoring.reasons.join("; ")
     : "Scor calculat pe baza datelor transmise.";
+  const intelligenceRows: Array<[string, string | undefined]> = leadIntelligence
+    ? [
+        ["Lead source", leadIntelligence.sourceContext],
+        ["Domeniu proiect", leadIntelligence.projectDomain],
+        ["Stadiu", leadIntelligence.projectStage],
+        ["Readiness", `${leadIntelligence.readinessScore}/100`],
+        ["Urgenta", `${leadIntelligence.urgencyScore}/100`],
+        ["Complexitate", leadIntelligence.complexityLevel],
+        ["Risc", leadIntelligence.riskLevel],
+        ["Intent comercial", leadIntelligence.commercialIntent],
+        ["Incredere", leadIntelligence.confidenceLevel],
+        ["Follow-up", `${leadIntelligence.followUpPriority} / ${leadIntelligence.followUpType}`],
+        ["Informatii lipsa", leadIntelligence.missingInformationSummary],
+        ["Validari", leadIntelligence.validationNeeds.join("; ")],
+        ["Servicii sugerate", leadIntelligence.recommendedServices.join(", ")],
+        ["Calculatoare sugerate", leadIntelligence.recommendedCalculators.map((item) => item.label).join(", ")],
+        ["Actiune recomandata", leadIntelligence.recommendedNextAction],
+      ]
+    : [];
   const text = [
     subject,
     "",
@@ -64,6 +86,12 @@ export function renderInternalLeadNotificationTemplate({
     `Mesaj: ${lead.message ?? "Nespecificat"}`,
     "",
     `Rezumat: ${summary}`,
+    leadIntelligence ? `Lead intelligence: ${leadIntelligence.internalSummary}` : "",
+    leadIntelligence ? `Readiness: ${leadIntelligence.readinessScore}/100` : "",
+    leadIntelligence ? `Complexitate: ${leadIntelligence.complexityLevel}` : "",
+    leadIntelligence ? `Risc: ${leadIntelligence.riskLevel}` : "",
+    leadIntelligence ? `Informatii lipsa: ${leadIntelligence.missingInformationSummary}` : "",
+    leadIntelligence ? `Actiune inteligenta recomandata: ${leadIntelligence.recommendedNextAction}` : "",
     `Servicii recomandate: ${services}`,
     `Urmatorul pas: ${scoring.nextAction}`,
     `Rationale scor: ${scoringReasons}`,
@@ -108,6 +136,10 @@ export function renderInternalLeadNotificationTemplate({
         ["Risc", lead.generatedRiskLevel ?? "Nespecificat"],
             ["Mesaj", lead.message ?? "Nespecificat"],
           ],
+        },
+        {
+          title: "Lead intelligence",
+          rows: intelligenceRows,
         },
         {
           title: "Recomandare preliminara",
@@ -180,6 +212,7 @@ export function renderHighPriorityAlertTemplate({
   lead,
   scoring,
   leadId,
+  leadIntelligence,
   adminReviewLink = `/admin/leads?leadId=${encodeURIComponent(leadId)}`,
 }: LeadEmailTemplateContext): RenderedEmailTemplate {
   const summary = createLeadSummary(lead);
@@ -192,6 +225,8 @@ export function renderHighPriorityAlertTemplate({
     `Scor: ${scoring.score}/100`,
     `Urgenta: ${lead.urgency ?? "Nespecificata"}`,
     `Risc: ${lead.generatedRiskLevel ?? "Nespecificat"}`,
+    leadIntelligence ? `Lead intelligence: ${leadIntelligence.internalSummary}` : "",
+    leadIntelligence ? `Actiune recomandata: ${leadIntelligence.recommendedNextAction}` : "",
     `Rezumat: ${summary}`,
     `Actiune recomandata: ${scoring.nextAction}`,
     `Review intern: ${adminReviewLink}`,
@@ -211,6 +246,9 @@ export function renderHighPriorityAlertTemplate({
         ["Scor", `${scoring.score}/100`],
         ["Urgenta", lead.urgency ?? "Nespecificata"],
         ["Risc", lead.generatedRiskLevel ?? "Nespecificat"],
+        ["Readiness", leadIntelligence ? `${leadIntelligence.readinessScore}/100` : undefined],
+        ["Complexitate", leadIntelligence?.complexityLevel],
+        ["Follow-up", leadIntelligence?.followUpType],
         ["Actiune", scoring.nextAction],
       ],
       summary,

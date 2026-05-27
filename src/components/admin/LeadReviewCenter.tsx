@@ -489,6 +489,7 @@ function LeadDetail({
   scoring: LeadScoreResult;
 }) {
   const followUp = createFollowUpOutline(lead);
+  const intelligence = createLeadIntelligenceView(lead, scoring);
 
   return (
     <Card className="border-blue-100 bg-white xl:sticky xl:top-28" padding="lg">
@@ -519,6 +520,10 @@ function LeadDetail({
         <DetailStat label="Urgență" value={lead.urgency} />
         <DetailStat label="Complexitate" value={lead.complexity} />
         <DetailStat label="Risc" value={lead.riskLevel} />
+        <DetailStat label="Follow-up" value={intelligence.followUpType} />
+        <DetailStat label="Intent comercial" value={intelligence.commercialIntent} />
+        <DetailStat label="Incredere" value={intelligence.confidenceLevel} />
+        <DetailStat label="Context sursa" value={intelligence.sourceContext} />
       </div>
 
       <div className="mt-8 rounded-2xl border border-blue-100 bg-[#f7fbff] p-5">
@@ -532,10 +537,22 @@ function LeadDetail({
 
       <div className="mt-6 grid gap-5">
         <DetailList
+          title="Lead intelligence"
+          items={[
+            `Prioritate follow-up: ${intelligence.followUpPriority}`,
+            `Tip follow-up: ${intelligence.followUpType}`,
+            `Intent comercial: ${intelligence.commercialIntent}`,
+            `Incredere: ${intelligence.confidenceLevel}`,
+            `Context sursa: ${intelligence.sourceContext}`,
+          ]}
+        />
+        <DetailList
           title="Score rationale"
           items={unique([...lead.scoreRationale, ...scoring.reasons]).slice(0, 6)}
         />
         <DetailList title="Servicii recomandate" items={lead.recommendedServices} />
+        <DetailList title="Validari necesare" items={intelligence.validationNeeds} />
+        <DetailList title="Calculatoare recomandate" items={intelligence.recommendedCalculators} />
         <DetailList title="Informații lipsă" items={lead.missingInformation} />
         <DetailList title="Ipoteze" items={lead.assumptions} />
       </div>
@@ -906,6 +923,48 @@ function scoreDemoLead(lead: DemoLead) {
     generatedSummary: lead.generatedSummary,
     recommendedServices: lead.recommendedServices,
   });
+}
+
+function createLeadIntelligenceView(lead: DemoLead, scoring: LeadScoreResult) {
+  const followUpType =
+    lead.followUpType ??
+    (lead.priority === "Critical / immediate opportunity" || lead.riskLevel === "Critic"
+      ? "urgent-technical-review"
+      : lead.readinessScore >= 70
+        ? "proposal-preparation"
+        : "technical-clarification");
+  const commercialIntent =
+    lead.commercialIntent ??
+    (lead.leadScore >= 70 || lead.readinessScore >= 70
+      ? "high"
+      : lead.leadScore >= 40
+        ? "medium"
+        : "low");
+  const confidenceLevel =
+    lead.confidenceLevel ??
+    (lead.readinessScore >= 72
+      ? "high"
+      : lead.readinessScore >= 45
+        ? "medium"
+        : "low");
+
+  return {
+    commercialIntent,
+    confidenceLevel,
+    followUpPriority: lead.followUpPriority ?? scoring.priority,
+    followUpType,
+    recommendedCalculators:
+      lead.recommendedCalculators?.map((item) => `${item.label} (${item.href})`) ??
+      ["Calculator proiect medical (/calculator-proiect-medical)"],
+    sourceContext: lead.sourceContext ?? `${lead.sourceTool} / ${lead.sourcePage}`,
+    validationNeeds:
+      lead.validationNeeds ??
+      [
+        "Validare planuri si amplasament",
+        "Confirmare echipamente si documentatie",
+        "Clarificare calendar, buget si responsabilitati",
+      ],
+  };
 }
 
 function createFollowUpOutline(lead: DemoLead) {

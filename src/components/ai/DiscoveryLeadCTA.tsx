@@ -54,8 +54,10 @@ function buildGeneratedSummary(result: OrchestratedDiscoveryResult) {
     `Detected domains: ${result.detectedDomains.join(", ") || "not clear"}.`,
     `Stage: ${result.projectStage}. Confidence: ${result.confidenceScore}/100 (${result.confidenceLevel}).`,
     `Risk: ${result.riskAssessment.riskLevel}; complexity: ${result.riskAssessment.complexityLevel}.`,
+    `Missing info count: ${result.missingInformation.length}.`,
     `Missing information: ${result.missingInformation.map((item) => item.label).slice(0, 6).join("; ") || "none marked"}.`,
     `Validation needs: ${result.riskAssessment.validationNeeds.slice(0, 6).join("; ") || "to be clarified"}.`,
+    `Recommended next action: ${result.leadIntelligence.internalSummary}.`,
     `Recommended next actions: ${result.recommendations.map((item) => item.title).slice(0, 5).join("; ")}.`,
     `Safety note: preliminary planning support only; final requirements depend on project, equipment, site and competent validation.`,
   ].join("\n");

@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { hasFormErrors, validateLeadPayload } from "@/lib/forms";
+import { createLeadIntelligence } from "@/lib/ai-intelligence/lead-intelligence";
 import {
   renderHighPriorityAlertTemplate,
   renderInternalLeadNotificationTemplate,
@@ -69,12 +70,20 @@ export async function POST(request: NextRequest) {
 
   const scoring = scoreLead(payload);
   const recommendedServices = parseRecommendedServices(payload);
+  const leadIntelligence = createLeadIntelligence({
+    lead: payload,
+    recommendedServices,
+    scoring,
+  });
   const integrationConfig = getLeadIntegrationConfig();
   const crmPayload = buildCrmPayload(payload, scoring);
   const emailContext = {
     lead: payload,
+    leadIntelligence,
     leadId: "",
-    recommendedServices,
+    recommendedServices: leadIntelligence.recommendedServices.length
+      ? leadIntelligence.recommendedServices
+      : recommendedServices,
     scoring,
   };
   const storageResult = await saveLead({
@@ -86,8 +95,9 @@ export async function POST(request: NextRequest) {
   const crmResult = await sendToCrm(crmPayload);
   const notificationEmail = buildLeadNotificationEmail({
     lead: payload,
+    leadIntelligence,
     leadId,
-    recommendedServices,
+    recommendedServices: emailContext.recommendedServices,
     scoring,
   });
   const confirmationEmail = buildLeadConfirmationEmail(payload, scoring);
@@ -110,8 +120,9 @@ export async function POST(request: NextRequest) {
     : null;
   const sheetsRow = buildGoogleSheetsLeadRow({
     lead: payload,
+    leadIntelligence,
     leadId,
-    recommendedServices,
+    recommendedServices: emailContext.recommendedServices,
     scoring,
   });
   const sheetsConfig = validateSheetsConfig(integrationConfig.sheetsRequested);
@@ -135,8 +146,26 @@ export async function POST(request: NextRequest) {
     integrationMode: integrationConfig.mode,
     score: scoring.score,
     priority: scoring.priority,
+    readinessScore: leadIntelligence.readinessScore,
+    riskLevel: leadIntelligence.riskLevel,
+    complexityLevel: leadIntelligence.complexityLevel,
+    recommendedNextAction: leadIntelligence.recommendedNextAction,
     nextAction: scoring.nextAction,
     scoringReasons: scoring.reasons,
+    leadIntelligence: {
+      leadSource: leadIntelligence.leadSource,
+      projectDomain: leadIntelligence.projectDomain,
+      projectStage: leadIntelligence.projectStage,
+      readinessScore: leadIntelligence.readinessScore,
+      urgencyScore: leadIntelligence.urgencyScore,
+      complexityLevel: leadIntelligence.complexityLevel,
+      riskLevel: leadIntelligence.riskLevel,
+      recommendedNextAction: leadIntelligence.recommendedNextAction,
+      followUpPriority: leadIntelligence.followUpPriority,
+      followUpType: leadIntelligence.followUpType,
+      commercialIntent: leadIntelligence.commercialIntent,
+      confidenceLevel: leadIntelligence.confidenceLevel,
+    },
     preparedPayloads: {
       crm: {
         provider: crmPayload.source.provider,

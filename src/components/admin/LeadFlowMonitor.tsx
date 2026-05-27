@@ -30,6 +30,10 @@ type LeadFlowTestResult = {
   ok?: boolean;
   score?: number;
   priority?: string;
+  readinessScore?: number;
+  riskLevel?: string;
+  complexityLevel?: string;
+  recommendedNextAction?: string;
   emailMode?: string;
   sheetsMode?: string;
   storageMode?: string;
@@ -79,6 +83,10 @@ export function LeadFlowMonitor({ config }: LeadFlowMonitorProps) {
         ok: asBoolean(body?.ok),
         score: asNumber(body?.score),
         priority: asString(body?.priority),
+        readinessScore: asNumber(body?.readinessScore),
+        riskLevel: asString(body?.riskLevel),
+        complexityLevel: asString(body?.complexityLevel),
+        recommendedNextAction: asString(body?.recommendedNextAction),
         emailMode: asString(body?.emailMode),
         sheetsMode: asString(body?.sheetsMode),
         storageMode: asString(body?.storageMode),
@@ -182,6 +190,10 @@ export function LeadFlowMonitor({ config }: LeadFlowMonitorProps) {
               <ResultItem label="Storage mode" value={labelForMode(result.storageMode)} />
               <ResultItem label="Score" value={String(result.score ?? "-")} />
               <ResultItem label="Priority" value={result.priority ?? "-"} />
+              <ResultItem label="Readiness" value={String(result.readinessScore ?? "-")} />
+              <ResultItem label="Risk" value={result.riskLevel ?? "-"} />
+              <ResultItem label="Complexity" value={result.complexityLevel ?? "-"} />
+              <ResultItem label="Next action" value={result.recommendedNextAction ?? "-"} />
             </div>
 
             {interpretation && (

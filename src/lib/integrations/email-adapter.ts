@@ -56,6 +56,7 @@ export function buildLeadNotificationEmail({
   scoring,
   leadId,
   recommendedServices = [],
+  leadIntelligence,
 }: EmailBuildContext): LeadNotificationEmail {
   return {
     provider: getEmailProvider(),
@@ -84,6 +85,7 @@ export function buildLeadNotificationEmail({
     nextStep: scoring.nextAction,
     adminReviewLink: `/admin/leads?leadId=${encodeURIComponent(leadId)}`,
     scoring,
+    leadIntelligence,
     createdAt: new Date().toISOString(),
   };
 }
