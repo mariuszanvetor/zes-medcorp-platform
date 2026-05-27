@@ -1,0 +1,176 @@
+# Deployment Readiness
+
+This document is the staging/live demo checklist for SITE ZESCORP. It focuses on safe public demo readiness, not activation of new integrations.
+
+## Current readiness status
+
+- Next.js App Router build is the deployment authority.
+- Public routes are statically generated where possible.
+- `/api/leads` is server-side and mock-safe by default.
+- Admin routes are dynamic, internal, noindex/nofollow and excluded from sitemap.
+- Sitemap is generated from public route/data sources only.
+- Robots points crawlers to `/sitemap.xml`.
+- AI Discovery, Proposal Builder, Project Intake and mock document intelligence remain deterministic and preliminary.
+
+## Public vs admin routes
+
+Public demo routes:
+
+- `/`
+- `/ai-discovery`
+- `/proposal-builder`
+- `/project-intake`
+- `/planificare`
+- `/calculatoare`
+- `/comparatii`
+- `/glosar`
+- `/knowledge-hub`
+- `/servicii`
+- `/contact`
+
+Internal routes:
+
+- `/admin/leads`
+- `/admin/lead-flow`
+- `/admin/seo-launch`
+- `/admin/content-ops`
+
+Admin requirements:
+
+- keep `robots.index=false` and `robots.follow=false`;
+- keep admin routes out of sitemap;
+- keep public header/footer free of admin links;
+- keep visible labels: internal demo, mock data, no CRM/no DB;
+- enable `ADMIN_ACCESS_ENABLED=true` and set `ADMIN_ACCESS_PASSWORD` before any real operational use.
+
+## Required environment variables for safe demo
+
+Safe default:
+
+```env
+LEAD_INTEGRATION_MODE=mock
+EMAIL_PROVIDER=mock
+LEAD_STORAGE_PROVIDER=mock
+LEAD_CONFIRMATION_EMAIL_ENABLED=false
+HIGH_PRIORITY_ALERT_EMAIL_ENABLED=false
+ADMIN_ACCESS_ENABLED=false
+```
+
+Recommended staging/live demo admin gate:
+
+```env
+ADMIN_ACCESS_ENABLED=true
+ADMIN_ACCESS_PASSWORD=<strong password in Vercel only>
+ADMIN_ACCESS_TTL_SECONDS=28800
+```
+
+Optional analytics:
+
+```env
+NEXT_PUBLIC_GA_ID=
+NEXT_PUBLIC_GTM_ID=
+```
+
+Real email can be activated later only with:
+
+```env
+LEAD_INTEGRATION_MODE=email-only
+EMAIL_PROVIDER=resend
+EMAIL_FROM=
+LEAD_NOTIFICATION_EMAIL=office@zescorp.ro
+RESEND_API_KEY=
+RESEND_VERIFIED_DOMAIN=
+RESEND_DOMAIN_VERIFIED=true
+```
+
+Google Sheets can be activated later only with:
+
+```env
+LEAD_INTEGRATION_MODE=email-and-sheets
+GOOGLE_SHEETS_SPREADSHEET_ID=
+GOOGLE_SHEETS_CLIENT_EMAIL=
+GOOGLE_SHEETS_PROJECT_ID=
+GOOGLE_SHEETS_PRIVATE_KEY=
+GOOGLE_SHEETS_TAB_NAME=Leads
+```
+
+Do not prefix secrets with `NEXT_PUBLIC_`.
+
+## Mock vs real integration modes
+
+- `mock`: lead submission returns safe mock modes and does not call external providers.
+- `email-only`: internal notification email may send if `EMAIL_PROVIDER=resend` is correctly configured.
+- `sheets-only`: Sheets may be attempted if Sheets env vars are configured.
+- `email-and-sheets`: email and Sheets may both run when their env vars are valid.
+- `crm`: reserved for future integration and should not be used now.
+
+For SITE ZESCORP staging/live demo, keep integrations mock unless a controlled real email/Sheets test is intentionally planned.
+
+## Pre-deploy checklist
+
+1. Run `npm run content:check`.
+2. Run `npm run build -- --webpack`.
+3. Confirm `.env.example` contains placeholders only.
+4. Confirm no real API keys or private keys are committed.
+5. Confirm `LEAD_INTEGRATION_MODE=mock` unless intentionally testing real integrations.
+6. Confirm admin password env is set if admin pages are used outside a private preview.
+7. Confirm `https://www.zescorp.ro` remains the canonical base URL.
+8. Confirm homepage CTAs point to AI Discovery, Proposal Builder and Project Intake.
+9. Confirm public copy does not imply real generative AI, compliance guarantees or final engineering approval.
+10. Confirm legal pages remain accessible.
+
+## Post-deploy smoke checklist
+
+Open:
+
+- `/`
+- `/ai-discovery`
+- `/proposal-builder`
+- `/project-intake`
+- `/admin/lead-flow`
+- `/admin/leads`
+- `/sitemap.xml`
+- `/robots.txt`
+
+Verify:
+
+- public routes return 200;
+- admin routes return 200 only behind intended admin gate/demo mode;
+- admin pages include noindex/nofollow;
+- sitemap excludes `/admin/*`;
+- AI Discovery, Proposal Builder and Project Intake submit successfully in mock mode;
+- lead response shows `integrationMode=mock`, `emailMode=mock`, `sheetsMode=mock`, `storageMode=mock`;
+- no false error state appears after a successful mock response.
+
+## Rollback notes
+
+If real email causes issues:
+
+```env
+EMAIL_PROVIDER=mock
+LEAD_INTEGRATION_MODE=mock
+```
+
+If Sheets causes issues:
+
+```env
+LEAD_INTEGRATION_MODE=email-only
+```
+
+If admin exposure is a concern:
+
+```env
+ADMIN_ACCESS_ENABLED=true
+ADMIN_ACCESS_PASSWORD=<new strong password>
+```
+
+Redeploy after environment changes and run one controlled internal test from `/admin/lead-flow`.
+
+## Known staging/demo limitations
+
+- AI Discovery is deterministic, not connected to a real AI API.
+- Mock document intelligence uses descriptors only; no uploads or parsing are active.
+- Admin lead workflow is client-side session state only.
+- No CRM, database or persistent lead dashboard is active.
+- PDF export is browser-side and preliminary.
+- All calculators and proposals are planning aids, not final engineering, regulatory or commercial approvals.

@@ -74,7 +74,9 @@ export async function AdminShell({
               <div className="flex flex-wrap gap-2">
                 <Badge variant="blue">{eyebrow}</Badge>
                 <Badge variant="neutral">noindex</Badge>
+                <Badge variant="neutral">internal demo</Badge>
                 <Badge variant="neutral">mock data</Badge>
+                <Badge variant="neutral">no CRM / no DB</Badge>
                 <Badge variant={accessStatus.enabled ? "blue" : "neutral"}>
                   {accessStatus.enabled ? "password gate" : "demo open"}
                 </Badge>

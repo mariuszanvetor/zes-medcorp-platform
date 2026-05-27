@@ -8,6 +8,7 @@ import { FinalCTASection } from "@/components/sections/FinalCTASection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { EcosystemNavigation } from "@/components/sections/EcosystemNavigation";
 import { PlanningJourneyBlock } from "@/components/sections/PlanningJourneyBlock";
+import { PublicDemoEntrySection } from "@/components/sections/PublicDemoEntrySection";
 import { RadiologyShieldingSection } from "@/components/sections/RadiologyShieldingSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
@@ -44,6 +45,7 @@ export default function Home() {
         title="Cum incepi cu ZES?"
         compact
       />
+      <PublicDemoEntrySection />
       <AIIntroSection />
       <ServicesSection />
       <AIToolsPreviewSection />

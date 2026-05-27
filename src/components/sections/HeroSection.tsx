@@ -41,16 +41,16 @@ export function HeroSection() {
               </TrackedButtonLink>
               <TrackedButtonLink
                 className="rounded-full border-blue-200 px-7 text-[#0057b8]"
-                href="/ai-project-advisor"
+                href="/ai-discovery"
                 size="lg"
                 tracking={{
-                  ctaLabel: "Planificare proiect",
-                  destination: "/ai-project-advisor",
+                  ctaLabel: "AI Discovery proiect",
+                  destination: "/ai-discovery",
                   sourcePage: "/",
                 }}
                 variant="secondary"
               >
-                Planificare proiect
+                AI Discovery proiect
               </TrackedButtonLink>
             </div>
           </div>
