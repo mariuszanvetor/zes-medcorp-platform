@@ -2,7 +2,15 @@
 
 import { useMemo, useState } from "react";
 
-import { trackCTA, trackEvent } from "@/lib/analytics";
+import { trackCTA, trackEvent, trackLeadEvent } from "@/lib/analytics";
+import {
+  createLeadPayload,
+  validateLeadPayload,
+  hasFormErrors,
+  validateEmail,
+  validatePhone,
+  type FormErrorMap,
+} from "@/lib/forms";
 import {
   continueZESConversation,
   startZESConversation,
@@ -32,6 +40,28 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
   const [conversationState, setConversationState] = useState<ZESConversationState | null>(
     null,
   );
+  const [captureVisible, setCaptureVisible] = useState(false);
+  const [leadValues, setLeadValues] = useState({
+    name: "",
+    company: "",
+    phone: "",
+    email: "",
+    city: "",
+    shortDescription: "",
+    urgency: "Normala",
+    equipmentModel: "",
+    projectType: "",
+  });
+  const [leadErrors, setLeadErrors] = useState<FormErrorMap>({});
+  const [leadStatus, setLeadStatus] = useState<"idle" | "loading" | "success" | "error">(
+    "idle",
+  );
+  const [leadModes, setLeadModes] = useState<{
+    emailMode?: string;
+    sheetsMode?: string;
+    storageMode?: string;
+    success?: boolean;
+  } | null>(null);
 
   const lastTurn = useMemo(() => {
     for (let index = conversation.length - 1; index >= 0; index -= 1) {
@@ -42,6 +72,19 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
     }
     return null;
   }, [conversation]);
+
+  const shouldOfferCapture = useMemo(() => {
+    if (!lastTurn || !conversationState) return false;
+    const answeredCount = Object.keys(conversationState.collectedAnswers).length;
+    const highIntentPath =
+      conversationState.pathId === "service" ||
+      conversationState.pathId === "ct-radiology" ||
+      conversationState.pathId === "mri" ||
+      conversationState.pathId === "funding" ||
+      conversationState.pathId === "equipment";
+
+    return lastTurn.highIntentClose || (highIntentPath && answeredCount >= 2);
+  }, [lastTurn, conversationState]);
 
   function handlePrompt(prompt: string) {
     setQuery(prompt);
@@ -60,6 +103,9 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
         { role: "user", text },
         { role: "assistant", text: composeAssistantText(started.turn), turn: started.turn },
       ]);
+      setCaptureVisible(false);
+      setLeadStatus("idle");
+      setLeadModes(null);
       trackEvent("ai_discovery_step", {
         sourcePage: "/",
         sourceTool: "zes-guide",
@@ -80,6 +126,9 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
         turn: progressed.turn,
       },
     ]);
+    if (progressed.turn.highIntentClose) {
+      setCaptureVisible(true);
+    }
 
     trackEvent("ai_discovery_step", {
       sourcePage: "/",
@@ -88,6 +137,125 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
       urgency: progressed.turn.leadSnapshot.urgency,
     });
     setQuery("");
+  }
+
+  async function submitLeadCapture() {
+    if (!lastTurn || !conversationState) return;
+
+    const rawValues = {
+      name: leadValues.name.trim(),
+      company: leadValues.company.trim(),
+      phone: leadValues.phone.trim(),
+      email: leadValues.email.trim(),
+      message: leadValues.shortDescription.trim(),
+      urgency: leadValues.urgency,
+      projectType:
+        leadValues.projectType.trim() || lastTurn.leadSnapshot.detectedNeed,
+      city: leadValues.city.trim(),
+      equipmentModel: leadValues.equipmentModel.trim(),
+      inquiryType: `ZES Guide - ${lastTurn.leadSnapshot.domain}`,
+      intent: conversationState.pathId,
+      readiness: lastTurn.leadSnapshot.maturity,
+      recommendedFollowUp: lastTurn.leadSnapshot.nextStep,
+      selectedServices: lastTurn.suggestedServices.map((item) => item.label).join(", "),
+      missingInfo: lastTurn.leadSnapshot.missingInfo.join(" | "),
+    };
+
+    const payload = createLeadPayload({
+      sourceTool: "ZES Guide",
+      sourcePage: "/",
+      inquiryType: "ZES Guide conversation",
+      values: rawValues,
+      generatedSummary: buildGeneratedSummary(lastTurn, conversationState),
+      generatedRiskLevel: mapUrgencyToRisk(lastTurn.leadSnapshot.urgency),
+      generatedComplexity: `${lastTurn.leadSnapshot.domain} / ${lastTurn.leadSnapshot.maturity}`,
+    });
+
+    const validationErrors = validateLeadPayload(payload);
+    if (!leadValues.city.trim()) {
+      validationErrors.city = "Completeaza orasul.";
+    }
+    if (!validateEmail(leadValues.email)) {
+      validationErrors.email = "Introdu un email valid.";
+    }
+    if (!validatePhone(leadValues.phone)) {
+      validationErrors.phone = "Introdu un telefon valid.";
+    }
+
+    if (hasFormErrors(validationErrors)) {
+      setLeadErrors(validationErrors);
+      setLeadStatus("error");
+      trackLeadEvent("lead_form_submit_error", {
+        sourcePage: "/",
+        sourceTool: "zes-guide",
+        inquiryType: "ZES Guide conversation",
+        status: "validation_error",
+      });
+      return;
+    }
+
+    setLeadErrors({});
+    setLeadStatus("loading");
+    trackLeadEvent("lead_form_submit_attempt", {
+      sourcePage: "/",
+      sourceTool: "zes-guide",
+      inquiryType: payload.inquiryType,
+      projectType: payload.projectType,
+      urgency: payload.urgency,
+      complexity: payload.generatedComplexity,
+      riskLevel: payload.generatedRiskLevel,
+    });
+
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const apiResult = (await response.json()) as {
+        success?: boolean;
+        emailMode?: string;
+        sheetsMode?: string;
+        storageMode?: string;
+        message?: string;
+      };
+
+      if (!response.ok || apiResult.success === false) {
+        throw new Error(
+          apiResult.message || "Solicitarea ZES nu a putut fi pregatita.",
+        );
+      }
+
+      setLeadStatus("success");
+      setLeadModes({
+        success: apiResult.success,
+        emailMode: apiResult.emailMode,
+        sheetsMode: apiResult.sheetsMode,
+        storageMode: apiResult.storageMode,
+      });
+      trackLeadEvent("lead_form_submit_success", {
+        sourcePage: "/",
+        sourceTool: "zes-guide",
+        inquiryType: payload.inquiryType,
+        emailMode: apiResult.emailMode,
+        sheetsMode: apiResult.sheetsMode,
+        storageMode: apiResult.storageMode,
+      });
+    } catch (error) {
+      setLeadStatus("error");
+      setLeadErrors({
+        form:
+          error instanceof Error
+            ? error.message
+            : "Solicitarea nu a putut fi trimisa.",
+      });
+      trackLeadEvent("lead_form_submit_error", {
+        sourcePage: "/",
+        sourceTool: "zes-guide",
+        inquiryType: payload.inquiryType,
+        status: "request_error",
+      });
+    }
   }
 
   return (
@@ -176,6 +344,140 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
               </Button>
             </form>
           </div>
+
+          {(captureVisible || shouldOfferCapture) && lastTurn && conversationState && (
+            <section className="mt-4 rounded-lg border border-blue-200 bg-white p-4">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
+                Cerere catre ZESCORP
+              </p>
+              <p className="mt-2 text-sm font-semibold leading-7 text-slate-900">
+                Din ce ai descris, pare o cerere cu potential ridicat. ZES poate pregati acum cererea pentru echipa ZESCORP.
+              </p>
+              <p className="mt-1 text-sm leading-7 text-slate-600">
+                Completeaza datele de contact ca sa poata reveni un specialist. Pentru service urgent, telefonul si orasul sunt esentiale.
+              </p>
+
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                <InlineInput
+                  error={leadErrors.name}
+                  label="Nume"
+                  value={leadValues.name}
+                  onChange={(value) => setLeadValues((current) => ({ ...current, name: value }))}
+                />
+                <InlineInput
+                  error={leadErrors.company}
+                  label="Companie / clinica"
+                  value={leadValues.company}
+                  onChange={(value) => setLeadValues((current) => ({ ...current, company: value }))}
+                />
+                <InlineInput
+                  error={leadErrors.phone}
+                  label="Telefon"
+                  value={leadValues.phone}
+                  onChange={(value) => setLeadValues((current) => ({ ...current, phone: value }))}
+                />
+                <InlineInput
+                  error={leadErrors.email}
+                  label="Email"
+                  value={leadValues.email}
+                  onChange={(value) => setLeadValues((current) => ({ ...current, email: value }))}
+                />
+                <InlineInput
+                  error={leadErrors.city}
+                  label="Oras"
+                  value={leadValues.city}
+                  onChange={(value) => setLeadValues((current) => ({ ...current, city: value }))}
+                />
+                <InlineSelect
+                  label="Urgenta"
+                  value={leadValues.urgency}
+                  options={["Normala", "Ridicata", "Critica"]}
+                  onChange={(value) => setLeadValues((current) => ({ ...current, urgency: value }))}
+                />
+                {conversationState.pathId === "service" ? (
+                  <InlineInput
+                    label="Echipament / model (optional)"
+                    value={leadValues.equipmentModel}
+                    onChange={(value) =>
+                      setLeadValues((current) => ({ ...current, equipmentModel: value }))
+                    }
+                  />
+                ) : (
+                  <InlineInput
+                    label="Tip proiect (optional)"
+                    value={leadValues.projectType}
+                    onChange={(value) =>
+                      setLeadValues((current) => ({ ...current, projectType: value }))
+                    }
+                  />
+                )}
+              </div>
+
+              <label className="mt-3 block text-sm font-semibold text-slate-700">
+                Descriere scurta
+                <textarea
+                  className="mt-1 min-h-24 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-blue-300 focus:bg-white"
+                  value={leadValues.shortDescription}
+                  onChange={(event) =>
+                    setLeadValues((current) => ({
+                      ...current,
+                      shortDescription: event.target.value,
+                    }))
+                  }
+                  placeholder="Descrie pe scurt contextul, blocajele sau ce astepti de la echipa ZESCORP."
+                />
+              </label>
+
+              {leadErrors.form && (
+                <p className="mt-2 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-800">
+                  {leadErrors.form}
+                </p>
+              )}
+
+              {leadStatus === "success" && (
+                <p className="mt-2 rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 text-sm font-semibold text-[#0057b8]">
+                  Solicitarea a fost trimisa. Moduri: email {leadModes?.emailMode ?? "mock"}, sheets{" "}
+                  {leadModes?.sheetsMode ?? "mock"}, storage {leadModes?.storageMode ?? "mock"}.
+                </p>
+              )}
+
+              <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+                <Button
+                  size="md"
+                  onClick={() => {
+                    void submitLeadCapture();
+                  }}
+                  isLoading={leadStatus === "loading"}
+                >
+                  {conversationState.pathId === "service"
+                    ? "Trimite cerere service"
+                    : "Trimite cerere proiect"}
+                </Button>
+                <Button
+                  href="/contact"
+                  size="md"
+                  variant="secondary"
+                  onClick={() =>
+                    trackCTA({
+                      sourcePage: "/",
+                      sourceTool: "zes-guide",
+                      ctaLabel: "Solicita contact prioritar",
+                      destination: "/contact",
+                    })
+                  }
+                >
+                  Solicita contact prioritar
+                </Button>
+                <Button
+                  size="md"
+                  variant="secondary"
+                  onClick={() => setCaptureVisible(false)}
+                >
+                  Continua conversatia cu ZES
+                </Button>
+              </div>
+            </section>
+          )}
         </div>
 
         <aside className="grid gap-3">
@@ -291,6 +593,86 @@ function TurnDetails({ turn }: { turn: ZESAssistantTurn }) {
       )}
     </div>
   );
+}
+
+function InlineInput({
+  label,
+  value,
+  onChange,
+  error,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  error?: string;
+}) {
+  return (
+    <label className="grid gap-1 text-sm font-semibold text-slate-700">
+      {label}
+      <input
+        className={cn(
+          "h-11 rounded-lg border bg-slate-50 px-3 text-sm text-slate-900 outline-none transition focus:border-blue-300 focus:bg-white",
+          error ? "border-rose-300" : "border-slate-200",
+        )}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+      />
+      {error && <span className="text-xs font-semibold text-rose-700">{error}</span>}
+    </label>
+  );
+}
+
+function InlineSelect({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  options: string[];
+  onChange: (value: string) => void;
+}) {
+  return (
+    <label className="grid gap-1 text-sm font-semibold text-slate-700">
+      {label}
+      <select
+        className="h-11 rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm text-slate-900 outline-none transition focus:border-blue-300 focus:bg-white"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+      >
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+}
+
+function mapUrgencyToRisk(urgency: string) {
+  if (urgency === "critica") return "Critic";
+  if (urgency === "ridicata") return "Ridicat";
+  if (urgency === "moderata") return "Mediu";
+  return "Redus";
+}
+
+function buildGeneratedSummary(
+  turn: ZESAssistantTurn,
+  state: ZESConversationState,
+) {
+  return [
+    `ZES Guide summary.`,
+    `Need: ${turn.leadSnapshot.detectedNeed}.`,
+    `Domain: ${turn.leadSnapshot.domain}.`,
+    `Urgency: ${turn.leadSnapshot.urgency}.`,
+    `Maturity: ${turn.leadSnapshot.maturity}.`,
+    `Missing info: ${turn.leadSnapshot.missingInfo.join(" | ") || "none"}.`,
+    `Recommended services: ${turn.suggestedServices.map((service) => service.label).join(", ")}.`,
+    `Follow-up: ${turn.leadSnapshot.nextStep}.`,
+    `Path: ${state.pathId}.`,
+  ].join(" ");
 }
 
 const defaultCapabilityChips = [

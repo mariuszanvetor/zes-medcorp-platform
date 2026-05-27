@@ -22,19 +22,21 @@ The platform currently presents deterministic planning intelligence, local hando
 4. Verify ZES returns deterministic consultative guidance (intent, missing info, next action and CTA routing).
 5. Verify capability chips and lead summary update after each meaningful assistant response.
 6. Verify document language is clearly demo-only (no fake parsing claims).
-7. Open `/ai-discovery` (ZES AI Copilot workspace).
-8. Optional: open `/ai-discovery?scenario=ct-clinic` or `/ai-discovery?scenario=mri-room` to demo AI Magic scenario handoff.
-9. Answer a few guided questions.
-10. Use `Continua cu ipoteze preliminare` if details are incomplete.
-11. Review the live intelligence panel: domains, missing information, readiness, risk, complexity and recommended next actions.
-12. Open the mock document section and select a descriptor if demoing future document parsing.
-13. Continue to `/proposal-builder`.
-14. Verify the imported context appears and can be edited or ignored.
-15. Generate the proposal result.
-16. Export the PDF and verify branding, company details, proposal ID, disclaimer and readable section hierarchy.
-17. Return to `/ai-discovery` or open `/project-intake`.
-18. Verify the imported context appears in Project Intake and remains editable.
-19. Submit a lead only in the intended environment and with safe test data.
+7. Trigger a high-intent ZES path (service urgent or CT/RMN) and verify inline lead capture appears.
+8. Submit one mock ZES lead from inline panel and confirm success + mode summary.
+9. Open `/ai-discovery` (ZES AI Copilot workspace).
+10. Optional: open `/ai-discovery?scenario=ct-clinic` or `/ai-discovery?scenario=mri-room` to demo AI Magic scenario handoff.
+11. Answer a few guided questions.
+12. Use `Continua cu ipoteze preliminare` if details are incomplete.
+13. Review the live intelligence panel: domains, missing information, readiness, risk, complexity and recommended next actions.
+14. Open the mock document section and select a descriptor if demoing future document parsing.
+15. Continue to `/proposal-builder`.
+16. Verify the imported context appears and can be edited or ignored.
+17. Generate the proposal result.
+18. Export the PDF and verify branding, company details, proposal ID, disclaimer and readable section hierarchy.
+19. Return to `/ai-discovery` or open `/project-intake`.
+20. Verify the imported context appears in Project Intake and remains editable.
+21. Submit a lead only in the intended environment and with safe test data.
 
 For Phase 75C/75D conversational demo quality, also confirm:
 

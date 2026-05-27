@@ -13,6 +13,8 @@ This document describes the current internal demo lifecycle for lead intelligenc
 7. `/admin/leads` displays deterministic demo leads for review, including readiness, risk, complexity, source context, intelligence summary and mock document context where present.
 8. `/admin/lead-flow` shows integration mode diagnostics and the mock-safe lifecycle timeline.
 
+Phase 75G adds `ZES Guide` as a visible lead source in demo review. These leads represent inline conversational captures from homepage.
+
 ## Phase 71L mock action workflow
 
 `/admin/leads` now includes a deterministic mock admin workflow for selected demo leads.
@@ -63,6 +65,8 @@ It intentionally avoids PII-heavy data and does not include email, phone, raw no
 ## Demo examples included
 
 - AI Discovery lead with mock document context.
+- ZES Guide service lead with high urgency.
+- ZES Guide project lead with ofertare intent.
 - Proposal Builder lead.
 - Project Intake lead.
 - High urgency service/maintenance lead.

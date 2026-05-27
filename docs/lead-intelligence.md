@@ -39,6 +39,7 @@ It returns:
 
 The model normalizes leads from:
 
+- ZES Guide conversation (homepage inline capture);
 - AI Discovery;
 - Proposal Builder;
 - Proposal Builder from AI Discovery;
@@ -50,6 +51,15 @@ The model normalizes leads from:
 - standard contact forms.
 
 Simple contact forms still work. They receive lower confidence and a qualification-oriented next action.
+
+ZES Guide leads can include extra metadata from conversation context:
+
+- detected intent/path;
+- readiness/maturity label;
+- recommended follow-up;
+- selected services;
+- missing info summary;
+- optional city/equipment-model/project-type conversation fields.
 
 ## API behavior
 

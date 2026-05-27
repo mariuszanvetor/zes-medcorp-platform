@@ -35,6 +35,38 @@ Phase 75F makes ZES the single conversational front door:
 
 The user is not required to choose AI Discovery vs Proposal Builder vs Project Intake upfront.
 
+## Phase 75G lead conversion layer
+
+Phase 75G extends the conversation with inline lead capture for high-intent requests.
+
+Trigger patterns:
+
+- urgent service/maintenance;
+- CT/RMN project with enough context;
+- equipment quote requests;
+- funding-related projects with commercial maturity.
+
+Inline capture panel collects compact business-contact data:
+
+- name;
+- company/clinic;
+- phone;
+- email;
+- city;
+- short description;
+- urgency;
+- optional equipment/model (service path);
+- optional project type (project path).
+
+Submission stays on existing `/api/leads` mock-safe flow and includes:
+
+- source `ZES Guide`;
+- detected intent/path;
+- readiness/maturity;
+- recommended follow-up;
+- selected services;
+- missing information summary.
+
 ## Supported intent buckets
 
 - CT project
@@ -119,3 +151,5 @@ ZES must also not imply real file parsing. Recommended phrasing:
 4. Verify copy keeps preliminary validation framing.
 5. Verify no fake typing/streaming behavior appears.
 6. Verify `npm run build -- --webpack` and `npm run content:check` pass.
+7. Trigger a high-intent scenario and confirm inline lead capture appears naturally.
+8. Submit a mock ZES lead and confirm success plus returned integration modes.

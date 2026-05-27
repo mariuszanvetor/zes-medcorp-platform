@@ -76,6 +76,131 @@ export type DemoLead = {
 
 export const demoLeads: DemoLead[] = [
   {
+    id: "ZES-LEAD-1300",
+    sourceTool: "ZES Guide",
+    sourcePage: "/",
+    projectType: "Service urgent imagistica",
+    inquiryType: "ZES Guide conversation / service",
+    company: "Service Demo Clinic",
+    contactName: "Monica Petrescu",
+    email: "monica.petrescu@demo.invalid",
+    phone: "+40 731 222 119",
+    urgency: "Urgent",
+    estimatedBudgetRange: "Evaluare service",
+    complexity: "Service triage",
+    riskLevel: "Critic",
+    readinessScore: 71,
+    leadScore: 85,
+    priority: "Critical / immediate opportunity",
+    status: "Prioritar",
+    recommendedNextStep:
+      "Contact prioritar pentru triere service si colectare coduri eroare/model.",
+    recommendedServices: [
+      "Service aparatura medicala",
+      "Service diagnostic",
+      "Mentenanta preventiva",
+    ],
+    projectDomain: "Service / mentenanta",
+    intelligenceSummary:
+      "Lead generat din ZES Guide pe flux service, cu intent ridicat si risc operational critic.",
+    sourceContext: "ZES Guide / homepage conversation",
+    followUpPriority: "Critical / immediate opportunity",
+    followUpType: "urgent-technical-review",
+    commercialIntent: "high",
+    confidenceLevel: "medium",
+    validationNeeds: [
+      "Confirmare model/serie echipament",
+      "Confirmare cod eroare si impact operational",
+      "Stabilire fereastra de interventie",
+    ],
+    recommendedCalculators: [
+      { label: "Service aparatura", href: "/calculatoare/service-aparatura" },
+    ],
+    missingInformation: [
+      "Model exact echipament",
+      "Durata exacta downtime",
+      "Contract mentenanta existent",
+    ],
+    createdAt: "2026-05-27T08:10:00.000Z",
+    lastActionAt: "2026-05-27T08:22:00.000Z",
+    notes:
+      "Demo lead ZES Guide. Conversatie orientata spre trimitere cerere service prioritara.",
+    generatedSummary:
+      "ZES Guide a detectat service urgent cu risc operational critic. Recomandat: contact prioritar si triere tehnica.",
+    assumptions: [
+      "Echipamentul este indisponibil sau degradat functional.",
+      "Datele tehnice complete nu sunt inca colectate.",
+    ],
+    scoreRationale: [
+      "Sursa ZES Guide cu intent ridicat.",
+      "Urgenta critica si impact operational.",
+      "Follow-up recomandat: urgent-technical-review.",
+    ],
+  },
+  {
+    id: "ZES-LEAD-1301",
+    sourceTool: "ZES Guide",
+    sourcePage: "/",
+    projectType: "Proiect CT clinic nou",
+    inquiryType: "ZES Guide conversation / proiect",
+    company: "CT Demo Project",
+    contactName: "Florin Negoita",
+    email: "florin.negoita@demo.invalid",
+    phone: "+40 733 555 121",
+    urgency: "1-3 luni",
+    estimatedBudgetRange: "EUR 180k-550k",
+    complexity: "CT / radiologie",
+    riskLevel: "Ridicat",
+    readinessScore: 66,
+    leadScore: 79,
+    priority: "High priority",
+    status: "De calificat",
+    recommendedNextStep:
+      "Pregatire cerere proiect cu date de camera, utilitati si status CNCAN.",
+    recommendedServices: [
+      "Proiectare camera CT",
+      "Protectie radiologica",
+      "Planificare infrastructura imagistica",
+    ],
+    projectDomain: "CT / radiologie",
+    intelligenceSummary:
+      "Lead ZES Guide pentru proiect CT cu readiness moderat si nevoie de clarificari tehnice.",
+    sourceContext: "ZES Guide / homepage conversation",
+    followUpPriority: "High priority",
+    followUpType: "proposal-preparation",
+    commercialIntent: "high",
+    confidenceLevel: "medium",
+    validationNeeds: [
+      "Plan camera si vecinatati",
+      "Status CNCAN",
+      "Necesitati HVAC/electric",
+    ],
+    recommendedCalculators: [
+      { label: "Estimare cost camera CT", href: "/calculatoare/cost-camera-ct" },
+      { label: "Estimare radioprotectie CT", href: "/calculatoare/radioprotectie-ct-estimare" },
+    ],
+    missingInformation: [
+      "Schita/plan spatiu",
+      "Buget final",
+      "Termen implementare confirmat",
+    ],
+    createdAt: "2026-05-27T08:25:00.000Z",
+    lastActionAt: "2026-05-27T08:29:00.000Z",
+    notes:
+      "Demo lead ZES Guide cu focus pe ofertare proiect CT si validare tehnica.",
+    generatedSummary:
+      "ZES Guide a detectat proiect CT cu intent comercial bun, dar datele de infrastructura trebuie completate pentru ofertare.",
+    assumptions: [
+      "Proiectul este in etapa de planificare activa.",
+      "Echipamentul este in selectie sau preselectie.",
+    ],
+    scoreRationale: [
+      "Sursa ZES Guide",
+      "Intent comercial ridicat pentru proiect CT",
+      "Readiness mediu cu nevoi clare de clarificare.",
+    ],
+  },
+  {
     id: "ZES-LEAD-1200",
     sourceTool: "AI Discovery",
     sourcePage: "/ai-discovery",
