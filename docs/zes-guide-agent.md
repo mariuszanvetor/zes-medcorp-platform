@@ -1,6 +1,6 @@
 # ZES Guide Agent
 
-`ZES Guide` is the public deterministic conversational sales and project guide used on homepage (`/#zes-guide`).
+`ZES Guide` is the public deterministic conversational sales and project guide used as the main above-the-fold entry on homepage (`/#zes-guide`).
 
 It is designed as a medical infrastructure sales engineer style assistant:
 
@@ -23,6 +23,18 @@ It is designed as a medical infrastructure sales engineer style assistant:
 - UI: `src/components/ai/ZESGuide.tsx`
 - homepage integration: `src/components/sections/ZESGuideSection.tsx`
 
+## Phase 75F unified flow
+
+Phase 75F makes ZES the single conversational front door:
+
+- users start from one input and one conversation;
+- ZES asks follow-up questions based on detected scenario;
+- ZES collects missing information progressively;
+- ZES surfaces compact lead summary after each assistant turn;
+- existing tools stay active, but are presented as internal capabilities of ZES.
+
+The user is not required to choose AI Discovery vs Proposal Builder vs Project Intake upfront.
+
 ## Supported intent buckets
 
 - CT project
@@ -36,6 +48,14 @@ It is designed as a medical infrastructure sales engineer style assistant:
 - equipment offer intent
 - project planning
 - general unknown inquiry
+
+### Scenario paths explicitly covered
+
+- Service / maintenance
+- CT / radiology project
+- RMN / MRI project
+- Funding / european funds
+- Equipment offer
 
 ## Deterministic response shape
 
@@ -52,6 +72,12 @@ Each response includes:
 - CTA list;
 - compact lead intent summary.
 
+Additionally, each conversation turn can include:
+
+- capability chips (`Planificare proiect`, `Ofertare`, `Service triage`, `CNCAN`, etc.);
+- document request language with explicit demo-only limitation;
+- closing prompts when intent/readiness is high.
+
 ## Routing strategy
 
 ZES routes users toward existing flows:
@@ -65,6 +91,12 @@ ZES routes users toward existing flows:
 
 If a specific flow is uncertain, ZES defaults to AI Discovery.
 
+Routing copy should emphasize internal orchestration, for example:
+
+- "ZES va pregati contextul pentru ofertare."
+- "ZES poate structura cererea de proiect."
+- "ZES poate evalua prioritatea de service."
+
 ## Safety boundaries
 
 ZES must not:
@@ -74,6 +106,10 @@ ZES must not:
 - guarantee pricing or timeline;
 - imply real AI is active;
 - request or expose sensitive personal data in analytics.
+
+ZES must also not imply real file parsing. Recommended phrasing:
+
+- "Momentan analiza documentelor este in mod demo; pentru proiect real, echipa ZESCORP poate verifica planurile manual."
 
 ## QA checklist
 

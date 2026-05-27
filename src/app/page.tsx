@@ -25,8 +25,8 @@ export default function Home() {
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Acasă", href: "/" }]} />
-      <HeroSection />
       <ZESGuideSection />
+      <HeroSection />
       <EnterpriseTrustBand sourcePage="/" />
       <AIMagicLayerSection />
       <Section

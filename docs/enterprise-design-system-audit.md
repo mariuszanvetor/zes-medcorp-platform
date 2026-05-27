@@ -20,6 +20,21 @@ Design intent remains unchanged:
 - no fake streaming or chatbot theatrics,
 - no changes to lead/API logic.
 
+## Phase 75F addendum (single conversational entry)
+
+Homepage now prioritizes ZES as the single conversational entry:
+
+- headline-first guided conversation above fold;
+- dominant input + send action;
+- deterministic follow-up rhythm instead of tool-first selection;
+- lead summary and capability chips visible during chat.
+
+Design implication:
+
+- separate tool CTAs are now supporting modules;
+- conversation surface acts as primary navigation into planning, ofertare, service and contact;
+- the visual system should keep this section clear and uncluttered on mobile.
+
 ## Methodology
 
 Reviewed:
