@@ -273,3 +273,19 @@ When CRM integration is added, map these fields into internal CRM properties:
 - source context.
 
 The CRM should store a compact summary, not raw long notes or sensitive documents.
+
+## Phase 76D ZES payload enrichment
+
+ZES lead submissions now include compact workflow metadata in `metadata`:
+
+- `conversationPhase`
+- `leadCompletionStatus`
+- `collectedFields`
+- `missingFields`
+- `closingSummary`
+- `fileAnalysisIncluded`
+- `fileAnalysisSummary`
+- `nextBestAction`
+- `aiMode` and `aiModel`
+
+These fields are deterministic and compact. They are used for internal triage and should not be exposed to public analytics as raw conversation data.

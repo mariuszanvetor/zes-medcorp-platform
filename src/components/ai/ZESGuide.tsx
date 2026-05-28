@@ -114,16 +114,18 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
 
   const shouldOfferCapture = useMemo(() => {
     if (!lastTurn || !conversationState) return false;
-    const answeredCount = Object.keys(conversationState.collectedAnswers).length;
-    const highIntentPath =
-      conversationState.pathId === "service" ||
-      conversationState.pathId === "ct-radiology" ||
-      conversationState.pathId === "mri" ||
-      conversationState.pathId === "funding" ||
-      conversationState.pathId === "equipment";
-
-    return lastTurn.highIntentClose || (highIntentPath && answeredCount >= 2);
+    return (
+      lastTurn.highIntentClose ||
+      conversationState.phase === "lead-capture-ready" ||
+      conversationState.phase === "completed-closed" ||
+      conversationState.leadCompletionStatus === "ready" ||
+      conversationState.leadCompletionStatus === "closed"
+    );
   }, [lastTurn, conversationState]);
+
+  const isReadyForHandoff =
+    conversationState?.leadCompletionStatus === "ready" ||
+    conversationState?.leadCompletionStatus === "closed";
 
   function handlePrompt(prompt: string) {
     setQuery(prompt);
@@ -143,7 +145,7 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
             .map((analysis) => `- ${analysis.fileName}: ${analysis.fileSummary}`)
             .join("\n")}`
         : text;
-    const explicitCloseIntent = /\b(trimite|oferta|oferte|contacteaza|sunati|prioritar)\b/i.test(
+    const explicitCloseIntent = /\b(da|trimite|oferta|oferte|contacteaza|sunati|prioritar|contactati-ma|vreau sa facem)\b/i.test(
       text,
     );
 
@@ -164,6 +166,20 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
       setConversationState(response.state);
       setRuntimeMode(response.aiMode);
       setRuntimeModel(response.aiModel);
+      setLeadValues((current) => ({
+        ...current,
+        city:
+          current.city || response.state.collectedAnswers.city || "",
+        phone:
+          current.phone || response.state.collectedAnswers.phone || "",
+        email:
+          current.email || response.state.collectedAnswers.email || "",
+        projectType:
+          current.projectType ||
+          response.state.collectedAnswers.project_type ||
+          response.state.collectedAnswers.service_equipment_type ||
+          "",
+      }));
       setConversation((current) => [
         ...current,
         { role: "user", text },
@@ -176,10 +192,19 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
         },
       ]);
 
-      if (response.turn.highIntentClose) {
+      if (
+        response.turn.highIntentClose ||
+        response.state.phase === "lead-capture-ready" ||
+        response.state.phase === "completed-closed"
+      ) {
         setCaptureVisible(true);
       }
-      if (response.turn.highIntentClose || explicitCloseIntent) {
+      if (
+        response.turn.highIntentClose ||
+        explicitCloseIntent ||
+        response.state.phase === "lead-capture-ready" ||
+        response.state.phase === "completed-closed"
+      ) {
         setPreliminaryRequest(
           buildPreliminaryRequest({
             analyses: readyAnalyses,
@@ -222,6 +247,20 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
 
       try {
         const result = await requestZESFileAnalysis(file, query);
+        setConversationState((current) =>
+          current
+            ? {
+                ...current,
+                fileUploadStatus: "analyzed",
+                collectedAnswers: {
+                  ...current.collectedAnswers,
+                  file_upload_status: "analyzed",
+                  plan_availability:
+                    current.collectedAnswers.plan_availability || "da",
+                },
+              }
+            : current,
+        );
         setUploadItems((current) =>
           current.map((item) =>
             item.id === uploadId
@@ -302,6 +341,12 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
       fileAnalysisIncluded: readyAnalyses.length > 0 ? "yes" : "no",
       fileAnalysisSummary: fileSummary || "none",
       preliminaryRequest: preliminaryRequest?.summary ?? "",
+      conversationPhase: conversationState.phase,
+      leadCompletionStatus: lastTurn.leadSnapshot.leadCompletionStatus,
+      collectedFields: lastTurn.leadSnapshot.collectedFields.join(" | "),
+      missingFields: lastTurn.leadSnapshot.missingFields.join(" | "),
+      closingSummary: buildClosingSummary(lastTurn, conversationState),
+      nextBestAction: lastTurn.leadSnapshot.nextStep,
     };
 
     const payload = createLeadPayload({
@@ -383,6 +428,22 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
         sheetsMode: apiResult.sheetsMode,
         storageMode: apiResult.storageMode,
       });
+      setConversationState((current) =>
+        current
+          ? {
+              ...current,
+              phase: "lead-captured",
+              leadCompletionStatus: "captured",
+            }
+          : current,
+      );
+      setConversation((current) => [
+        ...current,
+        {
+          role: "assistant",
+          text: "Cerere pregatita si trimisa. Daca vrei, mai pot genera un rezumat scurt pentru urmatoarea discutie tehnica.",
+        },
+      ]);
       trackLeadEvent("lead_form_submit_success", {
         sourcePage: "/",
         sourceTool: "zes-guide",
@@ -600,16 +661,30 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
             </section>
           )}
 
+          {isReadyForHandoff && lastTurn && conversationState && (
+            <section className="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 p-4">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-700">
+                Gata pentru preluare
+              </p>
+              <p className="mt-2 text-sm font-semibold leading-7 text-slate-900">
+                Cererea este suficient calificata pentru trimitere preliminara catre echipa ZESCORP.
+              </p>
+              <p className="mt-1 text-sm leading-7 text-slate-700">
+                Ce am inteles: {buildClosingSummary(lastTurn, conversationState)}
+              </p>
+            </section>
+          )}
+
           {(captureVisible || shouldOfferCapture) && lastTurn && conversationState && (
             <section className="mt-4 rounded-lg border border-blue-200 bg-white p-4">
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
                 Cerere catre ZESCORP
               </p>
               <p className="mt-2 text-sm font-semibold leading-7 text-slate-900">
-                Din ce ai descris, pare o cerere cu potential ridicat. ZES poate pregati acum cererea pentru echipa ZESCORP.
+                Din ce ai descris, cererea este pregatita pentru preluare preliminara. ZES poate trimite acum contextul catre echipa ZESCORP.
               </p>
               <p className="mt-1 text-sm leading-7 text-slate-600">
-                Completeaza datele de contact ca sa poata reveni un specialist. Pentru service urgent, telefonul si orasul sunt esentiale.
+                Completeaza datele minime de contact. Pentru service urgent, telefonul si orasul sunt esentiale.
               </p>
 
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
@@ -709,21 +784,6 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
                     : "Trimite cerere proiect"}
                 </Button>
                 <Button
-                  href="/contact"
-                  size="md"
-                  variant="secondary"
-                  onClick={() =>
-                    trackCTA({
-                      sourcePage: "/",
-                      sourceTool: "zes-guide",
-                      ctaLabel: "Solicita contact prioritar",
-                      destination: "/contact",
-                    })
-                  }
-                >
-                  Solicita contact prioritar
-                </Button>
-                <Button
                   size="md"
                   variant="secondary"
                   onClick={() => setCaptureVisible(false)}
@@ -792,6 +852,10 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
                   {lastTurn.leadSnapshot.maturity}
                 </li>
                 <li>
+                  <span className="font-semibold text-slate-900">Status lead:</span>{" "}
+                  {lastTurn.leadSnapshot.leadCompletionStatus}
+                </li>
+                <li>
                   <span className="font-semibold text-slate-900">Urmator pas:</span>{" "}
                   {lastTurn.leadSnapshot.nextStep}
                 </li>
@@ -831,7 +895,12 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
               Actiuni recomandate
             </p>
             <div className="mt-2 grid gap-2">
-              {(lastTurn?.ctas ?? defaultCtas).slice(0, 4).map((cta) => (
+              {(lastTurn?.ctas ?? defaultCtas)
+                .slice(
+                  0,
+                  lastTurn?.leadSnapshot.leadCompletionStatus === "closed" ? 2 : 4,
+                )
+                .map((cta) => (
                 <Button
                   className="justify-start"
                   href={cta.href}
@@ -861,7 +930,7 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
 function composeAssistantText(turn: ZESAssistantTurn) {
   const parts = [turn.message];
   if (turn.followUpQuestion) {
-    parts.push(`Intrebare urmatoare: ${turn.followUpQuestion}`);
+    parts.push(turn.followUpQuestion);
   }
   return parts.join("\n");
 }
@@ -875,8 +944,8 @@ function TurnDetails({
   aiMode?: ZESAIRuntimeMode;
   aiModel?: string | null;
 }) {
-  const showDocumentHint =
-    turn.highIntentClose || /plan|schita|document|fisa|atas/i.test(turn.message);
+  const showDocumentHint = Boolean(turn.documentHint?.trim());
+  const missingInfo = uniqueText(turn.leadSnapshot.missingInfo).slice(0, 2);
 
   return (
     <div className="mt-3 grid gap-2 rounded-lg border border-blue-100 bg-[#f7fbff] p-3 text-xs text-slate-700">
@@ -892,8 +961,8 @@ function TurnDetails({
       </p>
       <p>
         Informatii lipsa:{" "}
-        {turn.leadSnapshot.missingInfo.length
-          ? turn.leadSnapshot.missingInfo.slice(0, 2).join(" | ")
+        {missingInfo.length
+          ? missingInfo.join(" | ")
           : "set minim completat pentru pasul urmator"}
       </p>
       {showDocumentHint && (
@@ -901,7 +970,7 @@ function TurnDetails({
       )}
       {turn.highIntentClose && (
         <p className="rounded-lg border border-blue-200 bg-blue-50 p-2 font-semibold text-[#0057b8]">
-          Cerere cu intent ridicat detectata. ZES recomanda trimiterea datelor catre echipa ZESCORP.
+          Cerere pregatita pentru preluare. Trimite datele catre echipa ZESCORP.
         </p>
       )}
     </div>
@@ -986,6 +1055,10 @@ function buildGeneratedSummary(
     `Domain: ${turn.leadSnapshot.domain}.`,
     `Urgency: ${turn.leadSnapshot.urgency}.`,
     `Maturity: ${turn.leadSnapshot.maturity}.`,
+    `Conversation phase: ${state.phase}.`,
+    `Lead completion: ${turn.leadSnapshot.leadCompletionStatus}.`,
+    `Collected fields: ${turn.leadSnapshot.collectedFields.join(" | ") || "none"}.`,
+    `Missing fields: ${turn.leadSnapshot.missingFields.join(" | ") || "none"}.`,
     `Missing info: ${turn.leadSnapshot.missingInfo.join(" | ") || "none"}.`,
     `Recommended services: ${turn.suggestedServices.map((service) => service.label).join(", ")}.`,
     `Follow-up: ${turn.leadSnapshot.nextStep}.`,
@@ -1000,6 +1073,29 @@ function buildGeneratedSummary(
     `Preliminary request: ${preliminaryRequest?.summary ?? "not generated"}.`,
     `Path: ${state.pathId}.`,
   ].join(" ");
+}
+
+function buildClosingSummary(turn: ZESAssistantTurn, state: ZESConversationState) {
+  const values: string[] = [];
+  const collected = state.collectedAnswers;
+  const projectType =
+    collected.project_type || collected.service_equipment_type || turn.leadSnapshot.detectedNeed;
+  if (projectType) values.push(projectType);
+  if (collected.space_type) values.push(collected.space_type);
+  if (collected.city) values.push(collected.city);
+  if (collected.budget) values.push(`buget ${collected.budget}`);
+  if (collected.timeline) values.push(`termen ${collected.timeline}`);
+  if (collected.cncan_status) values.push(`CNCAN ${collected.cncan_status}`);
+  if (collected.plan_availability || collected.file_availability) {
+    values.push(`plan disponibil: ${collected.plan_availability || collected.file_availability}`);
+  }
+  if (collected.phone) values.push(`contact ${collected.phone}`);
+  if (!values.length) return turn.leadSnapshot.detectedNeed;
+  return values.join(" | ");
+}
+
+function uniqueText(items: string[]) {
+  return Array.from(new Set(items.map((item) => item.trim()).filter(Boolean)));
 }
 
 const defaultCapabilityChips = [
@@ -1122,30 +1218,32 @@ function buildPreliminaryRequest({
 }): PreliminaryRequest {
   const serviceLike = state.pathId === "service";
   const hasFiles = analyses.length > 0;
+  const summary = buildClosingSummary(turn, state);
+  const fileLine = hasFiles
+    ? `Fisiere analizate: ${analyses.map((analysis) => analysis.fileName).slice(0, 2).join(", ")}.`
+    : "Fisiere: inca neatasate, pot fi trimise ulterior.";
 
   if (serviceLike) {
     return {
       title: "Cerere structurata pentru service",
-      summary:
-        "ZES a pregatit un rezumat preliminar pentru triere service, cu simptome, urgenta si context operational.",
+      summary: `ZES a pregatit un rezumat preliminar pentru triere service: ${summary}. ${fileLine}`,
       recommendedServices: turn.suggestedServices.map((item) => item.label).slice(0, 4),
       missingInfo: turn.leadSnapshot.missingInfo,
       nextAction: hasFiles
         ? "Trimite cererea catre service ZESCORP impreuna cu datele de contact si fisierele analizate."
-        : "Trimite cererea catre service ZESCORP cu oras, telefon, model si descriere eroare.",
+        : "Trimite cererea catre service ZESCORP cu oras, telefon, model si descriere eroare. Documentele pot fi adaugate ulterior.",
       ctaLabel: "Trimite cazul catre service",
     };
   }
 
   return {
     title: "Cerere structurata pentru ofertare/proiect",
-    summary:
-      "ZES a pregatit un brief tehnic-comercial preliminar pentru analiza specialistului ZESCORP.",
+    summary: `ZES a pregatit un brief tehnic-comercial preliminar: ${summary}. ${fileLine}`,
     recommendedServices: turn.suggestedServices.map((item) => item.label).slice(0, 4),
     missingInfo: turn.leadSnapshot.missingInfo,
     nextAction: hasFiles
       ? "Trimite cererea pentru oferta preliminara cu date de contact si documentele analizate."
-      : "Trimite cererea pentru oferta preliminara si completeaza detaliile lipsa.",
+      : "Trimite cererea pentru oferta preliminara. Planul/fisierele se pot atasa ulterior.",
     ctaLabel: "Solicita oferta preliminara",
   };
 }

@@ -120,3 +120,15 @@ All examples use fake demo data only.
 9. Apply each mock action status to a selected lead.
 10. Confirm the list badge updates locally and the action appears in local review history.
 11. Reload the page and confirm the mock workflow resets, proving no persistence was added.
+
+## Phase 76D review additions
+
+For ZES Guide leads, admin demo review now highlights:
+
+- conversation state (`offer-prep`, `service-prep`, `lead-capture-ready`, etc.)
+- lead completion status (`not-ready`, `ready`, `captured`, `closed`)
+- file analysis included yes/no
+- collected and missing field groups
+- closing summary prepared by ZES
+
+This improves handoff clarity without adding CRM/database persistence.

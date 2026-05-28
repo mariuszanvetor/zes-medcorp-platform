@@ -545,6 +545,11 @@ function LeadList({
                       {lead.aiIntent ? ` / ${lead.aiIntent}` : ""}
                     </p>
                   )}
+                  {lead.leadCompletionStatus && (
+                    <p className="mt-1 text-xs font-semibold text-slate-600">
+                      completion: {lead.leadCompletionStatus}
+                    </p>
+                  )}
                 </td>
                 <td className="px-6 py-5">
                   <ScorePill score={lead.leadScore} priority={lead.priority} />
@@ -688,9 +693,21 @@ function LeadDetail({
         <DetailStat label="Domeniu" value={lead.projectDomain ?? classifyProject(lead)} />
         {lead.aiMode && <DetailStat label="AI mode" value={lead.aiMode} />}
         {lead.aiIntent && <DetailStat label="AI intent" value={lead.aiIntent} />}
+        {lead.conversationState && (
+          <DetailStat label="Conversation state" value={lead.conversationState} />
+        )}
+        {lead.leadCompletionStatus && (
+          <DetailStat label="Lead completion" value={lead.leadCompletionStatus} />
+        )}
         <DetailStat
           label="File analysis"
-          value={hasFileAnalysis(lead) ? "yes" : "no"}
+          value={lead.fileAnalysisIncluded !== undefined
+            ? lead.fileAnalysisIncluded
+              ? "yes"
+              : "no"
+            : hasFileAnalysis(lead)
+              ? "yes"
+              : "no"}
         />
       </div>
 
@@ -721,8 +738,19 @@ function LeadDetail({
             `Context sursa: ${intelligence.sourceContext}`,
             lead.aiMode ? `AI mode: ${lead.aiMode}` : "",
             lead.aiIntent ? `AI intent: ${lead.aiIntent}` : "",
+            lead.conversationState ? `Conversation state: ${lead.conversationState}` : "",
+            lead.leadCompletionStatus ? `Completion status: ${lead.leadCompletionStatus}` : "",
           ]}
         />
+        {lead.closingSummary && (
+          <DetailList title="Closing summary" items={[lead.closingSummary]} />
+        )}
+        {lead.collectedFields?.length ? (
+          <DetailList title="Collected fields" items={lead.collectedFields} />
+        ) : null}
+        {lead.missingFields?.length ? (
+          <DetailList title="Missing fields" items={lead.missingFields} />
+        ) : null}
         <DetailList
           title="Score rationale"
           items={unique([...lead.scoreRationale, ...scoring.reasons]).slice(0, 6)}

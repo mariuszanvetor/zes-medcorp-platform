@@ -82,6 +82,8 @@ const systemPrompt = [
   "Behave like a calm, consultative medical infrastructure sales engineer.",
   "Stay technical, enterprise-grade and commercially aware.",
   "Keep replies concise: 2-4 short sentences plus at most one next question.",
+  "Do not repeat questions that are already answered in collectedAnswers or conversationHistory.",
+  "When enough data exists for lead handoff, stop discovery and move to closing summary + next action.",
   "Avoid repeating the same disclaimer in every turn.",
   "Ask one clear next question at a time when possible.",
   "If user intent is high, move quickly toward contact capture and next action.",
@@ -315,15 +317,17 @@ function mergeStructuredReply(
   const matchedServices = mapServices(fallbackTurn, structured.recommendedServices);
   const ctas = reorderCtas(fallbackTurn, structured);
   const readiness = structured.leadReadiness;
+  const fallbackFollowUp = fallbackTurn.followUpQuestion?.trim() ?? "";
+  const aiFollowUp = structured.followUpQuestion.trim();
   const followUpQuestion =
-    structured.followUpQuestion.trim() || fallbackTurn.followUpQuestion || null;
+    fallbackTurn.leadSnapshot.leadCompletionStatus === "ready" ||
+    fallbackTurn.leadSnapshot.leadCompletionStatus === "closed"
+      ? null
+      : fallbackFollowUp || aiFollowUp || null;
   const highIntent =
     readiness >= 68 ||
     structured.urgency === "ridicata" ||
     structured.urgency === "critica";
-  const safetyTail = structured.safetyNotes.length
-    ? ` ${structured.safetyNotes.join(" ")}`
-    : "";
 
   return {
     ...fallbackTurn,
@@ -336,6 +340,9 @@ function mergeStructuredReply(
       maturity: readinessToMaturity(readiness),
       suggestedServices: matchedServices.map((item) => item.label),
       missingInfo: structured.missingInfo,
+      collectedFields: fallbackTurn.leadSnapshot.collectedFields,
+      missingFields: fallbackTurn.leadSnapshot.missingFields,
+      leadCompletionStatus: fallbackTurn.leadSnapshot.leadCompletionStatus,
       nextStep: structured.nextBestAction,
     },
     suggestedServices: matchedServices,
@@ -345,7 +352,7 @@ function mergeStructuredReply(
         ? structured.capabilityChips
         : fallbackTurn.capabilityChips,
     internalCapabilityNote: structured.nextBestAction,
-    documentHint: `${fallbackTurn.documentHint}${safetyTail}`.trim(),
+    documentHint: fallbackTurn.documentHint,
     highIntentClose:
       highIntent && (!followUpQuestion || followUpQuestion === fallbackTurn.followUpQuestion),
   };

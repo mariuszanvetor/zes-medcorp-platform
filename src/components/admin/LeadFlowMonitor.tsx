@@ -692,6 +692,13 @@ function createSafeTestPayload() {
     timestamp: new Date().toISOString(),
     metadata: {
       recommendedServices: "Lead flow diagnostic",
+      conversationPhase: "lead-capture-ready",
+      leadCompletionStatus: "ready",
+      collectedFields: "project_type|city|timeline|phone",
+      missingFields: "plan_availability",
+      closingSummary: "Lead flow monitor demo payload.",
+      fileAnalysisIncluded: "no",
+      nextBestAction: "Run internal triage follow-up",
     },
   };
 }

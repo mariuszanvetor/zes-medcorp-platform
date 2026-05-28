@@ -155,3 +155,18 @@ For a safe demo fallback:
 - Demo data is clearly labeled as mock/internal.
 - Public copy remains professional, technical and preliminary.
 - ZES branding is consistent: `ZES`, `ZES Copilot`, `ZES AI Copilot`, `ZES Guided Planning`.
+
+## Phase 76D conversation QA scenarios
+
+1. RX shielding close:
+   - feed project type, city, budget, timeline, CNCAN status, plan availability and phone;
+   - verify ZES closes with summary and does not keep asking repeated questions.
+2. Service close:
+   - use equipment symptom + close intent (`trimite cererea`) + phone/city;
+   - verify inline lead capture appears quickly.
+3. File already uploaded:
+   - upload plan/image, continue conversation;
+   - verify ZES uses file context and does not re-ask for same file.
+4. Fallback mode:
+   - set AI disabled/missing key;
+   - verify deterministic close behavior still works.

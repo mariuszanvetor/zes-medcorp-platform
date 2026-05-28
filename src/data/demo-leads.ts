@@ -28,6 +28,20 @@ export type DemoLead = {
   sourcePage: string;
   aiMode?: "real" | "fallback" | "mock";
   aiIntent?: string;
+  conversationState?:
+    | "early-discovery"
+    | "qualification"
+    | "offer-prep"
+    | "service-prep"
+    | "lead-capture-ready"
+    | "lead-captured"
+    | "waiting-for-file"
+    | "completed-closed";
+  leadCompletionStatus?: "not-ready" | "ready" | "captured" | "closed";
+  collectedFields?: string[];
+  missingFields?: string[];
+  fileAnalysisIncluded?: boolean;
+  closingSummary?: string;
   projectType: string;
   inquiryType: string;
   company: string;
@@ -83,6 +97,13 @@ export const demoLeads: DemoLead[] = [
     sourcePage: "/",
     aiMode: "fallback",
     aiIntent: "service-maintenance",
+    conversationState: "lead-capture-ready",
+    leadCompletionStatus: "ready",
+    collectedFields: ["service_equipment_type", "symptom", "city", "urgency", "phone"],
+    missingFields: ["manufacturer_model", "maintenance_contract"],
+    fileAnalysisIncluded: true,
+    closingSummary:
+      "Service monitor functii, Bucuresti, urgenta critica, contact telefonic disponibil.",
     projectType: "Service urgent imagistica",
     inquiryType: "ZES Guide conversation / service",
     company: "Service Demo Clinic",
@@ -147,6 +168,13 @@ export const demoLeads: DemoLead[] = [
     sourcePage: "/",
     aiMode: "real",
     aiIntent: "ct-project",
+    conversationState: "offer-prep",
+    leadCompletionStatus: "ready",
+    collectedFields: ["project_type", "city", "budget", "timeline", "cncan_status", "phone"],
+    missingFields: ["utilities"],
+    fileAnalysisIncluded: true,
+    closingSummary:
+      "Proiect CT clinic nou, Bucuresti, buget orientativ, timeline 1-3 luni, CNCAN de initiat.",
     projectType: "Proiect CT clinic nou",
     inquiryType: "ZES Guide conversation / proiect",
     company: "CT Demo Project",

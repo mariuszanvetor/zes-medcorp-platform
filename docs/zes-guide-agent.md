@@ -281,3 +281,23 @@ Privacy note in UI:
 8. Verify `npm run build -- --webpack` and `npm run content:check` pass.
 9. Trigger a high-intent scenario and confirm inline lead capture appears naturally.
 10. Submit a mock ZES lead and confirm success plus returned integration modes.
+
+## Phase 76D conversation quality rules
+
+- ZES now tracks explicit conversation phases: `early-discovery`, `qualification`, `offer-prep`, `service-prep`, `lead-capture-ready`, `lead-captured`, `waiting-for-file`, `completed-closed`.
+- ZES keeps `collectedAnswers`, `askedQuestionIds`, `lastAskedQuestionId`, `leadCompletionStatus` and `fileUploadStatus` in conversation state.
+- Anti-repetition is enforced by selecting only unanswered questions and deduping missing info in turn details.
+- Closing intent (`trimite`, `oferta`, `contactati-ma`, `vreau sa facem`, or explicit `da`) now accelerates lead closing instead of opening new generic questions.
+
+Lead completion thresholds:
+
+- Service path: equipment/service intent + symptom + urgency/downtime + city/contact.
+- Project path: project type + city + timeline/budget + plan or project description + phone/email.
+
+When threshold is reached, ZES switches to a closing summary and keeps only 1-2 closing actions.
+
+Safety frequency rules:
+
+- Service safety warning appears once at first relevant service risk.
+- CNCAN/compliance warning appears once per relevant project context.
+- Upload hint appears only when useful and not already resolved.

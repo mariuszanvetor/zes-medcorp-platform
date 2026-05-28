@@ -293,3 +293,15 @@ Recommended next phases:
 6. Admin review assistant for internal lead triage.
 7. CRM handoff mapping after auth and real storage exist.
 8. Human review workflow for high-value projects and compliance-sensitive cases.
+
+## Phase 76D closing intelligence update
+
+The AI Magic layer now applies deterministic closing intelligence:
+
+- conversation state machine with explicit phase tracking;
+- anti-repetition controls for questions and safety notes;
+- service/project qualification thresholds;
+- automatic shift to `lead-capture-ready` when minimum data exists;
+- `completed-closed` state when user confirms submit intent.
+
+This keeps ZES consultative and short while still respecting safety boundaries.
