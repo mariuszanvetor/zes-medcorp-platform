@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 
 import { AnalyticsProvider } from "@/components/analytics/AnalyticsProvider";
+import { ClarityAnalytics } from "@/components/analytics/ClarityAnalytics";
 import { FloatingZESAssistant } from "@/components/ai/FloatingZESAssistant";
 import { ConversionStickyCTA } from "@/components/layout/ConversionStickyCTA";
 import { Footer } from "@/components/layout/Footer";
@@ -30,6 +31,7 @@ export default function RootLayout({
     <html lang="ro">
       <body>
         <AnalyticsProvider />
+        <ClarityAnalytics />
         <OrganizationSchema />
         <LocalBusinessSchema />
         <div className="flex min-h-screen flex-col">
