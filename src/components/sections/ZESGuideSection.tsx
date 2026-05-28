@@ -25,8 +25,8 @@ export function ZESGuideSection() {
             Exemple rapide: "Am un aparat defect", "Vreau clinica CT", "Am nevoie
             de camera RMN", "Pregatesc proiect pe fonduri europene".
           </p>
-          <div className="mt-8">
-            <ZESGuide compactHeader />
+          <div className="mt-8" id="zes-guide">
+            <ZESGuide compactHeader instanceId="zes-guide-embedded" testIdPrefix="zes-embedded" />
           </div>
         </div>
       </Container>

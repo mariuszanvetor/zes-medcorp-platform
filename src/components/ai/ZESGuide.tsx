@@ -59,20 +59,26 @@ type ZESGuideProps = {
   compactHeader?: boolean;
   mode?: "full" | "popup";
   externalPromptToken?: string | null;
+  instanceId?: string;
+  testIdPrefix?: string;
 };
 
 const introMessage =
   "Salut, sunt ZES. Spune ce vrei sa construiesti, modernizezi sau repari. Poti atasa poze, planuri sau fise tehnice, iar ZES pregateste urmatorul pas pentru service, proiect sau ofertare.";
+const introMessagePopup =
+  "Salut, sunt ZES. Spune pe scurt ce ai nevoie, iar te ghidez catre urmatorul pas.";
 
 export function ZESGuide({
   compactHeader = false,
   mode = "full",
   externalPromptToken,
+  instanceId = "zes-guide",
+  testIdPrefix,
 }: ZESGuideProps) {
   const isPopup = mode === "popup";
   const [query, setQuery] = useState("");
   const [conversation, setConversation] = useState<ConversationItem[]>([
-    { role: "assistant", text: introMessage },
+    { role: "assistant", text: isPopup ? introMessagePopup : introMessage },
   ]);
   const [conversationState, setConversationState] = useState<ZESConversationState | null>(
     null,
@@ -115,6 +121,7 @@ export function ZESGuide({
   const scrollFrameRef = useRef<number | null>(null);
   const previousPromptTokenRef = useRef<string | null>(null);
   const forceAutoScrollRef = useRef(false);
+  const componentTestPrefix = testIdPrefix ?? (isPopup ? "zes-floating" : "zes-embedded");
 
   const lastTurn = useMemo(() => {
     for (let index = conversation.length - 1; index >= 0; index -= 1) {
@@ -140,6 +147,9 @@ export function ZESGuide({
   const isReadyForHandoff =
     conversationState?.leadCompletionStatus === "ready" ||
     conversationState?.leadCompletionStatus === "closed";
+  const hasConversationStarted = conversation.some((item) => item.role === "user");
+  const visibleConversation =
+    isPopup && hasConversationStarted ? conversation.slice(1) : conversation;
 
   function requestAutoScroll(force = false) {
     forceAutoScrollRef.current = force || forceAutoScrollRef.current;
@@ -147,8 +157,7 @@ export function ZESGuide({
 
   function scrollToLatest({ force = false }: { force?: boolean } = {}) {
     const viewport = conversationViewportRef.current;
-    const bottomAnchor = conversationBottomRef.current;
-    if (!viewport || !bottomAnchor) {
+    if (!viewport) {
       return;
     }
 
@@ -164,17 +173,22 @@ export function ZESGuide({
       scrollFrameRef.current = null;
     }
 
+    const behavior: ScrollBehavior = force ? "auto" : "smooth";
     scrollFrameRef.current = window.requestAnimationFrame(() => {
-      bottomAnchor.scrollIntoView({ behavior: "smooth", block: "end" });
+      viewport.scrollTo({ top: viewport.scrollHeight, behavior });
       scrollFrameRef.current = window.requestAnimationFrame(() => {
-        bottomAnchor.scrollIntoView({ behavior: "smooth", block: "end" });
+        viewport.scrollTo({ top: viewport.scrollHeight, behavior });
+        conversationBottomRef.current?.scrollIntoView({ behavior, block: "end" });
+        window.setTimeout(() => {
+          viewport.scrollTo({ top: viewport.scrollHeight, behavior: "auto" });
+        }, 24);
         scrollFrameRef.current = null;
       });
     });
   }
 
   useEffect(() => {
-    scrollToLatest({ force: forceAutoScrollRef.current });
+    scrollToLatest({ force: forceAutoScrollRef.current || isPopup });
     forceAutoScrollRef.current = false;
   }, [
     conversation,
@@ -590,7 +604,8 @@ export function ZESGuide({
         "rounded-xl border border-blue-200 bg-white p-4 shadow-[0_18px_42px_rgba(0,87,184,0.09)] sm:p-6",
         isPopup && "flex h-full flex-col overflow-hidden rounded-none border-0 bg-transparent p-0 shadow-none sm:p-0",
       )}
-      id="zes-guide"
+      data-testid={`${componentTestPrefix}-guide`}
+      id={instanceId}
     >
       {!compactHeader && (
         <>
@@ -626,17 +641,24 @@ export function ZESGuide({
           className={cn(
             "min-w-0 rounded-xl border border-slate-200 bg-[#f7fbff] p-3 sm:p-4",
             isPopup &&
-              "flex min-h-0 flex-1 flex-col overflow-x-hidden overflow-y-auto rounded-xl border-blue-100 bg-[linear-gradient(180deg,#f8fbff_0%,#f2f7ff_100%)] p-2.5 sm:p-3",
+              "flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl border-blue-100 bg-[linear-gradient(180deg,#f8fbff_0%,#f2f7ff_100%)] p-2 sm:p-2.5",
           )}
-          ref={conversationViewportRef}
         >
+          <div
+            className={cn(
+              "min-h-0 min-w-0",
+              isPopup ? "flex-1 overflow-y-auto overflow-x-hidden pr-1" : "",
+            )}
+            data-testid={isPopup ? `${componentTestPrefix}-messages` : undefined}
+            ref={conversationViewportRef}
+          >
           <div
             className={cn(
               "grid min-w-0 gap-3 overflow-x-hidden pr-1",
               isPopup ? "scroll-smooth" : "max-h-[30rem] overflow-y-auto",
             )}
           >
-            {conversation.map((item, index) => (
+            {visibleConversation.map((item, index) => (
               <div
                 className={cn(
                   "max-w-[96%] min-w-0 rounded-lg border p-3 text-sm leading-7 shadow-sm [overflow-wrap:anywhere]",
@@ -918,6 +940,7 @@ export function ZESGuide({
           )}
 
           <div aria-hidden className="h-px w-full" ref={conversationBottomRef} />
+          </div>
 
           <div
             className={cn(
@@ -925,6 +948,7 @@ export function ZESGuide({
               isPopup &&
                 "sticky bottom-0 z-20 border-blue-200 border-t bg-white/95 shadow-[0_-10px_22px_rgba(15,23,42,0.1)] backdrop-blur",
             )}
+            data-testid={isPopup ? `${componentTestPrefix}-composer` : undefined}
           >
             <div className="flex flex-wrap items-center justify-between gap-2">
               <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
@@ -948,9 +972,9 @@ export function ZESGuide({
                 ))}
               </div>
             )}
-            {isPopup && (
+            {isPopup && !hasConversationStarted && (
               <div className="mt-2 flex flex-wrap gap-1.5">
-                {zesGuideStarters.slice(0, 2).map((starter) => (
+                {zesGuideStarters.slice(0, 1).map((starter) => (
                   <button
                     className="min-w-0 max-w-full rounded-lg border border-blue-100 bg-[#f7fbff] px-2 py-1.5 text-[11px] font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
                     key={starter}
@@ -967,7 +991,7 @@ export function ZESGuide({
             <form
               className={cn(
                 "mt-3 min-w-0 gap-2",
-                isPopup ? "grid grid-cols-1 md:grid-cols-[1fr_auto_auto]" : "flex flex-col sm:flex-row",
+                isPopup ? "grid grid-cols-1 sm:grid-cols-[1fr_auto_auto]" : "flex flex-col sm:flex-row",
               )}
               onSubmit={(event) => {
                 event.preventDefault();
@@ -977,6 +1001,7 @@ export function ZESGuide({
               <input
                 ref={queryInputRef}
                 className="h-11 w-full min-w-0 rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none transition focus:border-blue-300"
+                data-testid={isPopup ? `${componentTestPrefix}-input` : undefined}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Vreau clinica CT / service / camera RMN"
                 value={query}
@@ -993,6 +1018,7 @@ export function ZESGuide({
               />
               <Button
                 className={cn("w-full shrink-0 md:w-auto", isPopup && "px-3")}
+                data-testid={isPopup ? `${componentTestPrefix}-upload` : undefined}
                 size="sm"
                 type="button"
                 variant="secondary"
@@ -1002,6 +1028,7 @@ export function ZESGuide({
               </Button>
               <Button
                 className={cn("w-full shrink-0 md:w-auto", isPopup && "px-3")}
+                data-testid={isPopup ? `${componentTestPrefix}-send` : undefined}
                 isLoading={isResponding}
                 size="sm"
                 type="submit"
@@ -1010,7 +1037,9 @@ export function ZESGuide({
               </Button>
             </form>
             <p className="mt-2 text-xs leading-6 text-slate-500">
-              Formate: JPG, PNG, WEBP, PDF, TXT, DOC/DOCX, XLS/XLSX (max 8 MB/fisier).
+              {isPopup
+                ? "JPG, PNG, WEBP, PDF, DOCX, XLSX. Evita date medicale sensibile."
+                : "Formate: JPG, PNG, WEBP, PDF, TXT, DOC/DOCX, XLS/XLSX (max 8 MB/fisier)."}
             </p>
             {!isPopup && (
               <p className="mt-1 text-xs leading-6 text-slate-500">
@@ -1214,7 +1243,7 @@ function TurnDetails({
   aiModel?: string | null;
   compact?: boolean;
 }) {
-  if (isGreetingLikeTurn(turn)) {
+  if (!shouldRenderRecommendationDetails(turn)) {
     return null;
   }
 
@@ -1248,7 +1277,7 @@ function TurnDetails({
               ? missingInfo.join(" | ")
               : "set minim completat pentru pasul urmator"}
           </p>
-          {aiMode && (
+          {aiMode && !isLowIntentTurn(turn) && (
             <p className="text-[11px] text-slate-600">
               Runtime: {formatRuntimeLabel(aiMode, aiModel ?? null)}
             </p>
@@ -1458,6 +1487,26 @@ function isGreetingLikeTurn(turn: ZESAssistantTurn) {
     turn.leadSnapshot.collectedFields.length === 0;
 
   return lowSpecificity;
+}
+
+function isLowIntentTurn(turn: ZESAssistantTurn) {
+  const unknownDomain = normalizeForComparison(turn.leadSnapshot.domain).includes("necunoscut");
+  return isGreetingLikeTurn(turn) || (unknownDomain && turn.suggestedServices.length <= 1);
+}
+
+function shouldRenderRecommendationDetails(turn: ZESAssistantTurn) {
+  if (isLowIntentTurn(turn)) {
+    return false;
+  }
+
+  const missingInfo = uniqueText(turn.leadSnapshot.missingInfo);
+  const hasGenericMissingOnly =
+    missingInfo.length > 0 && missingInfo.every((item) => isGenericPrompt(item));
+  if (hasGenericMissingOnly && turn.suggestedServices.length <= 1 && !turn.documentHint?.trim()) {
+    return false;
+  }
+
+  return true;
 }
 
 function isGreetingLikeText(input: string) {

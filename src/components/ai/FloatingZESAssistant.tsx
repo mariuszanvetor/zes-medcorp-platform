@@ -139,10 +139,7 @@ export function FloatingZESAssistant() {
   }, [shouldRender]);
 
   const isOpen = state === "open";
-  const buttonLabel = useMemo(
-    () => (isOpen ? "Minimizeaza ZES" : "Discuta cu ZES"),
-    [isOpen],
-  );
+  const buttonLabel = useMemo(() => "Discuta cu ZES", []);
 
   if (!shouldRender) {
     return null;
@@ -151,6 +148,7 @@ export function FloatingZESAssistant() {
   return (
     <div className="pointer-events-none fixed bottom-3 left-3 right-3 z-[70] sm:bottom-6 sm:left-auto sm:right-6 sm:w-[26.5rem]">
       <div
+        data-testid="zes-floating-popup"
         className={cn(
           "pointer-events-auto mb-2 flex w-full flex-col overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-[0_24px_70px_rgba(15,65,118,0.24)] transition-all duration-300",
           isOpen
@@ -175,6 +173,7 @@ export function FloatingZESAssistant() {
             <div className="flex items-center gap-1">
               <button
                 aria-label="Minimizeaza ZES"
+                data-testid="zes-floating-minimize"
                 className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-blue-100 text-sm font-semibold text-slate-600 transition hover:bg-blue-50 hover:text-[#0057b8]"
                 type="button"
                 onClick={() => setState("minimized")}
@@ -183,6 +182,7 @@ export function FloatingZESAssistant() {
               </button>
               <button
                 aria-label="Inchide ZES"
+                data-testid="zes-floating-close"
                 className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-blue-100 text-sm font-semibold text-slate-600 transition hover:bg-blue-50 hover:text-[#0057b8]"
                 type="button"
                 onClick={() => setState("closed")}
@@ -193,12 +193,19 @@ export function FloatingZESAssistant() {
           </div>
         </div>
         <div className="min-h-0 flex-1 overflow-hidden p-2 sm:p-3">
-          <ZESGuide compactHeader externalPromptToken={promptSeed} mode="popup" />
+          <ZESGuide
+            compactHeader
+            externalPromptToken={promptSeed}
+            instanceId="zes-guide-floating"
+            mode="popup"
+            testIdPrefix="zes-floating"
+          />
         </div>
       </div>
 
       {!isOpen && (
         <Button
+          data-testid="zes-floating-reopen"
           className="pointer-events-auto h-11 rounded-full px-4 text-sm shadow-[0_16px_42px_rgba(0,87,184,0.30)] sm:h-12 sm:px-5 sm:text-base"
           size="md"
           type="button"

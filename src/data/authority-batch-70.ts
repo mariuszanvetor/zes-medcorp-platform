@@ -28,6 +28,268 @@ const projectMedicalCalculatorTool = { label: "Calculator proiect medical", href
 
 export const authorityBatch70: Article[] = [
   {
+    slug: "ce-presupune-autorizarea-cncan-pentru-o-camera-rx",
+    title: "Ce presupune autorizarea CNCAN pentru o camera RX?",
+    description:
+      "Ghid practic pentru clinici si investitori: ce presupune preliminar autorizarea CNCAN pentru o camera RX, ce informatii sunt necesare si cand merita evaluarea tehnica.",
+    category: "Autorizări",
+    tags: ["CNCAN", "camera RX", "radioprotectie", "autorizare radiologie"],
+    readingTime: "9 min",
+    targetKeyword: "autorizare CNCAN camera RX",
+    relatedServices: [
+      "/radioprotectie-plumbare-rx",
+      "/services/protectie-radiologica",
+      "/service-aparatura-medicala",
+    ],
+    relatedTools: [
+      { label: "Discuta cu ZES despre camera RX", href: "/" },
+      { label: "Pregateste cererea preliminara", href: "/project-intake" },
+      { label: "Radioprotectie si plumbare RX", href: "/radioprotectie-plumbare-rx" },
+    ],
+    intro:
+      "Autorizarea CNCAN pentru o camera RX nu este un formular singular completat la final de proiect, ci un proces in care configuratia camerei, tipul echipamentului si solutia de radioprotectie trebuie corelate din timp. O abordare corecta reduce riscul de refaceri si blocaje in calendar.",
+    sections: [
+      {
+        id: "ce-este-cncan-si-de-ce-conteaza",
+        title: "Ce este CNCAN si de ce conteaza",
+        body: [
+          "Pentru proiectele cu radiologie, cadrul CNCAN este relevant deoarece gestioneaza cerintele de protectie radiologica in contextul utilizarii aparaturii cu radiatii ionizante.",
+          "In practica, pentru o clinica sau un investitor, asta inseamna ca proiectul camerei RX trebuie gandit astfel incat deciziile de amenajare, ecranare si exploatare sa fie coerente tehnic.",
+        ],
+      },
+      {
+        id: "ce-trebuie-clarificat-inainte",
+        title: "Ce trebuie clarificat inainte de autorizare",
+        body: [
+          "Inainte de a discuta despre o documentatie completa, trebuie clarificate datele de baza: tipul echipamentului RX, contextul de utilizare, vecinatatile camerei si constrangerile de spatiu.",
+          "Fara aceste premise, evaluarea costurilor, a termenului si a nivelului de radioprotectie ramane incompleta.",
+        ],
+        bullets: [
+          "tipul de aparat si configuratia de lucru",
+          "spatiu existent versus constructie noua",
+          "zone adiacente si fluxuri de personal/pacienti",
+          "orizont de implementare si stadiul proiectului",
+        ],
+      },
+      {
+        id: "rolul-planului-camerei-rx",
+        title: "Rolul planului camerei RX",
+        body: [
+          "Planul camerei este baza pentru orice discutie tehnica serioasa. El permite estimarea corecta a suprafetelor, analizarea punctelor sensibile si definirea solutiilor de ecranare.",
+          "Daca planul lipseste sau este incomplet, recomandarile pot fi doar orientative si trebuie revizuite ulterior.",
+        ],
+      },
+      {
+        id: "radioprotectie-si-plumbare",
+        title: "Radioprotectie si plumbare",
+        body: [
+          "Plumbarea este doar o parte a radioprotectiei. Solutia completa depinde de echipament, de geometria camerei, de vecinatati si de modul in care spatiul va fi folosit in operare.",
+          "Din acest motiv, nu exista o reteta universala aplicabila identic pentru toate camerele RX.",
+        ],
+      },
+      {
+        id: "documente-si-informatii-utile",
+        title: "Documente si informatii utile",
+        body: [
+          "Pentru o evaluare preliminara eficienta, sunt utile planul camerei, date tehnice de echipament si informatii despre utilizare. Acest pachet minim scurteaza clarificarile si imbunatateste calitatea estimarii.",
+          "Pe masura ce proiectul avanseaza, documentatia se completeaza impreuna cu specialistii relevanti.",
+        ],
+      },
+      {
+        id: "greseli-frecvente",
+        title: "Greseli frecvente",
+        body: [
+          "Una dintre cele mai frecvente greseli este amanarea radioprotectiei pana dupa alegerile de finisaj sau dupa blocarea bugetului. In acel punct, orice ajustare poate deveni costisitoare.",
+          "O alta greseala este presupunerea ca un pret generic pentru plumbare echivaleaza cu o solutie validata pentru proiect.",
+        ],
+        callout: {
+          title: "Nota de conformare",
+          body: "Informatiile sunt orientative si trebuie validate cu specialisti autorizati.",
+        },
+      },
+      {
+        id: "cum-poate-ajuta-zes",
+        title: "Cum poate ajuta ZES",
+        body: [
+          "ZES poate organiza rapid informatia initiala, poate evidentia datele lipsa si poate pregati un context util pentru discutia tehnica. Astfel, echipa ta intra mai pregatita in etapa de evaluare preliminara.",
+          "In functie de caz, poti continua catre discutia de radioprotectie/plumbare sau catre pregatirea cererii preliminare de proiect.",
+        ],
+      },
+      {
+        id: "cand-sa-soliciti-evaluare",
+        title: "Cand sa soliciti evaluare",
+        body: [
+          "Merita sa soliciti evaluare cand ai cel putin tipul echipamentului, planul (chiar preliminar) si contextul de utilizare. In acest punct poti primi o directie tehnica mai clara.",
+          "Daca proiectul este in faza timpurie, incepe cu ZES pentru trierea informatiei si stabilirea urmatorilor pasi.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Poate ZESCORP sa acorde direct autorizarea CNCAN?",
+        answer:
+          "Nu. ZESCORP poate oferi ghidaj tehnic preliminar si suport de pregatire, iar etapele de autorizare trebuie gestionate in cadrul legal aplicabil, cu specialisti autorizati.",
+      },
+      {
+        question: "Este suficienta doar plumbarea pentru conformare?",
+        answer:
+          "Nu intotdeauna. Radioprotectia trebuie abordata ca sistem, in functie de echipament, vecinatati, utilizare si documentatia tehnica.",
+      },
+      {
+        question: "Se poate porni evaluarea fara plan final?",
+        answer:
+          "Da, la nivel preliminar. Pentru decizii tehnice finale este necesara documentatie completa validata de specialisti.",
+      },
+      {
+        question: "Cand este potrivita cererea preliminara?",
+        answer:
+          "Cand exista date de baza despre camera RX, aparat si stadiul proiectului, astfel incat discutia sa devina practica si orientata pe implementare.",
+      },
+    ],
+    relatedArticles: [
+      "ce-trebuie-sa-stii-despre-autorizarea-cncan",
+      "protectie-radiologica-camera-rx",
+      "cat-costa-plumbarea-unei-camere-rx",
+    ],
+    cta: {
+      title: "Discuta cu ZES despre camera RX",
+      description:
+        "Pregateste contextul tehnic al proiectului si continua cu urmatorii pasi pentru evaluare preliminara.",
+      label: "Pregateste cererea preliminara",
+      href: "/project-intake",
+    },
+    publishedAt: "2026-05-28",
+    updatedAt: "2026-05-28",
+  },
+  {
+    slug: "ce-faci-cand-monitorul-de-functii-vitale-nu-mai-porneste",
+    title: "Ce faci cand un monitor de functii vitale nu mai porneste?",
+    description:
+      "Ghid practic pentru clinici si echipe biomedicale: simptome, cauze posibile si cand este necesara evaluarea specializata pentru un monitor de functii vitale care nu mai porneste.",
+    category: "Service",
+    tags: ["service aparatura medicala", "monitor functii vitale", "diagnostic preliminar", "mentenanta"],
+    readingTime: "8 min",
+    targetKeyword: "monitor functii vitale nu mai porneste",
+    relatedServices: [
+      "/service-aparatura-medicala",
+      "/services/service-aparatura-medicala",
+      "/services/aparatura-medicala",
+    ],
+    relatedTools: [
+      { label: "Discuta cu ZES despre problema aparatului", href: "/" },
+      { label: "Solicita evaluare preliminara", href: "/project-intake" },
+      { label: "Service aparatura medicala", href: "/service-aparatura-medicala" },
+    ],
+    intro:
+      "Cand un monitor de functii vitale nu mai porneste, presiunea operationala poate fi mare, mai ales in zone clinice active. O abordare corecta inseamna triere calma, verificari de baza in conditii sigure si escaladare rapida catre service calificat atunci cand exista risc de functionare incorecta.",
+    sections: [
+      {
+        id: "simptome-frecvente",
+        title: "Simptome frecvente",
+        body: [
+          "In practica, problemele apar sub forme diferite: echipamentul nu porneste deloc, porneste partial, are semnal acustic fara afisaj stabil sau se opreste imediat dupa boot.",
+          "Observarea exacta a simptomului ajuta echipa de service sa prioritizeze cazul si sa reduca timpul de diagnostic.",
+        ],
+      },
+      {
+        id: "cauze-posibile",
+        title: "Cauze posibile la nivel preliminar",
+        body: [
+          "Fara a deschide echipamentul, cauzele posibile pot include alimentare instabila, acumulator degradat, problema de pornire software, defect de afisaj, eroare interna sau incompatibilitate pe lantul de accesorii/cabluri.",
+          "Aceste ipoteze sunt orientative si nu inlocuiesc evaluarea tehnica de service.",
+        ],
+        bullets: [
+          "alimentare sau adaptor cu comportament instabil",
+          "acumulator cu autonomie critica sau defect",
+          "failure de startup/boot",
+          "problema pe display/backlight",
+          "defect intern care necesita diagnostic specializat",
+          "cabluri/accesorii cu contact incorect",
+        ],
+      },
+      {
+        id: "ce-se-poate-verifica-in-siguranta",
+        title: "Ce poate fi verificat in siguranta",
+        body: [
+          "Pot fi verificate doar elemente externe, fara interventii invazive: sursa de alimentare aprobata, conectica externa evidenta si conditiile de mediu de baza. Daca simptomul persista, nu continua utilizarea in flux clinic critic fara evaluare.",
+          "Nu este recomandata deschiderea echipamentului sau tentativa de reparatie interna de catre personal neautorizat.",
+        ],
+      },
+      {
+        id: "cand-este-necesar-service-specializat",
+        title: "Cand este necesar service specializat",
+        body: [
+          "Service-ul specializat este necesar atunci cand monitorul nu porneste repetat, afisajul ramane instabil sau exista dubii privind functionarea corecta in context clinic.",
+          "Cu cat datele initiale despre simptom sunt mai clare, cu atat trierea si interventia pot fi mai rapide.",
+        ],
+      },
+      {
+        id: "riscuri-utilizare-defect",
+        title: "Riscuri in utilizarea unui echipament defect",
+        body: [
+          "Utilizarea unui monitor cu pornire instabila sau comportament neclar poate afecta siguranta operationala si deciziile clinice. In scenarii critice, continuitatea monitorizarii trebuie protejata prin echipamente functionale.",
+          "Daca exista incertitudine privind functionarea corecta, echipamentul ar trebui scos temporar din uz pana la evaluare tehnica.",
+        ],
+        callout: {
+          title: "Siguranta operationala",
+          body: "Acest ghid nu include instructiuni de reparatie interna. Pentru diagnostic si remediere, folositi service calificat.",
+        },
+      },
+      {
+        id: "cum-poate-ajuta-zes",
+        title: "Cum poate ajuta ZES",
+        body: [
+          "ZES poate colecta rapid contextul de service (simptom, model, urgenta, locatie) si poate pregati cererea preliminara pentru echipa tehnica.",
+          "Astfel, comunicarea initiala devine mai clara, iar prioritizarea cazului este mai eficienta.",
+        ],
+      },
+      {
+        id: "cand-sa-solicitati-evaluare",
+        title: "Cand sa solicitati evaluare preliminara",
+        body: [
+          "Solicitati evaluare imediat ce observati un simptom repetitiv de pornire sau functionare instabila in context clinic. Escaladarea timpurie reduce riscul de downtime prelungit.",
+          "Pentru urgente, mentionati in cerere impactul operational (sectie, interval indisponibil, disponibilitate backup).",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Este sigur sa folosesc monitorul daca porneste intermitent?",
+        answer:
+          "Nu este recomandat in flux critic pana la o evaluare tehnica. Functionarea intermitenta poate ascunde defecte care afecteaza fiabilitatea monitorizarii.",
+      },
+      {
+        question: "Pot deschide echipamentul pentru verificare interna?",
+        answer:
+          "Nu. Reparatiile interne trebuie facute doar de personal calificat, cu proceduri si trasabilitate adecvata.",
+      },
+      {
+        question: "Ce informatii ajuta cel mai mult la triere?",
+        answer:
+          "Modelul echipamentului, simptomul exact, momentul aparitiei, urgenta operationala si locatia clinica.",
+      },
+      {
+        question: "Cand trebuie ceruta evaluare preliminara?",
+        answer:
+          "Cand monitorul nu mai porneste stabil sau exista impact asupra activitatii clinice. Cu cat cererea este trimisa mai devreme, cu atat interventia poate fi planificata mai eficient.",
+      },
+    ],
+    relatedArticles: [
+      "service-ct-rmn-mentenanta-uptime",
+      "mentenanta-preventiva-aparatura-medicala",
+      "contract-mentenanta-aparatura-medicala",
+    ],
+    cta: {
+      title: "Discuta cu ZES despre problema aparatului",
+      description:
+        "Descrie simptomul monitorului si pregateste rapid o cerere clara pentru evaluare preliminara.",
+      label: "Solicita evaluare preliminara",
+      href: "/project-intake",
+    },
+    publishedAt: "2026-05-28",
+    updatedAt: "2026-05-28",
+  },
+  {
     slug: "rmn-1-5t-vs-3t-infrastructura",
     title: "RMN 1.5T vs 3T din punct de vedere al infrastructurii",
     description:
@@ -1814,6 +2076,147 @@ export const authorityBatch70: Article[] = [
     },
     publishedAt: "2026-05-27",
     updatedAt: "2026-05-27",
+  },
+  {
+    slug: "cat-costa-plumbarea-unei-camere-rx",
+    title: "Cat costa plumbarea unei camere RX?",
+    description:
+      "Estimare realista pentru costul de plumbare/radioprotectie la camera RX: ce influenteaza pretul, ce documente sunt necesare si cand merita ceruta oferta preliminara.",
+    category: "Radiologie",
+    tags: ["plumbare RX", "radioprotectie", "camera RX", "cost amenajare radiologie"],
+    readingTime: "9 min",
+    targetKeyword: "cat costa plumbarea unei camere RX",
+    relatedServices: [
+      "/radioprotectie-plumbare-rx",
+      "/services/protectie-radiologica",
+      "/service-aparatura-medicala",
+    ],
+    relatedTools: [
+      { label: "Discuta cu ZES despre camera RX", href: "/" },
+      { label: "Solicita oferta preliminara", href: "/project-intake" },
+      { label: "Radioprotectie si plumbare RX", href: "/radioprotectie-plumbare-rx" },
+    ],
+    intro:
+      "Costul pentru plumbarea unei camere RX nu are o valoare fixa valabila pentru toate clinicile. Pretul depinde de tipul echipamentului, configuratia camerei, vecinatati, grosimile rezultate din calculul de radioprotectie si nivelul de interventie necesar in santier.",
+    sections: [
+      {
+        id: "de-ce-costul-nu-este-fix",
+        title: "De ce costul nu este fix",
+        body: [
+          "Doua camere RX pot avea costuri diferite chiar daca suprafata este apropiata. Diferenta vine din tipul aparatului, distributia fluxurilor, pozitionarea fata de spatii sensibile si cerintele tehnice de executie.",
+          "Un pret orientativ poate exista in faza de pre-buget, dar valoarea finala trebuie ancorata in planuri si in calculul de radioprotectie pentru proiectul concret.",
+        ],
+      },
+      {
+        id: "factori-care-influenteaza-pretul",
+        title: "Factorii care influenteaza pretul",
+        body: [
+          "Pretul este influentat de grosimile necesare de ecranare, suprafetele reale care trebuie tratate, tipul usilor/vitrajelor radioprotectate, detaliile de executie pentru penetrari si nivelul de finisaj solicitat de clinica.",
+          "Conteaza si logistica: accesul in spatiu, programul de lucru, eventualele restrictii operationale si necesarul de coordonare intre constructor, proiectant si specialistul de radioprotectie.",
+        ],
+        bullets: [
+          "tip aparat RX si parametrii de exploatare",
+          "vecinatati (spatii ocupate, circulatii, zone administrative)",
+          "configuratia peretilor, plafonului si pardoselii",
+          "usi, vitraje si detalii de etansare la radiatii",
+          "interventii in spatiu existent versus amenajare noua",
+        ],
+      },
+      {
+        id: "spatiu-existent-vs-constructie-noua",
+        title: "Spatiu existent vs constructie noua",
+        body: [
+          "In spatiu existent apar frecvent costuri suplimentare pentru demolari locale, adaptari de instalatii, corectii de planeitate si integrarea elementelor radioprotectate fara a bloca fluxul clinicii.",
+          "In constructie noua, secventa poate fi mai predictibila daca proiectarea este facuta din timp. Totusi, si aici costul depinde de specificatia finala a camerei si de validarea tehnica a solutiei.",
+        ],
+      },
+      {
+        id: "documente-necesare",
+        title: "Ce documente sunt necesare pentru estimare serioasa",
+        body: [
+          "Pentru o estimare utila ai nevoie de planul camerei, date despre aparat, scenariul de utilizare si informatii despre vecinatati. Fara acest set minim, orice cifra ramane aproximativa.",
+          "Daca proiectul este in faza foarte timpurie, poti incepe cu o discutie orientativa, apoi completezi datele pentru a trece la oferta preliminara coerenta.",
+        ],
+        bullets: [
+          "plan camera (dimensiuni, pozitie usa, vecinatati)",
+          "fisa aparatului RX sau date de baza de la furnizor",
+          "regim de lucru estimat (program, volum orientativ)",
+          "stadiu proiect: concept, executie, modernizare",
+        ],
+      },
+      {
+        id: "rolul-planului-camerei",
+        title: "Rolul planului camerei in calculul de cost",
+        body: [
+          "Planul camerei este documentul care transforma discutia din general in executabil. Fara plan, nu poti evalua corect suprafetele, detaliile de inchidere, traseele tehnice si punctele sensibile.",
+          "Daca nu ai inca plan final, ZES poate ajuta cu trierea informatiei lipsa si cu pregatirea unui brief tehnic pentru discutia cu specialistul.",
+        ],
+      },
+      {
+        id: "cncan-si-radioprotectie",
+        title: "CNCAN si radioprotectie: ce trebuie retinut",
+        body: [
+          "Plumbarea unei camere RX este parte dintr-un context mai larg de radioprotectie si conformare documentata. Solutia finala nu se stabileste dintr-un tabel generic, ci pe baza datelor proiectului si a validarii tehnice.",
+          "Grosimile finale de ecranare si configuratia completa trebuie validate de specialist autorizat, in conformitate cu cerintele aplicabile proiectului. Articolul de fata are rol orientativ, nu de aprobare finala.",
+        ],
+        callout: {
+          title: "Validare obligatorie",
+          body: "Estimarea din faza initiala este utila pentru buget si planificare, dar decizia finala de radioprotectie/plumbare trebuie confirmata de specialist autorizat pe baza documentatiei complete.",
+        },
+      },
+      {
+        id: "cum-poate-ajuta-zes",
+        title: "Cum poate ajuta ZES",
+        body: [
+          "ZES poate structura rapid datele initiale, poate marca informatiile lipsa si poate orienta clinica spre urmatorul pas practic: discutie tehnica, oferta preliminara sau pregatirea documentatiei pentru evaluare.",
+          "Daca proiectul include si operare pe echipamente existente, poate fi util sa corelezi devreme partea de radioprotectie cu planul de service si mentenanta pentru uptime.",
+        ],
+      },
+      {
+        id: "cand-merita-oferta",
+        title: "Cand merita ceruta oferta preliminara",
+        body: [
+          "Merita sa ceri oferta preliminara cand ai cel putin planul camerei, tipul aparatului si un orizont de implementare. In acest punct, discutia devine concreta si poti compara realist variantele.",
+          "Daca lipsesc date, incepe cu ZES si completeaza etapizat. Este mai eficient decat sa fortezi o cifra finala inainte sa ai premize tehnice suficiente.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Exista un pret fix pe metru patrat pentru plumbare RX?",
+        answer:
+          "Nu. Exista intervale orientative, dar costul final depinde de configuratia camerei, tipul aparatului, vecinatati si detalii de executie validate tehnic.",
+      },
+      {
+        question: "Pot obtine oferta preliminara fara plan final?",
+        answer:
+          "Da, poti primi un cadru preliminar. Pentru oferta mai precisa sunt necesare planul camerei si date tehnice de echipament.",
+      },
+      {
+        question: "Cine stabileste grosimea finala de ecranare?",
+        answer:
+          "Grosimea finala trebuie stabilita si validata de specialist autorizat, pe baza documentatiei tehnice si a contextului real de proiect.",
+      },
+      {
+        question: "Este relevant service-ul in discutia despre plumbare RX?",
+        answer:
+          "Da, mai ales in modernizari. Integrarea radioprotectiei cu planul de service reduce riscul de opriri neplanificate dupa punerea in functiune.",
+      },
+    ],
+    relatedArticles: [
+      "protectie-radiologica-camera-rx",
+      "ce-trebuie-sa-stii-despre-autorizarea-cncan",
+      "cost-camera-ct-romania",
+    ],
+    cta: {
+      title: "Discuta cu ZES despre camera RX",
+      description:
+        "Trimite datele de baza ale proiectului si primesti un cadru tehnic pentru radioprotectie, cost orientativ si pasi urmatori.",
+      label: "Solicita oferta preliminara",
+      href: "/project-intake",
+    },
+    publishedAt: "2026-05-28",
+    updatedAt: "2026-05-28",
   },
   {
     slug: "etape-validare-infrastructura-medicala",

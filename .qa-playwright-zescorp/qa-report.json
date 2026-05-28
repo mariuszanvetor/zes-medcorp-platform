@@ -1,0 +1,72 @@
+﻿{
+    "baseUrl":  "http://127.0.0.1:4025",
+    "checks":  [
+                   {
+                       "check":  "no_duplicate_legacy_id",
+                       "pass":  true,
+                       "value":  1
+                   },
+                   {
+                       "check":  "desktop_no_horizontal_overflow",
+                       "pass":  true,
+                       "value":  {
+                                     "pageOverflow":  0,
+                                     "targetOverflow":  0
+                                 }
+                   },
+                   {
+                       "check":  "latest_response_visible_after_greeting",
+                       "pass":  true
+                   },
+                   {
+                       "check":  "latest_response_visible_after_service",
+                       "pass":  true
+                   },
+                   {
+                       "check":  "minimize_shows_reopen",
+                       "pass":  true
+                   },
+                   {
+                       "check":  "reopen_restores_popup",
+                       "pass":  true
+                   },
+                   {
+                       "check":  "mobile_no_horizontal_overflow",
+                       "pass":  true,
+                       "value":  {
+                                     "pageOverflow":  0,
+                                     "targetOverflow":  0
+                                 }
+                   },
+                   {
+                       "check":  "mobile_latest_response_visible",
+                       "pass":  true
+                   },
+                   {
+                       "check":  "mobile_composer_visible",
+                       "pass":  true
+                   },
+                   {
+                       "check":  "mobile_minimize_reopen",
+                       "pass":  true
+                   }
+               ],
+    "generatedAt":  "2026-05-28T12:04:03.238Z",
+    "recommendations":  [
+                            {
+                                "detail":  "Continue to prioritize one concise greeting, one next action, and hide advanced panels until intent is clear.",
+                                "title":  "Keep popup default view minimal on first contact",
+                                "impact":  "high"
+                            },
+                            {
+                                "detail":  "Sticky composer is now stable, but periodic device QA is recommended because virtual keyboard behavior can vary by browser version.",
+                                "title":  "Monitor mobile keyboard behavior on iOS/Android",
+                                "impact":  "medium"
+                            },
+                            {
+                                "detail":  "Use zes-floating-* test ids for future QA to avoid selector drift and ambiguous targeting.",
+                                "title":  "Keep strict test-id contract for popup selectors",
+                                "impact":  "medium"
+                            }
+                        ]
+}
