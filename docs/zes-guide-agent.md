@@ -326,3 +326,19 @@ Safety frequency rules:
   - workflow clarity,
   - human contact actions.
 - ZES should support conversion trust signals (service triage, project structuring, preliminary context) without overshadowing portfolio/workflow/company sections.
+
+## Phase 78B popup UX reliability rules
+
+- Floating state now supports `open`, `minimized` and `closed`, persisted in local storage.
+- Auto-open runs only once per session intent and no longer reopens immediately after manual minimize/close.
+- Popup close/reopen keeps the same conversation context (no forced reset).
+- Composer row stays sticky at the bottom in popup mode:
+  - upload button visible,
+  - message input visible,
+  - send action visible.
+- Auto-scroll now prioritizes latest assistant/user updates while avoiding forced jumps when the user is reading older messages.
+- Popup default surface is intentionally compact:
+  - main conversation,
+  - next step,
+  - primary CTA,
+  - collapsed recommendation details.

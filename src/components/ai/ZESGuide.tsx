@@ -112,6 +112,7 @@ export function ZESGuide({
   const queryInputRef = useRef<HTMLInputElement | null>(null);
   const conversationViewportRef = useRef<HTMLDivElement | null>(null);
   const previousPromptTokenRef = useRef<string | null>(null);
+  const forceAutoScrollRef = useRef(false);
 
   const lastTurn = useMemo(() => {
     for (let index = conversation.length - 1; index >= 0; index -= 1) {
@@ -138,17 +139,37 @@ export function ZESGuide({
     conversationState?.leadCompletionStatus === "ready" ||
     conversationState?.leadCompletionStatus === "closed";
 
+  function requestAutoScroll(force = false) {
+    forceAutoScrollRef.current = force || forceAutoScrollRef.current;
+  }
+
   useEffect(() => {
     const viewport = conversationViewportRef.current;
     if (!viewport) {
       return;
     }
 
+    const distanceFromBottom =
+      viewport.scrollHeight - viewport.clientHeight - viewport.scrollTop;
+    const userNearBottom = distanceFromBottom < 120;
+
+    if (!userNearBottom && !forceAutoScrollRef.current) {
+      return;
+    }
+
     viewport.scrollTo({
       top: viewport.scrollHeight,
-      behavior: "smooth",
+      behavior: forceAutoScrollRef.current ? "smooth" : "auto",
     });
-  }, [conversation, uploadItems, captureVisible, leadStatus, preliminaryRequest]);
+    forceAutoScrollRef.current = false;
+  }, [
+    conversation,
+    uploadItems,
+    captureVisible,
+    leadStatus,
+    preliminaryRequest,
+    showPopupLeadForm,
+  ]);
 
   useEffect(() => {
     if (!isPopup || captureVisible) {
@@ -182,6 +203,7 @@ export function ZESGuide({
   }, [externalPromptToken]);
 
   function handlePrompt(prompt: string) {
+    requestAutoScroll(true);
     setQuery(prompt);
     void handleSend(prompt);
   }
@@ -204,6 +226,7 @@ export function ZESGuide({
     );
 
     setIsResponding(true);
+    requestAutoScroll(true);
     setCaptureVisible(false);
     if (isPopup) {
       setShowPopupLeadForm(false);
@@ -348,6 +371,7 @@ export function ZESGuide({
           },
         ]);
         setUploadNotice("Analiza preliminara este disponibila in conversatie.");
+        requestAutoScroll(true);
       } catch (error) {
         setUploadItems((current) =>
           current.map((item) =>
@@ -364,6 +388,7 @@ export function ZESGuide({
           ),
         );
         setUploadNotice("Nu s-a putut analiza unul dintre fisiere.");
+        requestAutoScroll(true);
       }
     }
 
@@ -510,6 +535,7 @@ export function ZESGuide({
       if (isPopup) {
         setShowPopupLeadForm(false);
       }
+      requestAutoScroll(true);
       trackLeadEvent("lead_form_submit_success", {
         sourcePage: "/",
         sourceTool: "zes-guide",
@@ -539,7 +565,7 @@ export function ZESGuide({
     <section
       className={cn(
         "rounded-xl border border-blue-200 bg-white p-4 shadow-[0_18px_42px_rgba(0,87,184,0.09)] sm:p-6",
-        isPopup && "rounded-none border-0 bg-transparent p-0 shadow-none sm:p-0",
+        isPopup && "flex h-full flex-col overflow-hidden rounded-none border-0 bg-transparent p-0 shadow-none sm:p-0",
       )}
       id="zes-guide"
     >
@@ -570,21 +596,21 @@ export function ZESGuide({
         className={cn(
           "grid gap-4",
           compactHeader ? "mt-0" : "mt-5",
-          isPopup ? "grid-cols-1" : "lg:grid-cols-[1fr_0.4fr]",
+          isPopup ? "mt-0 grid-cols-1 min-h-0 flex-1" : "lg:grid-cols-[1fr_0.4fr]",
         )}
       >
         <div
           className={cn(
             "min-w-0 rounded-xl border border-slate-200 bg-[#f7fbff] p-3 sm:p-4",
             isPopup &&
-              "rounded-xl border-blue-100 bg-[linear-gradient(180deg,#f8fbff_0%,#f2f7ff_100%)] p-2.5 sm:p-3",
+              "flex min-h-0 flex-1 flex-col overflow-y-auto rounded-xl border-blue-100 bg-[linear-gradient(180deg,#f8fbff_0%,#f2f7ff_100%)] p-2.5 sm:p-3",
           )}
+          ref={conversationViewportRef}
         >
           <div
-            ref={conversationViewportRef}
             className={cn(
-              "grid gap-3 overflow-y-auto pr-1",
-              isPopup ? "max-h-[38vh] scroll-smooth" : "max-h-[30rem]",
+              "grid gap-3 pr-1",
+              isPopup ? "min-h-0 scroll-smooth" : "max-h-[30rem] overflow-y-auto",
             )}
           >
             {conversation.map((item, index) => (
@@ -616,7 +642,8 @@ export function ZESGuide({
           <div
             className={cn(
               "mt-4 rounded-lg border border-slate-200 bg-white p-3",
-              isPopup && "sticky bottom-0 z-10 border-blue-200 shadow-[0_-12px_28px_rgba(15,23,42,0.08)]",
+              isPopup &&
+                "sticky bottom-0 z-20 border-blue-200 bg-white/95 shadow-[0_-10px_22px_rgba(15,23,42,0.1)] backdrop-blur",
             )}
           >
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -645,7 +672,7 @@ export function ZESGuide({
             )}
             {isPopup && (
               <div className="mt-2 flex flex-wrap gap-2">
-                {zesGuideStarters.slice(0, 3).map((starter) => (
+                {zesGuideStarters.slice(0, 2).map((starter) => (
                   <button
                     className="rounded-lg border border-blue-100 bg-[#f7fbff] px-2.5 py-1.5 text-[11px] font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
                     key={starter}
@@ -778,10 +805,19 @@ export function ZESGuide({
                 </>
               )}
               {isPopup && (
-                <p className="mt-2 text-sm leading-6 text-slate-700">
-                  <span className="font-semibold text-slate-900">Urmator pas:</span>{" "}
-                  {preliminaryRequest.nextAction}
-                </p>
+                <details className="mt-2 rounded-lg border border-blue-100 bg-[#f7fbff] p-2.5">
+                  <summary className="cursor-pointer text-xs font-semibold uppercase tracking-[0.12em] text-[#0057b8]">
+                    Detalii recomandare ZES
+                  </summary>
+                  <p className="mt-2 text-sm leading-6 text-slate-700">
+                    <span className="font-semibold text-slate-900">Urmator pas:</span>{" "}
+                    {preliminaryRequest.nextAction}
+                  </p>
+                  <p className="mt-1 text-sm leading-6 text-slate-700">
+                    <span className="font-semibold text-slate-900">Servicii sugerate:</span>{" "}
+                    {preliminaryRequest.recommendedServices.slice(0, 3).join(", ")}
+                  </p>
+                </details>
               )}
               <div className="mt-3 flex flex-col gap-2 sm:flex-row">
                 <Button
@@ -791,6 +827,7 @@ export function ZESGuide({
                     if (isPopup) {
                       setShowPopupLeadForm(true);
                     }
+                    requestAutoScroll(true);
                   }}
                 >
                   {preliminaryRequest.ctaLabel}
@@ -798,7 +835,10 @@ export function ZESGuide({
                 <Button
                   size="sm"
                   variant="secondary"
-                  onClick={() => setPreliminaryRequest(null)}
+                  onClick={() => {
+                    setPreliminaryRequest(null);
+                    requestAutoScroll(true);
+                  }}
                 >
                   Continua cu ZES
                 </Button>
@@ -806,7 +846,7 @@ export function ZESGuide({
             </section>
           )}
 
-          {isReadyForHandoff && lastTurn && conversationState && (
+          {!isPopup && isReadyForHandoff && lastTurn && conversationState && (
             <section
               className={cn(
                 "mt-4 rounded-lg border border-emerald-200 bg-emerald-50 p-4",
@@ -828,17 +868,32 @@ export function ZESGuide({
           {isPopup && (captureVisible || shouldOfferCapture) && !showPopupLeadForm && (
             <section className="mt-4 rounded-lg border border-blue-200 bg-white p-3">
               <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#0057b8]">
-                Cerere pregatita
+                Cerere pregatita pentru preluare
               </p>
               <p className="mt-2 text-sm leading-6 text-slate-700">
-                Avem suficiente date pentru trimitere preliminara catre echipa ZESCORP.
+                Avem suficiente date pentru preluare preliminara. Putem trimite acum catre echipa ZESCORP.
               </p>
+              {lastTurn && conversationState && (
+                <p className="mt-1 text-xs leading-6 text-slate-600">
+                  {buildCompactClosingSummary(lastTurn, conversationState)}
+                </p>
+              )}
               <div className="mt-3 flex flex-col gap-2">
-                <Button size="sm" onClick={() => setShowPopupLeadForm(true)}>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    setShowPopupLeadForm(true);
+                    requestAutoScroll(true);
+                  }}
+                >
                   Trimite datele catre ZESCORP
                 </Button>
-                <Button size="sm" variant="secondary" onClick={() => queryInputRef.current?.focus()}>
-                  Mai adauga detalii
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  Ataseaza fisier
                 </Button>
               </div>
             </section>
@@ -963,6 +1018,7 @@ export function ZESGuide({
                     if (isPopup) {
                       setShowPopupLeadForm(false);
                     }
+                    requestAutoScroll(true);
                   }}
                 >
                   Mai adauga detalii
@@ -1302,6 +1358,14 @@ function buildClosingSummary(turn: ZESAssistantTurn, state: ZESConversationState
   if (collected.phone) values.push(`contact ${collected.phone}`);
   if (!values.length) return turn.leadSnapshot.detectedNeed;
   return values.join(" | ");
+}
+
+function buildCompactClosingSummary(turn: ZESAssistantTurn, state: ZESConversationState) {
+  const summary = buildClosingSummary(turn, state);
+  if (summary.length <= 190) {
+    return summary;
+  }
+  return `${summary.slice(0, 187)}...`;
 }
 
 function uniqueText(items: string[]) {

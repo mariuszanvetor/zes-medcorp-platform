@@ -10,7 +10,12 @@ import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "zes_floating_assistant_state_v1";
 
-type FloatingState = "open" | "minimized";
+type FloatingState = "open" | "minimized" | "closed";
+
+type FloatingStorage = {
+  state: FloatingState;
+  hasAutoOpened: boolean;
+};
 
 export function FloatingZESAssistant() {
   const pathname = usePathname();
@@ -19,6 +24,7 @@ export function FloatingZESAssistant() {
   const shouldRender = !isAdminRoute && !hiddenRoute;
 
   const [state, setState] = useState<FloatingState>("minimized");
+  const [hasAutoOpened, setHasAutoOpened] = useState(false);
   const [bootstrapped, setBootstrapped] = useState(false);
   const [promptSeed, setPromptSeed] = useState<string | null>(null);
 
@@ -28,10 +34,37 @@ export function FloatingZESAssistant() {
     }
 
     const stored = window.localStorage.getItem(STORAGE_KEY);
+    if (!stored) {
+      setState("minimized");
+      setHasAutoOpened(false);
+      setBootstrapped(true);
+      return;
+    }
+
     if (stored === "open" || stored === "minimized") {
       setState(stored);
-    } else {
+      setHasAutoOpened(stored === "open");
+      setBootstrapped(true);
+      return;
+    }
+
+    try {
+      const parsed = JSON.parse(stored) as FloatingStorage;
+      if (
+        parsed &&
+        (parsed.state === "open" ||
+          parsed.state === "minimized" ||
+          parsed.state === "closed")
+      ) {
+        setState(parsed.state);
+        setHasAutoOpened(Boolean(parsed.hasAutoOpened));
+      } else {
+        setState("minimized");
+        setHasAutoOpened(false);
+      }
+    } catch {
       setState("minimized");
+      setHasAutoOpened(false);
     }
     setBootstrapped(true);
   }, [shouldRender]);
@@ -40,11 +73,22 @@ export function FloatingZESAssistant() {
     if (!shouldRender || !bootstrapped) {
       return;
     }
-    window.localStorage.setItem(STORAGE_KEY, state);
-  }, [bootstrapped, shouldRender, state]);
+
+    const storageValue: FloatingStorage = {
+      state,
+      hasAutoOpened,
+    };
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(storageValue));
+  }, [bootstrapped, hasAutoOpened, shouldRender, state]);
 
   useEffect(() => {
-    if (!shouldRender || !bootstrapped || state === "open") {
+    if (
+      !shouldRender ||
+      !bootstrapped ||
+      state === "open" ||
+      state === "closed" ||
+      hasAutoOpened
+    ) {
       return;
     }
 
@@ -52,6 +96,7 @@ export function FloatingZESAssistant() {
     const timeout = window.setTimeout(() => {
       opened = true;
       setState("open");
+      setHasAutoOpened(true);
     }, 5000);
 
     const onScroll = () => {
@@ -60,6 +105,7 @@ export function FloatingZESAssistant() {
         opened = true;
         window.clearTimeout(timeout);
         setState("open");
+        setHasAutoOpened(true);
       }
     };
 
@@ -68,7 +114,7 @@ export function FloatingZESAssistant() {
       window.clearTimeout(timeout);
       window.removeEventListener("scroll", onScroll);
     };
-  }, [bootstrapped, shouldRender, state]);
+  }, [bootstrapped, hasAutoOpened, shouldRender, state]);
 
   useEffect(() => {
     if (!shouldRender) {
@@ -78,6 +124,7 @@ export function FloatingZESAssistant() {
     const onOpenRequest = (event: Event) => {
       const customEvent = event as CustomEvent<ZESPopupOpenDetail>;
       setState("open");
+      setHasAutoOpened(true);
 
       const prompt = customEvent.detail?.prompt?.trim();
       if (prompt) {
@@ -105,41 +152,49 @@ export function FloatingZESAssistant() {
     <div className="pointer-events-none fixed bottom-4 right-3 z-[70] sm:bottom-6 sm:right-6">
       <div
         className={cn(
-          "pointer-events-auto transition-all duration-300",
-          isOpen ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0",
+          "pointer-events-auto mb-3 w-[min(96vw,25.5rem)] overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-[0_24px_70px_rgba(15,65,118,0.24)] transition-all duration-300",
+          isOpen
+            ? "max-h-[80vh] translate-y-0 opacity-100"
+            : "max-h-0 translate-y-2 opacity-0 pointer-events-none",
         )}
       >
-        {isOpen && (
-          <div className="mb-3 w-[min(94vw,27.5rem)] overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-[0_24px_80px_rgba(15,65,118,0.24)] sm:rounded-2xl">
-            <div className="border-b border-blue-100 bg-[linear-gradient(180deg,#f7fbff_0%,#ffffff_100%)] px-4 py-3.5">
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#0057b8]">
-                    ZES AI Concierge
-                  </p>
-                  <p className="mt-1 text-sm leading-6 text-slate-700">
-                    Salut, sunt ZES. Spune pe scurt ce ai nevoie si pornim.
-                  </p>
-                </div>
-                <button
-                  className="rounded-lg border border-blue-100 px-2 py-1 text-xs font-semibold text-slate-600 transition hover:bg-blue-50 hover:text-[#0057b8]"
-                  type="button"
-                  onClick={() => setState("minimized")}
-                >
-                  Inchide
-                </button>
+        <div className="border-b border-blue-100 bg-[linear-gradient(180deg,#f7fbff_0%,#ffffff_100%)] px-3.5 py-3">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#0057b8]">
+                ZES Copilot
+              </p>
+              <div className="mt-1 flex items-center gap-2 text-sm text-slate-700">
+                <span
+                  aria-hidden
+                  className="inline-flex h-2 w-2 rounded-full bg-emerald-500"
+                />
+                <span>Asistent infrastructura medicala</span>
               </div>
-              <ul className="mt-2 grid gap-1 text-xs text-slate-600">
-                <li>- service aparatura medicala</li>
-                <li>- camere CT/RMN si radiologie</li>
-                <li>- radioprotectie si plumbare RX</li>
-              </ul>
             </div>
-            <div className="max-h-[76vh] overflow-y-auto p-2 sm:p-3">
-              <ZESGuide compactHeader externalPromptToken={promptSeed} mode="popup" />
+            <div className="flex items-center gap-1">
+              <button
+                aria-label="Minimizeaza ZES"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-blue-100 text-sm font-semibold text-slate-600 transition hover:bg-blue-50 hover:text-[#0057b8]"
+                type="button"
+                onClick={() => setState("minimized")}
+              >
+                -
+              </button>
+              <button
+                aria-label="Inchide ZES"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-blue-100 text-sm font-semibold text-slate-600 transition hover:bg-blue-50 hover:text-[#0057b8]"
+                type="button"
+                onClick={() => setState("closed")}
+              >
+                x
+              </button>
             </div>
           </div>
-        )}
+        </div>
+        <div className="h-[min(78vh,38rem)] p-2 sm:p-3">
+          <ZESGuide compactHeader externalPromptToken={promptSeed} mode="popup" />
+        </div>
       </div>
 
       <Button
@@ -149,7 +204,14 @@ export function FloatingZESAssistant() {
         )}
         size="md"
         type="button"
-        onClick={() => setState((current) => (current === "open" ? "minimized" : "open"))}
+        onClick={() => {
+          if (isOpen) {
+            setState("minimized");
+            return;
+          }
+          setHasAutoOpened(true);
+          setState("open");
+        }}
       >
         {buttonLabel}
       </Button>

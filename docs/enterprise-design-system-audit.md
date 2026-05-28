@@ -392,3 +392,17 @@ Every redesign slice should verify:
   - direct contact actions (phone/email/WhatsApp).
 - ZES remains prominent but repositioned as assistant to a real technical company, not as a standalone AI demo.
 - Landing pages `/service-aparatura-medicala` and `/radioprotectie-plumbare-rx` now include stronger support expectations and trust-oriented conversion paths.
+
+## Phase 78B conversational surface simplification
+
+- Floating assistant interaction model is now explicit:
+  - `open`,
+  - `minimized`,
+  - `closed`,
+  with local persistence and stable reopen behavior.
+- Popup hierarchy was reduced to conversation-first UX:
+  - compact header,
+  - cleaner bubble stack,
+  - collapsed technical metadata by default.
+- Composer is now treated as a fixed interaction rail in popup mode and should remain visible on mobile and desktop.
+- Auto-scroll behavior was adjusted for continuity: new messages and lead transitions stay in view without forcing scroll jumps when users review older context.

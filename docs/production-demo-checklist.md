@@ -216,3 +216,20 @@ For a safe demo fallback:
    - preliminary framing clear,
    - technical support/contact reassurance visible.
 6. ZES remains available but does not visually dominate trust sections.
+
+## Phase 78B popup UX fix QA
+
+1. Open popup, minimize, reopen, close, reopen and refresh page:
+   - state persistence should remain stable,
+   - no double-open or invisible-stuck panel.
+2. In popup mode, verify composer is always visible at the bottom:
+   - upload button,
+   - input,
+   - send button.
+3. Send a message and confirm latest user/assistant content stays in view automatically.
+4. Upload a file and confirm analysis feedback appears without losing composer visibility.
+5. Trigger lead-ready state and confirm compact final card:
+   - `Cerere pregatita pentru preluare`,
+   - one primary action,
+   - one secondary action.
+6. Confirm seeded popup CTAs from landing pages still open the same conversation context.
