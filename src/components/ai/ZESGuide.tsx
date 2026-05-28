@@ -596,27 +596,27 @@ export function ZESGuide({
         className={cn(
           "grid gap-4",
           compactHeader ? "mt-0" : "mt-5",
-          isPopup ? "mt-0 grid-cols-1 min-h-0 flex-1" : "lg:grid-cols-[1fr_0.4fr]",
+          isPopup ? "mt-0 grid-cols-1 min-h-0 flex-1 overflow-hidden" : "lg:grid-cols-[1fr_0.4fr]",
         )}
       >
         <div
           className={cn(
             "min-w-0 rounded-xl border border-slate-200 bg-[#f7fbff] p-3 sm:p-4",
             isPopup &&
-              "flex min-h-0 flex-1 flex-col overflow-y-auto rounded-xl border-blue-100 bg-[linear-gradient(180deg,#f8fbff_0%,#f2f7ff_100%)] p-2.5 sm:p-3",
+              "flex min-h-0 flex-1 flex-col overflow-x-hidden overflow-y-auto rounded-xl border-blue-100 bg-[linear-gradient(180deg,#f8fbff_0%,#f2f7ff_100%)] p-2.5 sm:p-3",
           )}
           ref={conversationViewportRef}
         >
           <div
             className={cn(
-              "grid gap-3 pr-1",
-              isPopup ? "min-h-0 scroll-smooth" : "max-h-[30rem] overflow-y-auto",
+              "grid min-w-0 gap-3 overflow-x-hidden pr-1",
+              isPopup ? "scroll-smooth" : "max-h-[30rem] overflow-y-auto",
             )}
           >
             {conversation.map((item, index) => (
               <div
                 className={cn(
-                  "max-w-[96%] rounded-lg border p-3 text-sm leading-7 shadow-sm",
+                  "max-w-[96%] min-w-0 rounded-lg border p-3 text-sm leading-7 shadow-sm [overflow-wrap:anywhere]",
                   item.role === "assistant"
                     ? "justify-self-start border-blue-100 bg-white text-slate-800"
                     : "justify-self-end border-[#0057b8] bg-[#0057b8] text-white",
@@ -626,7 +626,7 @@ export function ZESGuide({
                 <p className="text-[11px] font-bold uppercase tracking-[0.12em] opacity-75">
                   {item.role === "assistant" ? "ZES" : "Tu"}
                 </p>
-                <p className="mt-1 whitespace-pre-line">{item.text}</p>
+                <p className="mt-1 whitespace-pre-line break-words [overflow-wrap:anywhere]">{item.text}</p>
                 {item.role === "assistant" && item.turn && (
                   <TurnDetails
                     aiMode={item.aiMode}
@@ -637,139 +637,6 @@ export function ZESGuide({
                 )}
               </div>
             ))}
-          </div>
-
-          <div
-            className={cn(
-              "mt-4 rounded-lg border border-slate-200 bg-white p-3",
-              isPopup &&
-                "sticky bottom-0 z-20 border-blue-200 bg-white/95 shadow-[0_-10px_22px_rgba(15,23,42,0.1)] backdrop-blur",
-            )}
-          >
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
-                {isPopup ? "Mesaj catre ZES" : "Start rapid"}
-              </p>
-              <p className="text-xs leading-6 text-slate-500">
-                Evita date medicale sensibile ale pacientilor.
-              </p>
-            </div>
-            {!isPopup && (
-              <div className="mt-2 flex flex-wrap gap-2">
-                {zesGuideStarters.map((starter) => (
-                  <button
-                    className="rounded-lg border border-blue-100 bg-[#f7fbff] px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
-                    key={starter}
-                    type="button"
-                    onClick={() => {
-                      void handlePrompt(starter);
-                    }}
-                  >
-                    {starter}
-                  </button>
-                ))}
-              </div>
-            )}
-            {isPopup && (
-              <div className="mt-2 flex flex-wrap gap-2">
-                {zesGuideStarters.slice(0, 2).map((starter) => (
-                  <button
-                    className="rounded-lg border border-blue-100 bg-[#f7fbff] px-2.5 py-1.5 text-[11px] font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
-                    key={starter}
-                    type="button"
-                    onClick={() => {
-                      void handlePrompt(starter);
-                    }}
-                  >
-                    {starter}
-                  </button>
-                ))}
-              </div>
-            )}
-            <form
-              className={cn(
-                "mt-3 flex flex-col gap-2 sm:flex-row",
-                isPopup && "gap-2.5 sm:flex-nowrap",
-              )}
-              onSubmit={(event) => {
-                event.preventDefault();
-                void handleSend();
-              }}
-            >
-              <input
-                ref={queryInputRef}
-                className="h-12 flex-1 rounded-lg border border-slate-200 bg-white px-4 text-sm text-slate-900 outline-none transition focus:border-blue-300"
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Vreau sa deschid o clinica CT | Am un aparat defect si am nevoie de service | Am nevoie de camera RMN"
-                value={query}
-              />
-              <input
-                ref={fileInputRef}
-                className="hidden"
-                multiple
-                accept=".jpg,.jpeg,.png,.webp,.pdf,.txt,.md,.doc,.docx,.xls,.xlsx"
-                type="file"
-                onChange={(event) => {
-                  void handleFileSelection(event.target.files);
-                }}
-              />
-              <Button
-                className={cn(isPopup && "sm:px-4")}
-                size="lg"
-                type="button"
-                variant="secondary"
-                onClick={() => fileInputRef.current?.click()}
-              >
-                {isPopup ? "Ataseaza" : "Ataseaza fisier"}
-              </Button>
-              <Button className={cn(isPopup && "sm:px-4")} isLoading={isResponding} size="lg" type="submit">
-                Trimite
-              </Button>
-            </form>
-            <p className="mt-2 text-xs leading-6 text-slate-500">
-              Formate: JPG, PNG, WEBP, PDF, TXT, DOC/DOCX, XLS/XLSX. Limita 8 MB / fisier.
-            </p>
-            {!isPopup && (
-              <p className="mt-1 text-xs leading-6 text-slate-500">
-                Nu incarca date medicale ale pacientilor. Pentru proiecte reale, echipa ZESCORP valideaza manual documentele.
-              </p>
-            )}
-            {uploadNotice && (
-              <p className="mt-2 rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 text-xs font-semibold text-[#0057b8]">
-                {uploadNotice}
-              </p>
-            )}
-            {uploadItems.length > 0 && (
-              <div className="mt-3 grid gap-2">
-                {uploadItems.slice(isPopup ? -2 : -4).map((item) => (
-                  <div
-                    key={item.id}
-                    className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs leading-6 text-slate-700"
-                  >
-                    <p className="font-semibold text-slate-900">{item.fileName}</p>
-                    <p>
-                      {item.status === "uploading"
-                        ? "ZES analizeaza documentul"
-                        : item.status === "ready"
-                          ? `Analiza preliminara (${formatRuntimeLabel(item.aiMode ?? "mock", null)})`
-                          : "Nu s-a putut analiza; verificare manuala recomandata"}
-                    </p>
-                    {item.analysis &&
-                      (isPopup ? (
-                        <details className="mt-1">
-                          <summary className="cursor-pointer font-semibold text-[#0057b8]">
-                            Vezi recomandare
-                          </summary>
-                          <p className="mt-1 text-slate-600">{item.analysis.nextBestAction}</p>
-                        </details>
-                      ) : (
-                        <p className="text-slate-600">{item.analysis.nextBestAction}</p>
-                      ))}
-                    {item.error && <p className="text-rose-700">{item.error}</p>}
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
 
           {preliminaryRequest && (
@@ -1026,6 +893,146 @@ export function ZESGuide({
               </div>
             </section>
           )}
+
+          <div
+            className={cn(
+              "mt-4 rounded-lg border border-slate-200 bg-white p-3",
+              isPopup &&
+                "sticky bottom-0 z-20 border-blue-200 border-t bg-white/95 shadow-[0_-10px_22px_rgba(15,23,42,0.1)] backdrop-blur",
+            )}
+          >
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
+                {isPopup ? "Mesaj catre ZES" : "Start rapid"}
+              </p>
+              <p className="text-xs leading-6 text-slate-500">Evita date medicale sensibile.</p>
+            </div>
+            {!isPopup && (
+              <div className="mt-2 flex flex-wrap gap-2">
+                {zesGuideStarters.map((starter) => (
+                  <button
+                    className="rounded-lg border border-blue-100 bg-[#f7fbff] px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
+                    key={starter}
+                    type="button"
+                    onClick={() => {
+                      void handlePrompt(starter);
+                    }}
+                  >
+                    {starter}
+                  </button>
+                ))}
+              </div>
+            )}
+            {isPopup && (
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {zesGuideStarters.slice(0, 2).map((starter) => (
+                  <button
+                    className="min-w-0 max-w-full rounded-lg border border-blue-100 bg-[#f7fbff] px-2 py-1.5 text-[11px] font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
+                    key={starter}
+                    type="button"
+                    onClick={() => {
+                      void handlePrompt(starter);
+                    }}
+                  >
+                    <span className="block max-w-[14rem] truncate">{starter}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+            <form
+              className={cn(
+                "mt-3 min-w-0 gap-2",
+                isPopup ? "grid grid-cols-1 md:grid-cols-[1fr_auto_auto]" : "flex flex-col sm:flex-row",
+              )}
+              onSubmit={(event) => {
+                event.preventDefault();
+                void handleSend();
+              }}
+            >
+              <input
+                ref={queryInputRef}
+                className="h-11 w-full min-w-0 rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none transition focus:border-blue-300"
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Vreau clinica CT / service / camera RMN"
+                value={query}
+              />
+              <input
+                ref={fileInputRef}
+                className="hidden"
+                multiple
+                accept=".jpg,.jpeg,.png,.webp,.pdf,.txt,.md,.doc,.docx,.xls,.xlsx"
+                type="file"
+                onChange={(event) => {
+                  void handleFileSelection(event.target.files);
+                }}
+              />
+              <Button
+                className={cn("w-full shrink-0 md:w-auto", isPopup && "px-3")}
+                size="sm"
+                type="button"
+                variant="secondary"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                {isPopup ? "Atas." : "Ataseaza fisier"}
+              </Button>
+              <Button
+                className={cn("w-full shrink-0 md:w-auto", isPopup && "px-3")}
+                isLoading={isResponding}
+                size="sm"
+                type="submit"
+              >
+                Trimite
+              </Button>
+            </form>
+            <p className="mt-2 text-xs leading-6 text-slate-500">
+              Formate: JPG, PNG, WEBP, PDF, TXT, DOC/DOCX, XLS/XLSX (max 8 MB/fisier).
+            </p>
+            {!isPopup && (
+              <p className="mt-1 text-xs leading-6 text-slate-500">
+                Nu incarca date medicale ale pacientilor. Echipa ZESCORP valideaza manual documentele.
+              </p>
+            )}
+            {uploadNotice && (
+              <p className="mt-2 rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 text-xs font-semibold text-[#0057b8]">
+                {uploadNotice}
+              </p>
+            )}
+            {uploadItems.length > 0 && (
+              <div className="mt-2 grid gap-2">
+                {uploadItems.slice(isPopup ? -2 : -4).map((item) => (
+                  <div
+                    key={item.id}
+                    className="min-w-0 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs leading-6 text-slate-700"
+                  >
+                    <p className="break-all font-semibold text-slate-900">{item.fileName}</p>
+                    <p>
+                      {item.status === "uploading"
+                        ? "ZES analizeaza documentul"
+                        : item.status === "ready"
+                          ? `Analiza preliminara (${formatRuntimeLabel(item.aiMode ?? "mock", null)})`
+                          : "Nu s-a putut analiza; verificare manuala recomandata"}
+                    </p>
+                    {item.analysis &&
+                      (isPopup ? (
+                        <details className="mt-1">
+                          <summary className="cursor-pointer font-semibold text-[#0057b8]">
+                            Vezi recomandare
+                          </summary>
+                          <p className="mt-1 text-slate-600 break-words [overflow-wrap:anywhere]">
+                            {item.analysis.nextBestAction}
+                          </p>
+                        </details>
+                      ) : (
+                        <p className="text-slate-600 break-words [overflow-wrap:anywhere]">
+                          {item.analysis.nextBestAction}
+                        </p>
+                      ))}
+                    {item.error && <p className="text-rose-700 break-words [overflow-wrap:anywhere]">{item.error}</p>}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {!isPopup && (

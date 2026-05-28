@@ -149,12 +149,12 @@ export function FloatingZESAssistant() {
   }
 
   return (
-    <div className="pointer-events-none fixed bottom-4 right-3 z-[70] sm:bottom-6 sm:right-6">
+    <div className="pointer-events-none fixed bottom-3 left-3 right-3 z-[70] sm:bottom-6 sm:left-auto sm:right-6 sm:w-[26.5rem]">
       <div
         className={cn(
-          "pointer-events-auto mb-3 w-[min(96vw,25.5rem)] overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-[0_24px_70px_rgba(15,65,118,0.24)] transition-all duration-300",
+          "pointer-events-auto mb-2 flex w-full flex-col overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-[0_24px_70px_rgba(15,65,118,0.24)] transition-all duration-300",
           isOpen
-            ? "max-h-[80vh] translate-y-0 opacity-100"
+            ? "h-[82dvh] max-h-[42rem] translate-y-0 opacity-100"
             : "max-h-0 translate-y-2 opacity-0 pointer-events-none",
         )}
       >
@@ -192,29 +192,24 @@ export function FloatingZESAssistant() {
             </div>
           </div>
         </div>
-        <div className="h-[min(78vh,38rem)] p-2 sm:p-3">
+        <div className="min-h-0 flex-1 overflow-hidden p-2 sm:p-3">
           <ZESGuide compactHeader externalPromptToken={promptSeed} mode="popup" />
         </div>
       </div>
 
-      <Button
-        className={cn(
-          "h-11 rounded-full px-4 text-sm shadow-[0_16px_42px_rgba(0,87,184,0.30)] sm:h-12 sm:px-5 sm:text-base",
-          !isOpen && "animate-pulse",
-        )}
-        size="md"
-        type="button"
-        onClick={() => {
-          if (isOpen) {
-            setState("minimized");
-            return;
-          }
-          setHasAutoOpened(true);
-          setState("open");
-        }}
-      >
-        {buttonLabel}
-      </Button>
+      {!isOpen && (
+        <Button
+          className="pointer-events-auto h-11 rounded-full px-4 text-sm shadow-[0_16px_42px_rgba(0,87,184,0.30)] sm:h-12 sm:px-5 sm:text-base"
+          size="md"
+          type="button"
+          onClick={() => {
+            setHasAutoOpened(true);
+            setState("open");
+          }}
+        >
+          {buttonLabel}
+        </Button>
+      )}
     </div>
   );
 }
