@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 import { OpenZESButton } from "@/components/ai/OpenZESButton";
@@ -6,6 +7,7 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/sections/SectionHeading";
+import { companyContact } from "@/lib/brand";
 import { createWebsiteMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createWebsiteMetadata({
@@ -123,6 +125,9 @@ export default function RadioprotectiePlumbareRxPage() {
               <p className="mt-4 text-sm leading-7 text-slate-600">
                 Estimarile sunt preliminare si necesita validare de specialist autorizat.
               </p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Proiectele reale depind de echipament, contextul spatiului, vecinatati si documentatie tehnica.
+              </p>
             </article>
 
             <article className="rounded-2xl border border-blue-100 bg-white p-6">
@@ -147,6 +152,45 @@ export default function RadioprotectiePlumbareRxPage() {
                   href="/project-intake?source=radioprotectie-plumbare-rx"
                 >
                   Trimite cererea de oferta
+                </Link>
+              </div>
+            </article>
+          </div>
+
+          <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+            <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+              <div className="relative h-52">
+                <Image
+                  alt="Planificare radioprotectie si plumbare RX"
+                  className="object-cover object-[55%_45%]"
+                  fill
+                  sizes="(min-width: 1024px) 60vw, 100vw"
+                  src="/hero-medical-tech.png"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(7,20,35,0.52)_0%,rgba(7,20,35,0.16)_70%)]" />
+              </div>
+              <div className="p-5">
+                <h3 className="text-xl font-semibold text-slate-950">Suport tehnic pe etape</h3>
+                <p className="mt-2 text-sm leading-7 text-slate-700">
+                  Clarificam datele initiale, evaluam configuratia spatiului si pregatim pasii pentru ofertare si implementare.
+                </p>
+              </div>
+            </article>
+
+            <article className="rounded-2xl border border-slate-200 bg-white p-6">
+              <h3 className="text-xl font-semibold text-slate-950">Contact direct specialist</h3>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Pentru proiecte cu termen scurt sau documentatie in lucru, poti solicita direct discutie tehnica.
+              </p>
+              <div className="mt-4 grid gap-2">
+                <Link className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-200 px-5 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50" href={companyContact.phoneHref}>
+                  {companyContact.phone}
+                </Link>
+                <Link className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-200 px-5 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50" href={companyContact.emailHref}>
+                  {companyContact.email}
+                </Link>
+                <Link className="inline-flex h-11 items-center justify-center rounded-xl bg-[#0f9d58] px-5 text-sm font-semibold text-white transition hover:bg-[#0d8b4d]" href={companyContact.whatsappHref} rel="noreferrer" target="_blank">
+                  WhatsApp consultanta
                 </Link>
               </div>
             </article>

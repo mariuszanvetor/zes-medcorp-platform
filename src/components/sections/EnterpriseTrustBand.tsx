@@ -10,23 +10,23 @@ export type EnterpriseTrustBandProps = {
 
 const trustItems = [
   {
-    title: "Validare tehnică înainte de decizii finale",
-    body: "Recomandările sunt corelate cu planuri, echipamente, amplasament, autorizări și condiții reale de implementare.",
+    title: "Validare tehnica inainte de decizii finale",
+    body: "Recomandarile sunt corelate cu planuri, echipamente, amplasament, autorizari si conditii reale de implementare.",
   },
   {
-    title: "Estimări orientative, nu promisiuni comerciale",
-    body: "Calculatoarele, propunerile PDF și instrumentele de triere pregătesc discuția, dar nu înlocuiesc o ofertă finală.",
+    title: "Estimari orientative, fara promisiuni artificiale",
+    body: "Calculatoarele, propunerile PDF si trierea ZES pregatesc discutia, dar nu inlocuiesc oferta finala.",
   },
   {
-    title: "Separare corectă între domenii tehnice",
-    body: "RMN/RF shielding, CT/RX/radioprotecție, IVD, aparatură și service sunt tratate ca fluxuri distincte.",
+    title: "Separare corecta intre fluxuri tehnice",
+    body: "RMN/RF shielding, CT/RX/radioprotectie, IVD, aparatura si service sunt tratate diferit, in functie de proiect.",
   },
 ];
 
 export function EnterpriseTrustBand({
   sourcePage,
-  title = "Încredere construită prin claritate tehnică.",
-  description = "ZES tratează proiectele medicale ca sisteme: infrastructură, aparatură, documentație, riscuri, service și continuitate operațională.",
+  title = "Incredere construita prin claritate tehnica.",
+  description = "ZESCORP trateaza proiectele medicale ca sisteme complete: infrastructura, aparatura, documentatie, riscuri, service si continuitate operationala.",
 }: EnterpriseTrustBandProps) {
   return (
     <Section className="border-y border-blue-100 bg-white" spacing="lg" tone="transparent">
@@ -44,23 +44,23 @@ export function EnterpriseTrustBand({
               <TrackedButtonLink
                 href="/project-intake"
                 tracking={{
-                  ctaLabel: "Pregătiți analiza",
+                  ctaLabel: "Pregateste analiza",
                   destination: "/project-intake",
                   sourcePage,
                 }}
               >
-                Pregătiți analiza
+                Pregateste analiza
               </TrackedButtonLink>
               <TrackedButtonLink
                 href="/contact"
                 tracking={{
-                  ctaLabel: "Discutați cu echipa",
+                  ctaLabel: "Discuta cu echipa",
                   destination: "/contact",
                   sourcePage,
                 }}
                 variant="secondary"
               >
-                Discutați cu echipa
+                Discuta cu echipa
               </TrackedButtonLink>
             </div>
           </div>

@@ -196,3 +196,23 @@ For a safe demo fallback:
 4. Trigger high intent and verify compact `Cerere pregatita` card appears before full lead form.
 5. Open `/service-aparatura-medicala` and confirm CTA opens/seeds ZES service prompt.
 6. Open `/radioprotectie-plumbare-rx` and confirm CTA opens/seeds radioprotectie prompt.
+
+## Phase 78A trust and conversion QA
+
+1. Homepage must read as a real implementation company before AI:
+   - trust copy,
+   - workflow clarity,
+   - project showcase realism.
+2. Portfolio cards:
+   - readable challenge/delivery/context,
+   - no fake client names,
+   - consistent visual quality.
+3. Human contact visibility:
+   - phone/email/WhatsApp actions visible and working.
+4. Service landing:
+   - support expectations clear,
+   - urgent conversion CTA visible.
+5. Radioprotectie landing:
+   - preliminary framing clear,
+   - technical support/contact reassurance visible.
+6. ZES remains available but does not visually dominate trust sections.

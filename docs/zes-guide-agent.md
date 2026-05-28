@@ -317,3 +317,12 @@ Safety frequency rules:
 - Runtime and recommendation details are compacted in popup mode behind `Detalii recomandare ZES`.
 - High-intent popup flow now uses a compact `Cerere pregatita` step before opening full inline lead form.
 - Landing page CTAs can open/seed popup context through `zes:open-popup` event payloads.
+
+## Phase 78A positioning guardrails
+
+- ZES is positioned as an assistant to a real medical infrastructure company, not as the company itself.
+- Homepage and landing pages now prioritize:
+  - implementation credibility,
+  - workflow clarity,
+  - human contact actions.
+- ZES should support conversion trust signals (service triage, project structuring, preliminary context) without overshadowing portfolio/workflow/company sections.

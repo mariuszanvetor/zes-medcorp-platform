@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 import { OpenZESButton } from "@/components/ai/OpenZESButton";
@@ -6,6 +7,7 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/sections/SectionHeading";
+import { companyContact } from "@/lib/brand";
 import { createWebsiteMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createWebsiteMetadata({
@@ -166,6 +168,9 @@ export default function ServiceAparaturaMedicalaPage() {
         <Container>
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_16px_34px_rgba(15,23,42,0.06)]">
             <h2 className="text-2xl font-semibold text-slate-950">Flux service ZESCORP</h2>
+            <p className="mt-2 text-sm leading-7 text-slate-600">
+              Flux orientat pe triere rapida, clarificare tehnica si interventie planificata.
+            </p>
             <div className="mt-5 grid gap-3 md:grid-cols-5">
               {processSteps.map((step) => (
                 <div className="rounded-lg border border-blue-100 bg-[#f8fbff] p-3 text-sm text-slate-700" key={step}>
@@ -173,6 +178,51 @@ export default function ServiceAparaturaMedicalaPage() {
                 </div>
               ))}
             </div>
+          </div>
+
+          <div className="mt-6 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+            <article className="rounded-2xl border border-slate-200 bg-white p-6">
+              <h3 className="text-xl font-semibold text-slate-950">Asteptari de suport</h3>
+              <ul className="mt-3 grid gap-2 text-sm leading-7 text-slate-700">
+                <li className="flex items-start gap-2"><span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#0057b8]" />Evaluare preliminara pe baza simptomelor si contextului operational.</li>
+                <li className="flex items-start gap-2"><span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#0057b8]" />Prioritizare pentru cazuri cu impact direct in activitatea clinicii.</li>
+                <li className="flex items-start gap-2"><span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#0057b8]" />Comunicare clara pentru pasii tehnici urmatori.</li>
+              </ul>
+              <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+                <Link className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-200 px-5 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50" href={companyContact.phoneHref}>
+                  {companyContact.phone}
+                </Link>
+                <Link className="inline-flex h-11 items-center justify-center rounded-xl bg-[#0f9d58] px-5 text-sm font-semibold text-white transition hover:bg-[#0d8b4d]" href={companyContact.whatsappHref} rel="noreferrer" target="_blank">
+                  WhatsApp rapid
+                </Link>
+              </div>
+            </article>
+
+            <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+              <div className="relative h-52">
+                <Image
+                  alt="Interventie service aparatura medicala"
+                  className="object-cover object-center"
+                  fill
+                  sizes="(min-width: 1024px) 55vw, 100vw"
+                  src="/hero-medical-tech.png"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(7,20,35,0.52)_0%,rgba(7,20,35,0.16)_70%)]" />
+              </div>
+              <div className="p-5">
+                <p className="text-sm leading-7 text-slate-700">
+                  Pentru solicitari urgente, ZES poate pregati imediat cererea de service cu informatiile esentiale.
+                </p>
+                <OpenZESButton
+                  className="mt-4"
+                  ctaLabel="Solicita service prin ZES visual"
+                  prompt="Am nevoie de service pentru aparatura medicala. Vreau preluare prioritara."
+                  sourcePage="/service-aparatura-medicala"
+                >
+                  Solicita service prin ZES
+                </OpenZESButton>
+              </div>
+            </article>
           </div>
         </Container>
       </Section>

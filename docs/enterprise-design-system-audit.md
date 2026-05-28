@@ -379,3 +379,16 @@ Every redesign slice should verify:
   - `/service-aparatura-medicala`
   - `/radioprotectie-plumbare-rx`
 - Homepage shortcut routing now includes those two focused funnels for faster conversion paths.
+
+## Phase 78A trust-first company positioning
+
+- Homepage now prioritizes company credibility before AI depth:
+  - implementation capability,
+  - portfolio-style project context,
+  - workflow and human contact clarity.
+- Added trust/proof structure:
+  - operational trust layer,
+  - project showcase cards with anonymized real-world context,
+  - direct contact actions (phone/email/WhatsApp).
+- ZES remains prominent but repositioned as assistant to a real technical company, not as a standalone AI demo.
+- Landing pages `/service-aparatura-medicala` and `/radioprotectie-plumbare-rx` now include stronger support expectations and trust-oriented conversion paths.

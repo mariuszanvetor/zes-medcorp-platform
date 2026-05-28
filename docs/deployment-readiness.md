@@ -217,3 +217,13 @@ Redeploy after environment changes and run one controlled internal test from `/a
 - Landing CTAs can open ZES popup directly and seed conversation intent.
 - Popup composer is pinned at the bottom for better mobile and desktop usability.
 - Conversation viewport auto-scrolls to newest responses and lead-state updates.
+
+## Phase 78A trust and portfolio rollout notes
+
+- Homepage includes trust-first sections for operational credibility and real-world project context.
+- Added anonymized portfolio showcase focused on:
+  - radioprotectie,
+  - CT/RMN infrastructure,
+  - service and modernization flows.
+- Contact trust layer now emphasizes direct phone/email/WhatsApp actions.
+- ZES remains integrated as guided assistant, but public hierarchy prioritizes company competence and implementation readiness.
