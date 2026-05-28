@@ -2,12 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { TrackedButtonLink } from "@/components/analytics/TrackedButtonLink";
+import { OpenZESButton } from "@/components/ai/OpenZESButton";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 
 const shortcutLinks = [
-  { label: "Service aparatura medicala", href: "/services/service-aparatura-medicala" },
-  { label: "Radioprotectie & Plumbare", href: "/services/protectie-radiologica" },
+  { label: "Service aparatura medicala", href: "/service-aparatura-medicala" },
+  { label: "Radioprotectie & Plumbare", href: "/radioprotectie-plumbare-rx" },
   { label: "CT & RMN", href: "/services/imagistica-medicala" },
   { label: "Proiecte medicale", href: "/servicii" },
   { label: "Ofertare echipamente", href: "/proposal-builder" },
@@ -41,18 +42,14 @@ export function HeroSection() {
               pentru proiecte medicale moderne.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <TrackedButtonLink
+              <OpenZESButton
                 className="rounded-xl px-7"
-                href="#zes-guide"
+                ctaLabel="Discuta cu ZES"
                 size="lg"
-                tracking={{
-                  ctaLabel: "Discuta cu ZES",
-                  destination: "/#zes-guide",
-                  sourcePage: "/",
-                }}
+                sourcePage="/"
               >
                 Discuta cu ZES
-              </TrackedButtonLink>
+              </OpenZESButton>
               <TrackedButtonLink
                 className="rounded-xl border-blue-200 px-7 text-[#0057b8]"
                 href="/contact"
@@ -121,4 +118,3 @@ export function HeroSection() {
     </Section>
   );
 }
-

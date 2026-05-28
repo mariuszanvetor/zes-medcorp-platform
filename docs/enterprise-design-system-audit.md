@@ -370,3 +370,12 @@ Every redesign slice should verify:
 - Primary CTA hierarchy simplified around `Discuta cu ZES` and technical evaluation flows.
 - Floating assistant introduced with compact popup behavior for low-friction access.
 - Sticky conversion bar is hidden on homepage to reduce CTA conflict with floating ZES.
+
+## Phase 77B visual and conversion addendum
+
+- Floating assistant panel was simplified for readability: lighter header, reduced dense text and compact metadata panels.
+- Popup now prioritizes conversation flow with persistent bottom message bar and improved mobile tap targets.
+- Service-first and radioprotection-first landing pages were added for high-intent entry:
+  - `/service-aparatura-medicala`
+  - `/radioprotectie-plumbare-rx`
+- Homepage shortcut routing now includes those two focused funnels for faster conversion paths.

@@ -30,6 +30,8 @@ const staticRoutes: Array<{
   { path: "/service-diagnostic", changeFrequency: "monthly", priority: 0.78 },
   { path: "/proposal-builder", changeFrequency: "monthly", priority: 0.8 },
   { path: "/project-intake", changeFrequency: "monthly", priority: 0.81 },
+  { path: "/service-aparatura-medicala", changeFrequency: "monthly", priority: 0.82 },
+  { path: "/radioprotectie-plumbare-rx", changeFrequency: "monthly", priority: 0.82 },
   { path: "/planificare", changeFrequency: "monthly", priority: 0.84 },
   { path: "/glosar", changeFrequency: "weekly", priority: 0.84 },
   { path: "/comparatii", changeFrequency: "weekly", priority: 0.83 },

@@ -309,3 +309,11 @@ Safety frequency rules:
 - Minimized/open state is persisted in local storage (`zes_floating_assistant_state_v1`).
 - Popup reuses the same ZES conversation engine, upload flow, lead capture, request summary and fallback logic.
 - In popup mode, ZES UI is condensed: single-column conversation, reduced visual density, mobile-first controls.
+
+## Phase 77B popup UX polish
+
+- Popup conversation input is pinned at the bottom of the assistant panel for easier continuous messaging.
+- Conversation viewport auto-scrolls to latest content after user sends a message, ZES replies, file analysis responses and lead state updates.
+- Runtime and recommendation details are compacted in popup mode behind `Detalii recomandare ZES`.
+- High-intent popup flow now uses a compact `Cerere pregatita` step before opening full inline lead form.
+- Landing page CTAs can open/seed popup context through `zes:open-popup` event payloads.

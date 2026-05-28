@@ -208,3 +208,12 @@ Redeploy after environment changes and run one controlled internal test from `/a
 - Auto-popup behavior is intentionally conservative (delay/scroll trigger) to avoid blocking core content.
 - Sticky conversion bar is disabled on homepage to keep CTA hierarchy clear.
 - No new backend dependencies were introduced for floating behavior.
+
+## Phase 77B landing and popup notes
+
+- New focused landing routes:
+  - `/service-aparatura-medicala`
+  - `/radioprotectie-plumbare-rx`
+- Landing CTAs can open ZES popup directly and seed conversation intent.
+- Popup composer is pinned at the bottom for better mobile and desktop usability.
+- Conversation viewport auto-scrolls to newest responses and lead-state updates.

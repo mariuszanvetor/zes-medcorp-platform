@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 
-import { AIMagicLayerSection } from "@/components/sections/AIMagicLayerSection";
-import { EquipmentServiceSection } from "@/components/sections/EquipmentServiceSection";
 import { EnterpriseTrustBand } from "@/components/sections/EnterpriseTrustBand";
 import { FinalCTASection } from "@/components/sections/FinalCTASection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { EcosystemNavigation } from "@/components/sections/EcosystemNavigation";
+import { HomepageTrustLayer } from "@/components/sections/HomepageTrustLayer";
 import { PlanningJourneyBlock } from "@/components/sections/PlanningJourneyBlock";
-import { RadiologyShieldingSection } from "@/components/sections/RadiologyShieldingSection";
+import { PortfolioShowcaseSection } from "@/components/sections/PortfolioShowcaseSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { ZESGuideSection } from "@/components/sections/ZESGuideSection";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
@@ -29,10 +28,9 @@ export default function Home() {
         title="Expertiza reala pentru infrastructura medicala complexa."
         description="ZESCORP coordoneaza proiectare, radioprotectie, RF shielding, aparatura si service intr-un flux clar, tehnic si verificabil."
       />
-      <RadiologyShieldingSection />
-      <EquipmentServiceSection />
+      <PortfolioShowcaseSection />
+      <HomepageTrustLayer />
       <ZESGuideSection />
-      <AIMagicLayerSection />
       <Section
         className="border-y border-blue-100 bg-white"
         spacing="lg"
@@ -57,4 +55,3 @@ export default function Home() {
     </>
   );
 }
-

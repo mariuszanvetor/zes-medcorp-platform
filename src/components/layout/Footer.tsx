@@ -6,6 +6,8 @@ import { Container } from "@/components/ui/Container";
 import { companyContact } from "@/lib/brand";
 
 const serviceLinks = [
+  { label: "Service aparatura medicala", href: "/service-aparatura-medicala" },
+  { label: "Radioprotectie / plumbare RX", href: "/radioprotectie-plumbare-rx" },
   { label: "Hub comercial ZES", href: "/servicii" },
   { label: "Servicii generale", href: "/services" },
   { label: "Proiectare camera RMN", href: "/servicii/proiectare-camera-rmn" },
@@ -18,7 +20,7 @@ const serviceLinks = [
 const aiToolLinks = [
   { label: "AI Discovery", href: "/ai-discovery" },
   { label: "Calculatoare medicale", href: "/calculatoare" },
-  { label: "Comparații tehnice", href: "/comparatii" },
+  { label: "Comparatii tehnice", href: "/comparatii" },
   { label: "Planificare proiect", href: "/planificare" },
   { label: "Proposal Builder", href: "/proposal-builder" },
   { label: "Project Intake ZES", href: "/project-intake" },
@@ -125,8 +127,8 @@ export function Footer() {
 
         <div className="flex flex-col gap-3 border-t border-white/10 py-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            &copy; {currentYear} {companyContact.legalName}. CUI {companyContact.cui} ·
-            Reg. Com. {companyContact.tradeRegister}
+            &copy; {currentYear} {companyContact.legalName}. CUI {companyContact.cui} · Reg. Com.{" "}
+            {companyContact.tradeRegister}
           </p>
           <div className="flex gap-4">
             <Link className="transition hover:text-slate-300" href="/contact">

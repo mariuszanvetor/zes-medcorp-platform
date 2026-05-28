@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 import { ZESGuide } from "@/components/ai/ZESGuide";
 import { Button } from "@/components/ui/Button";
+import { ZES_POPUP_OPEN_EVENT, type ZESPopupOpenDetail } from "@/lib/zes-popup";
 import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "zes_floating_assistant_state_v1";
@@ -19,6 +20,7 @@ export function FloatingZESAssistant() {
 
   const [state, setState] = useState<FloatingState>("minimized");
   const [bootstrapped, setBootstrapped] = useState(false);
+  const [promptSeed, setPromptSeed] = useState<string | null>(null);
 
   useEffect(() => {
     if (!shouldRender) {
@@ -68,6 +70,27 @@ export function FloatingZESAssistant() {
     };
   }, [bootstrapped, shouldRender, state]);
 
+  useEffect(() => {
+    if (!shouldRender) {
+      return;
+    }
+
+    const onOpenRequest = (event: Event) => {
+      const customEvent = event as CustomEvent<ZESPopupOpenDetail>;
+      setState("open");
+
+      const prompt = customEvent.detail?.prompt?.trim();
+      if (prompt) {
+        setPromptSeed(`${Date.now()}:${prompt}`);
+      }
+    };
+
+    window.addEventListener(ZES_POPUP_OPEN_EVENT, onOpenRequest as EventListener);
+    return () => {
+      window.removeEventListener(ZES_POPUP_OPEN_EVENT, onOpenRequest as EventListener);
+    };
+  }, [shouldRender]);
+
   const isOpen = state === "open";
   const buttonLabel = useMemo(
     () => (isOpen ? "Minimizeaza ZES" : "Discuta cu ZES"),
@@ -79,7 +102,7 @@ export function FloatingZESAssistant() {
   }
 
   return (
-    <div className="pointer-events-none fixed bottom-5 right-4 z-[70] sm:bottom-6 sm:right-6">
+    <div className="pointer-events-none fixed bottom-4 right-3 z-[70] sm:bottom-6 sm:right-6">
       <div
         className={cn(
           "pointer-events-auto transition-all duration-300",
@@ -87,15 +110,15 @@ export function FloatingZESAssistant() {
         )}
       >
         {isOpen && (
-          <div className="mb-3 w-[min(92vw,26rem)] overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-[0_24px_80px_rgba(15,65,118,0.24)]">
-            <div className="border-b border-blue-100 bg-[linear-gradient(180deg,#f7fbff_0%,#ffffff_100%)] px-4 py-3">
+          <div className="mb-3 w-[min(94vw,27.5rem)] overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-[0_24px_80px_rgba(15,65,118,0.24)] sm:rounded-2xl">
+            <div className="border-b border-blue-100 bg-[linear-gradient(180deg,#f7fbff_0%,#ffffff_100%)] px-4 py-3.5">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#0057b8]">
                     ZES AI Concierge
                   </p>
                   <p className="mt-1 text-sm leading-6 text-slate-700">
-                    Salut, sunt ZES. Descrie pe scurt ce ai nevoie si te ghidez.
+                    Salut, sunt ZES. Spune pe scurt ce ai nevoie si pornim.
                   </p>
                 </div>
                 <button
@@ -108,13 +131,12 @@ export function FloatingZESAssistant() {
               </div>
               <ul className="mt-2 grid gap-1 text-xs text-slate-600">
                 <li>- service aparatura medicala</li>
-                <li>- camere CT/RMN</li>
-                <li>- radioprotectie</li>
-                <li>- ofertare echipamente si proiecte medicale</li>
+                <li>- camere CT/RMN si radiologie</li>
+                <li>- radioprotectie si plumbare RX</li>
               </ul>
             </div>
-            <div className="max-h-[72vh] overflow-y-auto p-3">
-              <ZESGuide compactHeader mode="popup" />
+            <div className="max-h-[76vh] overflow-y-auto p-2 sm:p-3">
+              <ZESGuide compactHeader externalPromptToken={promptSeed} mode="popup" />
             </div>
           </div>
         )}
@@ -122,7 +144,7 @@ export function FloatingZESAssistant() {
 
       <Button
         className={cn(
-          "h-12 rounded-full px-5 shadow-[0_16px_42px_rgba(0,87,184,0.30)]",
+          "h-11 rounded-full px-4 text-sm shadow-[0_16px_42px_rgba(0,87,184,0.30)] sm:h-12 sm:px-5 sm:text-base",
           !isOpen && "animate-pulse",
         )}
         size="md"
@@ -134,4 +156,3 @@ export function FloatingZESAssistant() {
     </div>
   );
 }
-

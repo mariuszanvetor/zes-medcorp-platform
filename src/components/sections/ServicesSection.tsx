@@ -1,56 +1,56 @@
 import Link from "next/link";
 
+import { SectionHeading } from "@/components/sections/SectionHeading";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { SectionHeading } from "@/components/sections/SectionHeading";
 
 const services = [
   {
-    title: "Construcții & amenajări medicale",
+    title: "Constructii & amenajari medicale",
     description:
-      "Spații medicale proiectate pentru fluxuri, autorizări, echipamente și operare pe termen lung.",
+      "Spatii medicale proiectate pentru fluxuri, autorizari, echipamente si operare pe termen lung.",
     href: "/services/constructii-medicale",
   },
   {
-    title: "Radiologie & camere imagistică",
+    title: "Radiologie & camere imagistica",
     description:
-      "Camere CT, RMN și RX coordonate cu furnizorii, instalațiile, layout-ul și service-ul.",
+      "Camere CT, RMN si RX coordonate cu furnizorii, instalatiile, layout-ul si service-ul.",
     href: "/services/radiologie",
   },
   {
     title: "RF shielding pentru RMN",
     description:
-      "Cușcă Faraday, uși RF, waveguides, filtre și integritate electromagnetică pentru MRI.",
+      "Cusca Faraday, usi RF, waveguides, filtre si integritate electromagnetica pentru MRI.",
     href: "/services/rf-shielding",
   },
   {
-    title: "Protecție radiologică / plumb",
+    title: "Protectie radiologica / plumb",
     description:
-      "Ecranare cu plumb pentru CT/RX: pereți, uși, sticlă plumbată, zone controlate și CNCAN.",
+      "Ecranare cu plumb pentru CT/RX: pereti, usi, sticla plumbata, zone controlate si CNCAN.",
     href: "/services/protectie-radiologica",
   },
   {
-    title: "Aparatură medicală",
+    title: "Aparatura medicala",
     description:
-      "Selecție, vânzare, integrare și punere în funcțiune pentru echipamente medicale.",
+      "Selectie, vanzare, integrare si punere in functiune pentru echipamente medicale.",
     href: "/services/aparatura-medicala",
   },
   {
-    title: "Imagistică medicală",
+    title: "Imagistica medicala",
     description:
-      "CT, RMN, RX, ecografie și infrastructura necesară pentru performanță și uptime.",
+      "CT, RMN, RX, ecografie si infrastructura necesara pentru performanta si uptime.",
     href: "/services/imagistica-medicala",
   },
   {
     title: "IVD / laborator",
     description:
-      "Echipamente de laborator, consumabile, fluxuri tehnice, integrare și mentenanță.",
+      "Echipamente de laborator, consumabile, fluxuri tehnice, integrare si mentenanta.",
     href: "/services/ivd-laborator",
   },
   {
-    title: "Service & mentenanță",
+    title: "Service & mentenanta",
     description:
-      "Service specializat, mentenanță preventivă și suport pentru continuitate operațională.",
+      "Service specializat, mentenanta preventiva si suport pentru continuitate operationala.",
     href: "/services/service-aparatura-medicala",
   },
 ];
@@ -64,7 +64,7 @@ export function ServicesSection() {
           className="mx-auto"
           eyebrow="Servicii ZES"
           title="Pilonii tehnici ai unui proiect medical bine coordonat."
-          description="Servicii separate, dar planificate împreună: infrastructură, aparatură, imagistică, laborator, service, RF shielding pentru RMN și protecție radiologică pentru CT/RX."
+          description="Servicii separate, dar planificate impreuna: infrastructura, aparatura, imagistica, laborator, service, RF shielding pentru RMN si protectie radiologica pentru CT/RX."
         />
         <div className="mt-16 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {services.map((service) => (

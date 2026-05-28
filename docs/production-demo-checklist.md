@@ -81,6 +81,8 @@ Check at a narrow viewport before presentation:
 After a deploy reaches `Ready`, open:
 
 - `/`
+- `/service-aparatura-medicala`
+- `/radioprotectie-plumbare-rx`
 - `/ai-discovery`
 - `/proposal-builder`
 - `/project-intake`
@@ -185,3 +187,12 @@ For a safe demo fallback:
 5. Popup conversation:
    - text, upload and lead capture remain functional;
    - conversation continuity preserved in popup mode.
+
+## Phase 77B popup and landing QA
+
+1. In popup mode, verify input bar remains visible while scrolling conversation.
+2. Send one prompt and confirm auto-scroll keeps latest ZES response in view.
+3. Upload one file and confirm analysis notice appears without losing input access.
+4. Trigger high intent and verify compact `Cerere pregatita` card appears before full lead form.
+5. Open `/service-aparatura-medicala` and confirm CTA opens/seeds ZES service prompt.
+6. Open `/radioprotectie-plumbare-rx` and confirm CTA opens/seeds radioprotectie prompt.

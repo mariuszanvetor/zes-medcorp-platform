@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { trackCTA, trackEvent, trackLeadEvent } from "@/lib/analytics";
 import {
@@ -58,12 +58,17 @@ type PreliminaryRequest = {
 type ZESGuideProps = {
   compactHeader?: boolean;
   mode?: "full" | "popup";
+  externalPromptToken?: string | null;
 };
 
 const introMessage =
   "Salut, sunt ZES. Spune ce vrei sa construiesti, modernizezi sau repari. Poti atasa poze, planuri sau fise tehnice, iar ZES pregateste urmatorul pas pentru service, proiect sau ofertare.";
 
-export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps) {
+export function ZESGuide({
+  compactHeader = false,
+  mode = "full",
+  externalPromptToken,
+}: ZESGuideProps) {
   const isPopup = mode === "popup";
   const [query, setQuery] = useState("");
   const [conversation, setConversation] = useState<ConversationItem[]>([
@@ -102,7 +107,11 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
     storageMode?: string;
     success?: boolean;
   } | null>(null);
+  const [showPopupLeadForm, setShowPopupLeadForm] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const queryInputRef = useRef<HTMLInputElement | null>(null);
+  const conversationViewportRef = useRef<HTMLDivElement | null>(null);
+  const previousPromptTokenRef = useRef<string | null>(null);
 
   const lastTurn = useMemo(() => {
     for (let index = conversation.length - 1; index >= 0; index -= 1) {
@@ -129,6 +138,49 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
     conversationState?.leadCompletionStatus === "ready" ||
     conversationState?.leadCompletionStatus === "closed";
 
+  useEffect(() => {
+    const viewport = conversationViewportRef.current;
+    if (!viewport) {
+      return;
+    }
+
+    viewport.scrollTo({
+      top: viewport.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [conversation, uploadItems, captureVisible, leadStatus, preliminaryRequest]);
+
+  useEffect(() => {
+    if (!isPopup || captureVisible) {
+      return;
+    }
+
+    const focusTimer = window.setTimeout(() => {
+      queryInputRef.current?.focus();
+    }, 50);
+
+    return () => window.clearTimeout(focusTimer);
+  }, [isPopup, captureVisible, conversation.length]);
+
+  useEffect(() => {
+    if (!externalPromptToken || externalPromptToken === previousPromptTokenRef.current) {
+      return;
+    }
+
+    previousPromptTokenRef.current = externalPromptToken;
+    const separatorIndex = externalPromptToken.indexOf(":");
+    const prompt =
+      separatorIndex >= 0
+        ? externalPromptToken.slice(separatorIndex + 1).trim()
+        : externalPromptToken.trim();
+
+    if (!prompt) {
+      return;
+    }
+
+    void handlePrompt(prompt);
+  }, [externalPromptToken]);
+
   function handlePrompt(prompt: string) {
     setQuery(prompt);
     void handleSend(prompt);
@@ -153,6 +205,9 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
 
     setIsResponding(true);
     setCaptureVisible(false);
+    if (isPopup) {
+      setShowPopupLeadForm(false);
+    }
     setLeadStatus("idle");
     setLeadModes(null);
     setQuery("");
@@ -200,6 +255,9 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
         response.state.phase === "completed-closed"
       ) {
         setCaptureVisible(true);
+        if (isPopup) {
+          setShowPopupLeadForm(true);
+        }
       }
       if (
         response.turn.highIntentClose ||
@@ -216,6 +274,9 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
         );
         if (explicitCloseIntent) {
           setCaptureVisible(true);
+          if (isPopup) {
+            setShowPopupLeadForm(true);
+          }
         }
       }
 
@@ -443,9 +504,12 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
         ...current,
         {
           role: "assistant",
-          text: "Cerere pregatita si trimisa. Daca vrei, mai pot genera un rezumat scurt pentru urmatoarea discutie tehnica.",
+          text: "Cererea a fost trimisa. Echipa ZESCORP revine cu urmatorii pasi. Daca vrei, pot genera un rezumat scurt pentru discutia tehnica.",
         },
       ]);
+      if (isPopup) {
+        setShowPopupLeadForm(false);
+      }
       trackLeadEvent("lead_form_submit_success", {
         sourcePage: "/",
         sourceTool: "zes-guide",
@@ -509,8 +573,20 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
           isPopup ? "grid-cols-1" : "lg:grid-cols-[1fr_0.4fr]",
         )}
       >
-        <div className="min-w-0 rounded-xl border border-slate-200 bg-[#f7fbff] p-3 sm:p-4">
-          <div className="grid max-h-[30rem] gap-3 overflow-y-auto pr-1">
+        <div
+          className={cn(
+            "min-w-0 rounded-xl border border-slate-200 bg-[#f7fbff] p-3 sm:p-4",
+            isPopup &&
+              "rounded-xl border-blue-100 bg-[linear-gradient(180deg,#f8fbff_0%,#f2f7ff_100%)] p-2.5 sm:p-3",
+          )}
+        >
+          <div
+            ref={conversationViewportRef}
+            className={cn(
+              "grid gap-3 overflow-y-auto pr-1",
+              isPopup ? "max-h-[38vh] scroll-smooth" : "max-h-[30rem]",
+            )}
+          >
             {conversation.map((item, index) => (
               <div
                 className={cn(
@@ -529,6 +605,7 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
                   <TurnDetails
                     aiMode={item.aiMode}
                     aiModel={item.aiModel}
+                    compact={isPopup}
                     turn={item.turn}
                   />
                 )}
@@ -536,14 +613,18 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
             ))}
           </div>
 
-          <div className="mt-4 rounded-lg border border-slate-200 bg-white p-3">
+          <div
+            className={cn(
+              "mt-4 rounded-lg border border-slate-200 bg-white p-3",
+              isPopup && "sticky bottom-0 z-10 border-blue-200 shadow-[0_-12px_28px_rgba(15,23,42,0.08)]",
+            )}
+          >
             <div className="flex flex-wrap items-center justify-between gap-3">
               <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
-                {isPopup ? "Start rapid" : "Start rapid"}
+                {isPopup ? "Mesaj catre ZES" : "Start rapid"}
               </p>
               <p className="text-xs leading-6 text-slate-500">
-                Nu introduce date medicale sensibile sau date de pacient. ZES foloseste
-                contextul doar pentru raspunsul curent si pentru pregatirea solicitarii.
+                Evita date medicale sensibile ale pacientilor.
               </p>
             </div>
             {!isPopup && (
@@ -579,13 +660,17 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
               </div>
             )}
             <form
-              className="mt-3 flex flex-col gap-2 sm:flex-row"
+              className={cn(
+                "mt-3 flex flex-col gap-2 sm:flex-row",
+                isPopup && "gap-2.5 sm:flex-nowrap",
+              )}
               onSubmit={(event) => {
                 event.preventDefault();
                 void handleSend();
               }}
             >
               <input
+                ref={queryInputRef}
                 className="h-12 flex-1 rounded-lg border border-slate-200 bg-white px-4 text-sm text-slate-900 outline-none transition focus:border-blue-300"
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Vreau sa deschid o clinica CT | Am un aparat defect si am nevoie de service | Am nevoie de camera RMN"
@@ -602,14 +687,15 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
                 }}
               />
               <Button
+                className={cn(isPopup && "sm:px-4")}
                 size="lg"
                 type="button"
                 variant="secondary"
                 onClick={() => fileInputRef.current?.click()}
               >
-                Ataseaza fisier
+                {isPopup ? "Ataseaza" : "Ataseaza fisier"}
               </Button>
-              <Button isLoading={isResponding} size="lg" type="submit">
+              <Button className={cn(isPopup && "sm:px-4")} isLoading={isResponding} size="lg" type="submit">
                 Trimite
               </Button>
             </form>
@@ -628,7 +714,7 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
             )}
             {uploadItems.length > 0 && (
               <div className="mt-3 grid gap-2">
-                {uploadItems.slice(-4).map((item) => (
+                {uploadItems.slice(isPopup ? -2 : -4).map((item) => (
                   <div
                     key={item.id}
                     className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs leading-6 text-slate-700"
@@ -641,9 +727,17 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
                           ? `Analiza preliminara (${formatRuntimeLabel(item.aiMode ?? "mock", null)})`
                           : "Nu s-a putut analiza; verificare manuala recomandata"}
                     </p>
-                    {item.analysis && (
-                      <p className="text-slate-600">{item.analysis.nextBestAction}</p>
-                    )}
+                    {item.analysis &&
+                      (isPopup ? (
+                        <details className="mt-1">
+                          <summary className="cursor-pointer font-semibold text-[#0057b8]">
+                            Vezi recomandare
+                          </summary>
+                          <p className="mt-1 text-slate-600">{item.analysis.nextBestAction}</p>
+                        </details>
+                      ) : (
+                        <p className="text-slate-600">{item.analysis.nextBestAction}</p>
+                      ))}
                     {item.error && <p className="text-rose-700">{item.error}</p>}
                   </div>
                 ))}
@@ -652,7 +746,12 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
           </div>
 
           {preliminaryRequest && (
-            <section className="mt-4 rounded-lg border border-blue-200 bg-white p-4">
+            <section
+              className={cn(
+                "mt-4 rounded-lg border border-blue-200 bg-white p-4",
+                isPopup && "p-3",
+              )}
+            >
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
                 Cerere preliminara ZES
               </p>
@@ -662,22 +761,37 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
               <p className="mt-2 text-sm leading-7 text-slate-700">
                 {preliminaryRequest.summary}
               </p>
-              <p className="mt-2 text-sm leading-7 text-slate-700">
-                <span className="font-semibold text-slate-900">Servicii sugerate:</span>{" "}
-                {preliminaryRequest.recommendedServices.join(", ")}
-              </p>
-              <p className="mt-1 text-sm leading-7 text-slate-700">
-                <span className="font-semibold text-slate-900">Informatii lipsa:</span>{" "}
-                {preliminaryRequest.missingInfo.slice(0, 3).join(" | ")}
-              </p>
-              <p className="mt-1 text-sm leading-7 text-slate-700">
-                <span className="font-semibold text-slate-900">Urmator pas:</span>{" "}
-                {preliminaryRequest.nextAction}
-              </p>
+              {!isPopup && (
+                <>
+                  <p className="mt-2 text-sm leading-7 text-slate-700">
+                    <span className="font-semibold text-slate-900">Servicii sugerate:</span>{" "}
+                    {preliminaryRequest.recommendedServices.join(", ")}
+                  </p>
+                  <p className="mt-1 text-sm leading-7 text-slate-700">
+                    <span className="font-semibold text-slate-900">Informatii lipsa:</span>{" "}
+                    {preliminaryRequest.missingInfo.slice(0, 3).join(" | ")}
+                  </p>
+                  <p className="mt-1 text-sm leading-7 text-slate-700">
+                    <span className="font-semibold text-slate-900">Urmator pas:</span>{" "}
+                    {preliminaryRequest.nextAction}
+                  </p>
+                </>
+              )}
+              {isPopup && (
+                <p className="mt-2 text-sm leading-6 text-slate-700">
+                  <span className="font-semibold text-slate-900">Urmator pas:</span>{" "}
+                  {preliminaryRequest.nextAction}
+                </p>
+              )}
               <div className="mt-3 flex flex-col gap-2 sm:flex-row">
                 <Button
                   size="sm"
-                  onClick={() => setCaptureVisible(true)}
+                  onClick={() => {
+                    setCaptureVisible(true);
+                    if (isPopup) {
+                      setShowPopupLeadForm(true);
+                    }
+                  }}
                 >
                   {preliminaryRequest.ctaLabel}
                 </Button>
@@ -686,14 +800,19 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
                   variant="secondary"
                   onClick={() => setPreliminaryRequest(null)}
                 >
-                  Continua conversatia
+                  Continua cu ZES
                 </Button>
               </div>
             </section>
           )}
 
           {isReadyForHandoff && lastTurn && conversationState && (
-            <section className="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 p-4">
+            <section
+              className={cn(
+                "mt-4 rounded-lg border border-emerald-200 bg-emerald-50 p-4",
+                isPopup && "p-3",
+              )}
+            >
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-700">
                 Gata pentru preluare
               </p>
@@ -706,13 +825,35 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
             </section>
           )}
 
-          {(captureVisible || shouldOfferCapture) && lastTurn && conversationState && (
+          {isPopup && (captureVisible || shouldOfferCapture) && !showPopupLeadForm && (
+            <section className="mt-4 rounded-lg border border-blue-200 bg-white p-3">
+              <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#0057b8]">
+                Cerere pregatita
+              </p>
+              <p className="mt-2 text-sm leading-6 text-slate-700">
+                Avem suficiente date pentru trimitere preliminara catre echipa ZESCORP.
+              </p>
+              <div className="mt-3 flex flex-col gap-2">
+                <Button size="sm" onClick={() => setShowPopupLeadForm(true)}>
+                  Trimite datele catre ZESCORP
+                </Button>
+                <Button size="sm" variant="secondary" onClick={() => queryInputRef.current?.focus()}>
+                  Mai adauga detalii
+                </Button>
+              </div>
+            </section>
+          )}
+
+          {(captureVisible || shouldOfferCapture) &&
+            (!isPopup || showPopupLeadForm) &&
+            lastTurn &&
+            conversationState && (
             <section className="mt-4 rounded-lg border border-blue-200 bg-white p-4">
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
                 Cerere catre ZESCORP
               </p>
               <p className="mt-2 text-sm font-semibold leading-7 text-slate-900">
-                Din ce ai descris, cererea este pregatita pentru preluare preliminara. ZES poate trimite acum contextul catre echipa ZESCORP.
+                Cererea este pregatita pentru preluare preliminara. ZES poate trimite acum contextul catre echipa ZESCORP.
               </p>
               <p className="mt-1 text-sm leading-7 text-slate-600">
                 Completeaza datele minime de contact. Pentru service urgent, telefonul si orasul sunt esentiale.
@@ -817,9 +958,14 @@ export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps
                 <Button
                   size="md"
                   variant="secondary"
-                  onClick={() => setCaptureVisible(false)}
+                  onClick={() => {
+                    setCaptureVisible(false);
+                    if (isPopup) {
+                      setShowPopupLeadForm(false);
+                    }
+                  }}
                 >
-                  Continua conversatia cu ZES
+                  Mai adauga detalii
                 </Button>
               </div>
             </section>
@@ -972,13 +1118,44 @@ function TurnDetails({
   turn,
   aiMode,
   aiModel,
+  compact = false,
 }: {
   turn: ZESAssistantTurn;
   aiMode?: ZESAIRuntimeMode;
   aiModel?: string | null;
+  compact?: boolean;
 }) {
   const showDocumentHint = Boolean(turn.documentHint?.trim());
   const missingInfo = uniqueText(turn.leadSnapshot.missingInfo).slice(0, 2);
+
+  if (compact) {
+    return (
+      <details className="mt-2 rounded-lg border border-blue-100 bg-[#f7fbff] p-2 text-xs text-slate-700">
+        <summary className="cursor-pointer font-semibold text-[#0057b8]">
+          Detalii recomandare ZES
+        </summary>
+        <div className="mt-2 grid gap-2">
+          <p className="font-semibold text-slate-900">{turn.internalCapabilityNote}</p>
+          <p>
+            Servicii:{" "}
+            {turn.suggestedServices.slice(0, 3).map((service) => service.label).join(", ")}
+          </p>
+          <p>
+            Informatii lipsa:{" "}
+            {missingInfo.length
+              ? missingInfo.join(" | ")
+              : "set minim completat pentru pasul urmator"}
+          </p>
+          {aiMode && (
+            <p className="text-[11px] text-slate-600">
+              Runtime: {formatRuntimeLabel(aiMode, aiModel ?? null)}
+            </p>
+          )}
+          {showDocumentHint && <p className="text-[11px] leading-6 text-slate-600">{turn.documentHint}</p>}
+        </div>
+      </details>
+    );
+  }
 
   return (
     <div className="mt-3 grid gap-2 rounded-lg border border-blue-100 bg-[#f7fbff] p-3 text-xs text-slate-700">
