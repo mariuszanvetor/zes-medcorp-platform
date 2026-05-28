@@ -111,6 +111,8 @@ export function ZESGuide({
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const queryInputRef = useRef<HTMLInputElement | null>(null);
   const conversationViewportRef = useRef<HTMLDivElement | null>(null);
+  const conversationBottomRef = useRef<HTMLDivElement | null>(null);
+  const scrollFrameRef = useRef<number | null>(null);
   const previousPromptTokenRef = useRef<string | null>(null);
   const forceAutoScrollRef = useRef(false);
 
@@ -143,24 +145,36 @@ export function ZESGuide({
     forceAutoScrollRef.current = force || forceAutoScrollRef.current;
   }
 
-  useEffect(() => {
+  function scrollToLatest({ force = false }: { force?: boolean } = {}) {
     const viewport = conversationViewportRef.current;
-    if (!viewport) {
+    const bottomAnchor = conversationBottomRef.current;
+    if (!viewport || !bottomAnchor) {
       return;
     }
 
     const distanceFromBottom =
       viewport.scrollHeight - viewport.clientHeight - viewport.scrollTop;
-    const userNearBottom = distanceFromBottom < 120;
-
-    if (!userNearBottom && !forceAutoScrollRef.current) {
+    const userNearBottom = distanceFromBottom < 140;
+    if (!force && !userNearBottom) {
       return;
     }
 
-    viewport.scrollTo({
-      top: viewport.scrollHeight,
-      behavior: forceAutoScrollRef.current ? "smooth" : "auto",
+    if (scrollFrameRef.current) {
+      window.cancelAnimationFrame(scrollFrameRef.current);
+      scrollFrameRef.current = null;
+    }
+
+    scrollFrameRef.current = window.requestAnimationFrame(() => {
+      bottomAnchor.scrollIntoView({ behavior: "smooth", block: "end" });
+      scrollFrameRef.current = window.requestAnimationFrame(() => {
+        bottomAnchor.scrollIntoView({ behavior: "smooth", block: "end" });
+        scrollFrameRef.current = null;
+      });
     });
+  }
+
+  useEffect(() => {
+    scrollToLatest({ force: forceAutoScrollRef.current });
     forceAutoScrollRef.current = false;
   }, [
     conversation,
@@ -170,6 +184,15 @@ export function ZESGuide({
     preliminaryRequest,
     showPopupLeadForm,
   ]);
+
+  useEffect(
+    () => () => {
+      if (scrollFrameRef.current) {
+        window.cancelAnimationFrame(scrollFrameRef.current);
+      }
+    },
+    [],
+  );
 
   useEffect(() => {
     if (!isPopup || captureVisible) {
@@ -894,6 +917,8 @@ export function ZESGuide({
             </section>
           )}
 
+          <div aria-hidden className="h-px w-full" ref={conversationBottomRef} />
+
           <div
             className={cn(
               "mt-4 rounded-lg border border-slate-200 bg-white p-3",
@@ -1170,9 +1195,10 @@ export function ZESGuide({
 }
 
 function composeAssistantText(turn: ZESAssistantTurn) {
-  const parts = [turn.message];
-  if (turn.followUpQuestion) {
-    parts.push(turn.followUpQuestion);
+  const primaryMessage = turn.message.trim();
+  const parts = [primaryMessage];
+  if (shouldRenderNextQuestion(primaryMessage, turn.followUpQuestion)) {
+    parts.push(turn.followUpQuestion!.trim());
   }
   return parts.join("\n");
 }
@@ -1188,8 +1214,21 @@ function TurnDetails({
   aiModel?: string | null;
   compact?: boolean;
 }) {
+  if (isGreetingLikeTurn(turn)) {
+    return null;
+  }
+
   const showDocumentHint = Boolean(turn.documentHint?.trim());
   const missingInfo = uniqueText(turn.leadSnapshot.missingInfo).slice(0, 2);
+  const hasSpecificDetails =
+    showDocumentHint ||
+    missingInfo.length > 0 ||
+    turn.suggestedServices.length > 0 ||
+    Boolean(turn.internalCapabilityNote?.trim());
+
+  if (compact && !hasSpecificDetails) {
+    return null;
+  }
 
   if (compact) {
     return (
@@ -1373,6 +1412,118 @@ function buildCompactClosingSummary(turn: ZESAssistantTurn, state: ZESConversati
     return summary;
   }
   return `${summary.slice(0, 187)}...`;
+}
+
+function shouldRenderNextQuestion(reply: string, nextQuestion?: string | null) {
+  const trimmedNextQuestion = nextQuestion?.trim();
+  if (!trimmedNextQuestion) {
+    return false;
+  }
+
+  const normalizedReply = normalizeForComparison(reply);
+  const normalizedNextQuestion = normalizeForComparison(trimmedNextQuestion);
+  if (!normalizedNextQuestion) {
+    return false;
+  }
+
+  if (normalizedReply.includes(normalizedNextQuestion)) {
+    return false;
+  }
+
+  if (hasStrongTokenOverlap(normalizedReply, normalizedNextQuestion)) {
+    return false;
+  }
+
+  if (
+    isGenericPrompt(normalizedNextQuestion) &&
+    (isGreetingLikeText(normalizedReply) ||
+      isGenericPrompt(normalizedReply) ||
+      reply.trim().endsWith("?"))
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+function isGreetingLikeTurn(turn: ZESAssistantTurn) {
+  const normalizedMessage = normalizeForComparison(turn.message);
+  if (!isGreetingLikeText(normalizedMessage)) {
+    return false;
+  }
+
+  const lowSpecificity =
+    turn.suggestedServices.length <= 1 &&
+    uniqueText(turn.leadSnapshot.missingInfo).length <= 1 &&
+    turn.leadSnapshot.collectedFields.length === 0;
+
+  return lowSpecificity;
+}
+
+function isGreetingLikeText(input: string) {
+  const text = normalizeForComparison(input);
+  if (!text) {
+    return false;
+  }
+
+  return (
+    text.includes("buna ziua") ||
+    text.startsWith("salut") ||
+    text.includes("cum te pot ajuta") ||
+    text.includes("cu ce te pot ajuta") ||
+    text.includes("spune mi pe scurt ce ai nevoie")
+  );
+}
+
+function isGenericPrompt(input: string) {
+  const text = normalizeForComparison(input);
+  if (!text) {
+    return false;
+  }
+
+  return (
+    text.includes("ce vrei sa construiesti modernizezi sau repari") ||
+    text.includes("ce doriti sa construiti modernizati sau reparati") ||
+    text.includes("cum te pot ajuta") ||
+    text.includes("cu ce te pot ajuta") ||
+    text.includes("spune mi ce ai nevoie") ||
+    text.includes("spune mi pe scurt ce ai nevoie")
+  );
+}
+
+function hasStrongTokenOverlap(textA: string, textB: string) {
+  const tokensA = new Set(tokenizeForComparison(textA));
+  const tokensB = new Set(tokenizeForComparison(textB));
+  if (!tokensA.size || !tokensB.size) {
+    return false;
+  }
+
+  let overlapCount = 0;
+  for (const token of tokensB) {
+    if (tokensA.has(token)) {
+      overlapCount += 1;
+    }
+  }
+
+  const minTokenCount = Math.min(tokensA.size, tokensB.size);
+  return overlapCount >= 3 || overlapCount / minTokenCount >= 0.6;
+}
+
+function tokenizeForComparison(input: string) {
+  return normalizeForComparison(input)
+    .split(" ")
+    .map((token) => token.trim())
+    .filter((token) => token.length > 2);
+}
+
+function normalizeForComparison(input: string) {
+  return input
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function uniqueText(items: string[]) {
