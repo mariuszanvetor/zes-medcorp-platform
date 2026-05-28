@@ -35,6 +35,22 @@ Design implication:
 - conversation surface acts as primary navigation into planning, ofertare, service and contact;
 - the visual system should keep this section clear and uncluttered on mobile.
 
+## Phase 76B/76C addendum (final launch experience)
+
+The launch pass reinforces one primary public interaction model:
+
+- users talk with ZES first;
+- users can attach files in the same chat flow;
+- users receive concise guidance plus a preliminary request brief;
+- users can submit lead data inline without route hopping.
+
+Design implications:
+
+- the composer row (input, upload, send) must stay prominent and readable on mobile;
+- upload status should be explicit but lightweight;
+- conversion panels should be short and contextual;
+- supporting tools remain available, but the homepage hierarchy must keep ZES as the first decision point.
+
 ## Methodology
 
 Reviewed:

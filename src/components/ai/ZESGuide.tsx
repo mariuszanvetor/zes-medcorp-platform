@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import { trackCTA, trackEvent, trackLeadEvent } from "@/lib/analytics";
 import {
@@ -23,6 +23,7 @@ import {
   type ZESGuideHistoryItem,
   type ZESAIRuntimeMode,
 } from "@/lib/zes-ai";
+import { type ZESFileAnalysis } from "@/lib/zes-file-analysis";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
@@ -36,12 +37,30 @@ type ConversationItem =
     }
   | { role: "user"; text: string };
 
+type UploadItem = {
+  id: string;
+  fileName: string;
+  status: "uploading" | "ready" | "failed";
+  aiMode?: ZESAIRuntimeMode;
+  analysis?: ZESFileAnalysis;
+  error?: string;
+};
+
+type PreliminaryRequest = {
+  title: string;
+  summary: string;
+  recommendedServices: string[];
+  missingInfo: string[];
+  nextAction: string;
+  ctaLabel: string;
+};
+
 type ZESGuideProps = {
   compactHeader?: boolean;
 };
 
 const introMessage =
-  "Salut, sunt ZES. Spune ce vrei sa construiesti, modernizezi sau repari, iar ZES te ghideaza tehnic si comercial pana la urmatorul pas.";
+  "Salut, sunt ZES. Spune ce vrei sa construiesti, modernizezi sau repari. Poti atasa poze, planuri sau fise tehnice, iar ZES pregateste urmatorul pas pentru service, proiect sau ofertare.";
 
 export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
   const [query, setQuery] = useState("");
@@ -70,12 +89,18 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
   const [isResponding, setIsResponding] = useState(false);
   const [runtimeMode, setRuntimeMode] = useState<ZESAIRuntimeMode>("mock");
   const [runtimeModel, setRuntimeModel] = useState<string | null>(null);
+  const [uploadItems, setUploadItems] = useState<UploadItem[]>([]);
+  const [uploadNotice, setUploadNotice] = useState<string | null>(null);
+  const [preliminaryRequest, setPreliminaryRequest] = useState<PreliminaryRequest | null>(
+    null,
+  );
   const [leadModes, setLeadModes] = useState<{
     emailMode?: string;
     sheetsMode?: string;
     storageMode?: string;
     success?: boolean;
   } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const lastTurn = useMemo(() => {
     for (let index = conversation.length - 1; index >= 0; index -= 1) {
@@ -108,6 +133,19 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
   async function handleSend(overrideValue?: string) {
     const text = (overrideValue ?? query).trim();
     if (!text || isResponding) return;
+    const readyAnalyses = uploadItems
+      .map((item) => item.analysis)
+      .filter((item): item is ZESFileAnalysis => Boolean(item));
+    const enrichedText =
+      readyAnalyses.length > 0
+        ? `${text}\n\nContext atasamente:\n${readyAnalyses
+            .slice(-2)
+            .map((analysis) => `- ${analysis.fileName}: ${analysis.fileSummary}`)
+            .join("\n")}`
+        : text;
+    const explicitCloseIntent = /\b(trimite|oferta|oferte|contacteaza|sunati|prioritar)\b/i.test(
+      text,
+    );
 
     setIsResponding(true);
     setCaptureVisible(false);
@@ -118,8 +156,9 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
     try {
       const response = await requestZESReply({
         history: toHistoryItems(conversation),
-        message: text,
+        message: enrichedText,
         state: conversationState,
+        fileAnalyses: readyAnalyses,
       });
 
       setConversationState(response.state);
@@ -140,6 +179,18 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
       if (response.turn.highIntentClose) {
         setCaptureVisible(true);
       }
+      if (response.turn.highIntentClose || explicitCloseIntent) {
+        setPreliminaryRequest(
+          buildPreliminaryRequest({
+            analyses: readyAnalyses,
+            state: response.state,
+            turn: response.turn,
+          }),
+        );
+        if (explicitCloseIntent) {
+          setCaptureVisible(true);
+        }
+      }
 
       trackEvent("ai_discovery_step", {
         sourcePage: "/",
@@ -152,8 +203,82 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
     }
   }
 
+  async function handleFileSelection(files: FileList | null) {
+    if (!files || files.length === 0) return;
+
+    setUploadNotice(null);
+    const selected = Array.from(files).slice(0, 3);
+
+    for (const file of selected) {
+      const uploadId = `${file.name}-${Date.now()}-${Math.random().toString(16).slice(2, 7)}`;
+      setUploadItems((current) => [
+        ...current,
+        {
+          id: uploadId,
+          fileName: file.name,
+          status: "uploading",
+        },
+      ]);
+
+      try {
+        const result = await requestZESFileAnalysis(file, query);
+        setUploadItems((current) =>
+          current.map((item) =>
+            item.id === uploadId
+              ? {
+                  ...item,
+                  status: "ready",
+                  aiMode: result.aiMode,
+                  analysis: result.analysis,
+                }
+              : item,
+          ),
+        );
+        setConversation((current) => [
+          ...current,
+          {
+            role: "assistant",
+            text: [
+              `ZES a analizat fisierul ${result.analysis.fileName}.`,
+              `Concluzie preliminara: ${result.analysis.fileSummary}`,
+              `Urmator pas: ${result.analysis.nextBestAction}`,
+            ].join("\n"),
+          },
+        ]);
+        setUploadNotice("Analiza preliminara este disponibila in conversatie.");
+      } catch (error) {
+        setUploadItems((current) =>
+          current.map((item) =>
+            item.id === uploadId
+              ? {
+                  ...item,
+                  status: "failed",
+                  error:
+                    error instanceof Error
+                      ? error.message
+                      : "Nu s-a putut analiza fisierul.",
+                }
+              : item,
+          ),
+        );
+        setUploadNotice("Nu s-a putut analiza unul dintre fisiere.");
+      }
+    }
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  }
+
   async function submitLeadCapture() {
     if (!lastTurn || !conversationState) return;
+    const readyAnalyses = uploadItems
+      .map((item) => item.analysis)
+      .filter((item): item is ZESFileAnalysis => Boolean(item));
+    const fileSummary = readyAnalyses
+      .slice(0, 3)
+      .map((analysis) => `${analysis.fileName}: ${analysis.fileSummary}`)
+      .join(" | ");
 
     const rawValues = {
       name: leadValues.name.trim(),
@@ -174,6 +299,9 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
       missingInfo: lastTurn.leadSnapshot.missingInfo.join(" | "),
       aiMode: runtimeMode,
       aiModel: runtimeModel ?? "",
+      fileAnalysisIncluded: readyAnalyses.length > 0 ? "yes" : "no",
+      fileAnalysisSummary: fileSummary || "none",
+      preliminaryRequest: preliminaryRequest?.summary ?? "",
     };
 
     const payload = createLeadPayload({
@@ -181,7 +309,14 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
       sourcePage: "/",
       inquiryType: "ZES Guide conversation",
       values: rawValues,
-      generatedSummary: buildGeneratedSummary(lastTurn, conversationState, runtimeMode, runtimeModel),
+      generatedSummary: buildGeneratedSummary(
+        lastTurn,
+        conversationState,
+        runtimeMode,
+        runtimeModel,
+        readyAnalyses,
+        preliminaryRequest,
+      ),
       generatedRiskLevel: mapUrgencyToRisk(lastTurn.leadSnapshot.urgency),
       generatedComplexity: `${lastTurn.leadSnapshot.domain} / ${lastTurn.leadSnapshot.maturity}`,
     });
@@ -366,11 +501,104 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
                 placeholder="Vreau sa deschid o clinica CT | Am un aparat defect si am nevoie de service | Am nevoie de camera RMN"
                 value={query}
               />
+              <input
+                ref={fileInputRef}
+                className="hidden"
+                multiple
+                accept=".jpg,.jpeg,.png,.webp,.pdf,.txt,.md,.doc,.docx,.xls,.xlsx"
+                type="file"
+                onChange={(event) => {
+                  void handleFileSelection(event.target.files);
+                }}
+              />
+              <Button
+                size="lg"
+                type="button"
+                variant="secondary"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                Ataseaza fisier
+              </Button>
               <Button isLoading={isResponding} size="lg" type="submit">
                 Trimite
               </Button>
             </form>
+            <p className="mt-2 text-xs leading-6 text-slate-500">
+              Formate: JPG, PNG, WEBP, PDF, TXT, DOC/DOCX, XLS/XLSX. Limita 8 MB / fisier.
+            </p>
+            <p className="mt-1 text-xs leading-6 text-slate-500">
+              Nu incarca date medicale ale pacientilor. Pentru proiecte reale, echipa ZESCORP valideaza manual documentele.
+            </p>
+            {uploadNotice && (
+              <p className="mt-2 rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 text-xs font-semibold text-[#0057b8]">
+                {uploadNotice}
+              </p>
+            )}
+            {uploadItems.length > 0 && (
+              <div className="mt-3 grid gap-2">
+                {uploadItems.slice(-4).map((item) => (
+                  <div
+                    key={item.id}
+                    className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs leading-6 text-slate-700"
+                  >
+                    <p className="font-semibold text-slate-900">{item.fileName}</p>
+                    <p>
+                      {item.status === "uploading"
+                        ? "ZES analizeaza documentul"
+                        : item.status === "ready"
+                          ? `Analiza preliminara (${formatRuntimeLabel(item.aiMode ?? "mock", null)})`
+                          : "Nu s-a putut analiza; verificare manuala recomandata"}
+                    </p>
+                    {item.analysis && (
+                      <p className="text-slate-600">{item.analysis.nextBestAction}</p>
+                    )}
+                    {item.error && <p className="text-rose-700">{item.error}</p>}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
+
+          {preliminaryRequest && (
+            <section className="mt-4 rounded-lg border border-blue-200 bg-white p-4">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
+                Cerere preliminara ZES
+              </p>
+              <h4 className="mt-2 text-base font-semibold text-slate-950">
+                {preliminaryRequest.title}
+              </h4>
+              <p className="mt-2 text-sm leading-7 text-slate-700">
+                {preliminaryRequest.summary}
+              </p>
+              <p className="mt-2 text-sm leading-7 text-slate-700">
+                <span className="font-semibold text-slate-900">Servicii sugerate:</span>{" "}
+                {preliminaryRequest.recommendedServices.join(", ")}
+              </p>
+              <p className="mt-1 text-sm leading-7 text-slate-700">
+                <span className="font-semibold text-slate-900">Informatii lipsa:</span>{" "}
+                {preliminaryRequest.missingInfo.slice(0, 3).join(" | ")}
+              </p>
+              <p className="mt-1 text-sm leading-7 text-slate-700">
+                <span className="font-semibold text-slate-900">Urmator pas:</span>{" "}
+                {preliminaryRequest.nextAction}
+              </p>
+              <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+                <Button
+                  size="sm"
+                  onClick={() => setCaptureVisible(true)}
+                >
+                  {preliminaryRequest.ctaLabel}
+                </Button>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  onClick={() => setPreliminaryRequest(null)}
+                >
+                  Continua conversatia
+                </Button>
+              </div>
+            </section>
+          )}
 
           {(captureVisible || shouldOfferCapture) && lastTurn && conversationState && (
             <section className="mt-4 rounded-lg border border-blue-200 bg-white p-4">
@@ -577,6 +805,29 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
 
           <div className="rounded-lg border border-slate-200 bg-white p-4">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
+              Analiza fisiere
+            </p>
+            {uploadItems.some((item) => item.analysis) ? (
+              <ul className="mt-2 grid gap-2 text-sm leading-6 text-slate-700">
+                {uploadItems
+                  .filter((item) => item.analysis)
+                  .slice(-3)
+                  .map((item) => (
+                    <li key={item.id}>
+                      <span className="font-semibold text-slate-900">{item.fileName}:</span>{" "}
+                      {item.analysis?.confidence} / {item.analysis?.targetFlow}
+                    </li>
+                  ))}
+              </ul>
+            ) : (
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                Ataseaza imagini, PDF-uri sau date tehnice pentru analiza preliminara in acelasi flux.
+              </p>
+            )}
+          </div>
+
+          <div className="rounded-lg border border-slate-200 bg-white p-4">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
               Actiuni recomandate
             </p>
             <div className="mt-2 grid gap-2">
@@ -624,6 +875,9 @@ function TurnDetails({
   aiMode?: ZESAIRuntimeMode;
   aiModel?: string | null;
 }) {
+  const showDocumentHint =
+    turn.highIntentClose || /plan|schita|document|fisa|atas/i.test(turn.message);
+
   return (
     <div className="mt-3 grid gap-2 rounded-lg border border-blue-100 bg-[#f7fbff] p-3 text-xs text-slate-700">
       {aiMode && (
@@ -642,7 +896,9 @@ function TurnDetails({
           ? turn.leadSnapshot.missingInfo.slice(0, 2).join(" | ")
           : "set minim completat pentru pasul urmator"}
       </p>
-      <p className="text-[11px] leading-6 text-slate-600">{turn.documentHint}</p>
+      {showDocumentHint && (
+        <p className="text-[11px] leading-6 text-slate-600">{turn.documentHint}</p>
+      )}
       {turn.highIntentClose && (
         <p className="rounded-lg border border-blue-200 bg-blue-50 p-2 font-semibold text-[#0057b8]">
           Cerere cu intent ridicat detectata. ZES recomanda trimiterea datelor catre echipa ZESCORP.
@@ -720,6 +976,8 @@ function buildGeneratedSummary(
   state: ZESConversationState,
   runtimeMode: ZESAIRuntimeMode,
   runtimeModel: string | null,
+  fileAnalyses: ZESFileAnalysis[],
+  preliminaryRequest: PreliminaryRequest | null,
 ) {
   return [
     `ZES Guide summary.`,
@@ -731,6 +989,15 @@ function buildGeneratedSummary(
     `Missing info: ${turn.leadSnapshot.missingInfo.join(" | ") || "none"}.`,
     `Recommended services: ${turn.suggestedServices.map((service) => service.label).join(", ")}.`,
     `Follow-up: ${turn.leadSnapshot.nextStep}.`,
+    `File analysis: ${
+      fileAnalyses.length
+        ? fileAnalyses
+            .slice(0, 2)
+            .map((analysis) => `${analysis.fileName} (${analysis.confidence})`)
+            .join(", ")
+        : "none"
+    }.`,
+    `Preliminary request: ${preliminaryRequest?.summary ?? "not generated"}.`,
     `Path: ${state.pathId}.`,
   ].join(" ");
 }
@@ -758,10 +1025,12 @@ async function requestZESReply({
   message,
   state,
   history,
+  fileAnalyses,
 }: {
   message: string;
   state: ZESConversationState | null;
   history: ZESGuideHistoryItem[];
+  fileAnalyses: ZESFileAnalysis[];
 }): Promise<ZESGuideApiResponse> {
   try {
     const response = await fetch("/api/zes-guide", {
@@ -771,6 +1040,7 @@ async function requestZESReply({
         message,
         state,
         history,
+        fileAnalyses: fileAnalyses.slice(0, 3),
       }),
     });
 
@@ -795,6 +1065,29 @@ async function requestZESReply({
   }
 }
 
+async function requestZESFileAnalysis(file: File, message: string) {
+  const formData = new FormData();
+  formData.set("file", file);
+  formData.set("message", message);
+
+  const response = await fetch("/api/zes-guide/file-analysis", {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const body = (await response.json().catch(() => null)) as { error?: string } | null;
+    throw new Error(body?.error ?? "Nu s-a putut analiza fisierul.");
+  }
+
+  return (await response.json()) as {
+    ok: true;
+    aiMode: ZESAIRuntimeMode;
+    aiModel: string | null;
+    analysis: ZESFileAnalysis;
+  };
+}
+
 function toHistoryItems(conversation: ConversationItem[]): ZESGuideHistoryItem[] {
   return conversation
     .slice(-8)
@@ -816,4 +1109,43 @@ function formatRuntimeLabel(mode: ZESAIRuntimeMode, model: string | null) {
   }
 
   return "deterministic fallback mode";
+}
+
+function buildPreliminaryRequest({
+  turn,
+  state,
+  analyses,
+}: {
+  turn: ZESAssistantTurn;
+  state: ZESConversationState;
+  analyses: ZESFileAnalysis[];
+}): PreliminaryRequest {
+  const serviceLike = state.pathId === "service";
+  const hasFiles = analyses.length > 0;
+
+  if (serviceLike) {
+    return {
+      title: "Cerere structurata pentru service",
+      summary:
+        "ZES a pregatit un rezumat preliminar pentru triere service, cu simptome, urgenta si context operational.",
+      recommendedServices: turn.suggestedServices.map((item) => item.label).slice(0, 4),
+      missingInfo: turn.leadSnapshot.missingInfo,
+      nextAction: hasFiles
+        ? "Trimite cererea catre service ZESCORP impreuna cu datele de contact si fisierele analizate."
+        : "Trimite cererea catre service ZESCORP cu oras, telefon, model si descriere eroare.",
+      ctaLabel: "Trimite cazul catre service",
+    };
+  }
+
+  return {
+    title: "Cerere structurata pentru ofertare/proiect",
+    summary:
+      "ZES a pregatit un brief tehnic-comercial preliminar pentru analiza specialistului ZESCORP.",
+    recommendedServices: turn.suggestedServices.map((item) => item.label).slice(0, 4),
+    missingInfo: turn.leadSnapshot.missingInfo,
+    nextAction: hasFiles
+      ? "Trimite cererea pentru oferta preliminara cu date de contact si documentele analizate."
+      : "Trimite cererea pentru oferta preliminara si completeaza detaliile lipsa.",
+    ctaLabel: "Solicita oferta preliminara",
+  };
 }

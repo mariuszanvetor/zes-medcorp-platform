@@ -18,7 +18,13 @@ export function ZESGuideSection() {
             Discuta cu ZES despre proiectul tau medical
           </h1>
           <p className="mt-5 max-w-4xl text-xl leading-9 text-slate-600">
-            Spune ce vrei sa construiesti, modernizezi sau repari. ZES te ghideaza tehnic si comercial pana la urmatorul pas.
+            Spune ce ai nevoie. ZES te ghideaza, analizeaza documente sau poze
+            si pregateste urmatorul pas pentru ofertare, service sau proiect.
+          </p>
+          <p className="mt-3 max-w-4xl text-base leading-7 text-slate-600">
+            Exemple: "Am un aparat defect", "Vreau clinica CT", "Am nevoie de
+            camera RMN", "Pregatesc proiect pe fonduri europene", "Vreau oferta
+            echipamente".
           </p>
           <div className="mt-8">
             <ZESGuide compactHeader />

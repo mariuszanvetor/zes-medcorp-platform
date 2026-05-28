@@ -17,6 +17,13 @@ export type ZESGuideApiRequest = {
   message: string;
   state?: ZESConversationState | null;
   history?: ZESGuideHistoryItem[];
+  fileAnalyses?: Array<{
+    fileName: string;
+    fileSummary: string;
+    targetFlow: string;
+    confidence: string;
+    nextBestAction: string;
+  }>;
 };
 
 export type ZESGuideApiResponse = {
@@ -74,6 +81,10 @@ const systemPrompt = [
   "You support Romanian-speaking users with medical infrastructure planning, imaging, service triage, equipment planning, laboratory/IVD projects, modernization, funding readiness and project qualification.",
   "Behave like a calm, consultative medical infrastructure sales engineer.",
   "Stay technical, enterprise-grade and commercially aware.",
+  "Keep replies concise: 2-4 short sentences plus at most one next question.",
+  "Avoid repeating the same disclaimer in every turn.",
+  "Ask one clear next question at a time when possible.",
+  "If user intent is high, move quickly toward contact capture and next action.",
   "Never provide medical diagnosis, clinical advice, legal approval or final CNCAN authorization decisions.",
   "Frame compliance, CNCAN, HVAC, electrical and shielding guidance as preliminary and subject to specialist validation.",
   "Do not mention hidden tools or internal implementation details.",
@@ -165,6 +176,7 @@ async function requestStructuredReply(
   const promptPayload = {
     userMessage: input.message,
     conversationHistory: (input.history ?? []).slice(-8),
+    fileAnalyses: (input.fileAnalyses ?? []).slice(-3),
     detectedIntent: fallback.state.intent,
     pathId: fallback.state.pathId,
     collectedAnswers: fallback.state.collectedAnswers,
@@ -267,7 +279,7 @@ function sanitizeStructuredReply(
   fallbackTurn: ZESAssistantTurn,
 ): ZESStructuredReply {
   return {
-    reply: limitString(parsed.reply, 900) || fallbackTurn.message,
+    reply: shortenReply(limitString(parsed.reply, 900) || fallbackTurn.message),
     intent: allowedIntents.includes(parsed.intent as ZESGuideIntentId)
       ? (parsed.intent as ZESGuideIntentId)
       : "general",
@@ -282,7 +294,7 @@ function sanitizeStructuredReply(
       fallbackTurn.suggestedServices.map((item) => item.label),
     ),
     nextBestAction:
-      limitString(parsed.nextBestAction, 220) || fallbackTurn.leadSnapshot.nextStep,
+      shortenReply(limitString(parsed.nextBestAction, 220) || fallbackTurn.leadSnapshot.nextStep),
     leadReadiness: clampNumber(parsed.leadReadiness, 0, 100, maturityToReadiness(fallbackTurn)),
     ctaLabel: limitString(parsed.ctaLabel, 80),
     ctaTarget: limitString(parsed.ctaTarget, 160),
@@ -475,6 +487,16 @@ function sanitizeStringArray(
 
 function limitString(value: unknown, limit: number) {
   return typeof value === "string" ? value.trim().slice(0, limit) : "";
+}
+
+function shortenReply(text: string) {
+  const normalized = text.replace(/\s+/g, " ").trim();
+  if (!normalized) return text;
+  const sentences = normalized
+    .split(/(?<=[.!?])\s+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+  return sentences.slice(0, 4).join(" ");
 }
 
 function clampNumber(value: unknown, min: number, max: number, fallback: number) {

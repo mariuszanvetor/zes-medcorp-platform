@@ -60,6 +60,9 @@ ZES Guide leads can include extra metadata from conversation context:
 - selected services;
 - missing info summary;
 - optional city/equipment-model/project-type conversation fields.
+- `aiMode` and `aiModel` runtime labels;
+- `fileAnalysisIncluded` and compact file-analysis summary;
+- preliminary request/offer brief summary.
 
 ## API behavior
 
@@ -99,6 +102,8 @@ Internal lead notifications include a compact lead intelligence section:
 
 Customer confirmation emails remain disabled unless explicitly enabled in a future phase.
 
+When ZES file analysis is present, include only compact summary fields, not raw file content.
+
 ## Google Sheets usage
 
 The Sheets row now includes intelligence fields in addition to the previous lead fields:
@@ -133,6 +138,7 @@ This mirrors how future real lead data can be reviewed once stronger auth and pe
 - Do not send PII to analytics.
 - Do not include API keys, env vars or provider payloads in client responses.
 - Do not store patient data.
+- Do not store raw uploaded files in this phase.
 - Do not expose real lead data in admin without stronger authentication.
 - Keep intelligence deterministic and preliminary.
 - Avoid legal, regulatory or engineering certainty language.

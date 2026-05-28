@@ -21,6 +21,13 @@ Phase 76A adds runtime visibility for ZES AI:
 - `fallback`: AI was requested, but ZES returned to deterministic guidance because the provider response failed, timed out or could not be validated;
 - `mock`: AI is disabled or missing configuration, so ZES remains deterministic.
 
+Phase 76B/76C also adds ZES upload-analysis and preliminary-request visibility signals for demo leads:
+
+- `file analysis included` yes/no;
+- compact file analysis summary;
+- preliminary request / offer brief summary (preliminary only);
+- recommended next action from the same conversation.
+
 ## Phase 71L mock action workflow
 
 `/admin/leads` now includes a deterministic mock admin workflow for selected demo leads.
@@ -68,6 +75,8 @@ It intentionally avoids PII-heavy data and does not include email, phone, raw no
 - missing information;
 - validation needs;
 - recommended services;
+- file analysis included (yes/no);
+- preliminary request summary where available;
 - mock document context when available.
 
 ## Demo examples included

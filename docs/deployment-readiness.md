@@ -51,6 +51,7 @@ Safe default:
 ```env
 ZES_AI_ENABLED=false
 ZES_AI_MODEL=gpt-5.4
+ZES_AI_REQUEST_TIMEOUT_MS=12000
 LEAD_INTEGRATION_MODE=mock
 EMAIL_PROVIDER=mock
 LEAD_STORAGE_PROVIDER=mock
@@ -114,6 +115,7 @@ Do not prefix secrets with `NEXT_PUBLIC_`.
 - `ZES AI mock`: `ZES_AI_ENABLED=false` or missing key. Homepage ZES uses the deterministic engine directly.
 - `ZES AI fallback`: AI is requested but the provider response fails validation or times out. ZES falls back automatically to deterministic guidance.
 - `ZES AI real`: server-side AI returns validated structured JSON and the UI labels the runtime accordingly.
+- `ZES file analysis`: upload analysis runs in the same runtime strategy (`real`, `fallback`, `mock`) and never exposes API keys client-side.
 - `mock`: lead submission returns safe mock modes and does not call external providers.
 - `email-only`: internal notification email may send if `EMAIL_PROVIDER=resend` is correctly configured.
 - `sheets-only`: Sheets may be attempted if Sheets env vars are configured.
@@ -160,6 +162,7 @@ Verify:
 - AI Discovery, Proposal Builder and Project Intake submit successfully in mock mode;
 - ZES chat works in `mock` mode when AI is disabled or keyless;
 - if AI is enabled, ZES surfaces `real` or `fallback` runtime without breaking the conversation;
+- file analysis endpoint `/api/zes-guide/file-analysis` accepts supported files and returns safe preliminary output;
 - lead response shows `integrationMode=mock`, `emailMode=mock`, `sheetsMode=mock`, `storageMode=mock`;
 - no false error state appears after a successful mock response.
 
@@ -189,9 +192,10 @@ Redeploy after environment changes and run one controlled internal test from `/a
 
 ## Known staging/demo limitations
 
-- AI Discovery is deterministic, not connected to a real AI API.
+- AI Discovery remains deterministic in current architecture.
 - ZES can use real AI only when explicitly enabled server-side; otherwise it remains deterministic.
-- Mock document intelligence uses descriptors only; no uploads or parsing are active.
+- ZES upload analysis is preliminary and should not be treated as final technical validation.
+- DOCX/XLSX are accepted for manual-review guidance in this phase (no full parsing pipeline).
 - Admin lead workflow is client-side session state only.
 - No CRM, database or persistent lead dashboard is active.
 - PDF export is browser-side and preliminary.

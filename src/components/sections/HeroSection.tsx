@@ -26,16 +26,16 @@ export function HeroSection() {
               ZES MEDCORP / medical infrastructure planning
             </p>
             <h1 className="mt-7 text-4xl font-semibold leading-[1.04] text-balance text-slate-950 sm:text-6xl lg:text-7xl">
-              Planificare, infrastructura si echipamente medicale, pregatite cu rigoare.
+              ZES te ajuta sa planifici, repari, modernizezi sau ofertezi infrastructura medicala.
             </h1>
             <p className="mt-7 max-w-2xl text-xl leading-9 text-slate-600">
-              ZES MEDCORP ajuta clinicile sa clarifice proiecte de imagistica,
-              laborator, modernizare si service prin fluxuri asistate, estimari
-              orientative si validare tehnica inainte de investitii finale.
+              Incepe conversatia cu ZES, iar platforma pregateste contextul
+              tehnic si comercial pentru urmatorul pas: service, proiect,
+              oferta preliminara sau analiza specialist.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <TrackedButtonLink
-                className="rounded-xl border-blue-200 px-7 text-[#0057b8]"
+                className="rounded-xl px-7"
                 href="/#zes-guide"
                 size="lg"
                 tracking={{
@@ -43,7 +43,6 @@ export function HeroSection() {
                   destination: "/#zes-guide",
                   sourcePage: "/",
                 }}
-                variant="secondary"
               >
                 Discuta cu ZES
               </TrackedButtonLink>

@@ -688,6 +688,10 @@ function LeadDetail({
         <DetailStat label="Domeniu" value={lead.projectDomain ?? classifyProject(lead)} />
         {lead.aiMode && <DetailStat label="AI mode" value={lead.aiMode} />}
         {lead.aiIntent && <DetailStat label="AI intent" value={lead.aiIntent} />}
+        <DetailStat
+          label="File analysis"
+          value={hasFileAnalysis(lead) ? "yes" : "no"}
+        />
       </div>
 
       <div className="mt-8 rounded-lg border border-blue-100 bg-[#f7fbff] p-5">
@@ -1316,6 +1320,11 @@ function classifyProject(lead: DemoLead) {
   if (text.includes("clinic")) return "Clinic / infrastructură";
 
   return "Alt proiect";
+}
+
+function hasFileAnalysis(lead: DemoLead) {
+  if (lead.mockDocumentContext) return true;
+  return /file|document|plan|schita|atasat/i.test(lead.generatedSummary);
 }
 
 function scoreDemoLead(lead: DemoLead) {

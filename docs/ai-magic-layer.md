@@ -14,6 +14,14 @@ Current Phase 76A status:
 - no OCR or document parsing;
 - no CRM, database or authenticated lead workspace.
 
+Phase 76B/76C status:
+
+- ZES remains the primary public conversational entry;
+- file analysis is available inside the same ZES conversation flow;
+- service/project/equipment intent can produce a preliminary structured request brief;
+- lead-closing behavior is stronger with faster inline capture on high intent;
+- deterministic fallback remains mandatory when AI is unavailable.
+
 Phase 75B/75C/75D/75E/75F/75G/76A status:
 
 - AI Magic scenarios are now connected to `/ai-discovery` via deterministic query handoff;
@@ -202,6 +210,7 @@ Current env variables:
 - `ZES_AI_ENABLED`
 - `ZES_AI_MODEL`
 - `OPENAI_API_KEY`
+- `ZES_AI_REQUEST_TIMEOUT_MS`
 
 Recommended defaults:
 
@@ -266,6 +275,7 @@ Every public AI Magic surface should clearly label the current mode:
 - guided planning mode;
 - deterministic fallback mode;
 - server-side AI active;
+- analiza preliminara document;
 - preliminary guidance;
 - validation needed.
 

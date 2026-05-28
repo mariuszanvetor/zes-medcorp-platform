@@ -28,6 +28,9 @@ export async function POST(request: Request) {
     message: payload.message.trim(),
     state: payload.state ?? null,
     history: Array.isArray(payload.history) ? payload.history.slice(-8) : [],
+    fileAnalyses: Array.isArray(payload.fileAnalyses)
+      ? payload.fileAnalyses.slice(0, 3)
+      : [],
   });
 
   return NextResponse.json(response);

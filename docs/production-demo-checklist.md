@@ -25,6 +25,8 @@ The platform currently presents ZES-guided planning with either server-side AI o
 6. Verify document language is clearly demo-only (no fake parsing claims).
 7. Trigger a high-intent ZES path (service urgent or CT/RMN) and verify inline lead capture appears.
 8. Submit one mock ZES lead from inline panel and confirm success + mode summary.
+9. Test file analysis in ZES with one image and one PDF; confirm the analysis appears in conversation.
+10. Test an unsupported file type and verify graceful manual-review messaging.
 9. Open `/ai-discovery` (ZES AI Copilot workspace).
 10. Optional: open `/ai-discovery?scenario=ct-clinic` or `/ai-discovery?scenario=mri-room` to demo AI Magic scenario handoff.
 11. Answer a few guided questions.
@@ -109,6 +111,7 @@ Use one controlled test payload at most unless debugging:
 5. If email is active, verify the internal notification reaches the configured recipient.
 6. If Sheets is active, verify exactly one row is appended with expected columns.
 7. Confirm no customer confirmation email is sent unless explicitly enabled in a future phase.
+8. For ZES leads with file analysis, confirm metadata includes compact file analysis summary only.
 
 ## SEO and indexability
 
@@ -122,7 +125,8 @@ Use one controlled test payload at most unless debugging:
 
 - Real AI may be connected only server-side and only when `ZES_AI_ENABLED=true` plus `OPENAI_API_KEY` are configured.
 - If AI is disabled or unavailable, ZES must remain useful through deterministic fallback.
-- No real OCR, upload endpoint or document parsing is active.
+- Upload analysis is preliminary; no permanent raw file storage is active.
+- DOCX/XLSX parsing is still manual-review guidance in this phase.
 - No proposal persistence exists.
 - No CRM, database or real admin data source is active.
 - Admin workflow actions are local to the browser session.

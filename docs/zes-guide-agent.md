@@ -33,11 +33,20 @@ Runtime modes:
 - `fallback`: OpenAI was requested but failed validation or request handling, so ZES used the deterministic engine;
 - `mock`: AI is disabled or missing a key, so ZES uses the deterministic engine directly.
 
+Phase 76B/76C extends the same flow with in-conversation file analysis and preliminary request generation:
+
+- users can attach files directly in ZES chat;
+- ZES returns a file analysis summary in the same conversation;
+- high-intent sessions can produce a compact preliminary request/offer brief before lead submission;
+- lead capture remains inline and uses `/api/leads`.
+
 ## Architecture
 
 - response engine: `src/lib/zes-guide-engine.ts`
 - AI adapter and fallback merge: `src/lib/zes-ai.ts`
 - server route: `src/app/api/zes-guide/route.ts`
+- file analysis adapter: `src/lib/zes-file-analysis.ts`
+- file analysis route: `src/app/api/zes-guide/file-analysis/route.ts`
 - UI: `src/components/ai/ZESGuide.tsx`
 - homepage integration: `src/components/sections/ZESGuideSection.tsx`
 
@@ -169,6 +178,50 @@ When server-side AI is active, ZES requests structured JSON with:
 
 If the AI output fails schema validation or cannot be parsed, ZES returns to deterministic guidance immediately.
 
+## File analysis in ZES
+
+Uploads are handled inside the same ZES conversation UI.
+
+Supported types:
+
+- images: `jpg`, `jpeg`, `png`, `webp`;
+- documents: `pdf`, `txt`, `md`;
+- accepted with manual-review fallback: `doc`, `docx`, `xls`, `xlsx`.
+
+Current limit:
+
+- 8 MB per file.
+
+Behavior:
+
+- image/text/pdf: analyzed preliminarily (server-side AI when enabled, deterministic fallback otherwise);
+- doc/docx/xls/xlsx: received and routed to manual review guidance;
+- no permanent raw file storage is added in this phase.
+
+File analysis response includes:
+
+- `fileSummary`
+- `detectedItems`
+- `extractedSpecs`
+- `risks`
+- `missingInfo`
+- `recommendedServices`
+- `nextBestAction`
+- `confidence`
+- `limitations`
+- `targetFlow`
+
+## Preliminary request generator
+
+When intent is high, ZES can generate:
+
+- service request brief;
+- project/offer context brief;
+- missing info checklist;
+- recommended next action.
+
+These are explicitly preliminary (`cerere structurata`, `context pentru ofertare`) and not final legal/commercial commitments.
+
 ## Routing strategy
 
 ZES routes users toward existing flows:
@@ -205,6 +258,7 @@ ZES must also not imply real file parsing. Recommended phrasing:
 Privacy note in UI:
 
 - users are asked not to enter patient data or unnecessary sensitive medical data;
+- users are warned not to upload patient medical records;
 - the conversation context is used for the current reply and lead preparation only;
 - the application does not persist conversation state server-side in this phase.
 
