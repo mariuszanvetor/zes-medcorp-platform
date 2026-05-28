@@ -361,3 +361,12 @@ Every redesign slice should verify:
 - sitemap excludes admin;
 - no changes to lead integration modes;
 - no new real AI, upload, CRM, email or Sheets behavior.
+
+## Phase 77A launch polish decisions
+
+- Homepage is now trust-first: hero visual + enterprise copy first, AI interaction second.
+- ZES is positioned as premium concierge, not as the entire brand identity.
+- Core public rhythm: Hero -> Services -> Trust layer -> Technical domains -> ZES guided planning -> Workflow.
+- Primary CTA hierarchy simplified around `Discuta cu ZES` and technical evaluation flows.
+- Floating assistant introduced with compact popup behavior for low-friction access.
+- Sticky conversion bar is hidden on homepage to reduce CTA conflict with floating ZES.

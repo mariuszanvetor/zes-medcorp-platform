@@ -200,3 +200,11 @@ Redeploy after environment changes and run one controlled internal test from `/a
 - No CRM, database or persistent lead dashboard is active.
 - PDF export is browser-side and preliminary.
 - All calculators and proposals are planning aids, not final engineering, regulatory or commercial approvals.
+
+## Phase 77A homepage and assistant launch notes
+
+- Homepage is trust-first and company-first: infrastructure expertise is shown before AI interaction depth.
+- Floating ZES assistant is enabled as lightweight concierge with popup state persisted client-side.
+- Auto-popup behavior is intentionally conservative (delay/scroll trigger) to avoid blocking core content.
+- Sticky conversion bar is disabled on homepage to keep CTA hierarchy clear.
+- No new backend dependencies were introduced for floating behavior.

@@ -57,12 +57,14 @@ type PreliminaryRequest = {
 
 type ZESGuideProps = {
   compactHeader?: boolean;
+  mode?: "full" | "popup";
 };
 
 const introMessage =
   "Salut, sunt ZES. Spune ce vrei sa construiesti, modernizezi sau repari. Poti atasa poze, planuri sau fise tehnice, iar ZES pregateste urmatorul pas pentru service, proiect sau ofertare.";
 
-export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
+export function ZESGuide({ compactHeader = false, mode = "full" }: ZESGuideProps) {
+  const isPopup = mode === "popup";
   const [query, setQuery] = useState("");
   const [conversation, setConversation] = useState<ConversationItem[]>([
     { role: "assistant", text: introMessage },
@@ -471,7 +473,10 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
 
   return (
     <section
-      className="rounded-xl border border-blue-200 bg-white p-4 shadow-[0_18px_42px_rgba(0,87,184,0.09)] sm:p-6"
+      className={cn(
+        "rounded-xl border border-blue-200 bg-white p-4 shadow-[0_18px_42px_rgba(0,87,184,0.09)] sm:p-6",
+        isPopup && "rounded-none border-0 bg-transparent p-0 shadow-none sm:p-0",
+      )}
       id="zes-guide"
     >
       {!compactHeader && (
@@ -497,7 +502,13 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
         </>
       )}
 
-      <div className={cn("grid gap-4", compactHeader ? "mt-0" : "mt-5", "lg:grid-cols-[1fr_0.4fr]")}>
+      <div
+        className={cn(
+          "grid gap-4",
+          compactHeader ? "mt-0" : "mt-5",
+          isPopup ? "grid-cols-1" : "lg:grid-cols-[1fr_0.4fr]",
+        )}
+      >
         <div className="min-w-0 rounded-xl border border-slate-200 bg-[#f7fbff] p-3 sm:p-4">
           <div className="grid max-h-[30rem] gap-3 overflow-y-auto pr-1">
             {conversation.map((item, index) => (
@@ -528,27 +539,45 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
           <div className="mt-4 rounded-lg border border-slate-200 bg-white p-3">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
-                Start rapid
+                {isPopup ? "Start rapid" : "Start rapid"}
               </p>
               <p className="text-xs leading-6 text-slate-500">
                 Nu introduce date medicale sensibile sau date de pacient. ZES foloseste
                 contextul doar pentru raspunsul curent si pentru pregatirea solicitarii.
               </p>
             </div>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {zesGuideStarters.map((starter) => (
-                <button
-                  className="rounded-lg border border-blue-100 bg-[#f7fbff] px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
-                  key={starter}
-                  type="button"
-                  onClick={() => {
-                    void handlePrompt(starter);
-                  }}
-                >
-                  {starter}
-                </button>
-              ))}
-            </div>
+            {!isPopup && (
+              <div className="mt-2 flex flex-wrap gap-2">
+                {zesGuideStarters.map((starter) => (
+                  <button
+                    className="rounded-lg border border-blue-100 bg-[#f7fbff] px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
+                    key={starter}
+                    type="button"
+                    onClick={() => {
+                      void handlePrompt(starter);
+                    }}
+                  >
+                    {starter}
+                  </button>
+                ))}
+              </div>
+            )}
+            {isPopup && (
+              <div className="mt-2 flex flex-wrap gap-2">
+                {zesGuideStarters.slice(0, 3).map((starter) => (
+                  <button
+                    className="rounded-lg border border-blue-100 bg-[#f7fbff] px-2.5 py-1.5 text-[11px] font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
+                    key={starter}
+                    type="button"
+                    onClick={() => {
+                      void handlePrompt(starter);
+                    }}
+                  >
+                    {starter}
+                  </button>
+                ))}
+              </div>
+            )}
             <form
               className="mt-3 flex flex-col gap-2 sm:flex-row"
               onSubmit={(event) => {
@@ -587,9 +616,11 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
             <p className="mt-2 text-xs leading-6 text-slate-500">
               Formate: JPG, PNG, WEBP, PDF, TXT, DOC/DOCX, XLS/XLSX. Limita 8 MB / fisier.
             </p>
-            <p className="mt-1 text-xs leading-6 text-slate-500">
-              Nu incarca date medicale ale pacientilor. Pentru proiecte reale, echipa ZESCORP valideaza manual documentele.
-            </p>
+            {!isPopup && (
+              <p className="mt-1 text-xs leading-6 text-slate-500">
+                Nu incarca date medicale ale pacientilor. Pentru proiecte reale, echipa ZESCORP valideaza manual documentele.
+              </p>
+            )}
             {uploadNotice && (
               <p className="mt-2 rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 text-xs font-semibold text-[#0057b8]">
                 {uploadNotice}
@@ -795,6 +826,7 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
           )}
         </div>
 
+        {!isPopup && (
         <aside className="grid gap-3">
           <div className="rounded-lg border border-blue-100 bg-white p-4">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
@@ -922,6 +954,7 @@ export function ZESGuide({ compactHeader = false }: ZESGuideProps) {
             </div>
           </div>
         </aside>
+        )}
       </div>
     </section>
   );

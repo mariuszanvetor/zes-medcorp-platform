@@ -170,3 +170,18 @@ For a safe demo fallback:
 4. Fallback mode:
    - set AI disabled/missing key;
    - verify deterministic close behavior still works.
+
+## Phase 77A visual and floating QA
+
+1. Desktop hero: verify headline, premium visual and shortcut landing links.
+2. Mobile hero: verify no overflow and CTA readability.
+3. Floating ZES button:
+   - visible on homepage and public routes;
+   - hidden on admin routes and `/ai-discovery`.
+4. Floating popup:
+   - auto-open timing after short delay/scroll;
+   - minimize/close/reopen works;
+   - state persistence works after refresh.
+5. Popup conversation:
+   - text, upload and lead capture remain functional;
+   - conversation continuity preserved in popup mode.

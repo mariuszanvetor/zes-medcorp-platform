@@ -1,42 +1,49 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { TrackedButtonLink } from "@/components/analytics/TrackedButtonLink";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 
-const visualSignals = ["CT", "RMN", "RX", "IVD", "Service"];
+const shortcutLinks = [
+  { label: "Service aparatura medicala", href: "/services/service-aparatura-medicala" },
+  { label: "Radioprotectie & Plumbare", href: "/services/protectie-radiologica" },
+  { label: "CT & RMN", href: "/services/imagistica-medicala" },
+  { label: "Proiecte medicale", href: "/servicii" },
+  { label: "Ofertare echipamente", href: "/proposal-builder" },
+];
 
 const trustSignals = [
-  "Planificare preliminara asistata de ZES Copilot",
-  "Validare tehnica inainte de decizii finale",
-  "Integrare infrastructura + aparatura + service",
+  "CT/RMN infrastructure planning",
+  "RF shielding si radioprotectie",
+  "Service si mentenanta aparatura",
 ];
 
 export function HeroSection() {
   return (
     <Section
-      className="overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f7fbff_100%)]"
+      className="overflow-hidden border-b border-blue-100 bg-[linear-gradient(180deg,#f4f8fd_0%,#ffffff_58%)]"
       spacing="xl"
       tone="transparent"
     >
       <Container>
-        <div className="grid items-center gap-14 lg:grid-cols-[0.94fr_1.06fr] xl:gap-20">
+        <div className="grid items-center gap-10 lg:grid-cols-[1fr_1fr] xl:gap-16">
           <div className="max-w-3xl">
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#0057b8]">
-              ZES MEDCORP / medical infrastructure planning
+              ZES MEDCORP / medical infrastructure engineering
             </p>
-            <h1 className="mt-7 text-4xl font-semibold leading-[1.04] text-balance text-slate-950 sm:text-6xl lg:text-7xl">
-              ZES te ajuta sa planifici, repari, modernizezi sau ofertezi infrastructura medicala.
+            <h1 className="mt-6 text-4xl font-semibold leading-[1.06] text-slate-950 sm:text-6xl">
+              Infrastructura medicala inteligenta.
             </h1>
-            <p className="mt-7 max-w-2xl text-xl leading-9 text-slate-600">
-              Incepe conversatia cu ZES, iar platforma pregateste contextul
-              tehnic si comercial pentru urmatorul pas: service, proiect,
-              oferta preliminara sau analiza specialist.
+            <p className="mt-5 text-xl leading-9 text-slate-600">
+              Proiectare, radioprotectie, service si integrare pentru imagistica
+              medicala. ZESCORP combina expertiza tehnica reala cu asistenta AI ZES
+              pentru proiecte medicale moderne.
             </p>
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <TrackedButtonLink
                 className="rounded-xl px-7"
-                href="/#zes-guide"
+                href="#zes-guide"
                 size="lg"
                 tracking={{
                   ctaLabel: "Discuta cu ZES",
@@ -48,19 +55,19 @@ export function HeroSection() {
               </TrackedButtonLink>
               <TrackedButtonLink
                 className="rounded-xl border-blue-200 px-7 text-[#0057b8]"
-                href="/project-intake"
+                href="/contact"
                 size="lg"
+                variant="secondary"
                 tracking={{
-                  ctaLabel: "Trimite context proiect",
-                  destination: "/project-intake",
+                  ctaLabel: "Solicita evaluare tehnica",
+                  destination: "/contact",
                   sourcePage: "/",
                 }}
-                variant="secondary"
               >
-                Trimite context proiect
+                Solicita evaluare tehnica
               </TrackedButtonLink>
             </div>
-            <ul className="mt-7 grid gap-3 text-sm font-semibold leading-6 text-slate-600">
+            <ul className="mt-7 grid gap-2 text-sm font-semibold leading-6 text-slate-600">
               {trustSignals.map((signal) => (
                 <li className="flex items-start gap-3" key={signal}>
                   <span
@@ -74,41 +81,44 @@ export function HeroSection() {
           </div>
 
           <div className="relative">
-            <div className="absolute -left-8 top-12 hidden h-56 w-56 rounded-full bg-blue-100/60 blur-3xl lg:block" />
-            <div className="relative overflow-hidden rounded-2xl border border-blue-100 bg-white p-3 shadow-[0_24px_80px_rgba(15,65,118,0.12)]">
-              <div className="relative min-h-[340px] overflow-hidden rounded-xl bg-slate-100 sm:min-h-[420px] lg:min-h-[540px]">
+            <div className="absolute -left-10 top-8 hidden h-52 w-52 rounded-full bg-blue-100/60 blur-3xl lg:block" />
+            <div className="relative overflow-hidden rounded-2xl border border-blue-100 bg-white p-3 shadow-[0_24px_80px_rgba(15,65,118,0.14)]">
+              <div className="relative min-h-[340px] overflow-hidden rounded-xl sm:min-h-[420px] lg:min-h-[520px]">
                 <Image
-                  alt="Camera moderna de imagistica medicala"
+                  alt="Infrastructura premium pentru imagistica medicala CT RMN si radiologie"
                   className="object-cover"
                   fill
                   priority
                   sizes="(min-width: 1024px) 52vw, 100vw"
                   src="/hero-medical-tech.png"
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.76),rgba(255,255,255,0.12)_44%,rgba(255,255,255,0)_70%)]" />
-                <div className="absolute left-5 top-5 rounded-xl border border-white/75 bg-white/88 p-4 shadow-[0_14px_36px_rgba(15,23,42,0.10)] backdrop-blur-md">
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,20,35,0.55)_0%,rgba(7,20,35,0.18)_45%,rgba(7,20,35,0.05)_75%)]" />
+                <div className="absolute left-5 top-5 rounded-xl border border-white/30 bg-white/90 p-4 shadow-[0_14px_34px_rgba(15,23,42,0.16)]">
                   <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
-                    Integrare tehnica
+                    ZES premium workflow
                   </p>
-                  <p className="mt-2 text-lg font-semibold text-slate-950">
-                    Aparatura + spatiu + service
+                  <p className="mt-1 text-lg font-semibold text-slate-950">
+                    Planificare + implementare + service
                   </p>
-                </div>
-                <div className="absolute bottom-5 left-5 right-5 flex flex-wrap gap-2">
-                  {visualSignals.map((signal) => (
-                    <span
-                      className="rounded-xl border border-white/70 bg-white/88 px-4 py-2 text-xs font-bold text-[#0057b8] shadow-[0_8px_24px_rgba(15,23,42,0.09)] backdrop-blur"
-                      key={signal}
-                    >
-                      {signal}
-                    </span>
-                  ))}
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        <div className="mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+          {shortcutLinks.map((shortcut) => (
+            <Link
+              className="rounded-xl border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-slate-800 shadow-[0_10px_22px_rgba(15,65,118,0.08)] transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
+              href={shortcut.href}
+              key={shortcut.href}
+            >
+              {shortcut.label}
+            </Link>
+          ))}
+        </div>
       </Container>
     </Section>
   );
 }
+

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { trackCTA } from "@/lib/analytics";
 
@@ -11,6 +12,16 @@ const actions = [
 ];
 
 export function ConversionStickyCTA() {
+  const pathname = usePathname();
+
+  if (
+    pathname === "/" ||
+    pathname === "/ai-discovery" ||
+    pathname?.startsWith("/admin/")
+  ) {
+    return null;
+  }
+
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-3 z-40 flex justify-center px-3 sm:bottom-4 sm:px-4">
       <div className="pointer-events-auto flex w-full max-w-3xl items-center gap-2 rounded-[1.35rem] border border-blue-100 bg-white/94 p-2 shadow-[0_18px_60px_rgba(0,87,184,0.16)] backdrop-blur-xl sm:rounded-full">

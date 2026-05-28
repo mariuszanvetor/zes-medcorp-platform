@@ -301,3 +301,11 @@ Safety frequency rules:
 - Service safety warning appears once at first relevant service risk.
 - CNCAN/compliance warning appears once per relevant project context.
 - Upload hint appears only when useful and not already resolved.
+
+## Phase 77A floating assistant behavior
+
+- A floating `Discuta cu ZES` button is visible on public pages (hidden on `/ai-discovery` and admin routes).
+- Popup auto-opens after ~5 seconds or after a short scroll, then can be minimized/reopened anytime.
+- Minimized/open state is persisted in local storage (`zes_floating_assistant_state_v1`).
+- Popup reuses the same ZES conversation engine, upload flow, lead capture, request summary and fallback logic.
+- In popup mode, ZES UI is condensed: single-column conversation, reduced visual density, mobile-first controls.
