@@ -82,3 +82,16 @@ The goal is to move the conversation from vague interest to a technical next ste
 3. Project Intake or Proposal Builder
 4. Direct consultation
 
+## Semi-automated prospecting engine
+
+For manual prospecting operations, use the workbook and workflow described in
+[`docs/semi-automated-lead-prospecting.md`](./semi-automated-lead-prospecting.md).
+
+The local engine:
+
+- prepares daily queues, scoring and templates;
+- does not send emails;
+- does not scrape aggressively;
+- does not invent contact data;
+- blocks outreach until a public business contact is verified;
+- treats opt-out as a priority rule.

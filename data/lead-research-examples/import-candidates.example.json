@@ -1,0 +1,20 @@
+[
+  {
+    "companyName": "Synthetic Imaging Clinic SRL",
+    "category": "centre-radiologie-rx",
+    "subcategory": "Synthetic schema example",
+    "city": "Bucuresti",
+    "county": "Bucuresti",
+    "country": "Romania",
+    "website": "https://synthetic-imaging-clinic.invalid/",
+    "contactPage": "https://synthetic-imaging-clinic.invalid/contact",
+    "publicEmail": "office@synthetic-imaging-clinic.invalid",
+    "publicPhone": "0700 000 001",
+    "sourceUrls": [
+      "https://synthetic-imaging-clinic.invalid/contact"
+    ],
+    "sourceType": "Synthetic documentation example",
+    "outreachStatus": "Needs Manual Verification",
+    "notes": "Example only. Do not import as a real lead."
+  }
+]

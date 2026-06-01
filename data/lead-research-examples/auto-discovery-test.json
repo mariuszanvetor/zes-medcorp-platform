@@ -1,0 +1,10 @@
+[
+  {
+    "companyName": "Synthetic Auto Discovery Clinic SRL",
+    "website": "https://synthetic-auto-discovery-clinic.invalid/",
+    "sourceUrls": [
+      "https://synthetic-auto-discovery-clinic.invalid/"
+    ],
+    "fixtureHtml": "<html><body><a href=\"mailto:office@synthetic-auto-discovery-clinic.invalid\">Email</a><a href=\"tel:+40700000123\">Telefon</a></body></html>"
+  }
+]
