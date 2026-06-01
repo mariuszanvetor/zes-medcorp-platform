@@ -233,3 +233,21 @@ For a safe demo fallback:
    - one primary action,
    - one secondary action.
 6. Confirm seeded popup CTAs from landing pages still open the same conversation context.
+
+## Phase 79A commercial lead generation QA
+
+1. Open the five focused commercial routes:
+   - `/amenajare-centre-imagistica`
+   - `/proiectare-radiologie`
+   - `/autorizare-cncan-camera-rx`
+   - `/service-radiologie-romania`
+   - `/plumbare-radiologica`
+2. Confirm every page shows one clear ZES action, direct phone/email/WhatsApp access and a concise validation note where relevant.
+3. Click the primary ZES CTA on each page and verify that the floating assistant opens with the intended seeded prompt.
+4. Confirm commercial CTAs expose stable `data-cta` and `data-page-intent` attributes for Clarity/GA review.
+5. Verify the homepage commercial entry section links to all five routes without crowding the hero.
+6. Review Search Console after deploy:
+   - submit the refreshed sitemap;
+   - inspect the five commercial URLs;
+   - request indexing without repeated submissions;
+   - monitor impressions, clicks and Clarity sessions for commercial paths.

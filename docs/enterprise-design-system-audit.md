@@ -406,3 +406,21 @@ Every redesign slice should verify:
   - collapsed technical metadata by default.
 - Composer is now treated as a fixed interaction rail in popup mode and should remain visible on mobile and desktop.
 - Auto-scroll behavior was adjusted for continuity: new messages and lead transitions stay in view without forcing scroll jumps when users review older context.
+
+## Phase 79A commercial conversion pattern
+
+- Commercial landing pages use a shared trust-first renderer rather than one-off page layouts.
+- CTA hierarchy is intentionally narrow:
+  - primary: seeded conversation with ZES;
+  - secondary: project evaluation or direct WhatsApp contact.
+- Every commercial page follows the same rhythm:
+  - focused hero,
+  - audience context,
+  - technical scope,
+  - information checklist,
+  - process,
+  - common mistakes,
+  - FAQ,
+  - related links,
+  - closing conversion band.
+- Stable `data-cta` and `data-page-intent` attributes support Clarity review without adding new client tracking logic.

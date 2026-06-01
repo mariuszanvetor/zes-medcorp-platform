@@ -38,6 +38,32 @@ const nextConfig: NextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        source: "/shop/cusca-faraday-structura-cupru-aluminiu",
+        destination: "/amenajare-centre-imagistica",
+        permanent: true,
+      },
+      {
+        source:
+          "/product-category/amenajari-radiologie-spatii/solutii-specifice-rmn-ecranare-rf",
+        destination: "/amenajare-centre-imagistica",
+        permanent: true,
+      },
+      {
+        source: "/product-category/mobilier-medical/carucioare-urgenta",
+        destination: "/service-aparatura-medicala",
+        permanent: true,
+      },
+      {
+        source: "/noutati",
+        destination: "/knowledge-hub",
+        permanent: true,
+      },
+      {
+        source: "/telemedicine-or-in-person-care-whats-best",
+        destination: "/knowledge-hub",
+        permanent: true,
+      },
     ];
   },
 };

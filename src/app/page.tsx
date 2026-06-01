@@ -4,6 +4,7 @@ import { EnterpriseTrustBand } from "@/components/sections/EnterpriseTrustBand";
 import { FinalCTASection } from "@/components/sections/FinalCTASection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { EcosystemNavigation } from "@/components/sections/EcosystemNavigation";
+import { CommercialEntrySection } from "@/components/sections/CommercialEntrySection";
 import { HomepageTrustLayer } from "@/components/sections/HomepageTrustLayer";
 import { PlanningJourneyBlock } from "@/components/sections/PlanningJourneyBlock";
 import { PortfolioShowcaseSection } from "@/components/sections/PortfolioShowcaseSection";
@@ -23,6 +24,7 @@ export default function Home() {
       <BreadcrumbSchema items={[{ name: "Acasa", href: "/" }]} />
       <HeroSection />
       <ServicesSection />
+      <CommercialEntrySection />
       <EnterpriseTrustBand
         sourcePage="/"
         title="Expertiza reala pentru infrastructura medicala complexa."

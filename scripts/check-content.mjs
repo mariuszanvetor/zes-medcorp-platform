@@ -8,6 +8,7 @@ const comparisonPath = path.join(root, "src", "data", "comparisons.ts");
 const glossaryPath = path.join(root, "src", "data", "glossary.ts");
 const calculatorPath = path.join(root, "src", "data", "calculators.ts");
 const serviceFunnelsPath = path.join(root, "src", "data", "service-funnels.ts");
+const commercialLandingPagesPath = path.join(root, "src", "data", "commercial-landing-pages.ts");
 const planningPath = path.join(root, "src", "data", "planning-journeys.ts");
 const seoIndexingPath = path.join(root, "src", "data", "seo-indexing-priorities.ts");
 const appDir = path.join(root, "src", "app");
@@ -233,6 +234,10 @@ function extractCalculatorBlocks(source) {
 }
 
 function extractServiceFunnelSlugs(source) {
+  return [...source.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]);
+}
+
+function extractCommercialLandingSlugs(source) {
   return [...source.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]);
 }
 
@@ -684,6 +689,14 @@ function checkHubCoverage(routes, sitemapSource) {
     "/planificare/nu-stiu-de-unde-sa-incep",
   ];
 
+  const requiredCommercialRoutes = [
+    "/amenajare-centre-imagistica",
+    "/proiectare-radiologie",
+    "/autorizare-cncan-camera-rx",
+    "/service-radiologie-romania",
+    "/plumbare-radiologica",
+  ];
+
   for (const route of requiredHubRoutes) {
     if (!routes.has(route)) {
       errors.push(`Required public hub route missing: ${route}`);
@@ -694,6 +707,16 @@ function checkHubCoverage(routes, sitemapSource) {
     if (!routes.has(route)) {
       errors.push(`Required funnel route missing: ${route}`);
     }
+  }
+
+  for (const route of requiredCommercialRoutes) {
+    if (!routes.has(route)) {
+      errors.push(`Required commercial route missing: ${route}`);
+    }
+  }
+
+  if (!sitemapSource.includes("commercialLandingPages")) {
+    errors.push("Commercial landing pages are not wired into sitemap source.");
   }
 
   const adminRoutes = ["/admin/leads", "/admin/lead-flow", "/admin/content-ops", "/admin/seo-launch"];
@@ -734,6 +757,8 @@ const calculatorSlugs = new Set(
 );
 const serviceFunnelSource = fs.readFileSync(serviceFunnelsPath, "utf8");
 const serviceFunnelSlugs = extractServiceFunnelSlugs(serviceFunnelSource);
+const commercialLandingSource = fs.readFileSync(commercialLandingPagesPath, "utf8");
+const commercialLandingSlugs = extractCommercialLandingSlugs(commercialLandingSource);
 const routes = buildRoutes(articleSlugs);
 const sitemapSource = fs.readFileSync(path.join(appDir, "sitemap.ts"), "utf8");
 
@@ -759,6 +784,10 @@ for (const slug of calculatorSlugs) {
 
 for (const slug of serviceFunnelSlugs) {
   routes.add(`/servicii/${slug}`);
+}
+
+for (const slug of commercialLandingSlugs) {
+  routes.add(`/${slug}`);
 }
 
 checkArticleBlocks(articleBlocks, articleSlugs, routes);

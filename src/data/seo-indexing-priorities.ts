@@ -58,6 +58,19 @@ export const seoIndexingPriorityGroups: SeoIndexingGroup[] = [
     ],
   },
   {
+    slug: "commercial-lead-pages",
+    title: "Commercial lead pages",
+    description:
+      "Pagini comerciale cu intentie mare pentru proiecte RX, imagistica, CNCAN si service radiologie.",
+    items: [
+      item("/amenajare-centre-imagistica", "Amenajare centre imagistica medicala", "critical", "service", "Pagina adreseaza proiecte noi si extinderi RX, CT sau RMN.", "Inspect URL si solicita indexare prioritara dupa deploy.", "Request indexing pentru landing page-ul de imagistica.", "Verifica CTA ZES, contactele directe si legaturile catre serviciile CT/RMN."),
+      item("/proiectare-radiologie", "Proiectare radiologie si infrastructura RX", "critical", "service", "Pagina targeteaza clinici care pregatesc camera RX si documentatia tehnica.", "Inspect URL si solicita indexare prioritara.", "Request indexing pentru proiectare radiologie.", "Verifica legaturile CNCAN si radioprotectie."),
+      item("/autorizare-cncan-camera-rx", "Autorizare CNCAN camera RX", "high", "service", "Pagina transforma intentia informationala CNCAN intr-un traseu comercial responsabil.", "Inspect URL si solicita indexare.", "Request indexing pentru pagina CNCAN preliminara.", "Pastreaza framing-ul orientativ si validarea de specialist."),
+      item("/service-radiologie-romania", "Service radiologie Romania", "critical", "service", "Pagina raspunde cererilor urgente de service RX si imagistica.", "Inspect URL si solicita indexare prioritara.", "Request indexing pentru landing page-ul de service.", "Verifica preluarea rapida prin ZES si WhatsApp."),
+      item("/plumbare-radiologica", "Plumbare radiologica si protectie RX", "critical", "service", "Pagina targeteaza intentia comerciala pentru camere RX si ofertare preliminara.", "Inspect URL si solicita indexare prioritara.", "Request indexing pentru landing page-ul de plumbare.", "Verifica distinctia fata de RF shielding pentru RMN."),
+    ],
+  },
+  {
     slug: "comparison-hub",
     title: "Comparison hub",
     description:

@@ -5,6 +5,13 @@ import { chromium } from "playwright-core";
 const baseUrl = process.env.QA_BASE_URL ?? "http://127.0.0.1:4025";
 const outDir = path.resolve(".qa-playwright-zescorp");
 const uploadFixture = path.join(outDir, "qa-upload.txt");
+const commercialPages = [
+  { slug: "amenajare-centre-imagistica", intent: "imaging-center-planning" },
+  { slug: "proiectare-radiologie", intent: "radiology-design" },
+  { slug: "autorizare-cncan-camera-rx", intent: "cncan-rx-preliminary" },
+  { slug: "service-radiologie-romania", intent: "service-radiology" },
+  { slug: "plumbare-radiologica", intent: "radioprotection" },
+];
 
 async function ensureDir() {
   await fs.mkdir(outDir, { recursive: true });
@@ -166,6 +173,43 @@ async function run() {
   await d.goto(`${baseUrl}/radioprotectie-plumbare-rx`, { waitUntil: "networkidle" });
   await screenshot(d, "09-landing-rx-desktop.png");
 
+  for (const [index, commercialPage] of commercialPages.entries()) {
+    await d.goto(`${baseUrl}/${commercialPage.slug}`, { waitUntil: "networkidle" });
+    await d.waitForTimeout(350);
+    const cta = d.locator(
+      `[data-cta="zes-open"][data-page-intent="${commercialPage.intent}"]`,
+    ).first();
+    const overflow = await checkOverflow(d);
+    report.checks.push({
+      check: `commercial_desktop_${commercialPage.slug}`,
+      pass: (await cta.isVisible()) && (overflow.pageOverflow ?? 0) <= 1,
+      value: overflow,
+    });
+    await screenshot(
+      d,
+      `${String(index + 14).padStart(2, "0")}-${commercialPage.slug}-desktop.png`,
+    );
+  }
+
+  await d.goto(`${baseUrl}/plumbare-radiologica`, { waitUntil: "networkidle" });
+  await d
+    .locator('[data-cta="zes-open"][data-page-intent="radioprotection"]')
+    .first()
+    .click();
+  await d.getByTestId("zes-floating-popup").waitFor({ state: "visible", timeout: 8000 });
+  await d.waitForTimeout(1800);
+  const seededPromptVisible = await d
+    .getByTestId("zes-floating-messages")
+    .getByText("Am nevoie de plumbare/radioprotecție pentru o cameră RX", { exact: false })
+    .first()
+    .isVisible()
+    .catch(() => false);
+  report.checks.push({
+    check: "commercial_seeded_zes_prompt",
+    pass: seededPromptVisible,
+  });
+  await screenshot(d, "19-commercial-seeded-zes-flow.png");
+
   const m = await mobile.newPage();
   await openHome(m);
   await screenshot(m, "10-home-mobile.png");
@@ -204,6 +248,24 @@ async function run() {
     check: "mobile_minimize_reopen",
     pass: mobileReopenVisible,
   });
+
+  for (const [index, commercialPage] of commercialPages.entries()) {
+    await m.goto(`${baseUrl}/${commercialPage.slug}`, { waitUntil: "networkidle" });
+    await m.waitForTimeout(350);
+    const cta = m.locator(
+      `[data-cta="zes-open"][data-page-intent="${commercialPage.intent}"]`,
+    ).first();
+    const overflow = await checkOverflow(m);
+    report.checks.push({
+      check: `commercial_mobile_${commercialPage.slug}`,
+      pass: (await cta.isVisible()) && (overflow.pageOverflow ?? 0) <= 1,
+      value: overflow,
+    });
+    await screenshot(
+      m,
+      `${String(index + 20).padStart(2, "0")}-${commercialPage.slug}-mobile.png`,
+    );
+  }
 
   await fs.writeFile(
     path.join(outDir, "qa-report.json"),

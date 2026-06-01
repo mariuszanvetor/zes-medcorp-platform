@@ -227,3 +227,17 @@ Redeploy after environment changes and run one controlled internal test from `/a
   - service and modernization flows.
 - Contact trust layer now emphasizes direct phone/email/WhatsApp actions.
 - ZES remains integrated as guided assistant, but public hierarchy prioritizes company competence and implementation readiness.
+
+## Phase 79A commercial landing rollout
+
+- Added five focused lead-generation routes:
+  - `/amenajare-centre-imagistica`
+  - `/proiectare-radiologie`
+  - `/autorizare-cncan-camera-rx`
+  - `/service-radiologie-romania`
+  - `/plumbare-radiologica`
+- Each route uses the shared commercial landing renderer, FAQ/Service/Breadcrumb schema and canonical metadata.
+- Each route provides a seeded ZES CTA plus direct phone, email and WhatsApp actions from centralized brand config.
+- Commercial CTA hooks expose stable `data-cta` and `data-page-intent` attributes for Clarity review and future analytics refinement.
+- Sitemap and internal linking include the commercial cluster. Admin routes remain excluded.
+- Legacy commercial WordPress paths redirect permanently only where no useful local route exists.

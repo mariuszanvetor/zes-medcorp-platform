@@ -8,8 +8,11 @@ import { companyContact } from "@/lib/brand";
 const serviceLinks = [
   { label: "Service aparatura medicala", href: "/service-aparatura-medicala" },
   { label: "Radioprotectie / plumbare RX", href: "/radioprotectie-plumbare-rx" },
-  { label: "Hub comercial ZES", href: "/servicii" },
-  { label: "Servicii generale", href: "/services" },
+  { label: "Amenajare centre imagistica", href: "/amenajare-centre-imagistica" },
+  { label: "Proiectare radiologie", href: "/proiectare-radiologie" },
+  { label: "Autorizare CNCAN camera RX", href: "/autorizare-cncan-camera-rx" },
+  { label: "Service radiologie Romania", href: "/service-radiologie-romania" },
+  { label: "Plumbare radiologica", href: "/plumbare-radiologica" },
   { label: "Proiectare camera RMN", href: "/servicii/proiectare-camera-rmn" },
   { label: "Proiectare camera CT", href: "/servicii/proiectare-camera-ct" },
   { label: "RF shielding pentru RMN", href: "/servicii/rf-shielding-rmn" },

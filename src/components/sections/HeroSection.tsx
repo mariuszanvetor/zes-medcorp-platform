@@ -45,6 +45,7 @@ export function HeroSection() {
               <OpenZESButton
                 className="rounded-xl px-7"
                 ctaLabel="Discuta cu ZES"
+                pageIntent="homepage"
                 size="lg"
                 sourcePage="/"
               >
@@ -107,6 +108,7 @@ export function HeroSection() {
           {shortcutLinks.map((shortcut) => (
             <Link
               className="rounded-xl border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-slate-800 shadow-[0_10px_22px_rgba(15,65,118,0.08)] transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
+              data-cta="homepage-shortcut"
               href={shortcut.href}
               key={shortcut.href}
             >

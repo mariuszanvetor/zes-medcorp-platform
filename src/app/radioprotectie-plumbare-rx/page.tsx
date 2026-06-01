@@ -7,6 +7,7 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/sections/SectionHeading";
+import { CommercialConversionBand } from "@/components/sections/CommercialConversionBand";
 import { companyContact } from "@/lib/brand";
 import { createWebsiteMetadata } from "@/lib/seo";
 
@@ -79,6 +80,7 @@ export default function RadioprotectiePlumbareRxPage() {
               <div className="flex flex-col gap-2">
                 <OpenZESButton
                   ctaLabel="Analizeaza proiectul cu ZES"
+                  pageIntent="radioprotection"
                   prompt="Am nevoie de plumbare/radioprotectie pentru o camera RX"
                   size="lg"
                   sourcePage="/radioprotectie-plumbare-rx"
@@ -128,6 +130,17 @@ export default function RadioprotectiePlumbareRxPage() {
               <p className="mt-2 text-sm leading-7 text-slate-600">
                 Proiectele reale depind de echipament, contextul spatiului, vecinatati si documentatie tehnica.
               </p>
+              <div className="mt-4 flex flex-col gap-2 text-sm font-semibold text-[#0057b8]">
+                <Link className="underline decoration-blue-200 underline-offset-4" href="/plumbare-radiologica">
+                  Vezi detalii despre plumbarea radiologica
+                </Link>
+                <Link className="underline decoration-blue-200 underline-offset-4" href="/autorizare-cncan-camera-rx">
+                  Consulta pasii preliminari CNCAN pentru camera RX
+                </Link>
+                <Link className="underline decoration-blue-200 underline-offset-4" href="/proiectare-radiologie">
+                  Continua cu proiectarea infrastructurii RX
+                </Link>
+              </div>
             </article>
 
             <article className="rounded-2xl border border-blue-100 bg-white p-6">
@@ -142,6 +155,7 @@ export default function RadioprotectiePlumbareRxPage() {
               <div className="mt-5 flex flex-col gap-2 sm:flex-row">
                 <OpenZESButton
                   ctaLabel="Incarca planul si discuta cu ZES"
+                  pageIntent="radioprotection"
                   prompt="Am nevoie de plumbare/radioprotectie pentru o camera RX. Am plan disponibil."
                   sourcePage="/radioprotectie-plumbare-rx"
                 >
@@ -183,13 +197,13 @@ export default function RadioprotectiePlumbareRxPage() {
                 Pentru proiecte cu termen scurt sau documentatie in lucru, poti solicita direct discutie tehnica.
               </p>
               <div className="mt-4 grid gap-2">
-                <Link className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-200 px-5 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50" href={companyContact.phoneHref}>
+                <Link className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-200 px-5 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50" data-cta="phone" data-page-intent="radioprotection" href={companyContact.phoneHref}>
                   {companyContact.phone}
                 </Link>
-                <Link className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-200 px-5 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50" href={companyContact.emailHref}>
+                <Link className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-200 px-5 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50" data-cta="email" data-page-intent="radioprotection" href={companyContact.emailHref}>
                   {companyContact.email}
                 </Link>
-                <Link className="inline-flex h-11 items-center justify-center rounded-xl bg-[#0f9d58] px-5 text-sm font-semibold text-white transition hover:bg-[#0d8b4d]" href={companyContact.whatsappHref} rel="noreferrer" target="_blank">
+                <Link className="inline-flex h-11 items-center justify-center rounded-xl bg-[#0f9d58] px-5 text-sm font-semibold text-white transition hover:bg-[#0d8b4d]" data-cta="whatsapp" data-page-intent="radioprotection" href={companyContact.whatsappHref} rel="noreferrer" target="_blank">
                   WhatsApp consultanta
                 </Link>
               </div>
@@ -197,6 +211,14 @@ export default function RadioprotectiePlumbareRxPage() {
           </div>
         </Container>
       </Section>
+      <CommercialConversionBand
+        description="Începe cu tipul echipamentului și planul disponibil. ZES pregătește contextul pentru evaluare preliminară și ofertare."
+        pageIntent="radioprotection"
+        primaryLabel="Discută camera RX cu ZES"
+        prompt="Am nevoie de plumbare/radioprotecție pentru o cameră RX"
+        sourcePage="/radioprotectie-plumbare-rx"
+        title="Pregătește evaluarea preliminară pentru camera RX."
+      />
     </>
   );
 }

@@ -15,6 +15,8 @@ type OpenZESButtonProps = {
   className?: string;
   fullWidth?: boolean;
   disabled?: boolean;
+  dataCta?: string;
+  pageIntent?: string;
   children: ReactNode;
 };
 
@@ -22,12 +24,16 @@ export function OpenZESButton({
   prompt,
   sourcePage = "/",
   ctaLabel = "Discuta cu ZES",
+  dataCta = "zes-open",
+  pageIntent,
   children,
   ...buttonProps
 }: OpenZESButtonProps) {
   return (
     <Button
       {...buttonProps}
+      data-cta={dataCta}
+      data-page-intent={pageIntent}
       onClick={() => {
         openZESPopup({ prompt, source: sourcePage });
         trackCTA({

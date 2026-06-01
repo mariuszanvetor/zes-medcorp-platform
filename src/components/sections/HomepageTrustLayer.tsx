@@ -117,13 +117,13 @@ export function HomepageTrustLayer() {
               Daca preferi contact direct, echipa ZESCORP este disponibila prin telefon, email sau WhatsApp.
             </p>
             <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-              <Link className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-200 px-5 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50" href={companyContact.phoneHref}>
+              <Link className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-200 px-5 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50" data-cta="phone" data-page-intent="homepage" href={companyContact.phoneHref}>
                 {companyContact.phone}
               </Link>
-              <Link className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-200 px-5 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50" href={companyContact.emailHref}>
+              <Link className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-200 px-5 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50" data-cta="email" data-page-intent="homepage" href={companyContact.emailHref}>
                 {companyContact.email}
               </Link>
-              <Link className="inline-flex h-11 items-center justify-center rounded-xl bg-[#0f9d58] px-5 text-sm font-semibold text-white transition hover:bg-[#0d8b4d]" href={companyContact.whatsappHref} rel="noreferrer" target="_blank">
+              <Link className="inline-flex h-11 items-center justify-center rounded-xl bg-[#0f9d58] px-5 text-sm font-semibold text-white transition hover:bg-[#0d8b4d]" data-cta="whatsapp" data-page-intent="homepage" href={companyContact.whatsappHref} rel="noreferrer" target="_blank">
                 Scrie pe WhatsApp
               </Link>
             </div>

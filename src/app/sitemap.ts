@@ -4,6 +4,7 @@ import { articles } from "@/data/articles";
 import { programmaticCalculators } from "@/data/calculators";
 import { glossaryTerms } from "@/data/glossary";
 import { comparisonPages } from "@/data/comparisons";
+import { commercialLandingPages } from "@/data/commercial-landing-pages";
 import { legalPages } from "@/data/legal-pages";
 import { planningJourneys } from "@/data/planning-journeys";
 import { seoClusters } from "@/data/seo-clusters";
@@ -56,6 +57,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       page.category === "radioprotectie-rf" || page.slug === "proiectare-camera-rmn"
         ? 0.84
         : 0.8,
+  }));
+
+  const commercialRoutes = commercialLandingPages.map((page) => ({
+    url: new URL(`/${page.slug}`, siteConfig.url).toString(),
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.88,
   }));
 
   const articleRoutes = articles.map((article) => ({
@@ -140,6 +148,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: route.priority,
     })),
     ...serviceRoutes,
+    ...commercialRoutes,
     ...serviceFunnelRoutes,
     ...planningRoutes,
     ...calculatorRoutes,

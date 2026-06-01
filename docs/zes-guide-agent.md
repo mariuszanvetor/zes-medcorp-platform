@@ -342,3 +342,17 @@ Safety frequency rules:
   - next step,
   - primary CTA,
   - collapsed recommendation details.
+
+## Phase 79A commercial entry prompts
+
+Focused commercial landing pages reuse the same floating ZES assistant and open it through the existing `zes:open-popup` event. No second assistant runtime is introduced.
+
+Seed prompts:
+
+- `/amenajare-centre-imagistica`: `Vreau să amenajez un centru de imagistică medicală`
+- `/proiectare-radiologie`: `Am nevoie de proiectare pentru o cameră de radiologie`
+- `/autorizare-cncan-camera-rx`: `Am nevoie de pași preliminari pentru autorizare CNCAN cameră RX`
+- `/service-radiologie-romania`: `Am nevoie de service pentru echipament de radiologie`
+- `/plumbare-radiologica`: `Am nevoie de plumbare/radioprotecție pentru o cameră RX`
+
+All seeded entry buttons expose `data-cta="zes-open"` and a focused `data-page-intent` value so Clarity sessions can be reviewed by commercial scenario.

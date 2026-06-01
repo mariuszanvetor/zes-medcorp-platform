@@ -7,6 +7,7 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/sections/SectionHeading";
+import { CommercialConversionBand } from "@/components/sections/CommercialConversionBand";
 import { companyContact } from "@/lib/brand";
 import { createWebsiteMetadata } from "@/lib/seo";
 
@@ -86,6 +87,7 @@ export default function ServiceAparaturaMedicalaPage() {
               <div className="mt-4 flex flex-col gap-2">
                 <OpenZESButton
                   ctaLabel="Solicita service prin ZES"
+                  pageIntent="service-medical-equipment"
                   prompt="Am nevoie de service pentru aparatura medicala"
                   size="lg"
                   sourcePage="/service-aparatura-medicala"
@@ -139,6 +141,7 @@ export default function ServiceAparaturaMedicalaPage() {
               <OpenZESButton
                 className="mt-5"
                 ctaLabel="Urgent service prompt"
+                pageIntent="service-medical-equipment"
                 prompt="Am un aparat defect si am nevoie de service urgent"
                 sourcePage="/service-aparatura-medicala"
               >
@@ -159,6 +162,12 @@ export default function ServiceAparaturaMedicalaPage() {
               <p className="mt-4 text-sm text-slate-600">
                 Daca ai deja poze, cod de eroare sau fisa tehnica, le poti atasa direct in conversatia ZES.
               </p>
+              <Link
+                className="mt-4 inline-flex text-sm font-semibold text-[#0057b8] underline decoration-blue-200 underline-offset-4"
+                href="/service-radiologie-romania"
+              >
+                Vezi fluxul dedicat pentru service radiologie
+              </Link>
             </article>
           </div>
         </Container>
@@ -189,10 +198,10 @@ export default function ServiceAparaturaMedicalaPage() {
                 <li className="flex items-start gap-2"><span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#0057b8]" />Comunicare clara pentru pasii tehnici urmatori.</li>
               </ul>
               <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-                <Link className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-200 px-5 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50" href={companyContact.phoneHref}>
+                <Link className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-200 px-5 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50" data-cta="phone" data-page-intent="service-medical-equipment" href={companyContact.phoneHref}>
                   {companyContact.phone}
                 </Link>
-                <Link className="inline-flex h-11 items-center justify-center rounded-xl bg-[#0f9d58] px-5 text-sm font-semibold text-white transition hover:bg-[#0d8b4d]" href={companyContact.whatsappHref} rel="noreferrer" target="_blank">
+                <Link className="inline-flex h-11 items-center justify-center rounded-xl bg-[#0f9d58] px-5 text-sm font-semibold text-white transition hover:bg-[#0d8b4d]" data-cta="whatsapp" data-page-intent="service-medical-equipment" href={companyContact.whatsappHref} rel="noreferrer" target="_blank">
                   WhatsApp rapid
                 </Link>
               </div>
@@ -216,6 +225,7 @@ export default function ServiceAparaturaMedicalaPage() {
                 <OpenZESButton
                   className="mt-4"
                   ctaLabel="Solicita service prin ZES visual"
+                  pageIntent="service-medical-equipment"
                   prompt="Am nevoie de service pentru aparatura medicala. Vreau preluare prioritara."
                   sourcePage="/service-aparatura-medicala"
                 >
@@ -226,6 +236,14 @@ export default function ServiceAparaturaMedicalaPage() {
           </div>
         </Container>
       </Section>
+      <CommercialConversionBand
+        description="Descrie echipamentul, simptomul și orașul. ZES structurează solicitarea pentru triere și preluare de către echipa tehnică."
+        pageIntent="service-medical-equipment"
+        primaryLabel="Solicită service prin ZES"
+        prompt="Am nevoie de service pentru aparatură medicală"
+        sourcePage="/service-aparatura-medicala"
+        title="Ai nevoie de suport tehnic pentru un echipament medical?"
+      />
     </>
   );
 }
