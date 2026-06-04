@@ -9,6 +9,7 @@ const glossaryPath = path.join(root, "src", "data", "glossary.ts");
 const calculatorPath = path.join(root, "src", "data", "calculators.ts");
 const serviceFunnelsPath = path.join(root, "src", "data", "service-funnels.ts");
 const commercialLandingPagesPath = path.join(root, "src", "data", "commercial-landing-pages.ts");
+const revenueLandingPagesPath = path.join(root, "src", "data", "revenue-landing-pages.ts");
 const planningPath = path.join(root, "src", "data", "planning-journeys.ts");
 const seoIndexingPath = path.join(root, "src", "data", "seo-indexing-priorities.ts");
 const appDir = path.join(root, "src", "app");
@@ -238,6 +239,10 @@ function extractServiceFunnelSlugs(source) {
 }
 
 function extractCommercialLandingSlugs(source) {
+  return [...source.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]);
+}
+
+function extractRevenueLandingSlugs(source) {
   return [...source.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]);
 }
 
@@ -675,6 +680,7 @@ function checkHubCoverage(routes, sitemapSource) {
     "/proposal-builder",
     "/project-intake",
     "/services",
+    "/solutii-medicale",
     "/contact",
   ];
 
@@ -697,6 +703,26 @@ function checkHubCoverage(routes, sitemapSource) {
     "/plumbare-radiologica",
   ];
 
+  const requiredRevenueRoutes = [
+    "/solutii-medicale/camere-ct",
+    "/solutii-medicale/camere-rmn",
+    "/solutii-medicale/rf-shielding-rmn",
+    "/solutii-medicale/radioprotectie-imagistica",
+    "/solutii-medicale/dezvoltare-unitati-medicale",
+    "/solutii-medicale/echipamente-imagistica-diagnostic",
+    "/solutii-medicale/ecografe-sisteme-ultrasunete",
+    "/solutii-medicale/sisteme-mamografie",
+    "/solutii-medicale/sisteme-c-arm",
+    "/solutii-medicale/echipamente-laborator-ivd",
+    "/solutii-medicale/solutii-pacs-ris",
+    "/solutii-medicale/service-echipamente-medicale",
+    "/solutii-medicale/contracte-mentenanta-preventiva",
+    "/solutii-medicale/relocare-echipamente-medicale",
+    "/solutii-medicale/instalare-punere-in-functiune",
+    "/solutii-medicale/suport-tehnic-echipamente",
+    "/solutii-medicale/service-multi-vendor",
+  ];
+
   for (const route of requiredHubRoutes) {
     if (!routes.has(route)) {
       errors.push(`Required public hub route missing: ${route}`);
@@ -715,8 +741,18 @@ function checkHubCoverage(routes, sitemapSource) {
     }
   }
 
+  for (const route of requiredRevenueRoutes) {
+    if (!routes.has(route)) {
+      errors.push(`Required revenue route missing: ${route}`);
+    }
+  }
+
   if (!sitemapSource.includes("commercialLandingPages")) {
     errors.push("Commercial landing pages are not wired into sitemap source.");
+  }
+
+  if (!sitemapSource.includes("revenueLandingPages")) {
+    errors.push("Revenue landing pages are not wired into sitemap source.");
   }
 
   const adminRoutes = ["/admin/leads", "/admin/lead-flow", "/admin/content-ops", "/admin/seo-launch"];
@@ -759,6 +795,8 @@ const serviceFunnelSource = fs.readFileSync(serviceFunnelsPath, "utf8");
 const serviceFunnelSlugs = extractServiceFunnelSlugs(serviceFunnelSource);
 const commercialLandingSource = fs.readFileSync(commercialLandingPagesPath, "utf8");
 const commercialLandingSlugs = extractCommercialLandingSlugs(commercialLandingSource);
+const revenueLandingSource = fs.readFileSync(revenueLandingPagesPath, "utf8");
+const revenueLandingSlugs = extractRevenueLandingSlugs(revenueLandingSource);
 const routes = buildRoutes(articleSlugs);
 const sitemapSource = fs.readFileSync(path.join(appDir, "sitemap.ts"), "utf8");
 
@@ -790,6 +828,10 @@ for (const slug of commercialLandingSlugs) {
   routes.add(`/${slug}`);
 }
 
+for (const slug of revenueLandingSlugs) {
+  routes.add(`/solutii-medicale/${slug}`);
+}
+
 checkArticleBlocks(articleBlocks, articleSlugs, routes);
 checkComparisonBlocks(comparisonBlocks, comparisonSlugs, articleSlugs, new Set(glossarySlugs), routes);
 checkCalculatorBlocks(calculatorBlocks, routes);
@@ -797,7 +839,7 @@ checkInternalReferences(routes);
 checkHubCoverage(routes, sitemapSource);
 
 console.log(
-  `Content check scanned ${articleBlocks.length} articles, ${comparisonBlocks.length} comparison pages, ${calculatorBlocks.length} calculators, ${glossarySlugs.length} glossary terms and ${routes.size} routes/articles.`,
+  `Content check scanned ${articleBlocks.length} articles, ${comparisonBlocks.length} comparison pages, ${calculatorBlocks.length} calculators, ${glossarySlugs.length} glossary terms, ${revenueLandingSlugs.length} revenue pages and ${routes.size} routes/articles.`,
 );
 
 if (warnings.length) {

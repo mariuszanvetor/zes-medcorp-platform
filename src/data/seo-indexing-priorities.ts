@@ -83,6 +83,21 @@ export const seoIndexingPriorityGroups: SeoIndexingGroup[] = [
     ],
   },
   {
+    slug: "revenue-solution-pages",
+    title: "Revenue solution pages",
+    description:
+      "Hub si pagini comerciale Phase 84A pentru infrastructura medicala, echipamente si mentenanta.",
+    items: [
+      item("/solutii-medicale", "Solutii medicale", "critical", "hub", "Hub comercial pentru cele trei verticale ZESCORP.", "Inspect URL si solicita indexare dupa deploy.", "Request indexing pentru hub-ul comercial.", "Verifica CTA ZES, formularul si legaturile catre cei trei piloni."),
+      item("/solutii-medicale/camere-ct", "Camere CT", "critical", "service", "Pagina targeteaza proiecte CT cu valoare comerciala ridicata.", "Inspect URL si solicita indexare prioritara.", "Request indexing pentru landing page CT.", "Verifica radioprotectia, formularul si legatura catre instalare."),
+      item("/solutii-medicale/camere-rmn", "Camere RMN", "critical", "service", "Pagina targeteaza camere RMN, relocari si RF shielding.", "Inspect URL si solicita indexare prioritara.", "Request indexing pentru landing page RMN.", "Verifica separarea clara dintre RF shielding si radioprotectie."),
+      item("/solutii-medicale/echipamente-imagistica-diagnostic", "Echipamente imagistica diagnostic", "critical", "service", "Pagina sustine cereri de oferta pentru RX, CT si RMN.", "Inspect URL si solicita indexare prioritara.", "Request indexing pentru pagina de echipamente imagistica.", "Verifica formularul tehnico-comercial."),
+      item("/solutii-medicale/echipamente-laborator-ivd", "Echipamente laborator IVD", "high", "service", "Pagina extinde intentia comerciala in afara radiologiei.", "Inspect URL si solicita indexare.", "Request indexing pentru pagina laborator IVD.", "Verifica legatura catre mentenanta preventiva."),
+      item("/solutii-medicale/service-echipamente-medicale", "Service echipamente medicale", "critical", "service", "Pagina raspunde cererilor de service pentru aparatura medicala din mai multe categorii.", "Inspect URL si solicita indexare prioritara.", "Request indexing pentru pagina de service medical.", "Verifica CTA ZES, formularul si mesajele de siguranta."),
+      item("/solutii-medicale/contracte-mentenanta-preventiva", "Contracte mentenanta preventiva", "high", "service", "Pagina targeteaza contracte recurente si continuitate operationala.", "Inspect URL si solicita indexare.", "Request indexing pentru pagina de mentenanta.", "Verifica legaturile catre service multi-vendor."),
+    ],
+  },
+  {
     slug: "glossary-hub",
     title: "Glossary hub",
     description:

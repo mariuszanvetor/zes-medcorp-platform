@@ -108,16 +108,16 @@ export default function ServicesPage() {
                   Paginile comerciale de servicii
                 </p>
                 <h2 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">
-                  Vezi și serviciile comerciale construite pentru trafic cu intenție mare.
+                  Vezi soluțiile comerciale pentru proiecte, achiziții și mentenanță.
                 </h2>
                 <p className="mt-4 text-sm leading-7 text-slate-600">
-                  Dacă vrei pagini mai orientate spre decizie, consultanță și propunere preliminară,
-                  intră în noul hub comercial de servicii.
+                  Hub-ul comercial organizează infrastructura medicală, echipamentele și
+                  service-ul în trasee clare pentru ofertare și contact tehnic.
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
-                <Button href="/servicii" variant="secondary">
-                  Deschide hub-ul comercial
+                <Button href="/solutii-medicale" variant="secondary">
+                  Deschide soluțiile medicale
                 </Button>
                 <Button href="/proposal-builder">Proposal Builder</Button>
               </div>

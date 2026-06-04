@@ -7,6 +7,7 @@ import { comparisonPages } from "@/data/comparisons";
 import { commercialLandingPages } from "@/data/commercial-landing-pages";
 import { legalPages } from "@/data/legal-pages";
 import { planningJourneys } from "@/data/planning-journeys";
+import { revenueLandingPages } from "@/data/revenue-landing-pages";
 import { seoClusters } from "@/data/seo-clusters";
 import { serviceFunnels } from "@/data/service-funnels";
 import { services } from "@/data/services";
@@ -19,10 +20,12 @@ const staticRoutes: Array<{
 }> = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/services", changeFrequency: "monthly", priority: 0.9 },
+  { path: "/solutii-medicale", changeFrequency: "monthly", priority: 0.94 },
   { path: "/servicii", changeFrequency: "monthly", priority: 0.88 },
   { path: "/about", changeFrequency: "monthly", priority: 0.74 },
   { path: "/companie", changeFrequency: "monthly", priority: 0.76 },
   { path: "/projects", changeFrequency: "monthly", priority: 0.76 },
+  { path: "/resources", changeFrequency: "monthly", priority: 0.78 },
   { path: "/ai-discovery", changeFrequency: "monthly", priority: 0.86 },
   { path: "/ai-project-advisor", changeFrequency: "monthly", priority: 0.85 },
   { path: "/calculator-proiect-medical", changeFrequency: "monthly", priority: 0.8 },
@@ -64,6 +67,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.88,
+  }));
+
+  const revenueRoutes = revenueLandingPages.map((page) => ({
+    url: new URL(`/solutii-medicale/${page.slug}`, siteConfig.url).toString(),
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: page.pillar === "service-maintenance" ? 0.89 : 0.9,
   }));
 
   const articleRoutes = articles.map((article) => ({
@@ -149,6 +159,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...serviceRoutes,
     ...commercialRoutes,
+    ...revenueRoutes,
     ...serviceFunnelRoutes,
     ...planningRoutes,
     ...calculatorRoutes,

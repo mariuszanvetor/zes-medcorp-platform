@@ -1,7 +1,9 @@
-import { OpenZESButton } from "@/components/ai/OpenZESButton";
+import Link from "next/link";
+
 import { TrackedButtonLink } from "@/components/analytics/TrackedButtonLink";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { companyContact } from "@/lib/brand";
 
 export function FinalCTASection() {
   return (
@@ -9,51 +11,36 @@ export function FinalCTASection() {
       <Container>
         <div className="mx-auto max-w-5xl rounded-[2rem] bg-[linear-gradient(135deg,#f8fbff,#edf5ff)] px-8 py-14 text-center shadow-[0_30px_100px_rgba(0,87,184,0.12)] sm:px-14">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#0057b8]">
-            Urmatorul pas
+            Contact
           </p>
           <h2 className="mx-auto mt-6 max-w-3xl text-4xl font-semibold leading-tight text-balance text-slate-950 sm:text-5xl">
-            Porneste cu datele corecte inainte de buget, achizitii si executie.
+            Ai un proiect, o achizitie sau o problema de service?
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-            Trimite contextul proiectului si discuta cu ZES sau cu echipa tehnica pentru o directie preliminara clara.
+            Trimite contextul catre ZESCORP si echipa tehnica revine cu directia potrivita.
           </p>
           <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
-            <OpenZESButton
-              className="rounded-full px-7"
-              ctaLabel="Discuta cu ZES final"
-              prompt="Am nevoie de directie pentru proiect medical si evaluare preliminara"
-              size="lg"
-              sourcePage="/"
-            >
-              Discuta cu ZES
-            </OpenZESButton>
             <TrackedButtonLink
-              className="rounded-full border-blue-200 px-7 text-[#0057b8]"
+              className="rounded-full px-7"
               href="/contact"
               size="lg"
               tracking={{
-                ctaLabel: "Solicita evaluare tehnica",
+                ctaLabel: "Contact final homepage",
                 destination: "/contact",
                 sourcePage: "/",
               }}
-              variant="secondary"
+              variant="primary"
             >
-              Solicita evaluare tehnica
+              Solicita evaluare
             </TrackedButtonLink>
-          </div>
-          <div className="mx-auto mt-10 grid max-w-3xl gap-3 text-left sm:grid-cols-3">
-            {[
-              "Infrastructura + aparatura",
-              "Radiologie, RF si radioprotectie",
-              "Service si continuitate operationala",
-            ].map((item) => (
-              <div
-                className="rounded-2xl border border-blue-100 bg-white/78 p-4 text-sm font-semibold leading-6 text-slate-700"
-                key={item}
-              >
-                {item}
-              </div>
-            ))}
+            <Link
+              className="inline-flex h-12 items-center justify-center rounded-full border border-blue-200 bg-white px-7 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50"
+              data-cta="email"
+              data-page-intent="homepage"
+              href={companyContact.emailHref}
+            >
+              {companyContact.email}
+            </Link>
           </div>
         </div>
       </Container>

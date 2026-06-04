@@ -6,16 +6,16 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 
 const navigationLinks: MobileNavLink[] = [
-  { label: "Servicii", href: "/services" },
-  { label: "Instrumente", href: "/#ai-tools" },
-  { label: "Knowledge Hub", href: "/knowledge-hub" },
-  { label: "Proiecte", href: "/projects" },
-  { label: "Despre", href: "/about" },
+  { label: "Services", href: "/solutii-medicale" },
+  { label: "Equipment", href: "/solutii-medicale/echipamente-imagistica-diagnostic" },
+  { label: "Service", href: "/solutii-medicale/service-echipamente-medicale" },
+  { label: "Projects", href: "/projects" },
+  { label: "Resources", href: "/resources" },
   { label: "Contact", href: "/contact" },
 ];
 
-const ctaHref = "/ai-discovery";
-const ctaLabel = "AI Discovery";
+const ctaHref = "/contact";
+const ctaLabel = "Contact";
 
 export function Header() {
   return (

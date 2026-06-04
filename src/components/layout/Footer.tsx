@@ -6,46 +6,25 @@ import { Container } from "@/components/ui/Container";
 import { companyContact } from "@/lib/brand";
 
 const serviceLinks = [
-  { label: "Service aparatura medicala", href: "/service-aparatura-medicala" },
-  { label: "Radioprotectie / plumbare RX", href: "/radioprotectie-plumbare-rx" },
-  { label: "Amenajare centre imagistica", href: "/amenajare-centre-imagistica" },
-  { label: "Proiectare radiologie", href: "/proiectare-radiologie" },
-  { label: "Autorizare CNCAN camera RX", href: "/autorizare-cncan-camera-rx" },
-  { label: "Service radiologie Romania", href: "/service-radiologie-romania" },
-  { label: "Plumbare radiologica", href: "/plumbare-radiologica" },
-  { label: "Proiectare camera RMN", href: "/servicii/proiectare-camera-rmn" },
-  { label: "Proiectare camera CT", href: "/servicii/proiectare-camera-ct" },
-  { label: "RF shielding pentru RMN", href: "/servicii/rf-shielding-rmn" },
-  { label: "Radioprotectie pentru imagistica", href: "/servicii/radioprotectie-imagistica" },
-  { label: "Modernizare clinica medicala", href: "/servicii/modernizare-clinica-medicala" },
+  { label: "Services", href: "/solutii-medicale" },
+  { label: "Medical Infrastructure", href: "/solutii-medicale/dezvoltare-unitati-medicale" },
+  { label: "Medical Equipment", href: "/solutii-medicale/echipamente-imagistica-diagnostic" },
+  { label: "Service & Maintenance", href: "/solutii-medicale/service-echipamente-medicale" },
 ];
 
-const aiToolLinks = [
+const resourceLinks = [
+  { label: "Resources", href: "/resources" },
+  { label: "Tools", href: "/resources" },
   { label: "AI Discovery", href: "/ai-discovery" },
-  { label: "Calculatoare medicale", href: "/calculatoare" },
-  { label: "Comparatii tehnice", href: "/comparatii" },
-  { label: "Planificare proiect", href: "/planificare" },
   { label: "Proposal Builder", href: "/proposal-builder" },
-  { label: "Project Intake ZES", href: "/project-intake" },
-  { label: "Calculator proiect medical", href: "/calculator-proiect-medical" },
-  { label: "Radiology Room Planner", href: "/radiology-room-planner" },
-  { label: "Service Diagnostic", href: "/service-diagnostic" },
-  { label: "Analiza preliminara", href: "/ai-project-advisor" },
-];
-
-const knowledgeLinks = [
+  { label: "Project Intake", href: "/project-intake" },
+  { label: "Calculators", href: "/calculatoare" },
   { label: "Knowledge Hub", href: "/knowledge-hub" },
-  { label: "Glosar medical", href: "/glosar" },
-  { label: "Planificare proiect", href: "/planificare" },
-  { label: "Comparatii tehnice", href: "/comparatii" },
-  { label: "Ghiduri tehnice", href: "/knowledge-hub#ghiduri-tehnice" },
-  { label: "Autorizari", href: "/knowledge-hub#autorizari" },
 ];
 
 const companyLinks = [
-  { label: "Companie", href: "/companie" },
-  { label: "Despre ZES", href: "/about" },
-  { label: "Proiecte", href: "/projects" },
+  { label: "Projects", href: "/projects" },
+  { label: "Company", href: "/companie" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -54,14 +33,12 @@ const legalLinks = [
   { label: "Termeni", href: "/terms" },
   { label: "Cookies", href: "/cookie-policy" },
   { label: "GDPR", href: "/gdpr" },
-  { label: "Disclaimer", href: "/disclaimer" },
 ];
 
 const linkGroups = [
-  { title: "Servicii comerciale", links: serviceLinks },
-  { title: "Instrumente", links: aiToolLinks },
-  { title: "Resurse", links: knowledgeLinks },
-  { title: "Companie", links: companyLinks },
+  { title: "Services", links: serviceLinks },
+  { title: "Resources / Tools", links: resourceLinks },
+  { title: "Company", links: companyLinks },
   { title: "Legal", links: legalLinks },
 ];
 
@@ -100,12 +77,12 @@ export function Footer() {
             </div>
             <div className="mt-6">
               <Button href="/contact" size="sm" variant="outline">
-                Solicita evaluare tehnica
+                Solicita evaluare
               </Button>
             </div>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {linkGroups.map((group) => (
               <nav aria-label={group.title} key={group.title}>
                 <h2 className="text-xs font-semibold uppercase leading-none text-cyan-100">
@@ -113,7 +90,7 @@ export function Footer() {
                 </h2>
                 <ul className="mt-4 space-y-3">
                   {group.links.map((link) => (
-                    <li key={link.href}>
+                    <li key={link.href + link.label}>
                       <Link
                         className="text-sm leading-6 text-slate-400 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
                         href={link.href}
@@ -130,7 +107,7 @@ export function Footer() {
 
         <div className="flex flex-col gap-3 border-t border-white/10 py-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            &copy; {currentYear} {companyContact.legalName}. CUI {companyContact.cui} · Reg. Com.{" "}
+            &copy; {currentYear} {companyContact.legalName}. CUI {companyContact.cui} - Reg. Com.{" "}
             {companyContact.tradeRegister}
           </p>
           <div className="flex gap-4">

@@ -12,8 +12,8 @@ export function CommercialEntrySection() {
       <Container>
         <SectionHeading
           eyebrow="Solicitări comerciale"
-          title="Pornește rapid de la situația concretă a clinicii."
-          description="Alege traseul relevant sau descrie direct contextul către ZES. Primești o listă clară de informații necesare pentru evaluare, service sau ofertare."
+          title="Trasee rapide pentru proiecte de imagistică și radioprotecție."
+          description="Pentru nevoi RX, CT, RMN și service radiologie, poți porni direct dintr-un traseu specializat. Pentru echipamente, laborator și mentenanță, consultă hub-ul complet."
         />
         <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
           {commercialLandingPages.map((page) => (
@@ -36,7 +36,7 @@ export function CommercialEntrySection() {
             </Link>
           ))}
         </div>
-        <div className="mt-6">
+        <div className="mt-6 flex flex-wrap gap-3">
           <OpenZESButton
             ctaLabel="Discuta cu ZES comercial"
             dataCta="zes-open"
@@ -46,6 +46,12 @@ export function CommercialEntrySection() {
           >
             Discută direct cu ZES
           </OpenZESButton>
+          <Link
+            className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-200 bg-white px-5 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50"
+            href="/solutii-medicale"
+          >
+            Vezi toate soluțiile
+          </Link>
         </div>
       </Container>
     </Section>

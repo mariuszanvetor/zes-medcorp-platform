@@ -15,7 +15,15 @@
     "leads:dedupe": "node scripts/lead-research/cli.mjs dedupe",
     "leads:report": "node scripts/lead-research/cli.mjs report",
     "leads:test": "node scripts/lead-research/test.mjs",
-    "leads:auto": "node scripts/lead-research/auto-discovery.mjs"
+    "leads:auto": "node scripts/lead-research/auto-discovery.mjs",
+    "outreach:review": "node scripts/outreach/cli.mjs review",
+    "outreach:draft": "node scripts/outreach/cli.mjs draft",
+    "outreach:export": "node scripts/outreach/export-workbook.mjs",
+    "outreach:followups": "node scripts/outreach/cli.mjs followups",
+    "outreach:status": "node scripts/outreach/cli.mjs status",
+    "outreach:test": "node scripts/outreach/test.mjs",
+    "qualification:export": "node scripts/commercial-qualification/export-workbook.mjs",
+    "qualification:test": "node scripts/commercial-qualification/test.mjs"
   },
   "dependencies": {
     "next": "16.2.6",

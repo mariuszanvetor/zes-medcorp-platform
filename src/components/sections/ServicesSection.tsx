@@ -3,87 +3,59 @@ import Link from "next/link";
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { getRevenueLandingGroups } from "@/data/revenue-landing-pages";
 
-const services = [
-  {
-    title: "Constructii & amenajari medicale",
-    description:
-      "Spatii medicale proiectate pentru fluxuri, autorizari, echipamente si operare pe termen lung.",
-    href: "/services/constructii-medicale",
-  },
-  {
-    title: "Radiologie & camere imagistica",
-    description:
-      "Camere CT, RMN si RX coordonate cu furnizorii, instalatiile, layout-ul si service-ul.",
-    href: "/services/radiologie",
-  },
-  {
-    title: "RF shielding pentru RMN",
-    description:
-      "Cusca Faraday, usi RF, waveguides, filtre si integritate electromagnetica pentru MRI.",
-    href: "/services/rf-shielding",
-  },
-  {
-    title: "Protectie radiologica / plumb",
-    description:
-      "Ecranare cu plumb pentru CT/RX: pereti, usi, sticla plumbata, zone controlate si CNCAN.",
-    href: "/services/protectie-radiologica",
-  },
-  {
-    title: "Aparatura medicala",
-    description:
-      "Selectie, vanzare, integrare si punere in functiune pentru echipamente medicale.",
-    href: "/services/aparatura-medicala",
-  },
-  {
-    title: "Imagistica medicala",
-    description:
-      "CT, RMN, RX, ecografie si infrastructura necesara pentru performanta si uptime.",
-    href: "/services/imagistica-medicala",
-  },
-  {
-    title: "IVD / laborator",
-    description:
-      "Echipamente de laborator, consumabile, fluxuri tehnice, integrare si mentenanta.",
-    href: "/services/ivd-laborator",
-  },
-  {
-    title: "Service & mentenanta",
-    description:
-      "Service specializat, mentenanta preventiva si suport pentru continuitate operationala.",
-    href: "/services/service-aparatura-medicala",
-  },
-];
+const primaryPillarHref = {
+  "medical-infrastructure": "/solutii-medicale/dezvoltare-unitati-medicale",
+  "medical-equipment": "/solutii-medicale/echipamente-imagistica-diagnostic",
+  "service-maintenance": "/solutii-medicale/service-echipamente-medicale",
+} as const;
+
+const audienceByPillar = {
+  "medical-infrastructure": "clinici noi, modernizari, camere CT/RMN/RX si laboratoare.",
+  "medical-equipment": "achizitii, dotari, extinderi si integrare echipamente.",
+  "service-maintenance": "interventii, contracte de mentenanta, relocari si suport tehnic.",
+} as const;
 
 export function ServicesSection() {
+  const groups = getRevenueLandingGroups();
+
   return (
     <Section className="bg-[#f7fafc]" spacing="xl" tone="transparent">
       <Container>
         <SectionHeading
           align="center"
           className="mx-auto"
-          eyebrow="Servicii ZES"
-          title="Pilonii tehnici ai unui proiect medical bine coordonat."
-          description="Servicii separate, dar planificate impreuna: infrastructura, aparatura, imagistica, laborator, service, RF shielding pentru RMN si protectie radiologica pentru CT/RX."
+          eyebrow="Ce vindem"
+          title="Trei directii clare pentru proiectul tau medical."
+          description="Alege zona potrivita: infrastructura, echipamente sau service. Fiecare pagina explica cui se adreseaza, ce include si cum poti cere evaluare."
         />
-        <div className="mt-16 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {services.map((service) => (
+        <div className="mt-14 grid gap-6 lg:grid-cols-3">
+          {groups.map((group) => (
             <article
-              className="group flex min-h-[280px] flex-col rounded-[1.4rem] border border-slate-200/80 bg-white p-7 shadow-[0_20px_70px_rgba(15,23,42,0.055)] transition duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_32px_90px_rgba(0,87,184,0.12)] sm:p-8"
-              key={service.title}
+              className="flex min-h-[360px] flex-col rounded-2xl border border-slate-200/80 bg-white p-7 shadow-[0_20px_70px_rgba(15,23,42,0.055)] sm:p-8"
+              key={group.pillar}
             >
               <div className="h-1 w-12 rounded-full bg-[#0057b8]" />
-              <h3 className="mt-8 text-2xl font-semibold leading-tight text-slate-950">
-                {service.title}
-              </h3>
-              <p className="mt-5 flex-1 text-base leading-7 text-slate-600">
-                {service.description}
-              </p>
+              <h2 className="mt-7 text-2xl font-semibold leading-tight text-slate-950">
+                {group.label}
+              </h2>
+              <p className="mt-4 text-sm leading-7 text-slate-600">{group.description}</p>
+              <div className="mt-6 rounded-xl bg-[#f8fbff] p-4 text-sm leading-7 text-slate-700">
+                <p>
+                  <span className="font-semibold text-slate-950">Pentru:</span>{" "}
+                  {audienceByPillar[group.pillar]}
+                </p>
+                <p className="mt-2">
+                  <span className="font-semibold text-slate-950">Include:</span>{" "}
+                  {group.items.slice(0, 3).map((item) => item.eyebrow).join(", ")}.
+                </p>
+              </div>
               <Link
-                className="mt-8 inline-flex text-sm font-bold text-[#0057b8] transition group-hover:translate-x-1 group-hover:text-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                href={service.href}
+                className="mt-auto inline-flex h-11 items-center justify-center rounded-xl bg-[#0057b8] px-5 text-sm font-bold text-white transition hover:bg-blue-800"
+                href={primaryPillarHref[group.pillar]}
               >
-                Detalii →
+                Vezi detalii
               </Link>
             </article>
           ))}

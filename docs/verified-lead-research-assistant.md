@@ -197,3 +197,20 @@ Seed-ul Phase 81A importa exclusiv contacte business publice verificate manual d
 
 Pentru providerii configurabili, skip persistent pe domenii si auditul fiecarui candidat foloseste
 [`docs/autonomous-lead-discovery-engine.md`](./autonomous-lead-discovery-engine.md).
+
+## Phase 83A: outreach controlat
+
+Pentru statusuri operationale, aprobare umana, drafturi personalizate si workbook-ul de trimitere manuala foloseste
+[`docs/outreach-operating-system.md`](./outreach-operating-system.md).
+
+## Phase 83B: calificare comerciala
+
+Pentru ranking orientat spre contracte, separarea competitorilor/distribuitorilor si lista `Send First` foloseste:
+
+```powershell
+npm run qualification:test
+npm run qualification:export
+```
+
+Motorul este read-only fata de baza persistenta. Ghid:
+[`docs/commercial-qualification-engine.md`](./commercial-qualification-engine.md).

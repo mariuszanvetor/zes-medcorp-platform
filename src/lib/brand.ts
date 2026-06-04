@@ -30,7 +30,7 @@ export const companyContact = {
     full: "Str. Nazuintei nr. 11B, Bragadiru, Ilfov",
   },
   positioning:
-    "Infrastructura de imagistica medicala, RF shielding, radioprotectie, modernizare medicala, planificare si suport de implementare.",
+    "Infrastructura medicala, echipamente, imagistica, laborator, RF shielding, radioprotectie, service si mentenanta pentru proiecte medicale.",
 };
 
 export const futureBrandAssets = {
