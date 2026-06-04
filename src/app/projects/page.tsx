@@ -7,92 +7,86 @@ import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
+import { companyContact } from "@/lib/brand";
 import { createWebsiteMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createWebsiteMetadata({
-  title: "Proiecte și capabilități tehnice | ZES MEDCORP",
+  title: "Proiecte si capabilitati tehnice | ZES MEDCORP",
   description:
-    "Exemple de tipuri de proiecte medicale în care ZES poate asigura infrastructură, aparatură, radiologie, RF shielding, protecție radiologică, IVD și service.",
+    "Tipuri de proiecte medicale in care ZESCORP poate sustine infrastructura, aparatura, radiologie, RF shielding, protectie radiologica, IVD si service.",
   path: "/projects",
   keywords: [
     "proiecte medicale",
-    "capabilități tehnice medicale",
-    "cameră RMN RF shielding",
-    "cameră CT protecție radiologică",
+    "capabilitati tehnice medicale",
+    "camera RMN RF shielding",
+    "camera CT protectie radiologica",
     "laborator IVD",
-    "service aparatură medicală",
+    "service aparatura medicala",
   ],
 });
 
-const filters = [
-  "Infrastructură",
-  "Radiologie",
-  "Shielding",
-  "Aparatură",
-  "IVD",
-  "Service",
-];
+const filters = ["Infrastructura", "Radiologie", "Shielding", "Aparatura", "IVD", "Service"];
 
 const projectScenarios = [
   {
-    type: "Clinică medicală turnkey",
-    category: "Infrastructură",
+    type: "Clinica medicala turnkey",
+    category: "Infrastructura",
     challenge:
-      "Coordonarea spațiului, fluxurilor, DSP, aparaturii, instalațiilor și service-ului într-un proiect coerent.",
+      "Coordonarea spatiului, fluxurilor, autorizatiilor, aparaturii, instalatiilor si service-ului intr-un proiect coerent.",
     role:
-      "ZES poate asigura analiză tehnică, coordonare de infrastructură, integrare aparatură și pași de planificare turnkey.",
-    services: ["Construcții medicale", "Amenajări medicale", "Aparatură medicală"],
-    cta: { label: "Analiză preliminară", href: "/ai-project-advisor" },
+      "ZESCORP poate sustine analiza tehnica, coordonarea de infrastructura, integrarea aparaturii si planificarea etapelor.",
+    services: ["Constructii medicale", "Amenajari medicale", "Aparatura medicala"],
+    cta: { label: "Solicita evaluare", href: "/contact" },
   },
   {
-    type: "Cameră RMN cu RF shielding",
+    type: "Camera RMN cu RF shielding",
     category: "Shielding",
     challenge:
-      "Integrarea cuștii Faraday, ușilor RF, filtrelor, waveguides, penetrărilor, HVAC-ului și cerințelor echipamentului.",
+      "Integrarea RF shielding, usilor RF, filtrelor, penetrarilor, HVAC-ului si cerintelor echipamentului.",
     role:
-      "ZES separă logica RMN/RF de protecția radiologică și coordonează cerințele camerei cu furnizorul echipamentului.",
-    services: ["RF shielding", "Radiologie", "Imagistică medicală"],
-    cta: { label: "Planifică camera", href: "/radiology-room-planner" },
+      "ZESCORP separa logica RMN/RF de protectia radiologica si coordoneaza cerintele camerei cu furnizorul echipamentului.",
+    services: ["RF shielding", "Imagistica medicala", "Infrastructura RMN"],
+    cta: { label: "Planifica camera", href: "/solutii-medicale/camere-rmn" },
   },
   {
-    type: "Cameră CT / RX cu protecție radiologică",
+    type: "Camera CT / RX cu protectie radiologica",
     category: "Radiologie",
     challenge:
-      "Planificarea protecției radiologice, ușilor, sticlei, zonelor controlate, CNCAN și fluxului operator-pacient.",
+      "Planificarea protectiei radiologice, usilor, sticlei, zonelor controlate si fluxului operator-pacient.",
     role:
-      "ZES poate susține analiza tehnică a camerei, separarea cerințelor CT/RX de RF shielding și coordonarea cu autorizările.",
-    services: ["Radiologie", "Protecție radiologică", "Amenajări medicale"],
-    cta: { label: "Planificați camera", href: "/radiology-room-planner" },
+      "ZESCORP poate sustine analiza tehnica a camerei, radioprotectia si pregatirea contextului pentru autorizare si ofertare.",
+    services: ["Radioprotectie", "Camere CT", "Amenajari medicale"],
+    cta: { label: "Vezi solutii CT", href: "/solutii-medicale/camere-ct" },
   },
   {
-    type: "Integrare aparatură imagistică",
-    category: "Aparatură",
+    type: "Integrare aparatura imagistica",
+    category: "Aparatura",
     challenge:
-      "Corelarea echipamentului cu spațiul, alimentarea, datele, HVAC-ul, accesul de montaj, service-ul și mentenanța.",
+      "Corelarea echipamentului cu spatiul, alimentarea, datele, HVAC-ul, accesul de montaj, service-ul si mentenanta.",
     role:
-      "ZES poate conecta achiziția, integrarea și service-ul aparaturii cu infrastructura pregătită pentru operare.",
-    services: ["Aparatură medicală", "Imagistică medicală", "Service specializat"],
-    cta: { label: "Estimare orientativă", href: "/calculator-proiect-medical" },
+      "ZESCORP conecteaza achizitia si integrarea aparaturii cu infrastructura pregatita pentru operare.",
+    services: ["Aparatura medicala", "Imagistica medicala", "Service specializat"],
+    cta: { label: "Vezi echipamente", href: "/solutii-medicale/echipamente-imagistica-diagnostic" },
   },
   {
     type: "Laborator / IVD",
     category: "IVD",
     challenge:
-      "Planificarea fluxurilor de probe, echipamentelor IVD, consumabilelor, calibrării, QC și service-ului.",
+      "Planificarea fluxurilor de probe, echipamentelor IVD, consumabilelor, calibrarii, QC si service-ului.",
     role:
-      "ZES poate susține alegerea și integrarea echipamentelor de laborator într-un spațiu pregătit pentru continuitate operațională.",
-    services: ["IVD / laborator", "Aparatură medicală", "Service specializat"],
-    cta: { label: "Discutați cu ZES", href: "/contact" },
+      "ZESCORP sustine alegerea si integrarea echipamentelor de laborator intr-un spatiu pregatit pentru continuitate operationala.",
+    services: ["IVD / laborator", "Aparatura medicala", "Service specializat"],
+    cta: { label: "Vezi IVD", href: "/solutii-medicale/echipamente-laborator-ivd" },
   },
   {
-    type: "Service și mentenanță aparatură",
+    type: "Service si mentenanta aparatura",
     category: "Service",
     challenge:
-      "Reducerea downtime-ului, documentarea intervențiilor, planificarea mentenanței și trierea problemelor tehnice.",
+      "Reducerea downtime-ului, documentarea interventiilor, planificarea mentenantei si trierea problemelor tehnice.",
     role:
-      "ZES poate sprijini evaluarea service, diagnosticarea inițială, mentenanța preventivă și recomandări pentru continuitate operațională.",
-    services: ["Service aparatură medicală", "Aparatură medicală", "IVD / laborator"],
-    cta: { label: "Evaluare service", href: "/service-diagnostic" },
+      "ZESCORP poate sprijini evaluarea service, mentenanta preventiva si recomandari pentru continuitate operationala.",
+    services: ["Service aparatura medicala", "Mentenanta", "Suport tehnic"],
+    cta: { label: "Solicita service", href: "/solutii-medicale/service-echipamente-medicale" },
   },
 ];
 
@@ -101,7 +95,7 @@ export default function ProjectsPage() {
     <>
       <BreadcrumbSchema
         items={[
-          { name: "Acasă", href: "/" },
+          { name: "Acasa", href: "/" },
           { name: "Proiecte", href: "/projects" },
         ]}
       />
@@ -113,14 +107,20 @@ export default function ProjectsPage() {
       >
         <Container>
           <div className="mx-auto max-w-5xl text-center">
-            <Eyebrow tone="graphite">Capabilități tehnice</Eyebrow>
+            <Eyebrow tone="graphite">Capabilitati tehnice</Eyebrow>
             <h1 className="mt-7 text-5xl font-semibold leading-[1.03] text-balance text-slate-950 sm:text-6xl">
-              Proiecte și capabilități tehnice
+              Proiecte si capabilitati tehnice
             </h1>
             <p className="mx-auto mt-7 max-w-3xl text-xl leading-9 text-slate-600">
-              Exemple de tipuri de proiecte medicale în care ZES poate asigura
-              infrastructură, aparatură, ecranare, integrare și service.
+              Exemple de proiecte medicale in care ZESCORP poate sustine
+              infrastructura, aparatura, ecranare, integrare si service.
             </p>
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+              <Button href="/contact">Solicita evaluare</Button>
+              <Button href={companyContact.phoneHref} variant="secondary">
+                {companyContact.phone}
+              </Button>
+            </div>
           </div>
 
           <div className="mx-auto mt-12 flex max-w-4xl flex-wrap justify-center gap-2">
@@ -145,12 +145,11 @@ export default function ProjectsPage() {
                 Scenarii tehnice
               </p>
               <h2 className="mt-5 text-4xl font-semibold leading-tight text-slate-950">
-                Tipuri de proiecte, fără nume inventate, logo-uri false sau
-                studii de caz fabricate.
+                Tipuri de proiecte, fara nume inventate, logo-uri false sau studii de caz fabricate.
               </h2>
             </div>
             <Button href="/contact" variant="secondary">
-              Solicitați consultanță
+              Solicitati consultanta
             </Button>
           </div>
 
@@ -175,7 +174,7 @@ export default function ProjectsPage() {
                 </h3>
                 <div className="mt-6 grid gap-5">
                   <InfoBlock label="Challenge" text={project.challenge} />
-                  <InfoBlock label="Rol ZES" text={project.role} />
+                  <InfoBlock label="Rol ZESCORP" text={project.role} />
                 </div>
                 <div className="mt-7 flex flex-wrap gap-2">
                   {project.services.map((service) => (
@@ -201,29 +200,28 @@ export default function ProjectsPage() {
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#0057b8]">
-                Principiu de încredere
+                Principiu de incredere
               </p>
               <h2 className="mt-5 text-4xl font-semibold leading-tight text-slate-950">
-                Încredere fără ficțiune comercială.
+                Incredere fara fictiune comerciala.
               </h2>
               <p className="mt-5 text-base leading-8 text-slate-600">
-                Această pagină prezintă capabilități și scenarii de proiect, nu
-                portofoliu cu nume de clienți sau rezultate inventate. Scopul este
-                să vezi unde se potrivește ZES într-un proiect medical real.
+                Aceasta pagina prezinta capabilitati si scenarii de proiect, nu
+                portofoliu cu nume de clienti sau rezultate inventate.
               </p>
             </div>
             <Card className="border-blue-100 bg-white" padding="lg">
               <h3 className="text-2xl font-semibold leading-tight text-slate-950">
-                Următorul pas
+                Urmatorul pas
               </h3>
               <p className="mt-4 text-base leading-8 text-slate-600">
-                Alege un scenariu, deschide instrumentul relevant sau discută direct cu
-                ZES pentru a transforma capabilitatea într-un brief tehnic aplicat.
+                Alege un scenariu sau trimite direct contextul catre ZESCORP pentru
+                o discutie tehnica aplicata.
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <Button href="/ai-project-advisor">Analiză preliminară</Button>
-                <Button href="/contact" variant="secondary">
-                  Discutați cu ZES
+                <Button href="/contact">Solicita evaluare</Button>
+                <Button href={companyContact.emailHref} variant="secondary">
+                  {companyContact.email}
                 </Button>
               </div>
             </Card>
