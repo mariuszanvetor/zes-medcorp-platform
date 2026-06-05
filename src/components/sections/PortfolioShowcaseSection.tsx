@@ -3,6 +3,7 @@ import Image from "next/image";
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { corporateVisuals } from "@/lib/visual-assets";
 
 type PortfolioItem = {
   title: string;
@@ -11,6 +12,7 @@ type PortfolioItem = {
   challenge: string;
   delivered: string;
   summary: string;
+  imageSrc: string;
   imagePosition?: string;
 };
 
@@ -22,6 +24,7 @@ const projects: PortfolioItem[] = [
     challenge: "Spatiu limitat, vecinatati sensibile, termen de implementare strans.",
     delivered: "Evaluare preliminara, configurare protectie radiologica si plan de executie etapizat.",
     summary: "Proiect orientat pe continuitate operationala si claritate pentru etapa de ofertare.",
+    imageSrc: corporateVisuals.radiationProtection.src,
     imagePosition: "object-[60%_40%]",
   },
   {
@@ -31,6 +34,7 @@ const projects: PortfolioItem[] = [
     challenge: "Corelare intre spatiu, utilitati, flux pacienti si cerinte tehnice ale echipamentului.",
     delivered: "Structurare context tehnic, suport pentru documentatie si plan de implementare infrastructura.",
     summary: "Focus pe reducerea riscurilor de reconfigurare dupa instalare.",
+    imageSrc: corporateVisuals.ctRoom.src,
     imagePosition: "object-[45%_45%]",
   },
   {
@@ -40,6 +44,7 @@ const projects: PortfolioItem[] = [
     challenge: "Downtime critic si lipsa unui flux clar de triere service.",
     delivered: "Triage preliminar, priorizare interventie, plan de suport tehnic si recomandari de mentenanta.",
     summary: "Abordare orientata pe revenire rapida in exploatare si stabilitate ulterioara.",
+    imageSrc: corporateVisuals.service.src,
     imagePosition: "object-[50%_35%]",
   },
   {
@@ -49,6 +54,7 @@ const projects: PortfolioItem[] = [
     challenge: "Integrarea noilor functionalitati fara blocarea completa a activitatii.",
     delivered: "Planificare pe faze, clarificari tehnice si suport in configurarea spatiilor critice.",
     summary: "Flux construit pentru decizii realiste de buget, calendar si operational.",
+    imageSrc: corporateVisuals.projects.src,
     imagePosition: "object-[55%_50%]",
   },
 ];
@@ -72,7 +78,7 @@ export function PortfolioShowcaseSection() {
                   className={`object-cover ${project.imagePosition ?? ""}`}
                   fill
                   sizes="(min-width: 1024px) 50vw, 100vw"
-                  src="/hero-medical-tech.png"
+                  src={project.imageSrc}
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(7,20,35,0.54)_0%,rgba(7,20,35,0.15)_70%)]" />
                 <div className="absolute left-4 top-4 rounded-lg border border-white/35 bg-white/90 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.09em] text-slate-700">

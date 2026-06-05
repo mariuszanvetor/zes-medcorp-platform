@@ -15,9 +15,11 @@ import {
   type RevenueLandingPage as RevenueLandingPageData,
 } from "@/data/revenue-landing-pages";
 import { companyContact } from "@/lib/brand";
+import { getRevenueLandingVisual } from "@/lib/visual-assets";
 
 export function RevenueLandingPage({ page }: { page: RevenueLandingPageData }) {
   const sourcePage = `/solutii-medicale/${page.slug}`;
+  const visual = getRevenueLandingVisual(page.slug);
 
   return (
     <>
@@ -44,13 +46,12 @@ export function RevenueLandingPage({ page }: { page: RevenueLandingPageData }) {
           tone="transparent"
         >
           <Image
-            alt=""
-            aria-hidden
-            className="object-cover object-center opacity-40"
+            alt={visual.alt}
+            className={`object-cover opacity-45 ${visual.position ?? "object-center"}`}
             fill
             priority
             sizes="100vw"
-            src="/hero-medical-tech.png"
+            src={visual.src}
           />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,10,25,0.97)_0%,rgba(2,18,38,0.9)_52%,rgba(2,18,38,0.62)_100%)]" />
           <Container className="relative">

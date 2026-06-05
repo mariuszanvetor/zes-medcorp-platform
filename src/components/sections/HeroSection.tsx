@@ -3,6 +3,7 @@ import Image from "next/image";
 import { TrackedButtonLink } from "@/components/analytics/TrackedButtonLink";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { corporateVisuals } from "@/lib/visual-assets";
 
 const trustSignals = [
   "Infrastructura medicala pentru CT, RMN, RX, laborator si clinici.",
@@ -75,29 +76,18 @@ export function HeroSection() {
               </div>
             </div>
 
-            <ul className="mt-7 grid gap-2 text-sm font-semibold leading-6 text-slate-600">
-              {trustSignals.map((signal) => (
-                <li className="flex items-start gap-3" key={signal}>
-                  <span
-                    aria-hidden="true"
-                    className="mt-2 h-1.5 w-1.5 rounded-full bg-[#0057b8]"
-                  />
-                  <span>{signal}</span>
-                </li>
-              ))}
-            </ul>
           </div>
 
           <div className="relative">
             <div className="relative overflow-hidden rounded-2xl border border-blue-100 bg-white p-3 shadow-[0_24px_80px_rgba(15,65,118,0.14)]">
               <div className="relative min-h-[340px] overflow-hidden rounded-xl sm:min-h-[420px] lg:min-h-[520px]">
                 <Image
-                  alt="Infrastructura medicala pentru imagistica, echipamente si integrare tehnica"
-                  className="object-cover"
+                  alt={corporateVisuals.hero.alt}
+                  className={`object-cover ${corporateVisuals.hero.position}`}
                   fill
                   priority
                   sizes="(min-width: 1024px) 52vw, 100vw"
-                  src="/hero-medical-tech.png"
+                  src={corporateVisuals.hero.src}
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,20,35,0.55)_0%,rgba(7,20,35,0.18)_45%,rgba(7,20,35,0.05)_75%)]" />
                 <div className="absolute left-5 top-5 rounded-xl border border-white/30 bg-white/90 p-4 shadow-[0_14px_34px_rgba(15,23,42,0.16)]">
@@ -112,6 +102,18 @@ export function HeroSection() {
             </div>
           </div>
         </div>
+
+        <ul className="mt-8 grid gap-2 text-sm font-semibold leading-6 text-slate-600 lg:grid-cols-3">
+          {trustSignals.map((signal) => (
+            <li className="flex items-start gap-3 rounded-xl border border-blue-100 bg-white/85 px-4 py-3" key={signal}>
+              <span
+                aria-hidden="true"
+                className="mt-2 h-1.5 w-1.5 rounded-full bg-[#0057b8]"
+              />
+              <span>{signal}</span>
+            </li>
+          ))}
+        </ul>
       </Container>
     </Section>
   );

@@ -10,6 +10,7 @@ import { SectionHeading } from "@/components/sections/SectionHeading";
 import { CommercialConversionBand } from "@/components/sections/CommercialConversionBand";
 import { companyContact } from "@/lib/brand";
 import { createWebsiteMetadata } from "@/lib/seo";
+import { corporateVisuals } from "@/lib/visual-assets";
 
 export const metadata: Metadata = createWebsiteMetadata({
   title: "Radioprotectie si plumbare camere RX | ZES MEDCORP",
@@ -179,7 +180,7 @@ export default function RadioprotectiePlumbareRxPage() {
                   className="object-cover object-[55%_45%]"
                   fill
                   sizes="(min-width: 1024px) 60vw, 100vw"
-                  src="/hero-medical-tech.png"
+                  src={corporateVisuals.radiationProtection.src}
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(7,20,35,0.52)_0%,rgba(7,20,35,0.16)_70%)]" />
               </div>

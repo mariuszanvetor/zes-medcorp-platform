@@ -9,6 +9,8 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
 import { companyContact } from "@/lib/brand";
 import { createWebsiteMetadata } from "@/lib/seo";
+import { corporateVisuals } from "@/lib/visual-assets";
+import Image from "next/image";
 
 export const metadata: Metadata = createWebsiteMetadata({
   title: "Proiecte si capabilitati tehnice | ZES MEDCORP",
@@ -101,17 +103,26 @@ export default function ProjectsPage() {
       />
 
       <Section
-        className="overflow-hidden border-b border-blue-100 bg-[linear-gradient(180deg,#ffffff,#f7fbff)]"
+        className="relative isolate overflow-hidden border-b border-blue-100 bg-slate-950"
         spacing="xl"
         tone="transparent"
       >
-        <Container>
+        <Image
+          alt={corporateVisuals.projects.alt}
+          className={`object-cover opacity-45 ${corporateVisuals.projects.position}`}
+          fill
+          priority
+          sizes="100vw"
+          src={corporateVisuals.projects.src}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,10,25,0.96)_0%,rgba(2,18,38,0.86)_48%,rgba(2,18,38,0.48)_100%)]" />
+        <Container className="relative">
           <div className="mx-auto max-w-5xl text-center">
             <Eyebrow tone="graphite">Capabilitati tehnice</Eyebrow>
-            <h1 className="mt-7 text-5xl font-semibold leading-[1.03] text-balance text-slate-950 sm:text-6xl">
+            <h1 className="mt-7 text-5xl font-semibold leading-[1.03] text-balance text-white sm:text-6xl">
               Proiecte si capabilitati tehnice
             </h1>
-            <p className="mx-auto mt-7 max-w-3xl text-xl leading-9 text-slate-600">
+            <p className="mx-auto mt-7 max-w-3xl text-xl leading-9 text-slate-200">
               Exemple de proiecte medicale in care ZESCORP poate sustine
               infrastructura, aparatura, ecranare, integrare si service.
             </p>
@@ -126,7 +137,7 @@ export default function ProjectsPage() {
           <div className="mx-auto mt-12 flex max-w-4xl flex-wrap justify-center gap-2">
             {filters.map((filter) => (
               <a
-                className="rounded-full border border-blue-100 bg-white px-4 py-2 text-sm font-bold text-[#0057b8] shadow-[0_12px_32px_rgba(0,87,184,0.06)] transition hover:border-blue-200 hover:bg-blue-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                className="rounded-full border border-white/25 bg-white/12 px-4 py-2 text-sm font-bold text-white shadow-[0_12px_32px_rgba(0,87,184,0.06)] transition hover:border-white/45 hover:bg-white/18 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 href={`#${filter.toLowerCase().replace(/\s+/g, "-")}`}
                 key={filter}
               >

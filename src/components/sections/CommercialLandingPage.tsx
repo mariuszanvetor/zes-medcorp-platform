@@ -10,6 +10,7 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import type { CommercialLandingPage as CommercialLandingPageData } from "@/data/commercial-landing-pages";
 import { companyContact } from "@/lib/brand";
+import { getCommercialLandingVisual } from "@/lib/visual-assets";
 
 type CommercialLandingPageProps = {
   page: CommercialLandingPageData;
@@ -17,6 +18,7 @@ type CommercialLandingPageProps = {
 
 export function CommercialLandingPage({ page }: CommercialLandingPageProps) {
   const sourcePage = `/${page.slug}`;
+  const visual = getCommercialLandingVisual(page.slug);
 
   return (
     <>
@@ -42,13 +44,12 @@ export function CommercialLandingPage({ page }: CommercialLandingPageProps) {
           tone="transparent"
         >
           <Image
-            alt=""
-            aria-hidden
-            className="object-cover object-center opacity-45"
+            alt={visual.alt}
+            className={`object-cover opacity-50 ${visual.position ?? "object-center"}`}
             fill
             priority
             sizes="100vw"
-            src="/hero-medical-tech.png"
+            src={visual.src}
           />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,10,25,0.96)_0%,rgba(2,18,38,0.88)_48%,rgba(2,18,38,0.52)_100%)]" />
           <Container className="relative">
