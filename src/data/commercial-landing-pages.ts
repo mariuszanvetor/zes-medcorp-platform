@@ -496,6 +496,282 @@ export const commercialLandingPages: CommercialLandingPage[] = [
       { href: "/knowledge-hub/protectie-radiologica-camera-rx", label: "Ghid protecție radiologică pentru camera RX" },
     ],
   },
+  {
+    slug: "amenajare-cabinet-medical",
+    pageIntent: "medical-office-fitout",
+    eyebrow: "Amenajare cabinet medical",
+    title: "Amenajare cabinet medical",
+    description:
+      "Planificare tehnica si comerciala pentru cabinete medicale, policlinici si spatii clinice care au nevoie de fluxuri, instalatii, echipamente si suport de implementare clare.",
+    metadataTitle: "Amenajare cabinet medical | ZES MEDCORP",
+    metadataDescription:
+      "Amenajare cabinet medical: planificare spatiu, fluxuri, instalatii, echipamente, service si pregatire pentru ofertare cu ZESCORP.",
+    keywords: [
+      "amenajare cabinet medical",
+      "amenajare clinica medicala",
+      "proiect cabinet medical",
+      "infrastructura cabinet medical",
+    ],
+    heroNote:
+      "Un cabinet medical eficient se construieste in jurul fluxului clinic, al echipamentelor si al modului in care spatiul va fi operat zilnic.",
+    zesPrompt: "Vreau sa amenajez un cabinet medical",
+    primaryCta: "Discuta cabinetul cu ZES",
+    secondaryCta: "Trimite spatiul pentru evaluare",
+    audienceTitle: "Pentru proprietari si administratori care vor un spatiu medical functional",
+    audienceDescription:
+      "Pagina este potrivita pentru cabinete noi, extinderi de clinica si spatii existente care trebuie adaptate pentru activitate medicala.",
+    audiences: [
+      "Medici care deschid un cabinet sau o policlinica",
+      "Investitori care verifica un spatiu inainte de amenajare",
+      "Administratori care modernizeaza fluxuri si echipamente existente",
+    ],
+    helpTitle: "Ce poate clarifica ZESCORP",
+    helpDescription:
+      "Amenajarea medicala trebuie tratata impreuna cu echipamentele si operarea reala a cabinetului.",
+    helpItems: [
+      "Fluxuri pentru pacienti, personal, receptie si zone tehnice",
+      "Necesitati electrice, HVAC, date si spatii auxiliare",
+      "Integrarea echipamentelor medicale in layout",
+      "Optiuni pentru service, mentenanta si suport post-implementare",
+      "Pregatirea unei cereri coerente pentru ofertare",
+    ],
+    infoTitle: "Informatii utile pentru prima discutie",
+    infoDescription:
+      "Poti incepe cu un plan simplu sau o descriere a spatiului. Detaliile se clarifica progresiv.",
+    requiredInfo: [
+      "Specialitatea sau tipul cabinetului",
+      "Oras si suprafata aproximativa",
+      "Spatiu existent sau amenajare noua",
+      "Echipamente medicale planificate",
+      "Termen si buget orientativ",
+    ],
+    processTitle: "Proces de amenajare medicala",
+    processDescription:
+      "Fluxul separa rapid deciziile de spatiu, echipamente si operare, astfel incat oferta sa fie mai usor de pregatit.",
+    processSteps: [
+      "Discutie initiala",
+      "Evaluare spatiu",
+      "Clarificare echipamente",
+      "Planificare lucrari",
+      "Ofertare si implementare",
+    ],
+    mistakesTitle: "Greseli care merita evitate",
+    mistakes: [
+      "Alegerea finisajelor inainte de amplasarea echipamentelor",
+      "Subestimarea instalatiilor electrice, HVAC si de date",
+      "Lipsa unui plan de service si mentenanta dupa deschidere",
+    ],
+    complianceNote:
+      "Cerintele finale depind de specialitate, echipamente, amplasament si reglementarile aplicabile. Validarea se face cu specialistii competenti.",
+    faqs: [
+      {
+        question: "Se poate incepe fara proiect final?",
+        answer:
+          "Da. O evaluare preliminara poate identifica informatiile lipsa si pasii necesari pentru planificare si ofertare.",
+      },
+      {
+        question: "ZESCORP poate ajuta si cu echipamentele?",
+        answer:
+          "Da, pagina poate conecta amenajarea cu selectia, instalarea si service-ul echipamentelor medicale relevante.",
+      },
+      {
+        question: "Este acelasi lucru cu amenajarea unui centru de imagistica?",
+        answer:
+          "Nu. Centrele de imagistica au cerinte suplimentare pentru RX, CT, RMN, radioprotectie sau RF shielding.",
+      },
+    ],
+    relatedLinks: [
+      { href: "/solutii-medicale/dezvoltare-unitati-medicale", label: "Dezvoltare unitati medicale" },
+      { href: "/amenajare-centre-imagistica", label: "Amenajare centre imagistica" },
+      { href: "/solutii-medicale/echipamente-imagistica-diagnostic", label: "Echipamente medicale" },
+      { href: "/contracte-mentenanta", label: "Contracte mentenanta" },
+      { href: "/contact", label: "Contact ZESCORP" },
+    ],
+  },
+  {
+    slug: "service-ecografe",
+    pageIntent: "ultrasound-service",
+    eyebrow: "Service ecografe",
+    title: "Service ecografe",
+    description:
+      "Service si mentenanta pentru ecografe stationare sau portabile, sonde si accesorii, cu triere rapida pentru defecte care afecteaza activitatea cabinetului.",
+    metadataTitle: "Service ecografe | ZES MEDCORP",
+    metadataDescription:
+      "Service ecografe si sonde: triere defecte, mentenanta, suport tehnic, evaluare preliminara si solicitare service prin ZESCORP.",
+    keywords: [
+      "service ecografe",
+      "mentenanta ecograf",
+      "reparatii ecograf",
+      "service sonde ecograf",
+    ],
+    heroNote:
+      "Ecografele sunt echipamente folosite zilnic. O defectiune de sonda, display sau alimentare poate bloca rapid activitatea cabinetului.",
+    zesPrompt: "Am nevoie de service pentru un ecograf",
+    primaryCta: "Solicita service ecograf",
+    secondaryCta: "Trimite cazul pentru triere",
+    audienceTitle: "Pentru clinici care depind de ecografie zilnic",
+    audienceDescription:
+      "Pagina este utila pentru defecte active, mentenanta preventiva si evaluarea unui parc de ecografe.",
+    audiences: [
+      "Cabinete de ecografie si imagistica",
+      "Clinici de cardiologie, ginecologie sau medicina interna",
+      "Administratori cu mai multe ecografe sau sonde critice",
+    ],
+    helpTitle: "Ce poate include evaluarea",
+    helpDescription:
+      "Triage-ul porneste de la simptom si de la impactul operational, nu de la o presupunere de reparatie.",
+    helpItems: [
+      "Identificare marca, model si configuratie",
+      "Simptome de pornire, display, imagine sau sonda",
+      "Evaluare accesorii, cabluri si sonde disponibile",
+      "Recomandare pentru interventie sau mentenanta recurenta",
+      "Pregatirea cererii pentru preluare tehnica",
+    ],
+    infoTitle: "Date utile pentru service",
+    infoDescription:
+      "Cu datele minime, ZES poate pregati cererea si poate reduce timpul de clarificare.",
+    requiredInfo: [
+      "Marca si modelul ecografului",
+      "Numarul si tipul sondelor",
+      "Simptomul observat",
+      "Oras si urgenta",
+      "Poze cu eticheta sau eroarea, fara date de pacient",
+    ],
+    processTitle: "Flux service ecograf",
+    processDescription:
+      "Scopul este sa stabilim rapid daca discutam despre triere, interventie sau contract de mentenanta.",
+    processSteps: [
+      "Descriere simptom",
+      "Date echipament",
+      "Prioritate service",
+      "Evaluare preliminara",
+      "Interventie sau contract",
+    ],
+    mistakesTitle: "Ce trebuie evitat",
+    mistakes: [
+      "Continuarea utilizarii daca echipamentul are comportament nesigur",
+      "Transmiterea de imagini cu date medicale ale pacientilor",
+      "Amanarea mentenantei cand aceeasi problema reapare frecvent",
+    ],
+    complianceNote:
+      "Nu deschideti si nu reparati echipamentul fara personal calificat. Pentru defecte cu risc operational, opriti utilizarea pana la evaluare.",
+    faqs: [
+      {
+        question: "Pot solicita service doar pentru o sonda?",
+        answer:
+          "Da. Sonda poate fi tratata ca element critic, mai ales daca defectul afecteaza direct investigatiile programate.",
+      },
+      {
+        question: "Este nevoie de poza cu eticheta?",
+        answer:
+          "Este utila pentru identificare, dar nu obligatorie. Nu includeti date de pacient.",
+      },
+      {
+        question: "Se poate transforma interventia in contract?",
+        answer:
+          "Da. Daca exista mai multe ecografe sau probleme recurente, merita discutat un contract de mentenanta.",
+      },
+    ],
+    relatedLinks: [
+      { href: "/contracte-mentenanta/mentenanta-ecografe", label: "Mentenanta ecografe" },
+      { href: "/solutii-medicale/ecografe-sisteme-ultrasunete", label: "Ecografe si sisteme ultrasunete" },
+      { href: "/service-aparatura-medicala", label: "Service aparatura medicala" },
+      { href: "/service-diagnostic", label: "Diagnostic service" },
+      { href: "/contact", label: "Contact service" },
+    ],
+  },
+  {
+    slug: "service-laborator-ivd",
+    pageIntent: "laboratory-ivd-service",
+    eyebrow: "Service laborator / IVD",
+    title: "Service laborator / IVD",
+    description:
+      "Service si mentenanta pentru echipamente de laborator si IVD, cu focus pe continuitatea fluxului de probe, analizatoare, echipamente auxiliare si suport operational.",
+    metadataTitle: "Service laborator IVD | ZES MEDCORP",
+    metadataDescription:
+      "Service laborator si echipamente IVD: analizatoare, mentenanta, triere defecte, suport operational si contracte preventive prin ZESCORP.",
+    keywords: [
+      "service laborator IVD",
+      "service echipamente laborator",
+      "mentenanta analizatoare IVD",
+      "service analizatoare medicale",
+    ],
+    heroNote:
+      "In laborator, downtime-ul unui analizator poate afecta probe, raportare si fluxul clinic. Service-ul trebuie gandit impreuna cu operarea zilnica.",
+    zesPrompt: "Am nevoie de service pentru echipamente de laborator IVD",
+    primaryCta: "Solicita service laborator",
+    secondaryCta: "Trimite inventarul pentru evaluare",
+    audienceTitle: "Pentru laboratoare si clinici cu flux IVD critic",
+    audienceDescription:
+      "Pagina ajuta cand exista defecte active, echipamente critice sau nevoie de plan de mentenanta preventiva.",
+    audiences: [
+      "Laboratoare private si clinici cu laborator intern",
+      "Administratori care urmaresc continuitatea fluxului de probe",
+      "Centre cu analizatoare si echipamente auxiliare multimarca",
+    ],
+    helpTitle: "Ce poate clarifica ZESCORP",
+    helpDescription:
+      "Evaluarea initiala separa defectul activ, nevoia de preventie si eventualele dependente de producator sau consumabile.",
+    helpItems: [
+      "Analizatoare si echipamente auxiliare",
+      "Simptome, erori, consumabile si accesorii",
+      "Prioritate in functie de impactul asupra fluxului de probe",
+      "Optiuni de mentenanta preventiva",
+      "Recomandari pentru service multimarca sau escaladare",
+    ],
+    infoTitle: "Date utile pentru triere",
+    infoDescription:
+      "Nu este nevoie de inventar perfect. O lista aproximativa ajuta la prima evaluare.",
+    requiredInfo: [
+      "Tip analizator si producator",
+      "Volum aproximativ de lucru",
+      "Simptom sau eroare",
+      "Locatie si urgenta",
+      "Contracte, garantii sau mentenanta existenta",
+    ],
+    processTitle: "Flux service laborator",
+    processDescription:
+      "ZES structureaza cazul pentru preluare, iar echipa tehnica poate clarifica urmatorii pasi.",
+    processSteps: [
+      "Triage caz",
+      "Inventar minim",
+      "Criticitate laborator",
+      "Plan de actiune",
+      "Service sau mentenanta",
+    ],
+    mistakesTitle: "Riscuri care merita prevenite",
+    mistakes: [
+      "Ignorarea defectelor recurente pana cand blocheaza fluxul",
+      "Lipsa unei evidente clare pentru consumabile, accesorii si contracte",
+      "Amestecarea validarii laboratorului cu service-ul tehnic fara responsabilitati clare",
+    ],
+    complianceNote:
+      "Service-ul tehnic nu inlocuieste validarile interne ale laboratorului sau cerintele aplicabile procedurilor IVD.",
+    faqs: [
+      {
+        question: "Se pot include mai multe analizatoare intr-un contract?",
+        answer:
+          "Da, cu definirea clara a echipamentelor, prioritatilor, limitelor tehnice si responsabilitatilor.",
+      },
+      {
+        question: "Ce conteaza pentru prioritate?",
+        answer:
+          "Impactul asupra fluxului de probe, lipsa echipamentului alternativ, urgenta raportarii si istoricul de defecte.",
+      },
+      {
+        question: "Pot solicita evaluare fara contract existent?",
+        answer:
+          "Da. Cererea poate porni de la o problema activa sau de la intentia de a construi un plan preventiv.",
+      },
+    ],
+    relatedLinks: [
+      { href: "/contracte-mentenanta/mentenanta-laborator-ivd", label: "Mentenanta laborator / IVD" },
+      { href: "/solutii-medicale/echipamente-laborator-ivd", label: "Echipamente laborator / IVD" },
+      { href: "/calculatoare/cost-laborator-ivd", label: "Calculator laborator IVD" },
+      { href: "/service-aparatura-medicala", label: "Service aparatura medicala" },
+      { href: "/contact", label: "Contact service" },
+    ],
+  },
 ];
 
 export function getCommercialLandingPage(slug: string) {

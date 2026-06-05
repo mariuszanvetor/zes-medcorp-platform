@@ -7,9 +7,16 @@ import { companyContact } from "@/lib/brand";
 
 const serviceLinks = [
   { label: "Services", href: "/solutii-medicale" },
+  { label: "Amenajare centre imagistica", href: "/amenajare-centre-imagistica" },
+  { label: "Amenajare cabinet medical", href: "/amenajare-cabinet-medical" },
   { label: "Medical Infrastructure", href: "/solutii-medicale/dezvoltare-unitati-medicale" },
   { label: "Medical Equipment", href: "/solutii-medicale/echipamente-imagistica-diagnostic" },
+  { label: "Radioprotectie RX", href: "/radioprotectie-plumbare-rx" },
+  { label: "Service aparatura medicala", href: "/service-aparatura-medicala" },
+  { label: "Service ecografe", href: "/service-ecografe" },
+  { label: "Service laborator IVD", href: "/service-laborator-ivd" },
   { label: "Service & Maintenance", href: "/solutii-medicale/service-echipamente-medicale" },
+  { label: "Contracte mentenanta", href: "/contracte-mentenanta" },
 ];
 
 const resourceLinks = [

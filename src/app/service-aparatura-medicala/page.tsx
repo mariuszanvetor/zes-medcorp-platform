@@ -237,6 +237,40 @@ export default function ServiceAparaturaMedicalaPage() {
           </div>
         </Container>
       </Section>
+
+      <Section className="border-y border-blue-100 bg-[#f7fbff]" spacing="md" tone="transparent">
+        <Container>
+          <div className="grid gap-6 rounded-3xl border border-blue-100 bg-white p-6 shadow-[0_18px_44px_rgba(15,65,118,0.07)] lg:grid-cols-[1fr_0.78fr] lg:items-center">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
+                Service recurent
+              </p>
+              <h2 className="mt-3 text-2xl font-semibold text-slate-950">
+                Transforma interventiile reactive intr-un contract de mentenanta.
+              </h2>
+              <p className="mt-3 text-sm leading-7 text-slate-600">
+                Daca exista defecte recurente, echipamente critice sau mai multe
+                locatii, un plan preventiv poate reduce downtime-ul si clarifica
+                bugetul de service.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+              <Link
+                className="inline-flex h-11 items-center justify-center rounded-xl bg-[#0057b8] px-5 text-sm font-semibold text-white transition hover:bg-[#00498f]"
+                href="/contracte-mentenanta"
+              >
+                Vezi contracte mentenanta
+              </Link>
+              <Link
+                className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-200 px-5 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50"
+                href="/contracte-mentenanta/interventii-suport-tehnic"
+              >
+                Interventii si suport tehnic
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </Section>
       <CommercialConversionBand
         description="Descrie echipamentul, simptomul și orașul. ZES structurează solicitarea pentru triere și preluare de către echipa tehnică."
         pageIntent="service-medical-equipment"

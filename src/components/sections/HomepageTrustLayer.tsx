@@ -16,7 +16,7 @@ const trustColumns = [
   },
   {
     title: "Contact direct",
-    text: "Vizitatorul poate cere evaluare prin formular, telefon, email, WhatsApp sau prin ZES, fara sa inteleaga tool-urile interne.",
+    text: "Vizitatorul poate cere evaluare prin formular, telefon, email sau WhatsApp, fara sa inteleaga procesele interne.",
   },
 ];
 
@@ -28,7 +28,7 @@ export function HomepageTrustLayer() {
           align="center"
           eyebrow="De ce ZESCORP"
           title="Mai putina complexitate, mai multa claritate pentru decizie."
-          description="Website-ul porneste de la ce se vinde, pentru cine este potrivit si cum se cere evaluarea. Tool-urile avansate raman disponibile in Resources."
+          description="Website-ul porneste de la ce se vinde, pentru cine este potrivit si cum se cere evaluarea. Resursele avansate raman disponibile separat, in Resources."
         />
 
         <div className="mt-10 grid gap-5 lg:grid-cols-3">

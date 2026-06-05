@@ -1,0 +1,115 @@
+{
+  "generatedAt": "2026-06-05T08:01:00.223Z",
+  "routeCount": 198,
+  "moneyRoutes": [
+    "/",
+    "/solutii-medicale",
+    "/contracte-mentenanta",
+    "/amenajare-centre-imagistica",
+    "/amenajare-cabinet-medical",
+    "/proiectare-radiologie",
+    "/autorizare-cncan-camera-rx",
+    "/service-radiologie-romania",
+    "/service-ecografe",
+    "/service-laborator-ivd",
+    "/plumbare-radiologica",
+    "/radioprotectie-plumbare-rx",
+    "/service-aparatura-medicala",
+    "/contact"
+  ],
+  "commercialCoverage": {
+    "amenajare clinica medicala": [
+      "/solutii-medicale/dezvoltare-unitati-medicale",
+      "/amenajare-cabinet-medical"
+    ],
+    "amenajare cabinet medical": [
+      "/amenajare-cabinet-medical"
+    ],
+    "amenajare centru imagistica": [
+      "/amenajare-centre-imagistica"
+    ],
+    "amenajare camera CT": [
+      "/solutii-medicale/camere-ct",
+      "/servicii/proiectare-camera-ct"
+    ],
+    "amenajare camera RMN": [
+      "/solutii-medicale/camere-rmn",
+      "/servicii/proiectare-camera-rmn"
+    ],
+    "radioprotectie medicala": [
+      "/radioprotectie-plumbare-rx",
+      "/solutii-medicale/radioprotectie-imagistica"
+    ],
+    "placare plumb radiologie": [
+      "/plumbare-radiologica",
+      "/radioprotectie-plumbare-rx"
+    ],
+    "RF shielding RMN": [
+      "/solutii-medicale/rf-shielding-rmn",
+      "/servicii/rf-shielding-rmn"
+    ],
+    "cusca Faraday RMN": [
+      "/solutii-medicale/rf-shielding-rmn"
+    ],
+    "aparatura medicala": [
+      "/solutii-medicale/echipamente-imagistica-diagnostic"
+    ],
+    "aparatura imagistica medicala": [
+      "/solutii-medicale/echipamente-imagistica-diagnostic"
+    ],
+    "echipamente radiologie": [
+      "/proiectare-radiologie",
+      "/solutii-medicale/echipamente-imagistica-diagnostic"
+    ],
+    "echipamente laborator IVD": [
+      "/solutii-medicale/echipamente-laborator-ivd",
+      "/service-laborator-ivd"
+    ],
+    "ecografe": [
+      "/solutii-medicale/ecografe-sisteme-ultrasunete",
+      "/service-ecografe"
+    ],
+    "mamografe": [
+      "/solutii-medicale/sisteme-mamografie"
+    ],
+    "C-arm": [
+      "/solutii-medicale/sisteme-c-arm"
+    ],
+    "PACS / RIS": [
+      "/solutii-medicale/solutii-pacs-ris"
+    ],
+    "service aparatura medicala": [
+      "/service-aparatura-medicala",
+      "/solutii-medicale/service-echipamente-medicale"
+    ],
+    "service radiologie": [
+      "/service-radiologie-romania"
+    ],
+    "service ecografe": [
+      "/service-ecografe"
+    ],
+    "service laborator IVD": [
+      "/service-laborator-ivd"
+    ],
+    "contracte mentenanta aparatura medicala": [
+      "/contracte-mentenanta"
+    ],
+    "mentenanta preventiva aparatura medicala": [
+      "/contracte-mentenanta",
+      "/solutii-medicale/contracte-mentenanta-preventiva"
+    ],
+    "relocare aparatura medicala": [
+      "/solutii-medicale/relocare-echipamente-medicale"
+    ],
+    "instalare aparatura medicala": [
+      "/solutii-medicale/instalare-punere-in-functiune"
+    ]
+  },
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "Dynamic sitemap coverage is source-verified through data imports and content:check.",
+    "Warnings are review prompts; errors are blocking SEO hygiene issues.",
+    "No external crawling, lead data, SMTP, CRM, or API secrets are used by this audit."
+  ]
+}

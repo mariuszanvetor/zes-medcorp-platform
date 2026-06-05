@@ -9,6 +9,7 @@ const glossaryPath = path.join(root, "src", "data", "glossary.ts");
 const calculatorPath = path.join(root, "src", "data", "calculators.ts");
 const serviceFunnelsPath = path.join(root, "src", "data", "service-funnels.ts");
 const commercialLandingPagesPath = path.join(root, "src", "data", "commercial-landing-pages.ts");
+const maintenanceContractsPath = path.join(root, "src", "data", "maintenance-contracts.ts");
 const revenueLandingPagesPath = path.join(root, "src", "data", "revenue-landing-pages.ts");
 const planningPath = path.join(root, "src", "data", "planning-journeys.ts");
 const seoIndexingPath = path.join(root, "src", "data", "seo-indexing-priorities.ts");
@@ -243,6 +244,10 @@ function extractCommercialLandingSlugs(source) {
 }
 
 function extractRevenueLandingSlugs(source) {
+  return [...source.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]);
+}
+
+function extractMaintenanceContractSlugs(source) {
   return [...source.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]);
 }
 
@@ -681,6 +686,7 @@ function checkHubCoverage(routes, sitemapSource) {
     "/project-intake",
     "/services",
     "/solutii-medicale",
+    "/contracte-mentenanta",
     "/contact",
   ];
 
@@ -701,6 +707,9 @@ function checkHubCoverage(routes, sitemapSource) {
     "/autorizare-cncan-camera-rx",
     "/service-radiologie-romania",
     "/plumbare-radiologica",
+    "/amenajare-cabinet-medical",
+    "/service-ecografe",
+    "/service-laborator-ivd",
   ];
 
   const requiredRevenueRoutes = [
@@ -721,6 +730,15 @@ function checkHubCoverage(routes, sitemapSource) {
     "/solutii-medicale/instalare-punere-in-functiune",
     "/solutii-medicale/suport-tehnic-echipamente",
     "/solutii-medicale/service-multi-vendor",
+  ];
+
+  const requiredMaintenanceRoutes = [
+    "/contracte-mentenanta/mentenanta-imagistica-medicala",
+    "/contracte-mentenanta/mentenanta-radiologie-digitala",
+    "/contracte-mentenanta/mentenanta-ecografe",
+    "/contracte-mentenanta/mentenanta-laborator-ivd",
+    "/contracte-mentenanta/contracte-service-multimarca",
+    "/contracte-mentenanta/interventii-suport-tehnic",
   ];
 
   for (const route of requiredHubRoutes) {
@@ -747,12 +765,22 @@ function checkHubCoverage(routes, sitemapSource) {
     }
   }
 
+  for (const route of requiredMaintenanceRoutes) {
+    if (!routes.has(route)) {
+      errors.push(`Required maintenance route missing: ${route}`);
+    }
+  }
+
   if (!sitemapSource.includes("commercialLandingPages")) {
     errors.push("Commercial landing pages are not wired into sitemap source.");
   }
 
   if (!sitemapSource.includes("revenueLandingPages")) {
     errors.push("Revenue landing pages are not wired into sitemap source.");
+  }
+
+  if (!sitemapSource.includes("maintenanceContractPages")) {
+    errors.push("Maintenance contract pages are not wired into sitemap source.");
   }
 
   const adminRoutes = ["/admin/leads", "/admin/lead-flow", "/admin/content-ops", "/admin/seo-launch"];
@@ -795,6 +823,8 @@ const serviceFunnelSource = fs.readFileSync(serviceFunnelsPath, "utf8");
 const serviceFunnelSlugs = extractServiceFunnelSlugs(serviceFunnelSource);
 const commercialLandingSource = fs.readFileSync(commercialLandingPagesPath, "utf8");
 const commercialLandingSlugs = extractCommercialLandingSlugs(commercialLandingSource);
+const maintenanceContractSource = fs.readFileSync(maintenanceContractsPath, "utf8");
+const maintenanceContractSlugs = extractMaintenanceContractSlugs(maintenanceContractSource);
 const revenueLandingSource = fs.readFileSync(revenueLandingPagesPath, "utf8");
 const revenueLandingSlugs = extractRevenueLandingSlugs(revenueLandingSource);
 const routes = buildRoutes(articleSlugs);
@@ -830,6 +860,10 @@ for (const slug of commercialLandingSlugs) {
 
 for (const slug of revenueLandingSlugs) {
   routes.add(`/solutii-medicale/${slug}`);
+}
+
+for (const slug of maintenanceContractSlugs) {
+  routes.add(`/contracte-mentenanta/${slug}`);
 }
 
 checkArticleBlocks(articleBlocks, articleSlugs, routes);

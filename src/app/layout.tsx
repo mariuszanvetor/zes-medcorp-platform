@@ -8,6 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { LocalBusinessSchema } from "@/components/seo/LocalBusinessSchema";
 import { OrganizationSchema } from "@/components/seo/OrganizationSchema";
+import { WebSiteSchema } from "@/components/seo/WebSiteSchema";
 import { brand } from "@/lib/brand";
 import { defaultMetadata } from "@/lib/seo";
 
@@ -34,6 +35,7 @@ export default function RootLayout({
         <ClarityAnalytics />
         <OrganizationSchema />
         <LocalBusinessSchema />
+        <WebSiteSchema />
         <div className="flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">{children}</main>

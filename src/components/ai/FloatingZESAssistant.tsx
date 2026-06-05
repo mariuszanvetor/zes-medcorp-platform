@@ -20,7 +20,7 @@ type FloatingStorage = {
 export function FloatingZESAssistant() {
   const pathname = usePathname();
   const isAdminRoute = pathname?.startsWith("/admin/");
-  const hiddenRoute = pathname === "/ai-discovery";
+  const hiddenRoute = pathname === "/" || pathname === "/ai-discovery";
   const shouldRender = !isAdminRoute && !hiddenRoute;
 
   const [state, setState] = useState<FloatingState>("minimized");

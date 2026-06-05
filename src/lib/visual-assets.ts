@@ -84,9 +84,12 @@ const revenueVisualBySlug: Record<string, VisualAsset> = {
 
 const commercialVisualBySlug: Record<string, VisualAsset> = {
   "amenajare-centre-imagistica": corporateVisuals.construction,
+  "amenajare-cabinet-medical": corporateVisuals.construction,
   "proiectare-radiologie": corporateVisuals.radiationProtection,
   "autorizare-cncan-camera-rx": corporateVisuals.radiationProtection,
   "service-radiologie-romania": corporateVisuals.service,
+  "service-ecografe": corporateVisuals.equipment,
+  "service-laborator-ivd": corporateVisuals.laboratory,
   "plumbare-radiologica": corporateVisuals.radiationProtection,
 };
 

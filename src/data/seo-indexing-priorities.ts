@@ -68,6 +68,9 @@ export const seoIndexingPriorityGroups: SeoIndexingGroup[] = [
       item("/autorizare-cncan-camera-rx", "Autorizare CNCAN camera RX", "high", "service", "Pagina transforma intentia informationala CNCAN intr-un traseu comercial responsabil.", "Inspect URL si solicita indexare.", "Request indexing pentru pagina CNCAN preliminara.", "Pastreaza framing-ul orientativ si validarea de specialist."),
       item("/service-radiologie-romania", "Service radiologie Romania", "critical", "service", "Pagina raspunde cererilor urgente de service RX si imagistica.", "Inspect URL si solicita indexare prioritara.", "Request indexing pentru landing page-ul de service.", "Verifica preluarea rapida prin ZES si WhatsApp."),
       item("/plumbare-radiologica", "Plumbare radiologica si protectie RX", "critical", "service", "Pagina targeteaza intentia comerciala pentru camere RX si ofertare preliminara.", "Inspect URL si solicita indexare prioritara.", "Request indexing pentru landing page-ul de plumbare.", "Verifica distinctia fata de RF shielding pentru RMN."),
+      item("/amenajare-cabinet-medical", "Amenajare cabinet medical", "high", "service", "Pagina acopera intentia directa pentru cabinete si policlinici, separata de centrele de imagistica.", "Inspect URL si solicita indexare.", "Request indexing pentru pagina de amenajare cabinet.", "Verifica legaturile catre echipamente, mentenanta si contact."),
+      item("/service-ecografe", "Service ecografe", "high", "service", "Pagina targeteaza intentia de service pentru ecografe si sonde, cu potential de contract recurent.", "Inspect URL si solicita indexare.", "Request indexing pentru service ecografe.", "Verifica CTA de service si legatura catre contracte mentenanta."),
+      item("/service-laborator-ivd", "Service laborator IVD", "high", "service", "Pagina extinde service-ul comercial in zona de laborator si analizatoare IVD.", "Inspect URL si solicita indexare.", "Request indexing pentru service laborator IVD.", "Verifica legatura catre echipamente IVD si mentenanta laborator."),
     ],
   },
   {
@@ -95,6 +98,7 @@ export const seoIndexingPriorityGroups: SeoIndexingGroup[] = [
       item("/solutii-medicale/echipamente-laborator-ivd", "Echipamente laborator IVD", "high", "service", "Pagina extinde intentia comerciala in afara radiologiei.", "Inspect URL si solicita indexare.", "Request indexing pentru pagina laborator IVD.", "Verifica legatura catre mentenanta preventiva."),
       item("/solutii-medicale/service-echipamente-medicale", "Service echipamente medicale", "critical", "service", "Pagina raspunde cererilor de service pentru aparatura medicala din mai multe categorii.", "Inspect URL si solicita indexare prioritara.", "Request indexing pentru pagina de service medical.", "Verifica CTA ZES, formularul si mesajele de siguranta."),
       item("/solutii-medicale/contracte-mentenanta-preventiva", "Contracte mentenanta preventiva", "high", "service", "Pagina targeteaza contracte recurente si continuitate operationala.", "Inspect URL si solicita indexare.", "Request indexing pentru pagina de mentenanta.", "Verifica legaturile catre service multi-vendor."),
+      item("/contracte-mentenanta", "Contracte mentenanta aparatura medicala", "critical", "service", "Hub nou pentru venit recurent, contracte preventive si evaluare inventar.", "Inspect URL si solicita indexare prioritara.", "Request indexing pentru hub-ul contractelor de mentenanta.", "Verifica calculatorul, formularul si paginile dedicate."),
     ],
   },
   {

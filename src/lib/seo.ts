@@ -61,7 +61,12 @@ function getOgContext(path: string): { label: string; variant: OgVariant } {
     return { label: "Medical infrastructure", variant: "website" };
   }
 
-  if (path.startsWith("/services") || path.startsWith("/servicii") || path.startsWith("/solutii-medicale")) {
+  if (
+    path.startsWith("/services") ||
+    path.startsWith("/servicii") ||
+    path.startsWith("/solutii-medicale") ||
+    path.startsWith("/contracte-mentenanta")
+  ) {
     return { label: "Servicii ZES", variant: "services" };
   }
 
