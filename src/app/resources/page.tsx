@@ -41,6 +41,11 @@ const toolLinks = [
     description: "Articole, ghiduri si explicatii tehnice pentru decizii mai clare.",
     href: "/knowledge-hub",
   },
+  {
+    title: "Catalog produse",
+    description: "Produse medicale importate pentru review, ofertare si integrare cu serviciile ZESCORP.",
+    href: "/produse",
+  },
 ];
 
 const resourceLinks = [

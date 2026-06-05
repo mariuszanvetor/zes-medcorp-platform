@@ -9,6 +9,7 @@
     "lint": "eslint",
     "content:check": "node scripts/check-content.mjs",
     "audit:seo": "node scripts/audit-seo.mjs",
+    "products:import": "node scripts/product-catalog/import-gima.mjs",
     "leads:research": "node scripts/lead-research/cli.mjs research",
     "leads:import": "node scripts/lead-research/cli.mjs import",
     "leads:export": "node scripts/lead-research/build-workbook.mjs",

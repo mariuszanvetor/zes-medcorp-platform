@@ -17,6 +17,7 @@ const serviceLinks = [
   { label: "Service laborator IVD", href: "/service-laborator-ivd" },
   { label: "Service & Maintenance", href: "/solutii-medicale/service-echipamente-medicale" },
   { label: "Contracte mentenanta", href: "/contracte-mentenanta" },
+  { label: "Catalog produse", href: "/produse" },
 ];
 
 const resourceLinks = [

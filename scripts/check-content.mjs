@@ -13,6 +13,7 @@ const maintenanceContractsPath = path.join(root, "src", "data", "maintenance-con
 const revenueLandingPagesPath = path.join(root, "src", "data", "revenue-landing-pages.ts");
 const planningPath = path.join(root, "src", "data", "planning-journeys.ts");
 const seoIndexingPath = path.join(root, "src", "data", "seo-indexing-priorities.ts");
+const productCatalogPath = path.join(root, "data", "product-catalog", "products.json");
 const appDir = path.join(root, "src", "app");
 const publicDir = path.join(root, "public");
 
@@ -249,6 +250,11 @@ function extractRevenueLandingSlugs(source) {
 
 function extractMaintenanceContractSlugs(source) {
   return [...source.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]);
+}
+
+function readProductCatalog() {
+  if (!fs.existsSync(productCatalogPath)) return [];
+  return JSON.parse(fs.readFileSync(productCatalogPath, "utf8"));
 }
 
 function buildRoutes(articleSlugs) {
@@ -687,6 +693,7 @@ function checkHubCoverage(routes, sitemapSource) {
     "/services",
     "/solutii-medicale",
     "/contracte-mentenanta",
+    "/produse",
     "/contact",
   ];
 
@@ -783,6 +790,14 @@ function checkHubCoverage(routes, sitemapSource) {
     errors.push("Maintenance contract pages are not wired into sitemap source.");
   }
 
+  if (!sitemapSource.includes("getIndexableProducts")) {
+    errors.push("Product catalog sitemap must use getIndexableProducts to keep imported products out of the sitemap.");
+  }
+
+  if (!sitemapSource.includes("productCategories")) {
+    errors.push("Product category sitemap coverage is not wired into sitemap source.");
+  }
+
   const adminRoutes = ["/admin/leads", "/admin/lead-flow", "/admin/content-ops", "/admin/seo-launch"];
   for (const route of adminRoutes) {
     if (sitemapSource.includes(route)) {
@@ -827,6 +842,7 @@ const maintenanceContractSource = fs.readFileSync(maintenanceContractsPath, "utf
 const maintenanceContractSlugs = extractMaintenanceContractSlugs(maintenanceContractSource);
 const revenueLandingSource = fs.readFileSync(revenueLandingPagesPath, "utf8");
 const revenueLandingSlugs = extractRevenueLandingSlugs(revenueLandingSource);
+const productCatalog = readProductCatalog();
 const routes = buildRoutes(articleSlugs);
 const sitemapSource = fs.readFileSync(path.join(appDir, "sitemap.ts"), "utf8");
 
@@ -864,6 +880,15 @@ for (const slug of revenueLandingSlugs) {
 
 for (const slug of maintenanceContractSlugs) {
   routes.add(`/contracte-mentenanta/${slug}`);
+}
+
+const productCategorySlugs = new Set(productCatalog.map((product) => product.category).filter(Boolean));
+for (const slug of productCategorySlugs) {
+  routes.add(`/produse/categorie/${slug}`);
+}
+
+for (const product of productCatalog) {
+  if (product.slug) routes.add(`/produse/${product.slug}`);
 }
 
 checkArticleBlocks(articleBlocks, articleSlugs, routes);

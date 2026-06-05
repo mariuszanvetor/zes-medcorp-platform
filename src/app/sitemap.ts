@@ -12,6 +12,7 @@ import { revenueLandingPages } from "@/data/revenue-landing-pages";
 import { seoClusters } from "@/data/seo-clusters";
 import { serviceFunnels } from "@/data/service-funnels";
 import { services } from "@/data/services";
+import { getIndexableProducts, productCategories } from "@/lib/product-catalog";
 import { siteConfig } from "@/lib/seo";
 
 const staticRoutes: Array<{
@@ -23,6 +24,7 @@ const staticRoutes: Array<{
   { path: "/services", changeFrequency: "monthly", priority: 0.9 },
   { path: "/solutii-medicale", changeFrequency: "monthly", priority: 0.94 },
   { path: "/contracte-mentenanta", changeFrequency: "monthly", priority: 0.9 },
+  { path: "/produse", changeFrequency: "monthly", priority: 0.72 },
   { path: "/servicii", changeFrequency: "monthly", priority: 0.88 },
   { path: "/about", changeFrequency: "monthly", priority: 0.74 },
   { path: "/companie", changeFrequency: "monthly", priority: 0.76 },
@@ -84,6 +86,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
     priority: 0.88,
   }));
+
+  const indexableProductRoutes = getIndexableProducts().map((product) => ({
+    url: new URL(`/produse/${product.slug}`, siteConfig.url).toString(),
+    lastModified: new Date(product.indexableAt ?? now),
+    changeFrequency: "monthly" as const,
+    priority: 0.62,
+  }));
+
+  const indexableCategoryRoutes = productCategories
+    .filter((category) => getIndexableProducts().some((product) => product.category === category.id))
+    .map((category) => ({
+      url: new URL(`/produse/categorie/${category.slug}`, siteConfig.url).toString(),
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }));
 
   const articleRoutes = articles.map((article) => ({
     url: new URL(`/knowledge-hub/${article.slug}`, siteConfig.url).toString(),
@@ -170,6 +188,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...commercialRoutes,
     ...revenueRoutes,
     ...maintenanceRoutes,
+    ...indexableCategoryRoutes,
+    ...indexableProductRoutes,
     ...serviceFunnelRoutes,
     ...planningRoutes,
     ...calculatorRoutes,

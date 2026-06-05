@@ -6,11 +6,13 @@ const appDir = path.join(root, "src", "app");
 const dataDir = path.join(root, "src", "data");
 const componentsDir = path.join(root, "src", "components");
 const docsDir = path.join(root, "docs");
+const productCatalogPath = path.join(root, "data", "product-catalog", "products.json");
 
 const moneyRoutes = [
   "/",
   "/solutii-medicale",
   "/contracte-mentenanta",
+  "/produse",
   "/amenajare-centre-imagistica",
   "/amenajare-cabinet-medical",
   "/proiectare-radiologie",
@@ -97,6 +99,14 @@ function addDynamicRoutes(routes) {
   for (const slug of extractSlugs("src/data/glossary.ts")) routes.add(`/glosar/${slug}`);
   for (const slug of extractSlugs("src/data/planning-journeys.ts")) routes.add(`/planificare/${slug}`);
   for (const slug of extractSlugs("src/data/articles.ts")) routes.add(`/knowledge-hub/${slug}`);
+
+  if (fs.existsSync(productCatalogPath)) {
+    const products = JSON.parse(fs.readFileSync(productCatalogPath, "utf8"));
+    for (const product of products) {
+      if (product.slug) routes.add(`/produse/${product.slug}`);
+      if (product.category) routes.add(`/produse/categorie/${product.category}`);
+    }
+  }
 }
 
 function getStaticRoutesFromSitemap() {
@@ -178,6 +188,57 @@ function checkSchemaCoverage() {
       }
     }
   }
+
+  const productPage = read("src/app/produse/[slug]/page.tsx");
+  for (const required of ["BreadcrumbSchema", "ServiceSchema"]) {
+    if (!productPage.includes(required)) {
+      errors.push(`Product detail page is missing ${required}.`);
+    }
+  }
+}
+
+function checkProductCatalogSafety(sitemapSource) {
+  if (!fs.existsSync(productCatalogPath)) {
+    errors.push("Product catalog database is missing: data/product-catalog/products.json");
+    return;
+  }
+
+  const products = JSON.parse(fs.readFileSync(productCatalogPath, "utf8"));
+  const productPage = read("src/app/produse/[slug]/page.tsx");
+  const categoryPage = read("src/app/produse/categorie/[slug]/page.tsx");
+
+  if (!productPage.includes("noIndex: !isProductIndexable")) {
+    errors.push("Product detail metadata must noindex every product that is not explicitly indexable.");
+  }
+
+  if (!categoryPage.includes("noIndex: !hasIndexableProducts")) {
+    errors.push("Product category metadata must noindex categories without indexable reviewed products.");
+  }
+
+  if (!sitemapSource.includes("getIndexableProducts")) {
+    errors.push("Product sitemap coverage must use getIndexableProducts.");
+  }
+
+  const invalidStatuses = products.filter((product) =>
+    !["imported", "reviewed", "approved", "indexable"].includes(product.reviewStatus),
+  );
+  for (const product of invalidStatuses) {
+    errors.push(`Product has invalid review status: ${product.slug || product.id}`);
+  }
+
+  const importedWithIndexDate = products.filter(
+    (product) => product.reviewStatus !== "indexable" && product.indexableAt,
+  );
+  for (const product of importedWithIndexDate) {
+    errors.push(`Product has indexableAt before indexable status: ${product.slug || product.id}`);
+  }
+
+  const indexableWithoutCommercialCopy = products.filter(
+    (product) => product.reviewStatus === "indexable" && !product.commercialDescription,
+  );
+  for (const product of indexableWithoutCommercialCopy) {
+    errors.push(`Indexable product is missing rewritten commercial description: ${product.slug || product.id}`);
+  }
 }
 
 function checkCoverage(routes) {
@@ -242,6 +303,7 @@ checkAdminSafety(sitemapSource);
 checkImageAlt();
 checkMetadataStrength();
 checkSchemaCoverage();
+checkProductCatalogSafety(sitemapSource);
 checkCoverage(routes);
 checkSitemapCoverage(routes, sitemapStaticRoutes);
 checkInternalLinking(routes);
