@@ -42,62 +42,71 @@ export type ProductCatalogItem = {
   maintenanceConsiderations?: string[];
   relatedServices?: string[];
   notes?: string;
+  romanianTitle?: string;
+  romanianDescription?: string;
+  romanianApplications?: string[];
+  romanianBenefits?: string[];
+  romanianSpecifications?: Array<{ label: string; value: string }>;
+  commercialCategory?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  publicDisplayReady?: boolean;
 };
 
 export const productCategories: ProductCategory[] = [
   {
     id: "diagnostic",
     slug: "diagnostic",
-    label: "Diagnostic",
+    label: "Diagnostic medical",
     description: "Monitoare, ECG, audiometrie, spirometrie si aparatura de diagnostic pentru clinici.",
     serviceAngle: "ofertare, instalare, service si mentenanta pentru echipamente de diagnostic",
   },
   {
     id: "laboratory",
     slug: "laboratory",
-    label: "Laboratory",
+    label: "Laborator / IVD",
     description: "Echipamente de laborator si IVD pentru fluxuri de probe, analiza si suport operational.",
     serviceAngle: "selectie, instalare si mentenanta pentru laborator / IVD",
   },
   {
     id: "emergency",
     slug: "emergency",
-    label: "Emergency",
+    label: "Urgenta",
     description: "Echipamente si mobilier pentru urgente, interventii rapide si zone cu criticitate ridicata.",
     serviceAngle: "echipare urgenta, suport tehnic si disponibilitate operationala",
   },
   {
     id: "sterilization",
     slug: "sterilization",
-    label: "Sterilization",
+    label: "Sterilizare",
     description: "Echipamente pentru sterilizare, sigilare, suport de cabinet si fluxuri de instrumentar.",
     serviceAngle: "instalare, mentenanta si consumabile pentru sterilizare",
   },
   {
     id: "medical-furniture",
     slug: "medical-furniture",
-    label: "Medical Furniture",
+    label: "Mobilier medical",
     description: "Mobilier medical, carucioare, scaune si elemente pentru organizarea spatiului clinic.",
     serviceAngle: "amenajare spatiu, integrare echipamente si ofertare mobilier medical",
   },
   {
     id: "ent",
     slug: "ent",
-    label: "ENT",
+    label: "ORL",
     description: "Echipamente si mobilier pentru ORL, diagnostic si cabinete specializate.",
     serviceAngle: "ofertare, instalare si suport pentru cabinete ORL",
   },
   {
     id: "gynecology",
     slug: "gynecology",
-    label: "Gynecology",
+    label: "Ginecologie",
     description: "Echipamente pentru ginecologie, obstetrica si monitorizare clinica.",
     serviceAngle: "dotare cabinet, instalare si suport service pentru ginecologie",
   },
   {
     id: "consumables",
     slug: "consumables",
-    label: "Consumables",
+    label: "Consumabile",
     description: "Consumabile medicale si accesorii profesionale care completeaza echiparea clinicii.",
     serviceAngle: "ofertare recurenta, pachete de consumabile si suport operational",
   },
@@ -138,7 +147,7 @@ export function getProductPath(product: ProductCatalogItem) {
 }
 
 export function getProductDisplayName(product: ProductCatalogItem) {
-  return `${product.sourceBrand} ${product.sourceProductName}`.trim();
+  return product.romanianTitle || `${product.sourceBrand} ${product.sourceProductName}`.trim();
 }
 
 export function getProductReviewLabel(status: ProductReviewStatus) {
@@ -154,25 +163,73 @@ export function getProductReviewLabel(status: ProductReviewStatus) {
 
 export function getProductCommercialContent(product: ProductCatalogItem) {
   const category = productCategories.find((item) => item.id === product.category);
-  const categoryLabel = category?.label ?? "Medical equipment";
+  const categoryLabel = product.commercialCategory || category?.label || "Echipamente medicale";
+
+  if (product.publicDisplayReady && product.romanianDescription) {
+    return {
+      description: product.romanianDescription,
+      applications: product.romanianApplications ?? [],
+      benefits: product.romanianBenefits ?? [],
+      specifications: product.romanianSpecifications ?? [],
+      installation: product.installationConsiderations?.length
+        ? product.installationConsiderations
+        : [
+            "Verificarea spatiului si a conditiilor de utilizare inainte de livrare",
+            "Clarificarea accesoriilor, consumabilelor si documentatiei necesare",
+            "Integrarea produsului in fluxul operational al clinicii sau laboratorului",
+          ],
+      maintenance: product.maintenanceConsiderations?.length
+        ? product.maintenanceConsiderations
+        : [
+            "Plan de service si mentenanta adaptat frecventei de utilizare",
+            "Verificarea accesoriilor si consumabilelor critice pentru functionare",
+            "Suport ZESCORP pentru interventii, configurare si continuitate operationala",
+          ],
+      relatedServices: product.relatedServices?.length
+        ? product.relatedServices
+        : [
+            "/solutii-medicale/echipamente-imagistica-diagnostic",
+            "/service-aparatura-medicala",
+            "/contracte-mentenanta",
+          ],
+      categoryLabel,
+      imageUrl: product.imageUrl || getProductCategoryPlaceholder(product.category),
+      imageAlt: product.imageAlt || `${getProductDisplayName(product)} pentru clinici si unitati medicale`,
+    };
+  }
 
   if (isProductCommerciallyApproved(product) && product.commercialDescription) {
     return {
       description: product.commercialDescription,
       applications: product.applications ?? [],
+      benefits: product.romanianBenefits ?? [],
+      specifications: product.romanianSpecifications ?? [],
       installation: product.installationConsiderations ?? [],
       maintenance: product.maintenanceConsiderations ?? [],
       relatedServices: product.relatedServices ?? [],
+      categoryLabel,
+      imageUrl: product.imageUrl || getProductCategoryPlaceholder(product.category),
+      imageAlt: product.imageAlt || `${getProductDisplayName(product)} pentru clinici si unitati medicale`,
     };
   }
 
   return {
     description:
-      "Produs importat din catalog public si pastrat noindex pana la revizuire. Echipa ZESCORP poate verifica disponibilitatea, aplicatia clinica, cerintele de instalare si optiunile de service inainte de ofertare.",
+      "Produs disponibil pentru cerere de oferta, cu verificarea aplicatiei clinice, a configuratiei, a conditiilor de livrare si a optiunilor de service inainte de ofertare.",
     applications: [
       `Evaluare preliminara pentru categoria ${categoryLabel}`,
       "Cerere de oferta pentru clinici, cabinete sau laboratoare",
       "Comparatie cu alternative si pachete de echipare",
+    ],
+    benefits: [
+      "Selectie orientata spre aplicatia clinica",
+      "Posibilitate de ofertare impreuna cu instalare si service",
+      "Suport pentru clarificarea consumabilelor si accesoriilor",
+    ],
+    specifications: [
+      { label: "Categorie", value: categoryLabel },
+      { label: "Stadiu", value: "Disponibil pentru cerere de oferta" },
+      { label: "Suport", value: "Ofertare, instalare si mentenanta" },
     ],
     installation: [
       "Verificarea spatiului, alimentarii si accesului inainte de livrare",
@@ -189,5 +246,36 @@ export function getProductCommercialContent(product: ProductCatalogItem) {
       "/service-aparatura-medicala",
       "/contracte-mentenanta",
     ],
+    categoryLabel,
+    imageUrl: product.imageUrl || getProductCategoryPlaceholder(product.category),
+    imageAlt: product.imageAlt || `${getProductDisplayName(product)} pentru clinici si unitati medicale`,
   };
+}
+
+export function getProductCategoryPlaceholder(category: ProductCategoryId) {
+  const images: Record<ProductCategoryId, string> = {
+    diagnostic: "/visuals/medical-equipment.webp",
+    laboratory: "/visuals/medical-laboratory.webp",
+    emergency: "/visuals/technical-service.webp",
+    sterilization: "/visuals/preventive-maintenance.webp",
+    "medical-furniture": "/visuals/medical-construction.webp",
+    ent: "/visuals/medical-equipment.webp",
+    gynecology: "/visuals/medical-equipment.webp",
+    consumables: "/visuals/preventive-maintenance.webp",
+  };
+
+  return images[category];
+}
+
+export function getRelatedServiceLabel(href: string) {
+  const labels: Record<string, string> = {
+    "/solutii-medicale/echipamente-imagistica-diagnostic": "Echipamente medicale",
+    "/solutii-medicale/echipamente-laborator-ivd": "Laborator / IVD",
+    "/service-aparatura-medicala": "Service aparatura medicala",
+    "/contracte-mentenanta": "Contracte mentenanta",
+    "/solutii-medicale/instalare-punere-in-functiune": "Instalare si punere in functiune",
+    "/solutii-medicale/service-echipamente-medicale": "Service echipamente",
+  };
+
+  return labels[href] || href.replace("/", "").replaceAll("-", " ");
 }

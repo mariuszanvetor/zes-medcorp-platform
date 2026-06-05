@@ -53,6 +53,15 @@ This stricter rule prevents accidental duplicate-content exposure from imported 
 
 Before a product can become `approved` or `indexable`, add ZESCORP-owned commercial content:
 
+- `romanianTitle`
+- `romanianDescription`
+- `romanianApplications`
+- `romanianBenefits`
+- `romanianSpecifications`
+- `commercialCategory`
+- `imageUrl`
+- `imageAlt`
+- `publicDisplayReady`
 - `commercialDescription`
 - `applications`
 - `installationConsiderations`
@@ -60,6 +69,8 @@ Before a product can become `approved` or `indexable`, add ZESCORP-owned commerc
 - `relatedServices`
 
 The content should describe how ZESCORP can support the product commercially and technically. It should not copy the supplier catalog description.
+
+Public product pages must not expose import metadata such as source URL, raw review status, import status, or internal source fields. Those details remain in the data layer and audit workflow only.
 
 ## Import Command
 

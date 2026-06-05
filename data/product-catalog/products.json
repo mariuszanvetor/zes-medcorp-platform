@@ -22,7 +22,41 @@
     "installationConsiderations": [],
     "maintenanceConsiderations": [],
     "relatedServices": [],
-    "notes": "Imported seed from public GIMA product page. Noindex until reviewed."
+    "notes": "Imported seed from public GIMA product page. Noindex until reviewed.",
+    "romanianTitle": "Centrifuga de laborator XC-2000",
+    "romanianDescription": "Centrifuga compacta pentru laboratoare medicale, potrivita pentru pregatirea probelor in fluxuri clinice curente. ZESCORP poate ajuta cu ofertare, verificarea aplicatiei, integrarea in laborator si planul de mentenanta.",
+    "commercialCategory": "Echipamente laborator / IVD",
+    "imageUrl": "/visuals/medical-laboratory.webp",
+    "imageAlt": "Centrifuga de laborator pentru clinici si laboratoare medicale",
+    "romanianApplications": [
+      "Pregatirea probelor in laboratoare clinice",
+      "Cabinete si clinici cu fluxuri de analiza de baza",
+      "Proiecte de dotare laborator sau extindere IVD"
+    ],
+    "romanianBenefits": [
+      "Format compact pentru spatii medicale",
+      "Poate fi inclusa intr-un pachet de dotare laborator",
+      "Suport ZESCORP pentru ofertare, instalare si mentenanta"
+    ],
+    "romanianSpecifications": [
+      {
+        "label": "Categorie",
+        "value": "Centrifuga de laborator"
+      },
+      {
+        "label": "Utilizare",
+        "value": "Pregatire probe"
+      },
+      {
+        "label": "Mediu recomandat",
+        "value": "Laborator clinic / cabinet medical"
+      },
+      {
+        "label": "Suport",
+        "value": "Ofertare, instalare si mentenanta"
+      }
+    ],
+    "publicDisplayReady": true
   },
   {
     "id": "gima-hemo-control-23994",
@@ -47,7 +81,41 @@
     "installationConsiderations": [],
     "maintenanceConsiderations": [],
     "relatedServices": [],
-    "notes": "Imported seed from public GIMA product page. Noindex until reviewed."
+    "notes": "Imported seed from public GIMA product page. Noindex until reviewed.",
+    "romanianTitle": "Analizor hemoglobina si hematocrit Hemo Control",
+    "romanianDescription": "Echipament pentru masurarea hemoglobinei si hematocritului in contexte clinice unde sunt necesare rezultate rapide si flux controlat. ZESCORP poate verifica potrivirea cu aplicatia medicala si poate pregati oferta tehnico-comerciala.",
+    "commercialCategory": "Diagnostic / laborator",
+    "imageUrl": "/visuals/medical-laboratory.webp",
+    "imageAlt": "Analizor pentru hemoglobina si hematocrit in laborator medical",
+    "romanianApplications": [
+      "Cabinete si clinici cu testare rapida",
+      "Laboratoare medicale cu fluxuri de screening",
+      "Proiecte de dotare pentru diagnostic primar"
+    ],
+    "romanianBenefits": [
+      "Ajuta la organizarea unui flux rapid de testare",
+      "Poate fi integrat cu pachete de consumabile si service",
+      "Potrivit pentru cereri de oferta cu validare de aplicatie"
+    ],
+    "romanianSpecifications": [
+      {
+        "label": "Categorie",
+        "value": "Analizor hemoglobina / hematocrit"
+      },
+      {
+        "label": "Aplicatie",
+        "value": "Diagnostic rapid si laborator"
+      },
+      {
+        "label": "Utilizatori",
+        "value": "Clinici, cabinete, laboratoare"
+      },
+      {
+        "label": "Suport",
+        "value": "Consumabile, ofertare si mentenanta"
+      }
+    ],
+    "publicDisplayReady": true
   },
   {
     "id": "gima-urine-analyzer-bluetooth-24046",
@@ -72,7 +140,41 @@
     "installationConsiderations": [],
     "maintenanceConsiderations": [],
     "relatedServices": [],
-    "notes": "Imported seed from public GIMA product page. Noindex until reviewed."
+    "notes": "Imported seed from public GIMA product page. Noindex until reviewed.",
+    "romanianTitle": "Analizor urina cu conectivitate Bluetooth",
+    "romanianDescription": "Analizor pentru testare urinara in cabinete si laboratoare, util in fluxuri de diagnostic unde conteaza organizarea datelor si eficienta operationala. ZESCORP poate evalua necesarul de accesorii, consumabile si suport tehnic.",
+    "commercialCategory": "Laborator / diagnostic rapid",
+    "imageUrl": "/visuals/medical-laboratory.webp",
+    "imageAlt": "Analizor de urina pentru laborator si diagnostic rapid",
+    "romanianApplications": [
+      "Testare urinara in cabinete medicale",
+      "Laboratoare cu volum redus sau mediu",
+      "Dotare pentru clinici si centre medicale"
+    ],
+    "romanianBenefits": [
+      "Conectivitate utila pentru fluxuri moderne",
+      "Poate fi ofertat impreuna cu consumabile si suport",
+      "Integrare usoara in proiecte de laborator medical"
+    ],
+    "romanianSpecifications": [
+      {
+        "label": "Categorie",
+        "value": "Analizor urina"
+      },
+      {
+        "label": "Conectivitate",
+        "value": "Bluetooth"
+      },
+      {
+        "label": "Aplicatie",
+        "value": "Diagnostic rapid / laborator"
+      },
+      {
+        "label": "Suport",
+        "value": "Ofertare, consumabile si service"
+      }
+    ],
+    "publicDisplayReady": true
   },
   {
     "id": "gima-up-7000-monitor",
@@ -97,7 +199,41 @@
     "installationConsiderations": [],
     "maintenanceConsiderations": [],
     "relatedServices": [],
-    "notes": "Seeded from public catalogue reference. Needs product-page verification before approval."
+    "notes": "Seeded from public catalogue reference. Needs product-page verification before approval.",
+    "romanianTitle": "Monitor multiparametric UP 7000",
+    "romanianDescription": "Monitor multiparametric pentru supravegherea functiilor vitale in zone clinice, camere de tratament sau fluxuri cu pacienti monitorizati. ZESCORP poate pregati oferta, accesoriile necesare si optiunile de service.",
+    "commercialCategory": "Diagnostic si monitorizare pacient",
+    "imageUrl": "/visuals/medical-equipment.webp",
+    "imageAlt": "Monitor multiparametric pentru clinici si unitati medicale",
+    "romanianApplications": [
+      "Camere de tratament si consultatii",
+      "Clinici cu pacienti monitorizati",
+      "Dotare pentru fluxuri medicale noi sau modernizate"
+    ],
+    "romanianBenefits": [
+      "Sprijina monitorizarea clinica operationala",
+      "Poate include accesorii, senzori si suport service",
+      "Potrivit pentru contracte de mentenanta preventiva"
+    ],
+    "romanianSpecifications": [
+      {
+        "label": "Categorie",
+        "value": "Monitor multiparametric"
+      },
+      {
+        "label": "Utilizare",
+        "value": "Monitorizare functii vitale"
+      },
+      {
+        "label": "Mediu recomandat",
+        "value": "Clinici, cabinete, zone tratament"
+      },
+      {
+        "label": "Suport",
+        "value": "Service, accesorii si mentenanta"
+      }
+    ],
+    "publicDisplayReady": true
   },
   {
     "id": "gima-emergency-trolley-neo-plus-45720",
@@ -122,7 +258,41 @@
     "installationConsiderations": [],
     "maintenanceConsiderations": [],
     "relatedServices": [],
-    "notes": "Seeded from public catalogue reference. Needs product-page verification before approval."
+    "notes": "Seeded from public catalogue reference. Needs product-page verification before approval.",
+    "romanianTitle": "Carucior de urgenta Neo Plus",
+    "romanianDescription": "Carucior medical pentru organizarea echipamentelor si materialelor necesare in zone de urgenta, interventie sau tratament. ZESCORP poate ajuta cu configurarea, ofertarea si integrarea in fluxul clinic.",
+    "commercialCategory": "Urgenta si suport clinic",
+    "imageUrl": "/visuals/technical-service.webp",
+    "imageAlt": "Carucior de urgenta pentru echipare medicala",
+    "romanianApplications": [
+      "Zone de urgenta si triaj",
+      "Clinici cu interventii rapide",
+      "Spatii de tratament care necesita organizare mobila"
+    ],
+    "romanianBenefits": [
+      "Organizare clara a materialelor medicale",
+      "Integrare in proiecte de amenajare clinica",
+      "Poate fi completat cu accesorii si consumabile"
+    ],
+    "romanianSpecifications": [
+      {
+        "label": "Categorie",
+        "value": "Carucior de urgenta"
+      },
+      {
+        "label": "Utilizare",
+        "value": "Organizare echipamente si consumabile"
+      },
+      {
+        "label": "Mediu recomandat",
+        "value": "Urgenta, tratament, triaj"
+      },
+      {
+        "label": "Suport",
+        "value": "Configurare si ofertare"
+      }
+    ],
+    "publicDisplayReady": true
   },
   {
     "id": "gima-d-600-medical-heat-sealer",
@@ -147,7 +317,41 @@
     "installationConsiderations": [],
     "maintenanceConsiderations": [],
     "relatedServices": [],
-    "notes": "Seeded from public catalogue reference. Needs product-page verification before approval."
+    "notes": "Seeded from public catalogue reference. Needs product-page verification before approval.",
+    "romanianTitle": "Aparat de sigilare medicala D-600",
+    "romanianDescription": "Sistem de sigilare pentru ambalarea instrumentarului in fluxuri de sterilizare. ZESCORP poate verifica aplicatia, necesarul operational si modul de integrare cu zona de sterilizare.",
+    "commercialCategory": "Sterilizare si instrumentar",
+    "imageUrl": "/visuals/preventive-maintenance.webp",
+    "imageAlt": "Aparat de sigilare pentru sterilizare medicala",
+    "romanianApplications": [
+      "Cabinete cu sterilizare interna",
+      "Clinici stomatologice sau medicale",
+      "Zone de pregatire instrumentar"
+    ],
+    "romanianBenefits": [
+      "Sprijina un flux controlat de sterilizare",
+      "Poate fi integrat cu consumabile si mentenanta",
+      "Util pentru modernizarea zonelor de instrumentar"
+    ],
+    "romanianSpecifications": [
+      {
+        "label": "Categorie",
+        "value": "Aparat de sigilare medicala"
+      },
+      {
+        "label": "Aplicatie",
+        "value": "Ambalare instrumentar"
+      },
+      {
+        "label": "Mediu recomandat",
+        "value": "Sterilizare / cabinet medical"
+      },
+      {
+        "label": "Suport",
+        "value": "Instalare, consumabile si service"
+      }
+    ],
+    "publicDisplayReady": true
   },
   {
     "id": "gima-medical-trolley-easy-27880",
@@ -172,7 +376,41 @@
     "installationConsiderations": [],
     "maintenanceConsiderations": [],
     "relatedServices": [],
-    "notes": "Seeded from public catalogue reference. Needs product-page verification before approval."
+    "notes": "Seeded from public catalogue reference. Needs product-page verification before approval.",
+    "romanianTitle": "Carucior medical EASY",
+    "romanianDescription": "Carucior medical pentru organizarea instrumentarului, accesoriilor si consumabilelor in cabinete, sali de tratament sau zone de suport clinic. ZESCORP il poate include in proiecte de dotare si amenajare.",
+    "commercialCategory": "Mobilier medical",
+    "imageUrl": "/visuals/medical-construction.webp",
+    "imageAlt": "Carucior medical pentru organizarea cabinetului",
+    "romanianApplications": [
+      "Cabinete medicale si stomatologice",
+      "Sali de tratament",
+      "Zone de suport pentru echipamente si consumabile"
+    ],
+    "romanianBenefits": [
+      "Ajuta la organizarea spatiului clinic",
+      "Poate fi ofertat impreuna cu mobilier si echipamente",
+      "Util in proiecte de amenajare sau modernizare"
+    ],
+    "romanianSpecifications": [
+      {
+        "label": "Categorie",
+        "value": "Carucior medical"
+      },
+      {
+        "label": "Utilizare",
+        "value": "Organizare instrumentar si consumabile"
+      },
+      {
+        "label": "Mediu recomandat",
+        "value": "Cabinet / sala tratament"
+      },
+      {
+        "label": "Suport",
+        "value": "Ofertare si integrare in amenajare"
+      }
+    ],
+    "publicDisplayReady": true
   },
   {
     "id": "gima-ent-chair-otopex-27552",
@@ -197,7 +435,41 @@
     "installationConsiderations": [],
     "maintenanceConsiderations": [],
     "relatedServices": [],
-    "notes": "Seeded from public catalogue reference. Needs product-page verification before approval."
+    "notes": "Seeded from public catalogue reference. Needs product-page verification before approval.",
+    "romanianTitle": "Scaun ORL OTOPEX",
+    "romanianDescription": "Scaun specializat pentru cabinete ORL, gandit pentru examinare si organizarea eficienta a consultului. ZESCORP poate pregati oferta si integrarea cu restul dotarilor de cabinet.",
+    "commercialCategory": "ORL",
+    "imageUrl": "/visuals/medical-equipment.webp",
+    "imageAlt": "Scaun ORL pentru cabinet medical",
+    "romanianApplications": [
+      "Cabinete ORL",
+      "Clinici specializate",
+      "Proiecte de dotare cabinet medical"
+    ],
+    "romanianBenefits": [
+      "Sprijina ergonomia consultului ORL",
+      "Poate fi integrat cu mobilier si echipamente specifice",
+      "Include suport pentru ofertare si configurare"
+    ],
+    "romanianSpecifications": [
+      {
+        "label": "Categorie",
+        "value": "Scaun ORL"
+      },
+      {
+        "label": "Utilizare",
+        "value": "Examinare si consult ORL"
+      },
+      {
+        "label": "Mediu recomandat",
+        "value": "Cabinet ORL"
+      },
+      {
+        "label": "Suport",
+        "value": "Dotare cabinet si service"
+      }
+    ],
+    "publicDisplayReady": true
   },
   {
     "id": "gima-fc-700-foetal-monitor",
@@ -222,7 +494,41 @@
     "installationConsiderations": [],
     "maintenanceConsiderations": [],
     "relatedServices": [],
-    "notes": "Seeded from public catalogue reference. Needs product-page verification before approval."
+    "notes": "Seeded from public catalogue reference. Needs product-page verification before approval.",
+    "romanianTitle": "Monitor fetal FC 700",
+    "romanianDescription": "Monitor fetal pentru cabinete si clinici de ginecologie/obstetrica, util in fluxuri de monitorizare si evaluare clinica. ZESCORP poate ajuta cu ofertarea, accesoriile si suportul tehnic.",
+    "commercialCategory": "Ginecologie si obstetrica",
+    "imageUrl": "/visuals/medical-equipment.webp",
+    "imageAlt": "Monitor fetal pentru ginecologie si obstetrica",
+    "romanianApplications": [
+      "Cabinete de ginecologie",
+      "Clinici obstetrica",
+      "Dotare pentru servicii de monitorizare fetala"
+    ],
+    "romanianBenefits": [
+      "Ajuta la organizarea fluxului de monitorizare",
+      "Poate include accesorii si plan de service",
+      "Potrivit pentru dotari de cabinet sau clinica"
+    ],
+    "romanianSpecifications": [
+      {
+        "label": "Categorie",
+        "value": "Monitor fetal"
+      },
+      {
+        "label": "Aplicatie",
+        "value": "Monitorizare fetala"
+      },
+      {
+        "label": "Mediu recomandat",
+        "value": "Ginecologie / obstetrica"
+      },
+      {
+        "label": "Suport",
+        "value": "Ofertare, accesorii si mentenanta"
+      }
+    ],
+    "publicDisplayReady": true
   },
   {
     "id": "gima-disposable-skin-staple-remover-25892",
@@ -247,6 +553,40 @@
     "installationConsiderations": [],
     "maintenanceConsiderations": [],
     "relatedServices": [],
-    "notes": "Seeded from public catalogue reference. Needs product-page verification before approval."
+    "notes": "Seeded from public catalogue reference. Needs product-page verification before approval.",
+    "romanianTitle": "Dispozitiv de indepartare agrafe cutanate",
+    "romanianDescription": "Consumabil chirurgical pentru indepartarea agrafelor cutanate in contexte medicale controlate. ZESCORP poate pregati oferte recurente pentru consumabile si pachete operationale pentru clinici.",
+    "commercialCategory": "Consumabile medicale",
+    "imageUrl": "/visuals/preventive-maintenance.webp",
+    "imageAlt": "Consumabile medicale pentru proceduri clinice",
+    "romanianApplications": [
+      "Cabinete si clinici cu proceduri minore",
+      "Zone chirurgicale sau post-interventie",
+      "Pachete de consumabile pentru dotare clinica"
+    ],
+    "romanianBenefits": [
+      "Poate fi inclus in aprovizionare recurenta",
+      "Ajuta la completarea stocului operational",
+      "Se poate oferta impreuna cu alte consumabile medicale"
+    ],
+    "romanianSpecifications": [
+      {
+        "label": "Categorie",
+        "value": "Consumabil chirurgical"
+      },
+      {
+        "label": "Utilizare",
+        "value": "Indepartare agrafe cutanate"
+      },
+      {
+        "label": "Mediu recomandat",
+        "value": "Clinici, cabinete, zone procedurale"
+      },
+      {
+        "label": "Suport",
+        "value": "Ofertare recurenta si aprovizionare"
+      }
+    ],
+    "publicDisplayReady": true
   }
 ]

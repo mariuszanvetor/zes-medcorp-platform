@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -9,8 +10,9 @@ import { Section } from "@/components/ui/Section";
 import { createWebsiteMetadata } from "@/lib/seo";
 import {
   getCategoryPath,
+  getProductCommercialContent,
+  getProductDisplayName,
   getProductPath,
-  getProductReviewLabel,
   getProductsByCategory,
   getProductCategoryBySlug,
   isProductIndexable,
@@ -36,7 +38,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 
   return createWebsiteMetadata({
     title: `${category.label} | Catalog produse medicale ZESCORP`,
-    description: `${category.description} Catalog noindex pentru produse importate pana la review, cu cerere de oferta si suport ZESCORP.`,
+    description: `${category.description} Solicita oferta, instalare, service si mentenanta ZESCORP pentru produse medicale.`,
     path: getCategoryPath(category),
     noIndex: !hasIndexableProducts,
     keywords: [category.label, "catalog produse medicale", "oferta echipamente medicale"],
@@ -50,7 +52,6 @@ export default async function ProductCategoryPage({ params }: CategoryPageProps)
   if (!category) notFound();
 
   const products = getProductsByCategory(category.id);
-  const isIndexable = products.some(isProductIndexable);
 
   return (
     <>
@@ -66,7 +67,7 @@ export default async function ProductCategoryPage({ params }: CategoryPageProps)
           <Container>
             <div className="max-w-4xl">
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#0057b8]">
-                Catalog produse / {isIndexable ? "indexabil" : "noindex"}
+                Catalog produse medicale
               </p>
               <h1 className="mt-5 text-4xl font-semibold leading-tight text-slate-950 sm:text-6xl">
                 {category.label}
@@ -74,11 +75,20 @@ export default async function ProductCategoryPage({ params }: CategoryPageProps)
               <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
                 {category.description}
               </p>
-              <p className="mt-4 rounded-xl border border-blue-100 bg-white px-4 py-3 text-sm leading-7 text-slate-700">
-                {isIndexable
-                  ? "Categoria contine produse aprobate pentru indexare."
-                  : "Categoria ramane noindex pana cand exista produse revizuite si aprobate pentru indexare."}
-              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Link
+                  className="inline-flex h-12 items-center justify-center rounded-xl border border-[#0057b8] bg-[#0057b8] px-6 text-base font-semibold text-white shadow-[0_14px_30px_rgba(0,87,184,0.18)] transition hover:bg-[#00498f]"
+                  href="/contact"
+                >
+                  Solicita oferta
+                </Link>
+                <Link
+                  className="inline-flex h-12 items-center justify-center rounded-xl border border-blue-100 bg-white px-6 text-base font-semibold text-slate-950 transition hover:bg-blue-50"
+                  href="/contracte-mentenanta"
+                >
+                  Service si mentenanta
+                </Link>
+              </div>
             </div>
           </Container>
         </Section>
@@ -87,27 +97,39 @@ export default async function ProductCategoryPage({ params }: CategoryPageProps)
           <Container>
             <SectionHeading
               eyebrow="Produse"
-              title="Produse importate pentru review si ofertare"
+              title="Produse disponibile pentru cereri de oferta"
               description={category.serviceAngle}
             />
             <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {products.map((product) => (
-                <Link
-                  className="rounded-2xl border border-slate-200 bg-white p-5 transition hover:border-blue-200 hover:bg-blue-50"
-                  href={getProductPath(product)}
-                  key={product.id}
-                >
-                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
-                    {getProductReviewLabel(product.reviewStatus)}
-                  </p>
-                  <h2 className="mt-3 text-lg font-semibold leading-7 text-slate-950">
-                    {product.sourceBrand} {product.sourceProductName}
-                  </h2>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">
-                    {product.gimaCode ? `Cod GIMA: ${product.gimaCode}` : "Cod GIMA in verificare"}
-                  </p>
-                </Link>
-              ))}
+              {products.map((product) => {
+                const content = getProductCommercialContent(product);
+                return (
+                  <Link
+                    className="overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:border-blue-200 hover:bg-blue-50"
+                    href={getProductPath(product)}
+                    key={product.id}
+                  >
+                    <Image
+                      alt={content.imageAlt}
+                      className="aspect-[16/10] w-full object-cover"
+                      height={360}
+                      src={content.imageUrl}
+                      width={576}
+                    />
+                    <div className="p-5">
+                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
+                        {content.categoryLabel}
+                      </p>
+                      <h2 className="mt-3 text-lg font-semibold leading-7 text-slate-950">
+                        {getProductDisplayName(product)}
+                      </h2>
+                      <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-600">
+                        {content.description}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </Container>
         </Section>
