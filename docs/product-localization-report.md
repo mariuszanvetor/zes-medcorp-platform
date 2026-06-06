@@ -1,17 +1,15 @@
 # Product Localization Report
 
-Generated: 2026-06-06T19:36:30.068Z
+Generated: 2026-06-06T19:50:44.522Z
 
 Scope: 50 reviewed products only. No imports, no SEO changes, no deployment.
 
 ## Summary
 
 - Reviewed products audited: 50
-- English phrase findings in initial phase audit: 78
-- English phrase findings after final localization pass: 0
-- Findings fixed or normalized: 78
-- Products imported in this phase: 0
-- SEO/indexing behavior changed in this phase: no
+- English phrase findings before fixes: 0
+- English phrase findings after fixes: 0
+- Findings fixed: 0
 
 ## Translation Dictionaries Added
 
@@ -37,10 +35,7 @@ Scope: 50 reviewed products only. No imports, no SEO changes, no deployment.
 
 ## Products Affected
 
-- All 50 reviewed public-display products were audited for public-facing text.
-- Product titles, descriptions, feature lists, applications, benefits, package contents, support text and technical specification labels were normalized to Romanian where needed.
-- Product-specific cleanup was applied for the osteoporosis evaluation system so the product keeps the Sunlight MiniOmni model naming while using Romanian commercial wording.
-- Valid Romanian/customer-facing words such as "manual" and "transparent" are not counted as English findings.
+
 
 ## Fixes Applied
 
@@ -49,11 +44,8 @@ Scope: 50 reviewed products only. No imports, no SEO changes, no deployment.
 - Specification rows that still contained English after translation were removed instead of exposing mixed-language content.
 - Package contents were translated; uncertain package text was replaced with customer-facing Romanian wording.
 - Applications, benefits, installation and maintenance support notes were normalized in Romanian.
-- Generic replacements were tightened so brand/model words are not accidentally translated inside the word.
-- Public catalog content remains free of source/import/review metadata.
 
 ## Acceptance Check
 
 - Remaining English findings after localization: 0
 - Allowed exceptions remain brand names, model names, scientific abbreviations and regulatory abbreviations.
-- Imported product pages remain noindex and excluded from the sitemap.

@@ -131,10 +131,10 @@ const replacements = [
   [/Crank adjustment system/gi, "sistem de reglaj cu manivela"],
   [/Adjustment system/gi, "sistem de reglaj"],
   [/System/gi, "sistem"],
-  [/Blue/gi, "albastru"],
-  [/White/gi, "alb"],
-  [/Green/gi, "verde"],
-  [/Red/gi, "rosu"],
+  [/\bBlue\b/gi, "albastru"],
+  [/\bWhite\b/gi, "alb"],
+  [/\bGreen\b/gi, "verde"],
+  [/\bRed\b/gi, "rosu"],
   [/Vacuum/gi, "vacuum"],
   [/\bLight\b/gi, "lumina"],
   [/Halogen/gi, "halogen"],
@@ -271,9 +271,11 @@ function localizeText(value) {
     .replace(/&amp;/gi, "&")
     .replace(/•/g, "")
     .replace(/\s+/g, " ")
+    .replace(/albastrutooth/gi, "Bluetooth")
     .trim();
   for (const [pattern, replacement] of replacements) output = output.replace(pattern, replacement);
   return output
+    .replace(/albastrutooth/gi, "Bluetooth")
     .replace(/\bGB,?\s*FR,?\s*IT,?\s*ES,?\s*PT,?\s*DE,?\s*PL,?\s*RO\b/gi, "mai multe limbi")
     .replace(/\bGB,?\s*FR,?\s*IT,?\s*ES\b/gi, "mai multe limbi")
     .replace(/\bUS,?\s*PT,?\s*NL,?\s*KR\b/gi, "mai multe limbi")

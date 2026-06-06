@@ -273,7 +273,7 @@
       },
       {
         "label": "Metoda de masurare",
-        "value": "fotometric, azidemethemoglobinaa"
+        "value": "fotometric, azidemethemoglobinaaa"
       },
       {
         "label": "Interval de masurare",
@@ -496,8 +496,8 @@
       "/contracte-mentenanta"
     ],
     "notes": "GIMA public product page enriched. Noindex until manual ZESCORP review. Batch 50 quality-gate enrichment. Public noindex preserved. Batch 50 quality-gate enrichment. Public noindex preserved.",
-    "romanianTitle": "Analizor de urina cu albastrutooth",
-    "romanianDescription": "Analizor de urina cu albastrutooth este un produs medical pentru laboratoare, fluxuri IVD si prelucrarea probelor in unitati medicale. Pagina este pregatita pentru cereri de oferta profesionale, cu imagini produs, specificatii disponibile, documentatie locala si suport ZESCORP pentru selectie, livrare si service.",
+    "romanianTitle": "Analizor de urina cu Bluetooth",
+    "romanianDescription": "Analizor de urina cu Bluetooth este un produs medical pentru laboratoare, fluxuri IVD si prelucrarea probelor in unitati medicale. Pagina este pregatita pentru cereri de oferta profesionale, cu imagini produs, specificatii disponibile, documentatie locala si suport ZESCORP pentru selectie, livrare si service.",
     "commercialCategory": "Laborator / IVD",
     "imageUrl": "/product-images/24046/24046.jpg",
     "imageAlt": "Analizor de urina cu Bluetooth - produs medical pentru oferta ZESCORP",
@@ -654,7 +654,7 @@
       "24114"
     ],
     "romanianFeatures": [
-      "Analizor de urina cu albastrutooth",
+      "Analizor de urina cu Bluetooth",
       "ridicat-luminance, alb LE D, Caracteristici long life and good stability",
       "Ecran LCD de mari dimensiuni",
       "Interfata intuitiva"
@@ -663,8 +663,8 @@
       "Produs cod 24046",
       "Documentatia disponibila se confirma la ofertare"
     ],
-    "romanianShortSummary": "Analizor de urina cu albastrutooth, disponibil pentru cerere de oferta ZESCORP, cu verificarea configuratiei, cantitatii, documentatiei si suportului de service.",
-    "romanianSourceDescription": "Analizor de urina cu albastrutooth este un produs medical pentru laboratoare, fluxuri IVD si prelucrarea probelor in unitati medicale. Pagina este pregatita pentru cereri de oferta profesionale, cu imagini produs, specificatii disponibile, documentatie locala si suport ZESCORP pentru selectie, livrare si service.",
+    "romanianShortSummary": "Analizor de urina cu Bluetooth, disponibil pentru cerere de oferta ZESCORP, cu verificarea configuratiei, cantitatii, documentatiei si suportului de service.",
+    "romanianSourceDescription": "Analizor de urina cu Bluetooth este un produs medical pentru laboratoare, fluxuri IVD si prelucrarea probelor in unitati medicale. Pagina este pregatita pentru cereri de oferta profesionale, cu imagini produs, specificatii disponibile, documentatie locala si suport ZESCORP pentru selectie, livrare si service.",
     "sourceExtractedAt": "2026-06-06T14:46:48.197Z",
     "sourceQuality": "gima_page_parity_review",
     "documentStatus": {
@@ -79563,7 +79563,7 @@
       },
       {
         "label": "Conectivitate",
-        "value": "albastrutooth"
+        "value": "Bluetooth"
       },
       {
         "label": "Memorie",
@@ -79628,7 +79628,7 @@
     "romanianSourceDescription": "Monitor multiparametric pentru 6 parametri este un produs medical pentru monitorizare clinica, evaluare parametri si suport operational. Pagina este pregatita pentru cereri de oferta profesionale, cu imagini produs, specificatii disponibile, documentatie locala si suport ZESCORP pentru selectie, livrare si service.",
     "romanianFeatures": [
       "6 parametri masurabili intr-un singur dispozitiv",
-      "Conectivitate albastrutooth si compatibilitate ProCheck App",
+      "Conectivitate Bluetooth si compatibilitate ProCheck App",
       "Identificare automata a bandeletaurilor",
       "Memorie pentru 1.000 de masuratori",
       "Indicatori culoare pentru introducerea bandeletaului si intervalul rezultatului",
