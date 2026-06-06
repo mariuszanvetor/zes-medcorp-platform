@@ -24,7 +24,6 @@ const staticRoutes: Array<{
   { path: "/services", changeFrequency: "monthly", priority: 0.9 },
   { path: "/solutii-medicale", changeFrequency: "monthly", priority: 0.94 },
   { path: "/contracte-mentenanta", changeFrequency: "monthly", priority: 0.9 },
-  { path: "/produse", changeFrequency: "monthly", priority: 0.72 },
   { path: "/servicii", changeFrequency: "monthly", priority: 0.88 },
   { path: "/about", changeFrequency: "monthly", priority: 0.74 },
   { path: "/companie", changeFrequency: "monthly", priority: 0.76 },

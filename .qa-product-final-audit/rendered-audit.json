@@ -1,0 +1,339 @@
+{
+  "generatedAt": "2026-06-06T06:49:02.406Z",
+  "routes": [
+    {
+      "route": "/produse",
+      "status": 200,
+      "h1": "Produse medicale pentru clinici, cabinete si laboratoare.",
+      "noindex": true,
+      "inSitemap": true,
+      "forbidden": false,
+      "externalGimaAnchors": 0,
+      "localDocLinks": 0,
+      "hasQuote": true,
+      "hasSpecs": false,
+      "imgCount": 12,
+      "hasCarousel": false
+    },
+    {
+      "route": "/produse/categorie/laboratory",
+      "status": 200,
+      "h1": "Laborator / IVD",
+      "noindex": true,
+      "inSitemap": false,
+      "forbidden": false,
+      "externalGimaAnchors": 0,
+      "localDocLinks": 0,
+      "hasQuote": true,
+      "hasSpecs": false,
+      "imgCount": 50,
+      "hasCarousel": false
+    },
+    {
+      "route": "/produse/gima-xc-2000-centrifuge-24035",
+      "status": 200,
+      "h1": "Centrifuga de laborator XC-2000",
+      "noindex": true,
+      "inSitemap": false,
+      "forbidden": false,
+      "externalGimaAnchors": 0,
+      "localDocLinks": 2,
+      "hasQuote": true,
+      "hasSpecs": true,
+      "imgCount": 5,
+      "hasCarousel": true
+    },
+    {
+      "route": "/produse/gima-gimacare-multi-parameter-monitor-6-parameters-gb-fr-it-es-24128",
+      "status": 200,
+      "h1": "Monitor multiparametric pentru 6 parametri",
+      "noindex": true,
+      "inSitemap": false,
+      "forbidden": false,
+      "externalGimaAnchors": 0,
+      "localDocLinks": 3,
+      "hasQuote": true,
+      "hasSpecs": true,
+      "imgCount": 9,
+      "hasCarousel": true
+    },
+    {
+      "route": "/produse/gima-non-woven-bi-layer-drape-50x50-cm-23580",
+      "status": 200,
+      "h1": "Camp chirurgical steril netesut dublu strat 50 x 50 cm",
+      "noindex": true,
+      "inSitemap": false,
+      "forbidden": false,
+      "externalGimaAnchors": 0,
+      "localDocLinks": 2,
+      "hasQuote": true,
+      "hasSpecs": true,
+      "imgCount": 5,
+      "hasCarousel": true
+    },
+    {
+      "route": "/produse/gima-aesculap-foerster-ballenger-clamp-straight-18-cm-bf112r-39240",
+      "status": 200,
+      "h1": "Pensa Aesculap Foerster-Ballenger dreapta 18 cm BF112R",
+      "noindex": true,
+      "inSitemap": false,
+      "forbidden": false,
+      "externalGimaAnchors": 0,
+      "localDocLinks": 2,
+      "hasQuote": true,
+      "hasSpecs": true,
+      "imgCount": 3,
+      "hasCarousel": false
+    },
+    {
+      "route": "/produse/gima-quick-tourniquet-blue-25748",
+      "status": 200,
+      "h1": "Garou rapid albastru",
+      "noindex": true,
+      "inSitemap": false,
+      "forbidden": false,
+      "externalGimaAnchors": 0,
+      "localDocLinks": 2,
+      "hasQuote": true,
+      "hasSpecs": true,
+      "imgCount": 9,
+      "hasCarousel": true
+    },
+    {
+      "route": "/produse/gima-hydraulic-patient-transfer-chair-43430",
+      "status": 200,
+      "h1": "Scaun hidraulic pentru transfer pacient",
+      "noindex": true,
+      "inSitemap": false,
+      "forbidden": false,
+      "externalGimaAnchors": 0,
+      "localDocLinks": 2,
+      "hasQuote": true,
+      "hasSpecs": true,
+      "imgCount": 7,
+      "hasCarousel": true
+    },
+    {
+      "route": "/produse/gima-emergency-trolley-neo-plus-45720",
+      "status": 200,
+      "h1": "Carucior de urgenta Neo Plus",
+      "noindex": true,
+      "inSitemap": false,
+      "forbidden": false,
+      "externalGimaAnchors": 0,
+      "localDocLinks": 2,
+      "hasQuote": true,
+      "hasSpecs": true,
+      "imgCount": 6,
+      "hasCarousel": true
+    },
+    {
+      "route": "/produse/gima-ent-chair-otopex-27552",
+      "status": 200,
+      "h1": "Scaun ORL Otopex cu tetiera - verde Toronto",
+      "noindex": true,
+      "inSitemap": false,
+      "forbidden": false,
+      "externalGimaAnchors": 0,
+      "localDocLinks": 1,
+      "hasQuote": true,
+      "hasSpecs": true,
+      "imgCount": 5,
+      "hasCarousel": true
+    },
+    {
+      "route": "/produse/gima-foot-warmer-with-massage-28668",
+      "status": 200,
+      "h1": "Incalzitor pentru picioare cu masaj",
+      "noindex": true,
+      "inSitemap": false,
+      "forbidden": false,
+      "externalGimaAnchors": 0,
+      "localDocLinks": 2,
+      "hasQuote": true,
+      "hasSpecs": true,
+      "imgCount": 3,
+      "hasCarousel": false
+    },
+    {
+      "route": "/produse/gima-colpy-gima-led-colposcope-29600",
+      "status": 200,
+      "h1": "Colposcop LED Colpy",
+      "noindex": true,
+      "inSitemap": false,
+      "forbidden": false,
+      "externalGimaAnchors": 0,
+      "localDocLinks": 2,
+      "hasQuote": true,
+      "hasSpecs": true,
+      "imgCount": 3,
+      "hasCarousel": false
+    }
+  ],
+  "docChecks": [
+    {
+      "route": "/produse/gima-xc-2000-centrifuge-24035",
+      "link": "/product-documents/24035/manual-en.pdf",
+      "status": 200,
+      "contentType": "application/pdf"
+    },
+    {
+      "route": "/produse/gima-xc-2000-centrifuge-24035",
+      "link": "/product-documents/24035/fisa-tehnica.pdf",
+      "status": 200,
+      "contentType": "application/pdf"
+    },
+    {
+      "route": "/produse/gima-gimacare-multi-parameter-monitor-6-parameters-gb-fr-it-es-24128",
+      "link": "/product-documents/24128/manual-en.pdf",
+      "status": 200,
+      "contentType": "application/pdf"
+    },
+    {
+      "route": "/produse/gima-gimacare-multi-parameter-monitor-6-parameters-gb-fr-it-es-24128",
+      "link": "/product-documents/24128/certificat-ce.pdf",
+      "status": 200,
+      "contentType": "application/pdf"
+    },
+    {
+      "route": "/produse/gima-gimacare-multi-parameter-monitor-6-parameters-gb-fr-it-es-24128",
+      "link": "/product-documents/24128/fisa-tehnica.pdf",
+      "status": 200,
+      "contentType": "application/pdf"
+    },
+    {
+      "route": "/produse/gima-non-woven-bi-layer-drape-50x50-cm-23580",
+      "link": "/product-documents/23580/certificat-ce.pdf",
+      "status": 200,
+      "contentType": "application/pdf"
+    },
+    {
+      "route": "/produse/gima-non-woven-bi-layer-drape-50x50-cm-23580",
+      "link": "/product-documents/23580/fisa-tehnica.pdf",
+      "status": 200,
+      "contentType": "application/pdf"
+    }
+  ],
+  "imageStats": [
+    {
+      "slug": "gima-xc-2000-centrifuge-24035",
+      "images": 2,
+      "imageStatus": "verified",
+      "docs": 2,
+      "documentStatus": {
+        "englishManual": "available",
+        "ceCertificate": "missing",
+        "technicalDatasheet": "available"
+      },
+      "specs": 8
+    },
+    {
+      "slug": "gima-emergency-trolley-neo-plus-45720",
+      "images": 3,
+      "imageStatus": "verified",
+      "docs": 2,
+      "documentStatus": {
+        "englishManual": "available",
+        "ceCertificate": "missing",
+        "technicalDatasheet": "available"
+      },
+      "specs": 6
+    },
+    {
+      "slug": "gima-ent-chair-otopex-27552",
+      "images": 2,
+      "imageStatus": "verified",
+      "docs": 1,
+      "documentStatus": {
+        "englishManual": "missing",
+        "ceCertificate": "missing",
+        "technicalDatasheet": "available"
+      },
+      "specs": 4
+    },
+    {
+      "slug": "gima-foot-warmer-with-massage-28668",
+      "images": 1,
+      "imageStatus": "verified",
+      "docs": 2,
+      "documentStatus": {
+        "englishManual": "available",
+        "ceCertificate": "missing",
+        "technicalDatasheet": "available"
+      },
+      "specs": 3
+    },
+    {
+      "slug": "gima-colpy-gima-led-colposcope-29600",
+      "images": 1,
+      "imageStatus": "verified",
+      "docs": 2,
+      "documentStatus": {
+        "englishManual": "available",
+        "ceCertificate": "missing",
+        "technicalDatasheet": "available"
+      },
+      "specs": 8
+    },
+    {
+      "slug": "gima-gimacare-multi-parameter-monitor-6-parameters-gb-fr-it-es-24128",
+      "images": 6,
+      "imageStatus": "verified",
+      "docs": 3,
+      "documentStatus": {
+        "englishManual": "available",
+        "ceCertificate": "available",
+        "technicalDatasheet": "available"
+      },
+      "specs": 10
+    },
+    {
+      "slug": "gima-non-woven-bi-layer-drape-50x50-cm-23580",
+      "images": 2,
+      "imageStatus": "verified",
+      "docs": 2,
+      "documentStatus": {
+        "englishManual": "missing",
+        "ceCertificate": "available",
+        "technicalDatasheet": "available"
+      },
+      "specs": 5
+    },
+    {
+      "slug": "gima-aesculap-foerster-ballenger-clamp-straight-18-cm-bf112r-39240",
+      "images": 1,
+      "imageStatus": "verified",
+      "docs": 2,
+      "documentStatus": {
+        "englishManual": "missing",
+        "ceCertificate": "available",
+        "technicalDatasheet": "available"
+      },
+      "specs": 4
+    },
+    {
+      "slug": "gima-quick-tourniquet-blue-25748",
+      "images": 6,
+      "imageStatus": "verified",
+      "docs": 2,
+      "documentStatus": {
+        "englishManual": "available",
+        "ceCertificate": "missing",
+        "technicalDatasheet": "available"
+      },
+      "specs": 5
+    },
+    {
+      "slug": "gima-hydraulic-patient-transfer-chair-43430",
+      "images": 4,
+      "imageStatus": "verified",
+      "docs": 2,
+      "documentStatus": {
+        "englishManual": "available",
+        "ceCertificate": "missing",
+        "technicalDatasheet": "available"
+      },
+      "specs": 5
+    }
+  ]
+}

@@ -219,9 +219,16 @@ function checkProductCatalogSafety(sitemapSource) {
     errors.push("Product sitemap coverage must use getIndexableProducts.");
   }
 
-  const invalidStatuses = products.filter((product) =>
-    !["imported", "reviewed", "approved", "indexable"].includes(product.reviewStatus),
-  );
+  const validProductReviewStatuses = [
+    "imported",
+    "translated",
+    "image_verified",
+    "reviewed",
+    "approved",
+    "indexable",
+    "excluded",
+  ];
+  const invalidStatuses = products.filter((product) => !validProductReviewStatuses.includes(product.reviewStatus));
   for (const product of invalidStatuses) {
     errors.push(`Product has invalid review status: ${product.slug || product.id}`);
   }

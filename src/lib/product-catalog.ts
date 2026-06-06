@@ -1,6 +1,6 @@
 import productsJson from "../../data/product-catalog/products.json";
 
-export type ProductReviewStatus = "imported" | "reviewed" | "approved" | "indexable";
+export type ProductReviewStatus = "imported" | "translated" | "image_verified" | "reviewed" | "approved" | "indexable" | "excluded";
 
 export type ProductCategoryId =
   | "diagnostic"
@@ -10,7 +10,12 @@ export type ProductCategoryId =
   | "medical-furniture"
   | "ent"
   | "gynecology"
-  | "consumables";
+  | "consumables"
+  | "electromedical"
+  | "surgical-instruments"
+  | "patient-care"
+  | "monitoring"
+  | "disinfection";
 
 export type ProductCategory = {
   id: ProductCategoryId;
@@ -46,10 +51,33 @@ export type ProductCatalogItem = {
   romanianDescription?: string;
   romanianApplications?: string[];
   romanianBenefits?: string[];
+  romanianFeatures?: string[];
+  romanianPackageContents?: string[];
+  romanianShortSummary?: string;
+  romanianSourceDescription?: string;
   romanianSpecifications?: Array<{ label: string; value: string }>;
   commercialCategory?: string;
   imageUrl?: string;
+  imageSourceUrl?: string;
+  imageVerified?: boolean;
+  imageStatus?: "verified" | "missing" | "placeholder";
+  galleryImages?: Array<{ url: string; alt: string; verified: boolean }>;
   imageAlt?: string;
+  documents?: {
+    englishManual?: string;
+    ceCertificate?: string;
+    technicalDatasheet?: string;
+  };
+  documentStatus?: {
+    englishManual?: "available" | "missing" | "failed";
+    ceCertificate?: "available" | "missing" | "failed";
+    technicalDatasheet?: "available" | "missing" | "failed";
+  };
+  productDocuments?: Array<{ label: string; url: string; type: string }>;
+  relatedProductCodes?: string[];
+  gimaBreadcrumbs?: string[];
+  sourceExtractedAt?: string;
+  sourceQuality?: "basic_import" | "gima_page_parity_review";
   publicDisplayReady?: boolean;
 };
 
@@ -110,6 +138,41 @@ export const productCategories: ProductCategory[] = [
     description: "Consumabile medicale si accesorii profesionale care completeaza echiparea clinicii.",
     serviceAngle: "ofertare recurenta, pachete de consumabile si suport operational",
   },
+  {
+    id: "electromedical",
+    slug: "electromedical",
+    label: "Electromedicale",
+    description: "Echipamente electromedicale pentru tratament, diagnostic, terapie si suport clinic.",
+    serviceAngle: "selectie, instalare, configurare si mentenanta pentru echipamente electromedicale",
+  },
+  {
+    id: "surgical-instruments",
+    slug: "surgical-instruments",
+    label: "Instrumentar chirurgical",
+    description: "Instrumentar si accesorii chirurgicale pentru cabinete, clinici si zone de interventie.",
+    serviceAngle: "dotare, inlocuire instrumentar si suport pentru fluxuri de sterilizare",
+  },
+  {
+    id: "patient-care",
+    slug: "patient-care",
+    label: "Ingrijire pacient",
+    description: "Produse si echipamente pentru ingrijire pacient, mobilizare, suport si operare clinica.",
+    serviceAngle: "echipare operationala, consultanta pentru selectie si pachete de produse medicale",
+  },
+  {
+    id: "monitoring",
+    slug: "monitoring",
+    label: "Monitorizare",
+    description: "Echipamente pentru monitorizare clinica, evaluare parametri si suport decizional operational.",
+    serviceAngle: "ofertare, instalare si service pentru echipamente de monitorizare",
+  },
+  {
+    id: "disinfection",
+    slug: "disinfection",
+    label: "Dezinfectie",
+    description: "Produse pentru dezinfectie, control operational si suport pentru siguranta fluxurilor medicale.",
+    serviceAngle: "selectie produse, integrare in fluxuri si suport pentru necesar recurent",
+  },
 ];
 
 export const productCatalog = productsJson as ProductCatalogItem[];
@@ -153,9 +216,12 @@ export function getProductDisplayName(product: ProductCatalogItem) {
 export function getProductReviewLabel(status: ProductReviewStatus) {
   const labels: Record<ProductReviewStatus, string> = {
     imported: "Importat - noindex",
+    translated: "Tradus comercial - noindex",
+    image_verified: "Imagine verificata - noindex",
     reviewed: "Revizuit intern - noindex",
     approved: "Aprobat comercial - noindex",
     indexable: "Indexabil",
+    excluded: "Exclus din publicare",
   };
 
   return labels[status];
@@ -168,9 +234,22 @@ export function getProductCommercialContent(product: ProductCatalogItem) {
   if (product.publicDisplayReady && product.romanianDescription) {
     return {
       description: product.romanianDescription,
+      shortSummary: product.romanianShortSummary || product.romanianDescription,
       applications: product.romanianApplications ?? [],
       benefits: product.romanianBenefits ?? [],
+      features: product.romanianFeatures ?? [],
+      packageContents: product.romanianPackageContents ?? [],
       specifications: product.romanianSpecifications ?? [],
+      documents: getLocalProductDocuments(product),
+      galleryImages: product.galleryImages?.length
+        ? product.galleryImages
+        : [
+            {
+              url: product.imageUrl || getProductCategoryPlaceholder(product.category),
+              alt: product.imageAlt || `${getProductDisplayName(product)} pentru clinici si unitati medicale`,
+              verified: Boolean(product.imageVerified),
+            },
+          ],
       installation: product.installationConsiderations?.length
         ? product.installationConsiderations
         : [
@@ -195,27 +274,50 @@ export function getProductCommercialContent(product: ProductCatalogItem) {
       categoryLabel,
       imageUrl: product.imageUrl || getProductCategoryPlaceholder(product.category),
       imageAlt: product.imageAlt || `${getProductDisplayName(product)} pentru clinici si unitati medicale`,
+      productCode: product.gimaCode || "",
+      brand: product.sourceBrand || "",
+      breadcrumbs: product.gimaBreadcrumbs ?? [],
+      relatedProductCodes: product.relatedProductCodes ?? [],
     };
   }
 
   if (isProductCommerciallyApproved(product) && product.commercialDescription) {
     return {
       description: product.commercialDescription,
+      shortSummary: product.commercialDescription,
       applications: product.applications ?? [],
       benefits: product.romanianBenefits ?? [],
+      features: product.romanianFeatures ?? [],
+      packageContents: product.romanianPackageContents ?? [],
       specifications: product.romanianSpecifications ?? [],
+      documents: getLocalProductDocuments(product),
+      galleryImages: product.galleryImages?.length
+        ? product.galleryImages
+        : [
+            {
+              url: product.imageUrl || getProductCategoryPlaceholder(product.category),
+              alt: product.imageAlt || `${getProductDisplayName(product)} pentru clinici si unitati medicale`,
+              verified: Boolean(product.imageVerified),
+            },
+          ],
       installation: product.installationConsiderations ?? [],
       maintenance: product.maintenanceConsiderations ?? [],
       relatedServices: product.relatedServices ?? [],
       categoryLabel,
       imageUrl: product.imageUrl || getProductCategoryPlaceholder(product.category),
       imageAlt: product.imageAlt || `${getProductDisplayName(product)} pentru clinici si unitati medicale`,
+      productCode: product.gimaCode || "",
+      brand: product.sourceBrand || "",
+      breadcrumbs: product.gimaBreadcrumbs ?? [],
+      relatedProductCodes: product.relatedProductCodes ?? [],
     };
   }
 
   return {
     description:
       "Produs disponibil pentru cerere de oferta, cu verificarea aplicatiei clinice, a configuratiei, a conditiilor de livrare si a optiunilor de service inainte de ofertare.",
+    shortSummary:
+      "Produs disponibil pentru cerere de oferta, cu verificarea aplicatiei clinice, a configuratiei si a optiunilor de service.",
     applications: [
       `Evaluare preliminara pentru categoria ${categoryLabel}`,
       "Cerere de oferta pentru clinici, cabinete sau laboratoare",
@@ -226,6 +328,8 @@ export function getProductCommercialContent(product: ProductCatalogItem) {
       "Posibilitate de ofertare impreuna cu instalare si service",
       "Suport pentru clarificarea consumabilelor si accesoriilor",
     ],
+    features: [],
+    packageContents: [],
     specifications: [
       { label: "Categorie", value: categoryLabel },
       { label: "Stadiu", value: "Disponibil pentru cerere de oferta" },
@@ -249,7 +353,46 @@ export function getProductCommercialContent(product: ProductCatalogItem) {
     categoryLabel,
     imageUrl: product.imageUrl || getProductCategoryPlaceholder(product.category),
     imageAlt: product.imageAlt || `${getProductDisplayName(product)} pentru clinici si unitati medicale`,
+    documents: [],
+    galleryImages: [
+      {
+        url: product.imageUrl || getProductCategoryPlaceholder(product.category),
+        alt: product.imageAlt || `${getProductDisplayName(product)} pentru clinici si unitati medicale`,
+        verified: Boolean(product.imageVerified),
+      },
+    ],
+    productCode: product.gimaCode || "",
+    brand: product.sourceBrand || "",
+    breadcrumbs: product.gimaBreadcrumbs ?? [],
+    relatedProductCodes: product.relatedProductCodes ?? [],
   };
+}
+
+function getLocalProductDocuments(product: ProductCatalogItem) {
+  const documents = product.documents ?? {};
+  return [
+    documents.englishManual
+      ? {
+          label: "Manual in limba engleza",
+          url: documents.englishManual,
+          type: "manual",
+        }
+      : null,
+    documents.ceCertificate
+      ? {
+          label: "Certificat CE",
+          url: documents.ceCertificate,
+          type: "certificat",
+        }
+      : null,
+    documents.technicalDatasheet
+      ? {
+          label: "Fisa tehnica",
+          url: documents.technicalDatasheet,
+          type: "fisa tehnica",
+        }
+      : null,
+  ].filter((item): item is { label: string; url: string; type: string } => Boolean(item));
 }
 
 export function getProductCategoryPlaceholder(category: ProductCategoryId) {
@@ -262,6 +405,11 @@ export function getProductCategoryPlaceholder(category: ProductCategoryId) {
     ent: "/visuals/medical-equipment.webp",
     gynecology: "/visuals/medical-equipment.webp",
     consumables: "/visuals/preventive-maintenance.webp",
+    electromedical: "/visuals/medical-equipment.webp",
+    "surgical-instruments": "/visuals/technical-service.webp",
+    "patient-care": "/visuals/medical-construction.webp",
+    monitoring: "/visuals/technical-service.webp",
+    disinfection: "/visuals/preventive-maintenance.webp",
   };
 
   return images[category];

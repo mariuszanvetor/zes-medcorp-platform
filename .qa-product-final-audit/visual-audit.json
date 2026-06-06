@@ -1,0 +1,61 @@
+{
+  "playwrightAvailable": true,
+  "results": [
+    {
+      "name": "desktop-product",
+      "width": 1440,
+      "height": 1100,
+      "url": "http://localhost:3041/produse/gima-xc-2000-centrifuge-24035",
+      "h1": "Centrifuga de laborator XC-2000",
+      "overflow": false,
+      "imageCount": 5,
+      "brokenImageCount": 0,
+      "hasQuoteCTA": true,
+      "hasCarouselControls": true,
+      "hasLocalDocs": true,
+      "visibleForbidden": false
+    },
+    {
+      "name": "mobile-product",
+      "width": 390,
+      "height": 844,
+      "url": "http://localhost:3041/produse/gima-xc-2000-centrifuge-24035",
+      "h1": "Centrifuga de laborator XC-2000",
+      "overflow": false,
+      "imageCount": 5,
+      "brokenImageCount": 0,
+      "hasQuoteCTA": true,
+      "hasCarouselControls": true,
+      "hasLocalDocs": true,
+      "visibleForbidden": false
+    },
+    {
+      "name": "desktop-category",
+      "width": 1440,
+      "height": 1100,
+      "url": "http://localhost:3041/produse/categorie/laboratory",
+      "h1": "Laborator / IVD",
+      "overflow": false,
+      "imageCount": 3,
+      "brokenImageCount": 0,
+      "hasQuoteCTA": true,
+      "hasCarouselControls": false,
+      "hasLocalDocs": false,
+      "visibleForbidden": false
+    },
+    {
+      "name": "mobile-category",
+      "width": 390,
+      "height": 844,
+      "url": "http://localhost:3041/produse/categorie/laboratory",
+      "h1": "Laborator / IVD",
+      "overflow": false,
+      "imageCount": 3,
+      "brokenImageCount": 0,
+      "hasQuoteCTA": true,
+      "hasCarouselControls": false,
+      "hasLocalDocs": false,
+      "visibleForbidden": false
+    }
+  ]
+}

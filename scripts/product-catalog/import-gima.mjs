@@ -14,6 +14,11 @@ const allowedCategories = new Set([
   "ent",
   "gynecology",
   "consumables",
+  "electromedical",
+  "surgical-instruments",
+  "patient-care",
+  "monitoring",
+  "disinfection",
 ]);
 
 function parseArgs(argv) {
@@ -162,6 +167,16 @@ function normalizeCategory(value) {
     gynecology: "gynecology",
     gynaecology: "gynecology",
     consumables: "consumables",
+    electromedical: "electromedical",
+    electromedicals: "electromedical",
+    "electromedical-devices": "electromedical",
+    surgical: "surgical-instruments",
+    "surgical-instruments": "surgical-instruments",
+    "patient-care": "patient-care",
+    "patient-aids": "patient-care",
+    monitoring: "monitoring",
+    monitors: "monitoring",
+    disinfection: "disinfection",
   };
   return aliases[normalized] || normalized;
 }

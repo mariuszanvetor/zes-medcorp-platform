@@ -21,10 +21,15 @@ export const metadata: Metadata = createWebsiteMetadata({
   description:
     "Catalog medical ZESCORP pentru echipamente, laborator, urgenta, sterilizare, mobilier medical, ORL, ginecologie si consumabile, cu oferta, instalare si service.",
   path: "/produse",
+  noIndex: true,
   keywords: ["catalog produse medicale", "echipamente medicale", "oferta aparatura medicala"],
 });
 
 export default function ProductCatalogHubPage() {
+  const displayProducts = productCatalog
+    .filter((product) => product.sourceQuality === "gima_page_parity_review")
+    .slice(0, 24);
+
   return (
     <>
       <BreadcrumbSchema
@@ -122,7 +127,7 @@ export default function ProductCatalogHubPage() {
               description="Alege produsul sau categoria si trimite contextul pentru verificare comerciala."
             />
             <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {productCatalog.map((product) => {
+              {displayProducts.map((product) => {
                 const content = getProductCommercialContent(product);
                 return (
                   <Link
@@ -152,6 +157,10 @@ export default function ProductCatalogHubPage() {
                 );
               })}
             </div>
+            <p className="mt-6 max-w-3xl text-sm leading-7 text-slate-500">
+              Catalogul complet este in etapa de revizuire. Produsele afisate aici au pagina imbogatita cu imagini,
+              specificatii si documente locale pentru cerere de oferta.
+            </p>
           </Container>
         </Section>
       </main>

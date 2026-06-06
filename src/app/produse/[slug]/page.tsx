@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { ProductQuoteForm } from "@/components/forms/ProductQuoteForm";
+import { ProductImageCarousel } from "@/components/products/ProductImageCarousel";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
-import { SectionHeading } from "@/components/sections/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -42,7 +41,10 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
   return createWebsiteMetadata({
     title: `${displayName} | Oferta produs medical ZESCORP`,
-    description: `${product.romanianDescription ?? `Solicita oferta pentru ${displayName}, cu suport ZESCORP pentru instalare, service si mentenanta.`}`,
+    description:
+      product.romanianShortSummary ??
+      product.romanianDescription ??
+      `Solicita oferta pentru ${displayName}, cu suport ZESCORP pentru instalare, service si mentenanta.`,
     path: getProductPath(product),
     noIndex: !isProductIndexable(product),
     keywords: [displayName, product.commercialCategory ?? "", "oferta produs medical", "service aparatura medicala"].filter(Boolean),
@@ -58,6 +60,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const displayName = getProductDisplayName(product);
   const category = getProductCategoryBySlug(product.category);
   const content = getProductCommercialContent(product);
+  const gallery = content.galleryImages.length ? content.galleryImages : [{ url: content.imageUrl, alt: content.imageAlt, verified: false }];
+  const relatedProducts = productCatalog
+    .filter((item) => content.relatedProductCodes.includes(item.gimaCode ?? "") && item.slug !== product.slug)
+    .slice(0, 4);
 
   return (
     <>
@@ -79,112 +85,184 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <main>
         <Section className="bg-[linear-gradient(180deg,#f4f8fd_0%,#ffffff_72%)]" spacing="xl" tone="transparent">
           <Container>
-            <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+            <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+              <ProductImageCarousel images={gallery} title={displayName} />
+
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#0057b8]">
-                  {content.categoryLabel}
-                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="rounded-full border border-blue-100 bg-white px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
+                    {content.categoryLabel}
+                  </span>
+                  {content.productCode && (
+                    <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-600">
+                      Cod produs: {content.productCode}
+                    </span>
+                  )}
+                </div>
+
                 <h1 className="mt-5 text-4xl font-semibold leading-tight text-slate-950 sm:text-6xl">
                   {displayName}
                 </h1>
                 <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-                  {content.description}
+                  {content.shortSummary}
                 </p>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+
+                {content.breadcrumbs.length > 0 && (
+                  <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold text-slate-500">
+                    {content.breadcrumbs.map((item) => (
+                      <span className="rounded-full bg-blue-50 px-3 py-1" key={item}>
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                <div className="mt-8 grid gap-3 sm:grid-cols-3">
                   <Button href="#cerere-oferta" size="lg">
                     Solicita oferta
                   </Button>
                   <Button href={companyContact.phoneHref} size="lg" variant="secondary">
                     Suna acum
                   </Button>
+                  <Button href={companyContact.whatsappHref} size="lg" variant="secondary">
+                    WhatsApp
+                  </Button>
+                </div>
+
+                <div className="mt-8 rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_18px_45px_rgba(15,65,118,0.08)]">
+                  <p className="text-sm font-semibold text-slate-950">Oferta se confirma manual.</p>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                    Nu afisam preturi sau stoc inventat. Pentru oferta finala sunt verificate configuratia,
+                    cantitatea, documentatia, termenul si optiunile de service.
+                  </p>
                 </div>
               </div>
-              <div className="overflow-hidden rounded-3xl border border-blue-100 bg-white shadow-[0_24px_70px_rgba(15,65,118,0.14)]">
-                <Image
-                  alt={content.imageAlt}
-                  className="aspect-[4/3] h-full w-full object-cover"
-                  height={720}
-                  priority
-                  src={content.imageUrl}
-                  width={960}
-                />
-              </div>
             </div>
           </Container>
         </Section>
 
-        <Section className="bg-white" spacing="lg" tone="transparent">
+        <Section className="border-y border-blue-100 bg-white !py-4" spacing="sm" tone="transparent">
           <Container>
-            <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-              <SectionHeading
-                eyebrow="Descriere produs"
-                title="Selectie si ofertare pentru utilizare medicala"
-                description="ZESCORP trateaza produsul ca parte dintr-un flux clinic: aplicatie, instalare, consumabile, service si mentenanta."
-              />
+            <nav className="flex gap-2 overflow-x-auto text-sm font-semibold text-slate-700">
+              {[
+                ["Descriere", "#descriere"],
+                ["Specificatii tehnice", "#specificatii"],
+                ["Documente produs", "#documentatie"],
+                ["Livrare si ofertare", "#livrare"],
+                ["Service si mentenanta", "#service"],
+              ].map(([label, href]) => (
+                <a className="shrink-0 rounded-full border border-slate-200 px-4 py-2 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]" href={href} key={href}>
+                  {label}
+                </a>
+              ))}
+            </nav>
+          </Container>
+        </Section>
+
+        <Section className="bg-white" id="descriere" spacing="lg" tone="transparent">
+          <Container>
+            <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+              <ProductSectionIntro eyebrow="Descriere" title="Informatii produs traduse pentru ofertare" />
               <div className="rounded-2xl border border-blue-100 bg-[#f8fbff] p-6 text-sm leading-7 text-slate-700">
                 <p>{content.description}</p>
-                <p className="mt-4">
-                  Pentru oferta finala sunt utile informatii despre aplicatia clinica,
-                  cantitate, oras, termen si nivelul de suport necesar.
-                </p>
+                <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                  <InfoList title="Caracteristici" items={content.features} fallback="Caracteristicile se confirma inainte de ofertare." />
+                  <InfoList title="Continut pachet" items={content.packageContents} fallback="Continutul pachetului se confirma inainte de ofertare." />
+                </div>
               </div>
             </div>
           </Container>
         </Section>
 
-        <Section className="border-y border-blue-100 bg-[#f7fbff]" spacing="lg" tone="transparent">
-          <Container>
-            <div className="grid gap-6 lg:grid-cols-3">
-              <InfoCard title="Utilizare recomandata" items={content.applications} />
-              <InfoCard title="Beneficii comerciale" items={content.benefits} />
-              <InfoCard title="Service si mentenanta" items={content.maintenance} />
-            </div>
-          </Container>
-        </Section>
-
-        <Section className="bg-white" spacing="lg" tone="transparent">
+        <Section className="border-y border-blue-100 bg-[#f7fbff]" id="specificatii" spacing="lg" tone="transparent">
           <Container>
             <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
-              <SectionHeading
+              <ProductSectionIntro
                 eyebrow="Specificatii"
-                title="Specificatii tehnice orientative"
-                description="Specificatiile se confirma inainte de ofertare, in functie de configuratie, accesorii si disponibilitate."
+                title="Specificatii tehnice"
+                description="Afisam numai specificatii disponibile pentru produs sau detalii tehnice mentionate explicit in documentatia produsului."
+              />
+              {content.specifications.length > 0 ? (
+                <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+                  {content.specifications.map((spec, index) => (
+                    <div className="grid gap-2 border-b border-slate-100 p-4 last:border-b-0 sm:grid-cols-[0.38fr_0.62fr]" key={`${spec.label}-${index}`}>
+                      <p className="text-sm font-semibold text-slate-950">{spec.label}</p>
+                      <p className="text-sm leading-6 text-slate-600">{spec.value}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="rounded-2xl border border-slate-200 bg-white p-6 text-sm leading-7 text-slate-600">
+                  Specificatiile se confirma inainte de ofertare.
+                </div>
+              )}
+            </div>
+          </Container>
+        </Section>
+
+        <Section className="bg-white" id="documentatie" spacing="lg" tone="transparent">
+          <Container>
+            <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+              <ProductSectionIntro
+                eyebrow="Documentatie"
+                title="Documente produs"
+                description="Documentele disponibile sunt servite local pentru consultare rapida inainte de cererea de oferta."
               />
               <div className="grid gap-3 sm:grid-cols-2">
-                {content.specifications.map((spec) => (
-                  <div className="rounded-xl border border-slate-200 bg-white p-4" key={spec.label}>
-                    <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#0057b8]">
-                      {spec.label}
-                    </p>
-                    <p className="mt-2 text-sm font-semibold leading-6 text-slate-950">{spec.value}</p>
-                  </div>
-                ))}
+                {content.documents.length > 0 ? (
+                  content.documents.slice(0, 8).map((document) => (
+                    <a
+                      className="rounded-xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-800 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
+                      href={document.url}
+                      key={`${document.label}-${document.url}`}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      <span>{document.label}</span>
+                      <span className="mt-2 block text-xs font-medium uppercase tracking-[0.12em] text-slate-400">
+                        {document.type}
+                      </span>
+                    </a>
+                  ))
+                ) : (
+                  <p className="rounded-2xl border border-slate-200 bg-white p-6 text-sm leading-7 text-slate-600">
+                    Documentatia se confirma inainte de ofertare.
+                  </p>
+                )}
               </div>
             </div>
           </Container>
         </Section>
 
-        <Section className="border-y border-blue-100 bg-[#f7fbff]" spacing="lg" tone="transparent">
+        <Section className="border-y border-blue-100 bg-[#f7fbff]" id="livrare" spacing="lg" tone="transparent">
+          <Container>
+            <div className="grid gap-6 lg:grid-cols-3">
+              <InfoList title="Utilizare recomandata" items={content.applications} />
+              <InfoList title="Livrare si ofertare" items={content.installation} />
+              <InfoList title="Avantaje pentru achizitie" items={content.benefits} />
+            </div>
+          </Container>
+        </Section>
+
+        <Section className="bg-white" id="service" spacing="lg" tone="transparent">
           <Container>
             <div className="grid gap-6 lg:grid-cols-2">
-              <InfoCard title="Livrare si suport" items={content.installation} />
+              <InfoList title="Service si mentenanta" items={content.maintenance} />
               <article className="rounded-2xl border border-blue-100 bg-white p-6 shadow-[0_16px_38px_rgba(15,65,118,0.07)]">
-                <h2 className="text-xl font-semibold text-slate-950">Categorii si servicii relevante</h2>
+                <h2 className="text-xl font-semibold text-slate-950">Categorii, produse si servicii relevante</h2>
                 <div className="mt-4 grid gap-3">
                   {category && (
-                    <Link
-                      className="rounded-xl border border-blue-100 bg-[#f8fbff] px-4 py-3 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50"
-                      href={getCategoryPath(category)}
-                    >
+                    <Link className="rounded-xl border border-blue-100 bg-[#f8fbff] px-4 py-3 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50" href={getCategoryPath(category)}>
                       Vezi categoria {category.label}
                     </Link>
                   )}
+                  {relatedProducts.map((related) => (
+                    <Link className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]" href={getProductPath(related)} key={related.slug}>
+                      {getProductDisplayName(related)}
+                    </Link>
+                  ))}
                   {content.relatedServices.map((href) => (
-                    <Link
-                      className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
-                      href={href}
-                      key={href}
-                    >
+                    <Link className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]" href={href} key={href}>
                       {getRelatedServiceLabel(href)}
                     </Link>
                   ))}
@@ -204,12 +282,24 @@ export default async function ProductPage({ params }: ProductPageProps) {
   );
 }
 
-function InfoCard({ items, title }: { title: string; items: string[] }) {
+function ProductSectionIntro({ description, eyebrow, title }: { eyebrow: string; title: string; description?: string }) {
+  return (
+    <div>
+      <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#0057b8]">{eyebrow}</p>
+      <h2 className="mt-3 text-3xl font-semibold leading-tight text-slate-950">{title}</h2>
+      {description && <p className="mt-4 text-sm leading-7 text-slate-600">{description}</p>}
+    </div>
+  );
+}
+
+function InfoList({ fallback, items, title }: { title: string; items: string[]; fallback?: string }) {
+  const visibleItems = items.length ? items : fallback ? [fallback] : [];
+
   return (
     <article className="rounded-2xl border border-blue-100 bg-white p-6 shadow-[0_16px_38px_rgba(15,65,118,0.07)]">
       <h2 className="text-xl font-semibold text-slate-950">{title}</h2>
       <ul className="mt-4 grid gap-2 text-sm leading-7 text-slate-700">
-        {items.map((item) => (
+        {visibleItems.map((item) => (
           <li className="flex items-start gap-2" key={item}>
             <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0057b8]" />
             <span>{item}</span>

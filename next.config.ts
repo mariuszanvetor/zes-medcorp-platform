@@ -1,6 +1,20 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.gimaitaly.com",
+        pathname: "/images/prodotti/**",
+      },
+      {
+        protocol: "https",
+        hostname: "gimaitaly.com",
+        pathname: "/images/prodotti/**",
+      },
+    ],
+  },
   async redirects() {
     return [
       {
