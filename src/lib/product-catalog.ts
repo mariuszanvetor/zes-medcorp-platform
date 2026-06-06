@@ -196,6 +196,16 @@ export function isProductCommerciallyApproved(product: ProductCatalogItem) {
   return product.reviewStatus === "approved" || product.reviewStatus === "indexable";
 }
 
+export function isProductPublicDisplayReady(product: ProductCatalogItem) {
+  return Boolean(
+    product.publicDisplayReady &&
+      product.romanianTitle?.trim() &&
+      product.romanianDescription?.trim() &&
+      product.galleryImages?.length &&
+      product.imageStatus === "verified_local",
+  );
+}
+
 export function getProductBySlug(slug: string) {
   return productCatalog.find((product) => product.slug === slug);
 }

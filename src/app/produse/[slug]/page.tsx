@@ -20,6 +20,7 @@ import {
   getProductPath,
   getRelatedServiceLabel,
   isProductIndexable,
+  isProductPublicDisplayReady,
   productCatalog,
 } from "@/lib/product-catalog";
 
@@ -62,7 +63,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const content = getProductCommercialContent(product);
   const gallery = content.galleryImages.length ? content.galleryImages : [{ url: content.imageUrl, alt: content.imageAlt, verified: false }];
   const relatedProducts = productCatalog
-    .filter((item) => content.relatedProductCodes.includes(item.gimaCode ?? "") && item.slug !== product.slug)
+    .filter(
+      (item) =>
+        isProductPublicDisplayReady(item) &&
+        content.relatedProductCodes.includes(item.gimaCode ?? "") &&
+        item.slug !== product.slug,
+    )
     .slice(0, 4);
 
   return (

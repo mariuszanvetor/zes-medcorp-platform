@@ -12,6 +12,7 @@ import {
   getProductCommercialContent,
   getProductDisplayName,
   getProductPath,
+  isProductPublicDisplayReady,
   productCatalog,
   productCategories,
 } from "@/lib/product-catalog";
@@ -27,7 +28,7 @@ export const metadata: Metadata = createWebsiteMetadata({
 
 export default function ProductCatalogHubPage() {
   const displayProducts = productCatalog
-    .filter((product) => product.sourceQuality === "gima_page_parity_review")
+    .filter(isProductPublicDisplayReady)
     .slice(0, 24);
 
   return (

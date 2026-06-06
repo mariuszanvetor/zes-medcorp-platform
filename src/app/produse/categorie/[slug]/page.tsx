@@ -16,6 +16,7 @@ import {
   getProductsByCategory,
   getProductCategoryBySlug,
   isProductIndexable,
+  isProductPublicDisplayReady,
   productCategories,
 } from "@/lib/product-catalog";
 
@@ -51,9 +52,7 @@ export default async function ProductCategoryPage({ params }: CategoryPageProps)
 
   if (!category) notFound();
 
-  const products = getProductsByCategory(category.id).filter(
-    (product) => product.sourceQuality === "gima_page_parity_review",
-  );
+  const products = getProductsByCategory(category.id).filter(isProductPublicDisplayReady);
 
   return (
     <>
