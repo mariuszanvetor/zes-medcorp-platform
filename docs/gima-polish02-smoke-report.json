@@ -1,0 +1,356 @@
+{
+  "generatedAt": "2026-06-06T17:09:47.154Z",
+  "routes": [
+    {
+      "route": "/produse",
+      "noindex": true,
+      "inSitemap": false,
+      "isProductDetail": false,
+      "gallery": [],
+      "floatingReopenCount": 0,
+      "bottomZesCount": 1,
+      "stickyBarQuote": 2,
+      "stickyBarPhone": 1,
+      "stickyBarWhatsapp": 1,
+      "bottomBarAlignment": true,
+      "externalGimaAnchors": 0,
+      "forbiddenMatches": [],
+      "horizontalOverflow": false,
+      "popupOpens": true
+    },
+    {
+      "route": "/produse/categorie/laboratory",
+      "noindex": true,
+      "inSitemap": false,
+      "isProductDetail": false,
+      "gallery": [],
+      "floatingReopenCount": 0,
+      "bottomZesCount": 1,
+      "stickyBarQuote": 2,
+      "stickyBarPhone": 1,
+      "stickyBarWhatsapp": 1,
+      "bottomBarAlignment": true,
+      "externalGimaAnchors": 0,
+      "forbiddenMatches": [],
+      "horizontalOverflow": false,
+      "popupOpens": true
+    },
+    {
+      "route": "/produse/gima-emergency-trolley-neo-plus-45720",
+      "noindex": true,
+      "inSitemap": false,
+      "isProductDetail": true,
+      "gallery": [
+        {
+          "url": "/product-images/45720/45720.jpeg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/45720/45720_a.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/45720/45720_b.jpg",
+          "width": 853,
+          "height": 640
+        }
+      ],
+      "floatingReopenCount": 0,
+      "bottomZesCount": 1,
+      "stickyBarQuote": 2,
+      "stickyBarPhone": 2,
+      "stickyBarWhatsapp": 2,
+      "bottomBarAlignment": true,
+      "externalGimaAnchors": 0,
+      "forbiddenMatches": [],
+      "horizontalOverflow": false,
+      "popupOpens": true
+    },
+    {
+      "route": "/produse/gima-xc-2000-centrifuge-24035",
+      "noindex": true,
+      "inSitemap": false,
+      "isProductDetail": true,
+      "gallery": [
+        {
+          "url": "/product-images/24035/24035.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/24035/24035_a.jpg",
+          "width": 853,
+          "height": 640
+        }
+      ],
+      "floatingReopenCount": 0,
+      "bottomZesCount": 1,
+      "stickyBarQuote": 2,
+      "stickyBarPhone": 2,
+      "stickyBarWhatsapp": 2,
+      "bottomBarAlignment": true,
+      "externalGimaAnchors": 0,
+      "forbiddenMatches": [],
+      "horizontalOverflow": false,
+      "popupOpens": true
+    },
+    {
+      "route": "/produse/gima-gimacare-multi-parameter-monitor-6-parameters-gb-fr-it-es-24128",
+      "noindex": true,
+      "inSitemap": false,
+      "isProductDetail": true,
+      "gallery": [
+        {
+          "url": "/product-images/24128/24128.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/24128/24128_a.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/24128/24128_b.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/24128/24128_c.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/24128/24128_d.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/24128/24128_e.jpg",
+          "width": 853,
+          "height": 640
+        }
+      ],
+      "floatingReopenCount": 0,
+      "bottomZesCount": 1,
+      "stickyBarQuote": 2,
+      "stickyBarPhone": 2,
+      "stickyBarWhatsapp": 2,
+      "bottomBarAlignment": true,
+      "externalGimaAnchors": 0,
+      "forbiddenMatches": [],
+      "horizontalOverflow": false,
+      "popupOpens": true
+    },
+    {
+      "route": "/produse/gima-hydraulic-patient-transfer-chair-43430",
+      "noindex": true,
+      "inSitemap": false,
+      "isProductDetail": true,
+      "gallery": [
+        {
+          "url": "/product-images/43430/43430.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/43430/43430_a.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/43430/43430_b.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/43430/43430_c.jpg",
+          "width": 853,
+          "height": 640
+        }
+      ],
+      "floatingReopenCount": 0,
+      "bottomZesCount": 1,
+      "stickyBarQuote": 2,
+      "stickyBarPhone": 2,
+      "stickyBarWhatsapp": 2,
+      "bottomBarAlignment": true,
+      "externalGimaAnchors": 0,
+      "forbiddenMatches": [],
+      "horizontalOverflow": false,
+      "popupOpens": true
+    },
+    {
+      "route": "/produse/gima-ac-2311-led-video-colposcope-with-camera-29624",
+      "noindex": true,
+      "inSitemap": false,
+      "isProductDetail": true,
+      "gallery": [
+        {
+          "url": "/product-images/29624/29624.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/29624/29624_a.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/29624/29624_b.jpg",
+          "width": 853,
+          "height": 640
+        }
+      ],
+      "floatingReopenCount": 0,
+      "bottomZesCount": 1,
+      "stickyBarQuote": 2,
+      "stickyBarPhone": 2,
+      "stickyBarWhatsapp": 2,
+      "bottomBarAlignment": true,
+      "externalGimaAnchors": 0,
+      "forbiddenMatches": [],
+      "horizontalOverflow": false,
+      "popupOpens": true
+    },
+    {
+      "route": "/produse/gima-cu-sp2-aed-us-35341",
+      "noindex": true,
+      "inSitemap": false,
+      "isProductDetail": true,
+      "gallery": [
+        {
+          "url": "/product-images/35341/35341.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/35341/35341_c.jpg",
+          "width": 853,
+          "height": 640
+        }
+      ],
+      "floatingReopenCount": 0,
+      "bottomZesCount": 1,
+      "stickyBarQuote": 2,
+      "stickyBarPhone": 2,
+      "stickyBarWhatsapp": 2,
+      "bottomBarAlignment": true,
+      "externalGimaAnchors": 0,
+      "forbiddenMatches": [],
+      "horizontalOverflow": false,
+      "popupOpens": true
+    },
+    {
+      "route": "/produse/gima-medical-trolley-easy-27880",
+      "noindex": true,
+      "inSitemap": false,
+      "isProductDetail": true,
+      "gallery": [
+        {
+          "url": "/product-images/27880/27880.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/27880/27880_a.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/27880/27880_b.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/27880/27880_c.jpg",
+          "width": 853,
+          "height": 640
+        }
+      ],
+      "floatingReopenCount": 0,
+      "bottomZesCount": 1,
+      "stickyBarQuote": 2,
+      "stickyBarPhone": 2,
+      "stickyBarWhatsapp": 2,
+      "bottomBarAlignment": true,
+      "externalGimaAnchors": 0,
+      "forbiddenMatches": [],
+      "horizontalOverflow": false,
+      "popupOpens": true
+    },
+    {
+      "route": "/produse/gima-gimasafe-25659",
+      "noindex": true,
+      "inSitemap": false,
+      "isProductDetail": true,
+      "gallery": [
+        {
+          "url": "/product-images/25659/25659.jpg",
+          "width": 853,
+          "height": 640
+        }
+      ],
+      "floatingReopenCount": 0,
+      "bottomZesCount": 1,
+      "stickyBarQuote": 2,
+      "stickyBarPhone": 2,
+      "stickyBarWhatsapp": 2,
+      "bottomBarAlignment": true,
+      "externalGimaAnchors": 0,
+      "forbiddenMatches": [],
+      "horizontalOverflow": false,
+      "popupOpens": true
+    },
+    {
+      "route": "/produse/gima-mio-sonic-ultrasound-therapy-28309",
+      "noindex": true,
+      "inSitemap": false,
+      "isProductDetail": true,
+      "gallery": [
+        {
+          "url": "/product-images/28309/28309.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/28309/28309_a.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/28309/28309_b.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/28309/28309_c.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/28309/28309_d.jpg",
+          "width": 853,
+          "height": 640
+        }
+      ],
+      "floatingReopenCount": 0,
+      "bottomZesCount": 1,
+      "stickyBarQuote": 2,
+      "stickyBarPhone": 2,
+      "stickyBarWhatsapp": 2,
+      "bottomBarAlignment": true,
+      "externalGimaAnchors": 0,
+      "forbiddenMatches": [],
+      "horizontalOverflow": false,
+      "popupOpens": true
+    }
+  ],
+  "mobile": {
+    "horizontalOverflow": false,
+    "floatingButton": 0,
+    "bottomZes": 1
+  }
+}

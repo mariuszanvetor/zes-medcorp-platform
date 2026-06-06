@@ -101,7 +101,7 @@ export function ProductImageCarousel({ images, title }: ProductImageCarouselProp
       <p className="mt-3 text-xs text-slate-500">
         {safeImages.length > 1
           ? "Folositi sagetile sau thumbnail-urile pentru a naviga intre imaginile produsului."
-          : "Imagine produs verificata."}
+          : "Imagine produs."}
       </p>
     </div>
   );

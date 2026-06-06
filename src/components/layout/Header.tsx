@@ -6,11 +6,11 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 
 const navigationLinks: MobileNavLink[] = [
-  { label: "Services", href: "/solutii-medicale" },
-  { label: "Equipment", href: "/solutii-medicale/echipamente-imagistica-diagnostic" },
+  { label: "Servicii", href: "/solutii-medicale" },
+  { label: "Echipamente", href: "/solutii-medicale/echipamente-imagistica-diagnostic" },
   { label: "Service", href: "/solutii-medicale/service-echipamente-medicale" },
-  { label: "Projects", href: "/projects" },
-  { label: "Resources", href: "/resources" },
+  { label: "Proiecte", href: "/projects" },
+  { label: "Resurse", href: "/resources" },
   { label: "Contact", href: "/contact" },
 ];
 

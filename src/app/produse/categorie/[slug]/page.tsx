@@ -153,8 +153,8 @@ export default async function ProductCategoryPage({ params }: CategoryPageProps)
               </div>
             )}
             <p className="mt-6 max-w-3xl text-sm leading-7 text-slate-500">
-              Afisam selectiv produsele pregatite pentru cerere de oferta si revizuire comerciala.
-              Produsele importate raman noindex pana la verificare manuala.
+              Daca ai nevoie de o configuratie, cantitate sau alternativa care nu apare in lista, trimite contextul
+              clinic si echipa ZESCORP poate pregati o selectie potrivita.
             </p>
           </Container>
         </Section>

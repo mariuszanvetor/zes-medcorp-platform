@@ -158,8 +158,8 @@ export default function ProductCatalogHubPage() {
               })}
             </div>
             <p className="mt-6 max-w-3xl text-sm leading-7 text-slate-500">
-              Catalogul complet este in etapa de revizuire. Produsele afisate aici au pagina imbogatita cu imagini,
-              specificatii si documente locale pentru cerere de oferta.
+              Pentru produse, accesorii sau configuratii care nu apar in selectie, trimite o cerere catre ZESCORP.
+              Echipa poate verifica alternative potrivite, documentatie disponibila si optiuni de service.
             </p>
           </Container>
         </Section>

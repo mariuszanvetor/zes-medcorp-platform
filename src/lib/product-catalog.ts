@@ -60,8 +60,19 @@ export type ProductCatalogItem = {
   imageUrl?: string;
   imageSourceUrl?: string;
   imageVerified?: boolean;
-  imageStatus?: "verified" | "missing" | "placeholder";
+  imageStatus?: "verified" | "verified_local" | "missing" | "placeholder";
   galleryImages?: Array<{ url: string; alt: string; verified: boolean }>;
+  galleryImageAudit?: Array<{
+    originalExtractedUrl: string;
+    finalHighResUrl: string;
+    localFilePath: string;
+    width: number;
+    height: number;
+    bytes: number;
+    sourceSize: string;
+    status: string;
+    reason?: string;
+  }>;
   imageAlt?: string;
   documents?: {
     englishManual?: string;
@@ -213,6 +224,12 @@ export function getProductDisplayName(product: ProductCatalogItem) {
   return product.romanianTitle || `${product.sourceBrand} ${product.sourceProductName}`.trim();
 }
 
+export function getRomanianProductCategoryLabel(product: ProductCatalogItem) {
+  const category = productCategories.find((item) => item.id === product.category);
+  const sourceLabel = product.commercialCategory || product.subcategory || "";
+  return category?.label || translateGimaCategoryLabel(sourceLabel) || "Echipamente medicale";
+}
+
 export function getProductReviewLabel(status: ProductReviewStatus) {
   const labels: Record<ProductReviewStatus, string> = {
     imported: "Importat - noindex",
@@ -229,7 +246,7 @@ export function getProductReviewLabel(status: ProductReviewStatus) {
 
 export function getProductCommercialContent(product: ProductCatalogItem) {
   const category = productCategories.find((item) => item.id === product.category);
-  const categoryLabel = product.commercialCategory || category?.label || "Echipamente medicale";
+  const categoryLabel = getRomanianProductCategoryLabel(product);
 
   if (product.publicDisplayReady && product.romanianDescription) {
     return {
@@ -393,6 +410,31 @@ function getLocalProductDocuments(product: ProductCatalogItem) {
         }
       : null,
   ].filter((item): item is { label: string; url: string; type: string } => Boolean(item));
+}
+
+function translateGimaCategoryLabel(label: string) {
+  const normalized = label.toLowerCase().trim();
+  const translations: Record<string, string> = {
+    "diagnostic tests - laboratory": "Diagnostic si laborator",
+    "laboratories: centrifuges and microscopes": "Laborator / centrifuge si microscoape",
+    "first aid & emergency": "Urgenta",
+    "dressing and emergency trolleys": "Carucioare medicale si de urgenta",
+    "karrel and aurion plastic multi-functional trolleys": "Carucioare medicale multifunctionale",
+    furniture: "Mobilier medical",
+    "medical furniture": "Mobilier medical",
+    "electromedical devices": "Electromedicale",
+    gynecology: "Ginecologie",
+    gynaecology: "Ginecologie",
+    "ent devices": "ORL",
+    sterilization: "Sterilizare",
+    "surgical instruments": "Instrumentar chirurgical",
+    "patient aids": "Ingrijire pacient",
+    "ecg, monitors & ultrasound": "Monitorizare",
+    "health care - pharmacy": "Ingrijire pacient",
+    consumables: "Consumabile",
+  };
+
+  return translations[normalized] || "";
 }
 
 export function getProductCategoryPlaceholder(category: ProductCategoryId) {

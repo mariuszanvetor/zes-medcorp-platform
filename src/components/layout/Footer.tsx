@@ -6,33 +6,33 @@ import { Container } from "@/components/ui/Container";
 import { companyContact } from "@/lib/brand";
 
 const serviceLinks = [
-  { label: "Services", href: "/solutii-medicale" },
+  { label: "Servicii", href: "/solutii-medicale" },
   { label: "Amenajare centre imagistica", href: "/amenajare-centre-imagistica" },
   { label: "Amenajare cabinet medical", href: "/amenajare-cabinet-medical" },
-  { label: "Medical Infrastructure", href: "/solutii-medicale/dezvoltare-unitati-medicale" },
-  { label: "Medical Equipment", href: "/solutii-medicale/echipamente-imagistica-diagnostic" },
+  { label: "Infrastructura medicala", href: "/solutii-medicale/dezvoltare-unitati-medicale" },
+  { label: "Echipamente medicale", href: "/solutii-medicale/echipamente-imagistica-diagnostic" },
   { label: "Radioprotectie RX", href: "/radioprotectie-plumbare-rx" },
   { label: "Service aparatura medicala", href: "/service-aparatura-medicala" },
   { label: "Service ecografe", href: "/service-ecografe" },
   { label: "Service laborator IVD", href: "/service-laborator-ivd" },
-  { label: "Service & Maintenance", href: "/solutii-medicale/service-echipamente-medicale" },
+  { label: "Service si mentenanta", href: "/solutii-medicale/service-echipamente-medicale" },
   { label: "Contracte mentenanta", href: "/contracte-mentenanta" },
   { label: "Catalog produse", href: "/produse" },
 ];
 
 const resourceLinks = [
-  { label: "Resources", href: "/resources" },
-  { label: "Tools", href: "/resources" },
+  { label: "Resurse", href: "/resources" },
+  { label: "Instrumente", href: "/resources" },
   { label: "AI Discovery", href: "/ai-discovery" },
   { label: "Proposal Builder", href: "/proposal-builder" },
   { label: "Project Intake", href: "/project-intake" },
-  { label: "Calculators", href: "/calculatoare" },
+  { label: "Calculatoare", href: "/calculatoare" },
   { label: "Knowledge Hub", href: "/knowledge-hub" },
 ];
 
 const companyLinks = [
-  { label: "Projects", href: "/projects" },
-  { label: "Company", href: "/companie" },
+  { label: "Proiecte", href: "/projects" },
+  { label: "Companie", href: "/companie" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -44,9 +44,9 @@ const legalLinks = [
 ];
 
 const linkGroups = [
-  { title: "Services", links: serviceLinks },
-  { title: "Resources / Tools", links: resourceLinks },
-  { title: "Company", links: companyLinks },
+  { title: "Servicii", links: serviceLinks },
+  { title: "Resurse / Instrumente", links: resourceLinks },
+  { title: "Companie", links: companyLinks },
   { title: "Legal", links: legalLinks },
 ];
 

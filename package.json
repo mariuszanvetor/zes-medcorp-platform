@@ -12,6 +12,8 @@
     "products:import": "node scripts/product-catalog/import-gima.mjs",
     "products:mega-import": "node scripts/product-catalog/mega-import-gima.mjs",
     "products:quality-gate": "node scripts/product-catalog/enrich-gima-quality-gate.mjs",
+    "products:batch-50": "node scripts/product-catalog/enrich-gima-batch-50.mjs",
+    "products:clean-gallery": "node scripts/product-catalog/cleanup-gima-gallery-quality.mjs",
     "products:sync-assets": "node scripts/product-catalog/sync-gima-product-assets.mjs",
     "leads:research": "node scripts/lead-research/cli.mjs research",
     "leads:import": "node scripts/lead-research/cli.mjs import",

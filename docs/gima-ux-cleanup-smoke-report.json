@@ -1,0 +1,179 @@
+{
+  "generatedAt": "2026-06-06T16:45:06.318Z",
+  "routes": [
+    {
+      "route": "/produse/gima-emergency-trolley-neo-plus-45720",
+      "metaRobots": "noindex, nofollow",
+      "noindex": true,
+      "inSitemap": false,
+      "gallery": [
+        {
+          "url": "/product-images/45720/45720.jpeg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/45720/45720_a.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/45720/45720_b.jpg",
+          "width": 853,
+          "height": 640
+        }
+      ],
+      "visibleProductImages": 4,
+      "ctas": {
+        "quote": 2,
+        "phone": 1,
+        "whatsapp": 1,
+        "form": 1
+      },
+      "stickyLinks": 1,
+      "zesButtonCount": 1,
+      "zesPopupCount": 1,
+      "overlap": false,
+      "externalGimaAnchors": 0,
+      "forbiddenMatches": [],
+      "hiddenSourceHtml": false,
+      "horizontalOverflow": false
+    },
+    {
+      "route": "/produse/gima-xc-2000-centrifuge-24035",
+      "metaRobots": "noindex, nofollow",
+      "noindex": true,
+      "inSitemap": false,
+      "gallery": [
+        {
+          "url": "/product-images/24035/24035.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/24035/24035_a.jpg",
+          "width": 853,
+          "height": 640
+        }
+      ],
+      "visibleProductImages": 3,
+      "ctas": {
+        "quote": 2,
+        "phone": 1,
+        "whatsapp": 1,
+        "form": 1
+      },
+      "stickyLinks": 1,
+      "zesButtonCount": 1,
+      "zesPopupCount": 1,
+      "overlap": false,
+      "externalGimaAnchors": 0,
+      "forbiddenMatches": [],
+      "hiddenSourceHtml": false,
+      "horizontalOverflow": false
+    },
+    {
+      "route": "/produse/gima-gimacare-multi-parameter-monitor-6-parameters-gb-fr-it-es-24128",
+      "metaRobots": "noindex, nofollow",
+      "noindex": true,
+      "inSitemap": false,
+      "gallery": [
+        {
+          "url": "/product-images/24128/24128.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/24128/24128_a.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/24128/24128_b.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/24128/24128_c.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/24128/24128_d.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/24128/24128_e.jpg",
+          "width": 853,
+          "height": 640
+        }
+      ],
+      "visibleProductImages": 7,
+      "ctas": {
+        "quote": 2,
+        "phone": 1,
+        "whatsapp": 1,
+        "form": 1
+      },
+      "stickyLinks": 1,
+      "zesButtonCount": 1,
+      "zesPopupCount": 1,
+      "overlap": false,
+      "externalGimaAnchors": 0,
+      "forbiddenMatches": [],
+      "hiddenSourceHtml": false,
+      "horizontalOverflow": false
+    },
+    {
+      "route": "/produse/gima-hydraulic-patient-transfer-chair-43430",
+      "metaRobots": "noindex, nofollow",
+      "noindex": true,
+      "inSitemap": false,
+      "gallery": [
+        {
+          "url": "/product-images/43430/43430.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/43430/43430_a.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/43430/43430_b.jpg",
+          "width": 853,
+          "height": 640
+        },
+        {
+          "url": "/product-images/43430/43430_c.jpg",
+          "width": 853,
+          "height": 640
+        }
+      ],
+      "visibleProductImages": 5,
+      "ctas": {
+        "quote": 2,
+        "phone": 1,
+        "whatsapp": 1,
+        "form": 1
+      },
+      "stickyLinks": 1,
+      "zesButtonCount": 1,
+      "zesPopupCount": 1,
+      "overlap": false,
+      "externalGimaAnchors": 0,
+      "forbiddenMatches": [],
+      "hiddenSourceHtml": false,
+      "horizontalOverflow": false
+    }
+  ],
+  "mobile": {
+    "route": "/produse/gima-emergency-trolley-neo-plus-45720",
+    "horizontalOverflow": false,
+    "stickyVisible": true,
+    "zesVisible": true,
+    "overlap": false
+  }
+}

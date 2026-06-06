@@ -107,16 +107,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   {content.shortSummary}
                 </p>
 
-                {content.breadcrumbs.length > 0 && (
-                  <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold text-slate-500">
-                    {content.breadcrumbs.map((item) => (
-                      <span className="rounded-full bg-blue-50 px-3 py-1" key={item}>
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                )}
-
                 <div className="mt-8 grid gap-3 sm:grid-cols-3">
                   <Button href="#cerere-oferta" size="lg">
                     Solicita oferta
@@ -130,10 +120,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 </div>
 
                 <div className="mt-8 rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_18px_45px_rgba(15,65,118,0.08)]">
-                  <p className="text-sm font-semibold text-slate-950">Oferta se confirma manual.</p>
+                  <p className="text-sm font-semibold text-slate-950">Oferta personalizata pentru produs.</p>
                   <p className="mt-2 text-sm leading-6 text-slate-600">
-                    Nu afisam preturi sau stoc inventat. Pentru oferta finala sunt verificate configuratia,
-                    cantitatea, documentatia, termenul si optiunile de service.
+                    Pentru acest produs puteti solicita o oferta personalizata in functie de configuratie,
+                    cantitate, documentatie, termen de livrare si optiunile de service.
                   </p>
                 </div>
               </div>
@@ -162,12 +152,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <Section className="bg-white" id="descriere" spacing="lg" tone="transparent">
           <Container>
             <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-              <ProductSectionIntro eyebrow="Descriere" title="Informatii produs traduse pentru ofertare" />
+              <ProductSectionIntro eyebrow="Descriere" title="Descriere produs" />
               <div className="rounded-2xl border border-blue-100 bg-[#f8fbff] p-6 text-sm leading-7 text-slate-700">
                 <p>{content.description}</p>
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                  <InfoList title="Caracteristici" items={content.features} fallback="Caracteristicile se confirma inainte de ofertare." />
-                  <InfoList title="Continut pachet" items={content.packageContents} fallback="Continutul pachetului se confirma inainte de ofertare." />
+                  <InfoList title="Caracteristici" items={content.features} fallback="Detaliile de configuratie pot fi clarificate la cererea de oferta." />
+                  <InfoList title="Continut pachet" items={content.packageContents} fallback="Continutul pachetului se confirma in functie de configuratia solicitata." />
                 </div>
               </div>
             </div>
@@ -180,7 +170,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <ProductSectionIntro
                 eyebrow="Specificatii"
                 title="Specificatii tehnice"
-                description="Afisam numai specificatii disponibile pentru produs sau detalii tehnice mentionate explicit in documentatia produsului."
+                description="Datele tehnice disponibile ajuta la evaluarea produsului si la pregatirea cererii de oferta."
               />
               {content.specifications.length > 0 ? (
                 <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
@@ -193,7 +183,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 </div>
               ) : (
                 <div className="rounded-2xl border border-slate-200 bg-white p-6 text-sm leading-7 text-slate-600">
-                  Specificatiile se confirma inainte de ofertare.
+                  Specificatiile tehnice se confirma in functie de configuratia solicitata.
                 </div>
               )}
             </div>
@@ -206,7 +196,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <ProductSectionIntro
                 eyebrow="Documentatie"
                 title="Documente produs"
-                description="Documentele disponibile sunt servite local pentru consultare rapida inainte de cererea de oferta."
+                description="Documentatie disponibila pentru consultare inainte de pregatirea ofertei."
               />
               <div className="grid gap-3 sm:grid-cols-2">
                 {content.documents.length > 0 ? (
@@ -226,7 +216,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   ))
                 ) : (
                   <p className="rounded-2xl border border-slate-200 bg-white p-6 text-sm leading-7 text-slate-600">
-                    Documentatia se confirma inainte de ofertare.
+                    Documentatia produsului poate fi solicitata in cadrul cererii de oferta.
                   </p>
                 )}
               </div>

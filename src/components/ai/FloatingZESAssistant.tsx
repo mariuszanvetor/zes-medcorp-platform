@@ -20,6 +20,7 @@ type FloatingStorage = {
 export function FloatingZESAssistant() {
   const pathname = usePathname();
   const isAdminRoute = pathname?.startsWith("/admin/");
+  const isProductRoute = pathname === "/produse" || pathname?.startsWith("/produse/");
   const hiddenRoute = pathname === "/" || pathname === "/ai-discovery";
   const shouldRender = !isAdminRoute && !hiddenRoute;
 
@@ -30,6 +31,13 @@ export function FloatingZESAssistant() {
 
   useEffect(() => {
     if (!shouldRender) {
+      return;
+    }
+
+    if (isProductRoute) {
+      setState("minimized");
+      setHasAutoOpened(true);
+      setBootstrapped(true);
       return;
     }
 
@@ -67,7 +75,7 @@ export function FloatingZESAssistant() {
       setHasAutoOpened(false);
     }
     setBootstrapped(true);
-  }, [shouldRender]);
+  }, [isProductRoute, shouldRender]);
 
   useEffect(() => {
     if (!shouldRender || !bootstrapped) {
@@ -84,6 +92,7 @@ export function FloatingZESAssistant() {
   useEffect(() => {
     if (
       !shouldRender ||
+      isProductRoute ||
       !bootstrapped ||
       state === "open" ||
       state === "closed" ||
@@ -114,7 +123,7 @@ export function FloatingZESAssistant() {
       window.clearTimeout(timeout);
       window.removeEventListener("scroll", onScroll);
     };
-  }, [bootstrapped, hasAutoOpened, shouldRender, state]);
+  }, [bootstrapped, hasAutoOpened, isProductRoute, shouldRender, state]);
 
   useEffect(() => {
     if (!shouldRender) {
@@ -146,7 +155,12 @@ export function FloatingZESAssistant() {
   }
 
   return (
-    <div className="pointer-events-none fixed bottom-3 left-3 right-3 z-[70] sm:bottom-6 sm:left-auto sm:right-6 sm:w-[26.5rem]">
+    <div
+      className={cn(
+        "pointer-events-none fixed left-3 right-3 z-[70] sm:left-auto sm:right-6 sm:w-[26.5rem]",
+        isProductRoute ? "bottom-24 sm:bottom-28" : "bottom-3 sm:bottom-6",
+      )}
+    >
       <div
         data-testid="zes-floating-popup"
         className={cn(
@@ -203,7 +217,7 @@ export function FloatingZESAssistant() {
         </div>
       </div>
 
-      {!isOpen && (
+      {!isOpen && !isProductRoute && (
         <Button
           data-testid="zes-floating-reopen"
           className="pointer-events-auto h-11 rounded-full px-4 text-sm shadow-[0_16px_42px_rgba(0,87,184,0.30)] sm:h-12 sm:px-5 sm:text-base"
