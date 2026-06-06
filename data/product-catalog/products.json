@@ -40,15 +40,15 @@
     "romanianTitle": "Centrifuga de laborator XC-2000",
     "romanianDescription": "Centrifuga XC-2000 este destinata fluxurilor de laborator care au nevoie de procesare repetabila pentru tuburi de 10 ml sau 15 ml. Produsul include panou de programare one-touch, contor electronic pentru setarea vitezei si memorarea ultimelor setari de lucru.",
     "commercialCategory": "Laborator / IVD",
-    "imageUrl": "https://www.gimaitaly.com/images/prodotti/big/24035.jpg",
-    "imageAlt": "Centrifuga de laborator XC-2000 - produs GIMA pentru oferta ZESCORP",
+    "imageUrl": "/product-images/24035/24035.jpg",
+    "imageAlt": "Centrifuga de laborator XC-2000 - produs medical pentru oferta ZESCORP",
     "romanianApplications": [
       "Cerere de oferta pentru clinici, cabinete, laboratoare sau unitati medicale",
       "Completare dotare, inlocuire produs sau configurare impreuna cu alte echipamente",
       "Verificare aplicatie, cantitate, termen si suport tehnic inainte de ofertare"
     ],
     "romanianBenefits": [
-      "Pagina construita pe baza informatiilor publice GIMA si adaptata pentru ofertare ZESCORP",
+      "Pagina adaptata pentru cerere de oferta ZESCORP, pe baza datelor tehnice disponibile",
       "Date tehnice afisate transparent, fara preturi sau stoc inventate",
       "Posibilitate de ofertare impreuna cu service, mentenanta si suport operational"
     ],
@@ -103,17 +103,19 @@
       "Suport pentru 6 tuburi de 15 ml",
       "Manual de utilizare GB/IT"
     ],
-    "imageStatus": "verified",
+    "imageStatus": "verified_local",
     "galleryImages": [
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/big/24035.jpg",
+        "url": "/product-images/24035/24035.jpg",
         "alt": "Centrifuga de laborator XC-2000",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/big/24035.jpg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/24035_a.jpg",
+        "url": "/product-images/24035/24035_a.jpg",
         "alt": "Centrifuga de laborator XC-2000",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/24035_a.jpg"
       }
     ],
     "productDocuments": [
@@ -434,15 +436,15 @@
     "romanianTitle": "Carucior de urgenta Neo Plus",
     "romanianDescription": "Neo Plus este un carucior de urgenta echipat pentru organizarea accesoriilor si materialelor necesare in zone cu raspuns rapid. Include sertare adanci cu separatoare, roti cu frana si accesorii precum suport perfuzie, placa defibrilator si plansa CPR.",
     "commercialCategory": "Urgenta",
-    "imageUrl": "https://www.gimaitaly.com/images/prodotti/big/45720.jpeg",
-    "imageAlt": "Carucior de urgenta Neo Plus - produs GIMA pentru oferta ZESCORP",
+    "imageUrl": "/product-images/45720/45720.jpeg",
+    "imageAlt": "Carucior de urgenta Neo Plus - produs medical pentru oferta ZESCORP",
     "romanianApplications": [
       "Cerere de oferta pentru clinici, cabinete, laboratoare sau unitati medicale",
       "Completare dotare, inlocuire produs sau configurare impreuna cu alte echipamente",
       "Verificare aplicatie, cantitate, termen si suport tehnic inainte de ofertare"
     ],
     "romanianBenefits": [
-      "Pagina construita pe baza informatiilor publice GIMA si adaptata pentru ofertare ZESCORP",
+      "Pagina adaptata pentru cerere de oferta ZESCORP, pe baza datelor tehnice disponibile",
       "Date tehnice afisate transparent, fara preturi sau stoc inventate",
       "Posibilitate de ofertare impreuna cu service, mentenanta si suport operational"
     ],
@@ -497,22 +499,25 @@
       "2 containere pentru obiecte ascutite 2 l",
       "2 cosuri ABS cu capac"
     ],
-    "imageStatus": "verified",
+    "imageStatus": "verified_local",
     "galleryImages": [
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/big/45720.jpeg",
+        "url": "/product-images/45720/45720.jpeg",
         "alt": "Carucior de urgenta Neo Plus",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/big/45720.jpeg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/45720_a.jpg",
+        "url": "/product-images/45720/45720_a.jpg",
         "alt": "Carucior de urgenta Neo Plus",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/45720_a.jpg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/45720_b.jpg",
+        "url": "/product-images/45720/45720_b.jpg",
         "alt": "Carucior de urgenta Neo Plus",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/45720_b.jpg"
       }
     ],
     "productDocuments": [
@@ -845,15 +850,15 @@
     "romanianTitle": "Scaun ORL Otopex cu tetiera - verde Toronto",
     "romanianDescription": "Otopex este un scaun ORL conceput si pentru interventii ambulatorii. Are motoare electrice silentioase, control prin joystick de picior, tapiterie din piele sintetica si spuma de inalta densitate.",
     "commercialCategory": "ORL",
-    "imageUrl": "https://www.gimaitaly.com/images/prodotti/big/27552.jpg",
-    "imageAlt": "Scaun ORL Otopex cu tetiera - verde Toronto - produs GIMA pentru oferta ZESCORP",
+    "imageUrl": "/product-images/27552/27552.jpg",
+    "imageAlt": "Scaun ORL Otopex cu tetiera - verde Toronto - produs medical pentru oferta ZESCORP",
     "romanianApplications": [
       "Cerere de oferta pentru clinici, cabinete, laboratoare sau unitati medicale",
       "Completare dotare, inlocuire produs sau configurare impreuna cu alte echipamente",
       "Verificare aplicatie, cantitate, termen si suport tehnic inainte de ofertare"
     ],
     "romanianBenefits": [
-      "Pagina construita pe baza informatiilor publice GIMA si adaptata pentru ofertare ZESCORP",
+      "Pagina adaptata pentru cerere de oferta ZESCORP, pe baza datelor tehnice disponibile",
       "Date tehnice afisate transparent, fara preturi sau stoc inventate",
       "Posibilitate de ofertare impreuna cu service, mentenanta si suport operational"
     ],
@@ -891,17 +896,19 @@
     "romanianPackageContents": [
       "Scaun ORL Otopex cu tetiera"
     ],
-    "imageStatus": "verified",
+    "imageStatus": "verified_local",
     "galleryImages": [
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/big/27552.jpg",
+        "url": "/product-images/27552/27552.jpg",
         "alt": "Scaun ORL Otopex cu tetiera - verde Toronto",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/big/27552.jpg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/27552_a.jpg",
+        "url": "/product-images/27552/27552_a.jpg",
         "alt": "Scaun ORL Otopex cu tetiera - verde Toronto",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/27552_a.jpg"
       }
     ],
     "productDocuments": [
@@ -1661,7 +1668,7 @@
       "Verificare aplicatie, cantitate, termen si suport tehnic inainte de ofertare"
     ],
     "romanianBenefits": [
-      "Pagina construita pe baza informatiilor publice GIMA si adaptata pentru ofertare ZESCORP",
+      "Pagina adaptata pentru cerere de oferta ZESCORP, pe baza datelor tehnice disponibile",
       "Date tehnice afisate transparent, fara preturi sau stoc inventate",
       "Posibilitate de ofertare impreuna cu service, mentenanta si suport operational"
     ],
@@ -1680,8 +1687,8 @@
       }
     ],
     "commercialCategory": "Electromedicale",
-    "imageUrl": "https://www.gimaitaly.com/images/prodotti/big/28668.jpg",
-    "imageAlt": "Incalzitor pentru picioare cu masaj - produs GIMA pentru oferta ZESCORP",
+    "imageUrl": "/product-images/28668/28668.jpg",
+    "imageAlt": "Incalzitor pentru picioare cu masaj - produs medical pentru oferta ZESCORP",
     "publicDisplayReady": true,
     "imageSourceUrl": "https://www.gimaitaly.com/Prodotti/28668",
     "imageVerified": true,
@@ -1698,12 +1705,13 @@
       "Incalzitor pentru picioare cu masaj",
       "Manual multilingv inclusiv RO"
     ],
-    "imageStatus": "verified",
+    "imageStatus": "verified_local",
     "galleryImages": [
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/big/28668.jpg",
+        "url": "/product-images/28668/28668.jpg",
         "alt": "Incalzitor pentru picioare cu masaj",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/big/28668.jpg"
       }
     ],
     "productDocuments": [
@@ -30893,14 +30901,14 @@
     ],
     "notes": "GIMA public product page enriched. Noindex until manual ZESCORP review. Quality gate enriched from actual GIMA product page. Public noindex preserved. Quality gate enriched from actual GIMA product page. Public noindex preserved.",
     "romanianTitle": "Colposcop LED Colpy",
-    "romanianDescription": "GIMA Colpy este un colposcop LED montat pe baza mobila cu 5 roti. Sistemul optic stereo permite ajustare interpupilara, iar capul optic este pozitionat la 45 de grade.",
+    "romanianDescription": "Colposcopul Colpy este un colposcop LED montat pe baza mobila cu 5 roti. Sistemul optic stereo permite ajustare interpupilara, iar capul optic este pozitionat la 45 de grade.",
     "romanianApplications": [
       "Cerere de oferta pentru clinici, cabinete, laboratoare sau unitati medicale",
       "Completare dotare, inlocuire produs sau configurare impreuna cu alte echipamente",
       "Verificare aplicatie, cantitate, termen si suport tehnic inainte de ofertare"
     ],
     "romanianBenefits": [
-      "Pagina construita pe baza informatiilor publice GIMA si adaptata pentru ofertare ZESCORP",
+      "Pagina adaptata pentru cerere de oferta ZESCORP, pe baza datelor tehnice disponibile",
       "Date tehnice afisate transparent, fara preturi sau stoc inventate",
       "Posibilitate de ofertare impreuna cu service, mentenanta si suport operational"
     ],
@@ -30939,7 +30947,7 @@
       }
     ],
     "commercialCategory": "Ginecologie",
-    "imageUrl": "https://www.gimaitaly.com/images/prodotti/big/29600.jpg",
+    "imageUrl": "/product-images/29600/29600.jpg",
     "imageAlt": "Colposcop LED Colpy - produs pentru oferta ZESCORP",
     "publicDisplayReady": true,
     "imageSourceUrl": "https://www.gimaitaly.com/Prodotti/29600",
@@ -30957,12 +30965,13 @@
     "romanianPackageContents": [
       "Colposcop LED GIMA Colpy pe baza mobila"
     ],
-    "imageStatus": "verified",
+    "imageStatus": "verified_local",
     "galleryImages": [
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/big/29600.jpg",
+        "url": "/product-images/29600/29600.jpg",
         "alt": "Colposcop LED Colpy",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/big/29600.jpg"
       }
     ],
     "productDocuments": [
@@ -38290,14 +38299,14 @@
     "commercialDescription": "",
     "applications": [],
     "romanianTitle": "Monitor multiparametric pentru 6 parametri",
-    "romanianDescription": "GIMACARE este un dispozitiv multiparametric conectat prin Bluetooth, potrivit pentru utilizare profesionala si homecare. Identifica automat stripurile, permite transmiterea datelor prin aplicatie si afiseaza indicatori color pentru ghidarea utilizarii si interpretarea orientativa a intervalelor.",
+    "romanianDescription": "Monitorul multiparametric este un dispozitiv multiparametric conectat prin Bluetooth, potrivit pentru utilizare profesionala si homecare. Identifica automat stripurile, permite transmiterea datelor prin aplicatie si afiseaza indicatori color pentru ghidarea utilizarii si interpretarea orientativa a intervalelor.",
     "romanianApplications": [
       "Cerere de oferta pentru clinici, cabinete, laboratoare sau unitati medicale",
       "Completare dotare, inlocuire produs sau configurare impreuna cu alte echipamente",
       "Verificare aplicatie, cantitate, termen si suport tehnic inainte de ofertare"
     ],
     "romanianBenefits": [
-      "Pagina construita pe baza informatiilor publice GIMA si adaptata pentru ofertare ZESCORP",
+      "Pagina adaptata pentru cerere de oferta ZESCORP, pe baza datelor tehnice disponibile",
       "Date tehnice afisate transparent, fara preturi sau stoc inventate",
       "Posibilitate de ofertare impreuna cu service, mentenanta si suport operational"
     ],
@@ -38360,7 +38369,7 @@
       "/contracte-mentenanta"
     ],
     "imageAlt": "Monitor multiparametric pentru 6 parametri - produs pentru oferta ZESCORP",
-    "imageUrl": "https://www.gimaitaly.com/images/prodotti/big/24128.jpg",
+    "imageUrl": "/product-images/24128/24128.jpg",
     "imageSourceUrl": "https://www.gimaitaly.com/Prodotti/24128",
     "imageVerified": true,
     "publicDisplayReady": true,
@@ -38383,37 +38392,43 @@
       "Husa transport",
       "Manual GB/FR/IT/ES"
     ],
-    "imageStatus": "verified",
+    "imageStatus": "verified_local",
     "galleryImages": [
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/big/24128.jpg",
+        "url": "/product-images/24128/24128.jpg",
         "alt": "Monitor multiparametric pentru 6 parametri",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/big/24128.jpg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/24128_a.jpg",
+        "url": "/product-images/24128/24128_a.jpg",
         "alt": "Monitor multiparametric pentru 6 parametri",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/24128_a.jpg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/24128_b.jpg",
+        "url": "/product-images/24128/24128_b.jpg",
         "alt": "Monitor multiparametric pentru 6 parametri",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/24128_b.jpg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/24128_c.jpg",
+        "url": "/product-images/24128/24128_c.jpg",
         "alt": "Monitor multiparametric pentru 6 parametri",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/24128_c.jpg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/24128_d.jpg",
+        "url": "/product-images/24128/24128_d.jpg",
         "alt": "Monitor multiparametric pentru 6 parametri",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/24128_d.jpg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/24128_e.jpg",
+        "url": "/product-images/24128/24128_e.jpg",
         "alt": "Monitor multiparametric pentru 6 parametri",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/24128_e.jpg"
       }
     ],
     "productDocuments": [
@@ -40084,7 +40099,7 @@
       "Verificare aplicatie, cantitate, termen si suport tehnic inainte de ofertare"
     ],
     "romanianBenefits": [
-      "Pagina construita pe baza informatiilor publice GIMA si adaptata pentru ofertare ZESCORP",
+      "Pagina adaptata pentru cerere de oferta ZESCORP, pe baza datelor tehnice disponibile",
       "Date tehnice afisate transparent, fara preturi sau stoc inventate",
       "Posibilitate de ofertare impreuna cu service, mentenanta si suport operational"
     ],
@@ -40126,8 +40141,8 @@
       "/service-aparatura-medicala",
       "/contracte-mentenanta"
     ],
-    "imageAlt": "Camp chirurgical steril netesut dublu strat 50 x 50 cm - produs GIMA pentru oferta ZESCORP",
-    "imageUrl": "https://www.gimaitaly.com/images/prodotti/big/23580.jpg",
+    "imageAlt": "Camp chirurgical steril netesut dublu strat 50 x 50 cm - produs medical pentru oferta ZESCORP",
+    "imageUrl": "/product-images/23580/23580.jpg",
     "imageSourceUrl": "https://www.gimaitaly.com/Prodotti/23580",
     "imageVerified": true,
     "publicDisplayReady": true,
@@ -40144,17 +40159,19 @@
     "romanianPackageContents": [
       "Camp chirurgical steril 50 x 50 cm"
     ],
-    "imageStatus": "verified",
+    "imageStatus": "verified_local",
     "galleryImages": [
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/big/23580.jpg",
+        "url": "/product-images/23580/23580.jpg",
         "alt": "Camp chirurgical steril netesut dublu strat 50 x 50 cm",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/big/23580.jpg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/23580_a.jpg",
+        "url": "/product-images/23580/23580_a.jpg",
         "alt": "Camp chirurgical steril netesut dublu strat 50 x 50 cm",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/23580_a.jpg"
       }
     ],
     "productDocuments": [
@@ -41201,7 +41218,7 @@
       "Verificare aplicatie, cantitate, termen si suport tehnic inainte de ofertare"
     ],
     "romanianBenefits": [
-      "Pagina construita pe baza informatiilor publice GIMA si adaptata pentru ofertare ZESCORP",
+      "Pagina adaptata pentru cerere de oferta ZESCORP, pe baza datelor tehnice disponibile",
       "Date tehnice afisate transparent, fara preturi sau stoc inventate",
       "Posibilitate de ofertare impreuna cu service, mentenanta si suport operational"
     ],
@@ -41238,8 +41255,8 @@
       "/contracte-mentenanta",
       "/service-aparatura-medicala"
     ],
-    "imageAlt": "Pensa Aesculap Foerster-Ballenger dreapta 18 cm BF112R - produs GIMA pentru oferta ZESCORP",
-    "imageUrl": "https://www.gimaitaly.com/images/prodotti/big/39240.jpg",
+    "imageAlt": "Pensa Aesculap Foerster-Ballenger dreapta 18 cm BF112R - produs medical pentru oferta ZESCORP",
+    "imageUrl": "/product-images/39240/39240.jpg",
     "imageSourceUrl": "https://www.gimaitaly.com/Prodotti/39240",
     "imageVerified": true,
     "publicDisplayReady": true,
@@ -41255,12 +41272,13 @@
     "romanianPackageContents": [
       "Pensa Foerster-Ballenger dreapta 18 cm"
     ],
-    "imageStatus": "verified",
+    "imageStatus": "verified_local",
     "galleryImages": [
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/big/39240.jpg",
+        "url": "/product-images/39240/39240.jpg",
         "alt": "Pensa Aesculap Foerster-Ballenger dreapta 18 cm BF112R",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/big/39240.jpg"
       }
     ],
     "productDocuments": [
@@ -46014,7 +46032,7 @@
       "Verificare aplicatie, cantitate, termen si suport tehnic inainte de ofertare"
     ],
     "romanianBenefits": [
-      "Pagina construita pe baza informatiilor publice GIMA si adaptata pentru ofertare ZESCORP",
+      "Pagina adaptata pentru cerere de oferta ZESCORP, pe baza datelor tehnice disponibile",
       "Date tehnice afisate transparent, fara preturi sau stoc inventate",
       "Posibilitate de ofertare impreuna cu service, mentenanta si suport operational"
     ],
@@ -46055,8 +46073,8 @@
       "/service-aparatura-medicala",
       "/contracte-mentenanta"
     ],
-    "imageAlt": "Garou rapid albastru - produs GIMA pentru oferta ZESCORP",
-    "imageUrl": "https://www.gimaitaly.com/images/prodotti/big/25748.jpg",
+    "imageAlt": "Garou rapid albastru - produs medical pentru oferta ZESCORP",
+    "imageUrl": "/product-images/25748/25748.jpg",
     "imageSourceUrl": "https://www.gimaitaly.com/Prodotti/25748",
     "imageVerified": true,
     "publicDisplayReady": true,
@@ -46073,37 +46091,43 @@
     "romanianPackageContents": [
       "Garou rapid albastru"
     ],
-    "imageStatus": "verified",
+    "imageStatus": "verified_local",
     "galleryImages": [
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/big/25748.jpg",
+        "url": "/product-images/25748/25748.jpg",
         "alt": "Garou rapid albastru",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/big/25748.jpg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/25748_a.jpg",
+        "url": "/product-images/25748/25748_a.jpg",
         "alt": "Garou rapid albastru",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/25748_a.jpg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/25748_b.jpg",
+        "url": "/product-images/25748/25748_b.jpg",
         "alt": "Garou rapid albastru",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/25748_b.jpg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/25748_c.jpg",
+        "url": "/product-images/25748/25748_c.jpg",
         "alt": "Garou rapid albastru",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/25748_c.jpg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/25748_d.jpg",
+        "url": "/product-images/25748/25748_d.jpg",
         "alt": "Garou rapid albastru",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/25748_d.jpg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/25748_e.jpg",
+        "url": "/product-images/25748/25748_e.jpg",
         "alt": "Garou rapid albastru",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/25748_e.jpg"
       }
     ],
     "productDocuments": [
@@ -47138,7 +47162,7 @@
       "Verificare aplicatie, cantitate, termen si suport tehnic inainte de ofertare"
     ],
     "romanianBenefits": [
-      "Pagina construita pe baza informatiilor publice GIMA si adaptata pentru ofertare ZESCORP",
+      "Pagina adaptata pentru cerere de oferta ZESCORP, pe baza datelor tehnice disponibile",
       "Date tehnice afisate transparent, fara preturi sau stoc inventate",
       "Posibilitate de ofertare impreuna cu service, mentenanta si suport operational"
     ],
@@ -47179,8 +47203,8 @@
       "/solutii-medicale/amenajare-clinica-medicala",
       "/contact"
     ],
-    "imageAlt": "Scaun hidraulic pentru transfer pacient - produs GIMA pentru oferta ZESCORP",
-    "imageUrl": "https://www.gimaitaly.com/images/prodotti/big/43430.jpg",
+    "imageAlt": "Scaun hidraulic pentru transfer pacient - produs medical pentru oferta ZESCORP",
+    "imageUrl": "/product-images/43430/43430.jpg",
     "imageSourceUrl": "https://www.gimaitaly.com/Prodotti/43430",
     "imageVerified": true,
     "publicDisplayReady": true,
@@ -47201,27 +47225,31 @@
       "Panou moale detasabil",
       "Manual multilingv inclusiv RO"
     ],
-    "imageStatus": "verified",
+    "imageStatus": "verified_local",
     "galleryImages": [
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/big/43430.jpg",
+        "url": "/product-images/43430/43430.jpg",
         "alt": "Scaun hidraulic pentru transfer pacient",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/big/43430.jpg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/43430_a.jpg",
+        "url": "/product-images/43430/43430_a.jpg",
         "alt": "Scaun hidraulic pentru transfer pacient",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/43430_a.jpg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/43430_b.jpg",
+        "url": "/product-images/43430/43430_b.jpg",
         "alt": "Scaun hidraulic pentru transfer pacient",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/43430_b.jpg"
       },
       {
-        "url": "https://www.gimaitaly.com/images/prodotti/thumb/43430_c.jpg",
+        "url": "/product-images/43430/43430_c.jpg",
         "alt": "Scaun hidraulic pentru transfer pacient",
-        "verified": true
+        "verified": true,
+        "sourceUrl": "https://www.gimaitaly.com/images/prodotti/thumb/43430_c.jpg"
       }
     ],
     "productDocuments": [
