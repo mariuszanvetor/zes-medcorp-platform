@@ -97,6 +97,10 @@ export type ProductCatalogItem = {
   sourceExtractedAt?: string;
   sourceQuality?: "basic_import" | "gima_page_parity_review";
   publicDisplayReady?: boolean;
+  catalogStatus?: "imported" | "localized" | "image_verified" | "documents_verified" | "ready_for_publish" | "needs_review" | "excluded";
+  strictQualityScore?: number;
+  strictQualityStatus?: "pass" | "fail";
+  strictQualityFailures?: string[];
 };
 
 export const productCategories: ProductCategory[] = [
@@ -255,6 +259,8 @@ export function isProductCommerciallyApproved(product: ProductCatalogItem) {
 export function isProductPublicDisplayReady(product: ProductCatalogItem) {
   return Boolean(
     product.publicDisplayReady &&
+      product.strictQualityStatus === "pass" &&
+      product.catalogStatus === "ready_for_publish" &&
       product.romanianTitle?.trim() &&
       product.romanianDescription?.trim() &&
       product.galleryImages?.length &&

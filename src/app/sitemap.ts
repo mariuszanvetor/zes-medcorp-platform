@@ -12,7 +12,7 @@ import { revenueLandingPages } from "@/data/revenue-landing-pages";
 import { seoClusters } from "@/data/seo-clusters";
 import { serviceFunnels } from "@/data/service-funnels";
 import { services } from "@/data/services";
-import { getIndexableProducts, productCategories } from "@/lib/product-catalog";
+import { getIndexableProducts } from "@/lib/product-catalog";
 import { siteConfig } from "@/lib/seo";
 
 const staticRoutes: Array<{
@@ -93,14 +93,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.62,
   }));
 
-  const indexableCategoryRoutes = productCategories
-    .filter((category) => getIndexableProducts().some((product) => product.category === category.id))
-    .map((category) => ({
-      url: new URL(`/produse/categorie/${category.slug}`, siteConfig.url).toString(),
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    }));
+  const indexableCategoryRoutes: MetadataRoute.Sitemap = [];
 
   const articleRoutes = articles.map((article) => ({
     url: new URL(`/knowledge-hub/${article.slug}`, siteConfig.url).toString(),

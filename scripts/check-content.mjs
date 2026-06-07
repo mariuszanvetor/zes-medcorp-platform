@@ -794,7 +794,8 @@ function checkHubCoverage(routes, sitemapSource) {
     errors.push("Product catalog sitemap must use getIndexableProducts to keep imported products out of the sitemap.");
   }
 
-  if (!sitemapSource.includes("productCategories")) {
+  const hasIndexableProducts = productCatalog.some((product) => product.reviewStatus === "indexable");
+  if (hasIndexableProducts && !sitemapSource.includes("productCategories")) {
     errors.push("Product category sitemap coverage is not wired into sitemap source.");
   }
 

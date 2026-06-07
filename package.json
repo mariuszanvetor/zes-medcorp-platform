@@ -19,6 +19,7 @@
     "products:repair-full": "node scripts/product-catalog/repair-full-catalog.mjs",
     "products:repair-full-02": "node scripts/product-catalog/repair-full-catalog-02.mjs",
     "products:index-ready": "node scripts/product-catalog/index-ready-products.mjs",
+    "products:quality-rollback": "node scripts/product-catalog/rollback-quality-gate.mjs",
     "leads:research": "node scripts/lead-research/cli.mjs research",
     "leads:import": "node scripts/lead-research/cli.mjs import",
     "leads:export": "node scripts/lead-research/build-workbook.mjs",
