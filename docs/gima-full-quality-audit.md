@@ -1,0 +1,499 @@
+# GIMA Full Quality Audit
+
+Generated: 2026-06-06T21:55:12.219Z
+
+## Verdict
+
+- Catalog imported locally: 8823 products.
+- Source SKU candidates discovered: 8820.
+- Ready for repair pass: yes.
+- Ready for indexation: no.
+
+Products stay noindex until a separate manual approval phase sets `reviewStatus: "indexable"`.
+
+## Quality Summary
+
+- ready_for_publish: 37
+- needs review / below score 90: 8786
+- missing verified local image: 1899
+- public English leakage candidates: 0
+- localization issues held for repair: 224
+- broken public image links written: 0
+- broken public document links written: 0
+
+## Score Distribution
+
+- 90-100: 37
+- 80-89: 3928
+- 70-79: 2871
+- 0-69: 1987
+
+## Products Below Score 90
+
+- : Up 7000 multiparametric monitor — score 0, status needs_review
+- : D-600 medical heat sealer — score 0, status needs_review
+- : Fc 700 foetal monitor — score 0, status needs_review
+- 10079: Fizioterapie cod 10079 — score 45, status localized
+- 10088: Instrumentar chirurgical cod 10088 — score 62, status localized
+- 10421: Diagnostic medical cod 10421 — score 45, status localized
+- 10424: Diagnostic medical cod 10424 — score 62, status localized
+- 10487: Diagnostic medical cod 10487 — score 45, status localized
+- 10488: Diagnostic medical cod 10488 — score 45, status localized
+- 10489: Diagnostic medical cod 10489 — score 62, status localized
+- 10541: Sterilizare cod 10541 — score 45, status localized
+- 10544: Diagnostic medical cod 10544 — score 62, status localized
+- 10563: Diagnostic medical cod 10563 — score 62, status localized
+- 10565: Diagnostic medical cod 10565 — score 62, status localized
+- 10566: Monitorizare cod 10566 — score 45, status localized
+- 10569: Diagnostic medical cod 10569 — score 62, status localized
+- 10577: Diagnostic medical cod 10577 — score 62, status localized
+- 10590: Diagnostic medical cod 10590 — score 62, status localized
+- 10600: Diagnostic medical cod 10600 — score 62, status localized
+- 10605: Diagnostic medical cod 10605 — score 45, status localized
+- 10607: Diagnostic medical cod 10607 — score 62, status localized
+- 10608: Diagnostic medical cod 10608 — score 62, status localized
+- 10642: Sterilizare cod 10642 — score 45, status localized
+- 10691: Diagnostic medical cod 10691 — score 62, status localized
+- 10705: Diagnostic medical cod 10705 — score 62, status localized
+- 10801: Diagnostic medical cod 10801 — score 62, status localized
+- 10881: Sterilizare cod 10881 — score 62, status localized
+- 10882: Sterilizare cod 10882 — score 62, status localized
+- 10884: Sterilizare cod 10884 — score 45, status localized
+- 10993: Protectie operator cod 10993 — score 45, status localized
+- 11092: Protectie operator cod 11092 — score 62, status localized
+- 11135: Sterilizare cod 11135 — score 62, status localized
+- 11140: Sterilizare cod 11140 — score 45, status localized
+- 11221: Urgenta cod 11221 — score 62, status localized
+- 11251: Urgenta cod 11251 — score 62, status localized
+- 11332: Urgenta cod 11332 — score 62, status localized
+- 11334: Ingrijire pacient cod 11334 — score 45, status localized
+- 11500: Diagnostic medical cod 11500 — score 45, status localized
+- 11511: Diagnostic medical cod 11511 — score 45, status localized
+- 11571: Urgenta cod 11571 — score 45, status localized
+- 11600: Diagnostic medical cod 11600 — score 45, status localized
+- 11605: Diagnostic medical cod 11605 — score 45, status localized
+- 11607: Sterilizare cod 11607 — score 62, status localized
+- 11610: Diagnostic medical cod 11610 — score 45, status localized
+- 11620: Diagnostic medical cod 11620 — score 45, status localized
+- 11630: Diagnostic medical cod 11630 — score 45, status localized
+- 11710: Diagnostic medical cod 11710 — score 45, status localized
+- 11720: Diagnostic medical cod 11720 — score 45, status localized
+- 11730: Diagnostic medical cod 11730 — score 45, status localized
+- 11735: Diagnostic medical cod 11735 — score 45, status localized
+- 11737: Protectie operator cod 11737 — score 62, status localized
+- 11800: Diagnostic medical cod 11800 — score 45, status localized
+- 11810: Diagnostic medical cod 11810 — score 45, status localized
+- 11820: Diagnostic medical cod 11820 — score 45, status localized
+- 11959: Monitorizare cod 11959 — score 62, status localized
+- 12071: Lampi medicale cod 12071 — score 62, status localized
+- 12072: Lampi medicale cod 12072 — score 62, status localized
+- 12400: Diagnostic medical cod 12400 — score 45, status localized
+- 12470: Ingrijire pacient cod 12470 — score 45, status localized
+- 12631: Diagnostic medical cod 12631 — score 36, status localized
+- 12632: Diagnostic medical cod 12632 — score 36, status localized
+- 12633: Diagnostic medical cod 12633 — score 53, status localized
+- 12671: Urgenta cod 12671 — score 62, status localized
+- 12704: Diagnostic medical cod 12704 — score 62, status localized
+- 12770: Diagnostic medical cod 12770 — score 62, status localized
+- 12771: Diagnostic medical cod 12771 — score 62, status localized
+- 13034: Protectie operator cod 13034 — score 53, status localized
+- 13060: Sterilizare cod 13060 — score 62, status localized
+- 13098: Fizioterapie cod 13098 — score 62, status localized
+- 13164: Urgenta cod 13164 — score 62, status localized
+- 13270: Diagnostic medical cod 13270 — score 62, status localized
+- 13271: Diagnostic medical cod 13271 — score 62, status localized
+- 13272: Diagnostic medical cod 13272 — score 62, status localized
+- 13277: Diagnostic medical cod 13277 — score 45, status localized
+- 13278: Diagnostic medical cod 13278 — score 45, status localized
+- 13301: Monitorizare cod 13301 — score 45, status localized
+- 13302: Monitorizare cod 13302 — score 45, status localized
+- 13317: Monitorizare cod 13317 — score 45, status localized
+- 13321: Monitorizare cod 13321 — score 62, status localized
+- 13377: Diagnostic medical cod 13377 — score 45, status localized
+- 13428: Urgenta cod 13428 — score 45, status localized
+- 13485: Monitorizare cod 13485 — score 62, status localized
+- 13544: Fizioterapie cod 13544 — score 45, status localized
+- 13624: Urgenta cod 13624 — score 62, status localized
+- 13697: Urgenta cod 13697 — score 45, status localized
+- 13727: Urgenta cod 13727 — score 45, status localized
+- 13795: Protectie operator cod 13795 — score 62, status localized
+- 13911: Sterilizare cod 13911 — score 45, status localized
+- 13913: Sterilizare cod 13913 — score 45, status localized
+- 14041: Diagnostic medical cod 14041 — score 62, status localized
+- 14051: Diagnostic medical cod 14051 — score 62, status localized
+- 14079: Urgenta cod 14079 — score 62, status localized
+- 14126: Protectie operator cod 14126 — score 36, status localized
+- 14476: Urgenta cod 14476 — score 62, status localized
+- 14605: Protectie operator cod 14605 — score 36, status localized
+- 14683: Laborator / IVD cod 14683 — score 45, status localized
+- 14971: Fizioterapie cod 14971 — score 62, status localized
+- 15197: Laborator / IVD cod 15197 — score 62, status localized
+- 15883: Laborator / IVD cod 15883 — score 45, status localized
+- 16004: Urgenta cod 16004 — score 62, status localized
+- 16775: Sterilizare cod 16775 — score 45, status localized
+- 17593: Laborator / IVD cod 17593 — score 45, status localized
+- 17665: Sterilizare cod 17665 — score 45, status localized
+- 18000: Mobilier medical cod 18000 — score 74, status image_verified
+- 18001: Mobilier medical cod 18001 — score 74, status image_verified
+- 18002: Mobilier medical cod 18002 — score 74, status image_verified
+- 18003: Mobilier medical cod 18003 — score 74, status image_verified
+- 18004: Mobilier medical cod 18004 — score 74, status image_verified
+- 18005: Mobilier medical cod 18005 — score 74, status image_verified
+- 18008: Mobilier medical cod 18008 — score 74, status image_verified
+- 18009: Mobilier medical cod 18009 — score 74, status image_verified
+- 18010: Mobilier medical cod 18010 — score 74, status image_verified
+- 18011: Mobilier medical cod 18011 — score 74, status image_verified
+- 18012: Mobilier medical cod 18012 — score 74, status image_verified
+- 18013: Mobilier medical cod 18013 — score 74, status image_verified
+- 18016: Mobilier medical cod 18016 — score 74, status image_verified
+- 18017: Mobilier medical cod 18017 — score 74, status image_verified
+- 18018: Mobilier medical cod 18018 — score 74, status image_verified
+- 18019: Mobilier medical cod 18019 — score 74, status image_verified
+- 18020: Mobilier medical cod 18020 — score 74, status image_verified
+- 18021: Mobilier medical cod 18021 — score 74, status image_verified
+- 18024: Mobilier medical cod 18024 — score 74, status image_verified
+- 18025: Mobilier medical cod 18025 — score 74, status image_verified
+- 18026: Mobilier medical cod 18026 — score 74, status image_verified
+- 18027: Mobilier medical cod 18027 — score 74, status image_verified
+- 18028: Mobilier medical cod 18028 — score 74, status image_verified
+- 18029: Mobilier medical cod 18029 — score 74, status image_verified
+- 18062: Mobilier medical cod 18062 — score 74, status image_verified
+- 18063: Mobilier medical cod 18063 — score 74, status image_verified
+- 18064: Mobilier medical cod 18064 — score 74, status image_verified
+- 18065: Mobilier medical cod 18065 — score 74, status image_verified
+- 18066: Mobilier medical cod 18066 — score 74, status image_verified
+- 18067: Mobilier medical cod 18067 — score 74, status image_verified
+- 18070: Mobilier medical cod 18070 — score 74, status image_verified
+- 18071: Mobilier medical cod 18071 — score 74, status image_verified
+- 18072: Mobilier medical cod 18072 — score 74, status image_verified
+- 18073: Mobilier medical cod 18073 — score 74, status image_verified
+- 18074: Mobilier medical cod 18074 — score 74, status image_verified
+- 18075: Mobilier medical cod 18075 — score 74, status image_verified
+- 18078: Mobilier medical cod 18078 — score 74, status image_verified
+- 18079: Mobilier medical cod 18079 — score 74, status image_verified
+- 18080: Mobilier medical cod 18080 — score 74, status image_verified
+- 18081: Mobilier medical cod 18081 — score 74, status image_verified
+- 18082: Mobilier medical cod 18082 — score 74, status image_verified
+- 18083: Mobilier medical cod 18083 — score 74, status image_verified
+- 18086: Mobilier medical cod 18086 — score 74, status image_verified
+- 18087: Mobilier medical cod 18087 — score 74, status image_verified
+- 18088: Mobilier medical cod 18088 — score 74, status image_verified
+- 18089: Mobilier medical cod 18089 — score 74, status image_verified
+- 18090: Mobilier medical cod 18090 — score 74, status image_verified
+
+## Products Missing Images
+
+- : Up 7000 multiparametric monitor
+- : D-600 medical heat sealer
+- : Fc 700 foetal monitor
+- 10079: Fizioterapie cod 10079
+- 10088: Instrumentar chirurgical cod 10088
+- 10421: Diagnostic medical cod 10421
+- 10424: Diagnostic medical cod 10424
+- 10487: Diagnostic medical cod 10487
+- 10488: Diagnostic medical cod 10488
+- 10489: Diagnostic medical cod 10489
+- 10541: Sterilizare cod 10541
+- 10544: Diagnostic medical cod 10544
+- 10563: Diagnostic medical cod 10563
+- 10565: Diagnostic medical cod 10565
+- 10566: Monitorizare cod 10566
+- 10569: Diagnostic medical cod 10569
+- 10577: Diagnostic medical cod 10577
+- 10590: Diagnostic medical cod 10590
+- 10600: Diagnostic medical cod 10600
+- 10605: Diagnostic medical cod 10605
+- 10607: Diagnostic medical cod 10607
+- 10608: Diagnostic medical cod 10608
+- 10642: Sterilizare cod 10642
+- 10691: Diagnostic medical cod 10691
+- 10705: Diagnostic medical cod 10705
+- 10801: Diagnostic medical cod 10801
+- 10881: Sterilizare cod 10881
+- 10882: Sterilizare cod 10882
+- 10884: Sterilizare cod 10884
+- 10993: Protectie operator cod 10993
+- 11092: Protectie operator cod 11092
+- 11135: Sterilizare cod 11135
+- 11140: Sterilizare cod 11140
+- 11221: Urgenta cod 11221
+- 11251: Urgenta cod 11251
+- 11332: Urgenta cod 11332
+- 11334: Ingrijire pacient cod 11334
+- 11500: Diagnostic medical cod 11500
+- 11511: Diagnostic medical cod 11511
+- 11571: Urgenta cod 11571
+- 11600: Diagnostic medical cod 11600
+- 11605: Diagnostic medical cod 11605
+- 11607: Sterilizare cod 11607
+- 11610: Diagnostic medical cod 11610
+- 11620: Diagnostic medical cod 11620
+- 11630: Diagnostic medical cod 11630
+- 11710: Diagnostic medical cod 11710
+- 11720: Diagnostic medical cod 11720
+- 11730: Diagnostic medical cod 11730
+- 11735: Diagnostic medical cod 11735
+- 11737: Protectie operator cod 11737
+- 11800: Diagnostic medical cod 11800
+- 11810: Diagnostic medical cod 11810
+- 11820: Diagnostic medical cod 11820
+- 11959: Monitorizare cod 11959
+- 12071: Lampi medicale cod 12071
+- 12072: Lampi medicale cod 12072
+- 12400: Diagnostic medical cod 12400
+- 12470: Ingrijire pacient cod 12470
+- 12631: Diagnostic medical cod 12631
+- 12632: Diagnostic medical cod 12632
+- 12633: Diagnostic medical cod 12633
+- 12671: Urgenta cod 12671
+- 12704: Diagnostic medical cod 12704
+- 12770: Diagnostic medical cod 12770
+- 12771: Diagnostic medical cod 12771
+- 13034: Protectie operator cod 13034
+- 13060: Sterilizare cod 13060
+- 13098: Fizioterapie cod 13098
+- 13164: Urgenta cod 13164
+- 13270: Diagnostic medical cod 13270
+- 13271: Diagnostic medical cod 13271
+- 13272: Diagnostic medical cod 13272
+- 13277: Diagnostic medical cod 13277
+- 13278: Diagnostic medical cod 13278
+- 13301: Monitorizare cod 13301
+- 13302: Monitorizare cod 13302
+- 13317: Monitorizare cod 13317
+- 13321: Monitorizare cod 13321
+- 13377: Diagnostic medical cod 13377
+- 13428: Urgenta cod 13428
+- 13485: Monitorizare cod 13485
+- 13544: Fizioterapie cod 13544
+- 13624: Urgenta cod 13624
+- 13697: Urgenta cod 13697
+- 13727: Urgenta cod 13727
+- 13795: Protectie operator cod 13795
+- 13911: Sterilizare cod 13911
+- 13913: Sterilizare cod 13913
+- 14041: Diagnostic medical cod 14041
+- 14051: Diagnostic medical cod 14051
+- 14079: Urgenta cod 14079
+- 14126: Protectie operator cod 14126
+- 14476: Urgenta cod 14476
+- 14605: Protectie operator cod 14605
+- 14683: Laborator / IVD cod 14683
+- 14971: Fizioterapie cod 14971
+- 15197: Laborator / IVD cod 15197
+- 15883: Laborator / IVD cod 15883
+- 16004: Urgenta cod 16004
+- 16775: Sterilizare cod 16775
+- 17593: Laborator / IVD cod 17593
+- 17665: Sterilizare cod 17665
+- 18650: Diagnostic medical cod 18650
+- 18980: Urgenta cod 18980
+- 19354: Urgenta cod 19354
+- 19531: Urgenta cod 19531
+- 19570: Urgenta cod 19570
+- 19575: Urgenta cod 19575
+- 20000: Protectie operator cod 20000
+- 20001: Protectie operator cod 20001
+- 20002: Protectie operator cod 20002
+- 20003: Protectie operator cod 20003
+- 20004: Protectie operator cod 20004
+- 20005: Protectie operator cod 20005
+- 20006: Protectie operator cod 20006
+- 20007: Protectie operator cod 20007
+- 20008: Protectie operator cod 20008
+- 20009: Protectie operator cod 20009
+- 20010: Protectie operator cod 20010
+- 20011: Protectie operator cod 20011
+- 20012: Protectie operator cod 20012
+- 20013: Protectie operator cod 20013
+- 20020: Protectie operator cod 20020
+- 20021: Protectie operator cod 20021
+- 20022: Protectie operator cod 20022
+- 20023: Protectie operator cod 20023
+- 20024: Protectie operator cod 20024
+- 20025: Protectie operator cod 20025
+- 20026: Protectie operator cod 20026
+- 20027: Protectie operator cod 20027
+- 20028: Protectie operator cod 20028
+- 20029: Protectie operator cod 20029
+- 20030: Protectie operator cod 20030
+- 20031: Protectie operator cod 20031
+- 20032: Protectie operator cod 20032
+- 20033: Protectie operator cod 20033
+- 20060: Monitorizare cod 20060
+- 20200: Diagnostic medical cod 20200
+- 20202: Diagnostic medical cod 20202
+- 20220: Urgenta cod 20220
+- 20347: Protectie operator cod 20347
+- 20481: Diagnostic medical cod 20481
+- 20482: Diagnostic medical cod 20482
+- 20493: Diagnostic medical cod 20493
+- 20620: Protectie operator cod 20620
+- 20621: Protectie operator cod 20621
+- 20622: Protectie operator cod 20622
+- 20623: Protectie operator cod 20623
+- 20624: Protectie operator cod 20624
+
+## Public English Leakage Candidates
+
+- None detected by the automated dictionary.
+
+## Localization Issues Held For Repair
+
+- 12631: Diagnostic medical cod 12631
+- 12632: Diagnostic medical cod 12632
+- 12633: Diagnostic medical cod 12633
+- 13034: Protectie operator cod 13034
+- 14126: Protectie operator cod 14126
+- 14605: Protectie operator cod 14605
+- 20731: Protectie operator cod 20731
+- 20732: Protectie operator cod 20732
+- 20733: Protectie operator cod 20733
+- 20734: Protectie operator cod 20734
+- 20735: Protectie operator cod 20735
+- 20736: Protectie operator cod 20736
+- 20737: Protectie operator cod 20737
+- 20738: Protectie operator cod 20738
+- 20739: Protectie operator cod 20739
+- 20740: Protectie operator cod 20740
+- 20741: Protectie operator cod 20741
+- 20743: Protectie operator cod 20743
+- 21070: Protectie operator cod 21070
+- 21071: Protectie operator cod 21071
+- 21072: Protectie operator cod 21072
+- 21073: Protectie operator cod 21073
+- 21074: Protectie operator cod 21074
+- 21080: Protectie operator cod 21080
+- 21081: Protectie operator cod 21081
+- 21082: Protectie operator cod 21082
+- 21083: Protectie operator cod 21083
+- 21084: Protectie operator cod 21084
+- 21090: Protectie operator cod 21090
+- 21091: Protectie operator cod 21091
+- 21092: Protectie operator cod 21092
+- 21094: Protectie operator cod 21094
+- 21095: Protectie operator cod 21095
+- 21097: Protectie operator cod 21097
+- 21098: Protectie operator cod 21098
+- 24100: Sterilizare cod 24100
+- 27232: Cantare si masurare cod 27232
+- 27233: Cantare si masurare cod 27233
+- 27234: Cantare si masurare cod 27234
+- 27237: Cantare si masurare cod 27237
+- 27286: Cantare si masurare cod 27286
+- 27438: Mobilier medical cod 27438
+- 27439: Mobilier medical cod 27439
+- 27440: Mobilier medical cod 27440
+- 27441: Mobilier medical cod 27441
+- 27453: Mobilier medical cod 27453
+- 27454: Mobilier medical cod 27454
+- 27455: Mobilier medical cod 27455
+- 27456: Mobilier medical cod 27456
+- 27457: Mobilier medical cod 27457
+- 27459: Mobilier medical cod 27459
+- 27499: Mobilier medical cod 27499
+- 27539: Mobilier medical cod 27539
+- 27540: Mobilier medical cod 27540
+- 27541: Mobilier medical cod 27541
+- 27542: Mobilier medical cod 27542
+- 27543: Mobilier medical cod 27543
+- 27544: Mobilier medical cod 27544
+- 27545: Mobilier medical cod 27545
+- 27548: Mobilier medical cod 27548
+- 27549: Mobilier medical cod 27549
+- 27550: Mobilier medical cod 27550
+- 27551: Mobilier medical cod 27551
+- 27552: Otopex ent scaun cu headrest - verde toronto
+- 27554: Mobilier medical cod 27554
+- 27555: Mobilier medical cod 27555
+- 27600: Mobilier medical cod 27600
+- 27601: Mobilier medical cod 27601
+- 27605: Mobilier medical cod 27605
+- 27606: Mobilier medical cod 27606
+- 27607: Mobilier medical cod 27607
+- 27608: Mobilier medical cod 27608
+- 27610: Mobilier medical cod 27610
+- 27611: Mobilier medical cod 27611
+- 27637: Mobilier medical cod 27637
+- 27641: Mobilier medical cod 27641
+- 27644: Mobilier medical cod 27644
+- 27646: Mobilier medical cod 27646
+- 27649: Mobilier medical cod 27649
+- 27697: Mobilier medical cod 27697
+- 27698: Mobilier medical cod 27698
+- 27841: Mobilier medical cod 27841
+- 27885: Mobilier medical cod 27885
+- 27887: Mobilier medical cod 27887
+- 28125: Fizioterapie cod 28125
+- 28127: Fizioterapie cod 28127
+- 28131: Fizioterapie cod 28131
+- 28173: Fizioterapie cod 28173
+- 28174: Fizioterapie cod 28174
+- 28177: Fizioterapie cod 28177
+- 28178: Fizioterapie cod 28178
+- 28179: Fizioterapie cod 28179
+- 28219: Fizioterapie cod 28219
+- 28220: Fizioterapie cod 28220
+- 28239: Mobilier medical cod 28239
+- 28260: Fizioterapie cod 28260
+- 28262: Fizioterapie cod 28262
+- 28264: Fizioterapie cod 28264
+- 29480: Ginecologie cod 29480
+- 29481: Ginecologie cod 29481
+- 29482: Ginecologie cod 29482
+- 29484: Ginecologie cod 29484
+- 29490: Ginecologie cod 29490
+- 29491: Ginecologie cod 29491
+- 29493: Ginecologie cod 29493
+- 29496: Ginecologie cod 29496
+- 29497: Ginecologie cod 29497
+- 29498: Ginecologie cod 29498
+- 29499: Ginecologie cod 29499
+- 29500: Ginecologie cod 29500
+- 29502: Ginecologie cod 29502
+- 29503: Ginecologie cod 29503
+- 29505: Ginecologie cod 29505
+- 29511: Ginecologie cod 29511
+- 29512: Ginecologie cod 29512
+- 29624: Ginecologie cod 29624
+- 29625: Individually adjustable eyepiece: 16.7x
+- 29627: Ginecologie cod 29627
+- 29636: Ginecologie cod 29636
+- 29637: Ginecologie cod 29637
+- 29638: Ginecologie cod 29638
+- 29639: Ginecologie cod 29639
+- 29640: Ginecologie cod 29640
+- 29641: Ginecologie cod 29641
+- 29780: Ginecologie cod 29780
+- 29782: Ginecologie cod 29782
+- 29785: Ginecologie cod 29785
+- 30796: ORL cod 30796
+- 32185: ORL cod 32185
+- 32186: ORL cod 32186
+- 32187: ORL cod 32187
+- 32205: Ginecologie cod 32205
+- 32599: Diagnostic medical cod 32599
+- 32600: Diagnostic medical cod 32600
+- 32601: Diagnostic medical cod 32601
+- 32602: Diagnostic medical cod 32602
+- 32603: Diagnostic medical cod 32603
+- 32777: Diagnostic medical cod 32777
+- 32802: Diagnostic medical cod 32802
+- 32803: Diagnostic medical cod 32803
+- 32804: Diagnostic medical cod 32804
+- 32809: Diagnostic medical cod 32809
+- 32865: Diagnostic medical cod 32865
+- 32901: Diagnostic medical cod 32901
+- 32902: Diagnostic medical cod 32902
+- 32903: Diagnostic medical cod 32903
+- 32916: Diagnostic medical cod 32916
+- 32917: Diagnostic medical cod 32917
+- 32918: Diagnostic medical cod 32918
+- 32920: Diagnostic medical cod 32920
+
+## Remaining Repair Recommendations
+
+- Fetch product-page parity data for high-value products that still rely mainly on catalogue table text.
+- Add local technical datasheets where commercially useful; do not expose external source links.
+- Manually review titles that were normalized to generic category names.
+- Keep all product pages noindex until localization, image, document and commercial review pass.

@@ -15,7 +15,14 @@ export type ProductCategoryId =
   | "surgical-instruments"
   | "patient-care"
   | "monitoring"
-  | "disinfection";
+  | "disinfection"
+  | "operator-protection"
+  | "medical-bags"
+  | "scales-measures"
+  | "physiotherapy"
+  | "veterinary"
+  | "anatomy-models"
+  | "medical-lights";
 
 export type ProductCategory = {
   id: ProductCategoryId;
@@ -183,6 +190,55 @@ export const productCategories: ProductCategory[] = [
     label: "Dezinfectie",
     description: "Produse pentru dezinfectie, control operational si suport pentru siguranta fluxurilor medicale.",
     serviceAngle: "selectie produse, integrare in fluxuri si suport pentru necesar recurent",
+  },
+  {
+    id: "operator-protection",
+    slug: "protectie-operator",
+    label: "Protectie operator",
+    description: "Produse pentru protectia personalului medical, protectie individuala si fluxuri clinice sigure.",
+    serviceAngle: "selectie produse de protectie, consumabile si necesar operational recurent",
+  },
+  {
+    id: "medical-bags",
+    slug: "genti-medicale",
+    label: "Genti medicale",
+    description: "Genti, truse si solutii de transport pentru interventii, urgente si activitate medicala mobila.",
+    serviceAngle: "dotare truse, selectie pentru echipe mobile si suport pentru necesar de interventie",
+  },
+  {
+    id: "scales-measures",
+    slug: "cantare-si-masurare",
+    label: "Cantare si masurare",
+    description: "Cantare medicale, podoscopie, instrumente de masurare si evaluare pentru cabinete si clinici.",
+    serviceAngle: "selectie echipamente de masurare, instalare si suport operational",
+  },
+  {
+    id: "physiotherapy",
+    slug: "fizioterapie",
+    label: "Fizioterapie",
+    description: "Echipamente pentru fizioterapie, recuperare, terapie si suport clinic specializat.",
+    serviceAngle: "dotare sali de recuperare, selectie echipamente si mentenanta",
+  },
+  {
+    id: "veterinary",
+    slug: "veterinar",
+    label: "Veterinar",
+    description: "Produse si echipamente pentru clinici veterinare, interventii si suport operational.",
+    serviceAngle: "dotare clinica veterinara, consumabile si suport pentru echipamente",
+  },
+  {
+    id: "anatomy-models",
+    slug: "modele-anatomice",
+    label: "Modele anatomice",
+    description: "Modele anatomice si materiale didactice pentru educatie medicala si instruire clinica.",
+    serviceAngle: "selectie modele anatomice, pachete educationale si ofertare pentru institutii",
+  },
+  {
+    id: "medical-lights",
+    slug: "lampi-medicale",
+    label: "Lampi medicale",
+    description: "Lampi medicale, iluminare de examinare, iluminare chirurgicala si accesorii de lumina clinica.",
+    serviceAngle: "selectie iluminare medicala, instalare, suport tehnic si mentenanta",
   },
 ];
 
@@ -442,6 +498,13 @@ function translateGimaCategoryLabel(label: string) {
     "ecg, monitors & ultrasound": "Monitorizare",
     "health care - pharmacy": "Ingrijire pacient",
     consumables: "Consumabile",
+    "operator's protection": "Protectie operator",
+    "medical bags": "Genti medicale",
+    "scales & measures": "Cantare si masurare",
+    physiotherapy: "Fizioterapie",
+    veterinary: "Veterinar",
+    "human anatomy models": "Modele anatomice",
+    "medical lights": "Lampi medicale",
   };
 
   return translations[normalized] || "";
@@ -462,6 +525,13 @@ export function getProductCategoryPlaceholder(category: ProductCategoryId) {
     "patient-care": "/visuals/medical-construction.webp",
     monitoring: "/visuals/technical-service.webp",
     disinfection: "/visuals/preventive-maintenance.webp",
+    "operator-protection": "/visuals/preventive-maintenance.webp",
+    "medical-bags": "/visuals/medical-equipment.webp",
+    "scales-measures": "/visuals/medical-equipment.webp",
+    physiotherapy: "/visuals/medical-equipment.webp",
+    veterinary: "/visuals/technical-service.webp",
+    "anatomy-models": "/visuals/medical-laboratory.webp",
+    "medical-lights": "/visuals/medical-equipment.webp",
   };
 
   return images[category];

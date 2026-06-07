@@ -22,7 +22,10 @@ import {
 
 type CategoryPageProps = {
   params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ page?: string }>;
 };
+
+const PRODUCTS_PER_PAGE = 48;
 
 export function generateStaticParams() {
   return productCategories.map((category) => ({ slug: category.slug }));
@@ -46,13 +49,18 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   });
 }
 
-export default async function ProductCategoryPage({ params }: CategoryPageProps) {
+export default async function ProductCategoryPage({ params, searchParams }: CategoryPageProps) {
   const { slug } = await params;
+  const resolvedSearchParams = await searchParams;
   const category = getProductCategoryBySlug(slug);
 
   if (!category) notFound();
 
   const products = getProductsByCategory(category.id).filter(isProductPublicDisplayReady);
+  const page = Math.max(1, Number(resolvedSearchParams?.page || 1) || 1);
+  const totalPages = Math.max(1, Math.ceil(products.length / PRODUCTS_PER_PAGE));
+  const currentPage = Math.min(page, totalPages);
+  const pageProducts = products.slice((currentPage - 1) * PRODUCTS_PER_PAGE, currentPage * PRODUCTS_PER_PAGE);
 
   return (
     <>
@@ -103,7 +111,7 @@ export default async function ProductCategoryPage({ params }: CategoryPageProps)
             />
             {products.length > 0 ? (
               <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {products.map((product) => {
+                {pageProducts.map((product) => {
                   const content = getProductCommercialContent(product);
                   return (
                     <Link
@@ -150,6 +158,37 @@ export default async function ProductCategoryPage({ params }: CategoryPageProps)
                   Solicita selectie de produse
                 </Link>
               </div>
+            )}
+            {products.length > PRODUCTS_PER_PAGE && (
+              <nav className="mt-8 flex flex-col gap-3 border-t border-blue-100 pt-6 text-sm font-semibold text-slate-700 sm:flex-row sm:items-center sm:justify-between">
+                <p>
+                  Pagina {currentPage} din {totalPages} · {products.length} produse verificate pentru afisare
+                </p>
+                <div className="flex gap-2">
+                  <Link
+                    aria-disabled={currentPage === 1}
+                    className={`inline-flex h-11 items-center justify-center rounded-xl border px-4 transition ${
+                      currentPage === 1
+                        ? "pointer-events-none border-slate-200 bg-slate-50 text-slate-400"
+                        : "border-blue-100 bg-white text-slate-950 hover:bg-blue-50"
+                    }`}
+                    href={`${getCategoryPath(category)}${currentPage > 2 ? `?page=${currentPage - 1}` : ""}`}
+                  >
+                    Inapoi
+                  </Link>
+                  <Link
+                    aria-disabled={currentPage === totalPages}
+                    className={`inline-flex h-11 items-center justify-center rounded-xl border px-4 transition ${
+                      currentPage === totalPages
+                        ? "pointer-events-none border-slate-200 bg-slate-50 text-slate-400"
+                        : "border-[#0057b8] bg-[#0057b8] text-white hover:bg-[#00498f]"
+                    }`}
+                    href={`${getCategoryPath(category)}?page=${currentPage + 1}`}
+                  >
+                    Inainte
+                  </Link>
+                </div>
+              </nav>
             )}
             <p className="mt-6 max-w-3xl text-sm leading-7 text-slate-500">
               Daca ai nevoie de o configuratie, cantitate sau alternativa care nu apare in lista, trimite contextul

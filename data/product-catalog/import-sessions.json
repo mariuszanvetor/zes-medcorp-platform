@@ -86,5 +86,414 @@
       "consumables": 85
     },
     "mode": "write"
+  },
+  {
+    "sessionId": "gima-full-import-2026-06-06T21-17-02-167Z",
+    "source": "gima-full-import-quality-first",
+    "date": "2026-06-06T21:19:26.993Z",
+    "candidateSkus": 8820,
+    "productsTotal": 8823,
+    "added": 7823,
+    "updated": 997,
+    "unchanged": 0,
+    "imageStats": {
+      "verified": 6924,
+      "missing": 1896
+    },
+    "qualityCounts": {
+      "needs_review": 3,
+      "localized": 1897,
+      "ready_for_publish": 6795,
+      "image_verified": 128
+    },
+    "noindexPreserved": true
+  },
+  {
+    "sessionId": "gima-full-import-2026-06-06T21-22-54-904Z",
+    "source": "gima-full-import-quality-first",
+    "date": "2026-06-06T21:24:04.519Z",
+    "candidateSkus": 8820,
+    "productsTotal": 8823,
+    "added": 0,
+    "updated": 8820,
+    "unchanged": 0,
+    "imageStats": {
+      "verified": 6924,
+      "missing": 1896
+    },
+    "qualityGateActions": {
+      "demotedForEnglish": 4,
+      "demotedForMissingImage": 0,
+      "demotedForMissingCode": 3
+    },
+    "qualityCounts": {
+      "needs_review": 3,
+      "localized": 1896,
+      "ready_for_publish": 6800,
+      "image_verified": 124
+    },
+    "noindexPreserved": true
+  },
+  {
+    "sessionId": "gima-full-import-2026-06-06T21-27-43-969Z",
+    "source": "gima-full-import-quality-first",
+    "date": "2026-06-06T21:29:00.240Z",
+    "candidateSkus": 8820,
+    "productsTotal": 8823,
+    "added": 0,
+    "updated": 8820,
+    "unchanged": 0,
+    "imageStats": {
+      "verified": 6924,
+      "missing": 1896
+    },
+    "qualityGateActions": {
+      "demotedForEnglish": 0,
+      "demotedForMissingImage": 0,
+      "demotedForMissingCode": 3
+    },
+    "qualityCounts": {
+      "needs_review": 3,
+      "localized": 1896,
+      "image_verified": 767,
+      "ready_for_publish": 6157
+    },
+    "noindexPreserved": true
+  },
+  {
+    "sessionId": "gima-full-import-2026-06-06T21-30-04-090Z",
+    "source": "gima-full-import-quality-first",
+    "date": "2026-06-06T21:31:10.629Z",
+    "candidateSkus": 8820,
+    "productsTotal": 8823,
+    "added": 0,
+    "updated": 8820,
+    "unchanged": 0,
+    "imageStats": {
+      "verified": 6924,
+      "missing": 1896
+    },
+    "qualityGateActions": {
+      "demotedForEnglish": 0,
+      "demotedForMissingImage": 0,
+      "demotedForMissingCode": 3
+    },
+    "qualityCounts": {
+      "needs_review": 3,
+      "localized": 1896,
+      "ready_for_publish": 6739,
+      "image_verified": 185
+    },
+    "noindexPreserved": true
+  },
+  {
+    "sessionId": "gima-full-import-2026-06-06T21-32-25-090Z",
+    "source": "gima-full-import-quality-first",
+    "date": "2026-06-06T21:33:49.719Z",
+    "candidateSkus": 8820,
+    "productsTotal": 8823,
+    "added": 0,
+    "updated": 8820,
+    "unchanged": 0,
+    "imageStats": {
+      "verified": 6924,
+      "missing": 1896
+    },
+    "qualityGateActions": {
+      "demotedForEnglish": 0,
+      "demotedForMissingImage": 0,
+      "demotedForMissingCode": 3
+    },
+    "qualityCounts": {
+      "needs_review": 3,
+      "localized": 1896,
+      "ready_for_publish": 6739,
+      "image_verified": 185
+    },
+    "noindexPreserved": true
+  },
+  {
+    "sessionId": "gima-full-import-2026-06-06T21-34-31-161Z",
+    "source": "gima-full-import-quality-first",
+    "date": "2026-06-06T21:35:34.432Z",
+    "candidateSkus": 8820,
+    "productsTotal": 8823,
+    "added": 0,
+    "updated": 8820,
+    "unchanged": 0,
+    "imageStats": {
+      "verified": 6924,
+      "missing": 1896
+    },
+    "qualityGateActions": {
+      "demotedForEnglish": 0,
+      "demotedForMissingImage": 0,
+      "demotedForMissingCode": 3
+    },
+    "qualityCounts": {
+      "needs_review": 3,
+      "localized": 1896,
+      "ready_for_publish": 6739,
+      "image_verified": 185
+    },
+    "noindexPreserved": true
+  },
+  {
+    "sessionId": "gima-full-import-2026-06-06T21-36-39-827Z",
+    "source": "gima-full-import-quality-first",
+    "date": "2026-06-06T21:37:59.069Z",
+    "candidateSkus": 8820,
+    "productsTotal": 8823,
+    "added": 0,
+    "updated": 8820,
+    "unchanged": 0,
+    "imageStats": {
+      "verified": 6924,
+      "missing": 1896
+    },
+    "qualityGateActions": {
+      "demotedForEnglish": 0,
+      "demotedForMissingImage": 0,
+      "demotedForMissingCode": 3
+    },
+    "qualityCounts": {
+      "needs_review": 3,
+      "localized": 1943,
+      "image_verified": 1353,
+      "ready_for_publish": 5524
+    },
+    "noindexPreserved": true
+  },
+  {
+    "sessionId": "gima-full-import-2026-06-06T21-39-05-238Z",
+    "source": "gima-full-import-quality-first",
+    "date": "2026-06-06T21:40:04.915Z",
+    "candidateSkus": 8820,
+    "productsTotal": 8823,
+    "added": 0,
+    "updated": 8820,
+    "unchanged": 0,
+    "imageStats": {
+      "verified": 6924,
+      "missing": 1896
+    },
+    "qualityGateActions": {
+      "demotedForEnglish": 0,
+      "demotedForMissingImage": 0,
+      "demotedForMissingCode": 3
+    },
+    "qualityCounts": {
+      "needs_review": 3,
+      "localized": 1974,
+      "image_verified": 2818,
+      "ready_for_publish": 4028
+    },
+    "noindexPreserved": true
+  },
+  {
+    "sessionId": "gima-full-import-2026-06-06T21-41-04-844Z",
+    "source": "gima-full-import-quality-first",
+    "date": "2026-06-06T21:42:09.063Z",
+    "candidateSkus": 8820,
+    "productsTotal": 8823,
+    "added": 0,
+    "updated": 8820,
+    "unchanged": 0,
+    "imageStats": {
+      "verified": 6924,
+      "missing": 1896
+    },
+    "qualityGateActions": {
+      "demotedForEnglish": 0,
+      "demotedForMissingImage": 0,
+      "demotedForMissingCode": 3
+    },
+    "qualityCounts": {
+      "needs_review": 3,
+      "localized": 1984,
+      "image_verified": 2955,
+      "ready_for_publish": 3881
+    },
+    "noindexPreserved": true
+  },
+  {
+    "sessionId": "gima-full-import-2026-06-06T21-43-10-849Z",
+    "source": "gima-full-import-quality-first",
+    "date": "2026-06-06T21:44:18.444Z",
+    "candidateSkus": 8820,
+    "productsTotal": 8823,
+    "added": 0,
+    "updated": 8820,
+    "unchanged": 0,
+    "imageStats": {
+      "verified": 6924,
+      "missing": 1896
+    },
+    "qualityGateActions": {
+      "demotedForEnglish": 0,
+      "demotedForMissingImage": 0,
+      "demotedForMissingCode": 3
+    },
+    "qualityCounts": {
+      "needs_review": 3,
+      "localized": 1984,
+      "image_verified": 2980,
+      "ready_for_publish": 3856
+    },
+    "noindexPreserved": true
+  },
+  {
+    "sessionId": "gima-full-import-2026-06-06T21-45-16-188Z",
+    "source": "gima-full-import-quality-first",
+    "date": "2026-06-06T21:46:12.142Z",
+    "candidateSkus": 8820,
+    "productsTotal": 8823,
+    "added": 0,
+    "updated": 8820,
+    "unchanged": 0,
+    "imageStats": {
+      "verified": 6924,
+      "missing": 1896
+    },
+    "qualityGateActions": {
+      "demotedForEnglish": 0,
+      "demotedForMissingImage": 0,
+      "demotedForMissingCode": 3
+    },
+    "qualityCounts": {
+      "needs_review": 3,
+      "localized": 1984,
+      "image_verified": 3104,
+      "ready_for_publish": 3732
+    },
+    "noindexPreserved": true
+  },
+  {
+    "sessionId": "gima-full-import-2026-06-06T21-47-13-200Z",
+    "source": "gima-full-import-quality-first",
+    "date": "2026-06-06T21:48:20.967Z",
+    "candidateSkus": 8820,
+    "productsTotal": 8823,
+    "added": 0,
+    "updated": 8820,
+    "unchanged": 0,
+    "imageStats": {
+      "verified": 6924,
+      "missing": 1896
+    },
+    "qualityGateActions": {
+      "demotedForEnglish": 0,
+      "demotedForMissingImage": 0,
+      "demotedForMissingCode": 3
+    },
+    "qualityCounts": {
+      "needs_review": 3,
+      "localized": 1984,
+      "image_verified": 3107,
+      "ready_for_publish": 3729
+    },
+    "noindexPreserved": true
+  },
+  {
+    "sessionId": "gima-full-import-2026-06-06T21-49-07-056Z",
+    "source": "gima-full-import-quality-first",
+    "date": "2026-06-06T21:50:13.642Z",
+    "candidateSkus": 8820,
+    "productsTotal": 8823,
+    "added": 0,
+    "updated": 8820,
+    "unchanged": 0,
+    "imageStats": {
+      "verified": 6924,
+      "missing": 1896
+    },
+    "qualityGateActions": {
+      "demotedForEnglish": 0,
+      "demotedForMissingImage": 0,
+      "demotedForMissingCode": 3
+    },
+    "qualityCounts": {
+      "needs_review": 3,
+      "localized": 1984,
+      "image_verified": 3795,
+      "ready_for_publish": 3041
+    },
+    "noindexPreserved": true
+  },
+  {
+    "sessionId": "gima-full-import-2026-06-06T21-51-01-402Z",
+    "source": "gima-full-import-quality-first",
+    "date": "2026-06-06T21:52:05.873Z",
+    "candidateSkus": 8820,
+    "productsTotal": 8823,
+    "added": 0,
+    "updated": 8820,
+    "unchanged": 0,
+    "imageStats": {
+      "verified": 6924,
+      "missing": 1896
+    },
+    "qualityGateActions": {
+      "demotedForEnglish": 0,
+      "demotedForMissingImage": 0,
+      "demotedForMissingCode": 3
+    },
+    "qualityCounts": {
+      "needs_review": 3,
+      "localized": 1984,
+      "image_verified": 6836
+    },
+    "noindexPreserved": true
+  },
+  {
+    "sessionId": "gima-full-import-2026-06-06T21-52-38-879Z",
+    "source": "gima-full-import-quality-first",
+    "date": "2026-06-06T21:53:36.066Z",
+    "candidateSkus": 8820,
+    "productsTotal": 8823,
+    "added": 0,
+    "updated": 8820,
+    "unchanged": 0,
+    "imageStats": {
+      "verified": 6924,
+      "missing": 1896
+    },
+    "qualityGateActions": {
+      "demotedForEnglish": 0,
+      "demotedForMissingImage": 0,
+      "demotedForMissingCode": 3
+    },
+    "qualityCounts": {
+      "needs_review": 3,
+      "localized": 1984,
+      "image_verified": 6836
+    },
+    "noindexPreserved": true
+  },
+  {
+    "sessionId": "gima-full-import-2026-06-06T21-54-06-486Z",
+    "source": "gima-full-import-quality-first",
+    "date": "2026-06-06T21:55:08.436Z",
+    "candidateSkus": 8820,
+    "productsTotal": 8823,
+    "added": 0,
+    "updated": 8820,
+    "unchanged": 0,
+    "imageStats": {
+      "verified": 6924,
+      "missing": 1896
+    },
+    "qualityGateActions": {
+      "demotedForEnglish": 0,
+      "demotedForMissingImage": 0,
+      "demotedForMissingCode": 3
+    },
+    "qualityCounts": {
+      "needs_review": 3,
+      "localized": 1984,
+      "image_verified": 6799,
+      "ready_for_publish": 37
+    },
+    "noindexPreserved": true
   }
 ]

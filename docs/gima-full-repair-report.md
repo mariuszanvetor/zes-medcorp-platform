@@ -1,0 +1,506 @@
+# GIMA Full Repair Report
+
+Generated: 2026-06-06T22:10:35.539Z
+
+## Summary
+
+- Products in local catalog: 8823
+- ready_for_publish before repair: 3799
+- ready_for_publish after repair: 3799
+- Products repaired/promoted in this pass: 3799
+- Products still needs_review / below threshold: 5024
+- Products missing verified local images: 1899
+- Products with weak translations/titles held for review: 3125
+- Products below score 90: 5024
+- Product pages indexable: 0
+
+## Repair Rules
+
+- No new products imported.
+- Only existing local products and already-verified local images were used.
+- Technical specifications were not invented; unsafe or mixed-language specs were removed.
+- Products without verified local images remain below publish threshold.
+- Products with weak PDF/table titles remain in review.
+- All products remain noindex until a separate indexation approval phase.
+
+## Category Coverage After Repair
+
+| Category | Total | Ready for publish | Missing image | Weak/title repair needed |
+| --- | ---: | ---: | ---: | ---: |
+| Urgenta | 1429 | 591 | 361 | 477 |
+| Instrumentar chirurgical | 1340 | 651 | 260 | 429 |
+| Diagnostic medical | 1266 | 610 | 261 | 395 |
+| Mobilier medical | 1019 | 442 | 85 | 492 |
+| Protectie operator | 731 | 124 | 244 | 363 |
+| Ingrijire pacient | 544 | 231 | 156 | 157 |
+| Monitorizare | 536 | 198 | 154 | 184 |
+| Fizioterapie | 375 | 166 | 114 | 95 |
+| Sterilizare | 365 | 158 | 53 | 154 |
+| Laborator / IVD | 278 | 156 | 51 | 71 |
+| Ginecologie | 241 | 98 | 62 | 81 |
+| Electromedicale | 225 | 105 | 38 | 82 |
+| Genti medicale | 108 | 63 | 5 | 40 |
+| Lampi medicale | 102 | 51 | 26 | 25 |
+| Cantare si masurare | 98 | 73 | 1 | 24 |
+| ORL | 79 | 41 | 19 | 19 |
+| Modele anatomice | 69 | 33 | 2 | 34 |
+| Veterinar | 18 | 8 | 7 | 3 |
+
+## Still Missing Images
+
+- no-code: Up 7000 multiparametric monitor
+- no-code: D-600 medical heat sealer
+- no-code: Fc 700 foetal monitor
+- 10079: Fizioterapie cod 10079
+- 10088: Instrumentar chirurgical cod 10088
+- 10421: Diagnostic medical cod 10421
+- 10424: Diagnostic medical cod 10424
+- 10487: Diagnostic medical cod 10487
+- 10488: Diagnostic medical cod 10488
+- 10489: Diagnostic medical cod 10489
+- 10541: Sterilizare cod 10541
+- 10544: Diagnostic medical cod 10544
+- 10563: Diagnostic medical cod 10563
+- 10565: Diagnostic medical cod 10565
+- 10566: Monitorizare cod 10566
+- 10569: Diagnostic medical cod 10569
+- 10577: Diagnostic medical cod 10577
+- 10590: Diagnostic medical cod 10590
+- 10600: Diagnostic medical cod 10600
+- 10605: Diagnostic medical cod 10605
+- 10607: Diagnostic medical cod 10607
+- 10608: Diagnostic medical cod 10608
+- 10642: Sterilizare cod 10642
+- 10691: Diagnostic medical cod 10691
+- 10705: Diagnostic medical cod 10705
+- 10801: Diagnostic medical cod 10801
+- 10881: Sterilizare cod 10881
+- 10882: Sterilizare cod 10882
+- 10884: Sterilizare cod 10884
+- 10993: Protectie operator cod 10993
+- 11092: Protectie operator cod 11092
+- 11135: Sterilizare cod 11135
+- 11140: Sterilizare cod 11140
+- 11221: Urgenta cod 11221
+- 11251: Urgenta cod 11251
+- 11332: Urgenta cod 11332
+- 11334: Ingrijire pacient cod 11334
+- 11500: Diagnostic medical cod 11500
+- 11511: Diagnostic medical cod 11511
+- 11571: Urgenta cod 11571
+- 11600: Diagnostic medical cod 11600
+- 11605: Diagnostic medical cod 11605
+- 11607: Sterilizare cod 11607
+- 11610: Diagnostic medical cod 11610
+- 11620: Diagnostic medical cod 11620
+- 11630: Diagnostic medical cod 11630
+- 11710: Diagnostic medical cod 11710
+- 11720: Diagnostic medical cod 11720
+- 11730: Diagnostic medical cod 11730
+- 11735: Diagnostic medical cod 11735
+- 11737: Protectie operator cod 11737
+- 11800: Diagnostic medical cod 11800
+- 11810: Diagnostic medical cod 11810
+- 11820: Diagnostic medical cod 11820
+- 11959: Monitorizare cod 11959
+- 12071: Lampi medicale cod 12071
+- 12072: Lampi medicale cod 12072
+- 12400: Diagnostic medical cod 12400
+- 12470: Ingrijire pacient cod 12470
+- 12631: Diagnostic medical cod 12631
+- 12632: Diagnostic medical cod 12632
+- 12633: Diagnostic medical cod 12633
+- 12671: Urgenta cod 12671
+- 12704: Diagnostic medical cod 12704
+- 12770: Diagnostic medical cod 12770
+- 12771: Diagnostic medical cod 12771
+- 13034: Protectie operator cod 13034
+- 13060: Sterilizare cod 13060
+- 13098: Fizioterapie cod 13098
+- 13164: Urgenta cod 13164
+- 13270: Diagnostic medical cod 13270
+- 13271: Diagnostic medical cod 13271
+- 13272: Diagnostic medical cod 13272
+- 13277: Diagnostic medical cod 13277
+- 13278: Diagnostic medical cod 13278
+- 13301: Monitorizare cod 13301
+- 13302: Monitorizare cod 13302
+- 13317: Monitorizare cod 13317
+- 13321: Monitorizare cod 13321
+- 13377: Diagnostic medical cod 13377
+- 13428: Urgenta cod 13428
+- 13485: Monitorizare cod 13485
+- 13544: Fizioterapie cod 13544
+- 13624: Urgenta cod 13624
+- 13697: Urgenta cod 13697
+- 13727: Urgenta cod 13727
+- 13795: Protectie operator cod 13795
+- 13911: Sterilizare cod 13911
+- 13913: Sterilizare cod 13913
+- 14041: Diagnostic medical cod 14041
+- 14051: Diagnostic medical cod 14051
+- 14079: Urgenta cod 14079
+- 14126: Protectie operator cod 14126
+- 14476: Urgenta cod 14476
+- 14605: Protectie operator cod 14605
+- 14683: Laborator / IVD cod 14683
+- 14971: Fizioterapie cod 14971
+- 15197: Laborator / IVD cod 15197
+- 15883: Laborator / IVD cod 15883
+- 16004: Urgenta cod 16004
+- 16775: Sterilizare cod 16775
+- 17593: Laborator / IVD cod 17593
+- 17665: Sterilizare cod 17665
+- 18650: Diagnostic medical cod 18650
+- 18980: Urgenta cod 18980
+- 19354: Urgenta cod 19354
+- 19531: Urgenta cod 19531
+- 19570: Urgenta cod 19570
+- 19575: Urgenta cod 19575
+- 20000: Protectie operator cod 20000
+- 20001: Protectie operator cod 20001
+- 20002: Protectie operator cod 20002
+- 20003: Protectie operator cod 20003
+- 20004: Protectie operator cod 20004
+- 20005: Protectie operator cod 20005
+- 20006: Protectie operator cod 20006
+- 20007: Protectie operator cod 20007
+- 20008: Protectie operator cod 20008
+- 20009: Protectie operator cod 20009
+- 20010: Protectie operator cod 20010
+
+## Weak Translations / Titles Held For Review
+
+- 18000: XS 18001 18009 18017 18025 18063 18071 18079 18087
+- 18001: S 18002 18010 18018 18026 18064 18072 18080 18088
+- 18002: M 18003 18011 18019 18027 18065 18073 18081 18089
+- 18003: L 18004 18012 18020 18028 18066 18074 18082 18090
+- 18004: XL 18005 18013 18021 18029 18067 18075 18083 18091
+- 18005: SIZE GUIDE - WOMEN ORIGINALS LINE
+- 18008: Produs medical 18008
+- 18009: S 18002 18010 18018 18026 18064 18072 18080 18088
+- 18010: M 18003 18011 18019 18027 18065 18073 18081 18089
+- 18011: L 18004 18012 18020 18028 18066 18074 18082 18090
+- 18012: XL 18005 18013 18021 18029 18067 18075 18083 18091
+- 18013: SIZE GUIDE - WOMEN ORIGINALS LINE
+- 18016: Produs medical 18016
+- 18017: S 18002 18010 18018 18026 18064 18072 18080 18088
+- 18018: M 18003 18011 18019 18027 18065 18073 18081 18089
+- 18019: L 18004 18012 18020 18028 18066 18074 18082 18090
+- 18020: XL 18005 18013 18021 18029 18067 18075 18083 18091
+- 18021: SIZE GUIDE - WOMEN ORIGINALS LINE
+- 18024: XS 18001 18009 18017 18025 18063 18071 18079 18087
+- 18025: S 18002 18010 18018 18026 18064 18072 18080 18088
+- 18026: M 18003 18011 18019 18027 18065 18073 18081 18089
+- 18027: L 18004 18012 18020 18028 18066 18074 18082 18090
+- 18028: XL 18005 18013 18021 18029 18067 18075 18083 18091
+- 18029: SIZE GUIDE - WOMEN ORIGINALS LINE
+- 18062: XS 18001 18009 18017 18025 18063 18071 18079 18087
+- 18063: S 18002 18010 18018 18026 18064 18072 18080 18088
+- 18064: M 18003 18011 18019 18027 18065 18073 18081 18089
+- 18065: L 18004 18012 18020 18028 18066 18074 18082 18090
+- 18066: XL 18005 18013 18021 18029 18067 18075 18083 18091
+- 18067: SIZE GUIDE - WOMEN ORIGINALS LINE
+- 18070: Produs medical 18070
+- 18071: S 18002 18010 18018 18026 18064 18072 18080 18088
+- 18072: M 18003 18011 18019 18027 18065 18073 18081 18089
+- 18073: L 18004 18012 18020 18028 18066 18074 18082 18090
+- 18074: XL 18005 18013 18021 18029 18067 18075 18083 18091
+- 18075: SIZE GUIDE - WOMEN ORIGINALS LINE
+- 18078: XS 18001 18009 18017 18025 18063 18071 18079 18087
+- 18079: S 18002 18010 18018 18026 18064 18072 18080 18088
+- 18080: M 18003 18011 18019 18027 18065 18073 18081 18089
+- 18081: L 18004 18012 18020 18028 18066 18074 18082 18090
+- 18082: XL 18005 18013 18021 18029 18067 18075 18083 18091
+- 18083: SIZE GUIDE - WOMEN ORIGINALS LINE
+- 18086: XS 18001 18009 18017 18025 18063 18071 18079 18087
+- 18087: S 18002 18010 18018 18026 18064 18072 18080 18088
+- 18088: M 18003 18011 18019 18027 18065 18073 18081 18089
+- 18089: L 18004 18012 18020 18028 18066 18074 18082 18090
+- 18090: XL 18005 18013 18021 18029 18067 18075 18083 18091
+- 18091: SIZE GUIDE - WOMEN ORIGINALS LINE
+- 18130: XS 18131 18139 18147 18169 18177 18185
+- 18131: S 18132 18140 18148 18170 18178 18186
+- 18132: M 18133 18141 18149 18171 18179 18187
+- 18133: L 18134 18142 18150 18172 18180 18188
+- 18134: XL 18135 18143 18151 18173 18181 18189
+- 18135: XXL 18136 18144 18152 18174 18182 18190
+- 18136: TOPS AND TROUSERS
+- 18138: Produs medical 18138
+- 18139: S 18132 18140 18148 18170 18178 18186
+- 18140: M 18133 18141 18149 18171 18179 18187
+- 18141: L 18134 18142 18150 18172 18180 18188
+- 18142: XL 18135 18143 18151 18173 18181 18189
+- 18143: XXL 18136 18144 18152 18174 18182 18190
+- 18144: TOPS AND TROUSERS
+- 18146: Produs medical 18146
+- 18147: S 18132 18140 18148 18170 18178 18186
+- 18148: M 18133 18141 18149 18171 18179 18187
+- 18149: L 18134 18142 18150 18172 18180 18188
+- 18150: XL 18135 18143 18151 18173 18181 18189
+- 18151: XXL 18136 18144 18152 18174 18182 18190
+- 18152: TOPS AND TROUSERS
+- 18168: XS 18131 18139 18147 18169 18177 18185
+- 18169: S 18132 18140 18148 18170 18178 18186
+- 18170: M 18133 18141 18149 18171 18179 18187
+- 18171: L 18134 18142 18150 18172 18180 18188
+- 18172: XL 18135 18143 18151 18173 18181 18189
+- 18173: XXL 18136 18144 18152 18174 18182 18190
+- 18174: TOPS AND TROUSERS
+- 18176: TOPS AND TROUSERS - WOMEN
+- 18177: S 18132 18140 18148 18170 18178 18186
+- 18178: M 18133 18141 18149 18171 18179 18187
+- 18179: L 18134 18142 18150 18172 18180 18188
+- 18180: XL 18135 18143 18151 18173 18181 18189
+- 18181: XXL 18136 18144 18152 18174 18182 18190
+- 18182: TOPS AND TROUSERS
+- 18184: XS 18131 18139 18147 18169 18177 18185
+- 18185: S 18132 18140 18148 18170 18178 18186
+- 18186: M 18133 18141 18149 18171 18179 18187
+- 18187: L 18134 18142 18150 18172 18180 18188
+- 18188: XL 18135 18143 18151 18173 18181 18189
+- 18189: XXL 18136 18144 18152 18174 18182 18190
+- 18190: TOPS AND TROUSERS
+- 18205: Produs medical 18205
+- 18206: S 18207 18215 18223
+- 18207: M 18208 18216 18224
+- 18208: L 18209 18217 18225
+- 18209: XL 18210 18218 18226
+- 18210: XXL 18211 18219 18227
+- 18211: TOPS AND TROUSERS - MEN
+- 18213: XS 18206 18214 18222
+- 18214: S 18207 18215 18223
+- 18215: M 18208 18216 18224
+- 18216: L 18209 18217 18225
+- 18217: XL 18210 18218 18226
+- 18218: XXL 18211 18219 18227
+- 18219: TOPS AND TROUSERS - MEN
+- 18221: XS 18206 18214 18222
+- 18222: S 18207 18215 18223
+- 18223: M 18208 18216 18224
+- 18224: L 18209 18217 18225
+- 18225: XL 18210 18218 18226
+- 18226: XXL 18211 18219 18227
+- 18227: TOPS AND TROUSERS - MEN
+- 18260: XS 18261 18268 18275 18282 18289 18317 18324 18343 18350 18357
+- 18261: S 18262 18269 18276 18283 18290 18318 18325 18344 18351 18358
+- 18262: M 18263 18270 18277 18284 18291 18319 18326 18345 18352 18359
+- 18263: L 18264 18271 18278 18285 18292 18320 18327 18346 18353 18360
+- 18264: XL 18265 18272 18279 18286 18293 18321 18328 18347 18354 18361
+- 18265: TOPS AND TROUSERS - UNISEX
+- 18267: XS 18261 18268 18275 18282 18289 18317 18324 18343 18350 18357
+- 18268: S 18262 18269 18276 18283 18290 18318 18325 18344 18351 18358
+- 18269: M 18263 18270 18277 18284 18291 18319 18326 18345 18352 18359
+- 18270: L 18264 18271 18278 18285 18292 18320 18327 18346 18353 18360
+- 18271: XL 18265 18272 18279 18286 18293 18321 18328 18347 18354 18361
+- 18272: TOPS AND TROUSERS - UNISEX
+- 18274: Produs medical 18274
+- 18275: S 18262 18269 18276 18283 18290 18318 18325 18344 18351 18358
+- 18276: M 18263 18270 18277 18284 18291 18319 18326 18345 18352 18359
+- 18277: L 18264 18271 18278 18285 18292 18320 18327 18346 18353 18360
+- 18278: XL 18265 18272 18279 18286 18293 18321 18328 18347 18354 18361
+- 18279: TOPS AND TROUSERS - UNISEX
+- 18281: XS 18261 18268 18275 18282 18289 18317 18324 18343 18350 18357
+- 18282: S 18262 18269 18276 18283 18290 18318 18325 18344 18351 18358
+- 18283: M 18263 18270 18277 18284 18291 18319 18326 18345 18352 18359
+- 18284: L 18264 18271 18278 18285 18292 18320 18327 18346 18353 18360
+- 18285: XL 18265 18272 18279 18286 18293 18321 18328 18347 18354 18361
+- 18286: TOPS AND TROUSERS - UNISEX
+- 18288: Produs medical 18288
+- 18289: S 18262 18269 18276 18283 18290 18318 18325 18344 18351 18358
+- 18290: M 18263 18270 18277 18284 18291 18319 18326 18345 18352 18359
+- 18291: L 18264 18271 18278 18285 18292 18320 18327 18346 18353 18360
+- 18292: XL 18265 18272 18279 18286 18293 18321 18328 18347 18354 18361
+- 18293: TOPS AND TROUSERS - UNISEX
+- 18316: XS 18261 18268 18275 18282 18289 18317 18324 18343 18350 18357
+- 18317: S 18262 18269 18276 18283 18290 18318 18325 18344 18351 18358
+- 18318: M 18263 18270 18277 18284 18291 18319 18326 18345 18352 18359
+- 18319: L 18264 18271 18278 18285 18292 18320 18327 18346 18353 18360
+- 18320: XL 18265 18272 18279 18286 18293 18321 18328 18347 18354 18361
+- 18321: TOPS AND TROUSERS - UNISEX
+- 18323: XS 18261 18268 18275 18282 18289 18317 18324 18343 18350 18357
+- 18324: S 18262 18269 18276 18283 18290 18318 18325 18344 18351 18358
+- 18325: M 18263 18270 18277 18284 18291 18319 18326 18345 18352 18359
+- 18326: L 18264 18271 18278 18285 18292 18320 18327 18346 18353 18360
+- 18327: XL 18265 18272 18279 18286 18293 18321 18328 18347 18354 18361
+- 18328: TOPS AND TROUSERS - UNISEX
+- 18342: Produs medical 18342
+- 18343: S 18262 18269 18276 18283 18290 18318 18325 18344 18351 18358
+- 18344: M 18263 18270 18277 18284 18291 18319 18326 18345 18352 18359
+- 18345: L 18264 18271 18278 18285 18292 18320 18327 18346 18353 18360
+- 18346: XL 18265 18272 18279 18286 18293 18321 18328 18347 18354 18361
+- 18347: TOPS AND TROUSERS - UNISEX
+- 18349: XS 18261 18268 18275 18282 18289 18317 18324 18343 18350 18357
+
+## Products Below Score 90
+
+- no-code: Up 7000 multiparametric monitor — score 50
+- no-code: D-600 medical heat sealer — score 50
+- no-code: Fc 700 foetal monitor — score 50
+- 10079: Fizioterapie cod 10079 — score 50
+- 10088: Instrumentar chirurgical cod 10088 — score 50
+- 10421: Diagnostic medical cod 10421 — score 50
+- 10424: Diagnostic medical cod 10424 — score 50
+- 10487: Diagnostic medical cod 10487 — score 50
+- 10488: Diagnostic medical cod 10488 — score 50
+- 10489: Diagnostic medical cod 10489 — score 50
+- 10541: Sterilizare cod 10541 — score 50
+- 10544: Diagnostic medical cod 10544 — score 50
+- 10563: Diagnostic medical cod 10563 — score 50
+- 10565: Diagnostic medical cod 10565 — score 50
+- 10566: Monitorizare cod 10566 — score 50
+- 10569: Diagnostic medical cod 10569 — score 50
+- 10577: Diagnostic medical cod 10577 — score 50
+- 10590: Diagnostic medical cod 10590 — score 50
+- 10600: Diagnostic medical cod 10600 — score 50
+- 10605: Diagnostic medical cod 10605 — score 50
+- 10607: Diagnostic medical cod 10607 — score 50
+- 10608: Diagnostic medical cod 10608 — score 50
+- 10642: Sterilizare cod 10642 — score 50
+- 10691: Diagnostic medical cod 10691 — score 50
+- 10705: Diagnostic medical cod 10705 — score 50
+- 10801: Diagnostic medical cod 10801 — score 50
+- 10881: Sterilizare cod 10881 — score 50
+- 10882: Sterilizare cod 10882 — score 50
+- 10884: Sterilizare cod 10884 — score 50
+- 10993: Protectie operator cod 10993 — score 50
+- 11092: Protectie operator cod 11092 — score 50
+- 11135: Sterilizare cod 11135 — score 50
+- 11140: Sterilizare cod 11140 — score 50
+- 11221: Urgenta cod 11221 — score 50
+- 11251: Urgenta cod 11251 — score 50
+- 11332: Urgenta cod 11332 — score 50
+- 11334: Ingrijire pacient cod 11334 — score 50
+- 11500: Diagnostic medical cod 11500 — score 50
+- 11511: Diagnostic medical cod 11511 — score 50
+- 11571: Urgenta cod 11571 — score 50
+- 11600: Diagnostic medical cod 11600 — score 50
+- 11605: Diagnostic medical cod 11605 — score 50
+- 11607: Sterilizare cod 11607 — score 50
+- 11610: Diagnostic medical cod 11610 — score 50
+- 11620: Diagnostic medical cod 11620 — score 50
+- 11630: Diagnostic medical cod 11630 — score 50
+- 11710: Diagnostic medical cod 11710 — score 50
+- 11720: Diagnostic medical cod 11720 — score 50
+- 11730: Diagnostic medical cod 11730 — score 50
+- 11735: Diagnostic medical cod 11735 — score 50
+- 11737: Protectie operator cod 11737 — score 50
+- 11800: Diagnostic medical cod 11800 — score 50
+- 11810: Diagnostic medical cod 11810 — score 50
+- 11820: Diagnostic medical cod 11820 — score 50
+- 11959: Monitorizare cod 11959 — score 50
+- 12071: Lampi medicale cod 12071 — score 50
+- 12072: Lampi medicale cod 12072 — score 50
+- 12400: Diagnostic medical cod 12400 — score 50
+- 12470: Ingrijire pacient cod 12470 — score 50
+- 12631: Diagnostic medical cod 12631 — score 50
+- 12632: Diagnostic medical cod 12632 — score 50
+- 12633: Diagnostic medical cod 12633 — score 50
+- 12671: Urgenta cod 12671 — score 50
+- 12704: Diagnostic medical cod 12704 — score 50
+- 12770: Diagnostic medical cod 12770 — score 50
+- 12771: Diagnostic medical cod 12771 — score 50
+- 13034: Protectie operator cod 13034 — score 50
+- 13060: Sterilizare cod 13060 — score 50
+- 13098: Fizioterapie cod 13098 — score 50
+- 13164: Urgenta cod 13164 — score 50
+- 13270: Diagnostic medical cod 13270 — score 50
+- 13271: Diagnostic medical cod 13271 — score 50
+- 13272: Diagnostic medical cod 13272 — score 50
+- 13277: Diagnostic medical cod 13277 — score 50
+- 13278: Diagnostic medical cod 13278 — score 50
+- 13301: Monitorizare cod 13301 — score 50
+- 13302: Monitorizare cod 13302 — score 50
+- 13317: Monitorizare cod 13317 — score 50
+- 13321: Monitorizare cod 13321 — score 50
+- 13377: Diagnostic medical cod 13377 — score 50
+- 13428: Urgenta cod 13428 — score 50
+- 13485: Monitorizare cod 13485 — score 50
+- 13544: Fizioterapie cod 13544 — score 50
+- 13624: Urgenta cod 13624 — score 50
+- 13697: Urgenta cod 13697 — score 50
+- 13727: Urgenta cod 13727 — score 50
+- 13795: Protectie operator cod 13795 — score 50
+- 13911: Sterilizare cod 13911 — score 50
+- 13913: Sterilizare cod 13913 — score 50
+- 14041: Diagnostic medical cod 14041 — score 50
+- 14051: Diagnostic medical cod 14051 — score 50
+- 14079: Urgenta cod 14079 — score 50
+- 14126: Protectie operator cod 14126 — score 50
+- 14476: Urgenta cod 14476 — score 50
+- 14605: Protectie operator cod 14605 — score 50
+- 14683: Laborator / IVD cod 14683 — score 50
+- 14971: Fizioterapie cod 14971 — score 50
+- 15197: Laborator / IVD cod 15197 — score 50
+- 15883: Laborator / IVD cod 15883 — score 50
+- 16004: Urgenta cod 16004 — score 50
+- 16775: Sterilizare cod 16775 — score 50
+- 17593: Laborator / IVD cod 17593 — score 50
+- 17665: Sterilizare cod 17665 — score 50
+- 18000: Mobilier medical cod 18000 — score 78
+- 18001: Mobilier medical cod 18001 — score 78
+- 18002: Mobilier medical cod 18002 — score 78
+- 18003: Mobilier medical cod 18003 — score 78
+- 18004: Mobilier medical cod 18004 — score 78
+- 18005: Mobilier medical cod 18005 — score 78
+- 18008: Mobilier medical cod 18008 — score 78
+- 18009: Mobilier medical cod 18009 — score 78
+- 18010: Mobilier medical cod 18010 — score 78
+- 18011: Mobilier medical cod 18011 — score 78
+- 18012: Mobilier medical cod 18012 — score 78
+- 18013: Mobilier medical cod 18013 — score 78
+- 18016: Mobilier medical cod 18016 — score 78
+- 18017: Mobilier medical cod 18017 — score 78
+- 18018: Mobilier medical cod 18018 — score 78
+- 18019: Mobilier medical cod 18019 — score 78
+- 18020: Mobilier medical cod 18020 — score 78
+- 18021: Mobilier medical cod 18021 — score 78
+- 18024: Mobilier medical cod 18024 — score 78
+- 18025: Mobilier medical cod 18025 — score 78
+- 18026: Mobilier medical cod 18026 — score 78
+- 18027: Mobilier medical cod 18027 — score 78
+- 18028: Mobilier medical cod 18028 — score 78
+- 18029: Mobilier medical cod 18029 — score 78
+- 18062: Mobilier medical cod 18062 — score 78
+- 18063: Mobilier medical cod 18063 — score 78
+- 18064: Mobilier medical cod 18064 — score 78
+- 18065: Mobilier medical cod 18065 — score 78
+- 18066: Mobilier medical cod 18066 — score 78
+- 18067: Mobilier medical cod 18067 — score 78
+- 18070: Mobilier medical cod 18070 — score 78
+- 18071: Mobilier medical cod 18071 — score 78
+- 18072: Mobilier medical cod 18072 — score 78
+- 18073: Mobilier medical cod 18073 — score 78
+- 18074: Mobilier medical cod 18074 — score 78
+- 18075: Mobilier medical cod 18075 — score 78
+- 18078: Mobilier medical cod 18078 — score 78
+- 18079: Mobilier medical cod 18079 — score 78
+- 18080: Mobilier medical cod 18080 — score 78
+- 18081: Mobilier medical cod 18081 — score 78
+- 18082: Mobilier medical cod 18082 — score 78
+- 18083: Mobilier medical cod 18083 — score 78
+- 18086: Mobilier medical cod 18086 — score 78
+- 18087: Mobilier medical cod 18087 — score 78
+- 18088: Mobilier medical cod 18088 — score 78
+- 18089: Mobilier medical cod 18089 — score 78
+- 18090: Mobilier medical cod 18090 — score 78
+- 18091: Mobilier medical cod 18091 — score 78
+- 18130: Mobilier medical cod 18130 — score 78
+- 18131: Mobilier medical cod 18131 — score 78
+- 18132: Mobilier medical cod 18132 — score 78
+- 18133: Mobilier medical cod 18133 — score 78
+- 18134: Mobilier medical cod 18134 — score 78
+- 18135: Mobilier medical cod 18135 — score 78
+- 18136: Mobilier medical cod 18136 — score 78
+- 18138: Mobilier medical cod 18138 — score 78
+- 18139: Mobilier medical cod 18139 — score 78
+
+## Recommendation
+
+This catalog is ready for another repair pass focused on:
+- source-page title extraction for weak PDF/table rows;
+- image recovery for products missing `/images/prodotti/big/<sku>.jpg`;
+- manual review of operator protection, surgical consumables, apparel-like rows and accessory tables;
+- document download expansion where useful.
+
+It is not ready for indexation.
