@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import { ProductQuoteForm } from "@/components/forms/ProductQuoteForm";
 import { ProductImageCarousel } from "@/components/products/ProductImageCarousel";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
+import { FAQSchema } from "@/components/seo/FAQSchema";
+import { ProductSchema } from "@/components/seo/ProductSchema";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -64,14 +66,38 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const category = getProductCategoryBySlug(product.category);
   const content = getProductCommercialContent(product);
   const gallery = content.galleryImages.length ? content.galleryImages : [{ url: content.imageUrl, alt: content.imageAlt, verified: false }];
-  const relatedProducts = productCatalog
-    .filter(
-      (item) =>
-        isProductPublicDisplayReady(item) &&
-        content.relatedProductCodes.includes(item.gimaCode ?? "") &&
-        item.slug !== product.slug,
-    )
-    .slice(0, 4);
+  const productsByCode = new Map(productCatalog.filter(isProductPublicDisplayReady).map((item) => [item.gimaCode ?? item.id, item]));
+  const relatedFromCodes = (codes: string[] = [], limit = 4) =>
+    codes
+      .map((code) => productsByCode.get(code))
+      .filter((item): item is NonNullable<typeof item> => Boolean(item && item.slug !== product.slug))
+      .slice(0, limit);
+  const similarProducts = relatedFromCodes(content.relatedProductGroups.similarProducts, 4);
+  const premiumAlternatives = relatedFromCodes(content.relatedProductGroups.premiumAlternatives, 3);
+  const budgetAlternatives = relatedFromCodes(content.relatedProductGroups.budgetAlternatives, 3);
+  const compatibleAccessories = relatedFromCodes(content.relatedProductGroups.compatibleAccessories, 4);
+  const frequentlyRequestedTogether = relatedFromCodes(content.relatedProductGroups.frequentlyRequestedTogether, 4);
+  const faqItems = [
+    {
+      question: `Cum solicit oferta pentru ${displayName}?`,
+      answer:
+        "Completeaza formularul de cerere oferta sau contacteaza ZESCORP telefonic. Echipa poate verifica aplicatia clinica, cantitatea, documentatia si optiunile de service inainte de ofertare.",
+    },
+    {
+      question: "Pretul este afisat pe pagina produsului?",
+      answer:
+        "Nu afisam preturi fixe pentru produse medicale deoarece oferta depinde de configuratie, cantitate, termen de livrare, documentatie si suportul tehnic solicitat.",
+    },
+    {
+      question: "Se poate include service sau mentenanta?",
+      answer:
+        "Da. Pentru echipamente active, ZESCORP poate discuta instalare, verificare, service si mentenanta preventiva in functie de categoria produsului si modul de utilizare.",
+    },
+  ];
+  const productSchemaProperties = content.specificationGroups
+    .flatMap((group) => group.items)
+    .slice(0, 12)
+    .map((spec) => ({ label: spec.label, value: spec.value }));
 
   return (
     <>
@@ -89,6 +115,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
         serviceType="Product quotation"
         url={getProductPath(product)}
       />
+      <ProductSchema
+        brand={content.brand}
+        category={content.categoryLabel}
+        description={content.shortSummary}
+        image={content.imageUrl}
+        name={displayName}
+        properties={productSchemaProperties}
+        sku={content.productCode}
+        url={getProductPath(product)}
+      />
+      <FAQSchema items={faqItems} id={`faq-schema-produs-${product.slug}`} />
 
       <main>
         <Section className="bg-[linear-gradient(180deg,#f4f8fd_0%,#ffffff_72%)]" spacing="xl" tone="transparent">
@@ -180,7 +217,23 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 title="Specificatii tehnice"
                 description="Datele tehnice disponibile ajuta la evaluarea produsului si la pregatirea cererii de oferta."
               />
-              {content.specifications.length > 0 ? (
+              {content.specificationGroups.length > 0 ? (
+                <div className="grid gap-4">
+                  {content.specificationGroups.map((group) => (
+                    <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white" key={group.group}>
+                      <h3 className="border-b border-slate-100 bg-[#f8fbff] px-4 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[#0057b8]">
+                        {getSpecificationGroupLabel(group.group)}
+                      </h3>
+                      {group.items.map((spec, index) => (
+                        <div className="grid gap-2 border-b border-slate-100 p-4 last:border-b-0 sm:grid-cols-[0.38fr_0.62fr]" key={`${group.group}-${spec.label}-${index}`}>
+                          <p className="text-sm font-semibold text-slate-950">{spec.label}</p>
+                          <p className="text-sm leading-6 text-slate-600">{spec.value}</p>
+                        </div>
+                      ))}
+                    </article>
+                  ))}
+                </div>
+              ) : content.specifications.length > 0 ? (
                 <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
                   {content.specifications.map((spec, index) => (
                     <div className="grid gap-2 border-b border-slate-100 p-4 last:border-b-0 sm:grid-cols-[0.38fr_0.62fr]" key={`${spec.label}-${index}`}>
@@ -254,11 +307,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
                       Vezi categoria {category.label}
                     </Link>
                   )}
-                  {relatedProducts.map((related) => (
-                    <Link className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]" href={getProductPath(related)} key={related.slug}>
-                      {getProductDisplayName(related)}
-                    </Link>
-                  ))}
                   {content.relatedServices.map((href) => (
                     <Link className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]" href={href} key={href}>
                       {getRelatedServiceLabel(href)}
@@ -266,6 +314,34 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   ))}
                 </div>
               </article>
+            </div>
+          </Container>
+        </Section>
+
+        <Section className="border-y border-blue-100 bg-[#f7fbff]" spacing="lg" tone="transparent">
+          <Container>
+            <div className="grid gap-6 lg:grid-cols-2">
+              <ProductLinkGroup title="Produse similare" products={similarProducts} />
+              <ProductLinkGroup title="Alternative premium" products={premiumAlternatives} />
+              <ProductLinkGroup title="Alternative pentru bugete controlate" products={budgetAlternatives} />
+              <ProductLinkGroup title="Accesorii compatibile" products={compatibleAccessories} />
+              <ProductLinkGroup title="Solicitate frecvent impreuna" products={frequentlyRequestedTogether} />
+              <AuthorityLinkGroup title="Categorii si solutii conexe" links={[...content.relatedCategoryLinks, ...content.relatedSolutionLinks]} />
+              <AuthorityLinkGroup title="Ghiduri si mentenanta" links={[...content.relatedKnowledgeLinks, ...content.relatedMaintenanceLinks]} />
+              <AuthorityLinkGroup title="Parcurs recomandat pentru cumparator" links={content.buyerJourneyLinks} />
+            </div>
+          </Container>
+        </Section>
+
+        <Section className="bg-white" spacing="lg" tone="transparent">
+          <Container>
+            <div className="grid gap-4 lg:grid-cols-3">
+              {faqItems.map((item) => (
+                <article className="rounded-2xl border border-blue-100 bg-white p-6 shadow-[0_16px_38px_rgba(15,65,118,0.07)]" key={item.question}>
+                  <h2 className="text-lg font-semibold leading-7 text-slate-950">{item.question}</h2>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{item.answer}</p>
+                </article>
+              ))}
             </div>
           </Container>
         </Section>
@@ -278,6 +354,20 @@ export default async function ProductPage({ params }: ProductPageProps) {
       </main>
     </>
   );
+}
+
+function getSpecificationGroupLabel(group: string) {
+  const labels: Record<string, string> = {
+    General: "General",
+    Dimensions: "Dimensiuni",
+    Weight: "Greutate",
+    Electrical: "Electric",
+    Performance: "Performanta",
+    Medical: "Medical",
+    Accessories: "Accesorii",
+  };
+
+  return labels[group] || group;
 }
 
 function ProductSectionIntro({ description, eyebrow, title }: { eyebrow: string; title: string; description?: string }) {
@@ -304,6 +394,52 @@ function InfoList({ fallback, items, title }: { title: string; items: string[]; 
           </li>
         ))}
       </ul>
+    </article>
+  );
+}
+
+function ProductLinkGroup({ products, title }: { title: string; products: typeof productCatalog }) {
+  return (
+    <article className="rounded-2xl border border-blue-100 bg-white p-6 shadow-[0_16px_38px_rgba(15,65,118,0.07)]">
+      <h2 className="text-xl font-semibold text-slate-950">{title}</h2>
+      <div className="mt-4 grid gap-3">
+        {products.length ? (
+          products.map((related) => (
+            <Link
+              className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
+              href={getProductPath(related)}
+              key={related.slug}
+            >
+              {getProductDisplayName(related)}
+            </Link>
+          ))
+        ) : (
+          <p className="text-sm leading-7 text-slate-600">Recomandarile se confirma in etapa de ofertare.</p>
+        )}
+      </div>
+    </article>
+  );
+}
+
+function AuthorityLinkGroup({ links, title }: { title: string; links: Array<{ href: string; label: string }> }) {
+  const uniqueLinks = links.filter(
+    (link, index, list) => link.href && list.findIndex((item) => item.href === link.href) === index,
+  );
+
+  return (
+    <article className="rounded-2xl border border-blue-100 bg-white p-6 shadow-[0_16px_38px_rgba(15,65,118,0.07)]">
+      <h2 className="text-xl font-semibold text-slate-950">{title}</h2>
+      <div className="mt-4 grid gap-3">
+        {uniqueLinks.slice(0, 6).map((link) => (
+          <Link
+            className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
+            href={link.href}
+            key={link.href}
+          >
+            {link.label}
+          </Link>
+        ))}
+      </div>
     </article>
   );
 }

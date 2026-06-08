@@ -15,6 +15,7 @@ import {
   getProductPath,
   getProductsByCategory,
   getProductCategoryBySlug,
+  getRelatedServiceLabel,
   isProductIndexable,
   isProductPublicDisplayReady,
   productCategories,
@@ -57,6 +58,12 @@ export default async function ProductCategoryPage({ params, searchParams }: Cate
   if (!category) notFound();
 
   const products = getProductsByCategory(category.id).filter(isProductPublicDisplayReady);
+  const featuredProducts = [...products]
+    .sort((a, b) => (b.seoAuthorityScore || 0) - (a.seoAuthorityScore || 0))
+    .slice(0, 6);
+  const serviceLinks = uniqueLinks(products.flatMap((product) => product.relatedServices || [])).slice(0, 5);
+  const solutionLinks = uniqueAuthorityLinks(products.flatMap((product) => product.relatedSolutionLinks || [])).slice(0, 5);
+  const knowledgeLinks = uniqueAuthorityLinks(products.flatMap((product) => product.relatedKnowledgeLinks || [])).slice(0, 5);
   const page = Math.max(1, Number(resolvedSearchParams?.page || 1) || 1);
   const totalPages = Math.max(1, Math.ceil(products.length / PRODUCTS_PER_PAGE));
   const currentPage = Math.min(page, totalPages);
@@ -196,7 +203,67 @@ export default async function ProductCategoryPage({ params, searchParams }: Cate
             </p>
           </Container>
         </Section>
+
+        <Section className="border-y border-blue-100 bg-[#f7fbff]" spacing="lg" tone="transparent">
+          <Container>
+            <SectionHeading
+              eyebrow="Recomandari"
+              title="Produse si servicii relevante pentru categorie"
+              description="Selectie orientativa pentru cumparatori care vor sa compare produse, servicii si optiuni de suport inainte de cererea de oferta."
+            />
+            <div className="mt-8 grid gap-6 lg:grid-cols-2">
+              <article className="rounded-2xl border border-blue-100 bg-white p-6 shadow-[0_16px_38px_rgba(15,65,118,0.07)]">
+                <h2 className="text-xl font-semibold text-slate-950">Produse recomandate</h2>
+                <div className="mt-4 grid gap-3">
+                  {featuredProducts.map((product) => (
+                    <Link
+                      className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
+                      href={getProductPath(product)}
+                      key={product.slug}
+                    >
+                      {getProductDisplayName(product)}
+                    </Link>
+                  ))}
+                </div>
+              </article>
+              <AuthorityLinks title="Servicii asociate" links={serviceLinks.map((href) => ({ href, label: getRelatedServiceLabel(href) }))} />
+              <AuthorityLinks title="Solutii conexe" links={solutionLinks} />
+              <AuthorityLinks title="Ghiduri utile" links={knowledgeLinks} />
+            </div>
+          </Container>
+        </Section>
       </main>
     </>
+  );
+}
+
+function uniqueLinks(links: string[]) {
+  return links.filter((link, index, list) => link && list.indexOf(link) === index);
+}
+
+function uniqueAuthorityLinks(links: Array<{ href: string; label: string }>) {
+  return links.filter((link, index, list) => link.href && list.findIndex((item) => item.href === link.href) === index);
+}
+
+function AuthorityLinks({ links, title }: { title: string; links: Array<{ href: string; label: string }> }) {
+  return (
+    <article className="rounded-2xl border border-blue-100 bg-white p-6 shadow-[0_16px_38px_rgba(15,65,118,0.07)]">
+      <h2 className="text-xl font-semibold text-slate-950">{title}</h2>
+      <div className="mt-4 grid gap-3">
+        {links.length ? (
+          links.map((link) => (
+            <Link
+              className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
+              href={link.href}
+              key={link.href}
+            >
+              {link.label}
+            </Link>
+          ))
+        ) : (
+          <p className="text-sm leading-7 text-slate-600">Recomandarile se confirma in etapa de ofertare.</p>
+        )}
+      </div>
+    </article>
   );
 }

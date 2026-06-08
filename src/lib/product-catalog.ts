@@ -63,6 +63,12 @@ export type ProductCatalogItem = {
   romanianShortSummary?: string;
   romanianSourceDescription?: string;
   romanianSpecifications?: Array<{ label: string; value: string }>;
+  specificationGroups?: Array<{
+    group: "General" | "Dimensions" | "Weight" | "Electrical" | "Performance" | "Medical" | "Accessories";
+    items: Array<{ label: string; value: string }>;
+  }>;
+  specificationCompletenessGrade?: "A" | "B" | "C" | "D";
+  specificationCompletenessScore?: number;
   commercialCategory?: string;
   imageUrl?: string;
   imageSourceUrl?: string;
@@ -93,6 +99,21 @@ export type ProductCatalogItem = {
   };
   productDocuments?: Array<{ label: string; url: string; type: string }>;
   relatedProductCodes?: string[];
+  relatedProductGroups?: {
+    similarProducts?: string[];
+    premiumAlternatives?: string[];
+    budgetAlternatives?: string[];
+    compatibleAccessories?: string[];
+    frequentlyRequestedTogether?: string[];
+    allRelevantProducts?: string[];
+  };
+  relatedCategoryLinks?: Array<{ href: string; label: string }>;
+  relatedSolutionLinks?: Array<{ href: string; label: string }>;
+  relatedKnowledgeLinks?: Array<{ href: string; label: string }>;
+  relatedMaintenanceLinks?: Array<{ href: string; label: string }>;
+  buyerJourneyLinks?: Array<{ href: string; label: string }>;
+  seoAuthorityScore?: number;
+  seoAuthorityPreparedAt?: string;
   gimaBreadcrumbs?: string[];
   sourceExtractedAt?: string;
   sourceQuality?: "basic_import" | "gima_page_parity_review";
@@ -329,6 +350,7 @@ export function getProductCommercialContent(product: ProductCatalogItem) {
       features: product.romanianFeatures ?? [],
       packageContents: product.romanianPackageContents ?? [],
       specifications: product.romanianSpecifications ?? [],
+      specificationGroups: product.specificationGroups ?? [],
       documents: getLocalProductDocuments(product),
       galleryImages: product.galleryImages?.length
         ? product.galleryImages
@@ -367,6 +389,15 @@ export function getProductCommercialContent(product: ProductCatalogItem) {
       brand: product.sourceBrand || "",
       breadcrumbs: product.gimaBreadcrumbs ?? [],
       relatedProductCodes: product.relatedProductCodes ?? [],
+      relatedProductGroups: product.relatedProductGroups ?? {
+        allRelevantProducts: product.relatedProductCodes ?? [],
+      },
+      relatedCategoryLinks: product.relatedCategoryLinks ?? [],
+      relatedSolutionLinks: product.relatedSolutionLinks ?? [],
+      relatedKnowledgeLinks: product.relatedKnowledgeLinks ?? [],
+      relatedMaintenanceLinks: product.relatedMaintenanceLinks ?? [],
+      buyerJourneyLinks: product.buyerJourneyLinks ?? [],
+      seoAuthorityScore: product.seoAuthorityScore ?? 0,
     };
   }
 
@@ -379,6 +410,7 @@ export function getProductCommercialContent(product: ProductCatalogItem) {
       features: product.romanianFeatures ?? [],
       packageContents: product.romanianPackageContents ?? [],
       specifications: product.romanianSpecifications ?? [],
+      specificationGroups: product.specificationGroups ?? [],
       documents: getLocalProductDocuments(product),
       galleryImages: product.galleryImages?.length
         ? product.galleryImages
@@ -399,6 +431,15 @@ export function getProductCommercialContent(product: ProductCatalogItem) {
       brand: product.sourceBrand || "",
       breadcrumbs: product.gimaBreadcrumbs ?? [],
       relatedProductCodes: product.relatedProductCodes ?? [],
+      relatedProductGroups: product.relatedProductGroups ?? {
+        allRelevantProducts: product.relatedProductCodes ?? [],
+      },
+      relatedCategoryLinks: product.relatedCategoryLinks ?? [],
+      relatedSolutionLinks: product.relatedSolutionLinks ?? [],
+      relatedKnowledgeLinks: product.relatedKnowledgeLinks ?? [],
+      relatedMaintenanceLinks: product.relatedMaintenanceLinks ?? [],
+      buyerJourneyLinks: product.buyerJourneyLinks ?? [],
+      seoAuthorityScore: product.seoAuthorityScore ?? 0,
     };
   }
 
@@ -424,6 +465,7 @@ export function getProductCommercialContent(product: ProductCatalogItem) {
       { label: "Stadiu", value: "Disponibil pentru cerere de oferta" },
       { label: "Suport", value: "Ofertare, instalare si mentenanta" },
     ],
+    specificationGroups: [],
     installation: [
       "Verificarea spatiului, alimentarii si accesului inainte de livrare",
       "Clarificarea documentatiei tehnice si a accesoriilor necesare",
@@ -454,6 +496,15 @@ export function getProductCommercialContent(product: ProductCatalogItem) {
     brand: product.sourceBrand || "",
     breadcrumbs: product.gimaBreadcrumbs ?? [],
     relatedProductCodes: product.relatedProductCodes ?? [],
+    relatedProductGroups: product.relatedProductGroups ?? {
+      allRelevantProducts: product.relatedProductCodes ?? [],
+    },
+    relatedCategoryLinks: product.relatedCategoryLinks ?? [],
+    relatedSolutionLinks: product.relatedSolutionLinks ?? [],
+    relatedKnowledgeLinks: product.relatedKnowledgeLinks ?? [],
+    relatedMaintenanceLinks: product.relatedMaintenanceLinks ?? [],
+    buyerJourneyLinks: product.buyerJourneyLinks ?? [],
+    seoAuthorityScore: product.seoAuthorityScore ?? 0,
   };
 }
 
