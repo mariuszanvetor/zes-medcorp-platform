@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 
 import { ProductQuoteForm } from "@/components/forms/ProductQuoteForm";
 import { ProductImageCarousel } from "@/components/products/ProductImageCarousel";
@@ -20,6 +20,7 @@ import {
   getProductCommercialContent,
   getProductDisplayName,
   getProductPath,
+  getProductRedirectDestination,
   getRelatedServiceLabel,
   isProductIndexable,
   isProductPublicDisplayReady,
@@ -40,7 +41,21 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   const { slug } = await params;
   const product = getProductBySlug(slug);
 
-  if (!product) return {};
+  if (!product) {
+    const redirectDestination = getProductRedirectDestination(slug);
+    if (redirectDestination) {
+      return {
+        alternates: {
+          canonical: redirectDestination,
+        },
+        robots: {
+          index: false,
+          follow: true,
+        },
+      };
+    }
+    return {};
+  }
 
   const displayName = getProductDisplayName(product);
 
@@ -60,7 +75,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
   const product = getProductBySlug(slug);
 
-  if (!product) notFound();
+  if (!product) {
+    const redirectDestination = getProductRedirectDestination(slug);
+    if (redirectDestination) permanentRedirect(redirectDestination);
+    notFound();
+  }
 
   const displayName = getProductDisplayName(product);
   const category = getProductCategoryBySlug(product.category);

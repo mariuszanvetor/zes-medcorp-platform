@@ -1,7 +1,5 @@
 import type { NextConfig } from "next";
 
-import productRedirects from "./data/product-catalog/product-redirects.json";
-
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
@@ -19,10 +17,6 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      ...productRedirects.map((redirect) => ({
-        ...redirect,
-        permanent: true,
-      })),
       {
         source: "/2015/03/26/amenajari-radiologice-profesionale",
         destination: "/radioprotectie-plumbare-rx",

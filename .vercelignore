@@ -1,0 +1,9 @@
+.next
+node_modules
+outputs
+.qa-*
+.tmp
+scripts/node_modules
+public/product-images
+public/product-documents
+data/product-assets-local

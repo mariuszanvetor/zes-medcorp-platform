@@ -1,4 +1,5 @@
 import productsJson from "../../data/product-catalog/products.json";
+import productRedirectsJson from "../../data/product-catalog/product-redirects.json";
 
 export type ProductReviewStatus = "imported" | "translated" | "image_verified" | "reviewed" | "approved" | "indexable" | "excluded";
 
@@ -268,13 +269,144 @@ export const productCategories: ProductCategory[] = [
 ];
 
 export const productCatalog = productsJson as ProductCatalogItem[];
+const productRedirects = productRedirectsJson as Array<{ source: string; destination: string }>;
 
 export function isProductIndexable(product: ProductCatalogItem) {
-  return product.reviewStatus === "indexable";
+  return product.reviewStatus === "indexable" && passesProductIndexationGuard(product);
 }
 
 export function isProductCommerciallyApproved(product: ProductCatalogItem) {
   return product.reviewStatus === "approved" || product.reviewStatus === "indexable";
+}
+
+export function passesProductIndexationGuard(product: ProductCatalogItem) {
+  const title = product.romanianTitle || "";
+  const slug = product.slug || "";
+  const description = product.romanianDescription || product.commercialDescription || "";
+  const specsCount = product.specificationGroups?.reduce((count, group) => count + group.items.length, 0) ?? product.romanianSpecifications?.length ?? 0;
+  const hasProductSpecificContent = description.length >= 180 && !isGenericProductDescription(description);
+
+  return Boolean(
+    product.publicDisplayReady &&
+      product.imageStatus === "verified_local" &&
+      product.galleryImages?.length &&
+      isCleanRomanianProductTitle(title) &&
+      isCleanRomanianProductSlug(slug) &&
+      !hasPublicEnglishLeakage(title) &&
+      !hasPublicEnglishLeakage(slug.replaceAll("-", " ")) &&
+      !hasPublicEnglishLeakage(description) &&
+      hasProductSpecificContent &&
+      (specsCount >= 5 || product.productDocuments?.length || product.romanianFeatures?.length),
+  );
+}
+
+function isGenericProductDescription(description: string) {
+  const normalized = normalizePublicCatalogText(description);
+  const genericPatterns = [
+    "este un produs din categoria",
+    "prezentat pentru cereri de oferta profesionale",
+    "pagina este structurata pentru cumparatori",
+    "produs disponibil pentru cerere de oferta",
+  ];
+
+  return genericPatterns.some((pattern) => normalized.includes(pattern));
+}
+
+function isCleanRomanianProductTitle(title: string) {
+  const normalized = normalizePublicCatalogText(title);
+  if (normalized.length < 8) return false;
+  if (/([a-z])\1{4,}/i.test(normalized)) return false;
+  if (/(^| )(produs|echipament|dispozitiv|articol)( |$)/.test(normalized)) return false;
+  if (/^(specificatii tehnice|technical|class|manual|numai|pentru)( |$)/.test(normalized)) return false;
+  if (/^[\\d\\s.,/()°+-]+$/.test(normalized)) return false;
+  return !hasPublicEnglishLeakage(title);
+}
+
+function isCleanRomanianProductSlug(slug: string) {
+  const normalized = normalizePublicCatalogText(slug.replaceAll("-", " "));
+  if (normalized.length < 8) return false;
+  if (/^(produs|echipament|dispozitiv|articol|specificatii tehnice|technical|manual)( |$)/.test(normalized)) return false;
+  return !hasPublicEnglishLeakage(normalized);
+}
+
+function hasPublicEnglishLeakage(value: string) {
+  const normalized = normalizePublicCatalogText(value);
+  const allowed = new Set(["ce", "fda", "iso", "bluetooth", "wifi", "wi fi", "pacs", "ris", "dicom", "usb", "led", "spo2", "ecg"]);
+  const leakageTerms = [
+    "designed",
+    "technical",
+    "manual",
+    "product",
+    "disposable",
+    "single use",
+    "re usable",
+    "reusable",
+    "washer",
+    "drying",
+    "display",
+    "button",
+    "large",
+    "small",
+    "medium",
+    "adult",
+    "pediatric",
+    "children",
+    "kid",
+    "with",
+    "without",
+    "strap",
+    "straps",
+    "headband",
+    "bags",
+    "box",
+    "professional",
+    "sneaker",
+    "clogs",
+    "stretcher",
+    "stretchers",
+    "mask",
+    "masks",
+    "filter",
+    "filters",
+    "support",
+    "holder",
+    "accessories",
+    "accessory",
+    "speculum",
+    "otoscope",
+    "ophthalmoscope",
+    "thermometer",
+    "stethoscope",
+    "monitor",
+    "chart",
+    "couch",
+    "cart",
+    "trolley",
+    "belt",
+    "buckle",
+    "clamp",
+    "forceps",
+    "retractor",
+    "needle",
+    "needles",
+    "cups",
+    "compression",
+  ];
+
+  return leakageTerms.some((term) => !allowed.has(term) && new RegExp(`(^| )${escapeRegExp(term)}( |$)`).test(normalized));
+}
+
+function normalizePublicCatalogText(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\\u0300-\\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\$&");
 }
 
 export function isProductPublicDisplayReady(product: ProductCatalogItem) {
@@ -291,6 +423,11 @@ export function isProductPublicDisplayReady(product: ProductCatalogItem) {
 
 export function getProductBySlug(slug: string) {
   return productCatalog.find((product) => product.slug === slug);
+}
+
+export function getProductRedirectDestination(slug: string) {
+  const redirect = productRedirects.find((item) => item.source === `/produse/${slug}`);
+  return redirect?.destination || null;
 }
 
 export function getProductCategoryBySlug(slug: string) {
@@ -352,11 +489,11 @@ export function getProductCommercialContent(product: ProductCatalogItem) {
       specifications: product.romanianSpecifications ?? [],
       specificationGroups: product.specificationGroups ?? [],
       documents: getLocalProductDocuments(product),
-      galleryImages: product.galleryImages?.length
-        ? product.galleryImages
+      galleryImages: getDeployableProductGallery(product).length
+        ? getDeployableProductGallery(product)
         : [
             {
-              url: product.imageUrl || getProductCategoryPlaceholder(product.category),
+              url: getDeployableProductImageUrl(product),
               alt: product.imageAlt || `${getProductDisplayName(product)} pentru clinici si unitati medicale`,
               verified: Boolean(product.imageVerified),
             },
@@ -383,7 +520,7 @@ export function getProductCommercialContent(product: ProductCatalogItem) {
             "/contracte-mentenanta",
           ],
       categoryLabel,
-      imageUrl: product.imageUrl || getProductCategoryPlaceholder(product.category),
+      imageUrl: getDeployableProductImageUrl(product),
       imageAlt: product.imageAlt || `${getProductDisplayName(product)} pentru clinici si unitati medicale`,
       productCode: product.gimaCode || "",
       brand: product.sourceBrand || "",
@@ -412,11 +549,11 @@ export function getProductCommercialContent(product: ProductCatalogItem) {
       specifications: product.romanianSpecifications ?? [],
       specificationGroups: product.specificationGroups ?? [],
       documents: getLocalProductDocuments(product),
-      galleryImages: product.galleryImages?.length
-        ? product.galleryImages
+      galleryImages: getDeployableProductGallery(product).length
+        ? getDeployableProductGallery(product)
         : [
             {
-              url: product.imageUrl || getProductCategoryPlaceholder(product.category),
+              url: getDeployableProductImageUrl(product),
               alt: product.imageAlt || `${getProductDisplayName(product)} pentru clinici si unitati medicale`,
               verified: Boolean(product.imageVerified),
             },
@@ -425,7 +562,7 @@ export function getProductCommercialContent(product: ProductCatalogItem) {
       maintenance: product.maintenanceConsiderations ?? [],
       relatedServices: product.relatedServices ?? [],
       categoryLabel,
-      imageUrl: product.imageUrl || getProductCategoryPlaceholder(product.category),
+      imageUrl: getDeployableProductImageUrl(product),
       imageAlt: product.imageAlt || `${getProductDisplayName(product)} pentru clinici si unitati medicale`,
       productCode: product.gimaCode || "",
       brand: product.sourceBrand || "",
@@ -482,7 +619,7 @@ export function getProductCommercialContent(product: ProductCatalogItem) {
       "/contracte-mentenanta",
     ],
     categoryLabel,
-    imageUrl: product.imageUrl || getProductCategoryPlaceholder(product.category),
+    imageUrl: getDeployableProductImageUrl(product),
     imageAlt: product.imageAlt || `${getProductDisplayName(product)} pentru clinici si unitati medicale`,
     documents: [],
     galleryImages: [
@@ -508,7 +645,27 @@ export function getProductCommercialContent(product: ProductCatalogItem) {
   };
 }
 
+function getDeployableProductGallery(product: ProductCatalogItem) {
+  return (product.galleryImages ?? []).map((image) => ({
+    ...image,
+    url: getDeployableProductImageUrl(product, image.url),
+  }));
+}
+
+function getDeployableProductImageUrl(product: ProductCatalogItem, preferredUrl = product.imageUrl) {
+  if (preferredUrl?.startsWith("/product-images/")) {
+    const parts = preferredUrl.split("/").filter(Boolean);
+    const code = parts[1] || product.gimaCode || product.id;
+    const file = parts.slice(2).join("/");
+    if (code && file) return `/api/product-assets/images/${code}/${file}`;
+  }
+
+  return preferredUrl || getProductCategoryPlaceholder(product.category);
+}
+
 function getLocalProductDocuments(product: ProductCatalogItem) {
+  if (!isProductIndexable(product)) return [];
+
   const documents = product.documents ?? {};
   return [
     documents.englishManual

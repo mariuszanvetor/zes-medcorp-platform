@@ -22,9 +22,17 @@
 /build
 /outputs/
 /.qa-prospecting-workbook/
+/.qa-*/
+
+# generated product assets are too heavy for Vercel static deployment
+/public/product-images/
+/public/product-documents/
 
 # local lead research database
 /data/lead-research/
+
+# local-only product asset archive used for repair/import workflows
+/data/product-assets-local/
 
 # misc
 .DS_Store
