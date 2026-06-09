@@ -243,6 +243,12 @@ const leakageTerms = [
   "blade",
   "paed",
   "smart",
+  "humidifier",
+  "polarization",
+  "short",
+  "handle",
+  "stool",
+  "colours",
   "trolleys",
   "andsparesfor",
   "ontrolley",
@@ -343,6 +349,14 @@ const titleReplacementRules = [
   [/\bBlade\b/gi, "lamă"],
   [/\bPaed\b/gi, "pediatric"],
   [/\bDispenser pentru de unică folosință cupe\b/gi, "Dispenser pentru cupe de unică folosință"],
+  [/\bHumidifier\b/gi, "umidificator"],
+  [/\bPolarization\b/gi, "polarizare"],
+  [/\bShort Handle\b/gi, "mâner scurt"],
+  [/\bHandle\b/gi, "mâner"],
+  [/\bErgo Stool\b/gi, "Scaun ergonomic"],
+  [/\bStool\b/gi, "scaun"],
+  [/\bOther Colours\b/gi, "alte culori"],
+  [/\bCopii Manseta \(\), Adulti\b/gi, "Manșetă pentru copii și adulți"],
   [/\bFc\b/g, "FC"],
   [/\bGb\b/g, "GB"],
   [/\bFr\b/g, "FR"],
@@ -391,6 +405,9 @@ function repairTitle(product) {
   if (sourceArtifactPattern.test(title)) return null;
 
   title = cleanSpacing(title);
+
+  if (/^[\d\s.,/()°+xXhHØø-]+/.test(title)) return null;
+  if (/\bpentru$/i.test(title)) return null;
   for (const [pattern, replacement] of titleReplacementRules) {
     title = title.replace(pattern, replacement);
   }

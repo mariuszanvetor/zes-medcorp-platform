@@ -11485,6 +11485,26 @@
     "permanent": true
   },
   {
+    "source": "/produse/autoclavable-handle-30793",
+    "destination": "/produse/autoclavable-maner-30793",
+    "permanent": true
+  },
+  {
+    "source": "/produse/autoclavable-handle-49197",
+    "destination": "/produse/autoclavable-maner-49197",
+    "permanent": true
+  },
+  {
+    "source": "/produse/autoclavable-handle-since-serial-number-30738",
+    "destination": "/produse/autoclavable-maner-since-serial-number-30738",
+    "permanent": true
+  },
+  {
+    "source": "/produse/autoclavable-handle-up-pana-la-serial-number-30785",
+    "destination": "/produse/autoclavable-maner-up-pana-la-serial-number-30785",
+    "permanent": true
+  },
+  {
     "source": "/produse/autoclavable-handle-up-to-serial-number-30785",
     "destination": "/produse/autoclavable-handle-up-pana-la-serial-number-30785",
     "permanent": true
@@ -12028,6 +12048,11 @@
     "permanent": true
   },
   {
+    "source": "/produse/basic-diagnostic-station-1-handle-3-5-3652-31807",
+    "destination": "/produse/basic-diagnostic-station-1-maner-3-5-3652-31807",
+    "permanent": true
+  },
+  {
     "source": "/produse/basic-diagnostic-station-1-maner-3-5-3652-31807",
     "destination": "/produse/echipament-diagnostic-basic-diagnostic-station-1-handle-3-5-3652-31807",
     "permanent": true
@@ -12187,6 +12212,11 @@
   {
     "source": "/produse/baterie-handle-rtu-ready-pana-la-use-adult-58017",
     "destination": "/produse/baterie-maner-rtu-ready-pana-la-use-adult-58017",
+    "permanent": true
+  },
+  {
+    "source": "/produse/baterie-handle-rtu-ready-pana-la-use-adulti-58017",
+    "destination": "/produse/baterie-maner-rtu-ready-pana-la-use-adulti-58017",
     "permanent": true
   },
   {
@@ -24072,6 +24102,11 @@
     "permanent": true
   },
   {
+    "source": "/produse/container-2000-ml-cu-ergonomic-handle-cutie-cu-54-25981",
+    "destination": "/produse/container-2000-ml-cu-ergonomic-maner-cutie-cu-54-25981",
+    "permanent": true
+  },
+  {
     "source": "/produse/container-2000-ml-cu-ergonomic-maner-cutie-cu-54-25981",
     "destination": "/produse/container-2000-ml-with-ergonomic-handle-cutie-cu-54-25981",
     "permanent": true
@@ -24158,6 +24193,11 @@
   {
     "source": "/produse/copii-m-20804",
     "destination": "/produse/consumabil-de-protectie-copii-m-20804",
+    "permanent": true
+  },
+  {
+    "source": "/produse/copii-manseta-adulti-32886",
+    "destination": "/produse/manseta-pentru-copii-si-adulti-32886",
     "permanent": true
   },
   {
@@ -47386,6 +47426,11 @@
     "permanent": true
   },
   {
+    "source": "/produse/emergency-case-6-lame-plastic-handle-34384",
+    "destination": "/produse/emergency-case-6-lame-plastic-maner-34384",
+    "permanent": true
+  },
+  {
     "source": "/produse/emergency-compact-kart-4-sertare-portocaliu-45666",
     "destination": "/produse/emergency-compact-kart-4-drawers-portocaliu-45666",
     "permanent": true
@@ -47407,6 +47452,11 @@
   {
     "source": "/produse/emergency-mediu-kart-5-sertare-rosu-45667",
     "destination": "/produse/emergency-mediu-kart-5-drawers-rosu-45667",
+    "permanent": true
+  },
+  {
+    "source": "/produse/emergency-pachet-plastic-handle-34303",
+    "destination": "/produse/emergency-pachet-plastic-maner-34303",
     "permanent": true
   },
   {
@@ -47615,6 +47665,21 @@
     "permanent": true
   },
   {
+    "source": "/produse/ergo-b-stool-alb-45261",
+    "destination": "/produse/ergo-b-scaun-alb-45261",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ergo-b-stool-albastru-45262",
+    "destination": "/produse/ergo-b-scaun-albastru-45262",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ergo-b-stool-negru-45260",
+    "destination": "/produse/ergo-b-scaun-negru-45260",
+    "permanent": true
+  },
+  {
     "source": "/produse/ergo-b-taburet-alb-45261",
     "destination": "/produse/mobilier-medical-ergo-b-stool-alb-45261",
     "permanent": true
@@ -47627,6 +47692,21 @@
   {
     "source": "/produse/ergo-b-taburet-negru-45260",
     "destination": "/produse/mobilier-medical-ergo-b-stool-negru-45260",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ergo-stool-alb-45251",
+    "destination": "/produse/scaun-ergonomic-alb-45251",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ergo-stool-albastru-45252",
+    "destination": "/produse/scaun-ergonomic-albastru-45252",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ergo-stool-negru-45250",
+    "destination": "/produse/scaun-ergonomic-negru-45250",
     "permanent": true
   },
   {
@@ -51173,6 +51253,11 @@
     "permanent": true
   },
   {
+    "source": "/produse/f-008-22-820-easyclean-led-handle-100-impermeabil-34370",
+    "destination": "/produse/f-008-22-820-easyclean-led-maner-100-impermeabil-34370",
+    "permanent": true
+  },
+  {
     "source": "/produse/f-008-22-820-easyclean-led-maner-100-impermeabil-34370",
     "destination": "/produse/f-008-22-820-easyclean-led-handle-100-impermeabil-34370",
     "permanent": true
@@ -51230,6 +51315,11 @@
   {
     "source": "/produse/f-119-10-860-3-blades-set-with-paed-1-mac-2-mac-3-xhl-handle-34403",
     "destination": "/produse/f-119-10-860-3-blades-set-cu-paed-1-mac-2-mac-3-xhl-handle-34403",
+    "permanent": true
+  },
+  {
+    "source": "/produse/f-119-10-860-3-set-lame-cu-pediatric-1-mac-2-mac-3-xhl-handle-34403",
+    "destination": "/produse/f-119-10-860-3-set-lame-cu-pediatric-1-mac-2-mac-3-xhl-maner-34403",
     "permanent": true
   },
   {
@@ -61394,6 +61484,11 @@
     "permanent": true
   },
   {
+    "source": "/produse/graduated-inox-n-3-handle-22424",
+    "destination": "/produse/graduated-inox-n-3-maner-22424",
+    "permanent": true
+  },
+  {
     "source": "/produse/graduated-s-s-n-3-handle-22424",
     "destination": "/produse/graduated-inox-n-3-handle-22424",
     "permanent": true
@@ -63931,6 +64026,11 @@
     "destination": "/produse/planse-optometrice-iluminate-si-neiluminate-27384"
   },
   {
+    "source": "/produse/illuminated-handle-6-0-volt-30799",
+    "destination": "/produse/illuminated-maner-6-0-volt-30799",
+    "permanent": true
+  },
+  {
     "source": "/produse/illuminated-maner-6-0-volt-30799",
     "destination": "/produse/illuminated-handle-6-0-volt-30799",
     "permanent": true
@@ -64082,6 +64182,11 @@
   {
     "source": "/produse/inaltime-reglabil-gyn-pat-any-culoare-27496",
     "destination": "/produse/height-reglabil-gyn-pat-any-culoare-27496",
+    "permanent": true
+  },
+  {
+    "source": "/produse/inaltime-reglabil-gynaecological-pat-other-colours-27496",
+    "destination": "/produse/inaltime-reglabil-gynaecological-pat-alte-culori-27496",
     "permanent": true
   },
   {
@@ -65595,6 +65700,16 @@
   {
     "source": "/produse/inox-27909",
     "destination": "/produse/mobilier-medical-inox-27909",
+    "permanent": true
+  },
+  {
+    "source": "/produse/inox-pat-fracture-type-418x292x85-mm-cu-tub-handle-26594",
+    "destination": "/produse/inox-pat-fracture-type-418x292x85-mm-cu-tub-maner-26594",
+    "permanent": true
+  },
+  {
+    "source": "/produse/inox-pat-pan-round-cu-lid-320x85-mm-straigth-handle-26573",
+    "destination": "/produse/inox-pat-pan-round-cu-lid-320x85-mm-straigth-maner-26573",
     "permanent": true
   },
   {
@@ -81219,6 +81334,11 @@
     "permanent": true
   },
   {
+    "source": "/produse/lumex-led-lumina-cu-handle-carucior-49045",
+    "destination": "/produse/lumex-led-lumina-cu-maner-carucior-49045",
+    "permanent": true
+  },
+  {
     "source": "/produse/lumina-cutie-38x-92-cm-double-27366",
     "destination": "/produse/negatoscop-38x-92-cm-dublu-27366",
     "permanent": true
@@ -83169,6 +83289,11 @@
     "permanent": true
   },
   {
+    "source": "/produse/masti-medicale-cu-3-straturi-other-colours-50-cutii-cu-50-20610",
+    "destination": "/produse/masti-medicale-cu-3-straturi-alte-culori-50-cutii-cu-50-20610",
+    "permanent": true
+  },
+  {
     "source": "/produse/material-ignifug-b-34087",
     "destination": "/produse/material-ignifug-tip-b-pentru-urgente-34087"
   },
@@ -83708,6 +83833,16 @@
     "permanent": true
   },
   {
+    "source": "/produse/mb-autoclavable-handle-100-times-30545",
+    "destination": "/produse/mb-autoclavable-maner-100-times-30545",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mb-autoclavable-handle-100-times-30554",
+    "destination": "/produse/mb-autoclavable-maner-100-times-30554",
+    "permanent": true
+  },
+  {
     "source": "/produse/mb-autoclavable-maner-100-times-30545",
     "destination": "/produse/mb-autoclavable-handle-100-times-30545",
     "permanent": true
@@ -83715,6 +83850,11 @@
   {
     "source": "/produse/mb-autoclavable-maner-100-times-30554",
     "destination": "/produse/mb-autoclavable-handle-100-times-30554",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mb-impermeabil-foot-switch-usable-in-alternative-pana-la-handle-30536",
+    "destination": "/produse/mb-impermeabil-foot-switch-usable-in-alternative-pana-la-maner-30536",
     "permanent": true
   },
   {
@@ -99493,6 +99633,11 @@
     "permanent": true
   },
   {
+    "source": "/produse/orion-plus-autoclavable-handle-100-times-30539",
+    "destination": "/produse/orion-plus-autoclavable-maner-100-times-30539",
+    "permanent": true
+  },
+  {
     "source": "/produse/orion-plus-autoclavable-maner-100-times-30539",
     "destination": "/produse/orion-plus-autoclavable-handle-100-times-30539",
     "permanent": true
@@ -99747,6 +99892,11 @@
   {
     "source": "/produse/otel-inoxidabil-sharp-cutting-edge-ribbed-handle-for-sure-22616",
     "destination": "/produse/otel-inoxidabil-sharp-cutting-edge-ribbed-handle-pentru-sure-22616",
+    "permanent": true
+  },
+  {
+    "source": "/produse/otel-inoxidabil-sharp-cutting-edge-ribbed-handle-pentru-sure-22616",
+    "destination": "/produse/otel-inoxidabil-sharp-cutting-edge-ribbed-maner-pentru-sure-22616",
     "permanent": true
   },
   {
@@ -102731,6 +102881,11 @@
   {
     "source": "/produse/plastic-handle-pentru-f-o-de-unica-folosinta-blades-34364",
     "destination": "/produse/plastic-handle-pentru-f-o-de-unica-folosinta-lame-34364",
+    "permanent": true
+  },
+  {
+    "source": "/produse/plastic-handle-pentru-f-o-de-unica-folosinta-lame-34364",
+    "destination": "/produse/plastic-maner-pentru-f-o-de-unica-folosinta-lame-34364",
     "permanent": true
   },
   {
@@ -153158,6 +153313,11 @@
     "permanent": true
   },
   {
+    "source": "/produse/push-handle-pentru-45904-6-45910",
+    "destination": "/produse/push-maner-pentru-45904-6-45910",
+    "permanent": true
+  },
+  {
     "source": "/produse/putere-adaptor-28179",
     "destination": "/produse/power-adaptor-28179",
     "permanent": true
@@ -154838,6 +154998,11 @@
     "destination": "/produse/ri-focus-6091-lampa-frontala-led-cu-baterii-reincarcabile-30881"
   },
   {
+    "source": "/produse/ri-former-extension-module-1-handle-31810",
+    "destination": "/produse/ri-former-extension-module-1-maner-31810",
+    "permanent": true
+  },
+  {
     "source": "/produse/ri-incarcator-l-230-v-10705-31840",
     "destination": "/produse/echipament-diagnostic-ri-incarcator-l-230-v-10705-31840",
     "permanent": true
@@ -156209,6 +156374,16 @@
     "destination": "/produse/saba-electric-scaun-4-motoare-avio-albastru-28048"
   },
   {
+    "source": "/produse/saboti-medicali-cu-bareta-other-colours-26292",
+    "destination": "/produse/saboti-medicali-cu-bareta-alte-culori-26292",
+    "permanent": true
+  },
+  {
+    "source": "/produse/saboti-medicali-fara-bareta-other-colours-26463",
+    "destination": "/produse/saboti-medicali-fara-bareta-alte-culori-26463",
+    "permanent": true
+  },
+  {
     "source": "/produse/sac-transport-34117",
     "destination": "/produse/body-bag-34117",
     "permanent": true
@@ -156699,6 +156874,11 @@
   {
     "source": "/produse/scalpel-handle-n-4-pentru-blades-20-25-26914",
     "destination": "/produse/scalpel-handle-n-4-pentru-lame-20-25-26914",
+    "permanent": true
+  },
+  {
+    "source": "/produse/scalpel-handle-n-4-pentru-lame-20-25-26914",
+    "destination": "/produse/scalpel-maner-n-4-pentru-lame-20-25-26914",
     "permanent": true
   },
   {
@@ -158009,6 +158189,16 @@
   {
     "source": "/produse/signi-cant-structures-are-numerated-40161",
     "destination": "/produse/model-anatomic-signi-cant-structures-are-numerated-40161",
+    "permanent": true
+  },
+  {
+    "source": "/produse/siguranta-inox-handle-n-3-pentru-lame-10-15-26915",
+    "destination": "/produse/siguranta-inox-maner-n-3-pentru-lame-10-15-26915",
+    "permanent": true
+  },
+  {
+    "source": "/produse/siguranta-inox-handle-n-4-pentru-lame-20-25-26916",
+    "destination": "/produse/siguranta-inox-maner-n-4-pentru-lame-20-25-26916",
     "permanent": true
   },
   {
@@ -160711,6 +160901,11 @@
     "permanent": true
   },
   {
+    "source": "/produse/star-autoclavable-handle-30-times-30548",
+    "destination": "/produse/star-autoclavable-maner-30-times-30548",
+    "permanent": true
+  },
+  {
     "source": "/produse/star-autoclavable-maner-30-times-30548",
     "destination": "/produse/star-autoclavable-handle-30-times-30548",
     "permanent": true
@@ -162609,6 +162804,16 @@
     "permanent": true
   },
   {
+    "source": "/produse/stool-1-negru-45200",
+    "destination": "/produse/scaun-1-negru-45200",
+    "permanent": true
+  },
+  {
+    "source": "/produse/stool-2-albastru-45201",
+    "destination": "/produse/scaun-2-albastru-45201",
+    "permanent": true
+  },
+  {
     "source": "/produse/stool-3-grey-45202",
     "destination": "/produse/stool-3-gri-45202",
     "permanent": true
@@ -162619,8 +162824,38 @@
     "permanent": true
   },
   {
+    "source": "/produse/stool-4-verde-45203",
+    "destination": "/produse/scaun-4-verde-45203",
+    "permanent": true
+  },
+  {
+    "source": "/produse/stool-5-beige-45204",
+    "destination": "/produse/scaun-5-beige-45204",
+    "permanent": true
+  },
+  {
     "source": "/produse/stool-5-bej-45204",
     "destination": "/produse/stool-5-beige-45204",
+    "permanent": true
+  },
+  {
+    "source": "/produse/stool-6-apricot-45205",
+    "destination": "/produse/scaun-6-apricot-45205",
+    "permanent": true
+  },
+  {
+    "source": "/produse/stool-alb-45221",
+    "destination": "/produse/scaun-alb-45221",
+    "permanent": true
+  },
+  {
+    "source": "/produse/stool-castors-27954",
+    "destination": "/produse/scaun-castors-27954",
+    "permanent": true
+  },
+  {
+    "source": "/produse/stool-cu-or-fara-ring-27532",
+    "destination": "/produse/scaun-cu-or-fara-ring-27532",
     "permanent": true
   },
   {
@@ -162693,6 +162928,16 @@
     "permanent": true
   },
   {
+    "source": "/produse/stool-feet-27947",
+    "destination": "/produse/scaun-feet-27947",
+    "permanent": true
+  },
+  {
+    "source": "/produse/stool-feet-27949",
+    "destination": "/produse/scaun-feet-27949",
+    "permanent": true
+  },
+  {
     "source": "/produse/stool-grey-27956",
     "destination": "/produse/stool-gri-27956",
     "permanent": true
@@ -162722,8 +162967,33 @@
     "permanent": true
   },
   {
+    "source": "/produse/stool-negru-45210",
+    "destination": "/produse/scaun-negru-45210",
+    "permanent": true
+  },
+  {
     "source": "/produse/stool-negru-45212",
     "destination": "/produse/taburet-negru-45212"
+  },
+  {
+    "source": "/produse/stool-negru-45220",
+    "destination": "/produse/scaun-negru-45220",
+    "permanent": true
+  },
+  {
+    "source": "/produse/stool-negru-45230",
+    "destination": "/produse/scaun-negru-45230",
+    "permanent": true
+  },
+  {
+    "source": "/produse/stool-negru-45240",
+    "destination": "/produse/scaun-negru-45240",
+    "permanent": true
+  },
+  {
+    "source": "/produse/stool-rosu-45222",
+    "destination": "/produse/scaun-rosu-45222",
+    "permanent": true
   },
   {
     "source": "/produse/stool-roti-27954",
@@ -163823,6 +164093,21 @@
   {
     "source": "/produse/swann-morton-carbon-otel-blades-n-23-steril-22408",
     "destination": "/produse/swann-morton-carbon-otel-lame-n-23-steril-22408",
+    "permanent": true
+  },
+  {
+    "source": "/produse/swann-morton-otel-inoxidabil-handle-n-3-cu-ce-si-ukca-22425",
+    "destination": "/produse/swann-morton-otel-inoxidabil-maner-n-3-cu-ce-si-ukca-22425",
+    "permanent": true
+  },
+  {
+    "source": "/produse/swann-morton-otel-inoxidabil-handle-n-3-fara-ce-22423",
+    "destination": "/produse/swann-morton-otel-inoxidabil-maner-n-3-fara-ce-22423",
+    "permanent": true
+  },
+  {
+    "source": "/produse/swann-morton-otel-inoxidabil-handle-n-4-cu-ce-si-ukca-22426",
+    "destination": "/produse/swann-morton-otel-inoxidabil-maner-n-4-cu-ce-si-ukca-22426",
     "permanent": true
   },
   {
@@ -167000,6 +167285,11 @@
   {
     "source": "/produse/ultra-light-clogs-other-colour-minimum-50-pairs-26206",
     "destination": "/produse/ultra-lumina-clogs-cu-straps-other-colours-26206",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-other-colours-26206",
+    "destination": "/produse/ultra-lumina-saboti-medicali-cu-bareta-alte-culori-26206",
     "permanent": true
   },
   {
@@ -172432,6 +172722,11 @@
     "permanent": true
   },
   {
+    "source": "/produse/usb-f-o-laringoscop-handle-34468",
+    "destination": "/produse/usb-f-o-laringoscop-maner-34468",
+    "permanent": true
+  },
+  {
     "source": "/produse/usb-f-o-laringoscop-maner-34468",
     "destination": "/produse/produs-pentru-urgenta-usb-f-o-laryngoscope-handle-34468",
     "permanent": true
@@ -172474,6 +172769,11 @@
   {
     "source": "/produse/utility-bags-27135",
     "destination": "/produse/geanta-medicala-utility-bags-27135",
+    "permanent": true
+  },
+  {
+    "source": "/produse/utility-carucior-other-colours-45597",
+    "destination": "/produse/utility-carucior-alte-culori-45597",
     "permanent": true
   },
   {

@@ -1,4 +1,4 @@
-import productsJson from "../../data/product-catalog/products.json";
+﻿import productsJson from "../../data/product-catalog/products.json";
 import productRedirectsJson from "../../data/product-catalog/product-redirects.json";
 
 export type ProductReviewStatus = "imported" | "translated" | "image_verified" | "reviewed" | "approved" | "indexable" | "excluded";
@@ -318,7 +318,9 @@ function isCleanRomanianProductTitle(title: string) {
   if (/([a-z])\1{3,}/i.test(normalized)) return false;
   if (/(^| )(produs|echipament|dispozitiv|articol)( |$)/.test(normalized)) return false;
   if (/^(specificatii tehnice|technical|class|manual|numai|pentru)( |$)/.test(normalized)) return false;
-  if (/^[\\d\\s.,/()°+-]+$/.test(normalized)) return false;
+  if (/^\d/.test(normalized)) return false;
+  if (/\bpentru$/.test(normalized)) return false;
+  if (/^[\\d\\s.,/()Â°+-]+$/.test(normalized)) return false;
   return !hasPublicEnglishLeakage(title);
 }
 
@@ -442,6 +444,12 @@ function hasPublicEnglishLeakage(value: string) {
     "blade",
     "paed",
     "smart",
+    "humidifier",
+    "polarization",
+    "short",
+    "handle",
+    "stool",
+    "colours",
     "cups",
     "compression",
   ];
@@ -816,3 +824,4 @@ export function getRelatedServiceLabel(href: string) {
 
   return labels[href] || href.replace("/", "").replaceAll("-", " ");
 }
+
