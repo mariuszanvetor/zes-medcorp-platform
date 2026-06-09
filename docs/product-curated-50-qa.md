@@ -1,0 +1,55 @@
+# Product Curated 50 QA
+
+- PASS: 50/50
+- Failed: 0/50
+
+- PASS — Centrifuga de laborator XC-2000: fara probleme
+- PASS — Analizor de urina GIMA cu Bluetooth: fara probleme
+- PASS — Analizor hemoglobina Hemo Control: fara probleme
+- PASS — Analizor imunologic fluorescent: fara probleme
+- PASS — Glucometru wireless iHealth BG5: fara probleme
+- PASS — Camp chirurgical bistratificat 50x50 cm, cutie 350 bucati: fara probleme
+- PASS — Camp chirurgical bistratificat 45x75 cm, cutie 360 bucati: fara probleme
+- PASS — Camp chirurgical bistratificat 75x90 cm, cutie 170 bucati: fara probleme
+- PASS — Monitor multiparametric GIMACARE, 6 parametri: fara probleme
+- PASS — Monitor fetal FC1400 pentru sarcina unica: fara probleme
+- PASS — Monitor fetal FC1400 Twins pentru sarcina gemelara: fara probleme
+- PASS — Tensiometru de incheietura Jolly: fara probleme
+- PASS — Tensiometru GIMA Bluetooth: fara probleme
+- PASS — Tensiometru digital Andon: fara probleme
+- PASS — Tensiometru de incheietura iHealth Sense BP7: fara probleme
+- PASS — Monitor compozitie corporala Omron BF511: fara probleme
+- PASS — Garou rapid fara latex, albastru: fara probleme
+- PASS — Targa pentru scari 131x50x155 cm: fara probleme
+- PASS — Targa electrica pentru scari 123x50x160 cm: fara probleme
+- PASS — Targa cu incarcare automata: fara probleme
+- PASS — Defibrilator-monitor DefiMonitor XD: fara probleme
+- PASS — Concentrator de oxigen Respira 5 L: fara probleme
+- PASS — Carucior de anestezie Neo Plus: fara probleme
+- PASS — Scaun transfer pacient Ischia, albastru: fara probleme
+- PASS — Cutie inox pentru sterilizare: fara probleme
+- PASS — Cutie inox pentru sterilizare 20x10x6 cm: fara probleme
+- PASS — Cutie inox pentru sterilizare 25x12x6 cm: fara probleme
+- PASS — Cutie inox pentru sterilizare 30x15x6 cm: fara probleme
+- PASS — Cutie inox pentru sterilizare 50x20x10 cm: fara probleme
+- PASS — Cutie aluminiu pentru sterilizare 17,5x7,6x2 cm: fara probleme
+- PASS — Cutie aluminiu pentru sterilizare 18,5x9,5x3 cm: fara probleme
+- PASS — Cutie aluminiu pentru sterilizare 21,8x10,6x3 cm: fara probleme
+- PASS — Masa reglabila pentru pat Elite: fara probleme
+- PASS — Scaun ORL Otopex cu tetiera, verde Toronto: fara probleme
+- PASS — Pat medical specialistic cu Trendelenburg: fara probleme
+- PASS — Carucior medical cu doua polite 40x36 cm: fara probleme
+- PASS — Scaun electric Cleopatra pentru cabinet: fara probleme
+- PASS — Scaun rulant pliabil cu toaleta: fara probleme
+- PASS — Scaun hidraulic pentru transfer pacient: fara probleme
+- PASS — Scaun ergonomic medical, albastru: fara probleme
+- PASS — Tensiometru de brat iHealth Track Connected: fara probleme
+- PASS — Lanterna medicala LED Omega, metalica: fara probleme
+- PASS — Dispozitiv iluminare faringiana Throat Scope: fara probleme
+- PASS — Spatule linguale, cutie 100 bucati: fara probleme
+- PASS — Spirometru touchscreen SP100B cu imprimanta: fara probleme
+- PASS — Sistem ecografic Sunlight MiniOmni pentru evaluare osoasa: fara probleme
+- PASS — Electrocardiograf Mindray BeneHeart R3, 3 canale: fara probleme
+- PASS — Lupa binoculara 3960-620, 2.0x: fara probleme
+- PASS — Tonometru Schiotz drept: fara probleme
+- PASS — Kit neurologic cu 3 ciocane reflexe: fara probleme
