@@ -315,7 +315,7 @@ function isGenericProductDescription(description: string) {
 function isCleanRomanianProductTitle(title: string) {
   const normalized = normalizePublicCatalogText(title);
   if (normalized.length < 8) return false;
-  if (/([a-z])\1{4,}/i.test(normalized)) return false;
+  if (/([a-z])\1{3,}/i.test(normalized)) return false;
   if (/(^| )(produs|echipament|dispozitiv|articol)( |$)/.test(normalized)) return false;
   if (/^(specificatii tehnice|technical|class|manual|numai|pentru)( |$)/.test(normalized)) return false;
   if (/^[\\d\\s.,/()°+-]+$/.test(normalized)) return false;
@@ -331,7 +331,24 @@ function isCleanRomanianProductSlug(slug: string) {
 
 function hasPublicEnglishLeakage(value: string) {
   const normalized = normalizePublicCatalogText(value);
-  const allowed = new Set(["ce", "fda", "iso", "bluetooth", "wifi", "wi fi", "pacs", "ris", "dicom", "usb", "led", "spo2", "ecg"]);
+  const allowed = new Set([
+    "ce",
+    "fda",
+    "iso",
+    "bluetooth",
+    "wifi",
+    "wi fi",
+    "pacs",
+    "ris",
+    "dicom",
+    "usb",
+    "led",
+    "spo2",
+    "ecg",
+    "monitor",
+    "adult",
+    "pediatric",
+  ]);
   const leakageTerms = [
     "designed",
     "technical",
@@ -382,6 +399,7 @@ function hasPublicEnglishLeakage(value: string) {
     "couch",
     "cart",
     "trolley",
+    "trolleys",
     "belt",
     "buckle",
     "clamp",
@@ -389,6 +407,31 @@ function hasPublicEnglishLeakage(value: string) {
     "retractor",
     "needle",
     "needles",
+    "syringe",
+    "syringes",
+    "drawers",
+    "drawer",
+    "lacets",
+    "packed",
+    "quality",
+    "system",
+    "face",
+    "instruments",
+    "andsparesfor",
+    "ontrolley",
+    "guide",
+    "size",
+    "sizes",
+    "every",
+    "colours",
+    "mixed",
+    "surfaces",
+    "wipes",
+    "masking",
+    "faceshield",
+    "connection",
+    "rail",
+    "angled",
     "cups",
     "compression",
   ];
