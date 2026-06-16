@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { Container } from "@/components/ui/Container";
@@ -24,7 +24,7 @@ const commercialLinksByPillar = {
     { href: "/servicii/cusca-faraday-rmn", label: "Cusca Faraday RMN" },
   ],
   "medical-equipment": [
-    { href: "/aparatura-medicala-bucuresti", label: "Aparatura medicala Bucuresti" },
+    { href: "/aparatura-medicala-bucuresti", label: "Aparatura medicala București" },
     { href: "/produse/cbct", label: "CBCT" },
     { href: "/servicii/pacs-medical", label: "PACS medical" },
   ],
@@ -93,3 +93,5 @@ export function ServicesSection() {
     </Section>
   );
 }
+
+

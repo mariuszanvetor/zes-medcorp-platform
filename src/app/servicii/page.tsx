@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 
 import { EcosystemNavigation } from "@/components/sections/EcosystemNavigation";
@@ -15,15 +15,15 @@ import { getServiceFunnelHubData } from "@/lib/service-funnel-engine";
 export const metadata: Metadata = createWebsiteMetadata({
   title: "Servicii comerciale ZES MEDCORP",
   description:
-    "Pagini comerciale de servicii pentru proiectare, planificare și implementare medicală, gândite pentru trafic cu intenție mare.",
+    "Pagini comerciale de servicii pentru proiectare, planificare È™i implementare medicalÄƒ, gÃ¢ndite pentru trafic cu intenÈ›ie mare.",
   path: "/servicii",
   keywords: [
     "servicii medicale",
-    "proiectare cameră RMN",
-    "proiectare cameră CT",
-    "radioprotecție",
-    "modernizare clinică medicală",
-    "planificare infrastructură imagistică",
+    "proiectare camerÄƒ RMN",
+    "proiectare camerÄƒ CT",
+    "radioprotecÈ›ie",
+    "modernizare clinicÄƒ medicalÄƒ",
+    "planificare infrastructurÄƒ imagisticÄƒ",
   ],
 });
 
@@ -34,7 +34,7 @@ export default function ServiciiHubPage() {
     <>
       <BreadcrumbSchema
         items={[
-          { name: "Acasă", href: "/" },
+          { name: "AcasÄƒ", href: "/" },
           { name: "Servicii", href: "/servicii" },
         ]}
       />
@@ -50,8 +50,8 @@ export default function ServiciiHubPage() {
               Servicii comerciale pentru proiecte medicale serioase.
             </h1>
             <p className="mx-auto mt-7 max-w-3xl text-xl leading-9 text-slate-600">
-              Aceste pagini sunt construite pentru trafic cu intenție mare: proiectare,
-              radioprotecție, infrastructură, modernizare și implementare.
+              Aceste pagini sunt construite pentru trafic cu intenÈ›ie mare: proiectare,
+              radioprotecÈ›ie, infrastructurÄƒ, modernizare È™i implementare.
             </p>
             <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
               <Button className="rounded-full px-7" href="/proposal-builder" size="lg">
@@ -83,7 +83,7 @@ export default function ServiciiHubPage() {
               <p className="mt-4 text-sm leading-7 text-slate-600">
                 Aceste pagini sunt gandite pentru clienti care cauta direct service,
                 PACS, radiologie, infrastructura imagistica, CBCT sau aparatura medicala
-                in Bucuresti.
+                in București.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -142,14 +142,14 @@ export default function ServiciiHubPage() {
                   Continuitate
                 </p>
                 <h2 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">
-                  Dacă ai deja un proiect clar, treci direct spre structurare.
+                  DacÄƒ ai deja un proiect clar, treci direct spre structurare.
                 </h2>
               </div>
               <div className="flex flex-wrap gap-2">
                 <Button href="/contact" variant="secondary">
-                  Solicită evaluare tehnică
+                  SolicitÄƒ evaluare tehnicÄƒ
                 </Button>
-                <Button href="/ai-project-advisor">Analiză preliminară</Button>
+                <Button href="/ai-project-advisor">AnalizÄƒ preliminarÄƒ</Button>
               </div>
             </div>
           </Card>
@@ -158,3 +158,4 @@ export default function ServiciiHubPage() {
     </>
   );
 }
+

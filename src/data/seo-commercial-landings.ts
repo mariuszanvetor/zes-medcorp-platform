@@ -1,4 +1,4 @@
-import type { FAQItem } from "@/components/seo/FAQSchema";
+﻿import type { FAQItem } from "@/components/seo/FAQSchema";
 
 export type SeoCommercialLanding = {
   slug: string;
@@ -16,7 +16,7 @@ export type SeoCommercialLanding = {
   deliverables: string[];
   costFactors: string[];
   procurementNotes: string[];
-  whyZescorp: string[];
+  whyZESCORP: string[];
   internalLinks: Array<{ href: string; label: string }>;
   faqs: FAQItem[];
   primaryCta: string;
@@ -26,7 +26,7 @@ export type SeoCommercialLanding = {
   offerAngle: string;
 };
 
-const sharedWhyZescorp = [
+const sharedWhyZESCORP = [
   "ZESCORP trateaza proiectul ca un ansamblu comercial si tehnic: echipament, spatiu, instalatii, service, mentenanta si documentatie.",
   "Discutia porneste de la nevoia reala a clinicii, nu de la o lista generica de produse. Asta ajuta la pregatirea unei oferte mai clare si mai usor de comparat.",
   "Pentru proiecte de imagistica, radiologie, PACS, laborator sau service, echipa poate structura cererea astfel incat urmatorul pas sa fie o evaluare sau o oferta personalizata.",
@@ -47,7 +47,7 @@ const standardFaqs = {
   noFakePrice: {
     question: "Se poate estima costul direct de pe pagina?",
     answer:
-      "Pagina ofera repere comerciale si factori de cost. Pretul final nu este inventat online si se stabileste dupa configuratie, locatie, cantitate, servicii incluse si disponibilitatea documentelor.",
+      "ZESCORP poate oferi repere comerciale si factori de cost. Pretul final nu este inventat online si se stabileste dupa configuratie, locatie, cantitate, servicii incluse si disponibilitatea documentelor.",
   },
 };
 
@@ -62,7 +62,7 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
     h1: "Service aparatura medicala pentru clinici, spitale si laboratoare",
     eyebrow: "Service si mentenanta",
     intro:
-      "ZESCORP ajuta organizatiile medicale sa transforme problemele tehnice in cereri clare de service, mentenanta sau evaluare. Pagina este construita pentru administratori, responsabili tehnici si proprietari de clinici care au nevoie de suport practic pentru echipamente medicale, fara promisiuni vagi si fara reparatii improvizate.",
+      "ZESCORP ajuta organizatiile medicale sa transforme problemele tehnice in cereri clare de service, mentenanta sau evaluare. Administratorii, responsabilii tehnici si proprietarii de clinici primesc un traseu practic pentru preluarea echipamentelor medicale, fara promisiuni vagi si fara reparatii improvizate.",
     targetKeywords: [
       "service aparatura medicala",
       "mentenanta aparatura medicala",
@@ -135,10 +135,10 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
       "Evita interventiile interne nesigure si pastreaza codurile de eroare.",
       "Pentru contracte, stabileste ce inseamna timp de raspuns acceptabil.",
     ],
-    whyZescorp: sharedWhyZescorp,
+    whyZESCORP: sharedWhyZESCORP,
     internalLinks: [
       { href: "/contracte-mentenanta", label: "Contracte mentenanta" },
-      { href: "/service-radiologie-romania", label: "Service radiologie Romania" },
+      { href: "/service-radiologie-romania", label: "Service radiologie România" },
       { href: "/service-ecografe", label: "Service ecografe" },
       { href: "/service-laborator-ivd", label: "Service laborator / IVD" },
       { href: "/contact", label: "Contact ZESCORP" },
@@ -172,22 +172,22 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
   {
     slug: "aparatura-medicala-bucuresti",
     path: "/aparatura-medicala-bucuresti",
-    title: "Aparatura medicala Bucuresti",
-    metadataTitle: "Aparatura medicala Bucuresti | Echipamente si servicii ZESCORP",
+    title: "Aparatura medicala București",
+    metadataTitle: "Aparatura medicala București | Echipamente si servicii ZESCORP",
     metadataDescription:
-      "Aparatura medicala in Bucuresti pentru clinici si laboratoare: echipamente, instalare, service, mentenanta, consultanta si oferta personalizata ZESCORP.",
-    h1: "Aparatura medicala Bucuresti pentru proiecte, dotari si service",
+      "Aparatura medicala in București pentru clinici si laboratoare: echipamente, instalare, service, mentenanta, consultanta si oferta personalizata ZESCORP.",
+    h1: "Aparatura medicala București pentru proiecte, dotari si service",
     eyebrow: "Echipamente medicale",
     intro:
-      "Pentru Bucuresti si Ilfov, nevoia de aparatura medicala apare de obicei in trei scenarii: deschiderea unei clinici, modernizarea unui spatiu existent sau inlocuirea unui echipament care afecteaza fluxul operational. ZESCORP trateaza achizitia ca parte dintr-un proiect complet: selectie, integrare, instalare, service si mentenanta.",
+      "Pentru București si Ilfov, nevoia de aparatura medicala apare de obicei in trei scenarii: deschiderea unei clinici, modernizarea unui spatiu existent sau inlocuirea unui echipament care afecteaza fluxul operational. ZESCORP trateaza achizitia ca parte dintr-un proiect complet: selectie, integrare, instalare, service si mentenanta.",
     targetKeywords: [
-      "aparatura medicala Bucuresti",
-      "echipamente medicale Bucuresti",
-      "dotare clinica Bucuresti",
-      "service aparatura medicala Bucuresti",
+      "aparatura medicala București",
+      "echipamente medicale București",
+      "dotare clinica București",
+      "service aparatura medicala București",
     ],
     audience: [
-      "clinici private din Bucuresti si Ilfov care pregatesc dotari noi",
+      "clinici private din București si Ilfov care pregatesc dotari noi",
       "cabinete care inlocuiesc echipamente vechi sau greu de mentinut",
       "laboratoare si centre de diagnostic cu nevoie de aparatura si suport",
       "investitori medicali care vor sa coreleze echipamentele cu infrastructura",
@@ -250,9 +250,9 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
       "Stabileste aplicatia medicala inainte de a cere pret.",
       "Cere diferentierea intre echipament, accesorii, instalare si mentenanta.",
       "Noteaza termenul de deschidere sau de inlocuire.",
-      "Pentru Bucuresti, clarifica accesul, livrarea si conditiile de instalare.",
+      "Pentru București, clarifica accesul, livrarea si conditiile de instalare.",
     ],
-    whyZescorp: sharedWhyZescorp,
+    whyZESCORP: sharedWhyZESCORP,
     internalLinks: [
       { href: "/produse", label: "Catalog produse medicale" },
       { href: "/solutii-medicale/echipamente-imagistica-diagnostic", label: "Echipamente imagistica si diagnostic" },
@@ -287,8 +287,8 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
     primaryCta: "Solicita oferta aparatura",
     secondaryCta: "Trimite lista de echipamente",
     consultationCta: "Cere consultanta de dotare",
-    serviceType: "Aparatura medicala Bucuresti",
-    offerAngle: "echipamente medicale, dotari, instalare, service si mentenanta pentru Bucuresti si Ilfov",
+    serviceType: "Aparatura medicala București",
+    offerAngle: "echipamente medicale, dotari, instalare, service si mentenanta pentru București si Ilfov",
   },
   {
     slug: "pacs-medical",
@@ -368,7 +368,7 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
       "Clarifica cine citeste, cine raporteaza si cine acceseaza extern.",
       "Include backup, securitate si proceduri de incident in cerere.",
     ],
-    whyZescorp: sharedWhyZescorp,
+    whyZESCORP: sharedWhyZESCORP,
     internalLinks: [
       { href: "/servicii/arhivare-pacs", label: "Arhivare PACS" },
       { href: "/servicii/diagnostic-la-distanta", label: "Diagnostic la distanta" },
@@ -484,7 +484,7 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
       "Stabileste ce arhiva veche trebuie migrata.",
       "Include cerinte de acces, audit si securitate.",
     ],
-    whyZescorp: sharedWhyZescorp,
+    whyZESCORP: sharedWhyZESCORP,
     internalLinks: [
       { href: "/servicii/pacs-medical", label: "PACS medical" },
       { href: "/servicii/diagnostic-la-distanta", label: "Diagnostic la distanta" },
@@ -566,7 +566,7 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
       {
         title: "Coordonare echipament",
         description:
-          "Fișa tehnica a aparatului si cerintele furnizorului trebuie corelate cu planul si lucrarile.",
+          "FiÈ™a tehnica a aparatului si cerintele furnizorului trebuie corelate cu planul si lucrarile.",
       },
       {
         title: "Pregatire ofertare",
@@ -599,7 +599,7 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
       "Pregateste planul camerei si descrierea spatiilor vecine.",
       "Mentioneaza termenul de deschidere si stadiul CNCAN daca exista.",
     ],
-    whyZescorp: sharedWhyZescorp,
+    whyZESCORP: sharedWhyZESCORP,
     internalLinks: [
       { href: "/proiectare-radiologie", label: "Proiectare radiologie si infrastructura RX" },
       { href: "/radioprotectie-plumbare-rx", label: "Radioprotectie si plumbare RX" },
@@ -715,7 +715,7 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
       "Include in discutie usa RF, filtrele, penetrarile si testarea.",
       "Verifica daca spatiul permite accesul si service-ul echipamentului.",
     ],
-    whyZescorp: sharedWhyZescorp,
+    whyZESCORP: sharedWhyZESCORP,
     internalLinks: [
       { href: "/services/rf-shielding", label: "RF shielding" },
       { href: "/servicii/infrastructura-imagistica", label: "Infrastructura imagistica" },
@@ -831,7 +831,7 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
       "Include costurile de service si mentenanta in analiza.",
       "Cere validare pentru accesul echipamentelor in cladire.",
     ],
-    whyZescorp: sharedWhyZescorp,
+    whyZESCORP: sharedWhyZESCORP,
     internalLinks: [
       { href: "/amenajare-centre-imagistica", label: "Amenajare centre imagistica" },
       { href: "/servicii/proiectare-radiologie", label: "Proiectare radiologie" },
@@ -947,7 +947,7 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
       "Clarifica drepturile de acces si responsabilitatile.",
       "Include proceduri pentru cazuri urgente si incidente tehnice.",
     ],
-    whyZescorp: sharedWhyZescorp,
+    whyZESCORP: sharedWhyZESCORP,
     internalLinks: [
       { href: "/servicii/pacs-medical", label: "PACS medical" },
       { href: "/servicii/arhivare-pacs", label: "Arhivare PACS" },
@@ -1030,7 +1030,7 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
       {
         title: "Radioprotectie",
         description:
-          "Soluția finala depinde de aparat, plan, vecinatati si validare de specialitate.",
+          "SoluÈ›ia finala depinde de aparat, plan, vecinatati si validare de specialitate.",
       },
       {
         title: "Instalare si training",
@@ -1063,9 +1063,9 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
       "Include radioprotectia si service-ul in buget.",
       "Cere clarificari despre software, training si suport.",
     ],
-    whyZescorp: sharedWhyZescorp,
+    whyZESCORP: sharedWhyZESCORP,
     internalLinks: [
-      { href: "/aparatura-medicala-bucuresti", label: "Aparatura medicala Bucuresti" },
+      { href: "/aparatura-medicala-bucuresti", label: "Aparatura medicala București" },
       { href: "/servicii/rx-room-design", label: "RX room design" },
       { href: "/radioprotectie-plumbare-rx", label: "Radioprotectie RX" },
       { href: "/service-aparatura-medicala", label: "Service aparatura medicala" },
@@ -1179,7 +1179,7 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
       "Pregateste planul si vecinatatile.",
       "Include service-ul in discutia comerciala initiala.",
     ],
-    whyZescorp: sharedWhyZescorp,
+    whyZESCORP: sharedWhyZESCORP,
     internalLinks: [
       { href: "/servicii/proiectare-radiologie", label: "Proiectare radiologie" },
       { href: "/radioprotectie-plumbare-rx", label: "Radioprotectie si plumbare RX" },
@@ -1226,3 +1226,5 @@ export function getSeoCommercialLandingByPath(path: string) {
 export function getSeoCommercialLandingBySlug(slug: string) {
   return seoCommercialLandings.find((page) => page.slug === slug);
 }
+
+

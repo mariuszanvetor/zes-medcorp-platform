@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { FAQSchema } from "@/components/seo/FAQSchema";
@@ -33,7 +33,7 @@ export function SeoCommercialLandingPage({ page }: SeoCommercialLandingPageProps
 
       <main data-page-intent={page.slug}>
         <Section
-          className="overflow-hidden border-b border-blue-100 bg-[linear-gradient(135deg,#061b38_0%,#0a3768_50%,#f8fbff_50%,#ffffff_100%)]"
+          className="overflow-hidden border-b border-blue-100 bg-[linear-gradient(135deg,#04152d_0%,#062a55_58%,#0b3f78_100%)]"
           spacing="xl"
           tone="transparent"
         >
@@ -98,13 +98,11 @@ export function SeoCommercialLandingPage({ page }: SeoCommercialLandingPageProps
                   Cui se adreseaza
                 </p>
                 <h2 className="mt-4 text-3xl font-semibold leading-tight text-slate-950">
-                  Pagina este construita pentru cumparatori B2B care au nevoie de decizie, oferta
-                  si implementare.
+                  Decizie, oferta si implementare pentru echipe medicale care nu isi permit blocaje.
                 </h2>
                 <p className="mt-5 text-base leading-8 text-slate-600">
-                  Continutul nu este un articol general. Este o pagina comerciala pentru echipe care
-                  vor sa inteleaga rapid daca ZESCORP poate ajuta, ce date sunt necesare si cum se
-                  ajunge la o oferta clara.
+                  Beneficiarul trebuie sa vada rapid ce poate cumpara, ce rezultat obtine, ce date
+                  sunt necesare si cum se ajunge la o oferta clara, nu la o discutie generala.
                 </p>
               </div>
               <div className="grid gap-3">
@@ -220,9 +218,9 @@ export function SeoCommercialLandingPage({ page }: SeoCommercialLandingPageProps
                     pregatit pentru validari tehnice si executie.
                   </p>
                   <p>
-                    Scopul acestei pagini este sa aduca discutia intr-un punct in care ZESCORP poate
-                    raspunde comercial: ce se poate oferta acum, ce informatii lipsesc, ce riscuri
-                    trebuie verificate si care este urmatorul pas rezonabil pentru clinica.
+                    Rezultatul urmarit este o discutie suficient de clara pentru un raspuns comercial:
+                    ce se poate oferta acum, ce informatii lipsesc, ce riscuri trebuie verificate si
+                    care este urmatorul pas rezonabil pentru clinica.
                   </p>
                 </div>
               </article>
@@ -273,9 +271,9 @@ export function SeoCommercialLandingPage({ page }: SeoCommercialLandingPageProps
                     rapid. Daca exista buget, discutia trebuie sa devina oferta structurata.
                   </p>
                   <p>
-                    O pagina comerciala buna trebuie sa duca utilizatorul spre actiune, nu spre
-                    confuzie. De aceea, urmatorul pas recomandat este contactul cu ZESCORP, trimiterea
-                    datelor disponibile si stabilirea unei discutii scurte pentru validarea cererii.
+                    Experienta trebuie sa duca beneficiarul spre actiune, nu spre confuzie. Urmatorul
+                    pas recomandat este contactul cu ZESCORP, trimiterea datelor disponibile si
+                    stabilirea unei discutii scurte pentru validarea cererii.
                   </p>
                 </div>
               </article>
@@ -318,10 +316,10 @@ export function SeoCommercialLandingPage({ page }: SeoCommercialLandingPageProps
                   De ce ZESCORP
                 </p>
                 <h2 className="mt-4 text-3xl font-semibold leading-tight text-slate-950">
-                  Un partener comercial-tehnic pentru proiecte medicale, nu doar o pagina de contact.
+                  Un partener comercial-tehnic pentru proiecte medicale, nu doar un formular de contact.
                 </h2>
                 <div className="mt-6 grid gap-4">
-                  {page.whyZescorp.map((item) => (
+                  {page.whyZESCORP.map((item) => (
                     <p className="text-sm leading-7 text-slate-700" key={item}>
                       {item}
                     </p>
@@ -425,3 +423,4 @@ function InfoPanel({ title, items }: { title: string; items: string[] }) {
     </article>
   );
 }
+

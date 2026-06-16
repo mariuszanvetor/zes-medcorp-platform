@@ -1,10 +1,10 @@
-# SEO Phase 01 - Commercial Landing Expansion
+﻿# SEO Phase 01 - Commercial Landing Expansion
 
 Data: 2026-06-16
 
 ## Obiectiv
 
-Extinderea site-ului ZESCORP cu landing pages comerciale indexabile pentru interogari B2B cu intentie ridicata: service aparatura medicala, aparatura medicala Bucuresti, PACS, arhivare PACS, proiectare radiologie, cusca Faraday RMN, infrastructura imagistica, diagnostic la distanta, CBCT si RX room design.
+Extinderea site-ului ZESCORP cu landing pages comerciale indexabile pentru interogari B2B cu intentie ridicata: service aparatura medicala, aparatura medicala București, PACS, arhivare PACS, proiectare radiologie, cusca Faraday RMN, infrastructura imagistica, diagnostic la distanta, CBCT si RX room design.
 
 Aceste pagini sunt landing pages comerciale, nu articole de blog. Fiecare pagina raspunde la:
 
@@ -22,14 +22,14 @@ Aceste pagini sunt landing pages comerciale, nu articole de blog. Fiecare pagina
 | URL | Tip | Keyword principal | Status indexare | Word count HTML |
 | --- | --- | --- | --- | ---: |
 | `/service-aparatura-medicala` | service | service aparatura medicala | indexabil | 1.739 |
-| `/aparatura-medicala-bucuresti` | comercial local | aparatura medicala Bucuresti | indexabil | 1.685 |
-| `/servicii/pacs-medical` | serviciu digital imagistica | PACS medical | indexabil | 1.675 |
-| `/servicii/arhivare-pacs` | serviciu digital imagistica | arhivare PACS | indexabil | 1.657 |
+| `/aparatura-medicala-București` | comercial local | aparatura medicala București | indexabil | 1.685 |
+| `/servicii/PACS-medical` | serviciu digital imagistica | PACS medical | indexabil | 1.675 |
+| `/servicii/arhivare-PACS` | serviciu digital imagistica | arhivare PACS | indexabil | 1.657 |
 | `/servicii/proiectare-radiologie` | infrastructura radiologie | proiectare radiologie | indexabil | 1.641 |
-| `/servicii/cusca-faraday-rmn` | RF shielding | cusca Faraday RMN | indexabil | 1.660 |
+| `/servicii/cusca-faraday-RMN` | RF shielding | cusca Faraday RMN | indexabil | 1.660 |
 | `/servicii/infrastructura-imagistica` | infrastructura imagistica | infrastructura imagistica | indexabil | 1.619 |
 | `/servicii/diagnostic-la-distanta` | teleradiologie/PACS | diagnostic la distanta | indexabil | 1.638 |
-| `/produse/cbct` | produs comercial | CBCT | indexabil | 1.624 |
+| `/produse/CBCT` | produs comercial | CBCT | indexabil | 1.624 |
 | `/servicii/rx-room-design` | proiectare RX | RX room design | indexabil | 1.620 |
 
 ## Cuvinte cheie tintite
@@ -43,8 +43,8 @@ Aceste pagini sunt landing pages comerciale, nu articole de blog. Fiecare pagina
 
 ### Aparatura medicala si produse
 
-- aparatura medicala Bucuresti
-- echipamente medicale Bucuresti
+- aparatura medicala București
+- echipamente medicale București
 - CBCT
 - aparat CBCT
 - imagistica dentara CBCT
@@ -106,16 +106,16 @@ Verificare build: toate cele 10 URL-uri noi apar in sitemap-ul generat.
 - Medical Infrastructure:
   - `/servicii/infrastructura-imagistica`
   - `/servicii/proiectare-radiologie`
-  - `/servicii/cusca-faraday-rmn`
+  - `/servicii/cusca-faraday-RMN`
 
 - Medical Equipment:
-  - `/aparatura-medicala-bucuresti`
-  - `/produse/cbct`
-  - `/servicii/pacs-medical`
+  - `/aparatura-medicala-București`
+  - `/produse/CBCT`
+  - `/servicii/PACS-medical`
 
 - Service & Maintenance:
   - `/service-aparatura-medicala`
-  - `/servicii/arhivare-pacs`
+  - `/servicii/arhivare-PACS`
   - `/servicii/diagnostic-la-distanta`
 
 ### Pagina `/servicii`
@@ -144,3 +144,4 @@ Fiecare pagina include linkuri contextuale spre:
 ## Observatii
 
 Nu au fost inventate certificari, proiecte realizate sau preturi finale. Costurile sunt prezentate ca factori de cost si scenarii comerciale, nu ca tarife garantate.
+
