@@ -4,7 +4,7 @@ import { SeoCommercialLandingPage } from "@/components/sections/SeoCommercialLan
 import { getSeoCommercialLandingByPath } from "@/data/seo-commercial-landings";
 import { createWebsiteMetadata } from "@/lib/seo";
 
-const page = getSeoCommercialLandingByPath("/service-aparatura-medicala")!;
+const page = getSeoCommercialLandingByPath("/servicii/pacs-medical")!;
 
 export const metadata: Metadata = createWebsiteMetadata({
   title: page.metadataTitle,
@@ -13,6 +13,6 @@ export const metadata: Metadata = createWebsiteMetadata({
   keywords: page.targetKeywords,
 });
 
-export default function ServiceAparaturaMedicalaPage() {
+export default function PacsMedicalPage() {
   return <SeoCommercialLandingPage page={page} />;
 }

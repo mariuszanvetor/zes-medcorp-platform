@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { EcosystemNavigation } from "@/components/sections/EcosystemNavigation";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
@@ -7,6 +8,7 @@ import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
+import { seoCommercialLandings } from "@/data/seo-commercial-landings";
 import { createWebsiteMetadata } from "@/lib/seo";
 import { getServiceFunnelHubData } from "@/lib/service-funnel-engine";
 
@@ -63,6 +65,37 @@ export default function ServiciiHubPage() {
               >
                 Project Intake
               </Button>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      <Section className="border-b border-blue-100 bg-white" tone="transparent">
+        <Container>
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
+                Pagini comerciale
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950">
+                Servicii si produse cu intentie mare de ofertare.
+              </h2>
+              <p className="mt-4 text-sm leading-7 text-slate-600">
+                Aceste pagini sunt gandite pentru clienti care cauta direct service,
+                PACS, radiologie, infrastructura imagistica, CBCT sau aparatura medicala
+                in Bucuresti.
+              </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {seoCommercialLandings.map((page) => (
+                <Link
+                  className="rounded-xl border border-slate-200 bg-[#f8fbff] p-4 text-sm font-semibold leading-6 text-slate-800 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
+                  href={page.path}
+                  key={page.path}
+                >
+                  {page.title}
+                </Link>
+              ))}
             </div>
           </div>
         </Container>

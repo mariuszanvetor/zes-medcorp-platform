@@ -10,6 +10,7 @@ import { maintenanceContractPages } from "@/data/maintenance-contracts";
 import { planningJourneys } from "@/data/planning-journeys";
 import { revenueLandingPages } from "@/data/revenue-landing-pages";
 import { seoClusters } from "@/data/seo-clusters";
+import { seoCommercialLandings } from "@/data/seo-commercial-landings";
 import { serviceFunnels } from "@/data/service-funnels";
 import { services } from "@/data/services";
 import { getCategoryPath, getIndexableProducts, productCategories } from "@/lib/product-catalog";
@@ -37,7 +38,6 @@ const staticRoutes: Array<{
   { path: "/service-diagnostic", changeFrequency: "monthly", priority: 0.78 },
   { path: "/proposal-builder", changeFrequency: "monthly", priority: 0.8 },
   { path: "/project-intake", changeFrequency: "monthly", priority: 0.81 },
-  { path: "/service-aparatura-medicala", changeFrequency: "monthly", priority: 0.82 },
   { path: "/radioprotectie-plumbare-rx", changeFrequency: "monthly", priority: 0.82 },
   { path: "/planificare", changeFrequency: "monthly", priority: 0.84 },
   { path: "/glosar", changeFrequency: "weekly", priority: 0.84 },
@@ -70,6 +70,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.88,
+  }));
+
+  const seoCommercialRoutes = seoCommercialLandings.map((page) => ({
+    url: new URL(page.path, siteConfig.url).toString(),
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority:
+      page.path === "/service-aparatura-medicala" ||
+      page.path === "/aparatura-medicala-bucuresti" ||
+      page.path === "/servicii/pacs-medical"
+        ? 0.91
+        : 0.88,
   }));
 
   const revenueRoutes = revenueLandingPages.map((page) => ({
@@ -185,6 +197,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: route.priority,
     })),
     ...serviceRoutes,
+    ...seoCommercialRoutes,
     ...commercialRoutes,
     ...revenueRoutes,
     ...maintenanceRoutes,

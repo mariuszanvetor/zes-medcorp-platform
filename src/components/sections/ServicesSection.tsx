@@ -17,6 +17,24 @@ const audienceByPillar = {
   "service-maintenance": "interventii, contracte de mentenanta, relocari si suport tehnic.",
 } as const;
 
+const commercialLinksByPillar = {
+  "medical-infrastructure": [
+    { href: "/servicii/infrastructura-imagistica", label: "Infrastructura imagistica" },
+    { href: "/servicii/proiectare-radiologie", label: "Proiectare radiologie" },
+    { href: "/servicii/cusca-faraday-rmn", label: "Cusca Faraday RMN" },
+  ],
+  "medical-equipment": [
+    { href: "/aparatura-medicala-bucuresti", label: "Aparatura medicala Bucuresti" },
+    { href: "/produse/cbct", label: "CBCT" },
+    { href: "/servicii/pacs-medical", label: "PACS medical" },
+  ],
+  "service-maintenance": [
+    { href: "/service-aparatura-medicala", label: "Service aparatura medicala" },
+    { href: "/servicii/arhivare-pacs", label: "Arhivare PACS" },
+    { href: "/servicii/diagnostic-la-distanta", label: "Diagnostic la distanta" },
+  ],
+} as const;
+
 export function ServicesSection() {
   const groups = getRevenueLandingGroups();
 
@@ -50,6 +68,17 @@ export function ServicesSection() {
                   <span className="font-semibold text-slate-950">Include:</span>{" "}
                   {group.items.slice(0, 3).map((item) => item.eyebrow).join(", ")}.
                 </p>
+              </div>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {commercialLinksByPillar[group.pillar].map((link) => (
+                  <Link
+                    className="rounded-full border border-blue-100 bg-white px-3 py-1.5 text-xs font-semibold text-[#0057b8] transition hover:border-blue-200 hover:bg-blue-50"
+                    href={link.href}
+                    key={link.href}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
               </div>
               <Link
                 className="mt-auto inline-flex h-11 items-center justify-center rounded-xl bg-[#0057b8] px-5 text-sm font-bold text-white transition hover:bg-blue-800"
