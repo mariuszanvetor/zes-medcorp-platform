@@ -6,6 +6,7 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { medicalEquipmentLandings } from "@/data/medical-equipment-landings";
 import { createWebsiteMetadata } from "@/lib/seo";
 import {
   getCategoryPath,
@@ -67,6 +68,52 @@ export default function ProductCatalogHubPage() {
                 >
                   Contracte mentenanta
                 </Link>
+              </div>
+            </div>
+          </Container>
+        </Section>
+
+        <Section className="border-y border-blue-100 bg-[#f7fbff]" spacing="lg" tone="transparent">
+          <Container>
+            <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#0057b8]">
+                  Echipamente medicale
+                </p>
+                <h2 className="mt-4 text-3xl font-semibold leading-tight text-slate-950">
+                  Pagini comerciale pentru dotari, proiecte si cereri de oferta.
+                </h2>
+                <p className="mt-5 text-base leading-8 text-slate-600">
+                  Pentru RMN, CT, radiologie digitala, ecografie, mamografie, C-arm,
+                  DICOM, UPS medical, monitorizare si PACS/RIS, ZESCORP poate pregati
+                  o discutie de ofertare care include echipamentul, infrastructura,
+                  instalarea, service-ul si mentenanta.
+                </p>
+                <Link
+                  className="mt-6 inline-flex h-12 items-center justify-center rounded-xl border border-[#0057b8] bg-[#0057b8] px-6 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(0,87,184,0.18)] transition hover:bg-[#00498f]"
+                  href="/contact"
+                >
+                  Solicita oferta echipamente
+                </Link>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {medicalEquipmentLandings.map((landing) => (
+                  <Link
+                    className="rounded-2xl border border-blue-100 bg-white p-5 transition hover:border-blue-200 hover:bg-blue-50"
+                    href={landing.path}
+                    key={landing.path}
+                  >
+                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0057b8]">
+                      {landing.eyebrow}
+                    </p>
+                    <h3 className="mt-3 text-lg font-semibold leading-7 text-slate-950">
+                      {landing.title}
+                    </h3>
+                    <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-600">
+                      {landing.metadataDescription}
+                    </p>
+                  </Link>
+                ))}
               </div>
             </div>
           </Container>

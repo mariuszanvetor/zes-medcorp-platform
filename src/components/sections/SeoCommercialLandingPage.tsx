@@ -2,6 +2,7 @@
 
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { FAQSchema } from "@/components/seo/FAQSchema";
+import { ProductSchema } from "@/components/seo/ProductSchema";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -30,6 +31,15 @@ export function SeoCommercialLandingPage({ page }: SeoCommercialLandingPageProps
         serviceType={page.serviceType}
         url={page.path}
       />
+      {page.productSchema ? (
+        <ProductSchema
+          category={page.productSchema.category}
+          description={page.metadataDescription}
+          name={page.title}
+          properties={page.productSchema.properties}
+          url={page.path}
+        />
+      ) : null}
 
       <main data-page-intent={page.slug}>
         <Section
@@ -307,6 +317,34 @@ export function SeoCommercialLandingPage({ page }: SeoCommercialLandingPageProps
             </div>
           </Container>
         </Section>
+
+        {page.commercialNarrative?.length ? (
+          <Section className="bg-white" spacing="lg" tone="transparent">
+            <Container>
+              <div className="mx-auto max-w-4xl text-center">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#0057b8]">
+                  Argument comercial
+                </p>
+                <h2 className="mt-4 text-3xl font-semibold leading-tight text-slate-950">
+                  Detalii care conteaza inainte de cererea de oferta
+                </h2>
+              </div>
+              <div className="mt-10 grid gap-5 lg:grid-cols-2">
+                {page.commercialNarrative.map((section) => (
+                  <article
+                    className="rounded-3xl border border-slate-200 bg-[#f8fbff] p-6"
+                    key={`${page.slug}-${section.title}`}
+                  >
+                    <h3 className="text-xl font-semibold leading-7 text-slate-950">
+                      {section.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-7 text-slate-700">{section.body}</p>
+                  </article>
+                ))}
+              </div>
+            </Container>
+          </Section>
+        ) : null}
 
         <Section className="bg-white" spacing="lg" tone="transparent">
           <Container>

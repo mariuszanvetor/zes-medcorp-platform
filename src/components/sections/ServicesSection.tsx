@@ -24,9 +24,10 @@ const commercialLinksByPillar = {
     { href: "/servicii/cusca-faraday-rmn", label: "Cusca Faraday RMN" },
   ],
   "medical-equipment": [
+    { href: "/produse/rmn", label: "RMN" },
+    { href: "/produse/computer-tomograf", label: "Computer tomograf" },
+    { href: "/produse/ecograf", label: "Ecograf" },
     { href: "/aparatura-medicala-bucuresti", label: "Aparatura medicala București" },
-    { href: "/produse/cbct", label: "CBCT" },
-    { href: "/servicii/pacs-medical", label: "PACS medical" },
   ],
   "service-maintenance": [
     { href: "/service-aparatura-medicala", label: "Service aparatura medicala" },

@@ -1,5 +1,7 @@
 ﻿import type { FAQItem } from "@/components/seo/FAQSchema";
 
+import { medicalEquipmentLandings } from "@/data/medical-equipment-landings";
+
 export type SeoCommercialLanding = {
   slug: string;
   path: string;
@@ -19,6 +21,11 @@ export type SeoCommercialLanding = {
   whyZESCORP: string[];
   internalLinks: Array<{ href: string; label: string }>;
   faqs: FAQItem[];
+  commercialNarrative?: Array<{ title: string; body: string }>;
+  productSchema?: {
+    category: string;
+    properties: Array<{ label: string; value: string }>;
+  };
   primaryCta: string;
   secondaryCta: string;
   consultationCta: string;
@@ -1217,6 +1224,7 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
     serviceType: "RX room design",
     offerAngle: "camera RX, proiectare, radioprotectie, echipament si suport operational",
   },
+  ...medicalEquipmentLandings,
 ];
 
 export function getSeoCommercialLandingByPath(path: string) {
