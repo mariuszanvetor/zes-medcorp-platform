@@ -1,6 +1,7 @@
 ﻿import type { FAQItem } from "@/components/seo/FAQSchema";
 
 import { medicalEquipmentLandings } from "@/data/medical-equipment-landings";
+import { serviceMaintenanceLandings } from "@/data/service-maintenance-landings";
 
 export type SeoCommercialLanding = {
   slug: string;
@@ -1225,6 +1226,7 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
     offerAngle: "camera RX, proiectare, radioprotectie, echipament si suport operational",
   },
   ...medicalEquipmentLandings,
+  ...serviceMaintenanceLandings,
 ];
 
 export function getSeoCommercialLandingByPath(path: string) {

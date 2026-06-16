@@ -31,8 +31,9 @@ const commercialLinksByPillar = {
   ],
   "service-maintenance": [
     { href: "/service-aparatura-medicala", label: "Service aparatura medicala" },
-    { href: "/servicii/arhivare-pacs", label: "Arhivare PACS" },
-    { href: "/servicii/diagnostic-la-distanta", label: "Diagnostic la distanta" },
+    { href: "/servicii/service-radiologie", label: "Service radiologie" },
+    { href: "/servicii/service-rmn", label: "Service RMN" },
+    { href: "/servicii/mentenanta-echipamente-medicale", label: "Mentenanta echipamente" },
   ],
 } as const;
 
