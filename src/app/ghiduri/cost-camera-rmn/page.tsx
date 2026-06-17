@@ -1,7 +1,4 @@
-import {
-  createSeoClusterMetadata,
-  renderSeoClusterPage,
-} from "@/app/ghiduri/_cluster";
+import { createSeoClusterMetadata, renderSeoClusterPage } from "../_cluster";
 
 export const metadata = createSeoClusterMetadata("cost-camera-rmn");
 

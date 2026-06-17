@@ -37,6 +37,8 @@ export type SeoCluster = {
   cta: SeoClusterCTA;
 };
 
+import { investmentSeoClusters } from "@/data/investment-seo-clusters";
+
 const defaultProposalCta: SeoClusterCTA = {
   title: "Ai nevoie de o direcție tehnică înainte de buget?",
   description:
@@ -45,7 +47,7 @@ const defaultProposalCta: SeoClusterCTA = {
   href: "/proposal-builder",
 };
 
-export const seoClusters: SeoCluster[] = [
+const baseSeoClusters: SeoCluster[] = [
   {
     slug: "cost-clinica-medicala",
     title: "Cost clinică medicală: ce influențează investiția reală",
@@ -906,7 +908,14 @@ export const seoClusters: SeoCluster[] = [
       href: "/service-diagnostic",
     },
   },
+  ...investmentSeoClusters,
 ];
+
+export const seoClusters: SeoCluster[] = Array.from(
+  baseSeoClusters
+    .reduce((clusters, cluster) => clusters.set(cluster.slug, cluster), new Map<string, SeoCluster>())
+    .values(),
+);
 
 export function getSeoClusterBySlug(slug: string) {
   return seoClusters.find((cluster) => cluster.slug === slug);

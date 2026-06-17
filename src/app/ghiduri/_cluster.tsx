@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { ArticleSchema } from "@/components/seo/ArticleSchema";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { SeoClusterPage } from "@/components/sections/SeoClusterPage";
 import { getSeoClusterBySlug } from "@/data/seo-clusters";
@@ -36,6 +37,15 @@ export function renderSeoClusterPage(slug: string) {
           { name: "Ghiduri", href: "/knowledge-hub" },
           { name: cluster.title, href: `/ghiduri/${cluster.slug}` },
         ]}
+      />
+      <ArticleSchema
+        headline={cluster.title}
+        description={cluster.description}
+        url={`/ghiduri/${cluster.slug}`}
+        datePublished="2026-06-17"
+        dateModified="2026-06-17"
+        articleSection={cluster.category}
+        keywords={[cluster.targetKeyword, ...cluster.secondaryKeywords]}
       />
       <SeoClusterPage cluster={cluster} />
     </>
