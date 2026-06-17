@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { articles } from "@/data/articles";
 import { programmaticCalculators } from "@/data/calculators";
+import { caseStudies } from "@/data/case-studies";
 import { glossaryTerms } from "@/data/glossary";
 import { comparisonPages } from "@/data/comparisons";
 import { commercialLandingPages } from "@/data/commercial-landing-pages";
@@ -29,6 +30,7 @@ const staticRoutes: Array<{
   { path: "/about", changeFrequency: "monthly", priority: 0.74 },
   { path: "/companie", changeFrequency: "monthly", priority: 0.76 },
   { path: "/projects", changeFrequency: "monthly", priority: 0.76 },
+  { path: "/studii-de-caz", changeFrequency: "monthly", priority: 0.82 },
   { path: "/resources", changeFrequency: "monthly", priority: 0.78 },
   { path: "/ai-discovery", changeFrequency: "monthly", priority: 0.86 },
   { path: "/ai-project-advisor", changeFrequency: "monthly", priority: 0.85 },
@@ -143,6 +145,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         : 0.79,
   }));
 
+  const caseStudyRoutes = caseStudies.map((study) => ({
+    url: new URL(`/studii-de-caz/${study.slug}`, siteConfig.url).toString(),
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
   const comparisonRoutes = comparisonPages.map((page) => ({
     url: new URL(`/comparatii/${page.slug}`, siteConfig.url).toString(),
     lastModified: new Date(page.updatedAt),
@@ -211,6 +220,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...calculatorRoutes,
     ...glossaryRoutes,
     ...clusterRoutes,
+    ...caseStudyRoutes,
     ...comparisonRoutes,
     ...articleRoutes,
     ...legalRoutes,
