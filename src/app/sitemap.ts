@@ -48,6 +48,7 @@ const staticRoutes: Array<{
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
+  const seoCommercialPaths = new Set(seoCommercialLandings.map((page) => page.path));
   const serviceRoutes = services.map((service) => ({
     url: new URL(service.href, siteConfig.url).toString(),
     lastModified: now,
@@ -55,15 +56,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.78,
   }));
 
-  const serviceFunnelRoutes = serviceFunnels.map((page) => ({
-    url: new URL(`/servicii/${page.slug}`, siteConfig.url).toString(),
-    lastModified: new Date(page.updatedAt),
-    changeFrequency: "monthly" as const,
-    priority:
-      page.category === "radioprotectie-rf" || page.slug === "proiectare-camera-rmn"
-        ? 0.84
-        : 0.8,
-  }));
+  const serviceFunnelRoutes = serviceFunnels
+    .filter((page) => !seoCommercialPaths.has(`/servicii/${page.slug}`))
+    .map((page) => ({
+      url: new URL(`/servicii/${page.slug}`, siteConfig.url).toString(),
+      lastModified: new Date(page.updatedAt),
+      changeFrequency: "monthly" as const,
+      priority:
+        page.category === "radioprotectie-rf" || page.slug === "proiectare-camera-rmn"
+          ? 0.84
+          : 0.8,
+    }));
 
   const commercialRoutes = commercialLandingPages.map((page) => ({
     url: new URL(`/${page.slug}`, siteConfig.url).toString(),

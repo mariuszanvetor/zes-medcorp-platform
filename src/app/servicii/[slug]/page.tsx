@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ServiceLandingPage } from "@/components/sections/ServiceLandingPage";
+import { seoCommercialLandings } from "@/data/seo-commercial-landings";
 import {
   createServiceFunnelMetadata,
   serviceFunnels,
@@ -14,9 +15,17 @@ type ServiceFunnelPageProps = {
 };
 
 export function generateStaticParams() {
-  return serviceFunnels.map((page) => ({
-    slug: page.slug,
-  }));
+  const commercialServicePaths = new Set(
+    seoCommercialLandings
+      .filter((page) => page.path.startsWith("/servicii/"))
+      .map((page) => page.path),
+  );
+
+  return serviceFunnels
+    .filter((page) => !commercialServicePaths.has(`/servicii/${page.slug}`))
+    .map((page) => ({
+      slug: page.slug,
+    }));
 }
 
 export async function generateMetadata({

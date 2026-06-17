@@ -21,7 +21,9 @@ const commercialLinksByPillar = {
   "medical-infrastructure": [
     { href: "/servicii/infrastructura-imagistica", label: "Infrastructura imagistica" },
     { href: "/servicii/proiectare-radiologie", label: "Proiectare radiologie" },
-    { href: "/servicii/cusca-faraday-rmn", label: "Cusca Faraday RMN" },
+    { href: "/servicii/radioprotectie", label: "Radioprotectie" },
+    { href: "/servicii/rf-shielding-rmn", label: "RF shielding RMN" },
+    { href: "/servicii/consultanta-cncan-radiologie", label: "Consultanta CNCAN" },
   ],
   "medical-equipment": [
     { href: "/produse/rmn", label: "RMN" },

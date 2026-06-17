@@ -1,6 +1,7 @@
 ﻿import type { FAQItem } from "@/components/seo/FAQSchema";
 
 import { medicalEquipmentLandings } from "@/data/medical-equipment-landings";
+import { radioprotectionRfLandings } from "@/data/radioprotection-rf-landings";
 import { serviceMaintenanceLandings } from "@/data/service-maintenance-landings";
 
 export type SeoCommercialLanding = {
@@ -1227,6 +1228,7 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
   },
   ...medicalEquipmentLandings,
   ...serviceMaintenanceLandings,
+  ...radioprotectionRfLandings,
 ];
 
 export function getSeoCommercialLandingByPath(path: string) {
