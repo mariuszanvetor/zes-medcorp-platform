@@ -27,6 +27,10 @@ export type CalculatorSlug =
   | "timp-implementare-proiect-medical"
   | "modernizare-clinica-estimare"
   | "infrastructura-radiologie-estimare"
+  | "investitie-centru-imagistica"
+  | "radioprotectie"
+  | "rf-shielding"
+  | "rmn-readiness-assessment"
   | "ups-imagistica"
   | "flux-pacienti-imagistica"
   | "evaluare-preliminara-clinica";
@@ -1181,6 +1185,275 @@ export const programmaticCalculators: ProgrammaticCalculatorDefinition[] = [
       { label: "Calculator proiect medical", href: "/calculator-proiect-medical" },
     ],
     buildResult: (values) => buildExpandedCalculatorResult("clinic-eval", values),
+  },
+  {
+    slug: "investitie-centru-imagistica",
+    title: "Calculator investitie centru imagistica",
+    description:
+      "Estimator high-ticket pentru centru de imagistica: RMN, CT, RX, mamograf, infrastructura, radioprotectie, RF shielding, service si buget total.",
+    eyebrow: "Lead magnet investitii",
+    purpose:
+      "Calculeaza o estimare orientativa pentru investitori si proprietari de clinici care planifica un centru de imagistica medicala.",
+    targetKeyword: "calculator investitie centru imagistica",
+    keywords: [
+      "investitie centru imagistica",
+      "cost centru imagistica",
+      "buget RMN CT RX",
+      "calculator proiect imagistica",
+    ],
+    fields: [
+      optionField("modalities", "Echipamente planificate", [
+        ["RMN", "rmn"],
+        ["CT", "ct"],
+        ["RX + mamografie", "rx-mammo"],
+        ["RMN + CT + RX", "full"],
+      ]),
+      optionField("surface", "Suprafata disponibila", [
+        ["sub 120 mp", "small"],
+        ["120-250 mp", "medium"],
+        ["250-500 mp", "large"],
+        ["peste 500 mp", "xl"],
+      ]),
+      optionField("city", "Piata / oras", [
+        ["Bucuresti / Ilfov", "bucharest"],
+        ["Oras mare", "major"],
+        ["Oras regional", "regional"],
+        ["Nu este decis", "unknown"],
+      ]),
+      optionField("building", "Tip cladire", [
+        ["Cladire noua", "new"],
+        ["Spatiu medical existent", "existing-medical"],
+        ["Spatiu existent nemedical", "existing-nonmedical"],
+        ["Nu este decis", "unknown"],
+      ]),
+      optionField("equipmentCount", "Numar echipamente", [
+        ["1 echipament", "one"],
+        ["2 echipamente", "two"],
+        ["3-4 echipamente", "three-four"],
+        ["peste 4 echipamente", "many"],
+      ]),
+      urgencyField(),
+    ],
+    faq: [
+      {
+        question: "Estimatorul include echipamentele medicale?",
+        answer:
+          "Da, include o orientare pe echipamente, infrastructura, radioprotectie sau RF shielding, service si rezerva de risc. Nu este oferta finala.",
+      },
+      {
+        question: "Cand trebuie ceruta analiza completa?",
+        answer:
+          "Cand exista locatie, buget orientativ, mix de echipamente sau termen de implementare. Pentru proiecte mari, analiza timpurie reduce riscul de rework.",
+      },
+      {
+        question: "Rezultatul poate fi folosit pentru finantare?",
+        answer:
+          "Poate ajuta ca structura preliminara, dar valorile trebuie validate prin oferta si documentatie tehnica inainte de decizie financiara.",
+      },
+    ],
+    primaryCta: { label: "Solicita audit gratuit de fezabilitate", href: "/contact" },
+    secondaryCta: { label: "Pregateste proiectul", href: "/project-intake" },
+    relatedLinks: [
+      { label: "Cost centru imagistica", href: "/ghiduri/cost-centru-imagistica" },
+      { label: "Infrastructura imagistica", href: "/servicii/infrastructura-imagistica" },
+      { label: "PACS medical", href: "/servicii/pacs-medical" },
+      { label: "Mentenanta echipamente", href: "/servicii/mentenanta-echipamente-medicale" },
+    ],
+    buildResult: (values) => buildHighTicketLeadMagnetResult("imagistica", values),
+  },
+  {
+    slug: "radioprotectie",
+    title: "Calculator radioprotectie",
+    description:
+      "Estimator pentru proiecte de radioprotectie: tip echipament, suprafata, grosime estimata, camera RX/CT/mamografie si buget preliminar.",
+    eyebrow: "Radioprotectie",
+    purpose:
+      "Ofera o estimare orientativa pentru plumbare si protectie radiologica, cu limite clare: grosimile finale se valideaza de specialisti autorizati.",
+    targetKeyword: "calculator radioprotectie",
+    keywords: ["calculator radioprotectie", "cost plumbare RX", "radioprotectie CT", "radioprotectie mamografie"],
+    fields: [
+      optionField("equipment", "Tip echipament", [
+        ["RX conventional", "rx"],
+        ["CT", "ct"],
+        ["Mamografie", "mammo"],
+        ["CBCT / dental RX", "cbct"],
+      ]),
+      optionField("surface", "Suprafata camera", [
+        ["sub 15 mp", "small"],
+        ["15-25 mp", "medium"],
+        ["25-40 mp", "large"],
+        ["peste 40 mp", "xl"],
+      ]),
+      optionField("thickness", "Grosime estimata", [
+        ["Nu stiu", "unknown"],
+        ["Protectie usoara", "light"],
+        ["Protectie medie", "medium"],
+        ["Protectie ridicata", "high"],
+      ]),
+      optionField("plan", "Plan disponibil", [
+        ["Da", "yes"],
+        ["Schita simpla", "sketch"],
+        ["Nu", "no"],
+        ["In lucru", "progress"],
+      ]),
+      urgencyField(),
+    ],
+    faq: [
+      {
+        question: "Calculatorul stabileste grosimea finala de plumb?",
+        answer:
+          "Nu. Estimarea este orientativa. Grosimea si solutia finala trebuie validate prin specialisti autorizati si documentatie aplicabila.",
+      },
+      {
+        question: "Pot cere oferta fara plan?",
+        answer:
+          "Da, dar planul sau schita camerei ajuta mult. Oferta finala depinde de vecinatati, aparat si documentatie.",
+      },
+      {
+        question: "Ce influenteaza costul radioprotectiei?",
+        answer:
+          "Suprafata, tipul echipamentului, peretii, usa, vitrajul, vecinatatile, finisajele si nivelul de executie.",
+      },
+    ],
+    primaryCta: { label: "Solicita oferta radioprotectie", href: "/contact" },
+    secondaryCta: { label: "Analizeaza camera RX", href: "/servicii/placare-plumb-camera-rx" },
+    relatedLinks: [
+      { label: "Radioprotectie", href: "/servicii/radioprotectie" },
+      { label: "Radioprotectie CT", href: "/servicii/radioprotectie-ct" },
+      { label: "Consultanta CNCAN", href: "/servicii/consultanta-cncan-radiologie" },
+    ],
+    buildResult: (values) => buildHighTicketLeadMagnetResult("radioprotectie", values),
+  },
+  {
+    slug: "rf-shielding",
+    title: "Calculator RF shielding",
+    description:
+      "Estimator pentru ecranare RF RMN: camera, usa RF, penetratii, filtre, HVAC, testare si cost preliminar de proiect.",
+    eyebrow: "RF shielding",
+    purpose:
+      "Estimeaza complexitatea unui proiect RF shielding pentru RMN si separa clar ecranarea RF de radioprotectia cu plumb.",
+    targetKeyword: "calculator RF shielding",
+    keywords: ["calculator RF shielding", "cost RF shielding", "cusca Faraday RMN", "ecranare RF RMN"],
+    fields: [
+      optionField("roomSize", "Dimensiune camera", [
+        ["sub 25 mp", "small"],
+        ["25-40 mp", "medium"],
+        ["40-65 mp", "large"],
+        ["peste 65 mp", "xl"],
+      ]),
+      optionField("penetrations", "Penetratii / trasee", [
+        ["Putine", "few"],
+        ["Standard", "standard"],
+        ["Multe / complexe", "many"],
+        ["Nu stiu", "unknown"],
+      ]),
+      optionField("door", "Usa RF", [
+        ["Necesara", "needed"],
+        ["Existenta", "existing"],
+        ["Nu stiu", "unknown"],
+        ["Configuratie speciala", "special"],
+      ]),
+      optionField("equipment", "RMN selectat", [
+        ["Da", "selected"],
+        ["Oferte in analiza", "shortlist"],
+        ["Nu", "no"],
+        ["Nu stiu", "unknown"],
+      ]),
+      urgencyField(),
+    ],
+    faq: [
+      {
+        question: "RF shielding inseamna plumbare?",
+        answer:
+          "Nu. RF shielding protejeaza camera RMN de interferente electromagnetice. Plumbarea este folosita pentru radiatii ionizante, nu pentru RMN.",
+      },
+      {
+        question: "Ce include estimarea?",
+        answer:
+          "Include incinta RF, usa, penetratii, filtre, integrare cu HVAC si testare orientativa, in functie de datele introduse.",
+      },
+      {
+        question: "Cand se valideaza costul final?",
+        answer:
+          "Dupa plan, cerintele furnizorului RMN si verificarea traseelor tehnice.",
+      },
+    ],
+    primaryCta: { label: "Solicita analiza RF shielding", href: "/contact" },
+    secondaryCta: { label: "Vezi camera RMN la cheie", href: "/servicii/camera-rmn-la-cheie" },
+    relatedLinks: [
+      { label: "RF shielding RMN", href: "/servicii/rf-shielding-rmn" },
+      { label: "Camera RMN la cheie", href: "/servicii/camera-rmn-la-cheie" },
+      { label: "Cost RF shielding", href: "/ghiduri/cost-rf-shielding" },
+    ],
+    buildResult: (values) => buildHighTicketLeadMagnetResult("rf", values),
+  },
+  {
+    slug: "rmn-readiness-assessment",
+    title: "RMN Readiness Assessment",
+    description:
+      "Scor de pregatire RMN 0-100 pentru spatiu, acces, electric, ventilatie, documentatie si riscuri de implementare.",
+    eyebrow: "RMN readiness",
+    purpose:
+      "Evalueaza cat de pregatit este un spatiu pentru proiect RMN si ce trebuie clarificat inainte de oferta.",
+    targetKeyword: "RMN readiness assessment",
+    keywords: ["RMN readiness", "camera RMN pregatire", "evaluare spatiu RMN", "audit fezabilitate RMN"],
+    fields: [
+      optionField("space", "Spatiu", [
+        ["Spatiu dedicat", "ready"],
+        ["Spatiu identificat", "identified"],
+        ["Spatiu de adaptat", "adapt"],
+        ["Nu exista inca", "none"],
+      ]),
+      optionField("access", "Acces magnet", [
+        ["Confirmat", "confirmed"],
+        ["Probabil", "probable"],
+        ["Dificil", "difficult"],
+        ["Necunoscut", "unknown"],
+      ]),
+      optionField("power", "Putere electrica", [
+        ["Confirmata", "confirmed"],
+        ["Necesita upgrade", "upgrade"],
+        ["Necunoscuta", "unknown"],
+        ["In proiectare", "planning"],
+      ]),
+      optionField("ventilation", "Ventilatie / HVAC", [
+        ["Confirmata", "confirmed"],
+        ["In lucru", "progress"],
+        ["Necesita proiect", "needs-project"],
+        ["Necunoscuta", "unknown"],
+      ]),
+      optionField("docs", "Documentatie", [
+        ["Planuri si fise tehnice", "complete"],
+        ["Partial", "partial"],
+        ["Minim", "minimal"],
+        ["Lipsa", "none"],
+      ]),
+    ],
+    faq: [
+      {
+        question: "Scorul este o validare tehnica finala?",
+        answer:
+          "Nu. Este un scor preliminar care arata ce lipseste inainte de proiectare, oferta si validare tehnica.",
+      },
+      {
+        question: "Ce inseamna scor mic?",
+        answer:
+          "Inseamna ca proiectul are date insuficiente sau riscuri: acces, electric, HVAC, documente sau spatiu neconfirmat.",
+      },
+      {
+        question: "Pot primi raport PDF?",
+        answer:
+          "Raportul tehnic complet se solicita prin contact, cu datele proiectului si persoana responsabila.",
+      },
+    ],
+    primaryCta: { label: "Primeste raport tehnic PDF", href: "/contact" },
+    secondaryCta: { label: "Planifica camera RMN", href: "/servicii/camera-rmn-la-cheie" },
+    relatedLinks: [
+      { label: "Camera RMN la cheie", href: "/servicii/camera-rmn-la-cheie" },
+      { label: "RF shielding RMN", href: "/servicii/rf-shielding-rmn" },
+      { label: "Cost camera RMN", href: "/ghiduri/cost-camera-rmn" },
+    ],
+    buildResult: (values) => buildHighTicketLeadMagnetResult("rmn-readiness", values),
   },
 ];
 
@@ -2846,6 +3119,152 @@ function specificBudget(
     serviceBreakdown,
     disclaimer: BUDGET_DISCLAIMER,
   };
+}
+
+function buildHighTicketLeadMagnetResult(
+  kind: "imagistica" | "radioprotectie" | "rf" | "rmn-readiness",
+  values: Record<string, string>,
+): ProgrammaticCalculatorResult {
+  let score = 38;
+  const selected = Object.values(values);
+
+  if (selected.includes("full") || selected.includes("many") || selected.includes("xl")) score += 24;
+  if (selected.includes("rmn") || selected.includes("ct") || selected.includes("high")) score += 14;
+  if (selected.includes("existing-nonmedical") || selected.includes("adapt") || selected.includes("difficult")) score += 12;
+  if (selected.includes("unknown") || selected.includes("none")) score += 8;
+  if (selected.includes("immediate") || selected.includes("1-3")) score += 10;
+  if (selected.includes("confirmed") || selected.includes("complete") || selected.includes("selected")) score -= 6;
+
+  const normalizedScore = clampScore(score);
+  const hasRmn = kind === "rf" || kind === "rmn-readiness" || selected.includes("rmn") || selected.includes("full");
+  const hasCtRx =
+    kind === "radioprotectie" ||
+    selected.includes("ct") ||
+    selected.includes("rx") ||
+    selected.includes("rx-mammo") ||
+    selected.includes("cbct") ||
+    selected.includes("mammo");
+  const hasEquipment = kind === "imagistica" || hasRmn || hasCtRx;
+  const isHighValue = kind === "imagistica" || hasRmn || selected.includes("many") || selected.includes("xl");
+  const totalRange =
+    kind === "imagistica"
+      ? "EUR 250k-2M+"
+      : kind === "rmn-readiness"
+        ? "Scor 0-100"
+        : kind === "rf"
+          ? "EUR 40k-250k+"
+          : "EUR 8k-120k+";
+
+  const budget = createBudgetEstimate({
+    score: normalizedScore,
+    hasRadiology: hasRmn || hasCtRx,
+    hasRmn,
+    hasCtRx,
+    hasEquipment,
+    hasService: true,
+    hasRfShielding: hasRmn,
+    hasLeadShielding: hasCtRx,
+    isLarge: isHighValue,
+    isExistingBuilding: selected.includes("existing-nonmedical") || selected.includes("existing-medical"),
+    isUrgent: selected.includes("immediate") || selected.includes("1-3"),
+  });
+
+  budget.totalRange = totalRange;
+  budget.phaseBreakdown = [
+    line("Infrastructura", hasRmn ? "EUR 40k-300k+" : "EUR 8k-120k+", "Spatiu, utilitati, lucrari speciale si integrare."),
+    line("Echipamente", kind === "imagistica" ? "EUR 150k-1.5M+" : "Confirmare separata", "Depinde de configuratie, model si accesorii."),
+    line("Radioprotectie / RF shielding", hasRmn ? "EUR 40k-250k+" : "EUR 8k-120k+", "Validare tehnica necesara inainte de oferta finala."),
+    line("Service si mentenanta", "Contractabil", "Suport operational si reducerea riscului de downtime."),
+  ];
+  budget.serviceBreakdown = [
+    line("Audit fezabilitate", "Recomandat", "Clarifica riscurile si datele lipsa."),
+    line("Oferta personalizata", "Dupa validare", "Se bazeaza pe planuri, fise tehnice si termen."),
+    line("Raport tehnic PDF", "La cerere", "Pentru management, achizitii sau finantare."),
+  ];
+
+  const labels = {
+    imagistica: {
+      title: "Estimare investitie centru imagistica",
+      summary:
+        "Rezultatul structureaza bugetul pentru echipamente, infrastructura, radioprotectie sau RF shielding, service si rezerva de risc.",
+      metricLabel: "Potential investitie",
+      metricValue: normalizedScore >= 72 ? "HOT" : normalizedScore >= 50 ? "WARM" : "COLD",
+      services: ["Infrastructura imagistica", "PACS", "Service si mentenanta", "Project Intake"],
+    },
+    radioprotectie: {
+      title: "Estimare radioprotectie",
+      summary:
+        "Rezultatul indica nivelul orientativ de complexitate pentru plumbare, camera RX/CT/mamografie si documentatie.",
+      metricLabel: "Complexitate radioprotectie",
+      metricValue: normalizedScore >= 72 ? "Ridicata" : normalizedScore >= 50 ? "Medie" : "Controlabila",
+      services: ["Radioprotectie", "Consultanta CNCAN", "Amenajare camera radiologie"],
+    },
+    rf: {
+      title: "Estimare RF shielding",
+      summary:
+        "Rezultatul estimeaza complexitatea camerei RMN, a incintei RF, a usii, penetratiilor, HVAC-ului si testarii.",
+      metricLabel: "Complexitate RF",
+      metricValue: normalizedScore >= 72 ? "Ridicata" : normalizedScore >= 50 ? "Medie" : "Controlabila",
+      services: ["RF shielding RMN", "Camera RMN la cheie", "Ecranare electromagnetica"],
+    },
+    "rmn-readiness": {
+      title: "Scor RMN readiness",
+      summary:
+        "Scorul arata cat de pregatit este spatiul pentru camera RMN si ce riscuri trebuie clarificate inainte de oferta.",
+      metricLabel: "Readiness",
+      metricValue: `${Math.max(20, 100 - normalizedScore)} / 100`,
+      services: ["Camera RMN la cheie", "RF shielding RMN", "Audit fezabilitate"],
+    },
+  }[kind];
+
+  return buildScenarioResult({
+    title: labels.title,
+    summary: labels.summary,
+    score: normalizedScore,
+    metricLabel: labels.metricLabel,
+    metricValue: labels.metricValue,
+    budget,
+    timelineEstimate: timeline(
+      normalizedScore >= 72 ? "3-9 luni" : "2-6 luni",
+      [
+        ["Audit fezabilitate", "3-7 zile", "Date proiect, locatie si echipamente."],
+        ["Clarificare tehnica", "1-3 saptamani", "Planuri, fise tehnice si documente."],
+        ["Oferta si decizie", "1-4 saptamani", "Capitole bugetare si responsabilitati."],
+        ["Implementare", "1-6 luni", "Depinde de echipament si spatiu."],
+      ],
+      ["Planuri", "Echipament", "Locatie", "Termen", "Documentatie"],
+      ["date incomplete", "spatiu nevalidat", "echipament neselectat", "deadline agresiv"],
+    ),
+    risks: [
+      risk("Date incomplete", selected.includes("unknown") ? "High" : "Medium", "Estimarea poate varia daca lipsesc planuri sau fise tehnice.", "Transmiteti planul, schita si echipamentul vizat."),
+      risk("Buget high-ticket", isHighValue ? "High" : "Medium", "Proiectele medicale pot depasi rapid bugetul daca nu sunt fazate.", "Separati echipament, infrastructura, service si rezerva de risc."),
+      risk("Validare tehnica", hasRmn || hasCtRx ? "High" : "Medium", "Radioprotectia si RF shielding-ul necesita validari specifice.", "Cereti analiza inainte de executie."),
+    ],
+    assumptions: [
+      "Rezultatul este orientativ si nu reprezinta oferta finala.",
+      "Valorile depind de plan, echipament, locatie si documentatie.",
+      "Raportul complet se pregateste dupa datele de contact si verificarea proiectului.",
+    ],
+    missingData: missingFromValues(values, [
+      "Plan sau schita spatiu",
+      "Echipament / model vizat",
+      "Buget orientativ si termen",
+      "Status documentatie",
+    ]),
+    confidenceEstimate: confidence(values, normalizedScore),
+    recommendedServices: labels.services,
+    nextSteps: [
+      "Solicitati audit gratuit de fezabilitate.",
+      "Trimiteti planul sau schita spatiului.",
+      "Pregatiti echipamentele vizate si termenul de implementare.",
+      "Cereti raport tehnic PDF pentru management sau finantare.",
+    ],
+    emphasis: [
+      "Lead scoring: HOT peste EUR 250k si implementare sub 12 luni.",
+      "Estimarea completa trebuie validata tehnic.",
+      "ZESCORP poate transforma rezultatul intr-o cerere de oferta.",
+    ],
+  });
 }
 
 function timeline(

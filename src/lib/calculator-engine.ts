@@ -97,6 +97,26 @@ const calculatorGroupMetaBySlug: Record<string, CalculatorGroupMeta> = {
     title: "Infrastructura radiologie",
     description: "Scenarii multi-mod pentru RMN, CT si RX.",
   },
+  "investitie-centru-imagistica": {
+    group: "planning",
+    title: "Investitii imagistica",
+    description: "Buget high-ticket pentru RMN, CT, RX si mamografie.",
+  },
+  radioprotectie: {
+    group: "radioprotection",
+    title: "Radioprotectie",
+    description: "Estimare pentru plumbare, camere RX/CT si protectie radiologica.",
+  },
+  "rf-shielding": {
+    group: "radioprotection",
+    title: "RF shielding",
+    description: "Estimare pentru camera RMN, cusca Faraday si ecranare RF.",
+  },
+  "rmn-readiness-assessment": {
+    group: "imaging",
+    title: "RMN readiness",
+    description: "Scor de pregatire pentru camera RMN si riscuri de implementare.",
+  },
   "ups-imagistica": {
     group: "infrastructure",
     title: "UPS si backup",

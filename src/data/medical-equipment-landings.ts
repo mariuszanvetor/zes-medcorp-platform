@@ -215,6 +215,10 @@ const specs: EquipmentLandingSpec[] = [
     category: "Echipamente RMN",
     links: [
       { href: "/servicii/cusca-faraday-rmn", label: "Cusca Faraday RMN" },
+      { href: "/servicii/rf-shielding-rmn", label: "RF Shielding RMN" },
+      { href: "/servicii/camera-rmn-la-cheie", label: "Camera RMN la cheie" },
+      { href: "/servicii/ecranare-electromagnetica-medicala", label: "Ecranare electromagnetica medicala" },
+      { href: "/servicii/consultanta-cncan-radiologie", label: "Consultanta CNCAN" },
       { href: "/solutii-medicale/camere-rmn", label: "Camere RMN" },
       { href: "/services/rf-shielding", label: "RF shielding" },
       { href: "/servicii/pacs-medical", label: "PACS medical" },
@@ -246,6 +250,10 @@ const specs: EquipmentLandingSpec[] = [
       "Bugetul pentru CT depinde de numarul de slice-uri, tub, generator, software, injectomat, lucrari de camera, radioprotectie si service",
     category: "Echipamente CT",
     links: [
+      { href: "/servicii/radioprotectie-ct", label: "Radioprotectie CT" },
+      { href: "/servicii/proiectare-camera-rx", label: "Proiectare camera RX" },
+      { href: "/servicii/radioprotectie", label: "Radioprotectie" },
+      { href: "/servicii/consultanta-cncan-radiologie", label: "Consultanta CNCAN" },
       { href: "/solutii-medicale/camere-ct", label: "Camere CT" },
       { href: "/servicii/rx-room-design", label: "RX room design" },
       { href: "/radioprotectie-plumbare-rx", label: "Radioprotectie" },
@@ -278,6 +286,10 @@ const specs: EquipmentLandingSpec[] = [
       "Bugetul depinde de tipul sistemului RX, detector, generator, masa, stativ, software, camera, radioprotectie si integrarea PACS",
     category: "Echipamente radiologie digitala",
     links: [
+      { href: "/servicii/placare-plumb-camera-rx", label: "Placare plumb" },
+      { href: "/servicii/amenajare-camera-radiologie", label: "Amenajare camera radiologie" },
+      { href: "/servicii/radioprotectie", label: "Radioprotectie" },
+      { href: "/servicii/consultanta-cncan-radiologie", label: "Consultanta CNCAN" },
       { href: "/servicii/rx-room-design", label: "RX room design" },
       { href: "/radioprotectie-plumbare-rx", label: "Radioprotectie RX" },
       { href: "/servicii/proiectare-radiologie", label: "Proiectare radiologie" },
@@ -342,6 +354,9 @@ const specs: EquipmentLandingSpec[] = [
       "Bugetul depinde de configuratie, detector, optiuni 2D/3D unde sunt solicitate, camera, radioprotectie, software, instalare si service",
     category: "Echipamente mamografie",
     links: [
+      { href: "/servicii/radioprotectie-mamografie", label: "Radioprotectie mamografie" },
+      { href: "/servicii/radioprotectie", label: "Radioprotectie" },
+      { href: "/servicii/consultanta-cncan-radiologie", label: "Consultanta CNCAN" },
       { href: "/servicii/rx-room-design", label: "Design camera radiologie" },
       { href: "/radioprotectie-plumbare-rx", label: "Radioprotectie" },
       { href: "/servicii/pacs-medical", label: "PACS medical" },
