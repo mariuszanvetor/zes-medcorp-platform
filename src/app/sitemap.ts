@@ -44,6 +44,7 @@ const staticRoutes: Array<{
   { path: "/planificare", changeFrequency: "monthly", priority: 0.84 },
   { path: "/glosar", changeFrequency: "weekly", priority: 0.84 },
   { path: "/comparatii", changeFrequency: "weekly", priority: 0.83 },
+  { path: "/ghiduri", changeFrequency: "weekly", priority: 0.86 },
   { path: "/knowledge-hub", changeFrequency: "weekly", priority: 0.86 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.82 },
 ];
