@@ -179683,5 +179683,75 @@
   {
     "source": "/produse/zona-vizibila-24-x-62-cm-24-x-61-cm-27380",
     "destination": "/produse/panou-luminos-pentru-optotipuri-cu-zona-vizibila-24-x-62-cm-27380"
+  },
+  {
+    "source": "/produse/tensiometru-de-brat-ihealth-track-connected-23499",
+    "destination": "/produse/tensiometru-de-brat-ihealth-track-cu-conectivitate-23499",
+    "permanent": true
+  },
+  {
+    "source": "/produse/tensiometru-de-incheietura-ihealth-sense-bp7-23501",
+    "destination": "/produse/tensiometru-de-incheietura-ihealth-bp7-23501",
+    "permanent": true
+  },
+  {
+    "source": "/produse/analizor-de-urina-gima-cu-bluetooth-24046",
+    "destination": "/produse/analizor-de-urina-cu-bluetooth-24046",
+    "permanent": true
+  },
+  {
+    "source": "/produse/shaker-pentru-ecological-termometru-25587",
+    "destination": "/produse/agitator-pentru-termometre-medicale-ecologice-25587",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gimasafe-cutie-cu-10-bucati-25659",
+    "destination": "/produse/ochelari-de-protectie-gimasafe-cutie-10-bucati-25659",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gima-manual-pompa-de-aspiratie-cu-adulti-copii-cateter-28125",
+    "destination": "/produse/pompa-manuala-de-aspiratie-cu-catetere-adult-si-copil-28125",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gima-brush-b-steril-cutie-cu-100-bucati-29735",
+    "destination": "/produse/periuta-cervicala-sterila-brush-b-cutie-100-bucati-29735",
+    "permanent": true
+  },
+  {
+    "source": "/produse/lampa-frontala-medicala-led-gima-70kl-30879",
+    "destination": "/produse/lampa-frontala-medicala-led-70kl-30879",
+    "permanent": true
+  },
+  {
+    "source": "/produse/tensiometru-gima-bluetooth-32916",
+    "destination": "/produse/tensiometru-cu-bluetooth-pentru-monitorizare-pacient-32916",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mare-kit-metal-dulap-marime-460x300x140-mm-7-5-kg-34199",
+    "destination": "/produse/trusa-metalica-de-prim-ajutor-460x300x140-mm-34199",
+    "permanent": true
+  },
+  {
+    "source": "/produse/chirurgical-dressing-5x7-2-cm-2-8x3-8-cm-cutie-cu-5-bucati-34818",
+    "destination": "/produse/pansament-chirurgical-5x7-2-cm-cutie-5-bucati-34818",
+    "permanent": true
+  },
+  {
+    "source": "/produse/sterilizator-rapid-cu-bile-de-sticla-gima-quick-35640",
+    "destination": "/produse/sterilizator-rapid-quick-cu-bile-de-sticla-35640",
+    "permanent": true
+  },
+  {
+    "source": "/produse/carucior-de-anestezie-neo-plus-45720",
+    "destination": "/produse/carucior-de-urgenta-neo-plus-45720",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ms-led-flex-plus-lumina-carucior-49133",
+    "destination": "/produse/stativ-pe-roti-pentru-lampa-medicala-ms-led-flex-plus-49133",
+    "permanent": true
   }
 ]
