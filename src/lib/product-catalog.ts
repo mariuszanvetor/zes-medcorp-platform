@@ -750,7 +750,13 @@ function getLocalProductDocuments(product: ProductCatalogItem) {
           type: "fisa tehnica",
         }
       : null,
-  ].filter((item): item is { label: string; url: string; type: string } => Boolean(item));
+  ].filter((item): item is { label: string; url: string; type: string } =>
+    Boolean(item && isDeployableProductDocumentUrl(item.url)),
+  );
+}
+
+function isDeployableProductDocumentUrl(url: string) {
+  return !url.startsWith("/product-documents/");
 }
 
 function translateGimaCategoryLabel(label: string) {
