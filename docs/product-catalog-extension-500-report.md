@@ -1,0 +1,691 @@
+# Product Catalog Extension 500 Report
+
+Generated: 2026-06-18T17:50:01.294Z
+
+## Summary
+
+| Metric | Count |
+| --- | ---: |
+| Target indexable products | 500 |
+| Prepared candidates accepted for indexation | 500 |
+| Accepted products after public QA | 500 |
+| Rejected during final QA | 549 |
+| Total indexable products | 500 |
+| Products kept noindex | 8323 |
+
+## Category Distribution
+
+| Category | Indexable products |
+| --- | ---: |
+| operator-protection | 340 |
+| medical-furniture | 40 |
+| monitoring | 15 |
+| laboratory | 15 |
+| medical-bags | 15 |
+| sterilization | 15 |
+| diagnostic | 10 |
+| emergency | 10 |
+| patient-care | 9 |
+| surgical-instruments | 6 |
+| physiotherapy | 5 |
+| gynecology | 5 |
+| electromedical | 5 |
+| ent | 5 |
+| medical-lights | 5 |
+
+## Public Quality Rules
+
+- No internal phrases such as source, review, import, verified internally or page quality notes.
+- Romanian commercial titles and slugs are required.
+- Verified local image metadata is required.
+- Product-specific commercial description is required.
+- At least basic specifications are required.
+- Related products and relevant service links are generated for every indexed product.
+
+## Image Performance Changes
+
+Image delivery is optimized separately in the product asset proxy and carousel component:
+
+- longer CDN cache headers for proxied product images;
+- explicit responsive sizes for product images;
+- lazy thumbnail loading;
+- first product image remains prioritized for LCP.
+
+## Sample Indexed URLs
+
+- Pantaloni medicali Cherokee pentru dama, marimea XXS: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xxs-18062
+- Pantaloni medicali Cherokee pentru dama, marimea XS: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xs-18063
+- Pantaloni medicali Cherokee pentru dama, marimea S: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-s-18064
+- Pantaloni medicali Cherokee pentru dama, marimea L: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-l-18066
+- Pantaloni medicali Cherokee pentru dama, marimea XXS, alba: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xxs-alba-18070
+- Pantaloni medicali Cherokee pentru dama, marimea XS, alba: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xs-alba-18071
+- Pantaloni medicali Cherokee pentru dama, marimea S, alba: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-s-alba-18072
+- Pantaloni medicali Cherokee pentru dama, marimea L, alba: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-l-alba-18074
+- Pantaloni medicali Cherokee pentru dama, marimea XXS: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xxs-18078
+- Pantaloni medicali Cherokee pentru dama, marimea XS: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xs-18079
+- Pantaloni medicali Cherokee pentru dama, marimea S: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-s-18080
+- Pantaloni medicali Cherokee pentru dama, marimea L: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-l-18082
+- Pantaloni medicali Cherokee pentru dama, marimea XXS, alba: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xxs-alba-18086
+- Pantaloni medicali Cherokee pentru dama, marimea XS, alba: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xs-alba-18087
+- Pantaloni medicali Cherokee pentru dama, marimea S, alba: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-s-alba-18088
+- Pantaloni medicali Cherokee pentru dama, marimea L, alba: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-l-alba-18090
+- Set bluza si pantaloni medicali: /produse/set-bluza-si-pantaloni-medicali-18136
+- Set bluza si pantaloni medicali: /produse/set-bluza-si-pantaloni-medicali-18144
+- Set bluza si pantaloni medicali: /produse/set-bluza-si-pantaloni-medicali-18152
+- Pantaloni medicali Cherokee unisex, marimea XXS, alba: /produse/pantaloni-medicali-cherokee-unisex-marimea-xxs-alba-18168
+- Pantaloni medicali Cherokee unisex, marimea XS, alba: /produse/pantaloni-medicali-cherokee-unisex-marimea-xs-alba-18169
+- Pantaloni medicali Cherokee unisex, marimea S, alba: /produse/pantaloni-medicali-cherokee-unisex-marimea-s-alba-18170
+- Pantaloni medicali Cherokee unisex, marimea L, alba: /produse/pantaloni-medicali-cherokee-unisex-marimea-l-alba-18172
+- Pantaloni medicali Cherokee unisex, marimea XL, alba: /produse/pantaloni-medicali-cherokee-unisex-marimea-xl-alba-18173
+- Set bluza si pantaloni medicali: /produse/set-bluza-si-pantaloni-medicali-18174
+- Set bluza si pantaloni medicali pentru dama: /produse/set-bluza-si-pantaloni-medicali-pentru-dama-18176
+- Pantaloni medicali Cherokee unisex, marimea XS, gri: /produse/pantaloni-medicali-cherokee-unisex-marimea-xs-gri-18177
+- Pantaloni medicali Cherokee unisex, marimea S, gri: /produse/pantaloni-medicali-cherokee-unisex-marimea-s-gri-18178
+- Pantaloni medicali Cherokee unisex, marimea L, gri: /produse/pantaloni-medicali-cherokee-unisex-marimea-l-gri-18180
+- Pantaloni medicali Cherokee unisex, marimea XL, gri: /produse/pantaloni-medicali-cherokee-unisex-marimea-xl-gri-18181
+- Set bluza si pantaloni medicali: /produse/set-bluza-si-pantaloni-medicali-18182
+- Pantaloni medicali Cherokee unisex, marimea XXS, verde: /produse/pantaloni-medicali-cherokee-unisex-marimea-xxs-verde-18184
+- Pantaloni medicali Cherokee unisex, marimea XS, verde: /produse/pantaloni-medicali-cherokee-unisex-marimea-xs-verde-18185
+- Pantaloni medicali Cherokee unisex, marimea S, verde: /produse/pantaloni-medicali-cherokee-unisex-marimea-s-verde-18186
+- Pantaloni medicali Cherokee unisex, marimea L, verde: /produse/pantaloni-medicali-cherokee-unisex-marimea-l-verde-18188
+- Pantaloni medicali Cherokee unisex, marimea XL, verde: /produse/pantaloni-medicali-cherokee-unisex-marimea-xl-verde-18189
+- Set bluza si pantaloni medicali: /produse/set-bluza-si-pantaloni-medicali-18190
+- Set bluza si pantaloni medicali Cherokee unisex, marimea XXS: /produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xxs-18205
+- Set bluza si pantaloni medicali Cherokee unisex, marimea XS: /produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xs-18206
+- Set bluza si pantaloni medicali Cherokee unisex, marimea S: /produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-s-18207
+- Set bluza si pantaloni medicali Cherokee unisex, marimea L: /produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-l-18209
+- Set bluza si pantaloni medicali Cherokee unisex, marimea XL: /produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xl-18210
+- Set bluza si pantaloni medicali pentru barbati: /produse/set-bluza-si-pantaloni-medicali-pentru-barbati-18211
+- Set bluza si pantaloni medicali Cherokee unisex, marimea XXS: /produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xxs-18213
+- Set bluza si pantaloni medicali Cherokee unisex, marimea XS: /produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xs-18214
+- Set bluza si pantaloni medicali Cherokee unisex, marimea S: /produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-s-18215
+- Set bluza si pantaloni medicali Cherokee unisex, marimea L: /produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-l-18217
+- Set bluza si pantaloni medicali Cherokee unisex, marimea XL: /produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xl-18218
+- Set bluza si pantaloni medicali pentru barbati: /produse/set-bluza-si-pantaloni-medicali-pentru-barbati-18219
+- Set bluza si pantaloni medicali Cherokee unisex, marimea XXS, verde: /produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xxs-verde-18221
+- Set bluza si pantaloni medicali Cherokee unisex, marimea XS, verde: /produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xs-verde-18222
+- Set bluza si pantaloni medicali Cherokee unisex, marimea S, verde: /produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-s-verde-18223
+- Set bluza si pantaloni medicali Cherokee unisex, marimea L, verde: /produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-l-verde-18225
+- Set bluza si pantaloni medicali Cherokee unisex, marimea XL, verde: /produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xl-verde-18226
+- Set bluza si pantaloni medicali pentru barbati: /produse/set-bluza-si-pantaloni-medicali-pentru-barbati-18227
+- Set bluza si pantaloni medicali unisex: /produse/set-bluza-si-pantaloni-medicali-unisex-18265
+- Set bluza si pantaloni medicali unisex: /produse/set-bluza-si-pantaloni-medicali-unisex-18272
+- Set bluza si pantaloni medicali unisex: /produse/set-bluza-si-pantaloni-medicali-unisex-18279
+- Set bluza si pantaloni medicali unisex: /produse/set-bluza-si-pantaloni-medicali-unisex-18286
+- Set bluza si pantaloni medicali unisex: /produse/set-bluza-si-pantaloni-medicali-unisex-18293
+- Pantaloni medicali Cherokee pentru dama, marimea XXS: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xxs-18316
+- Pantaloni medicali Cherokee pentru dama, marimea XS: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xs-18317
+- Pantaloni medicali Cherokee pentru dama, marimea S: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-s-18318
+- Pantaloni medicali Cherokee pentru dama, marimea L: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-l-18320
+- Set bluza si pantaloni medicali unisex: /produse/set-bluza-si-pantaloni-medicali-unisex-18321
+- Pantaloni medicali Cherokee pentru dama, marimea XXS: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xxs-18323
+- Pantaloni medicali Cherokee pentru dama, marimea XS: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xs-18324
+- Pantaloni medicali Cherokee pentru dama, marimea S: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-s-18325
+- Pantaloni medicali Cherokee pentru dama, marimea L: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-l-18327
+- Set bluza si pantaloni medicali unisex: /produse/set-bluza-si-pantaloni-medicali-unisex-18328
+- Pantaloni medicali Cherokee pentru dama, marimea XXS: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xxs-18342
+- Pantaloni medicali Cherokee pentru dama, marimea XS: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xs-18343
+- Pantaloni medicali Cherokee pentru dama, marimea S: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-s-18344
+- Pantaloni medicali Cherokee pentru dama, marimea L: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-l-18346
+- Set bluza si pantaloni medicali unisex: /produse/set-bluza-si-pantaloni-medicali-unisex-18347
+- Pantaloni medicali Cherokee pentru dama, marimea XXS, alba: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xxs-alba-18349
+- Pantaloni medicali Cherokee pentru dama, marimea XS, alba: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xs-alba-18350
+- Pantaloni medicali Cherokee pentru dama, marimea S, alba: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-s-alba-18351
+- Pantaloni medicali Cherokee pentru dama, marimea L, alba: /produse/pantaloni-medicali-cherokee-pentru-dama-marimea-l-alba-18353
+- Set bluza si pantaloni medicali unisex: /produse/set-bluza-si-pantaloni-medicali-unisex-18354
+
+## Rejected Products
+
+- 25787: Cs Plus 10 L - 22x22xh 32.5 Cm Cutie cu 33
+- 27704: Folding Bedside șină
+- 25667: Protectie Goggles 5x7
+- 25642: Viziera de Protectie cu Ecrane
+- 27087: Cantar digital Omron HN286
+- 27229: Cantar pentru analiza compozitiei corporale Exacta Luxe
+- 27243: Cantar medical multifunctional
+- 27248: Cantar digital din sticla, negru
+- 27249: Cantar digital din sticla, gri
+- 27278: Cantar multifunctional pentru cabinet medical
+- 27279: Cantar digital Soehnle 6831
+- 27289: Cantar digital Pegaso
+- 27305: Cantar medical Sirio 150 kg
+- 27310: Cantar medical Astra 200 kg, clasa III
+- 27380: Viewing Area: 24 X 62 Cm 24 X 61 Cm
+- 27870: 47x42x102 Cm ()
+- 29545: Reutilizabil Centuri pentru Transductor Fetal 6x150 Cm - Gri
+- 29556: Z-fold Hartie 112x100 Mm - 150 Foi
+- 43153: Pedalier pliabil pentru recuperare si mobilizare
+- 45810: Mobilier Medical + 2 X 45815
+- 21403: Alb Coat - Bumbac/poliester - damă Marime M
+- 27086: Cantar corporal GIMAFIT cu Bluetooth 5.0
+- 27094: Cantar corporal GIMAFIT cu aplicatie si Bluetooth 5.0
+- 27245: Adiposity Handrails + Bracket
+- 27251: Suport Handrails + Bracket
+- 27365: Lumina Cutie 38x62 Cm
+- 27366: Negatoscop 38x 92 Cm - Dublu
+- 27367: Lumina Cutie 38x122 Cm - Triple
+- 27368: Lumina Cutie 38x153 Cm - Quadruple
+- 27369: Lumina Cutie 76x122 Cm - 2x3 Panels
+- 27370: Lumina Cutie 76x153 Cm - 2x4 Panels
+- 27372: Negatoscop 92x38 Cm - Dublu Vertical
+- 27373: Lumina Cutie 122x38 Cm - Triple Vertical
+- 29585: Mobilier Medical GIMA
+- 43123: Dublu Adjustment Crutches - Open Manseta
+- 43550: ) 61.5x48.5xh 91 Cm (-2)
+- 44505: Retractable/removable Roti
+- 34008: Chison Eco 5 Vet Ultrasound
+- 27239: Cantare si Masurare
+- 27258: Digital Pet Cantar - Mediu
+- 27259: Digital Pet Cantar - Mare
+- 27261: Digital Mic Pet Cantar
+- 27276: Capacity: 250 Kg 250 Kg
+- 27364: GIMA Luminous Optotypes Have Been Designed
+- 27382: Monoyer
+- 44690: Lumina Cutie 40x43 Cm
+- 80220: Soehnle 6858 Veterinary Cantar
+- 21413: Alb Coat - Bumbac/poliester - bărbați Marime M
+- 21423: Alb Coat cu Stud - Bumbac/poliester - Unisex Marime M
+- 28538: Gel Air 2d Cushion 41x41x7.5 Cm
+- 28539: Gel Air 2d Cushion 43x43x7.5 Cm
+- 21402: Alb Coat - Bumbac/poliester - damă Marime S
+- 21404: Alb Coat - Bumbac/poliester - damă Marime L
+- 27770: T-bar Crutch - Extra Adjustability
+- 27798: T-bar Crutch - Mediu
+- 27799: T-bar Crutch - Mare
+- 28575: Total Marime: 198x86x12.8 Cm 200x86x21 Cm
+- 28580: Total Marime: 198x86x12.8 Cm 200x86x21 Cm
+- 28582: Total Marime: 198x86x12.8 Cm 200x86x21 Cm
+- 40042: Model Anatomic Numai)
+- 40058: Model Anatomic Larynx
+- 43090: Advance Crutches - Albastru/negru - Pair
+- 43091: Advance Crutches - Turquoise/negru - Pair
+- 43093: Advance Crutches - Rosu/negru - Pair
+- 43100: Evolution Crutches - Negru - Pair
+- 43101: Evolution Crutches - Albastru - Pair
+- 43103: Evolution Crutches - Rosu - Pair
+- 43110: Progress 2 Crutches - Lumina Gri/gri
+- 43115: Tiki Crutches - Albastru/portocaliu - Pair
+- 43116: Tiki Crutches - Rosu/albastru - Pair
+- 43121: Elbow Crutches Advance Elbow Crutches
+- 43150: Ingrijire Pacient
+- 43151: Ingrijire Pacient
+- 43272: Scaun rulant Oxford 51 cm
+- 41108: Knee-high cu a Gradual compresie,
+- 41109: Knee-high cu a Gradual compresie,
+- 41136: Multilingual Cutie si Instructions:
+- 41137: Multilingual Cutie si Instructions:
+- 41138: Multilingual Cutie si Instructions:
+- 41139: Multilingual Cutie si Instructions:
+- 41225: Strong compresie Socks
+- 41226: Strong compresie Socks
+- 41227: Strong compresie Socks
+- 41228: Strong compresie Socks
+- 41229: Strong compresie Socks
+- 27244: Drive-on Ramp
+- 43260: Ingrijire Pacient
+- 43261: Ingrijire Pacient
+- 43262: Ingrijire Pacient
+- 43270: Ingrijire Pacient
+- 43271: Ingrijire Pacient
+- 28530: Bulgel Cushion 41x41x3 Cm
+- 28531: Bulgel Cushion 43x43x3 Cm
+- 28534: Visco-mouss Cushion 41x41x7* Cm
+- 28535: Visco-mouss Cushion 43x43x7* Cm
+- 33182: Chirurgical Marker pentru Piele - Simplu Tip - Steril - Cutie cu 100
+- 33183: Chirurgical Marker pentru Piele - Dublu Tip - Steril - Cutie cu 100
+- 24403: , 24405detachable Cleaning Brush
+- 25202: Pliere V Prosoape de Maini - 2 Straturi Hartie Reciclata 37g/m 2: 2x18.5 G/m2 25x23 25x11.5 20 Packs cu 160
+- 25206: Pliere V, W-fold si Z-fold Prosoape de Maini
+- 25207: Pliere V, W-fold si Z-fold Prosoape de Maini
+- 25552: 32.0-42.0°c ()
+- 25556: 32.0-42.0°c ()
+- 25557: , Have Also Pl, Arabic. See Beside pentru /61/65
+- 25558: Accuracy ±0.1°c (±0.2°f) - Memory: Last Reading
+- 25559: 32.0-42.0°c ()
+- 25562: 32.0-42.0°c ()
+- 25575: Profesional Infrarosu Ear Termometru
+- 25577: Sonda Husa Loaderprobe Husa Ejector
+- 25579: Pocket Ear Termometru
+- 25583: Gimatemp Non Contact
+- 25584: Gimatemp Non Contact
+- 25601: 48h Fever Monitor - Blister cu 3
+- 25729: Pill Splitter - Bulk
+- 25730: Pill Splitter - cu Cutie
+- 25738: Multilingual Cutie:
+- 25743: Ultra Pill Splitter - Blister
+- 25747: afișaj pentru Splitter ()
+- 25762: 7-day Easy Planner X4
+- 25763: 7-day Easy Planner X4
+- 25766: Combo Pill Manager 4 in 1
+- 25768: 7-day Spring Planner X4
+- 25773: Ecosave Dispozitiv Electronic pentru Intepaturi Veninoase
+- 25850: Severo Electric Pill Grinder
+- 25854: Severo Magnetic Stability Plate
+- 25871: Pill Crushing Vice Electric Pill Grinder
+- 25873: Pungi pentru Zdrobitor Pastile - 1,000 Pungi (20 Packs cu 50)
+- 25879: , ) Or Air-tight Closure
+- 25880: ) Ensure Complete Odour Control. Reutilizabil Until IT Is Full,
+- 27232: Quadrant Smartwatch
+- 27233: Sportpix Smartwatch
+- 27234: Fitband Activity Health Tracker - Negru
+- 27237: Fitband Plus Activity Health Tracker - Negru
+- 27257: Seca 807 Digital Cantar
+- 27265: Seca 813 Digital Flat Cantar
+- 27273: Scaun Cantar Soehnle 7802
+- 27284: Seca 756 - Mechanical cu
+- 27286: Soehnle 7850 Fitness Cantar
+- 27298: Seca Inaltime Meter
+- 27307: Tava pentru 8352 - de Rezerva
+- 27312: Baby si Copii Digital Cantar
+- 27313: GIMA Electronic Baby Cantar
+- 27341: Cantare si Masurare
+- 27342: Cantare si Masurare
+- 27344: Fat-1 Skinfold Caliper
+- 27347: profesional Body Tape
+- 27349: Fat-2 Skinfold Caliper
+- 27350: Profesional Body Tape cu pediatric Calibru Cutie
+- 27708: pediatric Scaun Rulant
+- 27709: Standard Scaun Rulant
+- 27716: Extra Mare Scaun Rulant
+- 27720: Lightweight Aluminiu Folding Wheelchairs
+- 27779: "t" Handle Aluminiu Walking Stick - Bronze
+- 27780: "t" Handle Aluminiu Walking Stick - Silver
+- 27781: "t" Handle Aluminiu Walking Stick - Negru
+- 27782: Foldable Aluminiu Stick
+- 27783: Foldable Aluminiu Walking Stick - Cashmere Pattern
+- 28921: Bendable Cutlery Set
+- 28935: Anti - Slip Suction Mat pentru Planse
+- 28941: Multiple Key Turner
+- 28951: Jar Opener & Closer
+- 28963: Grasping Tool - Foldable
+- 33945: Chison Eco2 B&w Vet Ultrasound - 1 Sonda Conector
+- 33995: Chison Eco3exp. Vet cu 2 Sonda Connectors
+- 34000: L7v-a Trans-rectal 7.5 5.3 - 10.0
+- 36672: • Pump pentru Dosasoap - de Rezerva
+- 36677: Dosasoap -touch Hand Wash sistem - Alb
+- 36678: Pump pentru Dosasoap - de Rezerva
+- 36692: Dispenser Pump pentru 36644, 36671,
+- 36730: Anti-handling Suit - S
+- 36731: Anti-handling Suit - M
+- 36732: Anti-handling Suit - L
+- 36733: Anti-handling Suit - XL
+- 40015: Head/neck Musculature
+- 40077: Human Anatomy - Modele
+- 40090: Male Urinary Bladder
+- 40094: • Pregnancy Pelvis cu
+- 40110: Pregnancy Pelvis cu
+- 40125: Muscular Human Skeleton
+- 40130: All Modele Also Feature Representation cu The Vertebral
+- 40131: The Left Side cu The Skeleton Shows The Points cu
+- 40132: The Sacral Crest si Coccyx Are Removable
+- 40133: Coloana Vertebrala cu Regiuni Codate Color
+- 40137: Vertebral Column cu Femur Heads
+- 40185: Human Anatomy - Modele
+- 43044: Trusty Cane - Silver
+- 43045: Trusty Cane - Negru
+- 43060: Stick cu Seat - Silver
+- 43075: Stabile Walking Cane
+- 43084: • "t" Handle Aluminiu Walking Stick - Bronze
+- 43085: • "t" Handle Aluminiu Walking Stick - Bronze
+- 43086: • "t" Handle Aluminiu Walking Stick - Bronze
+- 43087: • "t" Handle Aluminiu Walking Stick - Bronze
+- 43096: Universal Siguranta baretă
+- 43140: 3 Roti Rollator - Albastru
+- 43142: Ideal Rollator - Albastru
+- 43143: • Comfort Rollator cu Seat
+- 43160: Lightweight Rollator - Foldable
+- 43225: Transit Scaun Rulant
+- 43230: Narrow Scaun Rulant
+- 43251: Prince Aluminiu Scaun Rulant - Negru
+- 43275: Oxford Plus Scaun Rulant - 51 Cm
+- 43276: Plastic Footplate - Pair - de Rezerva
+- 43277: Roata Spate Pneumatica - de Rezerva pentru -2
+- 43278: Roata Spate din Pu Plin - de Rezerva pentru -5
+- 43283: Scaun Rulant cu Toaleta
+- 25966: Faeces Container 30 Ml - Steril Cutie cu 500
+- 25968: Faeces Container 60 Ml - Steril Cutie cu 500
+- 21414: Alb Coat - Bumbac/poliester - bărbați Marime L
+- 21415: 58-60 XXL 54-56
+- 21416: 62-64 Xxxl 58-60
+- 21422: Alb Coat cu Stud - Bumbac/poliester - Unisex Marime S
+- 21424: Alb Coat cu Stud - Bumbac/poliester - Unisex Marime L
+- 21425: 58-60 XXL 54-56
+- 21426: 62-64 Xxxl 58-60
+- 27230: • Mechanical Cantar
+- 43124: Dublu Adjustment Crutches - Closed Manseta
+- 23827: 5 Ml 21g - 0.8x38 Mm Cutie cu 100
+- 23828: 5 Ml 22g - 0.7x32 Mm Cutie cu 100
+- 23834: 20 Ml 21g - 0.8x38 Mm Cutie cu 50
+- 25710: Consumabil de Protectie Large
+- 25785: Cs 5 L - 21x21xh 20 Cm Cutie cu 30
+- 25208: Dispenser pentru V, W, Z-fold Prosoape de Maini Pp cu Masterbio 0.8 Kg 30.5x41.5x15.5
+- 25560: • Baterie 1.5 V Lr/41 - Cutie cu 20 pentru All Thermometers
+- 25961: Urina Recipient 60 Ml - Steril
+- 25963: Urina Recipient 120 Ml - Steril
+- 27089: Libra Body Fat Cantar Equilibra Body Fat Cantar
+- 27092: Cantare si Masurare
+- 27270: Nemesi Body Fat Cantar
+- 27291: Omron Viva Hbf-222t-ebk
+- 27339: Goniometru cu Pain Cantar Rigla - 203x45x7 Mm
+- 27340: Goniometru - 205x45 Mm
+- 40010: Head Dissection - Life Marime
+- 40030: Human Anatomy - Modele
+- 40161: Significant Structures Are Numerated
+- 40162: All The Bones Are Depicted in Different Colours, Making This
+- 40163: The Left Side cu The Skull Shows The Points cu Origin(rosu) si
+- 40165: ) ½ Adulti Natural Marime
+- 40210: Inferior Jaw - 6 Parts - 3x
+- 40212: Ntal Pathology Model
+- 40214: Inferior Molar cu Caries - 10x
+- 43040: Rotating Seat Cushion
+- 43175: Pelvic centură • Harness
+- 43181: Transac Transfer centură - Mic
+- 43182: Transac Transfer centură - Mediu
+- 43185: Simplu Movement centură L-xl 80-122
+- 43186: Dublu Movement centură S-m 60-88
+- 43187: Dublu Movement centură L-xl 80-122
+- 25965: Faeces Container 30 Ml - Cleanroom Iso8 Cutie cu 500
+- 25967: Faeces Container 60 Ml - Cleanroom Iso8 Cutie cu 500
+- 27285: ) - 1,000 G ()
+- 27792: T-bar Crutch - Mic
+- 18000: Cherokee Bluză medicală cu decolteu în V - Originals - damă XXS - bleumarin
+- 18001: Cherokee Bluză medicală cu decolteu în V - Originals - damă XS - bleumarin
+- 18002: Cherokee Bluză medicală cu decolteu în V - Originals - damă S - bleumarin
+- 18004: Cherokee Bluză medicală cu decolteu în V Originals - damă L - bleumarin
+- 18008: Cherokee Bluză medicală cu decolteu în V Originals - damă XXS - albastru-verzui
+- 18009: Cherokee Bluză medicală cu decolteu în V Originals - damă XS - albastru-verzui
+- 18010: Cherokee Bluză medicală cu decolteu în V Originals - damă S - albastru-verzui
+- 18012: Cherokee Bluză medicală cu decolteu în V Originals - damă L - albastru-verzui
+- 18016: Cherokee Bluză medicală cu decolteu în V Originals - damă XXS - bleu
+- 18017: Cherokee Bluză medicală cu decolteu în V Originals - damă XS - bleu
+- 18018: Cherokee Bluză medicală cu decolteu în V Originals - damă S - bleu
+- 18020: Cherokee Bluză medicală cu decolteu în V Originals - damă L - bleu
+- 18024: Cherokee Bluză medicală cu decolteu în V Originals - damă XXS - Alb
+- 18025: Cherokee Bluză medicală cu decolteu în V Originals - damă XS - Alb
+- 18026: Cherokee Bluză medicală cu decolteu în V Originals - damă S - Alb
+- 18028: Cherokee Bluză medicală cu decolteu în V Originals - damă L - Alb
+- 18130: Cherokee Bluză medicală cu decolteu în V Originals - Unisex XXS - bleumarin
+- 18131: Cherokee Bluză medicală cu decolteu în V Originals - Unisex XS - bleumarin
+- 18132: Cherokee Bluză medicală cu decolteu în V Originals - Unisex S - bleumarin
+- 18134: Cherokee Bluză medicală cu decolteu în V Originals - Unisex L - bleumarin
+- 18135: Cherokee Bluză medicală cu decolteu în V Originals - Unisex XL - bleumarin
+- 18138: Cherokee Bluză medicală cu decolteu în V Originals - Unisex XXS - Pewter
+- 18139: Cherokee Bluză medicală cu decolteu în V Originals - Unisex XS - Pewter
+- 18140: Cherokee Bluză medicală cu decolteu în V Originals - Unisex S - Pewter
+- 18142: Cherokee Bluză medicală cu decolteu în V Originals - Unisex L - Pewter
+- 18143: Cherokee Bluză medicală cu decolteu în V Originals - Unisex XL - Pewter
+- 18146: Cherokee Bluză medicală cu decolteu în V Originals - Unisex XXS - Hunter Verde
+- 18147: Cherokee Bluză medicală cu decolteu în V Originals - Unisex XS - Hunter Verde
+- 18148: Cherokee Bluză medicală cu decolteu în V Originals - Unisex S - Hunter Verde
+- 18150: Cherokee Bluză medicală cu decolteu în V Originals - Unisex L - Hunter Verde
+- 18151: Cherokee Bluză medicală cu decolteu în V Originals - Unisex XL - Hunter Verde
+- 18260: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă XXS - bleumarin
+- 18261: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă XS - bleumarin
+- 18262: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă S - bleumarin
+- 18264: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă L - bleumarin
+- 18267: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă XXS - Pewter
+- 18268: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă XS - Pewter
+- 18269: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă S - Pewter
+- 18271: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă L - Pewter
+- 18274: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă XXS - Wine
+- 18275: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă XS - Wine
+- 18276: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă S - Wine
+- 18278: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă L - Wine
+- 18281: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă XXS - albastru-verzui
+- 18282: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă XS - albastru-verzui
+- 18283: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă S - albastru-verzui
+- 18285: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă L - albastru-verzui
+- 18288: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă XXS - Turcoaz
+- 18289: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă XS - Turcoaz
+- 18290: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă S - Turcoaz
+- 18292: Bluză medicală Cherokee Mock Wrap Bluza Revolution - damă L - Turcoaz
+- 18381: Cherokee Bluză medicală cu decolteu în V - Revolution - bărbați XS - bleumarin
+- 18382: Cherokee Bluză medicală cu decolteu în V - Revolution - bărbați S - bleumarin
+- 18384: Cherokee Bluză medicală cu decolteu în V - Revolution - bărbați L - bleumarin
+- 18385: Cherokee Bluză medicală cu decolteu în V - Revolution - bărbați XL - bleumarin
+- 18389: Cherokee Bluză medicală cu decolteu în V - Revolution - bărbați XS - Pewter
+- 18390: Cherokee Bluză medicală cu decolteu în V - Revolution - bărbați S - Pewter
+- 18392: Cherokee Bluză medicală cu decolteu în V - Revolution - bărbați L - Pewter
+- 18393: Cherokee Bluză medicală cu decolteu în V - Revolution - bărbați XL - Pewter
+- 20400: Silicon Ceas pentru Asistente - Round - Alb
+- 20401: Silicon Ceas pentru Asistente - Round - Albastru
+- 20402: Silicon Ceas pentru Asistente - Round - Rosu
+- 20403: Silicon Ceas pentru Asistente - Round - Mov
+- 20404: Silicon Ceas pentru Asistente - Round - Roz
+- 20410: Silicon Ceas pentru Asistente cu Aluminiu Cutie - Round - Alb
+- 20418: Kit cu 6 Benzi din Silicon* Albastru
+- 20420: Silicon Ceas pentru Asistente - Round - Rosu&alb
+- 20421: Silicon Ceas pentru Asistente - Round - Patchwork
+- 20422: Silicon Ceas pentru Asistente - Round - Zebra
+- 20423: Silicon Ceas pentru Asistente - Round - Bubbles
+- 20424: Silicon Ceas pentru Asistente - Round - Leaves
+- 20460: Silicon Ceas pentru Asistente - Square - Violet&sky Albastru
+- 20461: Silicon Ceas pentru Asistente - Square - Hearts
+- 20462: Silicon Ceas pentru Asistente - Square - Flowers
+- 20463: Silicon Ceas pentru Asistente - Square - Leopard
+- 20464: Silicon Ceas pentru Asistente - Square - Roses
+- 20465: Violet si Sky Albastru
+- 20480: Digital Silicon Ceas pentru Asistente - Albastru
+- 20492: inox Bandaj Foarfeca - Bubbles Fantasy - 18 Cm
+- 20494: inox Bandaj Foarfeca - Caterpillar - 18 Cm
+- 20500: inox Bandaj Foarfeca cu centură Clip - 14 Cm
+- 20501: inox Bandaj Foarfeca - Verde Ring - 14 Cm
+- 20502: inox Bandaj Foarfeca - Mov Ring - 14 Cm
+- 20509: inox Bandaj Foarfeca - Foot Print Fantasy - 14 Cm
+- 20511: inox Bandaj Foarfeca - Leopard Fantasy - 14 Cm
+- 20512: inox Bandaj Foarfeca - Bubbles Fantasy - 14 Cm
+- 20513: inox Bandaj Foarfeca - Hearts Fantasy - 14 Cm
+- 20514: inox Bandaj Foarfeca - Caterpillar - 14 Cm
+- 20520: inox Drept Foarfeca cu centură Clip - Bont/ascutit - 14 Cm
+- 20521: inox Drept Foarfeca - Verde Ring - Bont/ascutit - 14 Cm
+- 20522: inox Drept Foarfeca - Mov Ring - Bont/ascutit - 14 Cm
+- 20529: inox Drept Foarfeca - Foot Print Fantasy - Bont/ascutit - 14 Cm
+- 20531: inox Drept Foarfeca - Leopard Fantasy - Bont/ascutit - 14 Cm
+- 20532: inox Drept Foarfeca - Bubbles Fantasy - Bont/ascutit - 14 Cm
+- 20533: inox Drept Foarfeca - Hearts Fantasy - Bont/ascutit - 14 Cm
+- 20534: inox Drept Foarfeca - Caterpillar - Bont/ascutit - 14 Cm
+- 20541: inox Drept Artery Pensa - Verde Ring - 16 Cm
+- 20542: inox Drept Artery Pensa - Mov Ring - 16 Cm
+- 20549: inox Drept Artery Pensa - Foot Print Fantasy - 16 Cm
+- 20551: inox Drept Artery Pensa - Leopard Fantasy - 16 Cm
+- 20552: inox Drept Artery Pensa - Bubbles Fantasy - 16 Cm
+- 20553: inox Drept Artery Pensa - Hearts Fantasy - 16 Cm
+- 20560: inox Utility si Bandages Foarfeca 4.7" - 12 Cm - Negru
+- 20570: inox Utility si Bandages Foarfeca 6.5" - 16.5 Cm - Negru
+- 20571: inox Utility si Bandages Foarfeca 6.5" - 16.5 Cm - Albastru
+- 20572: inox Utility si Bandages Foarfeca 6.5" - 16.5 Cm - Rosu
+- 20573: inox Utility si Bandages Foarfeca 6.5" - 16.5 Cm - Mov
+- 20574: inox Utility si Bandages Foarfeca 6.5" - 16.5 Cm - Roz
+- 20580: inox Utility si Bandages Foarfeca 7.5" - 19 Cm - Negru
+- 20581: inox Utility si Bandages Foarfeca 7.5" - 19 Cm - Albastru
+- 20582: inox Utility si Bandages Foarfeca 7.5" - 19 Cm - Rosu
+- 20583: inox Utility si Bandages Foarfeca 7.5" - 19 Cm - Mov
+- 20590: Lant din Otel pentru Foarfeca si Pensa
+- 20602: Operator's Protection
+- 20610: Masti Medicale cu 3 Straturi alte culori * 50 cutii cu 50
+- 20642: Consumabil de Protectie GIMA
+- 20646: Consumabil de Protectie GIMA
+- 20680: Masti Medicale cu 3 Straturi - Colorate Albastru Deschis Flowpack cu 10
+- 20682: Masti Medicale cu 3 Straturi - cu Model Desen Animat Flowpack cu 10
+- 20685: Masti Medicale cu 3 Straturi - cu Model Desen Animat Flowpack cu 10
+- 20686: Masti Medicale cu 3 Straturi - cu Model Peace Flowpack cu 10
+- 20687: Masti Medicale cu 3 Straturi - cu Model Stele Flowpack cu 10
+- 20688: Masti Medicale cu 3 Straturi - cu Model Colours Flowpack cu 10
+- 20689: Masti Medicale cu 3 Straturi - cu Model Macarons Flowpack cu 10
+- 20690: Masti Medicale cu 3 Straturi - cu Model Cranii Flowpack cu 10
+- 20691: Masti Medicale cu 3 Straturi - cu Model Militar Flowpack cu 10
+- 20694: Masti Medicale cu 3 Straturi - Colorate Roz Flowpack cu 10
+- 20695: Masti Medicale cu 3 Straturi - Colorate Albastru Deschis Flowpack cu 10
+- 20767: Consumabil de Protectie Adult
+- 20813: Hawaii - M • Cashmere - M • Stele - M
+- 20814: Cashmere - M • Stele - M
+- 20818: Skull - M • Rainbow - M • Wave - M
+- 20819: Rainbow - M • Wave - M
+- 20823: Pet - M • Veterinary - M • Dino - M
+- 20824: Veterinary - M • Dino - M
+- 20828: Macarons - M• Christmas - M • Halloween - M
+- 20829: Christmas - M • Halloween - M
+- 20833: Skeleton - M • Chemical - M • Biology - M
+- 20834: Chemical - M • Biology - M
+- 21070: Basic Insulation Coverall - Type 5b - 6b - S - de Unica Folosinta
+- 21071: Basic Insulation Coverall - Type 5b - 6b - M - de Unica Folosinta
+- 21072: Basic Insulation Coverall - Type 5b - 6b - L - de Unica Folosinta
+- 21073: Basic Insulation Coverall - Type 5b - 6b - XL - de Unica Folosinta
+- 21080: Taped Seam Insulation Coverall - Type 4b - 5b - 6b - S - de Unica Folosinta
+- 21081: Taped Seam Insulation Coverall - Type 4b - 5b - 6b - M - de Unica Folosinta
+- 21082: Taped Seam Insulation Coverall - Type 4b - 5b - 6b - L - de Unica Folosinta
+- 21083: Taped Seam Insulation Coverall - Type 4b - 5b - 6b - XL - de Unica Folosinta
+- 21802: Operator's Protection
+- 21815: Safe Pachet Wall Dispenser sistem - Plastic
+- 22296: Ethicon Ethilon Monofilament Fire de Sutura - Calibru 3/0 Ac 19 Mm Ps - 2
+- 22297: Ethicon Ethilon Monofilament Fire de Sutura - Calibru 4/0 Ac 19 Mm
+- 22299: Ethicon Ethilon Monofilament Fire de Sutura - Calibru 8/0 Ac 6.5 Mm
+- 22300: Ethicon Ethilon Monofilament Fire de Sutura - Calibru 6/0 Ac 16 Mm
+- 22301: Ethicon Ethilon Monofilament Fire de Sutura - Calibru 5/0 Ac 19 Mm
+- 22302: Ethicon Ethilon Monofilament Fire de Sutura - Calibru 4/0 Ac 19 Mm
+- 22303: Ethicon Ethilon Monofilament Fire de Sutura - Calibru 3/0 Ac 24 Mm
+- 22304: Ethicon Ethilon Monofilament Fire de Sutura - Calibru 3/0 Ac 19 Mm
+- 22305: Ethicon Ethilon Monofilament Fire de Sutura - Calibru 5/0 Ac 19 Mm
+- 22307: Ethicon Ethilon Monofilament Fire de Sutura - Calibru 5/0 Ac 13 Mm
+- 22310: Ethicon Perma - Hand Silk Fire de Sutura - Calibru 4/0 Ac 17 Mm J - 1 - Impletit
+- 22311: Ethicon Perma - Hand Silk Fire de Sutura - Calibru 3/0 Ac 22 Mm - Impletit
+- 22312: Ethicon Perma - Hand Silk Fire de Sutura - Calibru 2/0 Ac 22 Mm - Impletit
+- 22313: Ethicon Perma - Hand Silk Fire de Sutura - Calibru 4/0 Ac 19 Mm - Impletit - Drept
+- 22314: Ethicon Perma - Hand Silk Fire de Sutura - Calibru 4/0 Ac 13 Mm - Impletit
+- 22315: Ethicon Perma - Hand Silk Fire de Sutura - Calibru 3/0 Ac 22 Mm - Impletit
+- 22316: Ethicon Perma - Hand Silk Fire de Sutura - Calibru 4/0 Ac 19 Mm - Impletit
+- 22320: Ethicon Prolene Albastru Monofilament Fire de Sutura - Calibru 4/0 Ac 19 Mm Fs - 2 Fir de Sutura 75 Cm
+- 22321: Ethicon Prolene Albastru Monofilament Fire de Sutura - Calibru 4/0 Ac 19 Mm Fir de Sutura 45 Cm
+- 22322: Ethicon Prolene Albastru Monofilament Fire de Sutura - Calibru 6/0 Ac 16 Mm
+- 22323: Ethicon Prolene Albastru Monofilament Fire de Sutura - Calibru 5/0 Ac 19 Mm Fs - 2
+- 22351: Ethicon Monocryl Fire de Sutura Absorbabile - Calibru 4/0 Ac 16 Mm
+- 22360: Ethicon Vicryl Plus Fire de Sutura Absorbabile - Calibru 4/0 Ac 19 Mm - Impletit
+- 22361: Ethicon Vicryl Plus Fire de Sutura Absorbabile - Calibru 3/0 Ac 17 Mm - Impletit
+- 22362: Ethicon Vicryl Plus Fire de Sutura Absorbabile - Calibru 3/0 Ac 24 Mm - Impletit
+- 22363: Ethicon Vicryl Plus Fire de Sutura Absorbabile - Calibru 2/0 Ac 24 Mm - Impletit
+- 22370: Ethicon Vicryl Rapid Fire de Sutura Absorbabile - Calibru 3/0 Ac 17 Mm - Impletit
+- 22371: Ethicon Vicryl Rapid Fire de Sutura Absorbabile - Calibru 4/0 Ac 19 Mm - Impletit
+- 22372: Ethicon Vicryl Rapid Fire de Sutura Absorbabile - Calibru 3/0 Ac 19 Mm - Impletit
+- 22373: Ethicon Vicryl Rapid Fire de Sutura Absorbabile - Calibru 3/0 Ac 17 Mm - Impletit
+- 22374: Ethicon Vicryl Rapid Fire de Sutura Absorbabile - Calibru 3/0 Ac 22 Mm - Impletit
+- 22375: Ethicon Vicryl Rapid Fire de Sutura Absorbabile - Calibru 3/0 Ac 19 Mm - Impletit
+- 22380: Ethicon Vicryl Fire de Sutura Absorbabile - Calibru 2/0 Ac 24 Mm
+- 22400: Swann - Morton Carbon Otel lame N. 10 - Steril
+- 22401: Swann - Morton Carbon Otel lame N. 11 - Steril
+- 22402: Swann - Morton Carbon Otel lame N. 12 - Steril
+- 22403: Swann - Morton Carbon Otel lame N. 15 - Steril
+- 22405: Swann - Morton Carbon Otel lame N. 20 - Steril
+- 22406: Swann - Morton Carbon Otel lame N. 21 - Steril
+- 22407: Swann - Morton Carbon Otel lame N. 22 - Steril
+- 22408: Swann - Morton Carbon Otel lame N. 23 - Steril
+- 22424: Graduated inox N° 3 mâner
+- 22440: Swann - Morton Retractable Scalpels cu S/s Lama N. 10 - Steril
+- 22441: Swann - Morton Retractable Scalpels cu S/s Lama N. 11p - Steril
+- 22443: Swann - Morton Retractable Scalpels cu S/s Lama N. 15 - Steril
+- 22460: Diamantine de Unica Folosinta Scalpels cu inox Lama N. 10 - Steril
+- 22461: de unică folosință Scalpels - Lama 11
+- 22463: de unică folosință Scalpels - Lama 15
+- 22464: de unică folosință Scalpels - Lama 20
+- 22465: de unică folosință Scalpels - Lama 21
+- 22466: de unică folosință Scalpels - Lama 22
+- 22467: de unică folosință Scalpels - Lama 23
+- 22468: Diamantine de Unica Folosinta Scalpels cu inox Lama N. 24 - Steril
+- 22520: Special Maner pentru Dalta - Otel Inoxidabil
+- 22602: Dermal Chiureta Diameter 2 Mm
+- 22603: Dermal Chiureta Diameter 3 Mm
+- 22604: Dermal Chiureta Diameter 4 Mm
+- 22605: Dermal Chiureta Diameter 5 Mm
+- 22616: Otel Inoxidabil Sharp Cutting Edge, Ribbed mâner pentru Sure
+- 22630: Biopsy Punches Diameter 1 Mm cu Plunger
+- 22631: Biopsy Punches Diameter 1,5 Mm cu Plunger
+- 22632: Biopsy Punches Diameter 2 Mm cu Plunger
+- 22634: Biopsy Punches Diameter 3 Mm cu Plunger
+- 22636: Internal Plunger sistem
+- 23022: Kit de Training pentru Sutura
+- 23450: How pana la Use Veinspy™
+- 23454: Qv-600 profesional Vein Finder cu afișaj
+- 23456: Qv-500 profesional Vein Finder
+- 23458: Mobile Stativ pentru 23454,
+- 23600: Non Woven Bi - Layer Camp Chirurgical 50x50 Cm
+- 23601: Non Woven Bi - Layer Camp Chirurgical 50x75 Cm
+- 23602: Non Woven Bi - Layer Camp Chirurgical 75x90 Cm
+- 23604: Non Woven Bi - Layer Camp Chirurgical 100x100 Cm
+- 23606: Non Woven Bi - Layer Camp Chirurgical 120x150 Cm
+- 23610: Non Woven Bi - Layer Adhesive Side Camp Chirurgical 50x50 Cm
+- 23611: Non Woven Bi - Layer Adhesive Side Camp Chirurgical 50x75 Cm
+- 23612: Non Woven Bi - Layer Adhesive Side Camp Chirurgical 75x90 Cm
+- 23614: Non Woven Bi - Layer Adhesive Side Camp Chirurgical 100x100 Cm
+- 23617: Non Woven Bi - Layer Adhesive Side Camp Chirurgical 180x200 Cm
+- 23620: Non Woven Bi - Layer Camp Chirurgical 50x75 Cm cu Hole 6x9 Cm
+- 23622: Non Woven Bi - Layer Camp Chirurgical 75x90 Cm cu Hole 6x9 Cm
+- 23623: Non Woven Bi - Layer Camp Chirurgical 75x90 Cm cu Hole diametru10 Cm
+- 23624: Non Woven Bi - Layer Camp Chirurgical 100x100 Cm cu Hole diametru10 Cm
+- 23625: Non Woven Bi - Layer Camp Chirurgical 100x150 Cm cu Hole 9x18 Cm
+- 23628: Incision Film 40x50 Cm - Steril
+- 23630: Incision Film 30x35 Cm - Steril
+- 23631: Incision Film 40x50 Cm - Steril
+- 23634: Ophthalmic Surgery Camp Chirurgical
+- 23635: Ophthalmic Surgery Camp Chirurgical
+- 23654: Adhesive Pocket pentru
+- 23655: Camera Camp Chirurgical
+- 23670: Mesotherapy Luer Ace 27g 0,40x4 Mm - Gri
+- 23671: Mesotherapy Luer Ace 27g 0,40x6 Mm - Gri
+- 23672: Mesotherapy Luer Ace 30g 0,30x4 Mm - Galben
+- 23673: Mesotherapy Luer Ace 30g 0,30x6 Mm - Galben
+- 23674: Mesotherapy Luer Ace 31g 0,26x4 Mm - Lumina Albastru
+- 23676: Mesotherapy Luer Ace 32g 0,23x4 Mm - Roz
+- 23678: Mesotherapy Luer Ace 33g 0,20x4 Mm - Verde
+- 23680: Sclerotherapy/filler Luer Ace 30g 0,30x12 - Galben
+- 23682: Sclerotherapy/filler Luer Ace 31g 0,26x12 - Lumina Albastru
+- 23684: Sclerotherapy/filler Luer Ace 32g 0,23x12 - Roz
+- 23690: Micro - Mesotherapy Ace 27g 2.5 Mm - Alb
+- 23691: Micro - Mesotherapy Ace 30g 2.5 Mm - Galben
+- 23700: Multi - Injector Connectors - Drept - 3 Way - Out
+- 23701: Multi - Injector Connectors - Drept - 5 Way - Out
+- 23705: Bd Quincke Point Ace 18g - 1.2x90 Mm Roz
+- 23707: Bd Quincke Point Ace 20g - 0.9x90 Mm Galben
+- 23709: Bd Quincke Point Ace 22g - 0.7x90 Mm Negru
+- 23710: Bd Quincke Point Ace 23g - 0.64x90 Mm Turcoaz
+- 23711: Bd Quincke Point Ace 25g - 0.5x90 Mm Portocaliu
+- 23715: Bd Venflon Iv Catheters 18g 45 Mm - 391893 - Steril
+- 23716: Bd Venflon Iv Catheters 20g 32 Mm - 391892 - Steril
+- 23717: Bd Venflon Iv Catheters 22g 25 Mm - 391891 - Steril
+- 23739: Bd Microlance Ace 18g - 1.20x40 Mm Roz
+- 23742: Bd Microlance Ace 21g - 0.80x40 Mm Verde
+- 23744: Bd Microlance Ace 23g - 0.60x25 Mm Albastru
+- 23745: Bd Microlance Ace 25g - 0.50x16 Mm Portocaliu
+- 23747: Bd Microlance Ace 27g - 0.40x13 Mm Gri
+- 23748: Bd Microlance Ace 30g - 0.29x13 Mm Galben
+- 23797: Intramuscular Injection Training Wearable Pad - cu baretă
+- 23850: Bd Micro - Fine Ace 4 Mm - 32g
+- 23851: Bd Micro - Fine Ace 5 Mm - 31g
+- 23852: Bd Micro - Fine Ace 8 Mm - 31g
+- 23860: Bd Micro - Fine seringi 0.3 Ml - 8 Mm - 30g
+- 23861: Bd Micro - Fine seringi 0.5 Ml - 8 Mm - 30g
+- 23863: Bd Emerald seringi fara Ac - 2 Ml Centric Luer Slip
+- 23864: Bd Emerald seringi fara Ac - 5 Ml Centric Luer Slip
+- 23865: Bd Emerald seringi fara Ac - 10 Ml Centric Luer Slip
+- 23868: Instrumentar Chirurgical
+- 23870: Bd Emerald seringi cu Ac 21g - 10 Ml Centric Luer Slip
+- 23871: Bd Emerald seringi cu Ac 21g - 5 Ml Centric Luer Slip
+- 23873: Bd Plastipak seringi fara Ac - 30 Ml Luer Lock
+- 23877: Bd Plastipak seringi fara Ac - 50 Ml Cateter Cone
+- 23878: Bd Plastipak seringi fara Ac - 100 Ml Cateter Cone
+- 25150: Impermeable, Absorbent, Pre - Cut Mats 90x90 Cm
+- 25151: Impermeable, Absorbent, Pre - Cut Mats 90x120 Cm
+- 25152: Impermeable, Absorbent, Pre - Cut Mats 90x150 Cm
+- 25153: Impermeable, Absorbent, Pre - Cut Mats 90x200 Cm
+- 25165: Impermeable, Absorbent Rola 90 Cm X 50 M - 1700 Ml/m2
+- 25166: Impermeable, Absorbent Rola 90 Cm X 50 M - 2500 Ml/m2
+- 25405: Nitrile Manusi - Extra Long - Mediu - Albastru
+- 25406: Nitrile Manusi - Extra Long - Mare - Albastru
+- 25418: Extra Mare - Non Steril
+- 25430: Manusa Dispenser - Plastic
+- 25526: Militar Tourniquet - Portocaliu
+- 25527: Militar Tourniquet - Negru
+- 25634: Argenta si Elegance Made cu Anodized Aluminiu, Nova in Bluza
+- 25635: Extra Mare Marime - Non Steril
+
+## Verdict
+
+Pending build, content check, SEO audit and production verification.

@@ -23,6 +23,9 @@ export async function GET(_request: Request, { params }: ProductAssetImageRouteP
     headers: {
       "User-Agent": "ZESCORP product asset proxy",
     },
+    next: {
+      revalidate: 2_592_000,
+    },
   });
 
   if (!response.ok || !response.body) {
@@ -33,7 +36,7 @@ export async function GET(_request: Request, { params }: ProductAssetImageRouteP
 
   return new NextResponse(response.body, {
     headers: {
-      "Cache-Control": "public, max-age=86400, stale-while-revalidate=604800",
+      "Cache-Control": "public, max-age=31536000, s-maxage=31536000, stale-while-revalidate=604800, immutable",
       "Content-Type": contentType,
     },
   });

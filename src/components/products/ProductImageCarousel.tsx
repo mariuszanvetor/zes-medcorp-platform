@@ -47,6 +47,7 @@ export function ProductImageCarousel({ images, title }: ProductImageCarouselProp
             className="aspect-[4/3] h-full w-full object-contain p-6"
             height={760}
             priority
+            sizes="(min-width: 1024px) 44vw, 92vw"
             src={activeImage.url}
             width={960}
           />
@@ -90,6 +91,8 @@ export function ProductImageCarousel({ images, title }: ProductImageCarouselProp
                 alt={`${image.alt || title} - imagine ${index + 1}`}
                 className="aspect-square w-full object-contain p-2"
                 height={160}
+                loading="lazy"
+                sizes="96px"
                 src={image.url}
                 width={160}
               />
