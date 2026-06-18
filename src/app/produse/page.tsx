@@ -23,7 +23,7 @@ export const metadata: Metadata = createWebsiteMetadata({
   description:
     "Catalog medical ZESCORP pentru echipamente, laborator, urgenta, sterilizare, mobilier medical, ORL, ginecologie si consumabile, cu oferta, instalare si service.",
   path: "/produse",
-  noIndex: true,
+  noIndex: false,
   keywords: ["catalog produse medicale", "echipamente medicale", "oferta aparatura medicala"],
 });
 

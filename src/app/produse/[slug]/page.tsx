@@ -135,7 +135,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
         url={getProductPath(product)}
       />
       <ProductSchema
-        brand={content.brand}
         category={content.categoryLabel}
         description={content.shortSummary}
         image={content.imageUrl}
