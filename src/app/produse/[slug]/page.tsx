@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 
@@ -21,6 +22,7 @@ import {
   getProductDisplayName,
   getProductPath,
   getProductRedirectDestination,
+  getRomanianProductCategoryLabel,
   getRelatedServiceLabel,
   isProductIndexable,
   isProductPublicDisplayReady,
@@ -96,6 +98,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const budgetAlternatives = relatedFromCodes(content.relatedProductGroups.budgetAlternatives, 3);
   const compatibleAccessories = relatedFromCodes(content.relatedProductGroups.compatibleAccessories, 4);
   const frequentlyRequestedTogether = relatedFromCodes(content.relatedProductGroups.frequentlyRequestedTogether, 4);
+  const recommendedProducts = buildProductRecommendations(
+    [
+      ...similarProducts,
+      ...compatibleAccessories,
+      ...frequentlyRequestedTogether,
+      ...premiumAlternatives,
+      ...budgetAlternatives,
+    ],
+    3,
+  );
   const faqItems = [
     {
       question: `Cum solicit oferta pentru ${displayName}?`,
@@ -318,7 +330,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <div className="grid gap-6 lg:grid-cols-2">
               <InfoList title="Service si mentenanta" items={content.maintenance} />
               <article className="rounded-2xl border border-blue-100 bg-white p-6 shadow-[0_16px_38px_rgba(15,65,118,0.07)]">
-                <h2 className="text-xl font-semibold text-slate-950">Categorii, produse si servicii relevante</h2>
+                <h2 className="text-xl font-semibold text-slate-950">Servicii asociate</h2>
                 <div className="mt-4 grid gap-3">
                   {category && (
                     <Link className="rounded-xl border border-blue-100 bg-[#f8fbff] px-4 py-3 text-sm font-semibold text-[#0057b8] transition hover:bg-blue-50" href={getCategoryPath(category)}>
@@ -338,15 +350,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         <Section className="border-y border-blue-100 bg-[#f7fbff]" spacing="lg" tone="transparent">
           <Container>
-            <div className="grid gap-6 lg:grid-cols-2">
-              <ProductLinkGroup title="Produse similare" products={similarProducts} />
-              <ProductLinkGroup title="Alternative premium" products={premiumAlternatives} />
-              <ProductLinkGroup title="Alternative pentru bugete controlate" products={budgetAlternatives} />
-              <ProductLinkGroup title="Accesorii compatibile" products={compatibleAccessories} />
-              <ProductLinkGroup title="Solicitate frecvent impreuna" products={frequentlyRequestedTogether} />
-              <AuthorityLinkGroup title="Categorii si solutii conexe" links={[...content.relatedCategoryLinks, ...content.relatedSolutionLinks]} />
-              <AuthorityLinkGroup title="Ghiduri si mentenanta" links={[...content.relatedKnowledgeLinks, ...content.relatedMaintenanceLinks]} />
-              <AuthorityLinkGroup title="Parcurs recomandat pentru cumparator" links={content.buyerJourneyLinks} />
+            <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
+              <ProductLinkGroup title="Produse relevante" products={recommendedProducts} />
+              <AuthorityLinkGroup title="Urmatorul pas" links={[...content.buyerJourneyLinks, ...content.relatedCategoryLinks, ...content.relatedSolutionLinks, ...content.relatedServices.map((href) => ({ href, label: getRelatedServiceLabel(href) }))]} />
             </div>
           </Container>
         </Section>
@@ -416,19 +422,51 @@ function InfoList({ fallback, items, title }: { title: string; items: string[]; 
   );
 }
 
+function buildProductRecommendations(products: typeof productCatalog, limit: number) {
+  const seen = new Set<string>();
+  return products
+    .filter((product) => {
+      if (!product?.slug || seen.has(product.slug)) return false;
+      seen.add(product.slug);
+      return hasStableProductImage(product);
+    })
+    .slice(0, limit);
+}
+
+function hasStableProductImage(product: (typeof productCatalog)[number]) {
+  if (product.imageUrl && !product.imageUrl.startsWith("/product-images/")) return true;
+  return Boolean(product.galleryImageAudit?.some((image) => image.localFilePath && image.finalHighResUrl));
+}
+
 function ProductLinkGroup({ products, title }: { title: string; products: typeof productCatalog }) {
   return (
     <article className="rounded-2xl border border-blue-100 bg-white p-6 shadow-[0_16px_38px_rgba(15,65,118,0.07)]">
       <h2 className="text-xl font-semibold text-slate-950">{title}</h2>
-      <div className="mt-4 grid gap-3">
+      <div className="mt-4 grid gap-4 sm:grid-cols-3">
         {products.length ? (
           products.map((related) => (
             <Link
-              className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
+              className="group overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:border-blue-200 hover:shadow-[0_18px_42px_rgba(15,65,118,0.10)]"
               href={getProductPath(related)}
               key={related.slug}
             >
-              {getProductDisplayName(related)}
+              <div className="relative aspect-[4/3] bg-[#f4f8fd]">
+                <Image
+                  alt={`${getProductDisplayName(related)} - produs recomandat`}
+                  className="object-contain p-4 transition duration-300 group-hover:scale-[1.03]"
+                  fill
+                  sizes="(min-width: 1024px) 17vw, (min-width: 640px) 28vw, 90vw"
+                  src={getProductCommercialContent(related).imageUrl}
+                />
+              </div>
+              <div className="p-4">
+                <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#0057b8]">
+                  {getRomanianProductCategoryLabel(related)}
+                </p>
+                <p className="mt-2 text-sm font-semibold leading-6 text-slate-950">
+                  {getProductDisplayName(related)}
+                </p>
+              </div>
             </Link>
           ))
         ) : (
@@ -448,7 +486,7 @@ function AuthorityLinkGroup({ links, title }: { title: string; links: Array<{ hr
     <article className="rounded-2xl border border-blue-100 bg-white p-6 shadow-[0_16px_38px_rgba(15,65,118,0.07)]">
       <h2 className="text-xl font-semibold text-slate-950">{title}</h2>
       <div className="mt-4 grid gap-3">
-        {uniqueLinks.slice(0, 6).map((link) => (
+        {uniqueLinks.slice(0, 3).map((link) => (
           <Link
             className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
             href={link.href}

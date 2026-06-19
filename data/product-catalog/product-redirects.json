@@ -179753,5 +179753,15 @@
     "source": "/produse/ms-led-flex-plus-lumina-carucior-49133",
     "destination": "/produse/stativ-pe-roti-pentru-lampa-medicala-ms-led-flex-plus-49133",
     "permanent": true
+  },
+  {
+    "source": "/produse/spatule-linguale-cutie-100-bucati-25510",
+    "destination": "/produse/spatule-linguale-nesterile-cutie-100-bucati-25510",
+    "permanent": true
+  },
+  {
+    "source": "/produse/wood-tongue-depressor-steril-25511",
+    "destination": "/produse/spatule-linguale-sterile-din-lemn-ambalate-individual-25511",
+    "permanent": true
   }
 ]
