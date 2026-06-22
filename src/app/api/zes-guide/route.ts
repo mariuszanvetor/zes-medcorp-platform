@@ -4,8 +4,28 @@ import {
   generateZESGuideResponse,
   type ZESGuideApiRequest,
 } from "@/lib/zes-ai";
+import { checkServerRateLimit, rateLimitHeaders } from "@/lib/server-rate-limit";
 
 export async function POST(request: Request) {
+  const rateLimit = checkServerRateLimit(request, {
+    keyPrefix: "zes-guide",
+    limit: 24,
+    windowSeconds: 300,
+  });
+
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "Prea multe solicitari intr-un interval scurt. Va rugam sa reveniti in cateva minute.",
+      },
+      {
+        status: 429,
+        headers: rateLimitHeaders(rateLimit),
+      },
+    );
+  }
+
   let payload: ZESGuideApiRequest;
 
   try {
@@ -33,5 +53,10 @@ export async function POST(request: Request) {
       : [],
   });
 
-  return NextResponse.json(response);
+  return NextResponse.json(response, {
+    headers: {
+      ...rateLimitHeaders(rateLimit),
+      "Cache-Control": "no-store",
+    },
+  });
 }

@@ -1,8 +1,28 @@
 import { NextResponse } from "next/server";
 
+import { checkServerRateLimit, rateLimitHeaders } from "@/lib/server-rate-limit";
 import { analyzeZESFile } from "@/lib/zes-file-analysis";
 
 export async function POST(request: Request) {
+  const rateLimit = checkServerRateLimit(request, {
+    keyPrefix: "zes-file-analysis",
+    limit: 8,
+    windowSeconds: 300,
+  });
+
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "Prea multe fisiere trimise intr-un interval scurt. Va rugam sa incercati mai tarziu.",
+      },
+      {
+        status: 429,
+        headers: rateLimitHeaders(rateLimit),
+      },
+    );
+  }
+
   let formData: FormData;
 
   try {
@@ -43,5 +63,10 @@ export async function POST(request: Request) {
     );
   }
 
-  return NextResponse.json(result);
+  return NextResponse.json(result, {
+    headers: {
+      ...rateLimitHeaders(rateLimit),
+      "Cache-Control": "no-store",
+    },
+  });
 }

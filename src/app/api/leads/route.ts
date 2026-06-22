@@ -26,8 +26,30 @@ import type { LeadPayload } from "@/lib/lead-types";
 import { checkLeadSubmissionCooldown } from "@/lib/lead-rate-limit";
 import { scoreLead } from "@/lib/lead-scoring";
 import { saveLead } from "@/lib/lead-storage";
+import { checkServerRateLimit, rateLimitHeaders } from "@/lib/server-rate-limit";
 
 export async function POST(request: NextRequest) {
+  const rateLimit = checkServerRateLimit(request, {
+    keyPrefix: "lead-submit",
+    limit: 12,
+    windowSeconds: 300,
+  });
+
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      {
+        success: false,
+        ok: false,
+        error: "Prea multe solicitari trimise intr-un interval scurt.",
+        retryAfterSeconds: rateLimit.resetSeconds,
+      },
+      {
+        status: 429,
+        headers: rateLimitHeaders(rateLimit),
+      },
+    );
+  }
+
   let payload: LeadPayload;
 
   try {
@@ -131,117 +153,125 @@ export async function POST(request: NextRequest) {
     integrationConfig.mode,
   );
 
-  return NextResponse.json({
-    success: true,
-    ok: true,
-    leadId,
-    mode: integrationConfig.mode,
-    storageMode: storageResult.storageMode,
-    emailMode: getEmailMode([
-      notificationResult,
-      confirmationResult,
-      highPriorityResult,
-    ]),
-    sheetsMode: sheetsResult.sheetsMode,
-    integrationMode: integrationConfig.mode,
-    score: scoring.score,
-    priority: scoring.priority,
-    readinessScore: leadIntelligence.readinessScore,
-    riskLevel: leadIntelligence.riskLevel,
-    complexityLevel: leadIntelligence.complexityLevel,
-    recommendedNextAction: leadIntelligence.recommendedNextAction,
-    nextAction: scoring.nextAction,
-    scoringReasons: scoring.reasons,
-    leadIntelligence: {
-      leadSource: leadIntelligence.leadSource,
-      projectDomain: leadIntelligence.projectDomain,
-      projectStage: leadIntelligence.projectStage,
+  return NextResponse.json(
+    {
+      success: true,
+      ok: true,
+      leadId,
+      mode: integrationConfig.mode,
+      storageMode: storageResult.storageMode,
+      emailMode: getEmailMode([
+        notificationResult,
+        confirmationResult,
+        highPriorityResult,
+      ]),
+      sheetsMode: sheetsResult.sheetsMode,
+      integrationMode: integrationConfig.mode,
+      score: scoring.score,
+      priority: scoring.priority,
       readinessScore: leadIntelligence.readinessScore,
-      urgencyScore: leadIntelligence.urgencyScore,
-      complexityLevel: leadIntelligence.complexityLevel,
       riskLevel: leadIntelligence.riskLevel,
+      complexityLevel: leadIntelligence.complexityLevel,
       recommendedNextAction: leadIntelligence.recommendedNextAction,
-      followUpPriority: leadIntelligence.followUpPriority,
-      followUpType: leadIntelligence.followUpType,
-      commercialIntent: leadIntelligence.commercialIntent,
-      confidenceLevel: leadIntelligence.confidenceLevel,
+      nextAction: scoring.nextAction,
+      scoringReasons: scoring.reasons,
+      leadIntelligence: {
+        leadSource: leadIntelligence.leadSource,
+        projectDomain: leadIntelligence.projectDomain,
+        projectStage: leadIntelligence.projectStage,
+        readinessScore: leadIntelligence.readinessScore,
+        urgencyScore: leadIntelligence.urgencyScore,
+        complexityLevel: leadIntelligence.complexityLevel,
+        riskLevel: leadIntelligence.riskLevel,
+        recommendedNextAction: leadIntelligence.recommendedNextAction,
+        followUpPriority: leadIntelligence.followUpPriority,
+        followUpType: leadIntelligence.followUpType,
+        commercialIntent: leadIntelligence.commercialIntent,
+        confidenceLevel: leadIntelligence.confidenceLevel,
+      },
+      preparedPayloads: {
+        crm: {
+          provider: crmPayload.source.provider,
+          dealType: crmPayload.project.projectType ?? crmPayload.source.inquiryType,
+          result: crmResult,
+        },
+        internalNotification: {
+          priority: notificationEmail.priority,
+          adminReviewLink: notificationEmail.adminReviewLink,
+          template: {
+            subject: internalTemplate.subject,
+            priorityLabel: internalTemplate.priorityLabel,
+          },
+          result: {
+            ok: notificationResult.ok,
+            mode: notificationResult.mode,
+            provider: notificationResult.provider,
+            message: notificationResult.message,
+          },
+        },
+        confirmationEmail: {
+          subject: confirmationEmail.subject,
+          provider: confirmationEmail.provider,
+          template: {
+            subject: confirmationTemplate.subject,
+          },
+          result: {
+            ok: confirmationResult.ok,
+            mode: confirmationResult.mode,
+            provider: confirmationResult.provider,
+            message: confirmationResult.message,
+          },
+        },
+        highPriorityAlert: {
+          prepared: highPriorityPrepared,
+          emailEnabled: highPriorityEmailEnabled,
+          template: highPriorityTemplate
+            ? {
+                subject: highPriorityTemplate.subject,
+                priorityLabel: highPriorityTemplate.priorityLabel,
+              }
+            : null,
+          result: highPriorityResult
+            ? {
+                ok: highPriorityResult.ok,
+                mode: highPriorityResult.mode,
+                provider: highPriorityResult.provider,
+                message: highPriorityResult.message,
+              }
+            : null,
+        },
+        storage: {
+          mode: storageResult.storageMode,
+          result: {
+            ok: storageResult.ok,
+            message: storageResult.message,
+          },
+        },
+        sheets: {
+          mode: sheetsResult.sheetsMode,
+          requested: sheetsResult.requested,
+          tabName: sheetsConfig.tabName,
+          rowPrepared: sheetsResult.rowPrepared,
+          appended: sheetsResult.appended,
+          status: sheetsResult.status,
+          rowColumns: Object.keys(sheetsRow),
+          missingEnv: sheetsConfig.missingEnv,
+          result: {
+            ok: sheetsResult.ok,
+            message: sheetsResult.message,
+          },
+        },
+      },
+      message:
+        "Lead payload validated, scored and mapped to configured lead integration payloads. Default behavior remains mock-safe unless real provider environment variables are configured.",
     },
-    preparedPayloads: {
-      crm: {
-        provider: crmPayload.source.provider,
-        dealType: crmPayload.project.projectType ?? crmPayload.source.inquiryType,
-        result: crmResult,
-      },
-      internalNotification: {
-        priority: notificationEmail.priority,
-        adminReviewLink: notificationEmail.adminReviewLink,
-        template: {
-          subject: internalTemplate.subject,
-          priorityLabel: internalTemplate.priorityLabel,
-        },
-        result: {
-          ok: notificationResult.ok,
-          mode: notificationResult.mode,
-          provider: notificationResult.provider,
-          message: notificationResult.message,
-        },
-      },
-      confirmationEmail: {
-        subject: confirmationEmail.subject,
-        provider: confirmationEmail.provider,
-        template: {
-          subject: confirmationTemplate.subject,
-        },
-        result: {
-          ok: confirmationResult.ok,
-          mode: confirmationResult.mode,
-          provider: confirmationResult.provider,
-          message: confirmationResult.message,
-        },
-      },
-      highPriorityAlert: {
-        prepared: highPriorityPrepared,
-        emailEnabled: highPriorityEmailEnabled,
-        template: highPriorityTemplate
-          ? {
-              subject: highPriorityTemplate.subject,
-              priorityLabel: highPriorityTemplate.priorityLabel,
-            }
-          : null,
-        result: highPriorityResult
-          ? {
-              ok: highPriorityResult.ok,
-              mode: highPriorityResult.mode,
-              provider: highPriorityResult.provider,
-              message: highPriorityResult.message,
-            }
-          : null,
-      },
-      storage: {
-        mode: storageResult.storageMode,
-        result: {
-          ok: storageResult.ok,
-          message: storageResult.message,
-        },
-      },
-      sheets: {
-        mode: sheetsResult.sheetsMode,
-        requested: sheetsResult.requested,
-        tabName: sheetsConfig.tabName,
-        rowPrepared: sheetsResult.rowPrepared,
-        appended: sheetsResult.appended,
-        status: sheetsResult.status,
-        rowColumns: Object.keys(sheetsRow),
-        missingEnv: sheetsConfig.missingEnv,
-        result: {
-          ok: sheetsResult.ok,
-          message: sheetsResult.message,
-        },
+    {
+      headers: {
+        ...rateLimitHeaders(rateLimit),
+        "Cache-Control": "no-store",
       },
     },
-    message:
-      "Lead payload validated, scored and mapped to configured lead integration payloads. Default behavior remains mock-safe unless real provider environment variables are configured.",
-  });
+  );
 }
 
 function parseRecommendedServices(payload: LeadPayload) {
