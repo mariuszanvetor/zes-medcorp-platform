@@ -98,6 +98,14 @@ export type ProductCatalogItem = {
     ceCertificate?: "available" | "missing" | "failed";
     technicalDatasheet?: "available" | "missing" | "failed";
   };
+  documentAssetAudit?: Array<{
+    label: string;
+    type: "manual" | "certificat" | "fisa tehnica" | "document";
+    publicUrl: string;
+    sourceUrl: string;
+    bytes?: number;
+    status: "available" | "missing" | "failed";
+  }>;
   productDocuments?: Array<{ label: string; url: string; type: string }>;
   relatedProductCodes?: string[];
   relatedProductGroups?: {
