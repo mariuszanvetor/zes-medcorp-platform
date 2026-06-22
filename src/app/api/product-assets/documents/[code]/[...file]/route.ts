@@ -13,7 +13,7 @@ type ProductAssetDocumentRouteProps = {
 export async function GET(request: Request, { params }: ProductAssetDocumentRouteProps) {
   const rateLimit = checkServerRateLimit(request, {
     keyPrefix: "product-document-assets",
-    limit: 120,
+    limit: 40,
     windowSeconds: 300,
   });
 

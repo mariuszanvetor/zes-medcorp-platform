@@ -71,6 +71,35 @@ export function rateLimitHeaders(result: ServerRateLimitResult) {
   };
 }
 
+export function shouldBlockExpensivePost(request: Request) {
+  const method = request.method.toUpperCase();
+  if (method !== "POST") return false;
+
+  const headers = request.headers;
+  const origin = headers.get("origin");
+  const host = headers.get("host") ?? "";
+  const userAgent = headers.get("user-agent") ?? "";
+
+  if (isSuspiciousUserAgent(userAgent)) return true;
+  if (!origin) return false;
+
+  try {
+    const originHost = new URL(origin).hostname;
+    const requestHost = host.split(":")[0];
+    const allowedHosts = new Set([
+      requestHost,
+      "zescorp.ro",
+      "www.zescorp.ro",
+      "localhost",
+      "127.0.0.1",
+    ]);
+
+    return !allowedHosts.has(originHost) && !originHost.endsWith(".vercel.app");
+  } catch {
+    return true;
+  }
+}
+
 function createClientFingerprint(request: Request) {
   const headers = request.headers;
   const forwardedFor = headers.get("x-forwarded-for")?.split(",")[0]?.trim();
@@ -80,6 +109,13 @@ function createClientFingerprint(request: Request) {
   const client = forwardedFor || vercelIp || realIp || "unknown-ip";
 
   return createHash("sha256").update(`${client}|${userAgent}`).digest("hex");
+}
+
+function isSuspiciousUserAgent(userAgent: string) {
+  if (!userAgent.trim()) return true;
+  return /\b(curl|wget|python-requests|scrapy|httpclient|libwww|go-http-client|java\/|okhttp|aiohttp|botocore|masscan|nikto|sqlmap)\b/i.test(
+    userAgent,
+  );
 }
 
 function purgeExpiredBuckets(now: number) {

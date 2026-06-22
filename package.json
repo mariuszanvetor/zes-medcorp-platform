@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/product-catalog/build-public-catalog.mjs && next build",
     "start": "next start",
     "lint": "eslint",
     "content:check": "node scripts/check-content.mjs",

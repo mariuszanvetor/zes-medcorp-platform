@@ -1,7 +1,16 @@
-﻿import productsJson from "../../data/product-catalog/products.json";
-import productRedirectsJson from "../../data/product-catalog/product-redirects.json";
+﻿import productsJson from "../../data/product-catalog/products-public.json";
+import productRedirectsJson from "../../data/product-catalog/product-redirects-public.json";
 
-export type ProductReviewStatus = "imported" | "translated" | "image_verified" | "reviewed" | "approved" | "indexable" | "excluded";
+export type ProductReviewStatus =
+  | "imported"
+  | "translated"
+  | "image_verified"
+  | "reviewed"
+  | "approved"
+  | "indexable"
+  | "premium"
+  | "indexable_verified"
+  | "excluded";
 
 export type ProductCategoryId =
   | "diagnostic"
@@ -280,11 +289,19 @@ export const productCatalog = productsJson as ProductCatalogItem[];
 const productRedirects = productRedirectsJson as Array<{ source: string; destination: string }>;
 
 export function isProductIndexable(product: ProductCatalogItem) {
-  return product.reviewStatus === "indexable" && passesProductIndexationGuard(product);
+  return (
+    (product.reviewStatus === "premium" || product.reviewStatus === "indexable_verified") &&
+    passesProductIndexationGuard(product)
+  );
 }
 
 export function isProductCommerciallyApproved(product: ProductCatalogItem) {
-  return product.reviewStatus === "approved" || product.reviewStatus === "indexable";
+  return (
+    product.reviewStatus === "approved" ||
+    product.reviewStatus === "indexable" ||
+    product.reviewStatus === "premium" ||
+    product.reviewStatus === "indexable_verified"
+  );
 }
 
 export function passesProductIndexationGuard(product: ProductCatalogItem) {
@@ -536,7 +553,9 @@ export function getProductReviewLabel(status: ProductReviewStatus) {
     image_verified: "Imagine verificata - noindex",
     reviewed: "Revizuit intern - noindex",
     approved: "Aprobat comercial - noindex",
-    indexable: "Indexabil",
+    indexable: "Indexabil intern - nepublicat",
+    premium: "Premium verificat",
+    indexable_verified: "Indexabil verificat",
     excluded: "Exclus din publicare",
   };
 

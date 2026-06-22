@@ -17,6 +17,8 @@ import { services } from "@/data/services";
 import { getCategoryPath, getIndexableProducts, productCategories } from "@/lib/product-catalog";
 import { siteConfig } from "@/lib/seo";
 
+const MAX_SITEMAP_PRODUCT_URLS = 500;
+
 const staticRoutes: Array<{
   path: string;
   changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
@@ -52,6 +54,7 @@ const staticRoutes: Array<{
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const seoCommercialPaths = new Set(seoCommercialLandings.map((page) => page.path));
+  const indexableProducts = getIndexableProducts().slice(0, MAX_SITEMAP_PRODUCT_URLS);
   const serviceRoutes = services.map((service) => ({
     url: new URL(service.href, siteConfig.url).toString(),
     lastModified: now,
@@ -104,14 +107,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.88,
   }));
 
-  const indexableProductRoutes = getIndexableProducts().map((product) => ({
+  const indexableProductRoutes = indexableProducts.map((product) => ({
     url: new URL(`/produse/${product.slug}`, siteConfig.url).toString(),
     lastModified: new Date(product.indexableAt ?? now),
     changeFrequency: "monthly" as const,
     priority: 0.62,
   }));
 
-  const indexableProductCategories = new Set(getIndexableProducts().map((product) => product.category));
+  const indexableProductCategories = new Set(indexableProducts.map((product) => product.category));
   const indexableCategoryRoutes = productCategories
     .filter((category) => indexableProductCategories.has(category.id))
     .map((category) => ({

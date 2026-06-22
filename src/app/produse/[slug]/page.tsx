@@ -33,10 +33,11 @@ type ProductPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export const dynamicParams = true;
+export const dynamicParams = false;
+export const revalidate = 86_400;
 
 export function generateStaticParams() {
-  return productCatalog.filter(isProductIndexable).map((product) => ({ slug: product.slug }));
+  return productCatalog.filter(isProductPublicDisplayReady).map((product) => ({ slug: product.slug }));
 }
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {

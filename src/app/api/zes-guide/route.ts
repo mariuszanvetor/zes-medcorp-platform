@@ -4,12 +4,16 @@ import {
   generateZESGuideResponse,
   type ZESGuideApiRequest,
 } from "@/lib/zes-ai";
-import { checkServerRateLimit, rateLimitHeaders } from "@/lib/server-rate-limit";
+import { checkServerRateLimit, rateLimitHeaders, shouldBlockExpensivePost } from "@/lib/server-rate-limit";
 
 export async function POST(request: Request) {
+  if (shouldBlockExpensivePost(request)) {
+    return NextResponse.json({ ok: false, error: "Solicitare respinsa." }, { status: 403 });
+  }
+
   const rateLimit = checkServerRateLimit(request, {
     keyPrefix: "zes-guide",
-    limit: 24,
+    limit: 12,
     windowSeconds: 300,
   });
 

@@ -7,3 +7,5 @@ scripts/node_modules
 public/product-images
 public/product-documents
 data/product-assets-local
+data/product-catalog/products.json
+data/product-catalog/product-redirects.json

@@ -1,0 +1,3124 @@
+[
+  {
+    "source": "/produse/10-electrode-ball-point-3-mm-straight-30-30510",
+    "destination": "/produse/electrod-bila-pentru-electrocauter-30510",
+    "permanent": true
+  },
+  {
+    "source": "/produse/2-shelves-40x36-cm-base-75-27883",
+    "destination": "/produse/carucior-medical-cu-doua-rafturi-40x36-cm-27883",
+    "permanent": true
+  },
+  {
+    "source": "/produse/2-shelves-40x36-cm-base-78-27895",
+    "destination": "/produse/carucior-medical-cu-doua-rafturi-40x36-cm-27895",
+    "permanent": true
+  },
+  {
+    "source": "/produse/2-shelves-40x36-cm-base-drawer78-27893",
+    "destination": "/produse/carucior-medical-cu-doua-rafturi-40x36-cm-27893",
+    "permanent": true
+  },
+  {
+    "source": "/produse/2-shelves-50x42-cm-base-78-27889",
+    "destination": "/produse/carucior-medical-cu-doua-rafturi-50x42-cm-27889",
+    "permanent": true
+  },
+  {
+    "source": "/produse/2-shelves-50x42-cm-base-drawer78-27894",
+    "destination": "/produse/carucior-medical-cu-doua-rafturi-50x42-cm-27894",
+    "permanent": true
+  },
+  {
+    "source": "/produse/2-shelves-60x42-cm-base-78-27890",
+    "destination": "/produse/carucior-medical-cu-doua-rafturi-60x42-cm-27890",
+    "permanent": true
+  },
+  {
+    "source": "/produse/30631-diatermo-mb-120-flash-30631",
+    "destination": "/produse/diatermo-mb-120-flash-30631"
+  },
+  {
+    "source": "/produse/31457-steril-ent-kit-b-cutie-cu-10-kit-25513",
+    "destination": "/produse/steril-ent-kit-b-cutie-cu-10-kit-25513",
+    "permanent": true
+  },
+  {
+    "source": "/produse/532-disposable-ear-speculum-2-mm-cutie-cu-10-32158",
+    "destination": "/produse/specul-medical-de-unica-folosinta-32158",
+    "permanent": true
+  },
+  {
+    "source": "/produse/7-sertare-si-shelf-42x36-cm-6-50x36-cm-7-27865",
+    "destination": "/produse/modul-cu-sertare-si-raft-pentru-carucior-medical-27865",
+    "permanent": true
+  },
+  {
+    "source": "/produse/acquisition-cutie-series-mgy-all-models-cu-dsub-connector-15-pins-33320",
+    "destination": "/produse/acquisition-cutie-series-mgy-all-modele-cu-dsub-connector-15-pins-33320",
+    "permanent": true
+  },
+  {
+    "source": "/produse/acquisition-cutie-series-mgy-all-models-cu-dsub-connector-15-pins-33321",
+    "destination": "/produse/acquisition-cutie-series-mgy-all-modele-cu-dsub-connector-15-pins-33321",
+    "permanent": true
+  },
+  {
+    "source": "/produse/adaptor-pana-la-connect-cateter-28253",
+    "destination": "/produse/adaptor-to-connect-cateter-28253",
+    "permanent": true
+  },
+  {
+    "source": "/produse/adaptor-pana-la-connect-cateter-pana-la-tub-din-silicon-28254",
+    "destination": "/produse/adaptor-to-connect-cateter-to-tub-din-silicon-28254",
+    "permanent": true
+  },
+  {
+    "source": "/produse/afluid-4-ply-chirurgical-masca-cu-sireturi-albastru-deschis-20704",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-afluid-alba-20704",
+    "permanent": true
+  },
+  {
+    "source": "/produse/afluid-4-ply-chirurgical-masca-cu-sireturi-verde-20703",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-afluid-verde-20703",
+    "permanent": true
+  },
+  {
+    "source": "/produse/afluid-98-filtering-surgeon-masca-4-ply-lumina-albastru-cu-loops-type-iir-20702",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-afluid-alba-20702",
+    "permanent": true
+  },
+  {
+    "source": "/produse/antibacterial-gel-flacon-1-l-transparent-36594",
+    "destination": "/produse/gel-antibacterian-1-l-36594",
+    "permanent": true
+  },
+  {
+    "source": "/produse/aparat-sigilare-impuls-d-351-35900",
+    "destination": "/produse/aparat-de-sigilare-impuls-d-351-35900",
+    "permanent": true
+  },
+  {
+    "source": "/produse/autoclava-hydra-evo-imprimanta-15-l-230-v-35660",
+    "destination": "/produse/autoclava-hydra-evo-cu-imprimanta-15-l-230-v-35660",
+    "permanent": true
+  },
+  {
+    "source": "/produse/automatic-loading-targa-34055",
+    "destination": "/produse/targa-cu-incarcare-automata-34055"
+  },
+  {
+    "source": "/produse/binocular-loupe-2-5x-420-mm-90-mm-30894",
+    "destination": "/produse/lupa-binoculara-2-5x-420-mm-90-mm-30894",
+    "permanent": true
+  },
+  {
+    "source": "/produse/binocular-loupe-3-5x-340-mm-50-mm-30897",
+    "destination": "/produse/lupa-binoculara-3-5x-340-mm-50-mm-30897",
+    "permanent": true
+  },
+  {
+    "source": "/produse/binocular-loupe-3-5x-420-mm-60-mm-30898",
+    "destination": "/produse/lupa-binoculara-3-5x-420-mm-60-mm-30898",
+    "permanent": true
+  },
+  {
+    "source": "/produse/biological-microscope-40x-pana-la-1000x-31000",
+    "destination": "/produse/microscop-biologic-40x-1000x-31000",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-18136",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-18136",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-18144",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-18144",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-18152",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-18152",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-18174",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-18174",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-18182",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-18182",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-18190",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-18190",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-barbati-18211",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-pentru-barbati-18211",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-barbati-18219",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-pentru-barbati-18219",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-barbati-18227",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-pentru-barbati-18227",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-dama-18176",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-pentru-dama-18176",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-unisex-18265",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-unisex-18265",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-unisex-18272",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-unisex-18272",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-unisex-18279",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-unisex-18279",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-unisex-18286",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-unisex-18286",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-unisex-18293",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-unisex-18293",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-unisex-18321",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-unisex-18321",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-unisex-18328",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-unisex-18328",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-unisex-18347",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-unisex-18347",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-unisex-18354",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-unisex-18354",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bluza-si-pantaloni-medicali-unisex-18361",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-unisex-18361",
+    "permanent": true
+  },
+  {
+    "source": "/produse/bm1-bm3-bm5-bm7-spo2-sensors-33716",
+    "destination": "/produse/sonda-spo2-pentru-monitorizare-pacient-33716",
+    "permanent": true
+  },
+  {
+    "source": "/produse/boneta-medicala-funny-color-m-20810",
+    "destination": "/produse/boneta-medicala-funny-marimea-m-20810",
+    "permanent": true
+  },
+  {
+    "source": "/produse/boneta-medicala-funny-fish-m-20808",
+    "destination": "/produse/boneta-medicala-funny-marimea-m-20808",
+    "permanent": true
+  },
+  {
+    "source": "/produse/boneta-medicala-funny-peace-m-20809",
+    "destination": "/produse/boneta-medicala-funny-marimea-m-20809",
+    "permanent": true
+  },
+  {
+    "source": "/produse/breast-pumpsmamilat-breast-pump-41700",
+    "destination": "/produse/pompa-de-san-mamilat-41700",
+    "permanent": true
+  },
+  {
+    "source": "/produse/burn-dressing-5x15-cm-cutie-cu-10-bucati-34870",
+    "destination": "/produse/pansament-pentru-arsuri-5x15-cm-cutie-10-bucati-34870",
+    "permanent": true
+  },
+  {
+    "source": "/produse/burn-dressing-5x5-cm-cutie-cu-120-bucati-34869",
+    "destination": "/produse/pansament-pentru-arsuri-5x5-cm-34869",
+    "permanent": true
+  },
+  {
+    "source": "/produse/c-mount-f18-adaptor-for-endoscopes-32186",
+    "destination": "/produse/c-mount-f18-adaptor-pentru-endoscopes-32186",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cablu-monopolar-cu-fisa-4-mm-lungime-3-m-30610",
+    "destination": "/produse/monopolar-cablu-4-mm-pin-3-m-30610",
+    "permanent": true
+  },
+  {
+    "source": "/produse/camera-probe-45-x-diam-5-2-mm-pentru-md-scope-32165",
+    "destination": "/produse/camera-sonda-45-x-diam-5-2-mm-pentru-md-scope-32165",
+    "permanent": true
+  },
+  {
+    "source": "/produse/camera-sonda-47-x-4-2-mm-adult-child-32166",
+    "destination": "/produse/camera-sonda-47-x-4-2-mm-adulti-copii-32166",
+    "permanent": true
+  },
+  {
+    "source": "/produse/carucior-medical-doua-polite-40x36-cm-27880",
+    "destination": "/produse/carucior-medical-cu-doua-polite-40x36-cm-27880",
+    "permanent": true
+  },
+  {
+    "source": "/produse/carucior-medical-pro-doua-polite-80-cm-27885",
+    "destination": "/produse/carucior-medical-pro-cu-doua-polite-80-cm-27885",
+    "permanent": true
+  },
+  {
+    "source": "/produse/carucior-pentru-monitoare-fara-adaptor-placa-45760",
+    "destination": "/produse/carucior-pentru-monitors-fara-plate-adaptor-45760",
+    "permanent": true
+  },
+  {
+    "source": "/produse/carucior-pentru-pansamente-65x88xh-100-cm-with-dispenser-45713",
+    "destination": "/produse/carucior-pentru-pansamente-65x88xh-100-cm-cu-dispenser-45713",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cateter-lubricant-gel-12-ml-steril-cutie-cu-25-22104",
+    "destination": "/produse/gel-lubrifiant-steril-pentru-cateter-12-ml-22104",
+    "permanent": true
+  },
+  {
+    "source": "/produse/centrifuga-laborator-zip-iq-tt-24014",
+    "destination": "/produse/centrifuga-de-laborator-zip-iq-tt-24014",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-bluza-si-pantaloni-medicali-set-originals-unisex-l-bleumarin-18209",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-l-18209",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-bluza-si-pantaloni-medicali-set-originals-unisex-l-hunter-verde-18225",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-l-verde-18225",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-bluza-si-pantaloni-medicali-set-originals-unisex-l-pewter-18217",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-l-18217",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-bluza-si-pantaloni-medicali-set-originals-unisex-s-bleumarin-18207",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-s-18207",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-bluza-si-pantaloni-medicali-set-originals-unisex-s-hunter-verde-18223",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-s-verde-18223",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-bluza-si-pantaloni-medicali-set-originals-unisex-s-pewter-18215",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-s-18215",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-bluza-si-pantaloni-medicali-set-originals-unisex-xl-bleumarin-18210",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xl-18210",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-bluza-si-pantaloni-medicali-set-originals-unisex-xl-hunter-verde-18226",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xl-verde-18226",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-bluza-si-pantaloni-medicali-set-originals-unisex-xl-pewter-18218",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xl-18218",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-bluza-si-pantaloni-medicali-set-originals-unisex-xs-bleumarin-18206",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xs-18206",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-bluza-si-pantaloni-medicali-set-originals-unisex-xs-hunter-verde-18222",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xs-verde-18222",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-bluza-si-pantaloni-medicali-set-originals-unisex-xs-pewter-18214",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xs-18214",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-bluza-si-pantaloni-medicali-set-originals-unisex-xxs-bleumarin-18205",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xxs-18205",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-bluza-si-pantaloni-medicali-set-originals-unisex-xxs-hunter-verde-18221",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xxs-verde-18221",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-bluza-si-pantaloni-medicali-set-originals-unisex-xxs-pewter-18213",
+    "destination": "/produse/set-bluza-si-pantaloni-medicali-cherokee-unisex-marimea-xxs-18213",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-drawstring-revolution-dama-l-bleumarin-18320",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-l-18320",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-drawstring-revolution-dama-l-pewter-18327",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-l-18327",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-drawstring-revolution-dama-s-bleumarin-18318",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-s-18318",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-drawstring-revolution-dama-s-pewter-18325",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-s-18325",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-drawstring-revolution-dama-xs-bleumarin-18317",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xs-18317",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-drawstring-revolution-dama-xs-pewter-18324",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xs-18324",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-drawstring-revolution-dama-xxs-bleumarin-18316",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xxs-18316",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-drawstring-revolution-dama-xxs-pewter-18323",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xxs-18323",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-pull-on-revolution-dama-l-albastru-verzui-18353",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-l-alba-18353",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-pull-on-revolution-dama-l-turcoaz-18360",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-l-18360",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-pull-on-revolution-dama-l-wine-18346",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-l-18346",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-pull-on-revolution-dama-s-albastru-verzui-18351",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-s-alba-18351",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-pull-on-revolution-dama-s-turcoaz-18358",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-s-18358",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-pull-on-revolution-dama-s-wine-18344",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-s-18344",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-pull-on-revolution-dama-xs-albastru-verzui-18350",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xs-alba-18350",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-pull-on-revolution-dama-xs-turcoaz-18357",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xs-18357",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-pull-on-revolution-dama-xs-wine-18343",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xs-18343",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-pull-on-revolution-dama-xxs-albastru-verzui-18349",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xxs-alba-18349",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-pull-on-revolution-dama-xxs-turcoaz-18356",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xxs-18356",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-cu-pull-on-revolution-dama-xxs-wine-18342",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xxs-18342",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-dama-l-alb-18090",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-l-alba-18090",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-dama-l-albastru-verzui-18074",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-l-alba-18074",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-dama-l-bleu-18082",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-l-18082",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-dama-l-bleumarin-18066",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-l-18066",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-dama-s-alb-18088",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-s-alba-18088",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-dama-s-albastru-verzui-18072",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-s-alba-18072",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-dama-s-bleu-18080",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-s-18080",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-dama-s-bleumarin-18064",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-s-18064",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-dama-xs-alb-18087",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xs-alba-18087",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-dama-xs-albastru-verzui-18071",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xs-alba-18071",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-dama-xs-bleu-18079",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xs-18079",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-dama-xs-bleumarin-18063",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xs-18063",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-dama-xxs-alb-18086",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xxs-alba-18086",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-dama-xxs-albastru-verzui-18070",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xxs-alba-18070",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-dama-xxs-bleu-18078",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xxs-18078",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-dama-xxs-bleumarin-18062",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-dama-marimea-xxs-18062",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-unisex-l-bleumarin-albastru-18172",
+    "destination": "/produse/pantaloni-medicali-cherokee-unisex-marimea-l-alba-18172",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-unisex-l-gri-18180",
+    "destination": "/produse/pantaloni-medicali-cherokee-unisex-marimea-l-gri-18180",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-unisex-l-verde-inchis-verde-18188",
+    "destination": "/produse/pantaloni-medicali-cherokee-unisex-marimea-l-verde-18188",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-unisex-s-bleumarin-albastru-18170",
+    "destination": "/produse/pantaloni-medicali-cherokee-unisex-marimea-s-alba-18170",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-unisex-s-gri-18178",
+    "destination": "/produse/pantaloni-medicali-cherokee-unisex-marimea-s-gri-18178",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-unisex-s-verde-inchis-verde-18186",
+    "destination": "/produse/pantaloni-medicali-cherokee-unisex-marimea-s-verde-18186",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-unisex-xl-bleumarin-albastru-18173",
+    "destination": "/produse/pantaloni-medicali-cherokee-unisex-marimea-xl-alba-18173",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-unisex-xl-gri-18181",
+    "destination": "/produse/pantaloni-medicali-cherokee-unisex-marimea-xl-gri-18181",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-unisex-xl-verde-inchis-verde-18189",
+    "destination": "/produse/pantaloni-medicali-cherokee-unisex-marimea-xl-verde-18189",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-unisex-xs-bleumarin-albastru-18169",
+    "destination": "/produse/pantaloni-medicali-cherokee-unisex-marimea-xs-alba-18169",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-unisex-xs-gri-18177",
+    "destination": "/produse/pantaloni-medicali-cherokee-unisex-marimea-xs-gri-18177",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-unisex-xs-verde-inchis-verde-18185",
+    "destination": "/produse/pantaloni-medicali-cherokee-unisex-marimea-xs-verde-18185",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-unisex-xxs-bleumarin-albastru-18168",
+    "destination": "/produse/pantaloni-medicali-cherokee-unisex-marimea-xxs-alba-18168",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-originals-unisex-xxs-verde-inchis-verde-18184",
+    "destination": "/produse/pantaloni-medicali-cherokee-unisex-marimea-xxs-verde-18184",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-revolution-barbati-l-bleumarin-18423",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-barbati-marimea-l-18423",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-revolution-barbati-l-pewter-18431",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-barbati-marimea-l-18431",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-revolution-barbati-s-bleumarin-18421",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-barbati-marimea-s-18421",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-revolution-barbati-s-pewter-18429",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-barbati-marimea-s-18429",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-revolution-barbati-xl-bleumarin-18424",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-barbati-marimea-xl-18424",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-revolution-barbati-xl-pewter-18432",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-barbati-marimea-xl-18432",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-revolution-barbati-xs-bleumarin-18420",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-barbati-marimea-xs-18420",
+    "permanent": true
+  },
+  {
+    "source": "/produse/cherokee-pantaloni-medicali-revolution-barbati-xs-pewter-18428",
+    "destination": "/produse/pantaloni-medicali-cherokee-pentru-barbati-marimea-xs-18428",
+    "permanent": true
+  },
+  {
+    "source": "/produse/child-probe-3-20-kg-nellcor-comp-de-unica-folosinta-33756",
+    "destination": "/produse/copil-sonda-3-20-kg-nellcor-comp-de-unica-folosinta-33756",
+    "permanent": true
+  },
+  {
+    "source": "/produse/chison-eco2-cu-1-sonda-connector-without-sonda-33862",
+    "destination": "/produse/chison-eco2-b-w-ultrasound-1-sonda-conector-33862",
+    "permanent": true
+  },
+  {
+    "source": "/produse/chison-eco5-colour-ultrasound-2-sonda-conector-33865",
+    "destination": "/produse/chison-eco5-ecograf-color-2-sonda-conector-33865",
+    "permanent": true
+  },
+  {
+    "source": "/produse/colposcopy-software-pentru-colpro-colposcope-29621",
+    "destination": "/produse/colposcop-video-led-cu-camera-29621",
+    "permanent": true
+  },
+  {
+    "source": "/produse/commode-wheelchair-27703",
+    "destination": "/produse/scaun-rulant-cu-toaleta-27703",
+    "permanent": true
+  },
+  {
+    "source": "/produse/commode-wheelchair-painted-27702",
+    "destination": "/produse/scaun-rulant-cu-toaleta-vopsit-27702",
+    "permanent": true
+  },
+  {
+    "source": "/produse/consumabil-de-protectie-sneakers-20013",
+    "destination": "/produse/incaltaminte-medicala-20013",
+    "permanent": true
+  },
+  {
+    "source": "/produse/consumabil-de-protectie-sneakers-20033",
+    "destination": "/produse/incaltaminte-medicala-20033",
+    "permanent": true
+  },
+  {
+    "source": "/produse/consumabil-de-protectie-woman-21401",
+    "destination": "/produse/halat-medical-pentru-dama-21401",
+    "permanent": true
+  },
+  {
+    "source": "/produse/consumabil-de-protectie-woman-21405",
+    "destination": "/produse/halat-medical-pentru-dama-21405",
+    "permanent": true
+  },
+  {
+    "source": "/produse/container-card-with-steam-indicator-68x37-5-mm-cutie-cu-250-37333",
+    "destination": "/produse/container-card-cu-steam-indicator-68x37-5-mm-cutie-cu-250-37333",
+    "permanent": true
+  },
+  {
+    "source": "/produse/de-unica-folosinta-pads-cu-cable-pentru-rescue-sam-230-life-pediatric-see-also-33458",
+    "destination": "/produse/de-unica-folosinta-electrozi-cu-cablu-pentru-rescue-sam-230-life-pediatric-33458",
+    "permanent": true
+  },
+  {
+    "source": "/produse/de-unica-folosinta-pads-cu-cable-pentru-rescue-sam-adult-see-also-33420",
+    "destination": "/produse/de-unica-folosinta-electrozi-cu-cablu-pentru-rescue-sam-adult-33420",
+    "permanent": true
+  },
+  {
+    "source": "/produse/de-unica-folosinta-pads-cu-cable-pentru-rescue-sam-adult-see-also-33428",
+    "destination": "/produse/de-unica-folosinta-electrozi-cu-cablu-pentru-rescue-sam-adult-33428",
+    "permanent": true
+  },
+  {
+    "source": "/produse/de-unica-folosinta-vet-specul-32192",
+    "destination": "/produse/specul-veterinar-de-unica-folosinta-32192",
+    "permanent": true
+  },
+  {
+    "source": "/produse/dental-jacheta-l-verde-21003",
+    "destination": "/produse/jacheta-medicala-dental-marimea-l-verde-21003",
+    "permanent": true
+  },
+  {
+    "source": "/produse/dental-jacheta-m-verde-21002",
+    "destination": "/produse/jacheta-medicala-dental-marimea-m-verde-21002",
+    "permanent": true
+  },
+  {
+    "source": "/produse/dental-jacheta-s-verde-21001",
+    "destination": "/produse/jacheta-medicala-dental-marimea-s-verde-21001",
+    "permanent": true
+  },
+  {
+    "source": "/produse/dental-jacheta-xl-verde-21004",
+    "destination": "/produse/jacheta-medicala-dental-marimea-xl-verde-21004",
+    "permanent": true
+  },
+  {
+    "source": "/produse/dental-jacheta-xs-verde-21000",
+    "destination": "/produse/jacheta-medicala-dental-marimea-xs-verde-21000",
+    "permanent": true
+  },
+  {
+    "source": "/produse/dental-jacheta-xxl-verde-21005",
+    "destination": "/produse/jacheta-medicala-dental-marimea-xxl-verde-21005",
+    "permanent": true
+  },
+  {
+    "source": "/produse/diabetic-geanta-empty-albastru-27255",
+    "destination": "/produse/geanta-medicala-profesionala-27255",
+    "permanent": true
+  },
+  {
+    "source": "/produse/diagnostic-medical-cod-32864-32864",
+    "destination": "/produse/adaptor-dc-6v-600-ma-32864"
+  },
+  {
+    "source": "/produse/diagnostic-medical-cod-32866-32866",
+    "destination": "/produse/adaptor-dc-6v-600-ma-32866"
+  },
+  {
+    "source": "/produse/diatermo-bag-negru-600d-polyester-27139",
+    "destination": "/produse/diatermo-geanta-negru-600d-polyester-27139",
+    "permanent": true
+  },
+  {
+    "source": "/produse/disposable-bayonet-pensa-20-cm-tip-1-0-mm-30306",
+    "destination": "/produse/pensa-medicala-din-inox-20-cm-30306",
+    "permanent": true
+  },
+  {
+    "source": "/produse/disposable-ear-speculum-3-5-mm-negru-32188",
+    "destination": "/produse/specul-medical-de-unica-folosinta-32188",
+    "permanent": true
+  },
+  {
+    "source": "/produse/disposable-ear-speculum-4-3-mm-negru-32189",
+    "destination": "/produse/specul-medical-de-unica-folosinta-32189",
+    "permanent": true
+  },
+  {
+    "source": "/produse/disposable-jeweler-pensa-11-5-cm-tip-0-5-mm-30300",
+    "destination": "/produse/pensa-medicala-din-inox-11-5-cm-30300",
+    "permanent": true
+  },
+  {
+    "source": "/produse/disposable-straight-pensa-20-cm-tip-1-0-mm-30302",
+    "destination": "/produse/pensa-medicala-din-inox-20-cm-30302",
+    "permanent": true
+  },
+  {
+    "source": "/produse/doctor-s-alb-coats-jackets-pantaloni-medicali-100-cotton-26080",
+    "destination": "/produse/pantaloni-medicali-marimea-s-alba-26080",
+    "permanent": true
+  },
+  {
+    "source": "/produse/doctor-s-alb-coats-jackets-pantaloni-medicali-100-cotton-26117",
+    "destination": "/produse/pantaloni-medicali-marimea-s-alba-26117",
+    "permanent": true
+  },
+  {
+    "source": "/produse/doctor-s-alb-coats-jackets-pantaloni-medicali-cotton-polyester-21561",
+    "destination": "/produse/pantaloni-medicali-marimea-s-alba-21561",
+    "permanent": true
+  },
+  {
+    "source": "/produse/doctor-s-alb-coats-jackets-pantaloni-medicali-cotton-polyester-21566",
+    "destination": "/produse/pantaloni-medicali-marimea-s-alba-21566",
+    "permanent": true
+  },
+  {
+    "source": "/produse/domino-digital-b-p-m-on-carucior-with-basket-32804",
+    "destination": "/produse/domino-digital-b-p-m-on-carucior-cu-basket-32804",
+    "permanent": true
+  },
+  {
+    "source": "/produse/double-face-carucior-farmacie-27499",
+    "destination": "/produse/dublu-fata-carucior-farmacie-27499",
+    "permanent": true
+  },
+  {
+    "source": "/produse/double-face-carucior-farmacie-45730",
+    "destination": "/produse/dublu-fata-carucior-farmacie-45730",
+    "permanent": true
+  },
+  {
+    "source": "/produse/double-face-carucior-farmacie-45731",
+    "destination": "/produse/dublu-fata-carucior-farmacie-45731",
+    "permanent": true
+  },
+  {
+    "source": "/produse/double-suport-pentru-bol-27457",
+    "destination": "/produse/dublu-suport-pentru-bol-27457",
+    "permanent": true
+  },
+  {
+    "source": "/produse/drape-100x100-cutie-cu-120-23583",
+    "destination": "/produse/camp-chirurgical-100x100-cutie-cu-120-23583",
+    "permanent": true
+  },
+  {
+    "source": "/produse/drape-100x150-cutie-cu-80-23584",
+    "destination": "/produse/camp-chirurgical-100x150-cutie-cu-80-23584",
+    "permanent": true
+  },
+  {
+    "source": "/produse/drape-150x150-cutie-cu-70-23585",
+    "destination": "/produse/camp-chirurgical-150x150-cutie-cu-70-23585",
+    "permanent": true
+  },
+  {
+    "source": "/produse/drape-150x200-cutie-cu-50-23586",
+    "destination": "/produse/camp-chirurgical-150x200-cutie-cu-50-23586",
+    "permanent": true
+  },
+  {
+    "source": "/produse/drape-150x240-cutie-cu-40-23587",
+    "destination": "/produse/camp-chirurgical-150x240-cutie-cu-40-23587",
+    "permanent": true
+  },
+  {
+    "source": "/produse/drape-200x200-cutie-cu-40-23588",
+    "destination": "/produse/camp-chirurgical-200x200-cutie-cu-40-23588",
+    "permanent": true
+  },
+  {
+    "source": "/produse/drape-200x250-cutie-cu-30-23589",
+    "destination": "/produse/camp-chirurgical-200x250-cutie-cu-30-23589",
+    "permanent": true
+  },
+  {
+    "source": "/produse/dus-carucior-electric-44771",
+    "destination": "/produse/shower-carucior-electric-44771",
+    "permanent": true
+  },
+  {
+    "source": "/produse/echipament-de-diagnostic-adulti-manseta-l-xl-32-52-cm-32885",
+    "destination": "/produse/adulti-manseta-l-xl-32-52-cm-32885",
+    "permanent": true
+  },
+  {
+    "source": "/produse/echipament-de-diagnostic-sleep-apnea-screen-analizor-33676",
+    "destination": "/produse/sleep-apnea-screen-analizor-33676",
+    "permanent": true
+  },
+  {
+    "source": "/produse/echipament-de-diagnostic-vario-desk-adulti-manseta-285-20-481-32671",
+    "destination": "/produse/vario-desk-adulti-manseta-285-20-481-32671",
+    "permanent": true
+  },
+  {
+    "source": "/produse/echipament-electromedical-30401",
+    "destination": "/produse/k3-ac-0-075-mm-0-003-cutie-cu-50-30401",
+    "permanent": true
+  },
+  {
+    "source": "/produse/echipament-electromedical-30406",
+    "destination": "/produse/k3-ac-0-075-mm-0-003-cutie-cu-50-30406",
+    "permanent": true
+  },
+  {
+    "source": "/produse/echipament-electromedical-diatermo-106-50w-monopolar-30516",
+    "destination": "/produse/diatermo-106-50w-monopolar-30516",
+    "permanent": true
+  },
+  {
+    "source": "/produse/echipament-electromedical-diatermo-mb-122-mono-bipolar-120-w-30540",
+    "destination": "/produse/diatermo-mb-122-mono-bipolar-120-w-30540",
+    "permanent": true
+  },
+  {
+    "source": "/produse/echipament-electromedical-diatermo-mb-160-mono-bipolar-160-w-30541",
+    "destination": "/produse/diatermo-mb-160-mono-bipolar-160-w-30541",
+    "permanent": true
+  },
+  {
+    "source": "/produse/echipament-electromedical-diatermo-mb-200-200-w-30542",
+    "destination": "/produse/diatermo-mb-200-200-w-30542",
+    "permanent": true
+  },
+  {
+    "source": "/produse/echipament-electromedical-diatermo-mb-200-flash-30633",
+    "destination": "/produse/diatermo-mb-200-flash-30633"
+  },
+  {
+    "source": "/produse/echipament-electromedical-diatermo-mb-200-t-200w-30693",
+    "destination": "/produse/diatermo-mb-200-t-200w-30693",
+    "permanent": true
+  },
+  {
+    "source": "/produse/echipament-electromedical-k2-ac-0-055-mm-0-002-cutie-cu-50-30410",
+    "destination": "/produse/k2-ac-0-055-mm-0-002-cutie-cu-50-30410",
+    "permanent": true
+  },
+  {
+    "source": "/produse/echipament-electromedical-k3-ac-0-075-mm-0-003-cutie-cu-50-30411",
+    "destination": "/produse/k3-ac-0-075-mm-0-003-cutie-cu-50-30411",
+    "permanent": true
+  },
+  {
+    "source": "/produse/eco-temp-basic-thermometer-mc-246-e-25603",
+    "destination": "/produse/eco-temp-basic-termometru-mc-246-e-25603",
+    "permanent": true
+  },
+  {
+    "source": "/produse/electromedicale-cod-30542-30542",
+    "destination": "/produse/diatermo-mb-200-200-w-30542"
+  },
+  {
+    "source": "/produse/electromedicale-cod-30693-30693",
+    "destination": "/produse/diatermo-mb-200-t-200w-30693"
+  },
+  {
+    "source": "/produse/erka-vario-sk-wall-and-carucior-32766",
+    "destination": "/produse/erka-vario-sk-wall-si-carucior-32766",
+    "permanent": true
+  },
+  {
+    "source": "/produse/european-connector-bipolar-pensa-30667",
+    "destination": "/produse/eu-drept-pensa-15-cm-drept-0-5-mm-point-30667",
+    "permanent": true
+  },
+  {
+    "source": "/produse/evolution-double-histerometru-30-cm-cutie-cu-25-29927",
+    "destination": "/produse/evolution-dublu-histerometru-30-cm-cutie-cu-25-29927",
+    "permanent": true
+  },
+  {
+    "source": "/produse/evolution-double-histerometru-30-cm-cutie-cu-25-29929",
+    "destination": "/produse/evolution-dublu-histerometru-30-cm-cutie-cu-25-29929",
+    "permanent": true
+  },
+  {
+    "source": "/produse/evolution-long-pensa-29719",
+    "destination": "/produse/pensa-medicala-din-inox-29719",
+    "permanent": true
+  },
+  {
+    "source": "/produse/extension-cable-pentru-codes-33735-6-7-33738",
+    "destination": "/produse/cablu-prelungitor-pentru-coduri-33735-6-7-33738",
+    "permanent": true
+  },
+  {
+    "source": "/produse/extra-largeg-9-10-albastru-cutie-o-f-100-21809",
+    "destination": "/produse/manusi-medicale-marimea-10-alba-cutie-100-bucati-21809",
+    "permanent": true
+  },
+  {
+    "source": "/produse/extra-largeg-9-10-albastru-cutie-o-f-200-21814",
+    "destination": "/produse/manusi-medicale-marimea-10-alba-cutie-200-bucati-21814",
+    "permanent": true
+  },
+  {
+    "source": "/produse/extra-shelf-40x36-cm-27875",
+    "destination": "/produse/raft-suplimentar-pentru-carucior-medical-40x36-cm-27875",
+    "permanent": true
+  },
+  {
+    "source": "/produse/extra-shelf-40x36-cm-27888",
+    "destination": "/produse/raft-suplimentar-pentru-carucior-medical-40x36-cm-27888",
+    "permanent": true
+  },
+  {
+    "source": "/produse/extraction-curved-pensa-for-mic-80012",
+    "destination": "/produse/extraction-curved-pensa-pentru-mic-80012",
+    "permanent": true
+  },
+  {
+    "source": "/produse/extraction-curved-pensa-pentru-small-80012",
+    "destination": "/produse/extraction-curved-pensa-pentru-mic-80012",
+    "permanent": true
+  },
+  {
+    "source": "/produse/fantasy-jacheta-lumina-albastru-bumbac-mic-26170",
+    "destination": "/produse/jacheta-medicala-fantasy-alba-26170",
+    "permanent": true
+  },
+  {
+    "source": "/produse/flex-temp-smart-thermometer-mc-343f-e-25604",
+    "destination": "/produse/flex-temp-smart-termometru-mc-343f-e-25604",
+    "permanent": true
+  },
+  {
+    "source": "/produse/funny-boneta-daisy-m-20811",
+    "destination": "/produse/boneta-medicala-funny-marimea-m-20811",
+    "permanent": true
+  },
+  {
+    "source": "/produse/funny-boneta-dental-m-20831",
+    "destination": "/produse/jacheta-medicala-funny-marimea-m-20831",
+    "permanent": true
+  },
+  {
+    "source": "/produse/funny-boneta-dog-m-20822",
+    "destination": "/produse/boneta-medicala-funny-marimea-m-20822",
+    "permanent": true
+  },
+  {
+    "source": "/produse/funny-boneta-medical-m-20832",
+    "destination": "/produse/boneta-medicala-funny-marimea-m-20832",
+    "permanent": true
+  },
+  {
+    "source": "/produse/funny-boneta-military-albastru-m-20816",
+    "destination": "/produse/boneta-medicala-funny-marimea-m-alba-20816",
+    "permanent": true
+  },
+  {
+    "source": "/produse/funny-boneta-military-verde-m-20817",
+    "destination": "/produse/boneta-medicala-funny-marimea-m-verde-20817",
+    "permanent": true
+  },
+  {
+    "source": "/produse/funny-boneta-reef-m-20807",
+    "destination": "/produse/boneta-medicala-funny-marimea-m-20807",
+    "permanent": true
+  },
+  {
+    "source": "/produse/funny-boneta-smile-pet-m-20821",
+    "destination": "/produse/boneta-medicala-funny-marimea-m-20821",
+    "permanent": true
+  },
+  {
+    "source": "/produse/funny-boneta-space-m-20827",
+    "destination": "/produse/boneta-medicala-funny-marimea-m-20827",
+    "permanent": true
+  },
+  {
+    "source": "/produse/funny-boneta-toy-m-20826",
+    "destination": "/produse/boneta-medicala-funny-marimea-m-20826",
+    "permanent": true
+  },
+  {
+    "source": "/produse/funny-boneta-tropical-m-20812",
+    "destination": "/produse/boneta-medicala-funny-marimea-m-20812",
+    "permanent": true
+  },
+  {
+    "source": "/produse/funny-boneta-turtle-m-20806",
+    "destination": "/produse/boneta-medicala-funny-marimea-m-20806",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gamma3-dulap-108x45xh-77-cm-large-28031",
+    "destination": "/produse/gamma3-dulap-108x45xh-77-cm-mare-28031"
+  },
+  {
+    "source": "/produse/geanta-profesionala-empty-27125",
+    "destination": "/produse/geanta-medicala-profesionala-27125",
+    "permanent": true
+  },
+  {
+    "source": "/produse/geanta-profesionala-empty-27128",
+    "destination": "/produse/geanta-medicala-profesionala-27128",
+    "permanent": true
+  },
+  {
+    "source": "/produse/genti-medicale-cod-27139-27139",
+    "destination": "/produse/diatermo-geanta-negru-600d-polyester-27139"
+  },
+  {
+    "source": "/produse/gima-3-carucior-medium-70x50xh-78-weight-15-kg-27426",
+    "destination": "/produse/gima-3-carucior-mediu-70x50xh-78-weight-15-kg-27426",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gima-49214",
+    "destination": "/produse/lampa-medicala-gima-49214",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gima-emergency-trolley-neo-plus-45720",
+    "destination": "/produse/carucior-de-urgenta-neo-plus-45720"
+  },
+  {
+    "source": "/produse/gima-ent-chair-otopex-27552",
+    "destination": "/produse/scaun-orl-otopex-cu-tetiera-verde-toronto-27552"
+  },
+  {
+    "source": "/produse/gima-fc1400-single-foetal-monitor-29516",
+    "destination": "/produse/monitor-fetal-fc1400-pentru-sarcina-unica-29516"
+  },
+  {
+    "source": "/produse/gima-hydraulic-patient-transfer-chair-43430",
+    "destination": "/produse/scaun-hidraulic-pentru-transfer-pacient-43430"
+  },
+  {
+    "source": "/produse/gima-ischia-patient-transfer-chair-blue-44840",
+    "destination": "/produse/scaun-transfer-pacient-ischia-albastru-44840"
+  },
+  {
+    "source": "/produse/gima-urina-analizor-cu-bluetooth-24046",
+    "destination": "/produse/analizor-de-urina-cu-bluetooth-24046"
+  },
+  {
+    "source": "/produse/gima-urine-analyzer-bluetooth-24046",
+    "destination": "/produse/analizor-de-urina-cu-bluetooth-24046"
+  },
+  {
+    "source": "/produse/gima-v2005-vascular-doppler-cu-5-mhz-fixed-probe-33120",
+    "destination": "/produse/gima-v2005-vascular-doppler-cu-5-mhz-fixed-sonda-33120",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gima-v2008-vascular-doppler-cu-8-mhz-fixed-probe-33121",
+    "destination": "/produse/gima-v2008-vascular-doppler-cu-8-mhz-fixed-sonda-33121",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gima-xc-2000-centrifuge-24035",
+    "destination": "/produse/centrifuga-de-laborator-xc-2000-24035"
+  },
+  {
+    "source": "/produse/ginecologie-29425",
+    "destination": "/produse/sponge-holding-pensa-400-mm-29425",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gynex-pat-scaun-cu-rola-holder-colour-on-request-27520",
+    "destination": "/produse/gynex-pat-scaun-cu-rola-suport-culoare-la-cerere-27520",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gynex-pat-scaun-cu-rola-holder-lumina-albastru-27521",
+    "destination": "/produse/gynex-pat-scaun-cu-rola-suport-lumina-albastru-27521",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gynex-pat-scaun-cu-rola-holder-metal-apricot-27525",
+    "destination": "/produse/gynex-pat-scaun-cu-rola-suport-metal-apricot-27525",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gynex-pat-scaun-cu-rola-holder-metal-sea-albastru-27526",
+    "destination": "/produse/gynex-pat-scaun-cu-rola-suport-metal-sea-albastru-27526",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gynex-pat-scaun-cu-rola-holder-portocaliu-27524",
+    "destination": "/produse/gynex-pat-scaun-cu-rola-suport-portocaliu-27524",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gynex-pat-scaun-cu-rola-holder-verde-27522",
+    "destination": "/produse/gynex-pat-scaun-cu-rola-suport-verde-27522",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gynex-profesional-scaun-colour-on-request-27512",
+    "destination": "/produse/gynex-profesional-scaun-culoare-la-cerere-27512",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hartie-roll-152-mm-x-25-m-cutie-cu-10-29526",
+    "destination": "/produse/hartie-rola-152-mm-x-25-m-cutie-cu-10-29526"
+  },
+  {
+    "source": "/produse/hartie-termica-100-mm-x-20-m-100-l-cutie-cu-10-33052",
+    "destination": "/produse/termica-hartie-100-mm-x-20-m-100-l-cutie-cu-10-33052",
+    "permanent": true
+  },
+  {
+    "source": "/produse/height-adjustable-electric-bed-44800",
+    "destination": "/produse/inaltime-reglabil-electric-pat-sarcina-230-kg-44800",
+    "permanent": true
+  },
+  {
+    "source": "/produse/height-adjustable-electric-bed-compass-rail-44799",
+    "destination": "/produse/inaltime-reglabil-electric-pat-compass-sina-sarcina-230-kg-44799",
+    "permanent": true
+  },
+  {
+    "source": "/produse/heine-binocular-loupe-2-5x-420mm-c-000-32-356-30931",
+    "destination": "/produse/heine-lupa-binoculara-2-5x-420mm-c-000-32-356-30931",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf100-profesional-incaltaminte-medicala-34-laces-alb-20100",
+    "destination": "/produse/incaltaminte-medicala-hf100-marimea-34-cu-sireturi-alba-20100",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf100-profesional-incaltaminte-medicala-35-laces-alb-20101",
+    "destination": "/produse/incaltaminte-medicala-hf100-marimea-35-cu-sireturi-alba-20101",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf100-profesional-incaltaminte-medicala-36-laces-alb-20102",
+    "destination": "/produse/incaltaminte-medicala-hf100-marimea-36-cu-sireturi-alba-20102",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf100-profesional-incaltaminte-medicala-37-laces-alb-20103",
+    "destination": "/produse/incaltaminte-medicala-hf100-marimea-37-cu-sireturi-alba-20103",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf100-profesional-incaltaminte-medicala-38-laces-alb-20104",
+    "destination": "/produse/incaltaminte-medicala-hf100-marimea-38-cu-sireturi-alba-20104",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf100-profesional-incaltaminte-medicala-39-laces-alb-20105",
+    "destination": "/produse/incaltaminte-medicala-hf100-marimea-39-cu-sireturi-alba-20105",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf100-profesional-incaltaminte-medicala-40-laces-alb-20106",
+    "destination": "/produse/incaltaminte-medicala-hf100-marimea-40-cu-sireturi-alba-20106",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf100-profesional-incaltaminte-medicala-41-laces-alb-20107",
+    "destination": "/produse/incaltaminte-medicala-hf100-marimea-41-cu-sireturi-alba-20107",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf100-profesional-incaltaminte-medicala-42-laces-alb-20108",
+    "destination": "/produse/incaltaminte-medicala-hf100-marimea-42-cu-sireturi-alba-20108",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf100-profesional-incaltaminte-medicala-43-laces-alb-20109",
+    "destination": "/produse/incaltaminte-medicala-hf100-marimea-43-cu-sireturi-alba-20109",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf100-profesional-incaltaminte-medicala-44-laces-alb-20110",
+    "destination": "/produse/incaltaminte-medicala-hf100-marimea-44-cu-sireturi-alba-20110",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf100-profesional-incaltaminte-medicala-45-laces-alb-20111",
+    "destination": "/produse/incaltaminte-medicala-hf100-marimea-45-cu-sireturi-alba-20111",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf100-profesional-incaltaminte-medicala-46-laces-alb-20112",
+    "destination": "/produse/incaltaminte-medicala-hf100-marimea-46-cu-sireturi-alba-20112",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf200-profesional-incaltaminte-medicala-34-bareta-alb-20140",
+    "destination": "/produse/incaltaminte-medicala-hf200-marimea-34-cu-bareta-alba-20140",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf200-profesional-incaltaminte-medicala-35-bareta-alb-20141",
+    "destination": "/produse/incaltaminte-medicala-hf200-marimea-35-cu-bareta-alba-20141",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf200-profesional-incaltaminte-medicala-36-bareta-alb-20142",
+    "destination": "/produse/incaltaminte-medicala-hf200-marimea-36-cu-bareta-alba-20142",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf200-profesional-incaltaminte-medicala-37-bareta-alb-20143",
+    "destination": "/produse/incaltaminte-medicala-hf200-marimea-37-cu-bareta-alba-20143",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf200-profesional-incaltaminte-medicala-38-bareta-alb-20144",
+    "destination": "/produse/incaltaminte-medicala-hf200-marimea-38-cu-bareta-alba-20144",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf200-profesional-incaltaminte-medicala-39-bareta-alb-20145",
+    "destination": "/produse/incaltaminte-medicala-hf200-marimea-39-cu-bareta-alba-20145",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf200-profesional-incaltaminte-medicala-40-bareta-alb-20146",
+    "destination": "/produse/incaltaminte-medicala-hf200-marimea-40-cu-bareta-alba-20146",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf200-profesional-incaltaminte-medicala-41-bareta-alb-20147",
+    "destination": "/produse/incaltaminte-medicala-hf200-marimea-41-cu-bareta-alba-20147",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf200-profesional-incaltaminte-medicala-42-bareta-alb-20148",
+    "destination": "/produse/incaltaminte-medicala-hf200-marimea-42-cu-bareta-alba-20148",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf200-profesional-incaltaminte-medicala-43-bareta-alb-20149",
+    "destination": "/produse/incaltaminte-medicala-hf200-marimea-43-cu-bareta-alba-20149",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf200-profesional-incaltaminte-medicala-44-bareta-alb-20150",
+    "destination": "/produse/incaltaminte-medicala-hf200-marimea-44-cu-bareta-alba-20150",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf200-profesional-incaltaminte-medicala-45-bareta-alb-20151",
+    "destination": "/produse/incaltaminte-medicala-hf200-marimea-45-cu-bareta-alba-20151",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hf200-profesional-incaltaminte-medicala-46-bareta-alb-20152",
+    "destination": "/produse/incaltaminte-medicala-hf200-marimea-46-cu-bareta-alba-20152",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hydraulic-scaun-pentru-transfer-pacient-43430",
+    "destination": "/produse/scaun-hidraulic-pentru-transfer-pacient-43430"
+  },
+  {
+    "source": "/produse/hyridia-7-leds-light-flexible-arm-carucior-49040",
+    "destination": "/produse/hyridia-7-leds-lumina-cu-flexible-arm-carucior-49040",
+    "permanent": true
+  },
+  {
+    "source": "/produse/hyridia-7-leds-light-metal-spring-arm-carucior-49041",
+    "destination": "/produse/hyridia-7-leds-lumina-cu-metal-spring-arm-carucior-49041",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-marime-41245",
+    "destination": "/produse/incaltaminte-medicala-41245",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-marime-41246",
+    "destination": "/produse/incaltaminte-medicala-41246",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-marime-41247",
+    "destination": "/produse/incaltaminte-medicala-41247",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-marime-41248",
+    "destination": "/produse/incaltaminte-medicala-41248",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-marime-41249",
+    "destination": "/produse/incaltaminte-medicala-41249",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-34-alb-20000",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-34-alba-20000",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-34-albastru-20020",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-34-alba-20020",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-35-alb-20001",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-35-alba-20001",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-35-albastru-20021",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-35-alba-20021",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-36-alb-20002",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-36-alba-20002",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-36-albastru-20022",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-36-alba-20022",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-37-alb-20003",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-37-alba-20003",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-37-albastru-20023",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-37-alba-20023",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-38-alb-20004",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-38-alba-20004",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-38-albastru-20024",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-38-alba-20024",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-39-alb-20005",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-39-alba-20005",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-39-albastru-20025",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-39-alba-20025",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-40-alb-20006",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-40-alba-20006",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-40-albastru-20026",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-40-alba-20026",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-41-alb-20007",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-41-alba-20007",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-41-albastru-20027",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-41-alba-20027",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-42-alb-20008",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-42-alba-20008",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-42-albastru-20028",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-42-alba-20028",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-43-alb-20009",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-43-alba-20009",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-43-albastru-20029",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-43-alba-20029",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-44-alb-20010",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-44-alba-20010",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-44-albastru-20030",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-44-alba-20030",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-45-alb-20011",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-45-alba-20011",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-45-albastru-20031",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-45-alba-20031",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-46-alb-20012",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-46-alba-20012",
+    "permanent": true
+  },
+  {
+    "source": "/produse/incaltaminte-medicala-ultra-lumina-46-albastru-20032",
+    "destination": "/produse/incaltaminte-medicala-ultra-lumina-marimea-46-alba-20032",
+    "permanent": true
+  },
+  {
+    "source": "/produse/infusion-manseta-32680",
+    "destination": "/produse/trusa-perfuzie-riester-metpak-32680",
+    "permanent": true
+  },
+  {
+    "source": "/produse/instrumentar-chirurgical-cod-26760-26760",
+    "destination": "/produse/trousse-standard-polyester-geanta-9-instr-26760"
+  },
+  {
+    "source": "/produse/instrumentar-chirurgical-cod-26761-26761",
+    "destination": "/produse/trousse-classica-polyester-geanta-10-instr-26761"
+  },
+  {
+    "source": "/produse/instrumentar-chirurgical-cod-26762-26762",
+    "destination": "/produse/trousse-suprema-polyester-geanta-11-instr-26762"
+  },
+  {
+    "source": "/produse/insulin-seringa-0-5-ml-30g-0-3x8-mmyg-cutie-cu-100-23805",
+    "destination": "/produse/seringa-pentru-insulina-1-ml-25g-cutie-100-bucati-23805",
+    "permanent": true
+  },
+  {
+    "source": "/produse/insulin-seringa-1-ml-25g-0-5x16-mm-cutie-cu-100-23802",
+    "destination": "/produse/seringa-pentru-insulina-1-ml-25g-cutie-100-bucati-23802",
+    "permanent": true
+  },
+  {
+    "source": "/produse/insulin-seringa-1-ml-27g-0-4x13-mmyg-cutie-cu-100-23803",
+    "destination": "/produse/seringa-pentru-insulina-1-ml-25g-cutie-100-bucati-23803",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-alb-bumbac-mare-26132",
+    "destination": "/produse/jacheta-medicala-alba-26132",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-alb-bumbac-mic-26130",
+    "destination": "/produse/jacheta-medicala-alba-26130",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-alb-bumbac-x-mare-26133",
+    "destination": "/produse/jacheta-medicala-alba-26133",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-alb-bumbac-x-mic-26124",
+    "destination": "/produse/jacheta-medicala-alba-26124",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-albastru-indigo-bumbac-mare-26152",
+    "destination": "/produse/jacheta-medicala-alba-26152",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-albastru-indigo-bumbac-mic-26150",
+    "destination": "/produse/jacheta-medicala-alba-26150",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-albastru-indigo-bumbac-x-mare-26153",
+    "destination": "/produse/jacheta-medicala-alba-26153",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-albastru-indigo-bumbac-x-mic-26128",
+    "destination": "/produse/jacheta-medicala-alba-26128",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-l-alb-21434",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-l-alba-21434",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-l-lumina-albastru-21454",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-l-alba-21454",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-l-verde-21444",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-l-verde-21444",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-m-alb-21433",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-m-alba-21433",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-m-culoare-la-cerere-21473",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-m-21473",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-m-lumina-albastru-21453",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-m-alba-21453",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-m-verde-21443",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-m-verde-21443",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-s-alb-21432",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-s-alba-21432",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-s-lumina-albastru-21452",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-s-alba-21452",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-s-verde-21442",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-s-verde-21442",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-xl-alb-21435",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-xl-alba-21435",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-xl-lumina-albastru-21455",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-xl-alba-21455",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-xl-verde-21445",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-xl-verde-21445",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-xs-alb-21431",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-xs-alba-21431",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-xs-lumina-albastru-21451",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-xs-alba-21451",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-xs-verde-21441",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-xs-verde-21441",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-xxl-alb-21436",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-xxl-alba-21436",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-xxl-lumina-albastru-21456",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-xxl-alba-21456",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-xxl-verde-21446",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-xxl-verde-21446",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-xxxl-alb-21437",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-xxxl-alba-21437",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-bumbac-poliester-unisex-xxxl-lumina-albastru-21457",
+    "destination": "/produse/jacheta-medicala-unisex-marimea-xxxl-alba-21457",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-verde-bumbac-mare-26142",
+    "destination": "/produse/jacheta-medicala-verde-26142",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-verde-bumbac-mic-26140",
+    "destination": "/produse/jacheta-medicala-verde-26140",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-verde-bumbac-x-mare-26143",
+    "destination": "/produse/jacheta-medicala-verde-26143",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jacheta-verde-bumbac-x-mic-26126",
+    "destination": "/produse/jacheta-medicala-verde-26126",
+    "permanent": true
+  },
+  {
+    "source": "/produse/jolly-wrist-blood-pressure-monitor-32773",
+    "destination": "/produse/tensiometru-de-incheietura-jolly-32773"
+  },
+  {
+    "source": "/produse/k2-ac-0-055-mm-0-002-cutie-cu-50-30400",
+    "destination": "/produse/ac-medical-055-mm-30400",
+    "permanent": true
+  },
+  {
+    "source": "/produse/k2-ac-0-055-mm-0-002-cutie-cu-50-30405",
+    "destination": "/produse/ac-medical-055-mm-30405",
+    "permanent": true
+  },
+  {
+    "source": "/produse/konix-kavitation-gel-bottle-1-l-33252",
+    "destination": "/produse/konix-kavitation-gel-flacon-1-l-33252",
+    "permanent": true
+  },
+  {
+    "source": "/produse/lampa-led-fototerapie-infantila-pe-carucior-31192",
+    "destination": "/produse/lampa-led-pentru-fototerapie-infantila-pe-carucior-31192",
+    "permanent": true
+  },
+  {
+    "source": "/produse/laringiana-masca-n-1-0-up-pana-la-5-kg-4-ml-87-mm-cutie-cu-50-57580",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-57580",
+    "permanent": true
+  },
+  {
+    "source": "/produse/laringiana-masca-n-1-5-5-10-kg-7-ml-100-mm-cutie-cu-50-57581",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-57581",
+    "permanent": true
+  },
+  {
+    "source": "/produse/laringiana-masca-n-2-0-10-20-kg-10-ml-120-mm-cutie-cu-50-57582",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-57582",
+    "permanent": true
+  },
+  {
+    "source": "/produse/laringiana-masca-n-2-5-20-30-kg-14-ml-130-mm-cutie-cu-50-57583",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-57583",
+    "permanent": true
+  },
+  {
+    "source": "/produse/laringiana-masca-n-3-0-30-50-kg-20-ml-175-mm-cutie-cu-50-57584",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-57584",
+    "permanent": true
+  },
+  {
+    "source": "/produse/laringiana-masca-n-4-0-50-70-kg-30-ml-175-mm-cutie-cu-50-57585",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-57585",
+    "permanent": true
+  },
+  {
+    "source": "/produse/laringiana-masca-n-5-0-70-100-kg-40-ml-195-mm-cutie-cu-50-57586",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-57586",
+    "permanent": true
+  },
+  {
+    "source": "/produse/latex-sonda-covers-transparent-cutie-cu-50-29513",
+    "destination": "/produse/huse-pentru-sonda-medicala-29513",
+    "permanent": true
+  },
+  {
+    "source": "/produse/latex-sonda-covers-transparent-cutie-cu-500-29514",
+    "destination": "/produse/huse-pentru-sonda-medicala-29514",
+    "permanent": true
+  },
+  {
+    "source": "/produse/led-biological-microscope-40x-pana-la-1600x-31002",
+    "destination": "/produse/microscop-biologic-led-40x-1600x-31002",
+    "permanent": true
+  },
+  {
+    "source": "/produse/led-microscop-biologic-40x-to-1600x-31002",
+    "destination": "/produse/microscop-biologic-led-40x-1600x-31002"
+  },
+  {
+    "source": "/produse/led-spot-adjusted-light-carucior-49047",
+    "destination": "/produse/led-spot-adjusted-lumina-carucior-49047",
+    "permanent": true
+  },
+  {
+    "source": "/produse/lumex-led-lumina-cu-handle-carucior-49045",
+    "destination": "/produse/lumex-led-lumina-cu-maner-carucior-49045",
+    "permanent": true
+  },
+  {
+    "source": "/produse/lumina-led-light-carucior-49035",
+    "destination": "/produse/lumina-led-lumina-carucior-49035",
+    "permanent": true
+  },
+  {
+    "source": "/produse/male-ext-cateter-cu-tava-24-mm-s-cutie-cu-30-28735",
+    "destination": "/produse/cateter-extern-masculin-diametru-24-mm-cutie-30-bucati-28735",
+    "permanent": true
+  },
+  {
+    "source": "/produse/male-ext-cateter-cu-tava-28-mm-m-cutie-cu-30-28736",
+    "destination": "/produse/cateter-extern-masculin-diametru-28-mm-cutie-30-bucati-28736",
+    "permanent": true
+  },
+  {
+    "source": "/produse/male-ext-cateter-cu-tava-31-mm-m-l-cutie-cu-30-28737",
+    "destination": "/produse/cateter-extern-masculin-diametru-31-mm-cutie-30-bucati-28737",
+    "permanent": true
+  },
+  {
+    "source": "/produse/male-ext-cateter-cu-tava-35-mm-l-cutie-cu-30-28738",
+    "destination": "/produse/cateter-extern-masculin-diametru-35-mm-cutie-30-bucati-28738",
+    "permanent": true
+  },
+  {
+    "source": "/produse/male-ext-cateter-cu-tava-40-mm-xl-cutie-cu-30-28739",
+    "destination": "/produse/cateter-extern-masculin-diametru-40-mm-cutie-30-bucati-28739",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mamilat-breast-pump-230-v-50-hz-28148",
+    "destination": "/produse/pompa-de-san-mamilat-28148",
+    "permanent": true
+  },
+  {
+    "source": "/produse/manseta-omron-gs-cuff2-l-32-42-cm-pentru-hbp-49894",
+    "destination": "/produse/manseta-omron-gs-cuff2-l-32-42-cm-pentru-hbp-1120-49894",
+    "permanent": true
+  },
+  {
+    "source": "/produse/manseta-omron-gs-cuff2-s-17-22-cm-pentru-hbp-49892",
+    "destination": "/produse/manseta-omron-gs-cuff2-s-17-22-cm-pentru-hbp-1120-49892",
+    "permanent": true
+  },
+  {
+    "source": "/produse/manseta-omron-gs-cuff2-xl-42-50-cm-pentru-hbp-49895",
+    "destination": "/produse/manseta-omron-gs-cuff2-xl-42-50-cm-pentru-hbp-1120-49895",
+    "permanent": true
+  },
+  {
+    "source": "/produse/manseta-omron-gs-cuff2-xs-12-18-cm-pentru-hbp-49891",
+    "destination": "/produse/manseta-omron-gs-cuff2-xs-12-18-cm-pentru-hbp-1120-49891",
+    "permanent": true
+  },
+  {
+    "source": "/produse/manusi-medicale-marimea-10-neagra-cutie-100-bucati-21819",
+    "destination": "/produse/manusi-medicale-marimea-10-cutie-100-bucati-21819",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mare-8-9-albastru-cutie-o-f-100-21808",
+    "destination": "/produse/manusi-medicale-alba-cutie-100-bucati-21808",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mare-8-9-albastru-cutie-o-f-200-21813",
+    "destination": "/produse/manusi-medicale-alba-cutie-200-bucati-21813",
+    "permanent": true
+  },
+  {
+    "source": "/produse/masa-de-examinare-veterinara-80300",
+    "destination": "/produse/veterinary-examination-masa-80300",
+    "permanent": true
+  },
+  {
+    "source": "/produse/masa-de-operatie-veterinara-80301",
+    "destination": "/produse/veterinary-operation-masa-80301",
+    "permanent": true
+  },
+  {
+    "source": "/produse/masa-pat-olympus-blat-inclinabil-43552",
+    "destination": "/produse/masa-de-pat-olympus-cu-blat-inclinabil-43552",
+    "permanent": true
+  },
+  {
+    "source": "/produse/masa-peste-pat-ingrijire-pacient-27448",
+    "destination": "/produse/masa-peste-pat-pentru-ingrijire-pacient-27448",
+    "permanent": true
+  },
+  {
+    "source": "/produse/masa-servire-pacient-27449",
+    "destination": "/produse/masa-de-servire-pentru-pacient-27449",
+    "permanent": true
+  },
+  {
+    "source": "/produse/masca-chirurgicala-reutilizabila-mycroclean-pentru-copii-bfe-99-8-alba-20770",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-mycroclean-bfe-99-8-alba-20770",
+    "permanent": true
+  },
+  {
+    "source": "/produse/masca-chirurgicala-reutilizabila-mycroclean-pentru-copii-bfe-99-8-alba-20771",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-mycroclean-bfe-99-8-alba-20771",
+    "permanent": true
+  },
+  {
+    "source": "/produse/masca-chirurgicala-reutilizabila-mycroclean-pentru-copii-bfe-99-8-alba-20775",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-mycroclean-bfe-99-8-alba-20775",
+    "permanent": true
+  },
+  {
+    "source": "/produse/masca-faciala-adult-28168",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-pentru-adulti-28168",
+    "permanent": true
+  },
+  {
+    "source": "/produse/masca-faciala-pediatry-28169",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-28169",
+    "permanent": true
+  },
+  {
+    "source": "/produse/maskella-25648",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-25648",
+    "permanent": true
+  },
+  {
+    "source": "/produse/maskerita-chirurgical-face-masca-cu-sireturi-25649",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-25649",
+    "permanent": true
+  },
+  {
+    "source": "/produse/master-pentru-pat-masa-27447",
+    "destination": "/produse/masa-peste-pat-master-27447",
+    "permanent": true
+  },
+  {
+    "source": "/produse/maya-gynaecological-scaun-albastru-44300",
+    "destination": "/produse/scaun-ginecologic-maya-albastru-44300"
+  },
+  {
+    "source": "/produse/maya-gynaecological-scaun-culoare-la-alegere-44305",
+    "destination": "/produse/scaun-ginecologic-maya-culoare-la-alegere-44305",
+    "permanent": true
+  },
+  {
+    "source": "/produse/medication-first-aid-bag-filled-34149",
+    "destination": "/produse/medication-first-aid-geanta-filled-34149",
+    "permanent": true
+  },
+  {
+    "source": "/produse/medication-first-aid-geanta-echipata-34149",
+    "destination": "/produse/medication-first-aid-geanta-filled-34149",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mediu-7-8-albastru-cutie-o-f-100-21807",
+    "destination": "/produse/manusi-medicale-alba-cutie-100-bucati-21807",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mic-6-7-albastru-cutie-o-f-100-21806",
+    "destination": "/produse/manusi-medicale-alba-cutie-100-bucati-21806",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mic-6-7-albastru-cutie-o-f-200-21811",
+    "destination": "/produse/manusi-medicale-alba-cutie-200-bucati-21811",
+    "permanent": true
+  },
+  {
+    "source": "/produse/microscop-biologic-40x-to-1000x-31000",
+    "destination": "/produse/microscop-biologic-40x-1000x-31000"
+  },
+  {
+    "source": "/produse/microscope-adaptor-23-mm-32187",
+    "destination": "/produse/microscop-biologic-32187",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mini-diabetic-geanta-empty-albastru-27254",
+    "destination": "/produse/geanta-medicala-profesionala-27254",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mobilier-medical-27475-27475",
+    "destination": "/produse/masa-peste-pat-diffusion-alba-27475"
+  },
+  {
+    "source": "/produse/mobilier-medical-27513",
+    "destination": "/produse/gynex-profesional-scaun-albastru-27513",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mobilier-medical-27514",
+    "destination": "/produse/gynex-profesional-scaun-lumina-albastru-27514",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mobilier-medical-27515",
+    "destination": "/produse/gynex-profesional-scaun-metal-apricot-27515",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mobilier-medical-gamma1-cabinet-61x45xh-77-cm-small-28030",
+    "destination": "/produse/gamma1-dulap-61x45xh-77-cm-mic-28030",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mobilier-medical-gamma3-cabinet-108x45xh-77-cm-large-28031",
+    "destination": "/produse/gamma3-dulap-108x45xh-77-cm-mare-28031",
+    "permanent": true
+  },
+  {
+    "source": "/produse/monitor-fetal-fc1400-sarcina-unica-29516",
+    "destination": "/produse/monitor-fetal-fc1400-pentru-sarcina-unica-29516",
+    "permanent": true
+  },
+  {
+    "source": "/produse/monitor-fetal-fc1400-twins-sarcina-gemelara-29517",
+    "destination": "/produse/monitor-fetal-fc1400-twins-pentru-sarcina-gemelara-29517",
+    "permanent": true
+  },
+  {
+    "source": "/produse/monitorizare-33253",
+    "destination": "/produse/konix-kavitation-gel-tub-250-ml-33253",
+    "permanent": true
+  },
+  {
+    "source": "/produse/monitorizare-33272",
+    "destination": "/produse/ultrasound-gel-tub-250-ml-albastru-33272",
+    "permanent": true
+  },
+  {
+    "source": "/produse/monitorizare-33276",
+    "destination": "/produse/ultrasound-gel-tank-5-l-albastru-33276",
+    "permanent": true
+  },
+  {
+    "source": "/produse/monitorizare-33286",
+    "destination": "/produse/ultrasound-gel-geanta-5-l-albastru-33286",
+    "permanent": true
+  },
+  {
+    "source": "/produse/monitorizare-33344",
+    "destination": "/produse/de-unica-folosinta-foam-electrodes-48-50-mm-liquid-gel-33344",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mycroclean-adult-masca-chirurgicala-reutilizabila-bfe-99-8-2-straturi-alb-alb-clema-nazala-20750",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-mycroclean-pentru-adulti-bfe-99-8-alba-20750",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mycroclean-adult-masca-chirurgicala-reutilizabila-bfe-99-8-2-straturi-alb-albastru-clema-nazala-20751",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-mycroclean-pentru-adulti-bfe-99-8-alba-20751",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mycroclean-adult-masca-chirurgicala-reutilizabila-bfe-99-8-alb-albastru-20765",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-mycroclean-pentru-adulti-bfe-99-8-alba-20765",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mycroclean-adult-masca-chirurgicala-reutilizabila-bfe-99-8-alb-rosu-20766",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-mycroclean-pentru-adulti-bfe-99-8-alba-20766",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mycroclean-adult-masca-chirurgicala-reutilizabila-bfe-99-8-albastru-alb-20764",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-mycroclean-pentru-adulti-bfe-99-8-alba-20764",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mycroclean-adulti-reutilizabil-chirurgical-masca-bfe-99-8-2-layers-alb-alb-20755",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-mycroclean-pentru-adulti-bfe-99-8-alba-20755",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mycroclean-adulti-reutilizabil-chirurgical-masca-bfe-99-8-2-layers-alb-albastru-20756",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-mycroclean-pentru-adulti-bfe-99-8-alba-20756",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mycroclean-adulti-reutilizabil-chirurgical-masca-bfe-99-8-alb-alb-nose-clip-20760",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-mycroclean-pentru-adulti-bfe-99-8-alba-20760",
+    "permanent": true
+  },
+  {
+    "source": "/produse/new-pediatric-face-masca-pentru-eolo-corsia-famiglia-28147",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-28147",
+    "permanent": true
+  },
+  {
+    "source": "/produse/nibp-adult-cuff-pentru-bm1-bm3-bm5-bm7-needs-ext-cable-33735",
+    "destination": "/produse/nibp-manseta-pentru-adulti-pentru-bm1-bm3-bm5-bm7-needs-ext-cablu-33735",
+    "permanent": true
+  },
+  {
+    "source": "/produse/nibp-child-cuff-pentru-bm1-bm3-bm5-bm7-needs-extension-cable-33736",
+    "destination": "/produse/nibp-manseta-pentru-copii-pentru-bm1-bm3-bm5-bm7-needs-cablu-prelungitor-33736",
+    "permanent": true
+  },
+  {
+    "source": "/produse/nou-cardiogima-12-ecg-3-6-12-channel-33358",
+    "destination": "/produse/cardiogima-12-ecg-3-6-12-canale-cu-monitor-33358",
+    "permanent": true
+  },
+  {
+    "source": "/produse/og-digital-thermometer-c-25544",
+    "destination": "/produse/og-digital-termometru-c-25544",
+    "permanent": true
+  },
+  {
+    "source": "/produse/omron-bf511-body-composition-monitor-27293",
+    "destination": "/produse/monitor-compozitie-corporala-omron-bf511-27293"
+  },
+  {
+    "source": "/produse/orl-cod-31118-31118",
+    "destination": "/produse/plug-in-transformer-100-220-v-50-60-hz-cu-cablu-31118"
+  },
+  {
+    "source": "/produse/otel-inoxidabil-cutie-18x8xh-4-cm-26668",
+    "destination": "/produse/cutie-inox-pentru-sterilizare-26668",
+    "permanent": true
+  },
+  {
+    "source": "/produse/otel-inoxidabil-cutie-20x10xh-4-5-cm-26669",
+    "destination": "/produse/cutie-inox-pentru-sterilizare-26669",
+    "permanent": true
+  },
+  {
+    "source": "/produse/otel-inoxidabil-cutie-25x12-5xh-4-5-cm-26670",
+    "destination": "/produse/cutie-inox-pentru-sterilizare-26670",
+    "permanent": true
+  },
+  {
+    "source": "/produse/otel-inoxidabil-cutie-30x15xh-6-cm-26671",
+    "destination": "/produse/cutie-inox-pentru-sterilizare-26671",
+    "permanent": true
+  },
+  {
+    "source": "/produse/otel-inoxidabil-cutie-50x20xh-10-cm-26667",
+    "destination": "/produse/cutie-inox-pentru-sterilizare-10-cm-26667",
+    "permanent": true
+  },
+  {
+    "source": "/produse/otopex-ent-scaun-cu-headrest-verde-toronto-27552",
+    "destination": "/produse/scaun-orl-otopex-cu-tetiera-verde-toronto-27552"
+  },
+  {
+    "source": "/produse/otoscop-uni-i-maner-c-2-7-v-31870",
+    "destination": "/produse/otoscop-uni-i-cu-maner-c-2-7-v-31870",
+    "permanent": true
+  },
+  {
+    "source": "/produse/overbed-masa-moulded-tray-27469",
+    "destination": "/produse/pentru-pat-masa-turnat-tava-27469",
+    "permanent": true
+  },
+  {
+    "source": "/produse/oxy-100-pulse-oximeter-34342",
+    "destination": "/produse/pulsoximetru-oxy-50-34342",
+    "permanent": true
+  },
+  {
+    "source": "/produse/oxy-50-bluetooth-pulse-oximeter-35103",
+    "destination": "/produse/pulsoximetru-oxy-50-35103",
+    "permanent": true
+  },
+  {
+    "source": "/produse/oxy-50-pulse-oximeter-cu-software-35100",
+    "destination": "/produse/pulsoximetru-oxy-50-cu-software-35100",
+    "permanent": true
+  },
+  {
+    "source": "/produse/p3-skin-marker-fine-tip-steril-cutie-cu-10-33181",
+    "destination": "/produse/p3-marker-pentru-piele-fine-tip-steril-cutie-cu-10-33181",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pads-with-cablu-6-3-mm-plug-cutie-cu-25-30476",
+    "destination": "/produse/pads-cu-cablu-6-3-mm-plug-cutie-cu-25-30476",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pana-la-be-purchased-cu-light-49125",
+    "destination": "/produse/primaled-fix-lumina-carucior-49125",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-alb-bumbac-mare-26137",
+    "destination": "/produse/pantaloni-medicali-alba-26137",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-alb-bumbac-mediu-26136",
+    "destination": "/produse/pantaloni-medicali-alba-26136",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-alb-bumbac-mic-26135",
+    "destination": "/produse/pantaloni-medicali-alba-26135",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-alb-bumbac-x-mare-26138",
+    "destination": "/produse/pantaloni-medicali-alba-26138",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-alb-bumbac-x-mic-26125",
+    "destination": "/produse/pantaloni-medicali-alba-26125",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-albastru-indigo-bumbac-mare-26157",
+    "destination": "/produse/pantaloni-medicali-alba-26157",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-albastru-indigo-bumbac-mediu-26156",
+    "destination": "/produse/pantaloni-medicali-alba-26156",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-albastru-indigo-bumbac-mic-26155",
+    "destination": "/produse/pantaloni-medicali-alba-26155",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-albastru-indigo-bumbac-x-mare-26158",
+    "destination": "/produse/pantaloni-medicali-alba-26158",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-albastru-indigo-bumbac-x-mic-26129",
+    "destination": "/produse/pantaloni-medicali-alba-26129",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-l-alb-21494",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-l-alba-21494",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-l-bleumarin-21534",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-l-21534",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-l-lumina-albastru-21514",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-l-alba-21514",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-l-verde-21504",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-l-verde-21504",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-l-violet-21524",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-l-21524",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-m-alb-21493",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-m-alba-21493",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-m-bleumarin-21533",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-m-21533",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-m-lumina-albastru-21513",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-m-alba-21513",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-m-verde-21503",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-m-verde-21503",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-m-violet-21523",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-m-21523",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-s-alb-21492",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-s-alba-21492",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-s-bleumarin-21532",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-s-21532",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-s-lumina-albastru-21512",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-s-alba-21512",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-s-verde-21502",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-s-verde-21502",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-s-violet-21522",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-s-21522",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-xl-alb-21495",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-xl-alba-21495",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-xl-bleumarin-21535",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-xl-21535",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-xl-lumina-albastru-21515",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-xl-alba-21515",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-xl-verde-21505",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-xl-verde-21505",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-xl-violet-21525",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-xl-21525",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-xs-alb-21491",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-xs-alba-21491",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-xs-bleumarin-21531",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-xs-21531",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-xs-lumina-albastru-21511",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-xs-alba-21511",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-xs-verde-21501",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-xs-verde-21501",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-xs-violet-21521",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-xs-21521",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-xxl-alb-21496",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-xxl-alba-21496",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-xxl-bleumarin-21536",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-xxl-21536",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-xxl-lumina-albastru-21516",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-xxl-alba-21516",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-xxl-verde-21506",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-xxl-verde-21506",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-xxl-violet-21526",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-xxl-21526",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-xxxl-alb-21497",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-xxxl-alba-21497",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-bumbac-poliester-unisex-xxxl-lumina-albastru-21517",
+    "destination": "/produse/pantaloni-medicali-unisex-marimea-xxxl-alba-21517",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-verde-bumbac-mare-26147",
+    "destination": "/produse/pantaloni-medicali-verde-26147",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-verde-bumbac-mediu-26146",
+    "destination": "/produse/pantaloni-medicali-verde-26146",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-verde-bumbac-mic-26145",
+    "destination": "/produse/pantaloni-medicali-verde-26145",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-verde-bumbac-x-mare-26148",
+    "destination": "/produse/pantaloni-medicali-verde-26148",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pantaloni-medicali-verde-bumbac-x-mic-26127",
+    "destination": "/produse/pantaloni-medicali-verde-26127",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pediatric-probe-10-50-kg-nellcor-comp-de-unica-folosinta-33757",
+    "destination": "/produse/sonda-pediatrica-10-50-kg-nellcor-comp-de-unica-folosinta-33757",
+    "permanent": true
+  },
+  {
+    "source": "/produse/pentru-pat-diffusion-masa-alb-27475",
+    "destination": "/produse/masa-peste-pat-diffusion-alba-27475",
+    "permanent": true
+  },
+  {
+    "source": "/produse/plug-in-transformer-100-220-v-50-60-hz-with-cablu-31118",
+    "destination": "/produse/plug-in-transformer-100-220-v-50-60-hz-cu-cablu-31118",
+    "permanent": true
+  },
+  {
+    "source": "/produse/power-adaptor-80556",
+    "destination": "/produse/adaptor-de-alimentare-medical-80556",
+    "permanent": true
+  },
+  {
+    "source": "/produse/power-cablu-5m-30493",
+    "destination": "/produse/cablu-de-alimentare-medical-30493",
+    "permanent": true
+  },
+  {
+    "source": "/produse/prestige-autoclave-12-litres-35712",
+    "destination": "/produse/autoclava-prestige-12-l-35712"
+  },
+  {
+    "source": "/produse/primaled-flex-light-carucior-49126",
+    "destination": "/produse/primaled-flex-lumina-carucior-49126",
+    "permanent": true
+  },
+  {
+    "source": "/produse/primedic-heart-save-aed-defibrillator-cu-lithium-battery-gr-33391",
+    "destination": "/produse/primedic-heart-save-aed-defibrilator-cu-baterie-cu-litiu-gr-33391",
+    "permanent": true
+  },
+  {
+    "source": "/produse/primedic-heart-save-aed-defibrillator-cu-lithium-battery-pl-33392",
+    "destination": "/produse/primedic-heart-save-aed-defibrilator-cu-baterie-cu-litiu-pl-33392",
+    "permanent": true
+  },
+  {
+    "source": "/produse/produs-de-laborator-camp-chirurgical-100x100-cutie-cu-120-23583",
+    "destination": "/produse/camp-chirurgical-100x100-cutie-cu-120-23583",
+    "permanent": true
+  },
+  {
+    "source": "/produse/produs-de-laborator-camp-chirurgical-100x150-cutie-cu-80-23584",
+    "destination": "/produse/camp-chirurgical-100x150-cutie-cu-80-23584",
+    "permanent": true
+  },
+  {
+    "source": "/produse/produs-de-laborator-camp-chirurgical-150x150-cutie-cu-70-23585",
+    "destination": "/produse/camp-chirurgical-150x150-cutie-cu-70-23585",
+    "permanent": true
+  },
+  {
+    "source": "/produse/produs-de-laborator-camp-chirurgical-150x200-cutie-cu-50-23586",
+    "destination": "/produse/camp-chirurgical-150x200-cutie-cu-50-23586",
+    "permanent": true
+  },
+  {
+    "source": "/produse/produs-de-laborator-camp-chirurgical-150x240-cutie-cu-40-23587",
+    "destination": "/produse/camp-chirurgical-150x240-cutie-cu-40-23587",
+    "permanent": true
+  },
+  {
+    "source": "/produse/produs-de-laborator-camp-chirurgical-200x200-cutie-cu-40-23588",
+    "destination": "/produse/camp-chirurgical-200x200-cutie-cu-40-23588",
+    "permanent": true
+  },
+  {
+    "source": "/produse/produs-de-laborator-camp-chirurgical-200x250-cutie-cu-30-23589",
+    "destination": "/produse/camp-chirurgical-200x250-cutie-cu-30-23589",
+    "permanent": true
+  },
+  {
+    "source": "/produse/produs-pentru-ginecologie-ac-20-g-x-100-mm-29641",
+    "destination": "/produse/ac-20-g-x-100-mm-29641",
+    "permanent": true
+  },
+  {
+    "source": "/produse/produs-pentru-ginecologie-amniotic-membrane-perforator-steril-cutie-cu-600-29945",
+    "destination": "/produse/amniotic-membrane-perforator-steril-cutie-cu-600-29945",
+    "permanent": true
+  },
+  {
+    "source": "/produse/produs-pentru-ginecologie-hartie-rola-152-mm-x-25-m-cutie-cu-10-29526",
+    "destination": "/produse/hartie-rola-152-mm-x-25-m-cutie-cu-10-29526",
+    "permanent": true
+  },
+  {
+    "source": "/produse/produs-pentru-ingrijire-pacient-25540-25540",
+    "destination": "/produse/ri-termo-sensiopro-non-contact-infrarosu-termometru-25540",
+    "permanent": true
+  },
+  {
+    "source": "/produse/produs-pentru-ingrijirea-pacientului-funny-pattern-5-l-xl-cutie-cu-5-41205",
+    "destination": "/produse/funny-pattern-5-l-xl-cutie-cu-5-41205",
+    "permanent": true
+  },
+  {
+    "source": "/produse/produs-pentru-ingrijirea-pacientului-funny-pattern-6-l-xl-cutie-cu-5-41206",
+    "destination": "/produse/funny-pattern-6-l-xl-cutie-cu-5-41206",
+    "permanent": true
+  },
+  {
+    "source": "/produse/produs-pentru-sterilizare-container-card-cu-steam-indicator-68x37-5-mm-cutie-cu-250-37333",
+    "destination": "/produse/container-card-cu-steam-indicator-68x37-5-mm-cutie-cu-250-37333",
+    "permanent": true
+  },
+  {
+    "source": "/produse/produs-pentru-urgenta-rescue-life-aed-defibrilator-33185",
+    "destination": "/produse/rescue-life-aed-defibrilator-33185",
+    "permanent": true
+  },
+  {
+    "source": "/produse/produs-pentru-urgenta-rescue-life-aed-defibrilator-33186",
+    "destination": "/produse/rescue-life-aed-defibrilator-33186",
+    "permanent": true
+  },
+  {
+    "source": "/produse/professional-geanta-27141",
+    "destination": "/produse/geanta-profesionala-27141",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ri-focus-6091-led-headlight-cu-rechargeable-batteries-30881",
+    "destination": "/produse/riester-ri-focus-6091-led-lampa-frontala-30881",
+    "permanent": true
+  },
+  {
+    "source": "/produse/riester-big-ben-carucior-54-cm-adult-one-piece-cuff-32740",
+    "destination": "/produse/riester-big-ben-carucior-54-cm-adulti-one-piece-manseta-32740",
+    "permanent": true
+  },
+  {
+    "source": "/produse/riester-metpak-infusion-32684",
+    "destination": "/produse/trusa-perfuzie-riester-metpak-32684",
+    "permanent": true
+  },
+  {
+    "source": "/produse/riester-spo2-senzor-adulti-de-rezerva-33806",
+    "destination": "/produse/sonda-spo2-pentru-monitorizare-pacient-33806",
+    "permanent": true
+  },
+  {
+    "source": "/produse/rocker-single-use-handle-steril-cutie-cu-50-30544",
+    "destination": "/produse/maner-rocker-de-unica-folosinta-steril-cutie-cu-50-30544",
+    "permanent": true
+  },
+  {
+    "source": "/produse/rola-hartie-termica-80-mm-x-20-m-cutie-cu-10-33014",
+    "destination": "/produse/rola-termica-hartie-80-mm-x-20-m-cutie-cu-10-33014",
+    "permanent": true
+  },
+  {
+    "source": "/produse/rvs-100-nibp-spo2-imprimanta-33800",
+    "destination": "/produse/sonda-spo2-pentru-monitorizare-pacient-33800",
+    "permanent": true
+  },
+  {
+    "source": "/produse/rvs-100-nibp-spo2-pred-temp-imprimanta-33801",
+    "destination": "/produse/sonda-spo2-pentru-monitorizare-pacient-33801",
+    "permanent": true
+  },
+  {
+    "source": "/produse/safe-comfort-5-layer-reutilizabil-masca-type-iir-20730",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-20730",
+    "permanent": true
+  },
+  {
+    "source": "/produse/scaun-hidraulic-transfer-pacient-43430",
+    "destination": "/produse/scaun-hidraulic-pentru-transfer-pacient-43430",
+    "permanent": true
+  },
+  {
+    "source": "/produse/scaun-rulant-electric-roti-spate-30-cm-43290",
+    "destination": "/produse/scaun-rulant-electric-cu-roti-spate-30-cm-43290",
+    "permanent": true
+  },
+  {
+    "source": "/produse/scaun-rulant-electric-roti-spate-56-cm-bara-sprijin-43291",
+    "destination": "/produse/scaun-rulant-electric-cu-roti-spate-56-cm-si-bara-de-sprijin-43291",
+    "permanent": true
+  },
+  {
+    "source": "/produse/scaun-toaleta-otel-cromat-27701",
+    "destination": "/produse/scaun-toaleta-chromed-otel-27701",
+    "permanent": true
+  },
+  {
+    "source": "/produse/senzor-spo2-pediatric-riester-pentru-rvs-100-33805",
+    "destination": "/produse/sonda-spo2-pentru-monitorizare-pacient-33805",
+    "permanent": true
+  },
+  {
+    "source": "/produse/shower-carucior-hydraulic-44770",
+    "destination": "/produse/shower-carucior-hidraulic-44770",
+    "permanent": true
+  },
+  {
+    "source": "/produse/simplu-electric-breast-pump-41701",
+    "destination": "/produse/pompa-de-san-mamilat-41701",
+    "permanent": true
+  },
+  {
+    "source": "/produse/single-patient-pompa-manuala-de-aspiratie-28131",
+    "destination": "/produse/simplu-patient-pompa-manuala-de-aspiratie-28131",
+    "permanent": true
+  },
+  {
+    "source": "/produse/single-suport-pentru-bol-27456",
+    "destination": "/produse/simplu-suport-pentru-bol-27456",
+    "permanent": true
+  },
+  {
+    "source": "/produse/smart-geanta-polyester-pvc-coated-or-pvc-tarpaulin-empty-27153",
+    "destination": "/produse/geanta-medicala-profesionala-27153",
+    "permanent": true
+  },
+  {
+    "source": "/produse/smart-gima-automatic-wrist-tensiune-arteriala-monitor-32918",
+    "destination": "/produse/smart-gima-automat-incheietura-tensiune-arteriala-monitor-32918",
+    "permanent": true
+  },
+  {
+    "source": "/produse/soft-bag-kit-din-2014-34137",
+    "destination": "/produse/soft-geanta-kit-din-2014-34137",
+    "permanent": true
+  },
+  {
+    "source": "/produse/soft-geanta-kit-din-13164-2014-34137",
+    "destination": "/produse/soft-geanta-kit-din-2014-34137",
+    "permanent": true
+  },
+  {
+    "source": "/produse/solutie-de-control-15-ml-cutie-cu-nivel-nivel-nivel-nivel-nivel-nivel-nivel-nivel-2-24055",
+    "destination": "/produse/solutie-de-control-15-ml-cutie-cu-2-24055",
+    "permanent": true
+  },
+  {
+    "source": "/produse/sonda-covers-cutie-cu-200-bucati-25576",
+    "destination": "/produse/huse-pentru-sonda-medicala-25576",
+    "permanent": true
+  },
+  {
+    "source": "/produse/sonda-covers-cutie-cu-40-bucati-25581",
+    "destination": "/produse/huse-pentru-sonda-medicala-cutie-40-bucati-25581",
+    "permanent": true
+  },
+  {
+    "source": "/produse/sonda-spo2-pentru-80550-necesita-80557",
+    "destination": "/produse/sonda-spo2-pentru-monitorizare-pacient-80557",
+    "permanent": true
+  },
+  {
+    "source": "/produse/specialistic-bed-electrical-adjust-height-3-joints-4-sections-27672",
+    "destination": "/produse/specialist-low-pat-3-joints-4-sections-electric-cu-trendelenburg-27672",
+    "permanent": true
+  },
+  {
+    "source": "/produse/spo2-reutilizabil-adulti-sonda-cu-1-5-m-cablu-32903",
+    "destination": "/produse/sonda-spo2-pentru-monitorizare-pacient-32903",
+    "permanent": true
+  },
+  {
+    "source": "/produse/steril-ultrasound-gel-sachet-20-ml-transparent-33269",
+    "destination": "/produse/steril-ultrasound-gel-plic-20-ml-transparent-33269",
+    "permanent": true
+  },
+  {
+    "source": "/produse/stevens-dissection-foarfeca-curbat-80015",
+    "destination": "/produse/stevens-dissection-foarfeca-curved-80015",
+    "permanent": true
+  },
+  {
+    "source": "/produse/tensiometru-incheietura-ihealth-view-bp7s-ecran-23502",
+    "destination": "/produse/tensiometru-de-incheietura-ihealth-view-bp7s-cu-ecran-23502",
+    "permanent": true
+  },
+  {
+    "source": "/produse/trousse-classica-polyester-bag-10-instr-26761",
+    "destination": "/produse/trousse-classica-polyester-geanta-10-instr-26761",
+    "permanent": true
+  },
+  {
+    "source": "/produse/trousse-standard-polyester-bag-9-instr-26760",
+    "destination": "/produse/trousse-standard-polyester-geanta-9-instr-26760",
+    "permanent": true
+  },
+  {
+    "source": "/produse/trousse-suprema-polyester-bag-11-instr-26762",
+    "destination": "/produse/trousse-suprema-polyester-geanta-11-instr-26762",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-34-alb-26190",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-34-alba-26190",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-34-albastru-26210",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-34-alba-26210",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-34-verde-26175",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-34-verde-26175",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-35-alb-26191",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-35-alba-26191",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-35-albastru-26211",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-35-alba-26211",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-35-verde-26176",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-35-verde-26176",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-36-alb-26192",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-36-alba-26192",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-36-albastru-26212",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-36-alba-26212",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-36-verde-26177",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-36-verde-26177",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-37-alb-26193",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-37-alba-26193",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-37-albastru-26213",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-37-alba-26213",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-37-verde-26178",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-37-verde-26178",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-38-alb-26194",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-38-alba-26194",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-38-albastru-26214",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-38-alba-26214",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-38-verde-26179",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-38-verde-26179",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-39-alb-26195",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-39-alba-26195",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-39-albastru-26215",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-39-alba-26215",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-39-verde-26180",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-39-verde-26180",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-40-alb-26196",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-40-alba-26196",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-40-albastru-26216",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-40-alba-26216",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-40-verde-26181",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-40-verde-26181",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-41-alb-26197",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-41-alba-26197",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-41-albastru-26217",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-41-alba-26217",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-41-verde-26182",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-41-verde-26182",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-42-alb-26198",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-42-alba-26198",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-42-albastru-26218",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-42-alba-26218",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-42-verde-26183",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-42-verde-26183",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-43-alb-26199",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-43-alba-26199",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-43-albastru-26219",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-43-alba-26219",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-43-verde-26184",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-43-verde-26184",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-44-alb-26200",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-44-alba-26200",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-44-albastru-26220",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-44-alba-26220",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-44-verde-26185",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-44-verde-26185",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-45-alb-26201",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-45-alba-26201",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-45-albastru-26221",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-45-alba-26221",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-45-verde-26186",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-45-verde-26186",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-46-alb-26202",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-46-alba-26202",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-46-albastru-26222",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-46-alba-26222",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-46-verde-26187",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-46-verde-26187",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultra-lumina-saboti-medicali-cu-bareta-47-alb-26203",
+    "destination": "/produse/saboti-medicali-ultra-lumina-marimea-47-alba-26203",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ultrasound-gel-bottle-1-l-albastru-33288",
+    "destination": "/produse/ultrasound-gel-flacon-1-l-albastru-33288",
+    "permanent": true
+  },
+  {
+    "source": "/produse/urgenta-cod-45720-45720",
+    "destination": "/produse/carucior-de-urgenta-neo-plus-45720"
+  },
+  {
+    "source": "/produse/urine-eprubeta-12-ml-polystyrene-cutie-cu-100-25990",
+    "destination": "/produse/urina-eprubeta-12-ml-in-simplu-cutie-steril-25990",
+    "permanent": true
+  },
+  {
+    "source": "/produse/utility-bag-albastru-34063",
+    "destination": "/produse/utility-geanta-albastru-34063",
+    "permanent": true
+  },
+  {
+    "source": "/produse/utility-bag-albastru-34066",
+    "destination": "/produse/utility-geanta-albastru-34066",
+    "permanent": true
+  },
+  {
+    "source": "/produse/utility-bag-albastru-34067",
+    "destination": "/produse/utility-geanta-albastru-34067",
+    "permanent": true
+  },
+  {
+    "source": "/produse/vario-carucior-50-cm-adult-cuff-288-20-481-995-00-003-32673",
+    "destination": "/produse/vario-carucior-50-cm-adulti-manseta-288-20-481-995-00-003-32673",
+    "permanent": true
+  },
+  {
+    "source": "/produse/vario-perete-adulti-manseta-288-20-481-295-00-003-32672",
+    "destination": "/produse/vario-wall-adulti-manseta-288-20-481-295-00-003-32672",
+    "permanent": true
+  },
+  {
+    "source": "/produse/vento-airways-poly-bag-34211",
+    "destination": "/produse/vento-airways-poly-geanta-34211",
+    "permanent": true
+  },
+  {
+    "source": "/produse/visor-head-masca-25656",
+    "destination": "/produse/masca-chirurgicala-reutilizabila-25656",
+    "permanent": true
+  },
+  {
+    "source": "/produse/vista-4-led-lampa-wood-3w-maner-31195",
+    "destination": "/produse/vista-4-led-wood-lampa-3w-handle-31195",
+    "permanent": true
+  },
+  {
+    "source": "/produse/vista-4-led-wood-lampa-3w-maner-31195",
+    "destination": "/produse/vista-4-led-wood-lampa-3w-handle-31195",
+    "permanent": true
+  },
+  {
+    "source": "/produse/vista-lampa-wood-9w-maner-31196",
+    "destination": "/produse/vista-wood-lampa-9w-handle-31196",
+    "permanent": true
+  },
+  {
+    "source": "/produse/vista-wood-lampa-9w-maner-31196",
+    "destination": "/produse/vista-wood-lampa-9w-handle-31196",
+    "permanent": true
+  },
+  {
+    "source": "/produse/xc-2000-centrifuga-24035",
+    "destination": "/produse/centrifuga-de-laborator-xc-2000-24035"
+  },
+  {
+    "source": "/produse/years-in-a-nylon-bag-32814",
+    "destination": "/produse/years-in-a-nylon-geanta-32814",
+    "permanent": true
+  },
+  {
+    "source": "/produse/z-fold-hartie-termica-80x70-mm-x-200-foaie-cutie-cu-25-33016",
+    "destination": "/produse/z-fold-termica-hartie-80x70-mm-x-200-foaie-cutie-cu-25-33016",
+    "permanent": true
+  },
+  {
+    "source": "/produse/tensiometru-de-brat-ihealth-track-connected-23499",
+    "destination": "/produse/tensiometru-de-brat-ihealth-track-cu-conectivitate-23499",
+    "permanent": true
+  },
+  {
+    "source": "/produse/tensiometru-de-incheietura-ihealth-sense-bp7-23501",
+    "destination": "/produse/tensiometru-de-incheietura-ihealth-bp7-23501",
+    "permanent": true
+  },
+  {
+    "source": "/produse/analizor-de-urina-gima-cu-bluetooth-24046",
+    "destination": "/produse/analizor-de-urina-cu-bluetooth-24046",
+    "permanent": true
+  },
+  {
+    "source": "/produse/shaker-pentru-ecological-termometru-25587",
+    "destination": "/produse/agitator-pentru-termometre-medicale-ecologice-25587",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gimasafe-cutie-cu-10-bucati-25659",
+    "destination": "/produse/ochelari-de-protectie-gimasafe-cutie-10-bucati-25659",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gima-manual-pompa-de-aspiratie-cu-adulti-copii-cateter-28125",
+    "destination": "/produse/pompa-manuala-de-aspiratie-cu-catetere-adult-si-copil-28125",
+    "permanent": true
+  },
+  {
+    "source": "/produse/gima-brush-b-steril-cutie-cu-100-bucati-29735",
+    "destination": "/produse/periuta-cervicala-sterila-brush-b-cutie-100-bucati-29735",
+    "permanent": true
+  },
+  {
+    "source": "/produse/lampa-frontala-medicala-led-gima-70kl-30879",
+    "destination": "/produse/lampa-frontala-medicala-led-70kl-30879",
+    "permanent": true
+  },
+  {
+    "source": "/produse/tensiometru-gima-bluetooth-32916",
+    "destination": "/produse/tensiometru-cu-bluetooth-pentru-monitorizare-pacient-32916",
+    "permanent": true
+  },
+  {
+    "source": "/produse/mare-kit-metal-dulap-marime-460x300x140-mm-7-5-kg-34199",
+    "destination": "/produse/trusa-metalica-de-prim-ajutor-460x300x140-mm-34199",
+    "permanent": true
+  },
+  {
+    "source": "/produse/chirurgical-dressing-5x7-2-cm-2-8x3-8-cm-cutie-cu-5-bucati-34818",
+    "destination": "/produse/pansament-chirurgical-5x7-2-cm-cutie-5-bucati-34818",
+    "permanent": true
+  },
+  {
+    "source": "/produse/sterilizator-rapid-cu-bile-de-sticla-gima-quick-35640",
+    "destination": "/produse/sterilizator-rapid-quick-cu-bile-de-sticla-35640",
+    "permanent": true
+  },
+  {
+    "source": "/produse/carucior-de-anestezie-neo-plus-45720",
+    "destination": "/produse/carucior-de-urgenta-neo-plus-45720",
+    "permanent": true
+  },
+  {
+    "source": "/produse/ms-led-flex-plus-lumina-carucior-49133",
+    "destination": "/produse/stativ-pe-roti-pentru-lampa-medicala-ms-led-flex-plus-49133",
+    "permanent": true
+  },
+  {
+    "source": "/produse/spatule-linguale-cutie-100-bucati-25510",
+    "destination": "/produse/spatule-linguale-nesterile-cutie-100-bucati-25510",
+    "permanent": true
+  },
+  {
+    "source": "/produse/wood-tongue-depressor-steril-25511",
+    "destination": "/produse/spatule-linguale-sterile-din-lemn-ambalate-individual-25511",
+    "permanent": true
+  }
+]

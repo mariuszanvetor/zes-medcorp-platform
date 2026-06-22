@@ -28,6 +28,9 @@ type CategoryPageProps = {
 
 const PRODUCTS_PER_PAGE = 48;
 
+export const dynamic = "force-static";
+export const revalidate = 86_400;
+
 export function generateStaticParams() {
   return productCategories.map((category) => ({ slug: category.slug }));
 }

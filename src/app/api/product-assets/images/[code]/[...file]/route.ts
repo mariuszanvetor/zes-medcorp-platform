@@ -15,7 +15,7 @@ type ProductAssetImageRouteProps = {
 export async function GET(request: Request, { params }: ProductAssetImageRouteProps) {
   const rateLimit = checkServerRateLimit(request, {
     keyPrefix: "product-image-assets",
-    limit: 480,
+    limit: 240,
     windowSeconds: 300,
   });
 

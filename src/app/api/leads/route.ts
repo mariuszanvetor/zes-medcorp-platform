@@ -26,12 +26,16 @@ import type { LeadPayload } from "@/lib/lead-types";
 import { checkLeadSubmissionCooldown } from "@/lib/lead-rate-limit";
 import { scoreLead } from "@/lib/lead-scoring";
 import { saveLead } from "@/lib/lead-storage";
-import { checkServerRateLimit, rateLimitHeaders } from "@/lib/server-rate-limit";
+import { checkServerRateLimit, rateLimitHeaders, shouldBlockExpensivePost } from "@/lib/server-rate-limit";
 
 export async function POST(request: NextRequest) {
+  if (shouldBlockExpensivePost(request)) {
+    return NextResponse.json({ ok: false, error: "Solicitare respinsa." }, { status: 403 });
+  }
+
   const rateLimit = checkServerRateLimit(request, {
     keyPrefix: "lead-submit",
-    limit: 12,
+    limit: 6,
     windowSeconds: 300,
   });
 

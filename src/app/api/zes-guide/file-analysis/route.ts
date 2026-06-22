@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server";
 
-import { checkServerRateLimit, rateLimitHeaders } from "@/lib/server-rate-limit";
+import { checkServerRateLimit, rateLimitHeaders, shouldBlockExpensivePost } from "@/lib/server-rate-limit";
 import { analyzeZESFile } from "@/lib/zes-file-analysis";
 
 export async function POST(request: Request) {
+  if (shouldBlockExpensivePost(request)) {
+    return NextResponse.json({ ok: false, error: "Solicitare respinsa." }, { status: 403 });
+  }
+
   const rateLimit = checkServerRateLimit(request, {
     keyPrefix: "zes-file-analysis",
-    limit: 8,
+    limit: 4,
     windowSeconds: 300,
   });
 
