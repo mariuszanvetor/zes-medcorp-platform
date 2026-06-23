@@ -45,6 +45,7 @@ export type LeadCaptureFormProps = {
   generatedBudgetRange?: string;
   generatedRiskLevel?: string;
   generatedComplexity?: string;
+  hiddenFields?: Record<string, string>;
   onSubmitted?: (payload: LeadPayload) => void;
 };
 
@@ -119,9 +120,11 @@ export function LeadCaptureForm({
   generatedBudgetRange,
   generatedRiskLevel,
   generatedComplexity,
+  hiddenFields = {},
   onSubmitted,
 }: LeadCaptureFormProps) {
   const fields = useMemo(() => [...baseFields, ...extraFields], [extraFields]);
+  const hiddenEntries = useMemo(() => Object.entries(hiddenFields), [hiddenFields]);
   const [values, setValues] = useState<Record<string, string>>(
     Object.fromEntries(fields.map((field) => [field.id, field.options?.[0] ?? ""])),
   );
@@ -163,7 +166,7 @@ export function LeadCaptureForm({
       sourceTool,
       sourcePage,
       inquiryType,
-      values,
+      values: { ...hiddenFields, ...values },
       generatedSummary,
       generatedBudgetRange,
       generatedRiskLevel,
@@ -346,6 +349,9 @@ export function LeadCaptureForm({
         </div>
 
         <form className="grid gap-4" noValidate onSubmit={handleSubmit}>
+          {hiddenEntries.map(([name, value]) => (
+            <input key={name} name={name} type="hidden" value={value} />
+          ))}
           <p
             className={cn(
               "text-xs leading-6",

@@ -29,6 +29,7 @@ const staticRoutes: Array<{
   { path: "/solutii-medicale", changeFrequency: "monthly", priority: 0.94 },
   { path: "/contracte-mentenanta", changeFrequency: "monthly", priority: 0.9 },
   { path: "/servicii", changeFrequency: "monthly", priority: 0.88 },
+  { path: "/servicii/cabinetcare", changeFrequency: "monthly", priority: 0.9 },
   { path: "/about", changeFrequency: "monthly", priority: 0.74 },
   { path: "/companie", changeFrequency: "monthly", priority: 0.76 },
   { path: "/projects", changeFrequency: "monthly", priority: 0.76 },

@@ -33,6 +33,7 @@ const commercialLinksByPillar = {
     { href: "/aparatura-medicala-bucuresti", label: "Aparatura medicala București" },
   ],
   "service-maintenance": [
+    { href: "/servicii/cabinetcare", label: "ZES CabinetCare" },
     { href: "/service-aparatura-medicala", label: "Service aparatura medicala" },
     { href: "/servicii/service-radiologie", label: "Service radiologie" },
     { href: "/servicii/service-computer-tomograf", label: "Service CT" },

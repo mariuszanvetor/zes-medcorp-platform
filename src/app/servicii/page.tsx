@@ -87,6 +87,12 @@ export default function ServiciiHubPage() {
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
+              <Link
+                className="rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm font-semibold leading-6 text-[#0057b8] transition hover:border-blue-300 hover:bg-white"
+                href="/servicii/cabinetcare"
+              >
+                ZES CabinetCare - abonament tehnic pentru cabinete stomatologice
+              </Link>
               {seoCommercialLandings.map((page) => (
                 <Link
                   className="rounded-xl border border-slate-200 bg-[#f8fbff] p-4 text-sm font-semibold leading-6 text-slate-800 transition hover:border-blue-200 hover:bg-blue-50 hover:text-[#0057b8]"
