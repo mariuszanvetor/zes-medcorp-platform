@@ -29,11 +29,13 @@ const commercialLinksByPillar = {
     { href: "/produse/rmn", label: "RMN" },
     { href: "/produse/computer-tomograf", label: "Computer tomograf" },
     { href: "/produse/ecograf", label: "Ecograf" },
+    { href: "/servicii/pacs-medical", label: "PACS medical" },
     { href: "/aparatura-medicala-bucuresti", label: "Aparatura medicala București" },
   ],
   "service-maintenance": [
     { href: "/service-aparatura-medicala", label: "Service aparatura medicala" },
     { href: "/servicii/service-radiologie", label: "Service radiologie" },
+    { href: "/servicii/service-computer-tomograf", label: "Service CT" },
     { href: "/servicii/service-rmn", label: "Service RMN" },
     { href: "/servicii/mentenanta-echipamente-medicale", label: "Mentenanta echipamente" },
   ],

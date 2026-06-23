@@ -69,18 +69,29 @@ Expected Vercel usage impact:
 
 ## Vercel Monitoring Checklist
 
+Record these values manually after every production deploy:
+
+- Fluid Active CPU used / monthly limit
+- Function Invocations used / monthly limit
+- ISR Reads and ISR Writes
+- Image Optimization Transformations
+- Top request paths, especially `/api/product-assets/*`, `/api/zes-guide`, `/api/leads`
+- Any deployment upload warning or build package warning
+
 ### After 1 Hour
 
 - Fluid Active CPU should not climb rapidly after deploy.
 - Image Optimization Transformations should remain flat.
 - Function Invocations should not spike from `/api/product-assets/*` or `/api/zes-guide`.
 - Confirm no deployment upload warning appears.
+- If Product Asset proxy requests dominate, pause product expansion and move asset migration ahead of SEO expansion.
 
 Warning thresholds:
 
 - Fluid Active CPU > 20 minutes in first hour
 - Function Invocations > 5,000 in first hour
-- Image Optimization Transformations > 50 in first hour
+- Image Optimization Transformations > 0-50 in first hour, depending on cached historical requests
+- ISR Writes > 500 in first hour
 
 ### After 24 Hours
 
@@ -88,6 +99,7 @@ Warning thresholds:
 - Function Invocations should remain comfortably below daily pro-rata free plan pace.
 - ISR Writes should remain very low.
 - Check Vercel request paths for repeated product asset proxy hits.
+- Confirm no unexpected growth from bots on held-back product URLs.
 
 Warning thresholds:
 
@@ -101,6 +113,7 @@ Warning thresholds:
 - Fluid Active CPU should remain below weekly pace for Hobby.
 - Check whether bots are repeatedly hitting held-back product URLs.
 - Review Search Console crawl stats after the sitemap cap.
+- Decide whether the next product batch is safe only after Usage and crawl stats are both stable.
 
 Warning thresholds:
 
@@ -108,6 +121,14 @@ Warning thresholds:
 - Function Invocations > 400,000/week
 - ISR Reads > 250,000/week
 - Image Optimization Transformations > 500/week
+
+## Manual Logging Template
+
+| Checkpoint | Fluid CPU | Functions | ISR Reads | ISR Writes | Image Optimization | Top risk path | Decision |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1h |  |  |  |  |  |  | continue / pause |
+| 24h |  |  |  |  |  |  | continue / pause |
+| 7d |  |  |  |  |  |  | keep 500 / prepare 750 |
 
 ## Remaining Risks
 
@@ -119,3 +140,13 @@ Warning thresholds:
 ## Recommended Next Step
 
 Keep the 500-product cap for at least 7 days after deploy. If Vercel usage remains stable, increase the cap gradually only after another manual product QA pass.
+
+## Operational Gate For Any 750-Product Expansion
+
+Do not increase product indexation from 500 to 750 unless all checks below are true:
+
+- Vercel Usage remains stable for 7 days after the 500-product deployment.
+- Random QA passes on the candidate expansion pool with at least 50/50 PASS and 0 major issues.
+- Search Console does not show crawl/indexing deterioration for the current sitemap.
+- `npm run audit:seo` and `npm run build -- --webpack` pass with `indexableProducts <= 500` until the cap is intentionally changed in a dedicated release.
+- The expansion release updates this report, the public catalog generator and sitemap cap together.

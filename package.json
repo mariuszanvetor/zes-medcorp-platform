@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/product-catalog/build-public-catalog.mjs && next build",
+    "build": "node scripts/product-catalog/build-public-catalog.mjs && node scripts/product-catalog/assert-public-catalog-safety.mjs && next build",
     "start": "next start",
     "lint": "eslint",
     "content:check": "node scripts/check-content.mjs",
-    "audit:seo": "node scripts/audit-seo.mjs",
+    "audit:seo": "node scripts/audit-seo.mjs && node scripts/product-catalog/assert-public-catalog-safety.mjs",
     "products:import": "node scripts/product-catalog/import-gima.mjs",
     "products:mega-import": "node scripts/product-catalog/mega-import-gima.mjs",
     "products:quality-gate": "node scripts/product-catalog/enrich-gima-quality-gate.mjs",

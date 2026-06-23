@@ -415,6 +415,7 @@ export function getSemanticServiceRecommendations(
   limit = 4,
 ): InternalLinkRecommendation[] {
   const sourceProfile = getArticleSemanticProfile(article);
+  const moneyPages = getMoneyPageRecommendationsForArticle(article);
   const manual = article.relatedServices.map((href, index) => ({
     href,
     score: 48 - index * 4,
@@ -440,7 +441,9 @@ export function getSemanticServiceRecommendations(
     return { href: service.href, score };
   });
 
-  return mergeScoredHrefs([...manual, ...inferred])
+  return uniqueRecommendations([
+    ...moneyPages,
+    ...mergeScoredHrefs([...manual, ...inferred])
     .sort((a, b) => b.score - a.score)
     .slice(0, limit)
     .map((item, index) =>
@@ -448,7 +451,8 @@ export function getSemanticServiceRecommendations(
         item.href,
         index === 0 ? "primary-service" : "supporting-service",
       ),
-    );
+    ),
+  ]).slice(0, limit);
 }
 
 export function getSemanticCalculatorRecommendations(
@@ -1049,6 +1053,99 @@ function serviceToRecommendation(
       ? `Relevant service for ${service.schemaServiceType}.`
       : "Service path supplied by content blueprint.",
     priority: role === "primary-service" ? 95 : 82,
+  };
+}
+
+function getMoneyPageRecommendationsForArticle(article: Article): InternalLinkRecommendation[] {
+  const profile = getArticleSemanticProfile(article);
+  const text = normalizeText(buildArticleText(article));
+  const recommendations: InternalLinkRecommendation[] = [];
+
+  addIf(
+    recommendations,
+    moneyPageRecommendation(
+      "Service radiologie",
+      "/servicii/service-radiologie",
+      "Leaga ghidul de o pagina comerciala pentru interventii si mentenanta radiologie.",
+      99,
+    ),
+    profile.authorityClusters.includes("service-uptime") ||
+      profile.modalities.includes("rx") ||
+      /service|mentenanta|downtime|radiolog/.test(text),
+  );
+
+  addIf(
+    recommendations,
+    moneyPageRecommendation(
+      "Service CT",
+      "/servicii/service-computer-tomograf",
+      "Trimite cititorul catre oferta de service pentru computer tomograf.",
+      98,
+    ),
+    profile.modalities.includes("ct") || /computer tomograf|\bct\b/.test(text),
+  );
+
+  addIf(
+    recommendations,
+    moneyPageRecommendation(
+      "Service RMN",
+      "/servicii/service-rmn",
+      "Conecteaza subiectul cu suportul tehnic pentru sisteme RMN.",
+      98,
+    ),
+    profile.modalities.includes("rmn") || /\brmn\b|mri/.test(text),
+  );
+
+  addIf(
+    recommendations,
+    moneyPageRecommendation(
+      "Radioprotectie",
+      "/servicii/radioprotectie",
+      "Directioneaza intentia de proiect catre protectie radiologica si ofertare.",
+      97,
+    ),
+    profile.authorityClusters.includes("ct-radiation") ||
+      profile.pillars.includes("protectie-radiologica") ||
+      /radioprotect|plumb|camera rx/.test(text),
+  );
+
+  addIf(
+    recommendations,
+    moneyPageRecommendation(
+      "RF shielding RMN",
+      "/servicii/rf-shielding-rmn",
+      "Leaga continutul despre RMN de ecranare RF si infrastructura dedicata.",
+      97,
+    ),
+    profile.authorityClusters.includes("rmn-rf") || /rf shielding|faraday|cusca faraday/.test(text),
+  );
+
+  addIf(
+    recommendations,
+    moneyPageRecommendation(
+      "PACS medical",
+      "/servicii/pacs-medical",
+      "Trimite cititorul catre arhivare, flux DICOM si integrare imagistica.",
+      96,
+    ),
+    /pacs|ris|dicom|arhivare|diagnostic la distanta/.test(text),
+  );
+
+  return uniqueRecommendations(recommendations).slice(0, 3);
+}
+
+function moneyPageRecommendation(
+  label: string,
+  href: string,
+  reason: string,
+  priority: number,
+): InternalLinkRecommendation {
+  return {
+    label,
+    href,
+    role: "primary-service",
+    reason,
+    priority,
   };
 }
 

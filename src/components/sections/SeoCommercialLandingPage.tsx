@@ -4,6 +4,7 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { FAQSchema } from "@/components/seo/FAQSchema";
 import { ProductSchema } from "@/components/seo/ProductSchema";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
+import { LeadCaptureForm, type LeadFormExtraField } from "@/components/forms/LeadCaptureForm";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -15,6 +16,9 @@ type SeoCommercialLandingPageProps = {
 };
 
 export function SeoCommercialLandingPage({ page }: SeoCommercialLandingPageProps) {
+  const offerChecklist = getOfferChecklist(page);
+  const showShortLeadForm = shouldShowShortLeadForm(page);
+
   return (
     <>
       <BreadcrumbSchema
@@ -58,13 +62,22 @@ export function SeoCommercialLandingPage({ page }: SeoCommercialLandingPageProps
                 </h1>
                 <p className="mt-6 text-lg leading-9 text-slate-100">{page.intro}</p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <Button href="/contact" size="lg">
+                  <Button href="/contact" size="lg" data-cta="primary-offer">
                     {page.primaryCta}
                   </Button>
-                  <Button href="/project-intake" size="lg" variant="outline">
-                    {page.secondaryCta}
+                  <Button
+                    href={companyContact.whatsappHref}
+                    size="lg"
+                    target="_blank"
+                    variant="outline"
+                    data-cta="whatsapp"
+                  >
+                    WhatsApp
                   </Button>
                 </div>
+                <p className="mt-4 max-w-xl text-sm leading-6 text-cyan-100">
+                  Raspuns comercial pentru proiecte reale, dupa verificare tehnica.
+                </p>
               </div>
               <aside className="rounded-3xl border border-blue-100 bg-white p-6 shadow-[0_30px_90px_rgba(15,23,42,0.18)]">
                 <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0057b8]">
@@ -102,6 +115,36 @@ export function SeoCommercialLandingPage({ page }: SeoCommercialLandingPageProps
 
         <Section className="bg-white" spacing="lg" tone="transparent">
           <Container>
+            <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#0057b8]">
+                  Cerere de oferta
+                </p>
+                <h2 className="mt-4 text-3xl font-semibold leading-tight text-slate-950">
+                  Ce sa trimiti ca ZESCORP sa poata raspunde concret.
+                </h2>
+                <p className="mt-5 text-base leading-8 text-slate-600">
+                  O cerere buna nu trebuie sa fie lunga. Sunt suficiente cateva date clare despre
+                  echipament, proiect, locatie si termen pentru a pregati o discutie comerciala
+                  aplicata.
+                </p>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {offerChecklist.map((item) => (
+                  <article
+                    className="rounded-2xl border border-blue-100 bg-[#f8fbff] p-5 text-sm font-semibold leading-7 text-slate-800"
+                    key={item}
+                  >
+                    {item}
+                  </article>
+                ))}
+              </div>
+            </div>
+          </Container>
+        </Section>
+
+        <Section className="bg-white" spacing="lg" tone="transparent">
+          <Container>
             <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#0057b8]">
@@ -128,6 +171,25 @@ export function SeoCommercialLandingPage({ page }: SeoCommercialLandingPageProps
             </div>
           </Container>
         </Section>
+
+        {showShortLeadForm ? (
+          <Section className="border-y border-blue-100 bg-[#f7fbff]" spacing="lg" tone="transparent">
+            <Container>
+              <LeadCaptureForm
+                description={`Trimite cateva detalii despre ${page.offerAngle}. Formularul pastreaza trierea scurta: contact, locatie, echipament sau proiect si obiectivul principal.`}
+                eyebrow="Cerere rapida"
+                extraFields={getLeadFormFields(page)}
+                inquiryType={page.serviceType}
+                sourcePage={page.path}
+                sourceTool="seo-commercial-landing"
+                submitLabel={page.primaryCta}
+                successDescription="Solicitarea a fost preluata pentru evaluare comercial-tehnica. ZESCORP poate reveni cu intrebari scurte pentru clarificare."
+                title="Trimite solicitarea catre ZESCORP"
+                tone="light"
+              />
+            </Container>
+          </Section>
+        ) : null}
 
         <Section className="border-y border-blue-100 bg-[#f7fbff]" spacing="lg" tone="transparent">
           <Container>
@@ -444,6 +506,82 @@ export function SeoCommercialLandingPage({ page }: SeoCommercialLandingPageProps
       </main>
     </>
   );
+}
+
+function getOfferChecklist(page: SeoCommercialLanding) {
+  const slug = page.slug.toLowerCase();
+  const isRadioprotection =
+    slug.includes("radioprotectie") ||
+    slug.includes("shielding") ||
+    slug.includes("faraday") ||
+    slug.includes("rx-room") ||
+    slug.includes("radiologie");
+  const isEquipment =
+    page.path.startsWith("/produse/") ||
+    slug.includes("pacs") ||
+    slug.includes("computer-tomograf") ||
+    slug.includes("rmn");
+
+  if (isRadioprotection) {
+    return [
+      "Tip proiect: camera RX, CT, RMN, mamografie sau modernizare",
+      "Orasul si stadiul spatiului: existent, nou sau in renovare",
+      "Plan, schita, poze sau vecinatati disponibile",
+      "Echipamentul planificat si cerintele operationale",
+      "Termen dorit si status documentatie/CNCAN, daca exista",
+      "Telefon sau email pentru clarificari rapide",
+    ];
+  }
+
+  if (isEquipment) {
+    return [
+      "Echipamentul sau sistemul dorit si configuratia estimata",
+      "Locatia de instalare si termenul de achizitie",
+      "Integrarea necesara: PACS, RIS, DICOM, infrastructura sau service",
+      "Cantitate, accesorii, consumabile sau optiuni importante",
+      "Buget orientativ sau etapa de achizitie, daca exista",
+      "Telefon sau email pentru oferta personalizata",
+    ];
+  }
+
+  return [
+    "Tip echipament sau serviciu solicitat",
+    "Marca, modelul si simptomele, daca este service",
+    "Orasul, urgenta si impactul asupra activitatii",
+    "Poze, coduri de eroare, fise sau documente disponibile",
+    "Termen dorit pentru diagnostic, interventie sau contract",
+    "Telefon sau email pentru contact rapid",
+  ];
+}
+
+function shouldShowShortLeadForm(page: SeoCommercialLanding) {
+  return page.path === "/service-aparatura-medicala" || page.path.startsWith("/servicii/");
+}
+
+function getLeadFormFields(page: SeoCommercialLanding): LeadFormExtraField[] {
+  const isService = page.slug.includes("service") || page.slug.includes("mentenanta");
+
+  return [
+    {
+      id: "equipmentType",
+      label: isService ? "Tip echipament" : "Tip proiect / echipament",
+      placeholder: isService ? "ex. ecograf, CT, monitor pacient" : "ex. camera RX, PACS, RF shielding",
+      required: true,
+    },
+    { id: "city", label: "Oras", placeholder: "ex. Bucuresti", required: true },
+    {
+      id: "urgency",
+      label: "Urgenta",
+      options: ["Alege urgenta", "Urgent", "In 1-2 saptamani", "Planificat", "Doar bugetare"],
+      type: "select",
+    },
+    {
+      id: "projectObjective",
+      label: "Problema / obiectiv",
+      placeholder: "ex. defect, modernizare, oferta, contract mentenanta",
+      required: true,
+    },
+  ];
 }
 
 function InfoPanel({ title, items }: { title: string; items: string[] }) {
