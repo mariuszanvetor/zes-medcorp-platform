@@ -9,6 +9,7 @@ import type {
   TopicPillar,
 } from "@/lib/content-engine";
 import { authorityBatch70 } from "./authority-batch-70";
+import { authorityHubPhase2Articles } from "./authority-hub-phase-2";
 
 export const articleCategories = [
   "Infrastructură medicală",
@@ -5766,7 +5767,12 @@ const proposalBuilderTool: ArticleTool = {
   href: "/proposal-builder",
 };
 
-export const articles: Article[] = [...baseArticles, ...overnightSeoArticles, ...authorityBatch70].map((article) => {
+export const articles: Article[] = [
+  ...baseArticles,
+  ...overnightSeoArticles,
+  ...authorityBatch70,
+  ...authorityHubPhase2Articles,
+].map((article) => {
   const upgradedArticle = {
     ...article,
     ...authorityArticleUpgrades[article.slug],
