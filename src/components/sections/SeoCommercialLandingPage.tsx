@@ -555,7 +555,11 @@ function getOfferChecklist(page: SeoCommercialLanding) {
 }
 
 function shouldShowShortLeadForm(page: SeoCommercialLanding) {
-  return page.path === "/service-aparatura-medicala" || page.path.startsWith("/servicii/");
+  return (
+    page.path === "/service-aparatura-medicala" ||
+    page.path.startsWith("/servicii/") ||
+    !page.path.startsWith("/produse/")
+  );
 }
 
 function getLeadFormFields(page: SeoCommercialLanding): LeadFormExtraField[] {

@@ -1,6 +1,7 @@
 ﻿import type { FAQItem } from "@/components/seo/FAQSchema";
 
 import { medicalEquipmentLandings } from "@/data/medical-equipment-landings";
+import { moneyPageExpansionLandings } from "@/data/money-page-expansion";
 import { radioprotectionRfLandings } from "@/data/radioprotection-rf-landings";
 import { serviceMaintenanceLandings } from "@/data/service-maintenance-landings";
 
@@ -1227,6 +1228,7 @@ export const seoCommercialLandings: SeoCommercialLanding[] = [
     offerAngle: "camera RX, proiectare, radioprotectie, echipament si suport operational",
   },
   ...medicalEquipmentLandings,
+  ...moneyPageExpansionLandings,
   ...serviceMaintenanceLandings,
   ...radioprotectionRfLandings,
 ];
