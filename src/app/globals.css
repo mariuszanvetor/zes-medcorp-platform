@@ -42,6 +42,33 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@layer base {
+  body.construction-root,
+  body:has(.construction-site) {
+    padding-bottom: 0 !important;
+    background: #ffffff !important;
+  }
+
+  body.construction-root > .flex.min-h-screen.flex-col,
+  body:has(.construction-site) > .flex.min-h-screen.flex-col {
+    min-height: 0;
+  }
+
+  body.construction-root > .flex.min-h-screen.flex-col > header,
+  body.construction-root > .flex.min-h-screen.flex-col > footer,
+  body.construction-root > .flex.min-h-screen.flex-col > main ~ *,
+  body:has(.construction-site) > .flex.min-h-screen.flex-col > header,
+  body:has(.construction-site) > .flex.min-h-screen.flex-col > footer,
+  body:has(.construction-site) > .flex.min-h-screen.flex-col > main ~ * {
+    display: none !important;
+  }
+
+  body.construction-root > .flex.min-h-screen.flex-col > main,
+  body:has(.construction-site) > .flex.min-h-screen.flex-col > main {
+    flex: initial;
+  }
+}
+
 ::selection {
   background: rgba(0, 87, 184, 0.18);
   color: #0f172a;

@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
         hostname: "gimaitaly.com",
         pathname: "/images/prodotti/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
     ],
   },
   async redirects() {
