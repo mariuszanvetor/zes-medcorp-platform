@@ -142,6 +142,14 @@ export function ConstructionLeadForm({
     if (Object.keys(validationErrors).length) {
       setErrors(validationErrors);
       setStatus("error");
+      trackLeadSubmitError({
+        sourcePage,
+        formMode: mode,
+        projectType: values.projectType,
+        budgetRange: values.budgetRange,
+        timeline: values.timeline,
+        reason: "validation",
+      });
       return;
     }
 
@@ -149,6 +157,14 @@ export function ConstructionLeadForm({
     setErrors({});
 
     const payload = buildLeadPayload(values, sourcePage, mode);
+
+    trackLeadSubmitAttempt({
+      sourcePage,
+      formMode: mode,
+      projectType: values.projectType,
+      budgetRange: values.budgetRange,
+      timeline: values.timeline,
+    });
 
     try {
       const response = await fetch("/api/leads", {
@@ -190,6 +206,14 @@ export function ConstructionLeadForm({
           error instanceof Error
             ? error.message
             : "Solicitarea nu a putut fi trimisa. Incearca din nou.",
+      });
+      trackLeadSubmitError({
+        sourcePage,
+        formMode: mode,
+        projectType: values.projectType,
+        budgetRange: values.budgetRange,
+        timeline: values.timeline,
+        reason: "submit",
       });
     }
   }
@@ -607,12 +631,27 @@ function getLeadAttribution() {
   try {
     const landingKey = "zes_construct_landing_page";
     const storedLanding = window.sessionStorage.getItem(landingKey);
+    const landingUrl = storedLanding || window.location.href;
 
     if (storedLanding) {
       attribution.landingPage = storedLanding.slice(0, 500);
     } else {
       window.sessionStorage.setItem(landingKey, window.location.href);
       attribution.landingPage = window.location.href.slice(0, 500);
+    }
+
+    const landingParams = new URL(landingUrl).searchParams;
+
+    for (const key of trackedKeys) {
+      const value = landingParams.get(key);
+
+      if (!value) continue;
+
+      attribution[`landing_${key}`] = value.slice(0, 240);
+
+      if (!attribution[key]) {
+        attribution[key] = value.slice(0, 240);
+      }
     }
   } catch {
     attribution.landingPage = window.location.href.slice(0, 500);
@@ -637,6 +676,13 @@ function getLeadAttribution() {
     attribution.ttclid || source.includes("tiktok") || medium.includes("tiktok")
       ? "true"
       : "false";
+  attribution.leadIntent =
+    attribution.paidTraffic === "true" ||
+    attribution.tiktokTraffic === "true" ||
+    window.location.pathname.includes("deviz") ||
+    window.location.pathname.includes("oferta")
+      ? "high"
+      : "standard";
 
   return attribution;
 }
@@ -667,4 +713,28 @@ function trackLeadSubmit(detail: Record<string, string>) {
       detail: eventPayload,
     }),
   );
+}
+
+function trackLeadSubmitAttempt(detail: Record<string, string>) {
+  if (typeof window === "undefined") return;
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "construction_lead_submit_attempt",
+    lead_vertical: "constructii-rezidentiale",
+    ...detail,
+    ...getLeadAttribution(),
+  });
+}
+
+function trackLeadSubmitError(detail: Record<string, string>) {
+  if (typeof window === "undefined") return;
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "construction_lead_submit_error",
+    lead_vertical: "constructii-rezidentiale",
+    ...detail,
+    ...getLeadAttribution(),
+  });
 }

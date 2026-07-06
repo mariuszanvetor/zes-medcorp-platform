@@ -25,18 +25,8 @@ export function ConstructionConversionDock({
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const sessionKey = "zes_construct_popup_seen";
-    const params = new URLSearchParams(window.location.search);
-    const paidTraffic =
-      params.has("gclid") ||
-      params.has("gbraid") ||
-      params.has("wbraid") ||
-      params.has("msclkid") ||
-      params.has("ttclid") ||
-      Boolean(params.get("utm_source")?.toLowerCase().includes("tiktok")) ||
-      ["cpc", "ppc", "paid", "paid_search", "paid-social", "paid_social"].some((token) =>
-        Boolean(params.get("utm_medium")?.toLowerCase().includes(token)),
-      );
+    const sessionKey = "zes_construct_popup_seen_v2";
+    const trafficIntent = getTrafficIntent();
 
     try {
       if (window.sessionStorage.getItem(sessionKey)) return;
@@ -44,21 +34,44 @@ export function ConstructionConversionDock({
       return;
     }
 
-    const timeout = window.setTimeout(
-      () => {
-        setIsOpen(true);
-        pushIntentEvent("auto_popup_open", sourcePage);
+    function markPopupSeen() {
+      try {
+        window.sessionStorage.setItem(sessionKey, "true");
+      } catch {
+        // Non-critical: popup frequency is a UX enhancement, not data storage.
+      }
+    }
 
-        try {
-          window.sessionStorage.setItem(sessionKey, "true");
-        } catch {
-          // Non-critical: popup frequency is a UX enhancement, not data storage.
-        }
-      },
-      paidTraffic ? 3500 : 12000,
+    function openAutomaticPopup(action: string) {
+      setIsOpen(true);
+      pushIntentEvent(action, sourcePage);
+      markPopupSeen();
+    }
+
+    const timeout = window.setTimeout(
+      () => openAutomaticPopup("auto_popup_open"),
+      trafficIntent === "paid" ? 1800 : trafficIntent === "high" ? 4500 : 8500,
     );
 
-    return () => window.clearTimeout(timeout);
+    function handleScrollIntent() {
+      const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (pageHeight <= 0) return;
+
+      const depth = window.scrollY / pageHeight;
+
+      if (depth >= (trafficIntent === "paid" ? 0.22 : 0.45)) {
+        window.clearTimeout(timeout);
+        window.removeEventListener("scroll", handleScrollIntent);
+        openAutomaticPopup("scroll_intent_popup_open");
+      }
+    }
+
+    window.addEventListener("scroll", handleScrollIntent, { passive: true });
+
+    return () => {
+      window.clearTimeout(timeout);
+      window.removeEventListener("scroll", handleScrollIntent);
+    };
   }, [sourcePage]);
 
   function openPopup(action: string) {
@@ -196,8 +209,10 @@ export function ConstructionConversionDock({
                 anchorId="oferta-popup"
                 compact
                 mode="quick"
+                showBudgetInQuick
                 sourcePage={`${sourcePage}-popup`}
                 surface="embedded"
+                submitLabel="Vreau deviz rapid"
                 title="Te sunam pentru clarificari si urmatorul pas"
               />
             </div>
@@ -216,7 +231,83 @@ function pushIntentEvent(action: string, sourcePage: string) {
     event: "construction_contact_intent",
     action,
     sourcePage,
+    trafficIntent: getTrafficIntent(),
+    ...getContactAttribution(),
     path: window.location.pathname,
     url: window.location.href,
   });
+}
+
+function getTrafficIntent() {
+  const attribution = getContactAttribution();
+  const medium = attribution.utm_medium?.toLowerCase() ?? "";
+  const source = attribution.utm_source?.toLowerCase() ?? "";
+  const path = window.location.pathname;
+  const paidSignals = ["gclid", "gbraid", "wbraid", "msclkid", "ttclid"];
+  const paidTraffic =
+    paidSignals.some((key) => Boolean(attribution[key])) ||
+    ["cpc", "ppc", "paid", "paid_search", "paid-social", "paid_social"].some((token) =>
+      medium.includes(token),
+    ) ||
+    ["google", "googleads", "ads"].some((token) => source.includes(token));
+
+  if (paidTraffic) return "paid";
+
+  if (
+    path.includes("deviz") ||
+    path.includes("oferta") ||
+    path.includes("contact") ||
+    source.includes("tiktok")
+  ) {
+    return "high";
+  }
+
+  return "standard";
+}
+
+function getContactAttribution() {
+  const attribution: Record<string, string> = {};
+  const trackedKeys = [
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_term",
+    "utm_content",
+    "gclid",
+    "gbraid",
+    "wbraid",
+    "fbclid",
+    "msclkid",
+    "ttclid",
+  ];
+
+  addParamsToAttribution(new URLSearchParams(window.location.search), attribution, trackedKeys);
+
+  try {
+    const landingUrl = window.sessionStorage.getItem("zes_construct_landing_page");
+
+    if (landingUrl) {
+      const landingParams = new URL(landingUrl).searchParams;
+      addParamsToAttribution(landingParams, attribution, trackedKeys);
+      attribution.landingPage = landingUrl.slice(0, 500);
+    }
+  } catch {
+    // Attribution must never block contact clicks.
+  }
+
+  return attribution;
+}
+
+function addParamsToAttribution(
+  params: URLSearchParams,
+  attribution: Record<string, string>,
+  trackedKeys: string[],
+) {
+  for (const key of trackedKeys) {
+    const value = params.get(key);
+
+    if (value && !attribution[key]) {
+      attribution[key] = value.slice(0, 240);
+    }
+  }
 }
